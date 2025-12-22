@@ -1,5 +1,3 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -13,7 +11,93 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    "paths": {
+      "@spartan-ng/helm/breadcrumb": [
+        "./src/app/spartan/breadcrumb/src/index.ts"
+      ],
+      "@spartan-ng/helm/button": [
+        "./src/app/spartan/button/src/index.ts"
+      ],
+      "@spartan-ng/helm/card": [
+        "./src/app/spartan/card/src/index.ts"
+      ],
+      "@spartan-ng/helm/checkbox": [
+        "./src/app/spartan/checkbox/src/index.ts"
+      ],
+      "@spartan-ng/helm/date-picker": [
+        "./src/app/spartan/date-picker/src/index.ts"
+      ],
+      "@spartan-ng/helm/dialog": [
+        "./src/app/spartan/dialog/src/index.ts"
+      ],
+      "@spartan-ng/helm/dropdown-menu": [
+        "./src/app/spartan/dropdown-menu/src/index.ts"
+      ],
+      "@spartan-ng/helm/empty": [
+        "./src/app/spartan/empty/src/index.ts"
+      ],
+      "@spartan-ng/helm/field": [
+        "./src/app/spartan/field/src/index.ts"
+      ],
+      "@spartan-ng/helm/icon": [
+        "./src/app/spartan/icon/src/index.ts"
+      ],
+      "@spartan-ng/helm/input": [
+        "./src/app/spartan/input/src/index.ts"
+      ],
+      "@spartan-ng/helm/label": [
+        "./src/app/spartan/label/src/index.ts"
+      ],
+      "@spartan-ng/helm/pagination": [
+        "./src/app/spartan/pagination/src/index.ts"
+      ],
+      "@spartan-ng/helm/resizable": [
+        "./src/app/spartan/resizable/src/index.ts"
+      ],
+      "@spartan-ng/helm/select": [
+        "./src/app/spartan/select/src/index.ts"
+      ],
+      "@spartan-ng/helm/sidebar": [
+        "./src/app/spartan/sidebar/src/index.ts"
+      ],
+      "@spartan-ng/helm/skeleton": [
+        "./src/app/spartan/skeleton/src/index.ts"
+      ],
+      "@spartan-ng/helm/sonner": [
+        "./src/app/spartan/sonner/src/index.ts"
+      ],
+      "@spartan-ng/helm/spinner": [
+        "./src/app/spartan/spinner/src/index.ts"
+      ],
+      "@spartan-ng/helm/table": [
+        "./src/app/spartan/table/src/index.ts"
+      ],
+      "@spartan-ng/helm/textarea": [
+        "./src/app/spartan/textarea/src/index.ts"
+      ],
+      "@spartan-ng/helm/tooltip": [
+        "./src/app/spartan/tooltip/src/index.ts"
+      ],
+      "@spartan-ng/helm/utils": [
+        "./src/app/spartan/utils/src/index.ts"
+      ],
+      "@spartan-ng/helm/calendar": [
+        "./src/app/spartan/calendar/src/index.ts"
+      ],
+      "@spartan-ng/helm/popover": [
+        "./src/app/spartan/popover/src/index.ts"
+      ],
+      "@spartan-ng/helm/separator": [
+        "./src/app/spartan/separator/src/index.ts"
+      ],
+      "@spartan-ng/helm/sheet": [
+        "./src/app/spartan/sheet/src/index.ts"
+      ],
+      "@spartan-ng/helm/avatar": [
+        "./src/app/spartan/avatar/src/index.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
