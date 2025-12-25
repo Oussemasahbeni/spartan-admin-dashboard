@@ -1,13 +1,17 @@
 import {
   ApplicationConfig,
+  inject,
   isDevMode,
   provideBrowserGlobalErrorListeners,
+  provideEnvironmentInitializer,
 } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { routes } from './app.routes';
+import { LanguageOptions, LanguageService } from './core/language.service';
+import { ThemeService } from './core/theme.service';
 import { TranslocoHttpLoader } from './transloco-loader';
 
 const availableLangs = ['en', 'fr', 'ar'];
@@ -39,6 +43,15 @@ export const appConfig: ApplicationConfig = {
         prodMode: !isDevMode(),
       },
       loader: TranslocoHttpLoader,
+    }),
+    provideEnvironmentInitializer(() => {
+      const themeService = inject(ThemeService);
+      const languageService = inject(LanguageService);
+      const savedLang = localStorage.getItem('lang') as LanguageOptions | null;
+      if (savedLang) {
+        languageService.setLanguage(savedLang);
+      }
+      themeService.init();
     }),
   ],
 };

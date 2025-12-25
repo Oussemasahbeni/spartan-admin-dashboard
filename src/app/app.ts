@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { AppSidebar } from './layout/app-sidebar/app-sidebar';
-import { SiteHeader } from './layout/app-sidebar/site-header';
+import { SiteHeader } from './layout/app-sidebar/header/site-header';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,9 @@ import { SiteHeader } from './layout/app-sidebar/site-header';
         <router-outlet />
       </header>
 
-      <section class="flex-1 p-6">
+      <!-- <section class="flex-1 p-6">
         <router-outlet />
-      </section>
+      </section> -->
     </main>
   </app-sidebar>`,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,66 +1,28 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
 import {
   lucideCalendar,
+  lucideCommand,
   lucideHouse,
   lucideInbox,
   lucideSearch,
   lucideSettings,
 } from '@ng-icons/lucide';
-import { HlmIcon } from '@spartan-ng/helm/icon';
+import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
-import { NavSecondary } from './nav-secondary';
-import { NavUser } from './nav-user';
+import { DirectionalityService } from '../../shared/service/directionality.service';
+import { NavSecondary } from './secondary/nav-secondary';
+import { NavUser } from './user/user';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [HlmSidebarImports, NgIcon, HlmIcon, NavUser, NavSecondary],
-  template: `
-    <div hlmSidebarWrapper>
-      <hlm-sidebar variant="inset" collapsible="icon">
-        <hlm-sidebar-header>
-          <ul hlmSidebarMenu>
-            <li hlmSidebarMenuItem>
-              <a hlmSidebarMenuButton size="lg" href="#">
-                <div
-                  class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
-                >
-                  <ng-icon name="lucideCommand" class="text-base" />
-                </div>
-                <div class="grid flex-1 text-left text-sm leading-tight">
-                  <span class="truncate font-medium">Acme Inc</span>
-                  <span class="truncate text-xs">Enterprise</span>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </hlm-sidebar-header>
-
-        <hlm-sidebar-content>
-          <div hlmSidebarGroup>
-            <div hlmSidebarGroupLabel>Application</div>
-            <div hlmSidebarGroupContent>
-              <ul hlmSidebarMenu>
-                @for(item of _items; track item.title){
-                <li hlmSidebarMenuItem>
-                  <a hlmSidebarMenuButton>
-                    <ng-icon hlm [name]="item.icon" />
-                    <span>{{ item.title }}</span>
-                  </a>
-                </li>
-                }
-              </ul>
-            </div>
-          </div>
-          <nav-secondary class="mt-auto" />
-        </hlm-sidebar-content>
-        <hlm-sidebar-footer>
-          <spartan-nav-user [user]="user" />
-        </hlm-sidebar-footer>
-      </hlm-sidebar>
-      <ng-content />
-    </div>
-  `,
+  imports: [HlmSidebarImports, HlmIconImports, NavUser, NavSecondary],
+  templateUrl: './app-sidebar.html',
   providers: [
     provideIcons({
       lucideHouse,
@@ -68,11 +30,18 @@ import { NavUser } from './nav-user';
       lucideCalendar,
       lucideSearch,
       lucideSettings,
+      lucideCommand,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSidebar {
+  private readonly _directionalityService = inject(DirectionalityService);
+
+  readonly side = computed<'left' | 'right'>(() =>
+    this._directionalityService.isRtl() ? 'right' : 'left'
+  );
+
   protected readonly _items = [
     {
       title: 'Home',
