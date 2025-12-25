@@ -19,21 +19,56 @@
     </hlm-sidebar-header>
 
     <hlm-sidebar-content>
-      <div hlmSidebarGroup>
+      <hlm-sidebar-group>
         <div hlmSidebarGroupLabel>Application</div>
         <div hlmSidebarGroupContent>
           <ul hlmSidebarMenu>
-            @for(item of _items; track item.title){
+            @for(item of _items; track item.title){ @if(item.children; as
+            children){
+            <hlm-collapsible class="group/collapsible">
+              <li hlmSidebarMenuItem>
+                <button
+                  type="button"
+                  hlmCollapsibleTrigger
+                  hlmSidebarMenuButton
+                  class="flex w-full items-center justify-between"
+                >
+                  <ng-icon hlmIcon [name]="item.icon" />
+                  <span>{{ item.title }}</span>
+                  <ng-icon
+                    name="lucideChevronRight"
+                    class="ms-auto rtl:rotate-180 transition-transform group-data-[state=open]/collapsible:rotate-90"
+                    hlmIcon
+                  />
+                </button>
+                <hlm-collapsible-content>
+                  <ul hlmSidebarMenuSub>
+                    @for (subItem of item.children; track subItem.title) {
+                    <li hlmSidebarMenuSubItem>
+                      <button
+                        type="button"
+                        hlmSidebarMenuSubButton
+                        class="w-full"
+                      >
+                        <span>{{ subItem.title }}</span>
+                      </button>
+                    </li>
+                    }
+                  </ul>
+                </hlm-collapsible-content>
+              </li>
+            </hlm-collapsible>
+            } @else {
             <li hlmSidebarMenuItem>
               <a hlmSidebarMenuButton>
-                <ng-icon hlm [name]="item.icon" />
+                <ng-icon hlmIcon [name]="item.icon" />
                 <span>{{ item.title }}</span>
               </a>
             </li>
-            }
+            } }
           </ul>
         </div>
-      </div>
+      </hlm-sidebar-group>
       <nav-secondary class="mt-auto" />
     </hlm-sidebar-content>
     <hlm-sidebar-footer>

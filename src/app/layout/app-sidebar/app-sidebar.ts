@@ -6,13 +6,17 @@ import {
 } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
-  lucideCalendar,
+  lucideBarChart3,
+  lucideCalendarDays,
+  lucideCheckSquare,
+  lucideChevronRight,
   lucideCommand,
-  lucideHouse,
-  lucideInbox,
-  lucideSearch,
-  lucideSettings,
+  lucideFileText,
+  lucideGauge,
+  lucideLayoutDashboard,
+  lucideUsers,
 } from '@ng-icons/lucide';
+import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { DirectionalityService } from '../../shared/service/directionality.service';
@@ -21,16 +25,25 @@ import { NavUser } from './user/user';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [HlmSidebarImports, HlmIconImports, NavUser, NavSecondary],
+  imports: [
+    HlmSidebarImports,
+    HlmCollapsibleImports,
+    HlmIconImports,
+    NavUser,
+    NavSecondary,
+  ],
   templateUrl: './app-sidebar.html',
   providers: [
     provideIcons({
-      lucideHouse,
-      lucideInbox,
-      lucideCalendar,
-      lucideSearch,
-      lucideSettings,
       lucideCommand,
+      lucideLayoutDashboard,
+      lucideChevronRight,
+      lucideGauge,
+      lucideBarChart3,
+      lucideFileText,
+      lucideUsers,
+      lucideCalendarDays,
+      lucideCheckSquare,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,34 +57,46 @@ export class AppSidebar {
 
   protected readonly _items = [
     {
-      title: 'Home',
-      url: '#',
-      icon: 'lucideHouse',
+      title: 'Dashboard',
+      icon: 'lucideLayoutDashboard',
+      children: [
+        {
+          title: 'Overview',
+          url: '#',
+          icon: 'lucideGauge',
+        },
+        {
+          title: 'Analytics',
+          url: '#',
+          icon: 'lucideBarChart3',
+        },
+        {
+          title: 'Reports',
+          url: '#',
+          icon: 'lucideFileText',
+        },
+      ],
     },
     {
-      title: 'Inbox',
-      url: '#',
-      icon: 'lucideInbox',
+      title: 'Users',
+      url: '/users',
+      icon: 'lucideUsers',
     },
     {
       title: 'Calendar',
       url: '#',
-      icon: 'lucideCalendar',
+      icon: 'lucideCalendarDays',
     },
     {
-      title: 'Search',
+      title: 'Tasks',
       url: '#',
-      icon: 'lucideSearch',
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: 'lucideSettings',
+      icon: 'lucideCheckSquare',
     },
   ];
+
   protected readonly user = {
-    name: 'Rebecca Parsons',
-    email: 'rebecca@gmail.com',
-    avatar: 'https://i.pravatar.cc/150?u=rebecca',
+    name: 'John Doe',
+    email: 'john.doe@gmail.com',
+    avatar: 'https://i.pravatar.cc/120?u=johndoe',
   };
 }

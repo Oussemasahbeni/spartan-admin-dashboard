@@ -96,6 +96,9 @@
       ],
       "@spartan-ng/helm/avatar": [
         "./src/app/spartan/avatar/src/index.ts"
+      ],
+      "@spartan-ng/helm/collapsible": [
+        "./src/app/spartan/collapsible/src/index.ts"
       ]
     }
   },

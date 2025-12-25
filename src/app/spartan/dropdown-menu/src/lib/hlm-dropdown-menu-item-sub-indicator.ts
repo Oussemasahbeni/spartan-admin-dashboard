@@ -22,6 +22,6 @@ import type { ClassValue } from 'clsx';
 export class HlmDropdownMenuItemSubIndicator {
   public readonly userClass = input<ClassValue>('', { alias: 'class' });
   protected readonly _computedClass = computed(() =>
-    hlm('ml-auto size-4', this.userClass())
+    hlm('ms-auto size-4', this.userClass())
   );
 }
