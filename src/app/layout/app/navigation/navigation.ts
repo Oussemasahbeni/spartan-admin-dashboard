@@ -5,7 +5,8 @@ import {
   computed,
   inject,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideBarChart3,
@@ -22,11 +23,12 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { DirectionalityService } from '../../../core/config/directionality.service';
 import { UserService } from '../../../core/user/user.service';
+import { NavigationItem } from '../navigation.types';
 import { NavSecondary } from '../secondary/nav-secondary';
 import { NavUser } from '../user/user';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-navigation',
   imports: [
     HlmSidebarImports,
     HlmCollapsibleImports,
@@ -34,9 +36,11 @@ import { NavUser } from '../user/user';
     NavUser,
     NavSecondary,
     RouterLink,
+    RouterModule,
     NgOptimizedImage,
+    TranslocoModule,
   ],
-  templateUrl: './app-sidebar.html',
+  templateUrl: './navigation.html',
   providers: [
     provideIcons({
       lucideLayoutDashboard,
@@ -51,7 +55,7 @@ import { NavUser } from '../user/user';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppSidebar {
+export class Navigation {
   private readonly _directionalityService = inject(DirectionalityService);
   private readonly _userService = inject(UserService);
 
@@ -59,23 +63,27 @@ export class AppSidebar {
     this._directionalityService.isRtl() ? 'right' : 'left',
   );
 
-  protected readonly _items = [
+  protected readonly _items: NavigationItem[] = [
     {
       title: 'Dashboard',
+      key: 'dashboard',
       icon: 'lucideLayoutDashboard',
       children: [
         {
           title: 'Overview',
+          key: 'overview',
           url: '#',
           icon: 'lucideGauge',
         },
         {
           title: 'Analytics',
+          key: 'analytics',
           url: '#',
           icon: 'lucideBarChart3',
         },
         {
           title: 'Reports',
+          key: 'reports',
           url: '#',
           icon: 'lucideFileText',
         },
@@ -83,16 +91,19 @@ export class AppSidebar {
     },
     {
       title: 'Users',
+      key: 'users',
       url: '/users',
       icon: 'lucideUsers',
     },
     {
       title: 'Calendar',
+      key: 'calendar',
       url: '#',
       icon: 'lucideCalendarDays',
     },
     {
       title: 'Tasks',
+      key: 'tasks',
       url: '#',
       icon: 'lucideCheckSquare',
     },

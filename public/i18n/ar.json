@@ -8,6 +8,33 @@
         "system": "النظام",
         "logout": "تسجيل الخروج"
     },
+    "titles": {
+        "login": "تسجيل الدخول",
+        "signup": "إنشاء حساب",
+        "forgetPassword": "هل نسيت كلمة المرور؟",
+        "dashboard": "لوحة التحكم",
+        "users": "المستخدمون",
+        "notFound": "الصفحة غير موجودة"
+    },
+    "navigation": {
+        "application": "التطبيق",
+        "dashboard": "لوحة التحكم",
+        "analytics": "التحليلات",
+        "overview": "نظرة عامة",
+        "reports": "التقارير",
+        "tasks": "المهام",
+        "calendar": "التقويم",
+        "users": "المستخدمون"
+    },
+    "pagination": {
+        "items-per-page": "عنصر لكل صفحة",
+        "next-page": "الصفحة التالية",
+        "previous-page": "الصفحة السابقة",
+        "first-page": "الصفحة الأولى",
+        "last-page": "الصفحة الأخيرة",
+        "rows-selected": "{{selected}} من {{total}} صفوف مختارة",
+        "page": "صفحة {{page}} من {{totalPages}}"
+    },
     "auth": {
         "login": {
             "title": "تسجيل الدخول إلى حسابك",
@@ -21,7 +48,7 @@
             "rememberMe": "تذكرني",
             "noAccount": "ليس لديك حساب؟",
             "signUp": "إنشاء حساب",
-            "loginButton": "تسجيل الدخول",
+            "loginBtn": "تسجيل الدخول",
             "testimonial": "لقد وفرت لي هذه المكتبة ساعات لا حصر لها من العمل وساعدتني في تقديم تصميمات مذهلة لعملائي بشكل أسرع من أي وقت مضى.",
             "errors": {
                 "emailRequired": "البريد الإلكتروني مطلوب",
@@ -65,7 +92,7 @@
             "description": "أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور",
             "emailLabel": "البريد الإلكتروني",
             "emailPlaceholder": "name@example.com",
-            "submitButton": "إرسال رابط إعادة التعيين",
+            "submitBtn": "إرسال رابط إعادة التعيين",
             "backToLogin": "العودة إلى تسجيل الدخول",
             "testimonial": "لقد وفرت لي هذه المكتبة ساعات لا حصر لها من العمل وساعدتني في تقديم تصميمات مذهلة لعملائي بشكل أسرع من أي وقت مضى.",
             "alert": {
@@ -76,6 +103,52 @@
             "errors": {
                 "emailRequired": "البريد الإلكتروني مطلوب",
                 "emailInvalid": "البريد الإلكتروني غير صالح"
+            }
+        }
+    },
+    "dashboard": {
+        "cards": {
+            "totalUsers": {
+                "label": "إجمالي المستخدمين",
+                "value": "12,000",
+                "subtitle": "+5% مقارنة بالشهر الماضي"
+            },
+            "newUsers": {
+                "label": "مستخدمون جدد",
+                "value": "+350",
+                "subtitle": "+10% مقارنة بالشهر الماضي"
+            },
+            "pendingVerifications": {
+                "label": "التحقق المعلق",
+                "value": "42",
+                "subtitle": "2% من المستخدمين"
+            },
+            "activeUsers": {
+                "label": "المستخدمون النشطون",
+                "value": "7,800",
+                "subtitle": "65% من جميع المستخدمين"
+            }
+        }
+    },
+    "users": {
+        "list": {
+            "title": "المستخدمون",
+            "searchPlaceholder": "البحث عن المستخدمين...",
+            "addUserBtn": "إضافة مستخدم",
+            "columnsBtn": "الأعمدة",
+            "refreshBtn": "تحديث",
+            "columns": {
+                "name": "الاسم",
+                "email": "البريد الإلكتروني",
+                "role": "الدور",
+                "status": "الحالة",
+                "phoneNumber": "رقم الهاتف",
+                "createdAt": "تاريخ الإنشاء",
+                "actions": "الإجراءات"
+            },
+            "noUsers": "لم يتم العثور على مستخدمين.",
+            "errors": {
+                "loadFailed": "فشل تحميل المستخدمين. يرجى المحاولة مرة أخرى."
             }
         }
     },

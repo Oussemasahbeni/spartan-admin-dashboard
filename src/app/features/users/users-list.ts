@@ -1,21 +1,39 @@
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   signal,
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
+  lucideBriefcase,
   lucideChevronDown,
   lucideChevronFirst,
   lucideChevronLast,
   lucideChevronLeft,
   lucideChevronRight,
+  lucideCircleCheck,
+  lucideCircleX,
+  lucideGripVertical,
+  lucideLoader,
+  lucideRefreshCcw,
   lucideSettings2,
+  lucideShieldCheck,
+  lucideUser,
+  lucideUserPlus,
 } from '@ng-icons/lucide';
 import { BrnSelectImports } from '@spartan-ng/brain/select';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -42,15 +60,10 @@ import { DashboardCardSection } from './card-section';
 import { USER_DATA } from './data';
 import { TableHeadSelection, TableRowSelection } from './selection-column';
 import { TableHeadSortButton } from './sort-header-button';
-import { StatusCell } from './status';
-import { User } from './user-type';
+import { User } from './user.type';
 
-export interface Payment {
-  id: string;
-  amount: number;
-  status: 'pending' | 'processing' | 'success' | 'failed';
-  email: string;
-}
+import { translateSignal } from '@jsverse/transloco';
+
 @Component({
   selector: 'app-users',
   imports: [
@@ -65,7 +78,11 @@ export interface Payment {
     HlmSelectImports,
     HlmTableImports,
     HlmLabelImports,
+    HlmAvatarImports,
+    HlmBadgeImports,
     DashboardCardSection,
+    TranslocoModule,
+    DragDropModule,
   ],
   templateUrl: './users-list.html',
   providers: [
@@ -76,6 +93,15 @@ export interface Payment {
       lucideChevronRight,
       lucideChevronLeft,
       lucideSettings2,
+      lucideCircleCheck,
+      lucideLoader,
+      lucideCircleX,
+      lucideUser,
+      lucideBriefcase,
+      lucideShieldCheck,
+      lucideRefreshCcw,
+      lucideUserPlus,
+      lucideGripVertical,
     }),
   ],
 
@@ -83,13 +109,22 @@ export interface Payment {
 })
 export class Users {
   readonly dateCell = viewChild.required('dateCell');
-  protected readonly _availablePageSizes = [5, 10, 20, 10000];
+  readonly nameCell = viewChild.required('nameCell');
+  readonly statusCell = viewChild.required('statusCell');
+  readonly roleCell = viewChild.required('roleCell');
+  protected readonly _availablePageSizes = [5, 10, 25, 100];
 
-  protected _filterChanged(event: Event) {
-    this._table
-      .getColumn('email')
-      ?.setFilterValue((event.target as HTMLInputElement).value);
-  }
+  private readonly _columnOrder = signal<string[]>([]);
+  private readonly _columnFilters = signal<ColumnFiltersState>([]);
+  private readonly _sorting = signal<SortingState>([]);
+  private readonly _rowSelection = signal<RowSelectionState>({});
+  private readonly _columnVisibility = signal<VisibilityState>({});
+  protected readonly hidableColumns = computed(() => {
+    this._columnOrder();
+    this._columnVisibility();
+
+    return this._table.getAllLeafColumns().filter((col) => col.getCanHide());
+  });
 
   protected readonly _columns: ColumnDef<User>[] = [
     {
@@ -102,42 +137,42 @@ export class Users {
       enableHiding: false,
     },
     {
-      accessorKey: 'name',
       id: 'name',
-      header: 'Name',
+      accessorKey: 'name',
+      header: translateSignal('users.list.columns.name'),
+      cell: () => this.nameCell(),
     },
     {
-      accessorKey: 'email',
       id: 'email',
+      accessorKey: 'email',
       header: () =>
         flexRenderComponent(TableHeadSortButton, {
           inputs: { header: 'Email' },
         }),
     },
     {
-      accessorKey: 'phoneNumber',
       id: 'phoneNumber',
-      header: 'Phone Number',
+      accessorKey: 'phoneNumber',
+      header: translateSignal('users.list.columns.phoneNumber'),
     },
     {
-      accessorKey: 'createdAt',
       id: 'createdAt',
-      header: 'Created At',
+      accessorKey: 'createdAt',
+      header: translateSignal('users.list.columns.createdAt'),
       cell: () => this.dateCell(),
     },
     {
-      accessorKey: 'role',
       id: 'role',
-      header: 'Role',
-      cell: (info) =>
-        `<span class="capitalize">${info.getValue<string>()}</span>`,
+      accessorKey: 'role',
+      header: translateSignal('users.list.columns.role'),
+      cell: () => this.roleCell(),
     },
     {
-      accessorKey: 'status',
       id: 'status',
-      header: 'Status',
+      accessorKey: 'status',
+      header: translateSignal('users.list.columns.status'),
       enableSorting: false,
-      cell: () => flexRenderComponent(StatusCell),
+      cell: () => this.statusCell(),
     },
 
     {
@@ -146,11 +181,6 @@ export class Users {
       cell: () => flexRenderComponent(ActionDropdown),
     },
   ];
-
-  private readonly _columnFilters = signal<ColumnFiltersState>([]);
-  private readonly _sorting = signal<SortingState>([]);
-  private readonly _rowSelection = signal<RowSelectionState>({});
-  private readonly _columnVisibility = signal<VisibilityState>({});
 
   protected readonly _table = createAngularTable<User>(() => ({
     data: USER_DATA,
@@ -179,20 +209,43 @@ export class Users {
         ? this._rowSelection.update(updater)
         : this._rowSelection.set(updater);
     },
+    onColumnOrderChange: (updater) => {
+      updater instanceof Function
+        ? this._columnOrder.update(updater)
+        : this._columnOrder.set(updater);
+    },
     state: {
+      columnOrder: this._columnOrder(),
       sorting: this._sorting(),
       columnFilters: this._columnFilters(),
       columnVisibility: this._columnVisibility(),
       rowSelection: this._rowSelection(),
     },
   }));
-  protected readonly _hidableColumns = this._table
-    .getAllColumns()
-    .filter((column) => column.getCanHide());
 
   protected _filterChange(email: Event) {
     const target = email.target as HTMLInputElement;
     const typedValue = target.value;
     this._table.setGlobalFilter(typedValue);
+  }
+  protected _filterChanged(event: Event) {
+    this._table
+      .getColumn('email')
+      ?.setFilterValue((event.target as HTMLInputElement).value);
+  }
+
+  protected drop(event: CdkDragDrop<string[]>) {
+    const hidableIds = this.hidableColumns().map((c) => c.id);
+
+    moveItemInArray(hidableIds, event.previousIndex, event.currentIndex);
+
+    this._table.setColumnOrder(['select', ...hidableIds, 'actions']);
+  }
+
+  protected createUser() {
+    // Logic to create a new user
+  }
+  protected refreshTable() {
+    // Logic to refresh the table data
   }
 }

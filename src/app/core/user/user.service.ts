@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { User } from '../../features/users/user-type';
+import { User } from '../../features/users/user.type';
 
 @Injectable({
   providedIn: 'root',

@@ -8,6 +8,33 @@
         "system": "Système",
         "logout": "Déconnexion"
     },
+    "titles": {
+        "login": "Connexion",
+        "signup": "Créer un compte",
+        "forgetPassword": "Mot de passe oublié ?",
+        "dashboard": "Tableau de bord",
+        "users": "Utilisateurs",
+        "notFound": "Page non trouvée"
+    },
+    "navigation": {
+        "application": "Application",
+        "dashboard": "Tableau de bord",
+        "analytics": "Analytique",
+        "overview": "Vue d’ensemble",
+        "reports": "Rapports",
+        "tasks": "Tâches",
+        "calendar": "Calendrier",
+        "users": "Utilisateurs"
+    },
+    "pagination": {
+        "items-per-page": "Éléments par page",
+        "next-page": "Page suivante",
+        "previous-page": "Page précédente",
+        "first-page": "Première page",
+        "last-page": "Dernière page",
+        "rows-selected": "{{selected}} sur {{total}} lignes sélectionnées",
+        "page": "Page {{page}} sur {{totalPages}}"
+    },
     "auth": {
         "login": {
             "title": "Connectez-vous à votre compte",
@@ -21,7 +48,7 @@
             "rememberMe": "Se souvenir de moi",
             "noAccount": "Vous n'avez pas de compte ?",
             "signUp": "Inscrivez-vous",
-            "loginButton": "Se connecter",
+            "loginBtn": "Se connecter",
             "testimonial": "Cette bibliothèque m'a fait gagner d'innombrables heures de travail et m'a aidé à livrer de superbes designs à mes clients plus rapidement que jamais.",
             "errors": {
                 "emailRequired": "L'email est requis",
@@ -65,7 +92,7 @@
             "description": "Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe",
             "emailLabel": "Email",
             "emailPlaceholder": "nom@exemple.com",
-            "submitButton": "Envoyer le lien de réinitialisation",
+            "submitBtn": "Envoyer le lien de réinitialisation",
             "backToLogin": "Retour à la connexion",
             "testimonial": "Cette bibliothèque m'a fait gagner d'innombrables heures de travail et m'a aidé à livrer de superbes designs à mes clients plus rapidement que jamais.",
             "alert": {
@@ -76,6 +103,52 @@
             "errors": {
                 "emailRequired": "L'email est requis",
                 "emailInvalid": "L'email est invalide"
+            }
+        }
+    },
+    "dashboard": {
+        "cards": {
+            "totalUsers": {
+                "label": "Nombre total d'utilisateurs",
+                "value": "12 000",
+                "subtitle": "+5% par rapport au mois dernier"
+            },
+            "newUsers": {
+                "label": "Nouveaux utilisateurs",
+                "value": "+350",
+                "subtitle": "+10% par rapport au mois dernier"
+            },
+            "pendingVerifications": {
+                "label": "Vérifications en attente",
+                "value": "42",
+                "subtitle": "2% des utilisateurs"
+            },
+            "activeUsers": {
+                "label": "Utilisateurs actifs",
+                "value": "7 800",
+                "subtitle": "65% de tous les utilisateurs"
+            }
+        }
+    },
+    "users": {
+        "list": {
+            "title": "Utilisateurs",
+            "searchPlaceholder": "Rechercher des utilisateurs...",
+            "addUserBtn": "Ajouter un utilisateur",
+            "columnsBtn": "Colonnes",
+            "refreshBtn": "Rafraîchir",
+            "columns": {
+                "name": "Nom",
+                "email": "E-mail",
+                "role": "Rôle",
+                "status": "Statut",
+                "phoneNumber": "Numéro de téléphone",
+                "createdAt": "Créé le",
+                "actions": "Actions"
+            },
+            "noUsers": "Aucun utilisateur trouvé.",
+            "errors": {
+                "loadFailed": "Échec du chargement des utilisateurs. Veuillez réessayer."
             }
         }
     },

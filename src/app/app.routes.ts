@@ -7,18 +7,21 @@ import { EmptyLayout } from './layout/empty/empty';
 export const routes: Routes = [
   {
     path: 'login',
+    title: 'login',
     canActivate: [noAuthGuard],
     component: EmptyLayout,
     loadChildren: () => import('./features/auth/login/login.routes'),
   },
   {
     path: 'signup',
+    title: 'signup',
     canActivate: [noAuthGuard],
     component: EmptyLayout,
     loadChildren: () => import('./features/auth/signup/signup.routes'),
   },
   {
     path: 'forget-password',
+    title: 'forgetPassword',
     canActivate: [noAuthGuard],
     component: EmptyLayout,
     loadChildren: () =>
@@ -33,6 +36,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'users',
+        title: 'users',
         loadChildren: () => import('./features/users/users.routes'),
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -41,6 +45,7 @@ export const routes: Routes = [
 
   {
     path: '404-not-found',
+    title: 'notFound',
     pathMatch: 'full',
     component: EmptyLayout,
     loadChildren: () => import('./shared/pages/not-found/not-found.routes'),

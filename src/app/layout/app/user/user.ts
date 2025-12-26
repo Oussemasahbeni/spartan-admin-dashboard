@@ -30,7 +30,7 @@ import {
 } from '../../../core/config/language.service';
 import { ThemeService } from '../../../core/config/theme.service';
 import { UserService } from '../../../core/user/user.service';
-import { User } from '../../../features/users/user-type';
+import { User } from '../../../features/users/user.type';
 
 @Component({
   selector: 'user',

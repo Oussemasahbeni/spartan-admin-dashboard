@@ -5,7 +5,11 @@ import {
   provideBrowserGlobalErrorListeners,
   provideEnvironmentInitializer,
 } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  TitleStrategy,
+  withViewTransitions,
+} from '@angular/router';
 
 import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
@@ -15,6 +19,7 @@ import {
   LanguageService,
 } from './core/config/language.service';
 import { ThemeService } from './core/config/theme.service';
+import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
 
 const availableLangs = ['en', 'fr', 'ar'];
@@ -59,5 +64,10 @@ export const appConfig: ApplicationConfig = {
       }
       themeService.init();
     }),
+
+    {
+      provide: TitleStrategy,
+      useClass: TranslateTitleStrategy,
+    },
   ],
 };

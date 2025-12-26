@@ -13,7 +13,7 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
     >
       <div class="flex items-center gap-2 px-4">
         <button type="button" hlmSidebarTrigger>
-          <span class="sr-only">Toggle sidebar</span>
+          <span class="sr-only"></span>
         </button>
         <hlm-separator
           orientation="vertical"
@@ -22,7 +22,7 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
         <nav hlmBreadcrumb>
           <ol hlmBreadcrumbList>
             <li hlmBreadcrumbItem class="hidden sm:block">
-              <a hlmBreadcrumbLink link="/">Building Your Application</a>
+              <a hlmBreadcrumbLink link="/">Home</a>
             </li>
             <li hlmBreadcrumbSeparator class="hidden sm:block"></li>
             <li hlmBreadcrumbItem>

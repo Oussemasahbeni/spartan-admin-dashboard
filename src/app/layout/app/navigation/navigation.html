@@ -1,0 +1,114 @@
+<div *transloco="let t; prefix: 'navigation'" hlmSidebarWrapper>
+  <hlm-sidebar collapsible="icon" [side]="side()">
+    <hlm-sidebar-header>
+      <ul hlmSidebarMenu>
+        <li hlmSidebarMenuItem>
+          <a hlmSidebarMenuButton size="lg" href="#">
+            <img
+              class="aspect-square size-8 me-2 dark:hidden"
+              ngSrc="/images/logo/logo.svg"
+              width="32"
+              height="32"
+              priority
+              alt="logo"
+            />
+
+            <img
+              class="aspect-square size-8 me-2 hidden dark:inline-block"
+              ngSrc="/images/logo/logo-white.svg"
+              width="32"
+              height="32"
+              priority
+              alt="logo"
+            />
+
+            <div class="grid flex-1 text-left text-sm leading-tight">
+              <span class="truncate font-medium">Acme Inc</span>
+              <span class="truncate text-xs">Enterprise</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </hlm-sidebar-header>
+
+    <hlm-sidebar-content>
+      <hlm-sidebar-group>
+        <div hlmSidebarGroupLabel>{{ t("application") }}</div>
+        <div hlmSidebarGroupContent>
+          <ul hlmSidebarMenu>
+            @for (item of _items; track item.title) {
+              @if (item.children; as children) {
+                <hlm-collapsible class="group/collapsible">
+                  <li hlmSidebarMenuItem>
+                    <button
+                      type="button"
+                      hlmCollapsibleTrigger
+                      hlmSidebarMenuButton
+                      class="flex w-full items-center justify-between"
+                    >
+                      <ng-icon hlmIcon [name]="item.icon" />
+                      @if (item.key) {
+                        <span>{{ t(item.key) }}</span>
+                      } @else {
+                        {{ item.title }}
+                      }
+                      <ng-icon
+                        name="lucideChevronRight"
+                        class="ms-auto rtl:rotate-180 transition-transform group-data-[state=open]/collapsible:rotate-90"
+                        hlmIcon
+                      />
+                    </button>
+                    <hlm-collapsible-content>
+                      <ul hlmSidebarMenuSub>
+                        @for (subItem of item.children; track subItem.title) {
+                          <li hlmSidebarMenuSubItem>
+                            <button
+                              type="button"
+                              hlmSidebarMenuSubButton
+                              class="w-full"
+                              [routerLink]="subItem.url"
+                            >
+                              @if (subItem.key) {
+                                <span>{{ t(subItem.key) }}</span>
+                              } @else {
+                                {{ subItem.title }}
+                              }
+                            </button>
+                          </li>
+                        }
+                      </ul>
+                    </hlm-collapsible-content>
+                  </li>
+                </hlm-collapsible>
+              } @else {
+                <li hlmSidebarMenuItem>
+                  <a
+                    hlmSidebarMenuButton
+                    routerLinkActive="bg-primary/10 text-primary !font-semibold group active-link"
+                    class="relative overflow-hidden transition-all duration-200"
+                    [routerLinkActiveOptions]="{ exact: false }"
+                    [routerLink]="item.url"
+                  >
+                    <ng-icon hlmIcon [name]="item.icon" />
+                    @if (item.key) {
+                      <span>{{ t(item.key) }}</span>
+                    } @else {
+                      {{ item.title }}
+                    }
+                  </a>
+                </li>
+              }
+            }
+          </ul>
+        </div>
+      </hlm-sidebar-group>
+      <nav-secondary class="mt-auto" />
+    </hlm-sidebar-content>
+    <hlm-sidebar-footer>
+      @if (user(); as currentUser) {
+        <user [user]="currentUser" />
+      }
+    </hlm-sidebar-footer>
+  </hlm-sidebar>
+  <ng-content />
+</div>

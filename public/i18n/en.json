@@ -8,6 +8,33 @@
         "system": "System",
         "logout": "Logout"
     },
+    "titles": {
+        "login": "Login",
+        "signup": "Sign Up",
+        "forgetPassword": "Forgot Password",
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "notFound": "Page Not Found"
+    },
+    "navigation": {
+        "application": "Application",
+        "dashboard": "Dashboard",
+        "analytics": "Analytics",
+        "overview": "Overview",
+        "reports": "Reports",
+        "tasks": "Tasks",
+        "calendar": "Calendar",
+        "users": "Users"
+    },
+    "pagination": {
+        "items-per-page": "Items per page",
+        "next-page": "Next page",
+        "previous-page": "Previous page",
+        "first-page": "First page",
+        "last-page": "Last page",
+        "rows-selected": "{{selected}} of {{total}} rows selected",
+        "page": "Page {{page}} of {{totalPages}}"
+    },
     "auth": {
         "login": {
             "title": "Login to your account",
@@ -21,7 +48,7 @@
             "rememberMe": "Remember me",
             "noAccount": "Don't have an account?",
             "signUp": "Sign up",
-            "loginButton": "Login",
+            "loginBtn": "Login",
             "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
             "errors": {
                 "emailRequired": "Email is required",
@@ -65,7 +92,7 @@
             "description": "Enter your email address and we'll send you a link to reset your password",
             "emailLabel": "Email",
             "emailPlaceholder": "name@example.com",
-            "submitButton": "Send reset link",
+            "submitBtn": "Send reset link",
             "backToLogin": "Back to login",
             "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
             "alert": {
@@ -75,6 +102,52 @@
             "errors": {
                 "emailRequired": "Email is required",
                 "emailInvalid": "Email is invalid"
+            }
+        }
+    },
+    "dashboard": {
+        "cards": {
+            "totalUsers": {
+                "label": "Total Users",
+                "value": "12,000",
+                "subtitle": "+5% than last month"
+            },
+            "newUsers": {
+                "label": "New Users",
+                "value": "+350",
+                "subtitle": "+10% vs last month"
+            },
+            "pendingVerifications": {
+                "label": "Pending Verifications",
+                "value": "42",
+                "subtitle": "2% of users"
+            },
+            "activeUsers": {
+                "label": "Active Users",
+                "value": "7800",
+                "subtitle": "65% of all users"
+            }
+        }
+    },
+    "users": {
+        "list": {
+            "title": "Users",
+            "searchPlaceholder": "Search users...",
+            "addUserBtn": "Add User",
+            "columnsBtn": "Columns",
+            "refreshBtn": "Refresh",
+            "columns": {
+                "name": "Name",
+                "email": "Email",
+                "role": "Role",
+                "status": "Status",
+                "phoneNumber": "Phone Number",
+                "createdAt": "Created At",
+                "actions": "Actions"
+            },
+            "noUsers": "No users found.",
+            "errors": {
+                "loadFailed": "Failed to load users. Please try again."
             }
         }
     },
