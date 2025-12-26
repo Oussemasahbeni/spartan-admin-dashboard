@@ -18,10 +18,6 @@
             "forgotPassword": "هل نسيت كلمة المرور؟",
             "orContinueWith": "أو المتابعة مع",
             "github": "GitHub",
-            "termsText": "من خلال النقر على متابعة، فإنك توافق على",
-            "termsOfService": "شروط الخدمة",
-            "and": "و",
-            "privacyPolicy": "سياسة الخصوصية",
             "rememberMe": "تذكرني",
             "noAccount": "ليس لديك حساب؟",
             "signUp": "إنشاء حساب",
@@ -32,6 +28,54 @@
                 "emailInvalid": "البريد الإلكتروني غير صالح",
                 "passwordRequired": "كلمة المرور مطلوبة",
                 "passwordMinLength": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
+            }
+        },
+        "signup": {
+            "title": "إنشاء حساب",
+            "haveAccount": "هل لديك حساب بالفعل؟",
+            "signIn": "تسجيل الدخول",
+            "nameLabel": "الاسم",
+            "namePlaceholder": "اسمك الكامل",
+            "emailLabel": "البريد الإلكتروني",
+            "emailPlaceholder": "name@example.com",
+            "passwordLabel": "كلمة المرور",
+            "passwordPlaceholder": "كلمة المرور الخاصة بك",
+            "confirmPasswordLabel": "تأكيد كلمة المرور",
+            "confirmPasswordPlaceholder": "أكد كلمة المرور الخاصة بك",
+            "signupButton": "التسجيل",
+            "orContinueWith": "أو المتابعة مع",
+            "github": "GitHub",
+            "termsText": "من خلال النقر على متابعة، فإنك توافق على",
+            "termsOfService": "شروط الخدمة",
+            "and": "و",
+            "privacyPolicy": "سياسة الخصوصية",
+            "testimonial": "لقد وفرت لي هذه المكتبة ساعات لا حصر لها من العمل وساعدتني في تقديم تصميمات مذهلة لعملائي بشكل أسرع من أي وقت مضى.",
+            "errors": {
+                "nameRequired": "الاسم مطلوب",
+                "emailRequired": "البريد الإلكتروني مطلوب",
+                "emailInvalid": "البريد الإلكتروني غير صالح",
+                "passwordRequired": "كلمة المرور مطلوبة",
+                "passwordMinLength": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+                "passwordMismatch": "كلمات المرور غير متطابقة",
+                "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب"
+            }
+        },
+        "forgetPassword": {
+            "title": "هل نسيت كلمة المرور؟",
+            "description": "أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور",
+            "emailLabel": "البريد الإلكتروني",
+            "emailPlaceholder": "name@example.com",
+            "submitButton": "إرسال رابط إعادة التعيين",
+            "backToLogin": "العودة إلى تسجيل الدخول",
+            "testimonial": "لقد وفرت لي هذه المكتبة ساعات لا حصر لها من العمل وساعدتني في تقديم تصميمات مذهلة لعملائي بشكل أسرع من أي وقت مضى.",
+            "alert": {
+                "successTitle": "نجاح",
+                "successMessage": "تم حفظ تغييراتك بنجاح.",
+                "resetLinkSent": "تم إرسال تعليمات إعادة تعيين كلمة المرور إلى عنوان بريدك الإلكتروني إذا كان الحساب موجودًا."
+            },
+            "errors": {
+                "emailRequired": "البريد الإلكتروني مطلوب",
+                "emailInvalid": "البريد الإلكتروني غير صالح"
             }
         }
     },

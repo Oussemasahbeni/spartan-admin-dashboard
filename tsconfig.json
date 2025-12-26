@@ -102,6 +102,9 @@
       ],
       "@spartan-ng/helm/badge": [
         "./src/app/spartan/badge/src/index.ts"
+      ],
+      "@spartan-ng/helm/alert": [
+        "./src/app/spartan/alert/src/index.ts"
       ]
     }
   },

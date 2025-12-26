@@ -11,6 +11,19 @@ export const routes: Routes = [
     component: EmptyLayout,
     loadChildren: () => import('./features/auth/login/login.routes'),
   },
+  {
+    path: 'signup',
+    canActivate: [noAuthGuard],
+    component: EmptyLayout,
+    loadChildren: () => import('./features/auth/signup/signup.routes'),
+  },
+  {
+    path: 'forget-password',
+    canActivate: [noAuthGuard],
+    component: EmptyLayout,
+    loadChildren: () =>
+      import('./features/auth/forget-password/forget-password.routes'),
+  },
 
   {
     path: '',

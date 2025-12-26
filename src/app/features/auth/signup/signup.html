@@ -1,1 +1,177 @@
-<p>signup works!</p>
+<app-auth-layout>
+  <div
+    *transloco="let t; prefix: 'auth.signup'"
+    hlmCard
+    class="mx-auto w-full justify-center p-4 max-w-xl"
+  >
+    <div class="space-y-2 text-center">
+      <h1 class="text-2xl font-semibold tracking-tight">
+        {{ t("title") }}
+      </h1>
+      <p class="text-center text-sm text-muted-foreground">
+        {{ t("haveAccount") }}
+        <a
+          routerLink="/login"
+          class="font-semibold text-primary underline-offset-4 hover:underline hover:cursor-pointer"
+        >
+          {{ t("signIn") }}
+        </a>
+      </p>
+    </div>
+
+    <form class="flex flex-col gap-4">
+      <hlm-field>
+        @let name = signupForm.name();
+        <hlm-field-label for="name">{{ t("nameLabel") }}</hlm-field-label>
+        <input
+          hlmInput
+          id="name"
+          type="text"
+          autocomplete="name"
+          [placeholder]="t('namePlaceholder')"
+          [field]="signupForm.name"
+        />
+
+        @let showNameErrors = name.touched() && name.invalid();
+        @if (showNameErrors) {
+          @for (error of name.errors(); track error) {
+            <hlm-field-error>{{
+              t("errors." + error.message)
+            }}</hlm-field-error>
+          }
+        }
+      </hlm-field>
+
+      <hlm-field>
+        @let email = signupForm.email();
+        <hlm-field-label for="email">{{ t("emailLabel") }}</hlm-field-label>
+        <input
+          hlmInput
+          id="email"
+          type="email"
+          autocomplete="email"
+          [placeholder]="t('emailPlaceholder')"
+          [field]="signupForm.email"
+        />
+
+        @let showEmailErrors = email.touched() && email.invalid();
+        @if (showEmailErrors) {
+          @for (error of email.errors(); track error) {
+            <hlm-field-error>{{
+              t("errors." + error.message)
+            }}</hlm-field-error>
+          }
+        }
+      </hlm-field>
+
+      <hlm-field>
+        <hlm-field-label for="password">{{
+          t("passwordLabel")
+        }}</hlm-field-label>
+        <div class="relative">
+          <input
+            hlmInput
+            id="password"
+            autocomplete="new-password"
+            [type]="showPassword() ? 'text' : 'password'"
+            [placeholder]="t('passwordPlaceholder')"
+            [field]="signupForm.password"
+          />
+          <ng-icon
+            hlmIcon
+            size="sm"
+            class="absolute inset-y-2.5 end-2 cursor-pointer"
+            [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
+            (click)="togglePasswordVisibility()"
+          />
+        </div>
+
+        @let password = signupForm.password();
+        @let showPasswordErrors = password.touched() && password.invalid();
+        @if (showPasswordErrors) {
+          @for (error of password.errors(); track error) {
+            <hlm-field-error>{{
+              t("errors." + error.message)
+            }}</hlm-field-error>
+          }
+        }
+      </hlm-field>
+
+      <hlm-field>
+        <hlm-field-label for="confirmPassword">{{
+          t("confirmPasswordLabel")
+        }}</hlm-field-label>
+        <div class="relative">
+          <input
+            hlmInput
+            id="confirmPassword"
+            autocomplete="new-password"
+            [type]="showConfirmPassword() ? 'text' : 'password'"
+            [placeholder]="t('confirmPasswordPlaceholder')"
+            [field]="signupForm.confirmPassword"
+          />
+          <ng-icon
+            hlmIcon
+            size="sm"
+            class="absolute inset-y-2.5 end-2 cursor-pointer"
+            [name]="showConfirmPassword() ? 'lucideEye' : 'lucideEyeOff'"
+            (click)="toggleConfirmPasswordVisibility()"
+          />
+        </div>
+
+        @let confirmPassword = signupForm.confirmPassword();
+        @let showConfirmPasswordErrors =
+          confirmPassword.touched() && confirmPassword.invalid();
+        @if (showConfirmPasswordErrors) {
+          @for (error of confirmPassword.errors(); track error) {
+            <hlm-field-error>{{
+              t("errors." + error.message)
+            }}</hlm-field-error>
+          }
+        }
+      </hlm-field>
+
+      <button
+        type="button"
+        hlmBtn
+        [disabled]="isLoading()"
+        (click)="onSignup($event)"
+      >
+        @if (isLoading()) {
+          <hlm-spinner />
+        }
+        {{ t("signupButton") }}
+      </button>
+    </form>
+
+    <div class="relative mb-2">
+      <div class="absolute inset-0 flex items-center">
+        <span class="w-full border-t"></span>
+      </div>
+      <div class="relative flex justify-center text-xs uppercase">
+        <span class="bg-background text-muted-foreground px-2">{{
+          t("orContinueWith")
+        }}</span>
+      </div>
+    </div>
+
+    <button type="button" hlmBtn variant="outline" [disabled]="isLoading()">
+      <ng-icon hlm class="mr-2" size="sm" name="lucideGithub" />
+      {{ t("github") }}
+    </button>
+
+    <p class="text-muted-foreground text-center text-sm sm:px-8">
+      {{ t("termsText") }}
+      <a
+        class="hover:text-primary cursor-pointer underline underline-offset-4"
+        >{{ t("termsOfService") }}</a
+      >
+      {{ t("and") }}
+      <a
+        class="hover:text-primary cursor-pointer underline underline-offset-4"
+        >{{ t("privacyPolicy") }}</a
+      >
+      .
+    </p>
+  </div>
+</app-auth-layout>

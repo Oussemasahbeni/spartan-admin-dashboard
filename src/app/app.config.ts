@@ -44,6 +44,9 @@ export const appConfig: ApplicationConfig = {
         defaultLang: getDefaultLanguage(),
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
+        flatten: {
+          aot: !isDevMode(),
+        },
       },
       loader: TranslocoHttpLoader,
     }),

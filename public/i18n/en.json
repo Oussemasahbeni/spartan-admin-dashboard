@@ -18,10 +18,6 @@
             "forgotPassword": "Forgot your password?",
             "orContinueWith": "Or continue with",
             "github": "GitHub",
-            "termsText": "By clicking continue, you agree to our",
-            "termsOfService": "Terms of Service",
-            "and": "and",
-            "privacyPolicy": "Privacy Policy",
             "rememberMe": "Remember me",
             "noAccount": "Don't have an account?",
             "signUp": "Sign up",
@@ -32,6 +28,53 @@
                 "emailInvalid": "Email is invalid",
                 "passwordRequired": "Password is required",
                 "passwordMinLength": "Password must be at least 6 characters"
+            }
+        },
+        "signup": {
+            "title": "Create an account",
+            "haveAccount": "Already have an account?",
+            "signIn": "Sign in",
+            "nameLabel": "Name",
+            "namePlaceholder": "Your full name",
+            "emailLabel": "Email",
+            "emailPlaceholder": "name@example.com",
+            "passwordLabel": "Password",
+            "passwordPlaceholder": "Your password",
+            "confirmPasswordLabel": "Confirm Password",
+            "confirmPasswordPlaceholder": "Confirm your password",
+            "signupButton": "Sign up",
+            "orContinueWith": "Or continue with",
+            "github": "GitHub",
+            "termsText": "By clicking continue, you agree to our",
+            "termsOfService": "Terms of Service",
+            "and": "and",
+            "privacyPolicy": "Privacy Policy",
+            "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
+            "errors": {
+                "nameRequired": "Name is required",
+                "emailRequired": "Email is required",
+                "emailInvalid": "Email is invalid",
+                "passwordRequired": "Password is required",
+                "passwordMinLength": "Password must be at least 6 characters",
+                "passwordMismatch": "Passwords do not match",
+                "confirmPasswordRequired": "Confirm password is required"
+            }
+        },
+        "forgetPassword": {
+            "title": "Forgot your password?",
+            "description": "Enter your email address and we'll send you a link to reset your password",
+            "emailLabel": "Email",
+            "emailPlaceholder": "name@example.com",
+            "submitButton": "Send reset link",
+            "backToLogin": "Back to login",
+            "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
+            "alert": {
+                "successTitle": "Success",
+                "resetLinkSent": "Password reset instructions have been sent to your email address if an account exists."
+            },
+            "errors": {
+                "emailRequired": "Email is required",
+                "emailInvalid": "Email is invalid"
             }
         }
     },

@@ -18,10 +18,6 @@
             "forgotPassword": "Mot de passe oublié ?",
             "orContinueWith": "Ou continuer avec",
             "github": "GitHub",
-            "termsText": "En continuant, vous acceptez nos",
-            "termsOfService": "Conditions d'utilisation",
-            "and": "et",
-            "privacyPolicy": "Politique de confidentialité",
             "rememberMe": "Se souvenir de moi",
             "noAccount": "Vous n'avez pas de compte ?",
             "signUp": "Inscrivez-vous",
@@ -32,6 +28,54 @@
                 "emailInvalid": "L'email est invalide",
                 "passwordRequired": "Le mot de passe est requis",
                 "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères"
+            }
+        },
+        "signup": {
+            "title": "Créer un compte",
+            "haveAccount": "Vous avez déjà un compte?",
+            "signIn": "Se connecter",
+            "nameLabel": "Nom",
+            "namePlaceholder": "Votre nom complet",
+            "emailLabel": "Email",
+            "emailPlaceholder": "nom@exemple.com",
+            "passwordLabel": "Mot de passe",
+            "passwordPlaceholder": "Votre mot de passe",
+            "confirmPasswordLabel": "Confirmer le mot de passe",
+            "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+            "signupButton": "S'inscrire",
+            "orContinueWith": "Ou continuer avec",
+            "github": "GitHub",
+            "termsText": "En continuant, vous acceptez nos",
+            "termsOfService": "Conditions d'utilisation",
+            "and": "et",
+            "privacyPolicy": "Politique de confidentialité",
+            "testimonial": "Cette bibliothèque m'a fait gagner d'innombrables heures de travail et m'a aidé à livrer de superbes designs à mes clients plus rapidement que jamais.",
+            "errors": {
+                "nameRequired": "Le nom est requis",
+                "emailRequired": "L'email est requis",
+                "emailInvalid": "L'email est invalide",
+                "passwordRequired": "Le mot de passe est requis",
+                "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+                "passwordMismatch": "Les mots de passe ne correspondent pas",
+                "confirmPasswordRequired": "La confirmation du mot de passe est requise"
+            }
+        },
+        "forgetPassword": {
+            "title": "Mot de passe oublié?",
+            "description": "Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe",
+            "emailLabel": "Email",
+            "emailPlaceholder": "nom@exemple.com",
+            "submitButton": "Envoyer le lien de réinitialisation",
+            "backToLogin": "Retour à la connexion",
+            "testimonial": "Cette bibliothèque m'a fait gagner d'innombrables heures de travail et m'a aidé à livrer de superbes designs à mes clients plus rapidement que jamais.",
+            "alert": {
+                "successTitle": "Succès",
+                "successMessage": "Vos modifications ont été enregistrées avec succès.",
+                "resetLinkSent": "Les instructions de réinitialisation du mot de passe ont été envoyées à votre adresse e-mail si un compte existe."
+            },
+            "errors": {
+                "emailRequired": "L'email est requis",
+                "emailInvalid": "L'email est invalide"
             }
         }
     },

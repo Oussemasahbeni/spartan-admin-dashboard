@@ -4,84 +4,66 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import {
-  email,
-  Field,
-  form,
-  minLength,
-  required,
-} from '@angular/forms/signals';
+import { email, Field, form, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideEye, lucideEyeOff, lucideGithub } from '@ng-icons/lucide';
+import { lucideCircleCheck } from '@ng-icons/lucide';
+import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
-import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
-import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { AuthLayout } from '../auth-layout';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-forget-password',
   imports: [
     HlmButtonImports,
     HlmIconImports,
     HlmFieldImports,
     HlmInputImports,
-    HlmCheckboxImports,
-    HlmLabelImports,
     HlmSpinnerImports,
-    HlmCheckboxImports,
+    HlmAlertImports,
     Field,
     TranslocoModule,
     HlmCard,
     RouterLink,
     AuthLayout,
   ],
-  providers: [
-    provideIcons({
-      lucideGithub,
-      lucideEye,
-      lucideEyeOff,
-    }),
-  ],
-  templateUrl: './login.html',
+  providers: [provideIcons({ lucideCircleCheck })],
+  templateUrl: './forget-password.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Login {
+export class ForgetPassword {
   private readonly _router = inject(Router);
   public readonly isLoading = signal(false);
-  public readonly showPassword = signal(false);
+  readonly showAlert = signal(false);
 
-  readonly loginModel = signal({
+  readonly forgetPasswordModel = signal({
     email: '',
-    password: '',
   });
 
-  readonly loginForm = form(this.loginModel, (schema) => {
+  readonly forgetPasswordForm = form(this.forgetPasswordModel, (schema) => {
     required(schema.email, { message: 'emailRequired' });
     email(schema.email, { message: 'emailInvalid' });
-    required(schema.password, { message: 'passwordRequired' });
-    minLength(schema.password, 6, { message: 'passwordMinLength' });
   });
 
-  togglePasswordVisibility(): void {
-    this.showPassword.set(!this.showPassword());
-  }
-
-  onLogin(event: Event): void {
+  onSubmit(event: Event): void {
     event.preventDefault();
-    if (this.loginForm().invalid()) {
-      this.loginForm.email().markAsTouched();
-      this.loginForm.password().markAsTouched();
+    if (this.forgetPasswordForm().invalid()) {
+      this.forgetPasswordForm.email().markAsTouched();
       return;
     }
     this.isLoading.set(true);
-    localStorage.setItem('token', 'dummy-jwt-token');
-    this._router.navigate(['/users']);
+
+    // Simulate API call
+    setTimeout(() => {
+      this.isLoading.set(false);
+      this.forgetPasswordForm().reset({ email: '' });
+      this.showAlert.set(true);
+    }, 2000);
   }
 }

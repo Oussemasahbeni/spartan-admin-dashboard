@@ -1,193 +1,121 @@
-<div
-  *transloco="let t; prefix: 'auth.login'"
-  class="bg-background h-full en border shadow-md block md:shadow-xl"
->
+<app-auth-layout>
   <div
-    class="relative container h-screen flex flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
+    *transloco="let t; prefix: 'auth.login'"
+    hlmCard
+    class="mx-auto w-full justify-center p-4 max-w-xl"
   >
-    <!-- Form -->
-    <div class="lg:p-8">
-      <div class="mb-4 flex items-center gap-3 absolute top-0 left-0 p-6">
-        <img
-          class="aspect-square size-8 me-2 dark:hidden"
-          ngSrc="/images/logo/logo.svg"
-          width="32"
-          height="32"
-          priority
-          alt="logo"
-        />
-
-        <img
-          class="aspect-square size-8 me-2 hidden dark:inline-block"
-          ngSrc="/images/logo/logo-white.svg"
-          width="32"
-          height="32"
-          priority
-          alt="logo"
-        />
-        <span class="text-white text-xl"> Acme Inc </span>
-      </div>
-      <div hlmCard class="mx-auto w-full justify-center p-4 max-w-xl">
-        <div class="space-y-2 text-center">
-          <h1 class="text-2xl font-semibold tracking-tight">
-            {{ t("title") }}
-          </h1>
-          <p class="text-center text-sm text-muted-foreground">
-            {{ t("noAccount") }}
-            <a
-              routerLink="/signup"
-              class="font-semibold text-primary underline-offset-4 hover:underline hover:cursor-pointer"
-            >
-              {{ t("signUp") }}
-            </a>
-          </p>
-        </div>
-
-        <form class="flex flex-col gap-4">
-          <hlm-field>
-            @let email = loginForm.email();
-            <hlm-field-label for="email">{{ t("emailLabel") }}</hlm-field-label>
-            <input
-              hlmInput
-              id="email"
-              type="email"
-              autocomplete="off"
-              [placeholder]="t('emailPlaceholder')"
-              [field]="loginForm.email"
-            />
-
-            @let showEmailErrors = email.touched() && email.invalid();
-            @if (showEmailErrors) {
-              @for (error of email.errors(); track error) {
-                <hlm-field-error>{{
-                  t("errors." + error.message)
-                }}</hlm-field-error>
-              }
-            }
-          </hlm-field>
-          <hlm-field>
-            <hlm-field-label for="password">{{
-              t("passwordLabel")
-            }}</hlm-field-label>
-            <div class="relative">
-              <input
-                hlmInput
-                id="password"
-                autocomplete="new-password"
-                [type]="showPassword() ? 'text' : 'password'"
-                [placeholder]="t('passwordPlaceholder')"
-                [field]="loginForm.password"
-              />
-              <ng-icon
-                hlmIcon
-                size="sm"
-                class="absolute inset-y-2.5 end-2 cursor-pointer"
-                [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
-                (click)="togglePasswordVisibility()"
-              />
-            </div>
-
-            @let password = loginForm.password();
-            @let showPasswordErrors = password.touched() && password.invalid();
-            @if (showPasswordErrors) {
-              @for (error of password.errors(); track error) {
-                <hlm-field-error>{{
-                  t("errors." + error.message)
-                }}</hlm-field-error>
-              }
-            }
-          </hlm-field>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <hlm-checkbox class="border-muted-foreground" id="remember" />
-
-              <label for="remember" hlmLabel>
-                {{ t("rememberMe") }}
-              </label>
-            </div>
-
-            <a
-              routerLink="/forget-password"
-              class="text-sm font-medium text-primary underline-offset-4 hover:underline hover:cursor-pointer"
-            >
-              {{ t("forgotPassword") }}
-            </a>
-          </div>
-
-          <button
-            type="button"
-            hlmBtn
-            [disabled]="isLoading()"
-            (click)="onLogin($event)"
-          >
-            @if (isLoading()) {
-              <hlm-spinner />
-            }
-            {{ t("loginButton") }}
-          </button>
-        </form>
-        <div class="relative mb-2">
-          <div class="absolute inset-0 flex items-center">
-            <span class="w-full border-t"></span>
-          </div>
-          <div class="relative flex justify-center text-xs uppercase">
-            <span class="bg-background text-muted-foreground px-2">{{
-              t("orContinueWith")
-            }}</span>
-          </div>
-        </div>
-        <button type="button" hlmBtn variant="outline" [disabled]="isLoading()">
-          <ng-icon hlm class="mr-2" size="sm" name="lucideGithub" />
-
-          {{ t("github") }}
-        </button>
-        <p class="text-muted-foreground text-center text-sm sm:px-8">
-          {{ t("termsText") }}
-          <a
-            class="hover:text-primary cursor-pointer underline underline-offset-4"
-            >{{ t("termsOfService") }}</a
-          >
-          {{ t("and") }}
-          <a
-            class="hover:text-primary cursor-pointer underline underline-offset-4"
-            >{{ t("privacyPolicy") }}</a
-          >
-          .
-        </p>
-      </div>
-    </div>
-    <!-- Illustration -->
-    <div
-      class="bg-muted text-primary relative hidden h-full flex-col border-r p-10 lg:flex dark:border-r-zinc-800"
-    >
-      <div class="flex items-center pt-20 h-full justify-center z-1">
-        <div class="absolute right-0 top-0 w-full max-w-62.5 xl:max-w-112.5">
-          <img
-            ngSrc="/images/auth/shape.svg"
-            width="450"
-            height="254"
-            priority
-            alt="grid"
-          />
-        </div>
-        <div
-          class="absolute bottom-0 left-0 w-full max-w-62.5 rotate-180 xl:max-w-112.5"
+    <div class="space-y-2 text-center">
+      <h1 class="text-2xl font-semibold tracking-tight">
+        {{ t("title") }}
+      </h1>
+      <p class="text-center text-sm text-muted-foreground">
+        {{ t("noAccount") }}
+        <a
+          routerLink="/signup"
+          class="font-semibold text-primary underline-offset-4 hover:underline hover:cursor-pointer"
         >
-          <img
-            ngSrc="/images/auth/shape.svg"
-            width="450"
-            height="254"
-            priority
-            alt="grid"
+          {{ t("signUp") }}
+        </a>
+      </p>
+    </div>
+
+    <form class="flex flex-col gap-4">
+      <hlm-field>
+        @let email = loginForm.email();
+        <hlm-field-label for="email">{{ t("emailLabel") }}</hlm-field-label>
+        <input
+          hlmInput
+          id="email"
+          type="email"
+          autocomplete="off"
+          [placeholder]="t('emailPlaceholder')"
+          [field]="loginForm.email"
+        />
+
+        @let showEmailErrors = email.touched() && email.invalid();
+        @if (showEmailErrors) {
+          @for (error of email.errors(); track error) {
+            <hlm-field-error>{{
+              t("errors." + error.message)
+            }}</hlm-field-error>
+          }
+        }
+      </hlm-field>
+      <hlm-field>
+        <hlm-field-label for="password">{{
+          t("passwordLabel")
+        }}</hlm-field-label>
+        <div class="relative">
+          <input
+            hlmInput
+            id="password"
+            autocomplete="new-password"
+            [type]="showPassword() ? 'text' : 'password'"
+            [placeholder]="t('passwordPlaceholder')"
+            [field]="loginForm.password"
+          />
+          <ng-icon
+            hlmIcon
+            size="sm"
+            class="absolute inset-y-2.5 end-2 cursor-pointer"
+            [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
+            (click)="togglePasswordVisibility()"
           />
         </div>
 
-        <div class="flex justify-center my-auto flex-col items-center max-w-xs">
-          <p class="text-center text-gray-400 dark:text-white/60">
-            "{{ t("testimonial") }}"
-          </p>
+        @let password = loginForm.password();
+        @let showPasswordErrors = password.touched() && password.invalid();
+        @if (showPasswordErrors) {
+          @for (error of password.errors(); track error) {
+            <hlm-field-error>{{
+              t("errors." + error.message)
+            }}</hlm-field-error>
+          }
+        }
+      </hlm-field>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <hlm-checkbox class="border-muted-foreground" id="remember" />
+
+          <label for="remember" hlmLabel>
+            {{ t("rememberMe") }}
+          </label>
         </div>
+
+        <a
+          routerLink="/forget-password"
+          class="text-sm font-medium text-primary underline-offset-4 hover:underline hover:cursor-pointer"
+        >
+          {{ t("forgotPassword") }}
+        </a>
+      </div>
+
+      <button
+        type="button"
+        hlmBtn
+        [disabled]="isLoading()"
+        (click)="onLogin($event)"
+      >
+        @if (isLoading()) {
+          <hlm-spinner />
+        }
+        {{ t("loginButton") }}
+      </button>
+    </form>
+    <div class="relative mb-2">
+      <div class="absolute inset-0 flex items-center">
+        <span class="w-full border-t"></span>
+      </div>
+      <div class="relative flex justify-center text-xs uppercase">
+        <span class="bg-background text-muted-foreground px-2">{{
+          t("orContinueWith")
+        }}</span>
       </div>
     </div>
+    <button type="button" hlmBtn variant="outline" [disabled]="isLoading()">
+      <ng-icon hlm class="mr-2" size="sm" name="lucideGithub" />
+
+      {{ t("github") }}
+    </button>
   </div>
-</div>
+</app-auth-layout>
