@@ -1,0 +1,217 @@
+<div class="@container/main flex flex-1 flex-col gap-2">
+  <div class="flex flex-col gap-4 md:gap-6">
+    <dashboard-card-section />
+    <div
+      class="flex flex-col justify-between gap-4 py-4 sm:flex-row sm:items-center"
+    >
+      <input
+        hlmInput
+        class="w-full md:w-80"
+        placeholder="Filter emails..."
+        (input)="_filterChanged($event)"
+      />
+
+      <button
+        type="button"
+        hlmBtn
+        variant="outline"
+        align="end"
+        [hlmDropdownMenuTrigger]="menu"
+      >
+        <ng-icon hlmIcon name="lucideSettings2" size="sm" />
+        Columns
+        <ng-icon hlmIcon name="lucideChevronDown" class="ml-2" size="sm" />
+      </button>
+      <ng-template #menu>
+        <hlm-dropdown-menu class="w-32">
+          @for (column of _hidableColumns; track column.id) {
+          <button
+            type="button"
+            hlmDropdownMenuCheckbox
+            class="capitalize"
+            [checked]="column.getIsVisible()"
+            (triggered)="column.toggleVisibility()"
+          >
+            <hlm-dropdown-menu-checkbox-indicator />
+            {{ column.columnDef.id }}
+          </button>
+          }
+        </hlm-dropdown-menu>
+      </ng-template>
+    </div>
+    <div class="overflow-hidden rounded-md border">
+      <!-- we defer the loading of the table, because tanstack manipulates the DOM with flexRender which can cause errors during SSR -->
+      @defer {
+      <div hlmTableContainer>
+        <table hlmTable>
+          <thead hlmTHead class="bg-muted sticky top-0 z-10">
+            @for (headerGroup of _table.getHeaderGroups(); track headerGroup.id)
+            {
+            <tr hlmTr>
+              @for (header of headerGroup.headers; track header.id) {
+              <th hlmTh [attr.colSpan]="header.colSpan">
+                @if (!header.isPlaceholder) {
+                <ng-container
+                  *flexRender="
+                    header.column.columnDef.header;
+                    props: header.getContext();
+                    let headerText
+                  "
+                >
+                  <div [innerHTML]="headerText"></div>
+                </ng-container>
+                }
+              </th>
+              }
+            </tr>
+            }
+          </thead>
+          <tbody hlmTBody>
+            @for (row of _table.getRowModel().rows; track row.id) {
+            <tr
+              hlmTr
+              [attr.key]="row.id"
+              [attr.data-state]="row.getIsSelected() && 'selected'"
+            >
+              @for (cell of row.getVisibleCells(); track $index) {
+              <td hlmTd>
+                <ng-container
+                  *flexRender="
+                    cell.column.columnDef.cell;
+                    props: cell.getContext();
+                    let cell
+                  "
+                >
+                  <div [innerHTML]="cell"></div>
+                </ng-container>
+              </td>
+              }
+            </tr>
+            } @empty {
+            <tr hlmTr>
+              <td
+                hlmTd
+                class="h-24 text-center"
+                [attr.colspan]="_columns.length"
+              >
+                No results.
+              </td>
+            </tr>
+            }
+          </tbody>
+
+          <ng-template #dateCell let-context>
+            {{ context.getValue() | date : "mediumDate" }}
+          </ng-template>
+        </table>
+      </div>
+      }
+    </div>
+
+    <div class="flex flex-col justify-between py-4 sm:flex-row sm:items-center">
+      @if (_table.getRowCount() > 0) {
+
+      <span class="text-muted-foreground text-sm">
+        {{ _table.getSelectedRowModel().rows.length }} of
+        {{ _table.getRowCount() }} row(s) selected
+      </span>
+      <div class="mt-2 flex gap-8 sm:mt-0">
+        <div class="flex gap-2">
+          <span hlmLabel>Row per page:</span>
+          <brn-select
+            class="inline-block"
+            [ngModel]="_table.getState().pagination.pageSize"
+            (ngModelChange)="
+              _table.setPageSize($event); _table.resetPageIndex()
+            "
+          >
+            <hlm-select-trigger size="sm" class="mr-1 inline-flex h-8 w-fit">
+              <hlm-select-value />
+            </hlm-select-trigger>
+            <hlm-select-content>
+              @for (size of _availablePageSizes; track size) {
+              <hlm-option [value]="size">
+                {{ size === 10000 ? "All" : size }}
+              </hlm-option>
+              }
+            </hlm-select-content>
+          </brn-select>
+        </div>
+
+        <span hlmLabel
+          >Page {{ _table.getState().pagination.pageIndex + 1 }} of
+          {{ _table.getPageCount() }}</span
+        >
+
+        <div class="flex space-x-1">
+          <button
+            type="button"
+            size="icon-sm"
+            variant="outline"
+            hlmBtn
+            [disabled]="!_table.getCanPreviousPage()"
+            (click)="_table.firstPage()"
+          >
+            <ng-icon
+              hlmIcon
+              class="rtl:rotate-180"
+              name="lucideChevronFirst"
+              size="sm"
+            />
+          </button>
+          <button
+            type="button"
+            size="icon-sm"
+            variant="outline"
+            hlmBtn
+            [disabled]="!_table.getCanPreviousPage()"
+            (click)="_table.previousPage()"
+          >
+            <ng-icon
+              hlmIcon
+              class="rtl:rotate-180"
+              name="lucideChevronLeft"
+              size="sm"
+            />
+          </button>
+          <button
+            type="button"
+            size="icon-sm"
+            variant="outline"
+            hlmBtn
+            [disabled]="!_table.getCanNextPage()"
+            (click)="_table.nextPage()"
+          >
+            <ng-icon
+              hlmIcon
+              class="rtl:rotate-180"
+              name="lucideChevronRight"
+              size="sm"
+            />
+          </button>
+          <button
+            type="button"
+            size="icon-sm"
+            variant="outline"
+            hlmBtn
+            [disabled]="!_table.getCanNextPage()"
+            (click)="_table.lastPage()"
+          >
+            <ng-icon
+              hlmIcon
+              class="rtl:rotate-180"
+              name="lucideChevronLast"
+              size="sm"
+            />
+          </button>
+        </div>
+      </div>
+
+      } @else {
+      <div class="flex h-full w-full items-center justify-center">
+        <div class="text-muted-foreground text-sm">No Data</div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

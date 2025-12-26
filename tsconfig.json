@@ -99,6 +99,9 @@
       ],
       "@spartan-ng/helm/collapsible": [
         "./src/app/spartan/collapsible/src/index.ts"
+      ],
+      "@spartan-ng/helm/badge": [
+        "./src/app/spartan/badge/src/index.ts"
       ]
     }
   },

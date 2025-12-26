@@ -10,8 +10,11 @@ import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { routes } from './app.routes';
-import { LanguageOptions, LanguageService } from './core/language.service';
-import { ThemeService } from './core/theme.service';
+import {
+  LanguageOptions,
+  LanguageService,
+} from './core/config/language.service';
+import { ThemeService } from './core/config/theme.service';
 import { TranslocoHttpLoader } from './transloco-loader';
 
 const availableLangs = ['en', 'fr', 'ar'];

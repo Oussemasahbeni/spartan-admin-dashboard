@@ -7,5 +7,39 @@
         "dark": "داكن",
         "system": "النظام",
         "logout": "تسجيل الخروج"
+    },
+    "auth": {
+        "login": {
+            "title": "تسجيل الدخول إلى حسابك",
+            "emailLabel": "البريد الإلكتروني",
+            "emailPlaceholder": "name@example.com",
+            "passwordLabel": "كلمة المرور",
+            "passwordPlaceholder": "كلمة المرور الخاصة بك",
+            "forgotPassword": "هل نسيت كلمة المرور؟",
+            "orContinueWith": "أو المتابعة مع",
+            "github": "GitHub",
+            "termsText": "من خلال النقر على متابعة، فإنك توافق على",
+            "termsOfService": "شروط الخدمة",
+            "and": "و",
+            "privacyPolicy": "سياسة الخصوصية",
+            "rememberMe": "تذكرني",
+            "noAccount": "ليس لديك حساب؟",
+            "signUp": "إنشاء حساب",
+            "loginButton": "تسجيل الدخول",
+            "testimonial": "لقد وفرت لي هذه المكتبة ساعات لا حصر لها من العمل وساعدتني في تقديم تصميمات مذهلة لعملائي بشكل أسرع من أي وقت مضى.",
+            "errors": {
+                "emailRequired": "البريد الإلكتروني مطلوب",
+                "emailInvalid": "البريد الإلكتروني غير صالح",
+                "passwordRequired": "كلمة المرور مطلوبة",
+                "passwordMinLength": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
+            }
+        }
+    },
+    "notFound": {
+        "title": "404",
+        "heading": "الصفحة غير موجودة",
+        "message": "عذرًا، الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+        "goToDashboard": "الذهاب إلى لوحة التحكم",
+        "goBack": "العودة"
     }
 }

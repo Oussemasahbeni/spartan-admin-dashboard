@@ -8,7 +8,9 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
   imports: [HlmSidebarImports, HlmSeparatorImports, HlmBreadCrumbImports],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <header class="flex h-16 shrink-0 items-center gap-2">
+    <header
+      class="sticky top-0 z-30 flex h-14 w-full items-center gap-2 border-b bg-background/95 backdrop-blur shrink-0"
+    >
       <div class="flex items-center gap-2 px-4">
         <button type="button" hlmSidebarTrigger>
           <span class="sr-only">Toggle sidebar</span>

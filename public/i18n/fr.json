@@ -7,5 +7,39 @@
         "dark": "Sombre",
         "system": "Système",
         "logout": "Déconnexion"
+    },
+    "auth": {
+        "login": {
+            "title": "Connectez-vous à votre compte",
+            "emailLabel": "Email",
+            "emailPlaceholder": "nom@exemple.com",
+            "passwordLabel": "Mot de passe",
+            "passwordPlaceholder": "Votre mot de passe",
+            "forgotPassword": "Mot de passe oublié ?",
+            "orContinueWith": "Ou continuer avec",
+            "github": "GitHub",
+            "termsText": "En continuant, vous acceptez nos",
+            "termsOfService": "Conditions d'utilisation",
+            "and": "et",
+            "privacyPolicy": "Politique de confidentialité",
+            "rememberMe": "Se souvenir de moi",
+            "noAccount": "Vous n'avez pas de compte ?",
+            "signUp": "Inscrivez-vous",
+            "loginButton": "Se connecter",
+            "testimonial": "Cette bibliothèque m'a fait gagner d'innombrables heures de travail et m'a aidé à livrer de superbes designs à mes clients plus rapidement que jamais.",
+            "errors": {
+                "emailRequired": "L'email est requis",
+                "emailInvalid": "L'email est invalide",
+                "passwordRequired": "Le mot de passe est requis",
+                "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères"
+            }
+        }
+    },
+    "notFound": {
+        "title": "404",
+        "heading": "Page non trouvée",
+        "message": "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.",
+        "goToDashboard": "Aller au tableau de bord",
+        "goBack": "Retour"
     }
 }

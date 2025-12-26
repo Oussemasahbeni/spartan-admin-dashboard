@@ -72,8 +72,8 @@
             >
               <ng-icon hlmIcon name="lucideSun" size="sm" />
               <span> {{ t("light") }} </span>
-              @if (theme === 'light') {
-              <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+              @if (theme === "light") {
+                <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }
             </button>
 
@@ -84,8 +84,8 @@
             >
               <ng-icon hlmIcon name="lucideMoon" size="sm" />
               <span> {{ t("dark") }} </span>
-              @if (theme === 'dark') {
-              <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+              @if (theme === "dark") {
+                <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }
             </button>
 
@@ -96,8 +96,8 @@
             >
               <ng-icon hlmIcon name="lucideMonitor" size="sm" />
               <span> {{ t("system") }} </span>
-              @if (theme === 'system') {
-              <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+              @if (theme === "system") {
+                <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }
             </button>
           </hlm-dropdown-menu-sub>
@@ -122,22 +122,22 @@
       <ng-template #languageTpl>
         <hlm-dropdown-menu-sub>
           @for (lang of availableLanguages(); track lang.code) {
-          <button
-            type="button"
-            hlmDropdownMenuItem
-            (click)="setLang(lang.code)"
-          >
-            <span>{{ lang.label }}</span>
-            @if (currentLang() === lang.code) {
-            <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
-            }
-          </button>
+            <button
+              type="button"
+              hlmDropdownMenuItem
+              (click)="setLang(lang.code)"
+            >
+              <span>{{ lang.label }}</span>
+              @if (currentLang() === lang.code) {
+                <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+              }
+            </button>
           }
         </hlm-dropdown-menu-sub>
       </ng-template>
     </hlm-dropdown-menu-group>
     <hlm-dropdown-menu-separator />
-    <button type="button" hlmDropdownMenuItem>
+    <button type="button" hlmDropdownMenuItem (click)="onLogout()">
       <ng-icon name="lucideLogOut" />
       {{ "nav-user.logout" | transloco }}
     </button>

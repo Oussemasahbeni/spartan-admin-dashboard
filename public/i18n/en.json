@@ -7,5 +7,39 @@
         "dark": "Dark",
         "system": "System",
         "logout": "Logout"
+    },
+    "auth": {
+        "login": {
+            "title": "Login to your account",
+            "emailLabel": "Email",
+            "emailPlaceholder": "name@example.com",
+            "passwordLabel": "Password",
+            "passwordPlaceholder": "Your password",
+            "forgotPassword": "Forgot your password?",
+            "orContinueWith": "Or continue with",
+            "github": "GitHub",
+            "termsText": "By clicking continue, you agree to our",
+            "termsOfService": "Terms of Service",
+            "and": "and",
+            "privacyPolicy": "Privacy Policy",
+            "rememberMe": "Remember me",
+            "noAccount": "Don't have an account?",
+            "signUp": "Sign up",
+            "loginButton": "Login",
+            "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
+            "errors": {
+                "emailRequired": "Email is required",
+                "emailInvalid": "Email is invalid",
+                "passwordRequired": "Password is required",
+                "passwordMinLength": "Password must be at least 6 characters"
+            }
+        }
+    },
+    "notFound": {
+        "title": "404",
+        "heading": "Page Not Found",
+        "message": "Sorry, the page you are looking for doesn't exist or has been moved.",
+        "goToDashboard": "Go to Dashboard",
+        "goBack": "Go Back"
     }
 }

@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { DirectionalityService } from '../shared/service/directionality.service';
+import { DirectionalityService } from './directionality.service';
 
 export type LanguageOptions = 'en' | 'fr' | 'ar';
 
@@ -34,9 +34,7 @@ export class LanguageService {
     },
   ]);
 
-  constructor() {
-   
-  }
+  constructor() {}
 
   setLanguage(lang: LanguageOptions): void {
     this._currentLang.set(lang);
