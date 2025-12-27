@@ -14,7 +14,9 @@
         "forgetPassword": "Forgot Password",
         "dashboard": "Dashboard",
         "users": "Users",
-        "notFound": "Page Not Found"
+        "notFound": "Page Not Found",
+        "unauthorized": "Unauthorized",
+        "serviceUnavailable": "Service Unavailable"
     },
     "navigation": {
         "application": "Application",
@@ -34,6 +36,17 @@
         "last-page": "Last page",
         "rows-selected": "{{selected}} of {{total}} rows selected",
         "page": "Page {{page}} of {{totalPages}}"
+    },
+    "buttons": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "close": "Close",
+        "confirm": "Confirm",
+        "edit": "Edit",
+        "delete": "Delete",
+        "save": "Save",
+        "update": "Update",
+        "loadMore": "Load More"
     },
     "auth": {
         "login": {
@@ -149,13 +162,34 @@
             "errors": {
                 "loadFailed": "Failed to load users. Please try again."
             }
+        },
+        "actionDropdown": {
+            "edit": "Edit",
+            "makeCopy": "Make a copy",
+            "favorite": "Favorite",
+            "delete": "Delete"
+        },
+        "confirmationDialog": {
+            "deleteTitle": "Are you sure you want to delete this user?",
+            "deleteMessage": "This action cannot be undone. This will permanently delete the account and remove all associated data."
         }
     },
     "notFound": {
-        "title": "404",
         "heading": "Page Not Found",
         "message": "Sorry, the page you are looking for doesn't exist or has been moved.",
         "goToDashboard": "Go to Dashboard",
         "goBack": "Go Back"
+    },
+    "unauthorized": {
+        "heading": "Access Denied",
+        "message": "You do not have permission to view this page or your session has expired.",
+        "goToLogin": "Go to Login",
+        "goBack": "Go Back"
+    },
+    "serviceUnavailable": {
+        "heading": "Service Unavailable",
+        "message": "The service is temporarily unavailable. Please try again in a moment.",
+        "retry": "Retry",
+        "goToDashboard": "Go to Dashboard"
     }
 }

@@ -24,8 +24,7 @@ export const routes: Routes = [
     title: 'forgetPassword',
     canActivate: [noAuthGuard],
     component: EmptyLayout,
-    loadChildren: () =>
-      import('./features/auth/forget-password/forget-password.routes'),
+    loadChildren: () => import('./features/auth/forget-password/forget-password.routes'),
   },
 
   {
@@ -49,6 +48,20 @@ export const routes: Routes = [
     pathMatch: 'full',
     component: EmptyLayout,
     loadChildren: () => import('./shared/pages/not-found/not-found.routes'),
+  },
+  {
+    path: '401-unauthorized',
+    title: 'unauthorized',
+    pathMatch: 'full',
+    component: EmptyLayout,
+    loadChildren: () => import('./shared/pages/unauthorized/unauthorized.routes'),
+  },
+  {
+    path: '503-service-unavailable',
+    title: 'serviceUnavailable',
+    pathMatch: 'full',
+    component: EmptyLayout,
+    loadChildren: () => import('./shared/pages/service-unavailable/service-unavailable.routes'),
   },
   { path: '**', redirectTo: '404-not-found' },
 ];

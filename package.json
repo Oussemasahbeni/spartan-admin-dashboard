@@ -10,16 +10,6 @@
     "test": "ng test",
     "lint": "ng lint"
   },
-  "prettier": {
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
   "private": true,
   "packageManager": "pnpm@10.25.0",
   "dependencies": {

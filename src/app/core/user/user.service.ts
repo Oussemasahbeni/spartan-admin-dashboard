@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { User } from '../../features/users/user.type';
+import { USER_DATA } from './data';
+import { User } from './user.type';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,9 @@ import { User } from '../../features/users/user.type';
 export class UserService {
   private readonly _user = signal<User | null>(null);
   readonly user = this._user.asReadonly();
+
+  private readonly _users = signal<User[]>(USER_DATA);
+  readonly users = this._users.asReadonly();
 
   setUser(user: User | null): void {
     this._user.set(user);
@@ -23,5 +27,9 @@ export class UserService {
       }
       return currentUser;
     });
+  }
+
+  deleteUser(userId: string) {
+    this._users.update((prev) => prev.filter((u) => u.id !== userId));
   }
 }

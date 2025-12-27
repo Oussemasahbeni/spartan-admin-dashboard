@@ -1,13 +1,7 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { isPlatformBrowser } from '@angular/common';
 
-import {
-  computed,
-  DOCUMENT,
-  inject,
-  Injectable,
-  PLATFORM_ID,
-} from '@angular/core';
+import { computed, DOCUMENT, inject, Injectable, PLATFORM_ID } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',

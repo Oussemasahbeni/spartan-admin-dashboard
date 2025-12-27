@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -24,23 +18,14 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
-import {
-  LanguageOptions,
-  LanguageService,
-} from '../../../core/config/language.service';
+import { LanguageOptions, LanguageService } from '../../../core/config/language.service';
 import { ThemeService } from '../../../core/config/theme.service';
 import { UserService } from '../../../core/user/user.service';
-import { User } from '../../../features/users/user.type';
+import { User } from '../../../core/user/user.type';
 
 @Component({
   selector: 'user',
-  imports: [
-    HlmSidebarImports,
-    HlmAvatarImports,
-    HlmIconImports,
-    HlmDropdownMenuImports,
-    TranslocoModule,
-  ],
+  imports: [HlmSidebarImports, HlmAvatarImports, HlmIconImports, HlmDropdownMenuImports, TranslocoModule],
   templateUrl: './user.html',
   providers: [
     provideIcons({
@@ -69,9 +54,7 @@ export class NavUser {
 
   readonly availableLanguages = this._languageService.availableLanguages;
 
-  protected readonly _menuSide = computed(() =>
-    this._sidebarService.isMobile() ? 'top' : 'right',
-  );
+  protected readonly _menuSide = computed(() => (this._sidebarService.isMobile() ? 'top' : 'right'));
 
   public readonly user = input.required<User>();
 

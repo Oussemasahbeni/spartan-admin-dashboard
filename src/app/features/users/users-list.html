@@ -1,69 +1,47 @@
-<div
-  *transloco="let t; prefix: 'users.list'"
-  class="@container/main flex flex-1 flex-col gap-2"
->
+<div *transloco="let t; prefix: 'users.list'" class="@container/main flex flex-1 flex-col gap-2">
   <div class="flex flex-col gap-4 md:gap-6">
     <dashboard-card-section />
-    <div
-      class="flex flex-col justify-between gap-4 py-4 sm:flex-row sm:items-center"
-    >
-      <input
-        hlmInput
-        class="w-full md:w-80"
-        [placeholder]="t('searchPlaceholder')"
-        (input)="_filterChanged($event)"
-      />
+    <div class="flex flex-col justify-between gap-4 py-4 sm:flex-row sm:items-center">
+      <input hlmInput class="w-full md:w-80" [placeholder]="t('searchPlaceholder')" (input)="_filterChanged($event)" />
 
       <div class="flex gap-2">
-        <button
-          type="button"
-          hlmBtn
-          variant="outline"
-          align="end"
-          [hlmDropdownMenuTrigger]="menu"
-        >
+        <!-- Column visibility -->
+        <button type="button" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">
           <ng-icon hlmIcon name="lucideSettings2" size="sm" />
-          {{ t("columnsBtn") }}
+          {{ t('columnsBtn') }}
           <ng-icon hlmIcon name="lucideChevronDown" class="ms-2" size="sm" />
         </button>
+
+        <ng-template #columnMenu>
+          <hlm-dropdown-menu class="columns-list" cdkDropList (cdkDropListDropped)="onDrop($event)">
+            @for (column of hidableColumns(); track column.id) {
+              <div cdkDrag class="group column-box flex items-center gap-2">
+                <button
+                  type="button"
+                  hlmDropdownMenuCheckbox
+                  class="capitalize"
+                  [checked]="column.getIsVisible()"
+                  (triggered)="column.toggleVisibility()"
+                >
+                  <hlm-dropdown-menu-checkbox-indicator />
+                  {{ t('columns.' + column.columnDef.id) }}
+                </button>
+                <ng-icon cdkDragHandle hlmIcon class="cursor-grab active:cursor-grabbing" name="lucideGripVertical" />
+              </div>
+            }
+          </hlm-dropdown-menu>
+        </ng-template>
+
+        <!--  Refresh & Add User Buttons -->
         <button type="button" hlmBtn variant="outline" (click)="refreshTable()">
           <ng-icon hlmIcon name="lucideRefreshCcw" size="sm" />
-          {{ t("refreshBtn") }}
+          {{ t('refreshBtn') }}
         </button>
         <button type="button" hlmBtn variant="default" (click)="createUser()">
           <ng-icon hlmIcon name="lucideUserPlus" size="sm" />
-          {{ t("addUserBtn") }}
+          {{ t('addUserBtn') }}
         </button>
       </div>
-
-      <ng-template #menu>
-        <hlm-dropdown-menu
-          class="columns-list"
-          cdkDropList
-          (cdkDropListDropped)="drop($event)"
-        >
-          @for (column of hidableColumns(); track column.id) {
-            <div cdkDrag class="flex items-center group gap-2 column-box">
-              <button
-                type="button"
-                hlmDropdownMenuCheckbox
-                class="capitalize"
-                [checked]="column.getIsVisible()"
-                (triggered)="column.toggleVisibility()"
-              >
-                <hlm-dropdown-menu-checkbox-indicator />
-                {{ t("columns." + column.columnDef.id) }}
-              </button>
-              <ng-icon
-                cdkDragHandle
-                hlmIcon
-                class="cursor-grab active:cursor-grabbing"
-                name="lucideGripVertical"
-              />
-            </div>
-          }
-        </hlm-dropdown-menu>
-      </ng-template>
     </div>
     <div class="overflow-hidden rounded-md border">
       <!-- we defer the loading of the table, because tanstack manipulates the DOM with flexRender which can cause errors during SSR -->
@@ -71,26 +49,26 @@
         <div hlmTableContainer>
           <table hlmTable>
             <thead hlmTHead class="bg-muted sticky top-0 z-10">
-              @for (
-                headerGroup of _table.getHeaderGroups();
-                track headerGroup.id
-              ) {
+              @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
                 <tr hlmTr>
                   @for (header of headerGroup.headers; track header.id) {
-                    <th
-                      class="text-start"
-                      hlmTh
-                      [attr.colSpan]="header.colSpan"
-                    >
+                    <th hlmTh [attr.colSpan]="header.colSpan">
                       @if (!header.isPlaceholder) {
                         <ng-container
-                          *flexRender="
-                            header.column.columnDef.header;
-                            props: header.getContext();
-                            let headerText
-                          "
+                          *flexRender="header.column.columnDef.header; props: header.getContext(); let headerText"
                         >
-                          <div [innerHTML]="headerText"></div>
+                          @if (header.column.getCanSort()) {
+                            <button
+                              type="button"
+                              class="flex cursor-pointer items-center gap-2 capitalize"
+                              (click)="onSort(header.column)"
+                            >
+                              <div [innerHTML]="headerText"></div>
+                              <ng-icon hlm size="sm" name="lucideArrowUpDown" />
+                            </button>
+                          } @else {
+                            <div [innerHTML]="headerText"></div>
+                          }
                         </ng-container>
                       }
                     </th>
@@ -98,22 +76,12 @@
                 </tr>
               }
             </thead>
-            <tbody hlmTBody>
-              @for (row of _table.getRowModel().rows; track row.id) {
-                <tr
-                  hlmTr
-                  [attr.key]="row.id"
-                  [attr.data-state]="row.getIsSelected() && 'selected'"
-                >
+            <tbody hlmTBody class="w-full">
+              @for (row of table.getRowModel().rows; track row.id) {
+                <tr hlmTr [attr.key]="row.id" [attr.data-state]="row.getIsSelected() && 'selected'">
                   @for (cell of row.getVisibleCells(); track $index) {
-                    <td class="text-start" hlmTd>
-                      <ng-container
-                        *flexRender="
-                          cell.column.columnDef.cell;
-                          props: cell.getContext();
-                          let cell
-                        "
-                      >
+                    <td hlmTd>
+                      <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cell">
                         <div [innerHTML]="cell"></div>
                       </ng-container>
                     </td>
@@ -121,34 +89,19 @@
                 </tr>
               } @empty {
                 <tr hlmTr>
-                  <td
-                    hlmTd
-                    class="h-24 text-center"
-                    [attr.colspan]="_columns.length"
-                  >
-                    {{ t("users.list.noData") }}
-                  </td>
+                  <td hlmTd class="h-24 text-center" [attr.colspan]="_columns.length">{{ t('noUsers') }}</td>
                 </tr>
               }
             </tbody>
 
-            <ng-template #dateCell let-context>
-              {{ context.getValue() | date: "mediumDate" }}
-            </ng-template>
+            <ng-template #dateCell let-context> {{ context.getValue() | date: 'mediumDate' }} </ng-template>
 
             <ng-template #nameCell let-context>
               <div class="flex items-center gap-2">
                 <hlm-avatar>
-                  <img
-                    hlmAvatarImage
-                    [src]="context.row.original.avatar"
-                    [alt]="context.row.original.name"
-                  />
-                  <span class="text-white bg-destructive" hlmAvatarFallback>
-                    {{
-                      context.row.original.name.charAt(0) +
-                        context.row.original.name.charAt(1).toUpperCase()
-                    }}
+                  <img hlmAvatarImage [src]="context.row.original.avatar" [alt]="context.row.original.name" />
+                  <span class="bg-destructive text-white" hlmAvatarFallback>
+                    {{ context.row.original.name.charAt(0) + context.row.original.name.charAt(1).toUpperCase() }}
                   </span>
                 </hlm-avatar>
 
@@ -157,34 +110,14 @@
             </ng-template>
 
             <ng-template #statusCell let-context>
-              <span
-                hlmBadge
-                variant="outline"
-                class="text-muted-foreground"
-                [id]="context.row.original.id + '-status'"
-              >
+              <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
                 @let status = context.getValue();
-                @if (status === "active") {
-                  <ng-icon
-                    hlmIcon
-                    name="lucideCircleCheck"
-                    class="text-success"
-                    size="xs"
-                  />
-                } @else if (status === "inactive") {
-                  <ng-icon
-                    hlmIcon
-                    name="lucideCircleX"
-                    class="text-destructive"
-                    size="xs"
-                  />
+                @if (status === 'active') {
+                  <ng-icon hlmIcon name="lucideCircleCheck" class="text-success" size="xs" />
+                } @else if (status === 'inactive') {
+                  <ng-icon hlmIcon name="lucideCircleX" class="text-destructive" size="xs" />
                 } @else {
-                  <ng-icon
-                    hlmIcon
-                    name="lucideLoader"
-                    size="xs"
-                    class="text-warning"
-                  />
+                  <ng-icon hlmIcon name="lucideLoader" size="xs" class="text-warning" />
                 }
                 <span class="capitalize"> {{ status }} </span>
               </span>
@@ -194,33 +127,18 @@
               @let role = context.getValue();
 
               <span
-                class="flex w-fit items-center gap-1.5 px-2 py-0.5 capitalize border-transparent"
+                class="flex w-fit items-center gap-1.5 border-transparent px-2 py-0.5 capitalize"
                 [id]="context.row.original.id + '-role'"
               >
                 @switch (role) {
-                  @case ("admin") {
-                    <ng-icon
-                      hlmIcon
-                      size="sm"
-                      class="opacity-80"
-                      [name]="'lucideShieldCheck'"
-                    />
+                  @case ('admin') {
+                    <ng-icon hlmIcon size="sm" [name]="'lucideShieldCheck'" />
                   }
-                  @case ("manager") {
-                    <ng-icon
-                      hlmIcon
-                      size="sm"
-                      class="opacity-80"
-                      [name]="'lucideBriefcase'"
-                    />
+                  @case ('manager') {
+                    <ng-icon hlmIcon size="sm" [name]="'lucideBriefcase'" />
                   }
                   @default {
-                    <ng-icon
-                      hlmIcon
-                      size="sm"
-                      class="opacity-80"
-                      [name]="'lucideUser'"
-                    />
+                    <ng-icon hlmIcon size="sm" [name]="'lucideUser'" />
                   }
                 }
                 {{ role }}
@@ -228,117 +146,19 @@
             </ng-template>
           </table>
         </div>
+      } @placeholder {
+        <div class="flex h-96 items-center justify-center">
+          <hlm-spinner />
+        </div>
       }
     </div>
 
-    <div
-      *transloco="let t; prefix: 'pagination'"
-      class="flex flex-col justify-between py-4 sm:flex-row sm:items-center"
-    >
-      @if (_table.getRowCount() > 0) {
+    <div *transloco="let t; prefix: 'pagination'" class="flex flex-col justify-between sm:flex-row sm:items-center">
+      @if (table.getRowCount() > 0) {
         <span class="text-muted-foreground text-sm">
-          {{
-            t("rows-selected", {
-              selected: _table.getSelectedRowModel().rows.length,
-              total: _table.getRowCount(),
-            })
-          }}
+          {{ t('rows-selected', { selected: table.getSelectedRowModel().rows.length, total: table.getRowCount() }) }}
         </span>
-        <div class="mt-2 flex gap-8 sm:mt-0">
-          <div class="flex gap-2">
-            <span hlmLabel>{{ t("items-per-page") }}</span>
-            <brn-select
-              class="inline-block"
-              [ngModel]="_table.getState().pagination.pageSize"
-              (ngModelChange)="
-                _table.setPageSize($event); _table.resetPageIndex()
-              "
-            >
-              <hlm-select-trigger size="sm" class="mr-1 inline-flex h-8 w-fit">
-                <hlm-select-value />
-              </hlm-select-trigger>
-              <hlm-select-content>
-                @for (size of _availablePageSizes; track size) {
-                  <hlm-option [value]="size">
-                    {{ size }}
-                  </hlm-option>
-                }
-              </hlm-select-content>
-            </brn-select>
-          </div>
-
-          <span hlmLabel>
-            {{
-              t("page", {
-                page: _table.getState().pagination.pageIndex + 1,
-                totalPages: _table.getPageCount(),
-              })
-            }}
-          </span>
-
-          <div class="flex space-x-1">
-            <button
-              type="button"
-              size="icon-sm"
-              variant="outline"
-              hlmBtn
-              [disabled]="!_table.getCanPreviousPage()"
-              (click)="_table.firstPage()"
-            >
-              <ng-icon
-                hlmIcon
-                class="rtl:rotate-180"
-                name="lucideChevronFirst"
-                size="sm"
-              />
-            </button>
-            <button
-              type="button"
-              size="icon-sm"
-              variant="outline"
-              hlmBtn
-              [disabled]="!_table.getCanPreviousPage()"
-              (click)="_table.previousPage()"
-            >
-              <ng-icon
-                hlmIcon
-                class="rtl:rotate-180"
-                name="lucideChevronLeft"
-                size="sm"
-              />
-            </button>
-            <button
-              type="button"
-              size="icon-sm"
-              variant="outline"
-              hlmBtn
-              [disabled]="!_table.getCanNextPage()"
-              (click)="_table.nextPage()"
-            >
-              <ng-icon
-                hlmIcon
-                class="rtl:rotate-180"
-                name="lucideChevronRight"
-                size="sm"
-              />
-            </button>
-            <button
-              type="button"
-              size="icon-sm"
-              variant="outline"
-              hlmBtn
-              [disabled]="!_table.getCanNextPage()"
-              (click)="_table.lastPage()"
-            >
-              <ng-icon
-                hlmIcon
-                class="rtl:rotate-180"
-                name="lucideChevronLast"
-                size="sm"
-              />
-            </button>
-          </div>
-        </div>
+        <data-table-pagination [table]="table" />
       }
     </div>
   </div>

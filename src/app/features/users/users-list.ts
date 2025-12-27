@@ -1,26 +1,13 @@
-import {
-  CdkDragDrop,
-  DragDropModule,
-  moveItemInArray,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
+  lucideArrowUpDown,
   lucideBriefcase,
   lucideChevronDown,
-  lucideChevronFirst,
-  lucideChevronLast,
-  lucideChevronLeft,
-  lucideChevronRight,
   lucideCircleCheck,
   lucideCircleX,
   lucideGripVertical,
@@ -42,6 +29,7 @@ import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmTableImports } from '@spartan-ng/helm/table';
 import {
+  Column,
   ColumnDef,
   ColumnFiltersState,
   createAngularTable,
@@ -51,18 +39,20 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  PaginationState,
   RowSelectionState,
   SortingState,
   VisibilityState,
 } from '@tanstack/angular-table';
+import { User } from '../../core/user/user.type';
 import { ActionDropdown } from './action-dropdown';
 import { DashboardCardSection } from './card-section';
-import { USER_DATA } from './data';
 import { TableHeadSelection, TableRowSelection } from './selection-column';
-import { TableHeadSortButton } from './sort-header-button';
-import { User } from './user.type';
 
 import { translateSignal } from '@jsverse/transloco';
+import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
+import { UserService } from '../../core/user/user.service';
+import { DataTablePagination } from '../../shared/components/pagination/pagination';
 
 @Component({
   selector: 'app-users',
@@ -79,23 +69,22 @@ import { translateSignal } from '@jsverse/transloco';
     HlmTableImports,
     HlmLabelImports,
     HlmAvatarImports,
+    HlmSpinnerImports,
     HlmBadgeImports,
     DashboardCardSection,
     TranslocoModule,
     DragDropModule,
+    DataTablePagination,
   ],
   templateUrl: './users-list.html',
   providers: [
     provideIcons({
       lucideChevronDown,
-      lucideChevronFirst,
-      lucideChevronLast,
-      lucideChevronRight,
-      lucideChevronLeft,
       lucideSettings2,
       lucideCircleCheck,
       lucideLoader,
       lucideCircleX,
+      lucideArrowUpDown,
       lucideUser,
       lucideBriefcase,
       lucideShieldCheck,
@@ -108,11 +97,12 @@ import { translateSignal } from '@jsverse/transloco';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Users {
+  private readonly _userService = inject(UserService);
+
   readonly dateCell = viewChild.required('dateCell');
   readonly nameCell = viewChild.required('nameCell');
   readonly statusCell = viewChild.required('statusCell');
   readonly roleCell = viewChild.required('roleCell');
-  protected readonly _availablePageSizes = [5, 10, 25, 100];
 
   private readonly _columnOrder = signal<string[]>([]);
   private readonly _columnFilters = signal<ColumnFiltersState>([]);
@@ -123,37 +113,39 @@ export class Users {
     this._columnOrder();
     this._columnVisibility();
 
-    return this._table.getAllLeafColumns().filter((col) => col.getCanHide());
+    return this.table.getAllLeafColumns().filter((col) => col.getCanHide());
   });
 
   protected readonly _columns: ColumnDef<User>[] = [
     {
       id: 'select',
       header: () =>
-        flexRenderComponent(TableHeadSelection, { inputs: { header: '' } }),
+        flexRenderComponent(TableHeadSelection, {
+          inputs: { header: '' },
+        }),
       cell: () =>
-        flexRenderComponent(TableRowSelection, { inputs: { header: '' } }),
+        flexRenderComponent(TableRowSelection, {
+          inputs: { header: '' },
+        }),
       enableSorting: false,
       enableHiding: false,
     },
     {
       id: 'name',
       accessorKey: 'name',
-      header: translateSignal('users.list.columns.name'),
+      header: translateSignal(`users.list.columns.name`),
       cell: () => this.nameCell(),
     },
     {
       id: 'email',
       accessorKey: 'email',
-      header: () =>
-        flexRenderComponent(TableHeadSortButton, {
-          inputs: { header: 'Email' },
-        }),
+      header: translateSignal(`users.list.columns.email`),
     },
     {
       id: 'phoneNumber',
       accessorKey: 'phoneNumber',
       header: translateSignal('users.list.columns.phoneNumber'),
+      enableSorting: false,
     },
     {
       id: 'createdAt',
@@ -171,7 +163,6 @@ export class Users {
       id: 'status',
       accessorKey: 'status',
       header: translateSignal('users.list.columns.status'),
-      enableSorting: false,
       cell: () => this.statusCell(),
     },
 
@@ -182,70 +173,73 @@ export class Users {
     },
   ];
 
-  protected readonly _table = createAngularTable<User>(() => ({
-    data: USER_DATA,
+  private readonly _pagination = signal<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  protected readonly table = createAngularTable<User>(() => ({
+    data: this._userService.users(),
     columns: this._columns,
-    onSortingChange: (updater) => {
-      updater instanceof Function
-        ? this._sorting.update(updater)
-        : this._sorting.set(updater);
-    },
-    onColumnFiltersChange: (updater) => {
-      updater instanceof Function
-        ? this._columnFilters.update(updater)
-        : this._columnFilters.set(updater);
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: (updater) => {
-      updater instanceof Function
-        ? this._columnVisibility.update(updater)
-        : this._columnVisibility.set(updater);
-    },
-    onRowSelectionChange: (updater) => {
-      updater instanceof Function
-        ? this._rowSelection.update(updater)
-        : this._rowSelection.set(updater);
-    },
-    onColumnOrderChange: (updater) => {
-      updater instanceof Function
-        ? this._columnOrder.update(updater)
-        : this._columnOrder.set(updater);
-    },
     state: {
+      pagination: this._pagination(),
       columnOrder: this._columnOrder(),
       sorting: this._sorting(),
       columnFilters: this._columnFilters(),
       columnVisibility: this._columnVisibility(),
       rowSelection: this._rowSelection(),
     },
+
+    onSortingChange: (updater) => {
+      updater instanceof Function ? this._sorting.update(updater) : this._sorting.set(updater);
+    },
+    onColumnFiltersChange: (updater) => {
+      updater instanceof Function ? this._columnFilters.update(updater) : this._columnFilters.set(updater);
+    },
+    onPaginationChange: (updaterOrValue) => {
+      const next = typeof updaterOrValue === 'function' ? updaterOrValue(this._pagination()) : updaterOrValue;
+      this._pagination.set(next);
+    },
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: (updater) => {
+      updater instanceof Function ? this._columnVisibility.update(updater) : this._columnVisibility.set(updater);
+    },
+    onRowSelectionChange: (updater) => {
+      updater instanceof Function ? this._rowSelection.update(updater) : this._rowSelection.set(updater);
+    },
+    onColumnOrderChange: (updater) => {
+      updater instanceof Function ? this._columnOrder.update(updater) : this._columnOrder.set(updater);
+    },
   }));
 
   protected _filterChange(email: Event) {
     const target = email.target as HTMLInputElement;
     const typedValue = target.value;
-    this._table.setGlobalFilter(typedValue);
+    this.table.setGlobalFilter(typedValue);
   }
   protected _filterChanged(event: Event) {
-    this._table
-      .getColumn('email')
-      ?.setFilterValue((event.target as HTMLInputElement).value);
+    this.table.getColumn('email')?.setFilterValue((event.target as HTMLInputElement).value);
   }
 
-  protected drop(event: CdkDragDrop<string[]>) {
+  protected onDrop(event: CdkDragDrop<string[]>) {
     const hidableIds = this.hidableColumns().map((c) => c.id);
 
     moveItemInArray(hidableIds, event.previousIndex, event.currentIndex);
 
-    this._table.setColumnOrder(['select', ...hidableIds, 'actions']);
+    this.table.setColumnOrder(['select', ...hidableIds, 'actions']);
+  }
+
+  protected onSort(column: Column<User, unknown>) {
+    column.toggleSorting(column.getIsSorted() === 'asc');
   }
 
   protected createUser() {
     // Logic to create a new user
   }
   protected refreshTable() {
-    // Logic to refresh the table data
+    this.table.reset();
   }
 }

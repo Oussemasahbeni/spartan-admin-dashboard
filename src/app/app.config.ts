@@ -13,6 +13,7 @@ import {
 
 import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
+import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
 import {
   LanguageOptions,
@@ -55,6 +56,7 @@ export const appConfig: ApplicationConfig = {
       },
       loader: TranslocoHttpLoader,
     }),
+    provideNgIconsConfig({}, withExceptionLogger()),
     provideEnvironmentInitializer(() => {
       const themeService = inject(ThemeService);
       const languageService = inject(LanguageService);

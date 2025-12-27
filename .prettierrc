@@ -3,12 +3,20 @@
     "semi": true,
     "bracketSameLine": false,
     "trailingComma": "es5",
-    "tabWidth": 4,
+    "tabWidth": 2,
     "singleQuote": true,
     "bracketSpacing": true,
     "arrowParens": "always",
     "plugins": [
         "prettier-plugin-organize-imports",
         "prettier-plugin-tailwindcss"
+    ],
+    "overrides": [
+        {
+            "files": "*.html",
+            "options": {
+                "parser": "angular"
+            }
+        }
     ]
 }

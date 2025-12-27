@@ -6,20 +6,22 @@
         "light": "Clair",
         "dark": "Sombre",
         "system": "Système",
-        "logout": "Déconnexion"
+        "logout": "Se déconnecter"
     },
     "titles": {
         "login": "Connexion",
         "signup": "Créer un compte",
-        "forgetPassword": "Mot de passe oublié ?",
+        "forgetPassword": "Mot de passe oublié",
         "dashboard": "Tableau de bord",
         "users": "Utilisateurs",
-        "notFound": "Page non trouvée"
+        "notFound": "Page introuvable",
+        "unauthorized": "Accès refusé",
+        "serviceUnavailable": "Service indisponible"
     },
     "navigation": {
         "application": "Application",
         "dashboard": "Tableau de bord",
-        "analytics": "Analytique",
+        "analytics": "Statistiques",
         "overview": "Vue d’ensemble",
         "reports": "Rapports",
         "tasks": "Tâches",
@@ -35,10 +37,21 @@
         "rows-selected": "{{selected}} sur {{total}} lignes sélectionnées",
         "page": "Page {{page}} sur {{totalPages}}"
     },
+    "buttons": {
+        "submit": "Envoyer",
+        "cancel": "Annuler",
+        "close": "Fermer",
+        "confirm": "Confirmer",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "save": "Enregistrer",
+        "update": "Mettre à jour",
+        "loadMore": "Charger plus"
+    },
     "auth": {
         "login": {
-            "title": "Connectez-vous à votre compte",
-            "emailLabel": "Email",
+            "title": "Connexion à votre compte",
+            "emailLabel": "Adresse e-mail",
             "emailPlaceholder": "nom@exemple.com",
             "passwordLabel": "Mot de passe",
             "passwordPlaceholder": "Votre mot de passe",
@@ -46,87 +59,86 @@
             "orContinueWith": "Ou continuer avec",
             "github": "GitHub",
             "rememberMe": "Se souvenir de moi",
-            "noAccount": "Vous n'avez pas de compte ?",
-            "signUp": "Inscrivez-vous",
+            "noAccount": "Vous n’avez pas de compte ?",
+            "signUp": "Créer un compte",
             "loginBtn": "Se connecter",
-            "testimonial": "Cette bibliothèque m'a fait gagner d'innombrables heures de travail et m'a aidé à livrer de superbes designs à mes clients plus rapidement que jamais.",
+            "testimonial": "Cette bibliothèque m’a fait gagner un temps considérable et m’a permis de livrer des interfaces modernes plus rapidement.",
             "errors": {
-                "emailRequired": "L'email est requis",
-                "emailInvalid": "L'email est invalide",
-                "passwordRequired": "Le mot de passe est requis",
+                "emailRequired": "L’adresse e-mail est obligatoire",
+                "emailInvalid": "L’adresse e-mail n’est pas valide",
+                "passwordRequired": "Le mot de passe est obligatoire",
                 "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères"
             }
         },
         "signup": {
             "title": "Créer un compte",
-            "haveAccount": "Vous avez déjà un compte?",
+            "haveAccount": "Vous avez déjà un compte ?",
             "signIn": "Se connecter",
-            "nameLabel": "Nom",
+            "nameLabel": "Nom complet",
             "namePlaceholder": "Votre nom complet",
-            "emailLabel": "Email",
+            "emailLabel": "Adresse e-mail",
             "emailPlaceholder": "nom@exemple.com",
             "passwordLabel": "Mot de passe",
             "passwordPlaceholder": "Votre mot de passe",
             "confirmPasswordLabel": "Confirmer le mot de passe",
             "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
-            "signupButton": "S'inscrire",
+            "signupButton": "S’inscrire",
             "orContinueWith": "Ou continuer avec",
             "github": "GitHub",
             "termsText": "En continuant, vous acceptez nos",
-            "termsOfService": "Conditions d'utilisation",
+            "termsOfService": "conditions d’utilisation",
             "and": "et",
-            "privacyPolicy": "Politique de confidentialité",
-            "testimonial": "Cette bibliothèque m'a fait gagner d'innombrables heures de travail et m'a aidé à livrer de superbes designs à mes clients plus rapidement que jamais.",
+            "privacyPolicy": "politique de confidentialité",
+            "testimonial": "Cette bibliothèque m’a permis de concevoir des interfaces élégantes en un temps record.",
             "errors": {
-                "nameRequired": "Le nom est requis",
-                "emailRequired": "L'email est requis",
-                "emailInvalid": "L'email est invalide",
-                "passwordRequired": "Le mot de passe est requis",
+                "nameRequired": "Le nom est obligatoire",
+                "emailRequired": "L’adresse e-mail est obligatoire",
+                "emailInvalid": "L’adresse e-mail n’est pas valide",
+                "passwordRequired": "Le mot de passe est obligatoire",
                 "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
                 "passwordMismatch": "Les mots de passe ne correspondent pas",
-                "confirmPasswordRequired": "La confirmation du mot de passe est requise"
+                "confirmPasswordRequired": "La confirmation du mot de passe est obligatoire"
             }
         },
         "forgetPassword": {
-            "title": "Mot de passe oublié?",
-            "description": "Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe",
-            "emailLabel": "Email",
+            "title": "Mot de passe oublié ?",
+            "description": "Saisissez votre adresse e-mail afin de recevoir un lien de réinitialisation.",
+            "emailLabel": "Adresse e-mail",
             "emailPlaceholder": "nom@exemple.com",
-            "submitBtn": "Envoyer le lien de réinitialisation",
+            "submitBtn": "Envoyer le lien",
             "backToLogin": "Retour à la connexion",
-            "testimonial": "Cette bibliothèque m'a fait gagner d'innombrables heures de travail et m'a aidé à livrer de superbes designs à mes clients plus rapidement que jamais.",
+            "testimonial": "Une expérience simple et efficace pour gérer les accès utilisateurs.",
             "alert": {
                 "successTitle": "Succès",
-                "successMessage": "Vos modifications ont été enregistrées avec succès.",
-                "resetLinkSent": "Les instructions de réinitialisation du mot de passe ont été envoyées à votre adresse e-mail si un compte existe."
+                "resetLinkSent": "Si un compte existe, les instructions de réinitialisation ont été envoyées par e-mail."
             },
             "errors": {
-                "emailRequired": "L'email est requis",
-                "emailInvalid": "L'email est invalide"
+                "emailRequired": "L’adresse e-mail est obligatoire",
+                "emailInvalid": "L’adresse e-mail n’est pas valide"
             }
         }
     },
     "dashboard": {
         "cards": {
             "totalUsers": {
-                "label": "Nombre total d'utilisateurs",
+                "label": "Utilisateurs totaux",
                 "value": "12 000",
-                "subtitle": "+5% par rapport au mois dernier"
+                "subtitle": "+5 % par rapport au mois dernier"
             },
             "newUsers": {
                 "label": "Nouveaux utilisateurs",
                 "value": "+350",
-                "subtitle": "+10% par rapport au mois dernier"
+                "subtitle": "+10 % par rapport au mois dernier"
             },
             "pendingVerifications": {
                 "label": "Vérifications en attente",
                 "value": "42",
-                "subtitle": "2% des utilisateurs"
+                "subtitle": "2 % des utilisateurs"
             },
             "activeUsers": {
                 "label": "Utilisateurs actifs",
                 "value": "7 800",
-                "subtitle": "65% de tous les utilisateurs"
+                "subtitle": "65 % des utilisateurs"
             }
         }
     },
@@ -136,27 +148,48 @@
             "searchPlaceholder": "Rechercher des utilisateurs...",
             "addUserBtn": "Ajouter un utilisateur",
             "columnsBtn": "Colonnes",
-            "refreshBtn": "Rafraîchir",
+            "refreshBtn": "Actualiser",
             "columns": {
                 "name": "Nom",
                 "email": "E-mail",
                 "role": "Rôle",
                 "status": "Statut",
                 "phoneNumber": "Numéro de téléphone",
-                "createdAt": "Créé le",
+                "createdAt": "Date de création",
                 "actions": "Actions"
             },
             "noUsers": "Aucun utilisateur trouvé.",
             "errors": {
-                "loadFailed": "Échec du chargement des utilisateurs. Veuillez réessayer."
+                "loadFailed": "Impossible de charger les utilisateurs. Veuillez réessayer."
             }
+        },
+        "actionDropdown": {
+            "edit": "Modifier",
+            "makeCopy": "Dupliquer",
+            "favorite": "Favori",
+            "delete": "Supprimer"
+        },
+        "confirmationDialog": {
+            "deleteTitle": "Confirmer la suppression de cet utilisateur ?",
+            "deleteMessage": "Cette action est irréversible. Le compte et toutes les données associées seront définitivement supprimés."
         }
     },
     "notFound": {
-        "title": "404",
-        "heading": "Page non trouvée",
-        "message": "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.",
+        "heading": "Page introuvable",
+        "message": "La page demandée n’existe pas ou a été déplacée.",
         "goToDashboard": "Aller au tableau de bord",
         "goBack": "Retour"
+    },
+    "unauthorized": {
+        "heading": "Accès refusé",
+        "message": "Vous n’êtes pas autorisé à accéder à cette page ou votre session a expiré.",
+        "goToLogin": "Aller à la connexion",
+        "goBack": "Retour"
+    },
+    "serviceUnavailable": {
+        "heading": "Service indisponible",
+        "message": "Le service est temporairement indisponible. Veuillez réessayer ultérieurement.",
+        "retry": "Réessayer",
+        "goToDashboard": "Aller au tableau de bord"
     }
 }
