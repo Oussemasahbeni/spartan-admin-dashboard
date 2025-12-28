@@ -146,9 +146,12 @@
         "list": {
             "title": "Users",
             "searchPlaceholder": "Search users...",
-            "addUserBtn": "Add User",
             "columnsBtn": "Columns",
             "refreshBtn": "Refresh",
+            "importBtn": "Import",
+            "exportBtn": "Export",
+            "clearFilter": "Clear Filter",
+            "addUserBtn": "Add User",
             "columns": {
                 "name": "Name",
                 "email": "Email",
@@ -158,9 +161,26 @@
                 "createdAt": "Created At",
                 "actions": "Actions"
             },
-            "noUsers": "No users found.",
+            "noResult": "No results found.",
             "errors": {
                 "loadFailed": "Failed to load users. Please try again."
+            }
+        },
+        "form": {
+            "addTitle": "Add New User",
+            "editTitle": "Edit User",
+            "addDescription": "Fill in the details below to create a new user.",
+            "nameLabel": "Name",
+            "emailLabel": "Email",
+            "phoneNumberLabel": "Phone Number",
+            "countryLabel": "Country",
+            "roleLabel": "Role",
+            "errors": {
+                "nameRequired": "Name is required",
+                "emailRequired": "Email is required",
+                "emailInvalid": "Email is invalid",
+                "phoneNumberRequired": "Phone number is required",
+                "roleRequired": "Role is required"
             }
         },
         "actionDropdown": {
@@ -172,6 +192,16 @@
         "confirmationDialog": {
             "deleteTitle": "Are you sure you want to delete this user?",
             "deleteMessage": "This action cannot be undone. This will permanently delete the account and remove all associated data."
+        },
+        "role": {
+            "admin": "Admin",
+            "user": "User",
+            "manager": "Manager"
+        },
+        "status": {
+            "active": "Active",
+            "inactive": "Inactive",
+            "pending": "Pending"
         }
     },
     "notFound": {

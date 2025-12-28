@@ -2,17 +2,21 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUpDown,
   lucideBriefcase,
   lucideChevronDown,
   lucideCircleCheck,
+  lucideCirclePlus,
   lucideCircleX,
+  lucideDownload,
+  lucideFileUp,
   lucideGripVertical,
   lucideLoader,
   lucideRefreshCcw,
+  lucideSearch,
   lucideSettings2,
   lucideShieldCheck,
   lucideUser,
@@ -44,15 +48,25 @@ import {
   SortingState,
   VisibilityState,
 } from '@tanstack/angular-table';
-import { User } from '../../core/user/user.type';
+
+import { toSignal } from '@angular/core/rxjs-interop';
+import { translateSignal } from '@jsverse/transloco';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
+import { BrnPopoverImports } from '@spartan-ng/brain/popover';
+import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
+import { HlmCommandImports } from '@spartan-ng/helm/command';
+import { HlmDialogService } from '@spartan-ng/helm/dialog';
+import { HlmPopoverImports } from '@spartan-ng/helm/popover';
+import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
+import { UserService } from '../../../core/user/user.service';
+import { User, UserRole, UserStatus } from '../../../core/user/user.type';
+import { DataTablePagination } from '../../../shared/components/pagination/pagination';
+import { UserForm } from '../form/user-form';
+import { RoleIconPipe } from '../pipes/role-icon.pipe';
+import { StatusUIPipe } from '../pipes/status-ui.pipe';
 import { ActionDropdown } from './action-dropdown';
 import { DashboardCardSection } from './card-section';
 import { TableHeadSelection, TableRowSelection } from './selection-column';
-
-import { translateSignal } from '@jsverse/transloco';
-import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
-import { UserService } from '../../core/user/user.service';
-import { DataTablePagination } from '../../shared/components/pagination/pagination';
 
 @Component({
   selector: 'app-users',
@@ -71,10 +85,17 @@ import { DataTablePagination } from '../../shared/components/pagination/paginati
     HlmAvatarImports,
     HlmSpinnerImports,
     HlmBadgeImports,
+    HlmPopoverImports,
+    BrnPopoverImports,
+    BrnCommandImports,
+    HlmCommandImports,
+    HlmCheckboxImports,
     DashboardCardSection,
     TranslocoModule,
     DragDropModule,
     DataTablePagination,
+    RoleIconPipe,
+    StatusUIPipe,
   ],
   templateUrl: './users-list.html',
   providers: [
@@ -91,24 +112,55 @@ import { DataTablePagination } from '../../shared/components/pagination/paginati
       lucideRefreshCcw,
       lucideUserPlus,
       lucideGripVertical,
+      lucideDownload,
+      lucideFileUp,
+      lucideCirclePlus,
+      lucideSearch,
     }),
   ],
 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Users {
+  // --- Services ---
   private readonly _userService = inject(UserService);
+  private readonly _translocoService = inject(TranslocoService);
+  private readonly _hlmDialogService = inject(HlmDialogService);
 
+  /**
+   * Template references for custom cell rendering.
+   * These are accessed via viewChild and passed to TanStack column definitions.
+   */
   readonly dateCell = viewChild.required('dateCell');
   readonly nameCell = viewChild.required('nameCell');
   readonly statusCell = viewChild.required('statusCell');
   readonly roleCell = viewChild.required('roleCell');
 
+  /** Signal tracking the current active language for i18n updates */
+  protected readonly currentLang = toSignal(this._translocoService.langChanges$, {
+    initialValue: this._translocoService.getActiveLang(),
+  });
+
+  // --- Filter & UI State ---
+  protected readonly _statusFilter = signal<UserStatus[]>([]);
+  protected readonly _statusList = signal(['active', 'inactive', 'pending'] satisfies UserStatus[]);
+  protected readonly _statusState = signal<'closed' | 'open'>('closed');
+
+  protected readonly _rolesFilter = signal<UserRole[]>([]);
+  protected readonly _rolesList = signal(['admin', 'user', 'manager'] satisfies UserRole[]);
+  protected readonly _rolesState = signal<'closed' | 'open'>('closed');
+
+  // --- Table State  ---
   private readonly _columnOrder = signal<string[]>([]);
   private readonly _columnFilters = signal<ColumnFiltersState>([]);
   private readonly _sorting = signal<SortingState>([]);
   private readonly _rowSelection = signal<RowSelectionState>({});
   private readonly _columnVisibility = signal<VisibilityState>({});
+
+  /**
+   * Computed list of columns that are eligible for being hidden.
+   * Filters out columns with `enableHiding: false`.
+   */
   protected readonly hidableColumns = computed(() => {
     this._columnOrder();
     this._columnVisibility();
@@ -116,6 +168,10 @@ export class Users {
     return this.table.getAllLeafColumns().filter((col) => col.getCanHide());
   });
 
+  /**
+   * TanStack Table Column Definitions.
+   * Uses `translateSignal` for reactive header translations.
+   */
   protected readonly _columns: ColumnDef<User>[] = [
     {
       id: 'select',
@@ -164,6 +220,14 @@ export class Users {
       accessorKey: 'status',
       header: translateSignal('users.list.columns.status'),
       cell: () => this.statusCell(),
+      filterFn: (row, columnId, filterValue: UserStatus[]) => {
+        // If no filter is selected, show all rows
+        if (!filterValue || filterValue.length === 0) {
+          return true;
+        }
+        const rowValue = row.getValue(columnId) as UserStatus;
+        return filterValue.includes(rowValue);
+      },
     },
 
     {
@@ -173,11 +237,16 @@ export class Users {
     },
   ];
 
+  /** Current pagination state (page index and size) */
   private readonly _pagination = signal<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
 
+  /**
+   * Core TanStack Table instance.
+   * Manages data processing, sorting, filtering, and pagination logic.
+   */
   protected readonly table = createAngularTable<User>(() => ({
     data: this._userService.users(),
     columns: this._columns,
@@ -215,6 +284,10 @@ export class Users {
     },
   }));
 
+  /**
+   * Updates the global table filter based on input search text.
+   * @param event The input event from the search field.
+   */
   protected _filterChange(email: Event) {
     const target = email.target as HTMLInputElement;
     const typedValue = target.value;
@@ -224,6 +297,24 @@ export class Users {
     this.table.getColumn('email')?.setFilterValue((event.target as HTMLInputElement).value);
   }
 
+  protected onSort(column: Column<User, unknown>) {
+    column.toggleSorting(column.getIsSorted() === 'asc');
+  }
+
+  protected addUser() {
+    this._hlmDialogService.open(UserForm, {
+      contentClass: 'max-w-2xl',
+    });
+  }
+
+  protected refreshTable() {
+    this.table.reset();
+  }
+
+  /**
+   * Handles column reordering via CDK Drag and Drop.
+   * @param event The drag-drop event containing previous and current index.
+   */
   protected onDrop(event: CdkDragDrop<string[]>) {
     const hidableIds = this.hidableColumns().map((c) => c.id);
 
@@ -232,14 +323,52 @@ export class Users {
     this.table.setColumnOrder(['select', ...hidableIds, 'actions']);
   }
 
-  protected onSort(column: Column<User, unknown>) {
-    column.toggleSorting(column.getIsSorted() === 'asc');
+  // --- Role Filter Methods ---
+  protected rolesStateChanged(state: 'open' | 'closed') {
+    this._rolesState.set(state);
   }
 
-  protected createUser() {
-    // Logic to create a new user
+  protected isRoleSelected(role: UserRole): boolean {
+    return this._rolesFilter().some((r) => r === role);
   }
-  protected refreshTable() {
-    this.table.reset();
+
+  protected roleSelected(role: UserRole): void {
+    const current = this._rolesFilter();
+    const index = current.indexOf(role);
+    if (index === -1) {
+      this._rolesFilter.set([...current, role]);
+    } else {
+      this._rolesFilter.set(current.filter((r) => r !== role));
+    }
+    this.table.getColumn('role')?.setFilterValue(this._rolesFilter());
+  }
+  protected clearRolesFilter(): void {
+    this._rolesFilter.set([]);
+    this.table.getColumn('role')?.setFilterValue([]);
+  }
+
+  // --- Status Filter Methods ---
+  protected statusStateChanged(state: 'open' | 'closed') {
+    this._statusState.set(state);
+  }
+
+  protected isStatusSelected(status: UserStatus): boolean {
+    return this._statusFilter().some((s) => s === status);
+  }
+
+  protected statusSelected(status: UserStatus): void {
+    const current = this._statusFilter();
+    const index = current.indexOf(status);
+    if (index === -1) {
+      this._statusFilter.set([...current, status]);
+    } else {
+      this._statusFilter.set(current.filter((s) => s !== status));
+    }
+    this.table.getColumn('status')?.setFilterValue(this._statusFilter());
+  }
+
+  protected clearStatusFilter(): void {
+    this._statusFilter.set([]);
+    this.table.getColumn('status')?.setFilterValue([]);
   }
 }

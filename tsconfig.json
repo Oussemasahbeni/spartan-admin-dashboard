@@ -108,6 +108,9 @@
       ],
       "@spartan-ng/helm/alert-dialog": [
         "./src/app/spartan/alert-dialog/src/index.ts"
+      ],
+      "@spartan-ng/helm/command": [
+        "./src/app/spartan/command/src/index.ts"
       ]
     }
   },

@@ -149,6 +149,9 @@
             "addUserBtn": "Ajouter un utilisateur",
             "columnsBtn": "Colonnes",
             "refreshBtn": "Actualiser",
+            "importBtn": "Importer",
+            "exportBtn": "Exporter",
+            "clearFilter": "Effacer le filtre",
             "columns": {
                 "name": "Nom",
                 "email": "E-mail",
@@ -158,9 +161,26 @@
                 "createdAt": "Date de création",
                 "actions": "Actions"
             },
-            "noUsers": "Aucun utilisateur trouvé.",
+            "noResult": "Aucun résultat trouvé.",
             "errors": {
                 "loadFailed": "Impossible de charger les utilisateurs. Veuillez réessayer."
+            }
+        },
+        "form": {
+            "addTitle": "Ajouter un nouvel utilisateur",
+            "editTitle": "Modifier l'utilisateur",
+            "addDescription": "Remplissez les détails ci-dessous pour créer un nouvel utilisateur.",
+            "nameLabel": "Nom",
+            "emailLabel": "E-mail",
+            "phoneNumberLabel": "Numéro de téléphone",
+            "countryLabel": "Pays",
+            "roleLabel": "Rôle",
+            "errors": {
+                "nameRequired": "Le nom est requis",
+                "emailRequired": "L'e-mail est requis",
+                "emailInvalid": "L'e-mail n'est pas valide",
+                "phoneNumberRequired": "Le numéro de téléphone est requis",
+                "roleRequired": "Le rôle est requis"
             }
         },
         "actionDropdown": {
@@ -172,6 +192,16 @@
         "confirmationDialog": {
             "deleteTitle": "Confirmer la suppression de cet utilisateur ?",
             "deleteMessage": "Cette action est irréversible. Le compte et toutes les données associées seront définitivement supprimés."
+        },
+        "role": {
+            "admin": "Administrateur",
+            "user": "Utilisateur",
+            "manager": "Gestionnaire"
+        },
+        "status": {
+            "active": "Actif",
+            "inactive": "Inactif",
+            "pending": "En attente"
         }
     },
     "notFound": {

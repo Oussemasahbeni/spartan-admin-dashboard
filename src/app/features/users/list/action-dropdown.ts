@@ -8,8 +8,8 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
-import { UserService } from '../../core/user/user.service';
-import { User } from '../../core/user/user.type';
+import { UserService } from '../../../core/user/user.service';
+import { User } from '../../../core/user/user.type';
 
 @Component({
   selector: 'spartan-action-dropdown',

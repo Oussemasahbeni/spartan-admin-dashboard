@@ -5,23 +5,23 @@ import {
   provideBrowserGlobalErrorListeners,
   provideEnvironmentInitializer,
 } from '@angular/core';
-import {
-  provideRouter,
-  TitleStrategy,
-  withViewTransitions,
-} from '@angular/router';
+import { provideRouter, TitleStrategy, withViewTransitions } from '@angular/router';
 
 import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
-import {
-  LanguageOptions,
-  LanguageService,
-} from './core/config/language.service';
+import { LanguageOptions, LanguageService } from './core/config/language.service';
 import { ThemeService } from './core/config/theme.service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
+
+import { registerLocaleData } from '@angular/common';
+import localeAr from '@angular/common/locales/ar';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr, 'fr');
+registerLocaleData(localeAr, 'ar');
 
 const availableLangs = ['en', 'fr', 'ar'];
 

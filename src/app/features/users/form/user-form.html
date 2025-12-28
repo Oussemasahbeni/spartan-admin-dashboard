@@ -1,0 +1,74 @@
+<hlm-dialog-header *transloco="let t; prefix: 'users.form'">
+  <h3 hlmDialogTitle>{{ t('addTitle') }}</h3>
+  <p hlmDialogDescription>{{ t('addDescription') }}</p>
+</hlm-dialog-header>
+<div *transloco="let t; prefix: 'users.form'" class="flex w-full flex-col gap-4">
+  <hlm-field>
+    @let name = userForm.name();
+    <hlm-field-label for="name" class="text-right">{{ t('nameLabel') }}</hlm-field-label>
+    <input hlmInput id="name" [field]="userForm.name" />
+    @let showNameErrors = name.touched() && name.invalid();
+    @if (showNameErrors) {
+      @for (error of name.errors(); track error) {
+        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+      }
+    }
+  </hlm-field>
+  <hlm-field>
+    @let email = userForm.email();
+    <hlm-field-label for="email" class="text-right">{{ t('emailLabel') }}</hlm-field-label>
+    <input hlmInput id="email" [field]="userForm.email" />
+    @let showEmailErrors = email.touched() && email.invalid();
+    @if (showEmailErrors) {
+      @for (error of email.errors(); track error) {
+        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+      }
+    }
+  </hlm-field>
+  <hlm-field>
+    @let phoneNumber = userForm.phoneNumber();
+    <hlm-field-label for="phoneNumber" class="text-right">{{ t('phoneNumberLabel') }}</hlm-field-label>
+    <input hlmInput id="phoneNumber" [field]="userForm.phoneNumber" />
+    @let showPhoneNumberErrors = phoneNumber.touched() && phoneNumber.invalid();
+    @if (showPhoneNumberErrors) {
+      @for (error of phoneNumber.errors(); track error) {
+        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+      }
+    }
+  </hlm-field>
+  <hlm-field>
+    @let country = userForm.country();
+    <hlm-field-label for="country" class="text-right">{{ t('countryLabel') }}</hlm-field-label>
+    <input hlmInput id="country" [field]="userForm.country" />
+    @let showCountryErrors = country.touched() && country.invalid();
+    @if (showCountryErrors) {
+      @for (error of country.errors(); track error) {
+        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+      }
+    }
+  </hlm-field>
+  <hlm-field>
+    @let role = userForm.role();
+    <hlm-field-label for="role" class="text-right">{{ t('roleLabel') }}</hlm-field-label>
+    <brn-select class="inline-block" placeholder="Select an option" [field]="userForm.role">
+      <hlm-select-trigger id="role" class="w-full">
+        <hlm-select-value />
+      </hlm-select-trigger>
+      <hlm-select-content>
+        @for (role of _rolesList(); track role) {
+          <hlm-option *transloco="let t; prefix: 'users.role'" [value]="role">{{ t(role) }}</hlm-option>
+        }
+      </hlm-select-content>
+    </brn-select>
+    @let showRoleErrors = role.touched() && role.invalid();
+    @if (showRoleErrors) {
+      @for (error of role.errors(); track error) {
+        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+      }
+    }
+  </hlm-field>
+</div>
+<hlm-dialog-footer *transloco="let t; prefix: 'buttons'">
+  <button type="button" hlmBtn variant="outline" brnDialogClose>{{ t('cancel') }}</button>
+  <button hlmBtn type="submit">{{ t('save') }}</button>
+</hlm-dialog-footer>

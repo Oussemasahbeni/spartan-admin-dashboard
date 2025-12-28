@@ -149,6 +149,9 @@
             "addUserBtn": "إضافة مستخدم",
             "columnsBtn": "الأعمدة",
             "refreshBtn": "تحديث",
+            "importBtn": "استيراد",
+            "exportBtn": "تصدير",
+            "clearFilter": "مسح الفلتر",
             "columns": {
                 "name": "الاسم",
                 "email": "البريد الإلكتروني",
@@ -158,9 +161,25 @@
                 "createdAt": "تاريخ الإنشاء",
                 "actions": "الإجراءات"
             },
-            "noUsers": "لم يتم العثور على مستخدمين.",
+            "noResult": "لا توجد نتائج.",
             "errors": {
                 "loadFailed": "فشل تحميل المستخدمين. يرجى المحاولة مرة أخرى."
+            }
+        },
+        "form": {
+            "addTitle": "إضافة مستخدم جديد",
+            "editTitle": "تعديل المستخدم",
+            "addDescription": "املأ التفاصيل أدناه لإنشاء مستخدم جديد.",
+            "nameLabel": "الاسم",
+            "emailLabel": "البريد الإلكتروني",
+            "phoneNumberLabel": "رقم الهاتف",
+            "countryLabel": "البلد",
+            "errors": {
+                "nameRequired": "الاسم مطلوب",
+                "emailRequired": "البريد الإلكتروني مطلوب",
+                "emailInvalid": "البريد الإلكتروني غير صالح",
+                "phoneNumberRequired": "رقم الهاتف مطلوب",
+                "roleRequired": "الدور مطلوب"
             }
         },
         "actionDropdown": {
@@ -172,6 +191,16 @@
         "confirmationDialog": {
             "deleteTitle": "هل أنت متأكد من حذف هذا المستخدم؟",
             "deleteMessage": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف الحساب وجميع البيانات المرتبطة به نهائيًا."
+        },
+        "role": {
+            "admin": "المسؤول",
+            "user": "المستخدم",
+            "manager": "المدير"
+        },
+        "status": {
+            "active": "نشط",
+            "inactive": "غير نشط",
+            "pending": "معلق"
         }
     },
     "notFound": {
