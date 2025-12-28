@@ -171,14 +171,13 @@
             "addTitle": "Add New User",
             "editTitle": "Edit User",
             "addDescription": "Fill in the details below to create a new user.",
+            "editDescription": "Update the details below to edit the user.",
             "nameLabel": "Name",
             "emailLabel": "Email",
             "phoneNumberLabel": "Phone Number",
             "countryLabel": "Country",
             "roleLabel": "Role",
             "selectRolePlaceholder": "Select an option",
-            "selectCountryPlaceholder": "Select country...",
-            "searchCountryPlaceholder": "Search a country...",
             "noCountryFound": "No results found.",
             "errors": {
                 "nameRequired": "Name is required",
@@ -209,6 +208,17 @@
             "inactive": "Inactive",
             "pending": "Pending"
         }
+    },
+    "country-picker": {
+        "selectCountryPlaceholder": "Select country...",
+        "searchCountryPlaceholder": "Search a country...",
+        "noCountryFound": "No results found."
+    },
+    "phone-number-picker": {
+        "selectCountryPlaceholder": "Select country code...",
+        "searchCountryPlaceholder": "Search a country...",
+        "enterPhoneNumberPlaceholder": "Enter phone number...",
+        "noCountryFound": "No results found."
     },
     "notFound": {
         "heading": "Page Not Found",

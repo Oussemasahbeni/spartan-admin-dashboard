@@ -5,11 +5,13 @@ import { lucideEllipsisVertical } from '@ng-icons/lucide';
 import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
 import { HlmAlertDialog, HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
 import { UserService } from '../../../core/user/user.service';
 import { User } from '../../../core/user/user.type';
+import { UserForm } from '../form/user-form';
 
 @Component({
   selector: 'spartan-action-dropdown',
@@ -32,7 +34,7 @@ import { User } from '../../../core/user/user.type';
       <ng-container *transloco="let t; prefix: 'users.actionDropdown'">
         <hlm-dropdown-menu>
           <hlm-dropdown-menu-group>
-            <button type="button" hlmDropdownMenuItem>
+            <button type="button" hlmDropdownMenuItem (click)="onEditUser()">
               {{ t('edit') }}
             </button>
             <button type="button" hlmDropdownMenuItem>
@@ -44,7 +46,7 @@ import { User } from '../../../core/user/user.type';
           </hlm-dropdown-menu-group>
           <hlm-dropdown-menu-separator />
           <hlm-dropdown-menu-group>
-            <button type="button" variant="destructive" hlmDropdownMenuItem (click)="openDialog()">
+            <button type="button" variant="destructive" hlmDropdownMenuItem (click)="openConfirmationDialog()">
               {{ t('delete') }}
             </button>
           </hlm-dropdown-menu-group>
@@ -71,17 +73,28 @@ import { User } from '../../../core/user/user.type';
 })
 export class ActionDropdown {
   private readonly _userService = inject(UserService);
+  private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _context = injectFlexRenderContext<CellContext<User, unknown>>();
-  readonly aletDialog = viewChild.required(HlmAlertDialog);
+  readonly alertDialog = viewChild.required(HlmAlertDialog);
 
-  openDialog() {
-    this.aletDialog().open();
+  openConfirmationDialog() {
+    this.alertDialog().open();
 
-    this.aletDialog().closed.subscribe((result) => {
+    this.alertDialog().closed.subscribe((result) => {
       if (result === 'confirm') {
         const user = this._context.row.original;
         this._userService.deleteUser(user.id);
       }
+    });
+  }
+
+  onEditUser() {
+    const user = this._context.row.original;
+    // this._userService.editUser(user.id);
+    this._hlmDialogService.open(UserForm, {
+      context: { user },
+      contentClass: 'max-w-3xl',
+      autoFocus: 'dialog',
     });
   }
 }

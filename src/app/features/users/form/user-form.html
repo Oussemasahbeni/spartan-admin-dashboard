@@ -1,6 +1,6 @@
 <hlm-dialog-header *transloco="let t; prefix: 'users.form'">
-  <h3 hlmDialogTitle>{{ t('addTitle') }}</h3>
-  <p hlmDialogDescription>{{ t('addDescription') }}</p>
+  <h3 hlmDialogTitle>{{ isEditMode() ? t('editTitle') : t('addTitle') }}</h3>
+  <p hlmDialogDescription>{{ isEditMode() ? t('editDescription') : t('addDescription') }}</p>
 </hlm-dialog-header>
 <div *transloco="let t; prefix: 'users.form'" class="flex w-full flex-col gap-4">
   <hlm-field>
@@ -51,17 +51,17 @@
 
   <hlm-field>
     @let role = userForm.role();
-    <hlm-field-label for="role" class="text-right">{{ t('roleLabel') }}</hlm-field-label>
-    <brn-select class="inline-block" [placeholder]="t('selectRolePlaceholder')" [field]="userForm.role">
+    <hlm-field-label for="role">{{ t('roleLabel') }}</hlm-field-label>
+    <hlm-select class="text-start" [placeholder]="t('selectRolePlaceholder')" [field]="userForm.role">
       <hlm-select-trigger id="role" class="w-full">
         <hlm-select-value />
       </hlm-select-trigger>
       <hlm-select-content>
-        @for (role of _rolesList(); track role) {
+        @for (role of rolesList(); track role) {
           <hlm-option *transloco="let t; prefix: 'users.role'" [value]="role">{{ t(role) }}</hlm-option>
         }
       </hlm-select-content>
-    </brn-select>
+    </hlm-select>
     @let showRoleErrors = role.touched() && role.invalid();
     @if (showRoleErrors) {
       @for (error of role.errors(); track error) {

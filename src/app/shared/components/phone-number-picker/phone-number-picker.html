@@ -1,12 +1,11 @@
-<div class="flex items-stretch">
+<div *transloco="let t; prefix: 'phone-number-picker'" class="flex">
   <hlm-popover sideOffset="5" align="start" [state]="state()" (stateChanged)="stateChanged($event)">
     <button
       type="button"
       hlmBtn
       variant="outline"
       hlmPopoverTrigger
-      class="flex gap-1 rounded-r-none border-r-0 px-3 focus-visible:ring-0"
-      [class.border-destructive]="invalid() && touched()"
+      class="flex gap-1 rounded-e-none border-e-0 px-3 focus-visible:ring-0"
       (click)="state.set('open')"
     >
       @if (selectedCountry()) {
@@ -20,8 +19,9 @@
     <hlm-command *brnPopoverContent="let ctx" hlmPopoverContent class="w-64 p-0">
       <hlm-command-search>
         <ng-icon hlm name="lucideSearch" />
-        <input placeholder="Search country code..." hlm-command-search-input />
+        <input hlm-command-search-input [placeholder]="t('searchCountryPlaceholder')" />
       </hlm-command-search>
+      <div *brnCommandEmpty hlmCommandEmpty>{{ t('noCountryFound') }}</div>
       <hlm-command-list>
         <hlm-command-group>
           @for (country of _countriesList(); track country.id) {
@@ -32,7 +32,7 @@
               [value]="country.name[activeLang()]"
               (selected)="countrySelected(country)"
             >
-              <app-country-display class="mr-2" [country]="country" />
+              <app-country-display class="me-2" [country]="country" />
               <span class="text-muted-foreground text-xs">{{ country.code }}</span>
             </button>
           }
@@ -43,11 +43,10 @@
 
   <!-- Phone Number Input -->
   <input
-    type="tel"
     hlmInput
-    placeholder="Enter phone number"
-    class="flex-1 rounded-l-none"
-    [class.border-destructive]="invalid() && touched()"
+    class="flex-1 rounded-s-none"
+    [placeholder]="t('enterPhoneNumberPlaceholder')"
+    [error]="invalid() && touched() ? true : 'auto'"
     [value]="rawPhoneNumber()"
     (input)="onPhoneInput($event)"
     (blur)="touched.set(true)"

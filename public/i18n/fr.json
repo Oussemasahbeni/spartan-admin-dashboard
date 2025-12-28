@@ -171,6 +171,7 @@
             "addTitle": "Ajouter un nouvel utilisateur",
             "editTitle": "Modifier l'utilisateur",
             "addDescription": "Remplissez les détails ci-dessous pour créer un nouvel utilisateur.",
+            "editDescription": "Mettez à jour les détails ci-dessous pour modifier l'utilisateur.",
             "nameLabel": "Nom",
             "emailLabel": "E-mail",
             "phoneNumberLabel": "Numéro de téléphone",

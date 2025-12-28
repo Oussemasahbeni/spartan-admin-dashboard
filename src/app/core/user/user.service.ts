@@ -21,12 +21,7 @@ export class UserService {
   }
 
   updateUser(updatedUser: Partial<User>): void {
-    this._user.update((currentUser) => {
-      if (currentUser) {
-        return { ...currentUser, ...updatedUser };
-      }
-      return currentUser;
-    });
+    this._users.update((users) => users.map((user) => (user.id === updatedUser.id ? { ...user, ...updatedUser } : user)));
   }
 
   deleteUser(userId: string) {

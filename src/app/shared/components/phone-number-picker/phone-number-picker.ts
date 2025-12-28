@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, model, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, linkedSignal, model, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
@@ -49,9 +49,26 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   readonly invalid = input<boolean>(false);
   readonly disabled = input<boolean>(false);
 
-  protected readonly selectedCountry = signal<Country | null>(null);
-  protected readonly rawPhoneNumber = signal<string>('');
+  protected readonly selectedCountry = linkedSignal<string, Country | null>({
+    source: this.value,
+    computation: (fullValue) => {
+      if (!fullValue) return null;
+      // Find the longest matching code first (e.g., +1 242 before +1)
+      const sorted = [...this._countriesList()].sort((a, b) => b.code.length - a.code.length);
+      return sorted.find((c) => fullValue.startsWith(c.code)) || null;
+    },
+  });
 
+  protected readonly rawPhoneNumber = linkedSignal<string, string>({
+    source: this.value,
+    computation: (fullValue) => {
+      const country = this.selectedCountry();
+      if (!fullValue) return '';
+      if (!country) return fullValue;
+      // Strip the code to get just the numbers for the input field
+      return fullValue.replace(country.code, '');
+    },
+  });
   protected readonly _countriesList = signal(countries);
   protected readonly state = signal<'closed' | 'open'>('closed');
 

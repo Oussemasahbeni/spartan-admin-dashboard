@@ -1,4 +1,9 @@
-<hlm-popover *transloco="let t; prefix: 'users.form'" align="start" [state]="state()" (stateChanged)="stateChanged($event)">
+<hlm-popover
+  *transloco="let t; prefix: 'country-picker'"
+  align="start"
+  [state]="state()"
+  (stateChanged)="stateChanged($event)"
+>
   <button
     #trigger
     type="button"

@@ -171,6 +171,7 @@
             "addTitle": "إضافة مستخدم جديد",
             "editTitle": "تعديل المستخدم",
             "addDescription": "املأ التفاصيل أدناه لإنشاء مستخدم جديد.",
+            "editDescription": "قم بتحديث التفاصيل أدناه لتعديل المستخدم.",
             "nameLabel": "الاسم",
             "emailLabel": "البريد الإلكتروني",
             "phoneNumberLabel": "رقم الهاتف",
@@ -209,6 +210,17 @@
             "inactive": "غير نشط",
             "pending": "معلق"
         }
+    },
+    "country-picker": {
+        "selectCountryPlaceholder": "اختر البلد...",
+        "searchCountryPlaceholder": "ابحث عن بلد...",
+        "noCountryFound": "لا توجد نتائج."
+    },
+    "phone-number-picker": {
+        "selectCountryPlaceholder": "اختر رمز البلد...",
+        "searchCountryPlaceholder": "ابحث عن بلد...",
+        "enterPhoneNumberPlaceholder": "أدخل رقم الهاتف...",
+        "noCountryFound": "لا توجد نتائج."
     },
     "notFound": {
         "heading": "الصفحة غير موجودة",
