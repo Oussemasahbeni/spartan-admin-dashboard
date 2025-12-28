@@ -26,20 +26,9 @@
     }
   </hlm-field>
   <hlm-field>
-    @let phoneNumber = userForm.phoneNumber();
-    <hlm-field-label for="phoneNumber" class="text-right">{{ t('phoneNumberLabel') }}</hlm-field-label>
-    <input hlmInput id="phoneNumber" [field]="userForm.phoneNumber" />
-    @let showPhoneNumberErrors = phoneNumber.touched() && phoneNumber.invalid();
-    @if (showPhoneNumberErrors) {
-      @for (error of phoneNumber.errors(); track error) {
-        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
-      }
-    }
-  </hlm-field>
-  <hlm-field>
     @let country = userForm.country();
     <hlm-field-label for="country" class="text-right">{{ t('countryLabel') }}</hlm-field-label>
-    <input hlmInput id="country" [field]="userForm.country" />
+    <app-country-picker [field]="userForm.country" />
     @let showCountryErrors = country.touched() && country.invalid();
     @if (showCountryErrors) {
       @for (error of country.errors(); track error) {
@@ -47,10 +36,23 @@
       }
     }
   </hlm-field>
+
+  <hlm-field>
+    <hlm-field-label>{{ t('phoneNumberLabel') }}</hlm-field-label>
+    <app-phone-number-picker [field]="userForm.phoneNumber" />
+    @let phoneNumber = userForm.phoneNumber();
+    @let showPhoneNumberErrors = phoneNumber.touched() && phoneNumber.invalid();
+    @if (showPhoneNumberErrors) {
+      @for (error of phoneNumber.errors(); track error) {
+        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+      }
+    }
+  </hlm-field>
+
   <hlm-field>
     @let role = userForm.role();
     <hlm-field-label for="role" class="text-right">{{ t('roleLabel') }}</hlm-field-label>
-    <brn-select class="inline-block" placeholder="Select an option" [field]="userForm.role">
+    <brn-select class="inline-block" [placeholder]="t('selectRolePlaceholder')" [field]="userForm.role">
       <hlm-select-trigger id="role" class="w-full">
         <hlm-select-value />
       </hlm-select-trigger>
@@ -70,5 +72,5 @@
 </div>
 <hlm-dialog-footer *transloco="let t; prefix: 'buttons'">
   <button type="button" hlmBtn variant="outline" brnDialogClose>{{ t('cancel') }}</button>
-  <button hlmBtn type="submit">{{ t('save') }}</button>
+  <button type="submit" hlmBtn (click)="onSaveUser($event)">{{ t('save') }}</button>
 </hlm-dialog-footer>

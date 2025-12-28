@@ -156,6 +156,7 @@
                 "name": "الاسم",
                 "email": "البريد الإلكتروني",
                 "role": "الدور",
+                "country": "البلد",
                 "status": "الحالة",
                 "phoneNumber": "رقم الهاتف",
                 "createdAt": "تاريخ الإنشاء",
@@ -174,11 +175,17 @@
             "emailLabel": "البريد الإلكتروني",
             "phoneNumberLabel": "رقم الهاتف",
             "countryLabel": "البلد",
+            "roleLabel": "الدور",
+            "selectRolePlaceholder": "اختر دورًا",
+            "selectCountryPlaceholder": "اختر البلد...",
+            "searchCountryPlaceholder": "البحث عن بلد...",
+            "noCountryFound": "لا توجد نتائج.",
             "errors": {
                 "nameRequired": "الاسم مطلوب",
                 "emailRequired": "البريد الإلكتروني مطلوب",
                 "emailInvalid": "البريد الإلكتروني غير صالح",
                 "phoneNumberRequired": "رقم الهاتف مطلوب",
+                "phoneNumberInvalid": "رقم الهاتف غير صالح",
                 "roleRequired": "الدور مطلوب"
             }
         },

@@ -32,4 +32,7 @@ export class UserService {
   deleteUser(userId: string) {
     this._users.update((prev) => prev.filter((u) => u.id !== userId));
   }
+  addUser(user: User) {
+    this._users.update((users) => [user, ...users]);
+  }
 }

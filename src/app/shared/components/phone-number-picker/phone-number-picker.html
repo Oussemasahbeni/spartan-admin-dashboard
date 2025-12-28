@@ -1,0 +1,55 @@
+<div class="flex items-stretch">
+  <hlm-popover sideOffset="5" align="start" [state]="state()" (stateChanged)="stateChanged($event)">
+    <button
+      type="button"
+      hlmBtn
+      variant="outline"
+      hlmPopoverTrigger
+      class="flex gap-1 rounded-r-none border-r-0 px-3 focus-visible:ring-0"
+      [class.border-destructive]="invalid() && touched()"
+      (click)="state.set('open')"
+    >
+      @if (selectedCountry()) {
+        <app-country-display class="mr-2" [country]="selectedCountry()" [showCountryCode]="true" />
+      } @else {
+        <ng-icon hlm name="lucideGlobe" size="sm" />
+      }
+      <ng-icon hlm size="xs" name="lucideChevronDown" class="opacity-50" />
+    </button>
+
+    <hlm-command *brnPopoverContent="let ctx" hlmPopoverContent class="w-64 p-0">
+      <hlm-command-search>
+        <ng-icon hlm name="lucideSearch" />
+        <input placeholder="Search country code..." hlm-command-search-input />
+      </hlm-command-search>
+      <hlm-command-list>
+        <hlm-command-group>
+          @for (country of _countriesList(); track country.id) {
+            <button
+              type="button"
+              class="flex justify-between"
+              hlm-command-item
+              [value]="country.name[activeLang()]"
+              (selected)="countrySelected(country)"
+            >
+              <app-country-display class="mr-2" [country]="country" />
+              <span class="text-muted-foreground text-xs">{{ country.code }}</span>
+            </button>
+          }
+        </hlm-command-group>
+      </hlm-command-list>
+    </hlm-command>
+  </hlm-popover>
+
+  <!-- Phone Number Input -->
+  <input
+    type="tel"
+    hlmInput
+    placeholder="Enter phone number"
+    class="flex-1 rounded-l-none"
+    [class.border-destructive]="invalid() && touched()"
+    [value]="rawPhoneNumber()"
+    (input)="onPhoneInput($event)"
+    (blur)="touched.set(true)"
+  />
+</div>

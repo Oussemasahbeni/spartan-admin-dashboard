@@ -60,6 +60,7 @@ import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { UserService } from '../../../core/user/user.service';
 import { User, UserRole, UserStatus } from '../../../core/user/user.type';
+import { CountryDisplay } from '../../../shared/components/country-display/country-display';
 import { DataTablePagination } from '../../../shared/components/pagination/pagination';
 import { UserForm } from '../form/user-form';
 import { RoleIconPipe } from '../pipes/role-icon.pipe';
@@ -96,6 +97,7 @@ import { TableHeadSelection, TableRowSelection } from './selection-column';
     DataTablePagination,
     RoleIconPipe,
     StatusUIPipe,
+    CountryDisplay,
   ],
   templateUrl: './users-list.html',
   providers: [
@@ -135,6 +137,7 @@ export class Users {
   readonly nameCell = viewChild.required('nameCell');
   readonly statusCell = viewChild.required('statusCell');
   readonly roleCell = viewChild.required('roleCell');
+  readonly countryCell = viewChild.required('countryCell');
 
   /** Signal tracking the current active language for i18n updates */
   protected readonly currentLang = toSignal(this._translocoService.langChanges$, {
@@ -196,6 +199,13 @@ export class Users {
       id: 'email',
       accessorKey: 'email',
       header: translateSignal(`users.list.columns.email`),
+    },
+    {
+      id: 'country',
+      accessorKey: 'country',
+      header: translateSignal('users.list.columns.country'),
+      enableSorting: false,
+      cell: () => this.countryCell(),
     },
     {
       id: 'phoneNumber',
@@ -303,7 +313,8 @@ export class Users {
 
   protected addUser() {
     this._hlmDialogService.open(UserForm, {
-      contentClass: 'max-w-2xl',
+      contentClass: 'max-w-3xl',
+      autoFocus: 'dialog',
     });
   }
 

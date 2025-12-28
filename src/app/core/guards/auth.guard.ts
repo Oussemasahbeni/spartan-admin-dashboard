@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = (_route, _state) => {
       id: '1',
       name: 'John Doe',
       email: 'john.doe@gmail.com',
-      avatar: 'https://i.pravatar.cc/120?u=johndoe',
+      avatar: 'https://i.pravatar.cc/120?u=alicej',
       phoneNumber: '+1234567890',
       role: 'admin',
       status: 'active',

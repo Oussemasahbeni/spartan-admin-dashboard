@@ -158,6 +158,7 @@
                 "role": "Role",
                 "status": "Status",
                 "phoneNumber": "Phone Number",
+                "country": "Country",
                 "createdAt": "Created At",
                 "actions": "Actions"
             },
@@ -175,11 +176,16 @@
             "phoneNumberLabel": "Phone Number",
             "countryLabel": "Country",
             "roleLabel": "Role",
+            "selectRolePlaceholder": "Select an option",
+            "selectCountryPlaceholder": "Select country...",
+            "searchCountryPlaceholder": "Search a country...",
+            "noCountryFound": "No results found.",
             "errors": {
                 "nameRequired": "Name is required",
                 "emailRequired": "Email is required",
                 "emailInvalid": "Email is invalid",
                 "phoneNumberRequired": "Phone number is required",
+                "phoneNumberInvalid": "Phone number is invalid",
                 "roleRequired": "Role is required"
             }
         },

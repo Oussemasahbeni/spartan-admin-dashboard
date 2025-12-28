@@ -157,6 +157,7 @@
                 "email": "E-mail",
                 "role": "Rôle",
                 "status": "Statut",
+                "country": "Pays",
                 "phoneNumber": "Numéro de téléphone",
                 "createdAt": "Date de création",
                 "actions": "Actions"
@@ -175,11 +176,16 @@
             "phoneNumberLabel": "Numéro de téléphone",
             "countryLabel": "Pays",
             "roleLabel": "Rôle",
+            "selectRolePlaceholder": "Sélectionnez une option",
+            "selectCountryPlaceholder": "Sélectionnez un pays...",
+            "searchCountryPlaceholder": "Rechercher un pays...",
+            "noCountryFound": "Aucun résultat trouvé.",
             "errors": {
                 "nameRequired": "Le nom est requis",
                 "emailRequired": "L'e-mail est requis",
                 "emailInvalid": "L'e-mail n'est pas valide",
                 "phoneNumberRequired": "Le numéro de téléphone est requis",
+                "phoneNumberInvalid": "Le numéro de téléphone n'est pas valide",
                 "roleRequired": "Le rôle est requis"
             }
         },
