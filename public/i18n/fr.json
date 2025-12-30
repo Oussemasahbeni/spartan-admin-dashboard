@@ -1,27 +1,27 @@
 {
-    "nav-user": {
+    "navUser": {
         "account": "Compte",
         "theme": "Thème",
         "language": "Langue",
         "light": "Clair",
         "dark": "Sombre",
         "system": "Système",
-        "logout": "Se déconnecter"
+        "logout": "Déconnexion"
     },
     "titles": {
         "login": "Connexion",
-        "signup": "Créer un compte",
+        "signup": "Inscription",
         "forgetPassword": "Mot de passe oublié",
         "dashboard": "Tableau de bord",
         "users": "Utilisateurs",
         "notFound": "Page introuvable",
-        "unauthorized": "Accès refusé",
+        "unauthorized": "Non autorisé",
         "serviceUnavailable": "Service indisponible"
     },
     "navigation": {
         "application": "Application",
         "dashboard": "Tableau de bord",
-        "analytics": "Statistiques",
+        "analytics": "Analytique",
         "overview": "Vue d’ensemble",
         "reports": "Rapports",
         "tasks": "Tâches",
@@ -29,16 +29,28 @@
         "users": "Utilisateurs"
     },
     "pagination": {
-        "items-per-page": "Éléments par page",
-        "next-page": "Page suivante",
-        "previous-page": "Page précédente",
-        "first-page": "Première page",
-        "last-page": "Dernière page",
-        "rows-selected": "{{selected}} sur {{total}} lignes sélectionnées",
+        "itemsPerPage": "Éléments par page",
+        "nextPage": "Page suivante",
+        "previousPage": "Page précédente",
+        "firstPage": "Première page",
+        "lastPage": "Dernière page",
+        "rowSelected": "{{selected}} sur {{total}} lignes sélectionnées",
         "page": "Page {{page}} sur {{totalPages}}"
     },
+    "common": {
+        "noData": "Aucune donnée disponible.",
+        "clearFilter": "Effacer le filtre",
+        "searchPlaceholder": "Rechercher...",
+        "unsavedChangesWarning": "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter sans enregistrer ?"
+    },
+    "actionDropdown": {
+        "edit": "Modifier",
+        "makeCopy": "Faire une copie",
+        "favorite": "Favori",
+        "delete": "Supprimer"
+    },
     "buttons": {
-        "submit": "Envoyer",
+        "submit": "Soumettre",
         "cancel": "Annuler",
         "close": "Fermer",
         "confirm": "Confirmer",
@@ -46,187 +58,30 @@
         "delete": "Supprimer",
         "save": "Enregistrer",
         "update": "Mettre à jour",
-        "loadMore": "Charger plus"
+        "columns": "Colonnes",
+        "refresh": "Actualiser",
+        "import": "Importer",
+        "export": "Exporter",
+        "clearFilter": "Effacer le filtre",
+        "addNew": "Ajouter"
     },
-    "auth": {
-        "login": {
-            "title": "Connexion à votre compte",
-            "emailLabel": "Adresse e-mail",
-            "emailPlaceholder": "nom@exemple.com",
-            "passwordLabel": "Mot de passe",
-            "passwordPlaceholder": "Votre mot de passe",
-            "forgotPassword": "Mot de passe oublié ?",
-            "orContinueWith": "Ou continuer avec",
-            "github": "GitHub",
-            "rememberMe": "Se souvenir de moi",
-            "noAccount": "Vous n’avez pas de compte ?",
-            "signUp": "Créer un compte",
-            "loginBtn": "Se connecter",
-            "testimonial": "Cette bibliothèque m’a fait gagner un temps considérable et m’a permis de livrer des interfaces modernes plus rapidement.",
-            "errors": {
-                "emailRequired": "L’adresse e-mail est obligatoire",
-                "emailInvalid": "L’adresse e-mail n’est pas valide",
-                "passwordRequired": "Le mot de passe est obligatoire",
-                "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères"
-            }
-        },
-        "signup": {
-            "title": "Créer un compte",
-            "haveAccount": "Vous avez déjà un compte ?",
-            "signIn": "Se connecter",
-            "nameLabel": "Nom complet",
-            "namePlaceholder": "Votre nom complet",
-            "emailLabel": "Adresse e-mail",
-            "emailPlaceholder": "nom@exemple.com",
-            "passwordLabel": "Mot de passe",
-            "passwordPlaceholder": "Votre mot de passe",
-            "confirmPasswordLabel": "Confirmer le mot de passe",
-            "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
-            "signupButton": "S’inscrire",
-            "orContinueWith": "Ou continuer avec",
-            "github": "GitHub",
-            "termsText": "En continuant, vous acceptez nos",
-            "termsOfService": "conditions d’utilisation",
-            "and": "et",
-            "privacyPolicy": "politique de confidentialité",
-            "testimonial": "Cette bibliothèque m’a permis de concevoir des interfaces élégantes en un temps record.",
-            "errors": {
-                "nameRequired": "Le nom est obligatoire",
-                "emailRequired": "L’adresse e-mail est obligatoire",
-                "emailInvalid": "L’adresse e-mail n’est pas valide",
-                "passwordRequired": "Le mot de passe est obligatoire",
-                "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
-                "passwordMismatch": "Les mots de passe ne correspondent pas",
-                "confirmPasswordRequired": "La confirmation du mot de passe est obligatoire"
-            }
-        },
-        "forgetPassword": {
-            "title": "Mot de passe oublié ?",
-            "description": "Saisissez votre adresse e-mail afin de recevoir un lien de réinitialisation.",
-            "emailLabel": "Adresse e-mail",
-            "emailPlaceholder": "nom@exemple.com",
-            "submitBtn": "Envoyer le lien",
-            "backToLogin": "Retour à la connexion",
-            "testimonial": "Une expérience simple et efficace pour gérer les accès utilisateurs.",
-            "alert": {
-                "successTitle": "Succès",
-                "resetLinkSent": "Si un compte existe, les instructions de réinitialisation ont été envoyées par e-mail."
-            },
-            "errors": {
-                "emailRequired": "L’adresse e-mail est obligatoire",
-                "emailInvalid": "L’adresse e-mail n’est pas valide"
-            }
-        }
+    "validation": {
+        "required": "Ce champ est obligatoire.",
+        "minlength": "Ce champ doit contenir au moins {{ min }} caractères.",
+        "maxlength": "Ce champ ne peut pas dépasser {{ max }} caractères.",
+        "email": "Veuillez entrer une adresse e-mail valide.",
+        "invalid": "Ce champ est invalide.",
+        "min": "Ce champ doit être au minimum {{ min }}.",
+        "max": "Ce champ ne peut pas dépasser {{ max }}.",
+        "pattern": "Ce champ doit respecter le format {{ pattern }}."
     },
-    "dashboard": {
-        "cards": {
-            "totalUsers": {
-                "label": "Utilisateurs totaux",
-                "value": "12 000",
-                "subtitle": "+5 % par rapport au mois dernier"
-            },
-            "newUsers": {
-                "label": "Nouveaux utilisateurs",
-                "value": "+350",
-                "subtitle": "+10 % par rapport au mois dernier"
-            },
-            "pendingVerifications": {
-                "label": "Vérifications en attente",
-                "value": "42",
-                "subtitle": "2 % des utilisateurs"
-            },
-            "activeUsers": {
-                "label": "Utilisateurs actifs",
-                "value": "7 800",
-                "subtitle": "65 % des utilisateurs"
-            }
-        }
+    "countryPicker": {
+        "selectCountryPlaceholder": "Sélectionner un pays...",
+        "searchCountryPlaceholder": "Rechercher un pays..."
     },
-    "users": {
-        "list": {
-            "title": "Utilisateurs",
-            "searchPlaceholder": "Rechercher des utilisateurs...",
-            "addUserBtn": "Ajouter un utilisateur",
-            "columnsBtn": "Colonnes",
-            "refreshBtn": "Actualiser",
-            "importBtn": "Importer",
-            "exportBtn": "Exporter",
-            "clearFilter": "Effacer le filtre",
-            "columns": {
-                "name": "Nom",
-                "email": "E-mail",
-                "role": "Rôle",
-                "status": "Statut",
-                "country": "Pays",
-                "phoneNumber": "Numéro de téléphone",
-                "createdAt": "Date de création",
-                "actions": "Actions"
-            },
-            "noResult": "Aucun résultat trouvé.",
-            "errors": {
-                "loadFailed": "Impossible de charger les utilisateurs. Veuillez réessayer."
-            }
-        },
-        "form": {
-            "addTitle": "Ajouter un nouvel utilisateur",
-            "editTitle": "Modifier l'utilisateur",
-            "addDescription": "Remplissez les détails ci-dessous pour créer un nouvel utilisateur.",
-            "editDescription": "Mettez à jour les détails ci-dessous pour modifier l'utilisateur.",
-            "nameLabel": "Nom",
-            "emailLabel": "E-mail",
-            "phoneNumberLabel": "Numéro de téléphone",
-            "countryLabel": "Pays",
-            "roleLabel": "Rôle",
-            "selectRolePlaceholder": "Sélectionnez une option",
-            "selectCountryPlaceholder": "Sélectionnez un pays...",
-            "searchCountryPlaceholder": "Rechercher un pays...",
-            "noCountryFound": "Aucun résultat trouvé.",
-            "errors": {
-                "nameRequired": "Le nom est requis",
-                "emailRequired": "L'e-mail est requis",
-                "emailInvalid": "L'e-mail n'est pas valide",
-                "phoneNumberRequired": "Le numéro de téléphone est requis",
-                "phoneNumberInvalid": "Le numéro de téléphone n'est pas valide",
-                "roleRequired": "Le rôle est requis"
-            }
-        },
-        "actionDropdown": {
-            "edit": "Modifier",
-            "makeCopy": "Dupliquer",
-            "favorite": "Favori",
-            "delete": "Supprimer"
-        },
-        "confirmationDialog": {
-            "deleteTitle": "Confirmer la suppression de cet utilisateur ?",
-            "deleteMessage": "Cette action est irréversible. Le compte et toutes les données associées seront définitivement supprimés."
-        },
-        "role": {
-            "admin": "Administrateur",
-            "user": "Utilisateur",
-            "manager": "Gestionnaire"
-        },
-        "status": {
-            "active": "Actif",
-            "inactive": "Inactif",
-            "pending": "En attente"
-        }
-    },
-    "notFound": {
-        "heading": "Page introuvable",
-        "message": "La page demandée n’existe pas ou a été déplacée.",
-        "goToDashboard": "Aller au tableau de bord",
-        "goBack": "Retour"
-    },
-    "unauthorized": {
-        "heading": "Accès refusé",
-        "message": "Vous n’êtes pas autorisé à accéder à cette page ou votre session a expiré.",
-        "goToLogin": "Aller à la connexion",
-        "goBack": "Retour"
-    },
-    "serviceUnavailable": {
-        "heading": "Service indisponible",
-        "message": "Le service est temporairement indisponible. Veuillez réessayer ultérieurement.",
-        "retry": "Réessayer",
-        "goToDashboard": "Aller au tableau de bord"
+    "phoneNumberPicker": {
+        "selectCountryPlaceholder": "Sélectionner l’indicatif du pays...",
+        "searchCountryPlaceholder": "Rechercher un pays...",
+        "enterPhoneNumberPlaceholder": "Saisir le numéro de téléphone..."
     }
 }

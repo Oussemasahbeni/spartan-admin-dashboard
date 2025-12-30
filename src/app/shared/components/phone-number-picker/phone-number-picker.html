@@ -1,4 +1,4 @@
-<div *transloco="let t; prefix: 'phone-number-picker'" class="flex">
+<div *transloco="let t; prefix: 'phoneNumberPicker'" class="flex">
   <hlm-popover sideOffset="5" align="start" [state]="state()" (stateChanged)="stateChanged($event)">
     <button
       type="button"
@@ -21,7 +21,9 @@
         <ng-icon hlm name="lucideSearch" />
         <input hlm-command-search-input [placeholder]="t('searchCountryPlaceholder')" />
       </hlm-command-search>
-      <div *brnCommandEmpty hlmCommandEmpty>{{ t('noCountryFound') }}</div>
+      <div *brnCommandEmpty hlmCommandEmpty>
+        <span *transloco="let t"> {{ t('common.noData') }}</span>
+      </div>
       <hlm-command-list>
         <hlm-command-group>
           @for (country of _countriesList(); track country.id) {

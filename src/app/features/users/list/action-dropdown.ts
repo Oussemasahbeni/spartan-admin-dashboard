@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEllipsisVertical } from '@ng-icons/lucide';
 import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
@@ -9,6 +9,7 @@ import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
+import { toast } from 'ngx-sonner';
 import { UserService } from '../../../core/user/user.service';
 import { User } from '../../../core/user/user.type';
 import { UserForm } from '../form/user-form';
@@ -31,7 +32,7 @@ import { UserForm } from '../form/user-form';
       <ng-icon hlmIcon size="sm" name="lucideEllipsisVertical" />
     </button>
     <ng-template #menu>
-      <ng-container *transloco="let t; prefix: 'users.actionDropdown'">
+      <ng-container *transloco="let t; prefix: 'actionDropdown'">
         <hlm-dropdown-menu>
           <hlm-dropdown-menu-group>
             <button type="button" hlmDropdownMenuItem (click)="onEditUser()">
@@ -73,6 +74,7 @@ import { UserForm } from '../form/user-form';
 })
 export class ActionDropdown {
   private readonly _userService = inject(UserService);
+  private readonly _transloco = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _context = injectFlexRenderContext<CellContext<User, unknown>>();
   readonly alertDialog = viewChild.required(HlmAlertDialog);
@@ -84,6 +86,7 @@ export class ActionDropdown {
       if (result === 'confirm') {
         const user = this._context.row.original;
         this._userService.deleteUser(user.id);
+        toast.success(this._transloco.translate('users.toast.userDeleted'));
       }
     });
   }

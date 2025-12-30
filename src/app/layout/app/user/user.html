@@ -1,19 +1,10 @@
 @let u = user();
 <ul hlmSidebarMenu>
   <li hlmSidebarMenuItem>
-    <button
-      type="button"
-      hlmSidebarMenuButton
-      size="lg"
-      align="end"
-      [hlmDropdownMenuTrigger]="menu"
-      [side]="_menuSide()"
-    >
+    <button type="button" hlmSidebarMenuButton size="lg" align="end" [hlmDropdownMenuTrigger]="menu" [side]="_menuSide()">
       <hlm-avatar class="rounded-lg">
         <img hlmAvatarImage [src]="u.avatar" [alt]="u.name" />
-        <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback
-          >RG</span
-        >
+        <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback>RG</span>
       </hlm-avatar>
       <div class="grid flex-1 text-left text-sm leading-tight">
         <span class="truncate font-medium">{{ u.name }}</span>
@@ -30,9 +21,7 @@
       <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
         <hlm-avatar class="rounded-lg">
           <img hlmAvatarImage [src]="u.avatar" [alt]="u.name" />
-          <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback
-            >RG</span
-          >
+          <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback>RG</span>
         </hlm-avatar>
         <div class="grid flex-1 text-left text-sm leading-tight">
           <span class="truncate font-medium">{{ u.name }}</span>
@@ -44,20 +33,14 @@
     <hlm-dropdown-menu-group>
       <button type="button" hlmDropdownMenuItem>
         <ng-icon name="lucideBadgeCheck" />
-        {{ "nav-user.account" | transloco }}
+        {{ 'navUser.account' | transloco }}
       </button>
 
       <!-- Theme Selector -->
-      <ng-container *transloco="let t; prefix: 'nav-user'">
-        <button
-          type="button"
-          hlmDropdownMenuItem
-          side="right"
-          align="start"
-          [hlmDropdownMenuTrigger]="themeTpl"
-        >
+      <ng-container *transloco="let t; prefix: 'navUser'">
+        <button type="button" hlmDropdownMenuItem side="right" align="start" [hlmDropdownMenuTrigger]="themeTpl">
           <ng-icon name="lucidePalette" />
-          <span> {{ t("theme") }} </span>
+          <span> {{ t('theme') }} </span>
           <hlm-dropdown-menu-item-sub-indicator class="rtl:rotate-180" />
         </button>
 
@@ -65,38 +48,26 @@
           <hlm-dropdown-menu-sub>
             @let theme = currentTheme();
 
-            <button
-              type="button"
-              hlmDropdownMenuItem
-              (click)="setTheme('light')"
-            >
+            <button type="button" hlmDropdownMenuItem (click)="setTheme('light')">
               <ng-icon hlmIcon name="lucideSun" size="sm" />
-              <span> {{ t("light") }} </span>
-              @if (theme === "light") {
+              <span> {{ t('light') }} </span>
+              @if (theme === 'light') {
                 <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }
             </button>
 
-            <button
-              type="button"
-              hlmDropdownMenuItem
-              (click)="setTheme('dark')"
-            >
+            <button type="button" hlmDropdownMenuItem (click)="setTheme('dark')">
               <ng-icon hlmIcon name="lucideMoon" size="sm" />
-              <span> {{ t("dark") }} </span>
-              @if (theme === "dark") {
+              <span> {{ t('dark') }} </span>
+              @if (theme === 'dark') {
                 <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }
             </button>
 
-            <button
-              type="button"
-              hlmDropdownMenuItem
-              (click)="setTheme('system')"
-            >
+            <button type="button" hlmDropdownMenuItem (click)="setTheme('system')">
               <ng-icon hlmIcon name="lucideMonitor" size="sm" />
-              <span> {{ t("system") }} </span>
-              @if (theme === "system") {
+              <span> {{ t('system') }} </span>
+              @if (theme === 'system') {
                 <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }
             </button>
@@ -105,16 +76,10 @@
       </ng-container>
 
       <!-- Language Selector -->
-      <button
-        type="button"
-        hlmDropdownMenuItem
-        side="right"
-        align="start"
-        [hlmDropdownMenuTrigger]="languageTpl"
-      >
+      <button type="button" hlmDropdownMenuItem side="right" align="start" [hlmDropdownMenuTrigger]="languageTpl">
         <ng-icon name="lucideGlobe" />
-        <span *transloco="let t; prefix: 'nav-user'">
-          {{ t("language") }}
+        <span *transloco="let t; prefix: 'navUser'">
+          {{ t('language') }}
         </span>
         <hlm-dropdown-menu-item-sub-indicator class="rtl:rotate-180" />
       </button>
@@ -122,11 +87,7 @@
       <ng-template #languageTpl>
         <hlm-dropdown-menu-sub>
           @for (lang of availableLanguages(); track lang.code) {
-            <button
-              type="button"
-              hlmDropdownMenuItem
-              (click)="setLang(lang.code)"
-            >
+            <button type="button" hlmDropdownMenuItem (click)="setLang(lang.code)">
               <span>{{ lang.label }}</span>
               @if (currentLang() === lang.code) {
                 <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
@@ -139,7 +100,7 @@
     <hlm-dropdown-menu-separator />
     <button type="button" hlmDropdownMenuItem (click)="onLogout()">
       <ng-icon name="lucideLogOut" />
-      {{ "nav-user.logout" | transloco }}
+      {{ 'navUser.logout' | transloco }}
     </button>
   </hlm-dropdown-menu>
 </ng-template>

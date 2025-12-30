@@ -1,5 +1,5 @@
 {
-    "nav-user": {
+    "navUser": {
         "account": "Account",
         "theme": "Theme",
         "language": "Language",
@@ -29,13 +29,25 @@
         "users": "Users"
     },
     "pagination": {
-        "items-per-page": "Items per page",
-        "next-page": "Next page",
-        "previous-page": "Previous page",
-        "first-page": "First page",
-        "last-page": "Last page",
-        "rows-selected": "{{selected}} of {{total}} rows selected",
+        "itemsPerPage": "Items per page",
+        "nextPage": "Next page",
+        "previousPage": "Previous page",
+        "firstPage": "First page",
+        "lastPage": "Last page",
+        "rowSelected": "{{selected}} of {{total}} rows selected",
         "page": "Page {{page}} of {{totalPages}}"
+    },
+    "common": {
+        "noData": "No data available.",
+        "clearFilter": "Clear filter",
+        "searchPlaceholder": "Search...",
+        "unsavedChangesWarning": "You have unsaved changes. Are you sure you want to leave without saving?"
+    },
+    "actionDropdown": {
+        "edit": "Edit",
+        "makeCopy": "Make a copy",
+        "favorite": "Favorite",
+        "delete": "Delete"
     },
     "buttons": {
         "submit": "Submit",
@@ -46,196 +58,30 @@
         "delete": "Delete",
         "save": "Save",
         "update": "Update",
-        "loadMore": "Load More"
+        "columns": "Columns",
+        "refresh": "Refresh",
+        "import": "Import",
+        "export": "Export",
+        "clearFilter": "Clear Filter",
+        "addNew": "Add New"
     },
-    "auth": {
-        "login": {
-            "title": "Login to your account",
-            "emailLabel": "Email",
-            "emailPlaceholder": "name@example.com",
-            "passwordLabel": "Password",
-            "passwordPlaceholder": "Your password",
-            "forgotPassword": "Forgot your password?",
-            "orContinueWith": "Or continue with",
-            "github": "GitHub",
-            "rememberMe": "Remember me",
-            "noAccount": "Don't have an account?",
-            "signUp": "Sign up",
-            "loginBtn": "Login",
-            "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
-            "errors": {
-                "emailRequired": "Email is required",
-                "emailInvalid": "Email is invalid",
-                "passwordRequired": "Password is required",
-                "passwordMinLength": "Password must be at least 6 characters"
-            }
-        },
-        "signup": {
-            "title": "Create an account",
-            "haveAccount": "Already have an account?",
-            "signIn": "Sign in",
-            "nameLabel": "Name",
-            "namePlaceholder": "Your full name",
-            "emailLabel": "Email",
-            "emailPlaceholder": "name@example.com",
-            "passwordLabel": "Password",
-            "passwordPlaceholder": "Your password",
-            "confirmPasswordLabel": "Confirm Password",
-            "confirmPasswordPlaceholder": "Confirm your password",
-            "signupButton": "Sign up",
-            "orContinueWith": "Or continue with",
-            "github": "GitHub",
-            "termsText": "By clicking continue, you agree to our",
-            "termsOfService": "Terms of Service",
-            "and": "and",
-            "privacyPolicy": "Privacy Policy",
-            "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
-            "errors": {
-                "nameRequired": "Name is required",
-                "emailRequired": "Email is required",
-                "emailInvalid": "Email is invalid",
-                "passwordRequired": "Password is required",
-                "passwordMinLength": "Password must be at least 6 characters",
-                "passwordMismatch": "Passwords do not match",
-                "confirmPasswordRequired": "Confirm password is required"
-            }
-        },
-        "forgetPassword": {
-            "title": "Forgot your password?",
-            "description": "Enter your email address and we'll send you a link to reset your password",
-            "emailLabel": "Email",
-            "emailPlaceholder": "name@example.com",
-            "submitBtn": "Send reset link",
-            "backToLogin": "Back to login",
-            "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
-            "alert": {
-                "successTitle": "Success",
-                "resetLinkSent": "Password reset instructions have been sent to your email address if an account exists."
-            },
-            "errors": {
-                "emailRequired": "Email is required",
-                "emailInvalid": "Email is invalid"
-            }
-        }
+    "validation": {
+        "required": "This field is required.",
+        "minlength": "This field is required to be at least {{ min }} characters.",
+        "maxlength": "This field cannot be longer than {{ max }} characters.",
+        "email": "Please enter a valid email address.",
+        "invalid": "This field is invalid.",
+        "min": "This field should be at least {{ min }}.",
+        "max": "This field cannot be more than {{ max }}.",
+        "pattern": "This field should follow pattern for {{ pattern }}."
     },
-    "dashboard": {
-        "cards": {
-            "totalUsers": {
-                "label": "Total Users",
-                "value": "12,000",
-                "subtitle": "+5% than last month"
-            },
-            "newUsers": {
-                "label": "New Users",
-                "value": "+350",
-                "subtitle": "+10% vs last month"
-            },
-            "pendingVerifications": {
-                "label": "Pending Verifications",
-                "value": "42",
-                "subtitle": "2% of users"
-            },
-            "activeUsers": {
-                "label": "Active Users",
-                "value": "7800",
-                "subtitle": "65% of all users"
-            }
-        }
-    },
-    "users": {
-        "list": {
-            "title": "Users",
-            "searchPlaceholder": "Search users...",
-            "columnsBtn": "Columns",
-            "refreshBtn": "Refresh",
-            "importBtn": "Import",
-            "exportBtn": "Export",
-            "clearFilter": "Clear Filter",
-            "addUserBtn": "Add User",
-            "columns": {
-                "name": "Name",
-                "email": "Email",
-                "role": "Role",
-                "status": "Status",
-                "phoneNumber": "Phone Number",
-                "country": "Country",
-                "createdAt": "Created At",
-                "actions": "Actions"
-            },
-            "noResult": "No results found.",
-            "errors": {
-                "loadFailed": "Failed to load users. Please try again."
-            }
-        },
-        "form": {
-            "addTitle": "Add New User",
-            "editTitle": "Edit User",
-            "addDescription": "Fill in the details below to create a new user.",
-            "editDescription": "Update the details below to edit the user.",
-            "nameLabel": "Name",
-            "emailLabel": "Email",
-            "phoneNumberLabel": "Phone Number",
-            "countryLabel": "Country",
-            "roleLabel": "Role",
-            "selectRolePlaceholder": "Select an option",
-            "noCountryFound": "No results found.",
-            "errors": {
-                "nameRequired": "Name is required",
-                "emailRequired": "Email is required",
-                "emailInvalid": "Email is invalid",
-                "phoneNumberRequired": "Phone number is required",
-                "phoneNumberInvalid": "Phone number is invalid",
-                "roleRequired": "Role is required"
-            }
-        },
-        "actionDropdown": {
-            "edit": "Edit",
-            "makeCopy": "Make a copy",
-            "favorite": "Favorite",
-            "delete": "Delete"
-        },
-        "confirmationDialog": {
-            "deleteTitle": "Are you sure you want to delete this user?",
-            "deleteMessage": "This action cannot be undone. This will permanently delete the account and remove all associated data."
-        },
-        "role": {
-            "admin": "Admin",
-            "user": "User",
-            "manager": "Manager"
-        },
-        "status": {
-            "active": "Active",
-            "inactive": "Inactive",
-            "pending": "Pending"
-        }
-    },
-    "country-picker": {
+    "countryPicker": {
         "selectCountryPlaceholder": "Select country...",
-        "searchCountryPlaceholder": "Search a country...",
-        "noCountryFound": "No results found."
+        "searchCountryPlaceholder": "Search a country..."
     },
-    "phone-number-picker": {
+    "phoneNumberPicker": {
         "selectCountryPlaceholder": "Select country code...",
         "searchCountryPlaceholder": "Search a country...",
-        "enterPhoneNumberPlaceholder": "Enter phone number...",
-        "noCountryFound": "No results found."
-    },
-    "notFound": {
-        "heading": "Page Not Found",
-        "message": "Sorry, the page you are looking for doesn't exist or has been moved.",
-        "goToDashboard": "Go to Dashboard",
-        "goBack": "Go Back"
-    },
-    "unauthorized": {
-        "heading": "Access Denied",
-        "message": "You do not have permission to view this page or your session has expired.",
-        "goToLogin": "Go to Login",
-        "goBack": "Go Back"
-    },
-    "serviceUnavailable": {
-        "heading": "Service Unavailable",
-        "message": "The service is temporarily unavailable. Please try again in a moment.",
-        "retry": "Retry",
-        "goToDashboard": "Go to Dashboard"
+        "enterPhoneNumberPlaceholder": "Enter phone number..."
     }
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { email, Field, form, required, validate } from '@angular/forms/signals';
-import { TranslocoModule } from '@jsverse/transloco';
+import { provideTranslocoScope, TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -11,6 +11,7 @@ import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { parsePhoneNumberFromString } from 'libphonenumber-js/mobile';
+import { toast } from 'ngx-sonner';
 import { UserService } from '../../../core/user/user.service';
 import { User, UserRole } from '../../../core/user/user.type';
 import { CountryPicker } from '../../../shared/components/country-picker/country-picker';
@@ -47,18 +48,19 @@ export interface UserFormModel {
   host: {
     class: 'flex flex-col gap-4 min-w-lg',
   },
-
+  providers: [provideTranslocoScope('users')],
   templateUrl: './user-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserForm implements OnInit {
   private readonly _userService = inject(UserService);
+  private readonly _transloco = inject(TranslocoService);
   private readonly _dialogRef = inject<BrnDialogRef<UserForm>>(BrnDialogRef);
   private readonly _dialogContext = injectBrnDialogContext<{ user?: User }>();
 
   protected readonly rolesList = signal(['admin', 'user', 'manager'] satisfies UserRole[]);
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.user);
-  
+
   private readonly userModel = signal<UserFormModel>({
     name: '',
     email: '',
@@ -68,11 +70,11 @@ export class UserForm implements OnInit {
   });
 
   readonly userForm = form(this.userModel, (schema) => {
-    required(schema.name, { message: 'nameRequired' });
-    required(schema.email, { message: 'emailRequired' });
-    email(schema.email, { message: 'emailInvalid' });
-    required(schema.phoneNumber, { message: 'phoneNumberRequired' });
-    required(schema.role, { message: 'roleRequired' });
+    required(schema.name);
+    required(schema.email);
+    email(schema.email);
+    required(schema.phoneNumber);
+    required(schema.role);
     validate(schema.phoneNumber, ({ value }) => {
       if (!value()) {
         return null;
@@ -82,8 +84,7 @@ export class UserForm implements OnInit {
       return phoneNumber && phoneNumber.isValid()
         ? null
         : {
-            kind: 'phoneNumberInvalid',
-            message: 'phoneNumberInvalid',
+            kind: 'invalid',
           };
     });
   });
@@ -110,7 +111,6 @@ export class UserForm implements OnInit {
         this.createUser();
       }
     } else {
-      this.userForm().markAsTouched();
       this.userForm.email().markAsTouched();
       this.userForm.name().markAsTouched();
       this.userForm.phoneNumber().markAsTouched();
@@ -132,6 +132,7 @@ export class UserForm implements OnInit {
     };
     this._userService.addUser(user);
     this._dialogRef.close();
+    this.showToast();
   }
 
   editUser() {
@@ -146,6 +147,28 @@ export class UserForm implements OnInit {
       };
       this._userService.updateUser(updatedUser);
       this._dialogRef.close();
+      this.showToast();
     }
+  }
+
+  showToast() {
+    const message = this.isEditMode()
+      ? this._transloco.translate('users.toast.userUpdated')
+      : this._transloco.translate('users.toast.userCreated');
+    toast.success(message);
+  }
+
+  protected closeDialog(): void {
+    const isDirty = this.userForm().dirty();
+
+    if (isDirty) {
+      const confirmDiscard = confirm('You have unsaved changes. Are you sure you want to discard them?');
+      if (!confirmDiscard) {
+        return;
+      }
+    }
+
+    // If not dirty OR user confirmed discard, close the dialog
+    this._dialogRef.close();
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { USER_DATA } from './data';
+import { makeData } from './data';
 import { User } from './user.type';
 
 @Injectable({
@@ -9,7 +9,7 @@ export class UserService {
   private readonly _user = signal<User | null>(null);
   readonly user = this._user.asReadonly();
 
-  private readonly _users = signal<User[]>(USER_DATA);
+  private readonly _users = signal<User[]>(makeData(200));
   readonly users = this._users.asReadonly();
 
   setUser(user: User | null): void {

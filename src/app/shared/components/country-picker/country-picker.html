@@ -1,5 +1,5 @@
 <hlm-popover
-  *transloco="let t; prefix: 'country-picker'"
+  *transloco="let t; prefix: 'countryPicker'"
   align="start"
   [state]="state()"
   (stateChanged)="stateChanged($event)"
@@ -29,7 +29,9 @@
       <ng-icon hlm name="lucideSearch" />
       <input hlm-command-search-input [placeholder]="t('searchCountryPlaceholder')" />
     </hlm-command-search>
-    <div *brnCommandEmpty hlmCommandEmpty>{{ t('noCountryFound') }}</div>
+    <div *brnCommandEmpty hlmCommandEmpty>
+      <span *transloco="let t"> {{ t('common.noData') }}</span>
+    </div>
     <hlm-command-list class="w-full">
       <hlm-command-group class="w-full">
         @for (country of _countriesList(); track country.id) {

@@ -1,0 +1,71 @@
+{
+    "cards": {
+        "totalUsers": {
+            "label": "Total Users",
+            "value": "12,000",
+            "subtitle": "+5% than last month"
+        },
+        "newUsers": {
+            "label": "New Users",
+            "value": "+350",
+            "subtitle": "+10% vs last month"
+        },
+        "pendingVerifications": {
+            "label": "Pending Verifications",
+            "value": "42",
+            "subtitle": "2% of users"
+        },
+        "activeUsers": {
+            "label": "Active Users",
+            "value": "7800",
+            "subtitle": "65% of all users"
+        }
+    },
+    "list": {
+        "title": "Users",
+        "columns": {
+            "name": "Name",
+            "email": "Email",
+            "role": "Role",
+            "status": "Status",
+            "phoneNumber": "Phone Number",
+            "country": "Country",
+            "createdAt": "Created At",
+            "actions": "Actions"
+        }
+    },
+    "form": {
+        "addTitle": "Add New User",
+        "editTitle": "Edit User",
+        "addDescription": "Fill in the details below to create a new user.",
+        "editDescription": "Update the details below to edit the user.",
+        "label": {
+            "name": "Name",
+            "email": "Email",
+            "phoneNumber": "Phone Number",
+            "country": "Country",
+            "role": "Role",
+            "status": "Status"
+        },
+        "selectRolePlaceholder": "Select an option"
+    },
+    "role": {
+        "admin": "Admin",
+        "user": "User",
+        "manager": "Manager"
+    },
+    "status": {
+        "active": "Active",
+        "inactive": "Inactive",
+        "pending": "Pending"
+    },
+    "confirmationDialog": {
+        "deleteTitle": "Are you sure you want to delete this user?",
+        "deleteMessage": "This action cannot be undone. This will permanently delete the user and remove all associated data."
+    },
+    "toast": {
+        "userCreated": "User has been created successfully",
+        "userUpdated": "User has been updated successfully",
+        "userDeleted": "User has been deleted successfully"
+    }
+}

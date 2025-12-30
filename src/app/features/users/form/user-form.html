@@ -5,53 +5,53 @@
 <div *transloco="let t; prefix: 'users.form'" class="flex w-full flex-col gap-4">
   <hlm-field>
     @let name = userForm.name();
-    <hlm-field-label for="name" class="text-right">{{ t('nameLabel') }}</hlm-field-label>
+    <hlm-field-label for="name" class="text-right">{{ t('label.name') }}</hlm-field-label>
     <input hlmInput id="name" [field]="userForm.name" />
     @let showNameErrors = name.touched() && name.invalid();
     @if (showNameErrors) {
       @for (error of name.errors(); track error) {
-        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     }
   </hlm-field>
   <hlm-field>
     @let email = userForm.email();
-    <hlm-field-label for="email" class="text-right">{{ t('emailLabel') }}</hlm-field-label>
+    <hlm-field-label for="email" class="text-right">{{ t('label.email') }}</hlm-field-label>
     <input hlmInput id="email" [field]="userForm.email" />
     @let showEmailErrors = email.touched() && email.invalid();
     @if (showEmailErrors) {
       @for (error of email.errors(); track error) {
-        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     }
   </hlm-field>
   <hlm-field>
     @let country = userForm.country();
-    <hlm-field-label for="country" class="text-right">{{ t('countryLabel') }}</hlm-field-label>
+    <hlm-field-label for="country" class="text-right">{{ t('label.country') }}</hlm-field-label>
     <app-country-picker [field]="userForm.country" />
     @let showCountryErrors = country.touched() && country.invalid();
     @if (showCountryErrors) {
       @for (error of country.errors(); track error) {
-        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     }
   </hlm-field>
 
   <hlm-field>
-    <hlm-field-label>{{ t('phoneNumberLabel') }}</hlm-field-label>
+    <hlm-field-label>{{ t('label.phoneNumber') }}</hlm-field-label>
     <app-phone-number-picker [field]="userForm.phoneNumber" />
     @let phoneNumber = userForm.phoneNumber();
     @let showPhoneNumberErrors = phoneNumber.touched() && phoneNumber.invalid();
     @if (showPhoneNumberErrors) {
       @for (error of phoneNumber.errors(); track error) {
-        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     }
   </hlm-field>
 
   <hlm-field>
     @let role = userForm.role();
-    <hlm-field-label for="role">{{ t('roleLabel') }}</hlm-field-label>
+    <hlm-field-label for="role">{{ t('label.role') }}</hlm-field-label>
     <hlm-select class="text-start" [placeholder]="t('selectRolePlaceholder')" [field]="userForm.role">
       <hlm-select-trigger id="role" class="w-full">
         <hlm-select-value />
@@ -65,7 +65,7 @@
     @let showRoleErrors = role.touched() && role.invalid();
     @if (showRoleErrors) {
       @for (error of role.errors(); track error) {
-        <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     }
   </hlm-field>

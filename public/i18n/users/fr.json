@@ -1,0 +1,71 @@
+{
+    "cards": {
+        "totalUsers": {
+            "label": "Utilisateurs totaux",
+            "value": "12 000",
+            "subtitle": "+5 % par rapport au mois dernier"
+        },
+        "newUsers": {
+            "label": "Nouveaux utilisateurs",
+            "value": "+350",
+            "subtitle": "+10 % par rapport au mois dernier"
+        },
+        "pendingVerifications": {
+            "label": "Vérifications en attente",
+            "value": "42",
+            "subtitle": "2 % des utilisateurs"
+        },
+        "activeUsers": {
+            "label": "Utilisateurs actifs",
+            "value": "7 800",
+            "subtitle": "65 % de l’ensemble des utilisateurs"
+        }
+    },
+    "list": {
+        "title": "Utilisateurs",
+        "columns": {
+            "name": "Nom",
+            "email": "E-mail",
+            "role": "Rôle",
+            "status": "Statut",
+            "phoneNumber": "Numéro de téléphone",
+            "country": "Pays",
+            "createdAt": "Date de création",
+            "actions": "Actions"
+        }
+    },
+    "form": {
+        "addTitle": "Ajouter un nouvel utilisateur",
+        "editTitle": "Modifier l’utilisateur",
+        "addDescription": "Renseignez les informations ci-dessous pour créer un nouvel utilisateur.",
+        "editDescription": "Mettez à jour les informations ci-dessous pour modifier l’utilisateur.",
+        "label": {
+            "name": "Nom",
+            "email": "E-mail",
+            "phoneNumber": "Numéro de téléphone",
+            "country": "Pays",
+            "role": "Rôle",
+            "status": "Statut"
+        },
+        "selectRolePlaceholder": "Sélectionner une option"
+    },
+    "role": {
+        "admin": "Administrateur",
+        "user": "Utilisateur",
+        "manager": "Responsable"
+    },
+    "status": {
+        "active": "Actif",
+        "inactive": "Inactif",
+        "pending": "En attente"
+    },
+    "confirmationDialog": {
+        "deleteTitle": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+        "deleteMessage": "Cette action est irréversible. Cela supprimera définitivement l'utilisateur et toutes les données associées."
+    },
+    "toast": {
+        "userCreated": "Utilisateur créé avec succès",
+        "userUpdated": "Utilisateur mis à jour avec succès",
+        "userDeleted": "Utilisateur supprimé avec succès"
+    }
+}

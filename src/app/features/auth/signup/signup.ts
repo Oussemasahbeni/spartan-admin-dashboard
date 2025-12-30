@@ -1,17 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
-import {
-  email,
-  Field,
-  form,
-  minLength,
-  required,
-  validate,
-} from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { email, Field, form, minLength, required, validate } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';

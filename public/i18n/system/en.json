@@ -1,0 +1,20 @@
+{
+    "notFound": {
+        "heading": "Page Not Found",
+        "message": "Sorry, the page you are looking for doesn't exist or has been moved.",
+        "goToDashboard": "Go to Dashboard",
+        "goBack": "Go Back"
+    },
+    "unauthorized": {
+        "heading": "Access Denied",
+        "message": "You do not have permission to view this page or your session has expired.",
+        "goToLogin": "Go to Login",
+        "goBack": "Go Back"
+    },
+    "serviceUnavailable": {
+        "heading": "Service Unavailable",
+        "message": "The service is temporarily unavailable. Please try again in a moment.",
+        "retry": "Retry",
+        "goToDashboard": "Go to Dashboard"
+    }
+}

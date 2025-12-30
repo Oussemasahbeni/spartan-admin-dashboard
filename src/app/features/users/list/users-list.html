@@ -1,9 +1,14 @@
-<div *transloco="let t; prefix: 'users.list'" class="@container/main flex flex-1 flex-col gap-2">
+<div *transloco="let t" class="@container/main flex flex-1 flex-col gap-2">
   <div class="flex flex-col gap-4 md:gap-6">
     <dashboard-card-section />
     <div class="flex flex-col justify-between gap-4 py-4 lg:flex-row lg:items-center">
       <div class="flex items-center gap-2">
-        <input hlmInput class="h-8 w-full md:w-80" [placeholder]="t('searchPlaceholder')" (input)="_filterChanged($event)" />
+        <input
+          hlmInput
+          class="h-8 w-full md:w-80"
+          [placeholder]="t('common.searchPlaceholder')"
+          (input)="_filterChanged($event)"
+        />
 
         <!-- STATUS FILTER -->
         <hlm-popover
@@ -15,7 +20,7 @@
         >
           <button type="button" hlmBtn hlmPopoverTrigger variant="outline" size="sm" class="border-dashed">
             <ng-icon hlm name="lucideCirclePlus" class="mr-2" size="sm" />
-            {{ t('columns.status') }}
+            {{ t('users.list.columns.status') }}
             @if (_statusFilter().length) {
               <div data-orientation="vertical" role="none" class="bg-border mx-2 h-4 w-px shrink-0"></div>
 
@@ -31,10 +36,10 @@
           <hlm-command *brnPopoverContent="let ctx" hlmPopoverContent class="w-50 p-0">
             <hlm-command-search>
               <ng-icon hlm name="lucideSearch" class="text-muted-foreground" />
-              <input hlm-command-search-input [placeholder]="t('columns.status')" />
+              <input hlm-command-search-input [placeholder]="t('users.list.columns.status')" />
             </hlm-command-search>
             <div *brnCommandEmpty hlmCommandEmpty>
-              {{ t('noResult') }}
+              {{ t('common.noData') }}
             </div>
             <hlm-command-list>
               <hlm-command-group>
@@ -55,7 +60,7 @@
                     [value]="''"
                     (selected)="clearStatusFilter()"
                   >
-                    {{ t('clearFilter') }}
+                    {{ t('common.clearFilter') }}
                   </button>
                 }
               </hlm-command-group>
@@ -73,7 +78,7 @@
         >
           <button type="button" hlmBtn hlmPopoverTrigger variant="outline" size="sm" class="border-dashed">
             <ng-icon hlm name="lucideCirclePlus" class="mr-2" size="sm" />
-            {{ t('columns.role') }}
+            {{ t('users.list.columns.role') }}
             @if (_rolesFilter().length) {
               <div data-orientation="vertical" role="none" class="bg-border mx-2 h-4 w-px shrink-0"></div>
 
@@ -89,10 +94,10 @@
           <hlm-command *brnPopoverContent="let ctx" hlmPopoverContent class="w-50 p-0">
             <hlm-command-search>
               <ng-icon hlm name="lucideSearch" class="text-muted-foreground" />
-              <input hlm-command-search-input [placeholder]="t('columns.role')" />
+              <input hlm-command-search-input [placeholder]="t('users.list.columns.role')" />
             </hlm-command-search>
             <div *brnCommandEmpty hlmCommandEmpty>
-              {{ t('noResult') }}
+              {{ t('common.noData') }}
             </div>
             <hlm-command-list>
               <hlm-command-group>
@@ -112,7 +117,7 @@
                     [value]="''"
                     (selected)="clearRolesFilter()"
                   >
-                    {{ t('clearFilter') }}
+                    {{ t('common.clearFilter') }}
                   </button>
                 }
               </hlm-command-group>
@@ -125,7 +130,7 @@
         <!-- Column visibility -->
         <button type="button" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">
           <ng-icon hlmIcon name="lucideSettings2" size="sm" />
-          {{ t('columnsBtn') }}
+          {{ t('buttons.columns') }}
           <ng-icon hlmIcon name="lucideChevronDown" class="ms-2" size="sm" />
         </button>
 
@@ -141,7 +146,7 @@
                   (triggered)="column.toggleVisibility()"
                 >
                   <hlm-dropdown-menu-checkbox-indicator />
-                  {{ t('columns.' + column.columnDef.id) }}
+                  {{ t('users.list.columns.' + column.columnDef.id) }}
                 </button>
                 <ng-icon cdkDragHandle hlmIcon class="cursor-grab active:cursor-grabbing" name="lucideGripVertical" />
               </div>
@@ -152,20 +157,20 @@
         <!--  Actions -->
         <button type="button" hlmBtn variant="secondary" (click)="refreshTable()">
           <ng-icon hlmIcon name="lucideRefreshCcw" size="sm" />
-          {{ t('refreshBtn') }}
+          {{ t('buttons.refresh') }}
         </button>
         <button type="button" hlmBtn variant="secondary" (click)="refreshTable()">
           <ng-icon hlmIcon name="lucideFileUp" size="sm" />
-          {{ t('importBtn') }}
+          {{ t('buttons.import') }}
         </button>
         <button type="button" hlmBtn variant="secondary" (click)="refreshTable()">
           <ng-icon hlmIcon name="lucideDownload" size="sm" />
-          {{ t('exportBtn') }}
+          {{ t('buttons.export') }}
         </button>
 
         <button type="button" hlmBtn variant="default" (click)="addUser()">
           <ng-icon hlmIcon name="lucideUserPlus" size="sm" />
-          {{ t('addUserBtn') }}
+          {{ t('buttons.addNew') }}
         </button>
       </div>
     </div>
@@ -173,13 +178,14 @@
       <!-- we defer the loading of the table, because tanstack manipulates the DOM with flexRender which can cause errors during SSR -->
       @defer {
         <div hlmTableContainer>
-          <table hlmTable>
+          <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+          <table hlmTable [style]="columnSizeVars()">
             <!-- Table Header -->
             <thead hlmTHead class="bg-muted sticky top-0 z-10">
               @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
                 <tr hlmTr>
                   @for (header of headerGroup.headers; track header.id) {
-                    <th hlmTh [attr.colSpan]="header.colSpan">
+                    <th class="relative" hlmTh [attr.colSpan]="header.colSpan" [tableResizableHeader]="header.id">
                       @if (!header.isPlaceholder) {
                         <ng-container
                           *flexRender="header.column.columnDef.header; props: header.getContext(); let headerText"
@@ -197,6 +203,16 @@
                             <div [innerHTML]="headerText"></div>
                           }
                         </ng-container>
+
+                        @if (header.column.getCanResize()) {
+                          <div
+                            class="resizer"
+                            [class.isResizing]="header.column.getIsResizing()"
+                            (dblclick)="header.column.resetSize()"
+                            (mousedown)="header.getResizeHandler()($event)"
+                            (touchstart)="header.getResizeHandler()($event)"
+                          ></div>
+                        }
                       }
                     </th>
                   }
@@ -208,7 +224,7 @@
               @for (row of table.getRowModel().rows; track row.id) {
                 <tr hlmTr [attr.key]="row.id" [attr.data-state]="row.getIsSelected() && 'selected'">
                   @for (cell of row.getVisibleCells(); track $index) {
-                    <td hlmTd>
+                    <td hlmTd [tableResizableCell]="cell.column.id">
                       <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cell">
                         <div [innerHTML]="cell"></div>
                       </ng-container>
@@ -217,7 +233,7 @@
                 </tr>
               } @empty {
                 <tr hlmTr>
-                  <td hlmTd class="h-24 text-center" [attr.colspan]="_columns.length">{{ t('noResult') }}</td>
+                  <td hlmTd class="h-24 text-center" [attr.colspan]="_columns.length">{{ t('common.noData') }}</td>
                 </tr>
               }
             </tbody>
@@ -281,7 +297,7 @@
     <div *transloco="let t; prefix: 'pagination'" class="flex flex-col justify-between sm:flex-row sm:items-center">
       @if (table.getRowCount() > 0) {
         <span class="text-muted-foreground text-sm">
-          {{ t('rows-selected', { selected: table.getSelectedRowModel().rows.length, total: table.getRowCount() }) }}
+          {{ t('rowSelected', { selected: table.getSelectedRowModel().rows.length, total: table.getRowCount() }) }}
         </span>
         <data-table-pagination [table]="table" />
       }

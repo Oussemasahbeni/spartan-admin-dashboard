@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { provideTranslocoScope } from '@jsverse/transloco';
 import { authGuard } from './core/guards/auth.guard';
 import { noAuthGuard } from './core/guards/no-auth.guard';
 import { MainLayout } from './layout/app/layout';
@@ -6,25 +7,36 @@ import { EmptyLayout } from './layout/empty/empty';
 
 export const routes: Routes = [
   {
-    path: 'login',
-    title: 'login',
-    canActivate: [noAuthGuard],
-    component: EmptyLayout,
-    loadChildren: () => import('./features/auth/login/login.routes'),
+    path: '',
+    redirectTo: 'users',
+    pathMatch: 'full',
   },
   {
-    path: 'signup',
-    title: 'signup',
-    canActivate: [noAuthGuard],
-    component: EmptyLayout,
-    loadChildren: () => import('./features/auth/signup/signup.routes'),
-  },
-  {
-    path: 'forget-password',
-    title: 'forgetPassword',
-    canActivate: [noAuthGuard],
-    component: EmptyLayout,
-    loadChildren: () => import('./features/auth/forget-password/forget-password.routes'),
+    path: '',
+    providers: [provideTranslocoScope('auth')],
+    children: [
+      {
+        path: 'login',
+        title: 'login',
+        canActivate: [noAuthGuard],
+        component: EmptyLayout,
+        loadChildren: () => import('./features/auth/login/login.routes'),
+      },
+      {
+        path: 'signup',
+        title: 'signup',
+        canActivate: [noAuthGuard],
+        component: EmptyLayout,
+        loadChildren: () => import('./features/auth/signup/signup.routes'),
+      },
+      {
+        path: 'forget-password',
+        title: 'forgetPassword',
+        canActivate: [noAuthGuard],
+        component: EmptyLayout,
+        loadChildren: () => import('./features/auth/forget-password/forget-password.routes'),
+      },
+    ],
   },
 
   {
@@ -36,6 +48,7 @@ export const routes: Routes = [
       {
         path: 'users',
         title: 'users',
+        providers: [provideTranslocoScope('users')],
         loadChildren: () => import('./features/users/users.routes'),
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -47,6 +60,7 @@ export const routes: Routes = [
     title: 'notFound',
     pathMatch: 'full',
     component: EmptyLayout,
+    providers: [provideTranslocoScope('system')],
     loadChildren: () => import('./shared/pages/not-found/not-found.routes'),
   },
   {
@@ -54,6 +68,8 @@ export const routes: Routes = [
     title: 'unauthorized',
     pathMatch: 'full',
     component: EmptyLayout,
+    providers: [provideTranslocoScope('system')],
+
     loadChildren: () => import('./shared/pages/unauthorized/unauthorized.routes'),
   },
   {
@@ -61,6 +77,7 @@ export const routes: Routes = [
     title: 'serviceUnavailable',
     pathMatch: 'full',
     component: EmptyLayout,
+    providers: [provideTranslocoScope('system')],
     loadChildren: () => import('./shared/pages/service-unavailable/service-unavailable.routes'),
   },
   { path: '**', redirectTo: '404-not-found' },

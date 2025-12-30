@@ -1,6 +1,6 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, untracked, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -62,11 +62,12 @@ import { UserService } from '../../../core/user/user.service';
 import { User, UserRole, UserStatus } from '../../../core/user/user.type';
 import { CountryDisplay } from '../../../shared/components/country-display/country-display';
 import { DataTablePagination } from '../../../shared/components/pagination/pagination';
+import { TableResizableCell, TableResizableHeader } from '../../../shared/directives/resizable-cell';
 import { UserForm } from '../form/user-form';
 import { RoleIconPipe } from '../pipes/role-icon.pipe';
 import { StatusUIPipe } from '../pipes/status-ui.pipe';
 import { ActionDropdown } from './action-dropdown';
-import { DashboardCardSection } from './card-section';
+import { CardSection } from './card-section';
 import { TableHeadSelection, TableRowSelection } from './selection-column';
 
 @Component({
@@ -91,13 +92,15 @@ import { TableHeadSelection, TableRowSelection } from './selection-column';
     BrnCommandImports,
     HlmCommandImports,
     HlmCheckboxImports,
-    DashboardCardSection,
+    CardSection,
     TranslocoModule,
     DragDropModule,
     DataTablePagination,
     RoleIconPipe,
     StatusUIPipe,
     CountryDisplay,
+    TableResizableCell,
+    TableResizableHeader,
   ],
   templateUrl: './users-list.html',
   providers: [
@@ -120,7 +123,6 @@ import { TableHeadSelection, TableRowSelection } from './selection-column';
       lucideSearch,
     }),
   ],
-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Users {
@@ -159,6 +161,29 @@ export class Users {
   private readonly _sorting = signal<SortingState>([]);
   private readonly _rowSelection = signal<RowSelectionState>({});
   private readonly _columnVisibility = signal<VisibilityState>({});
+  readonly _columnSizingInfo = computed(() => this.table.getState().columnSizingInfo);
+  readonly _columnSizing = computed(() => this.table.getState().columnSizing);
+
+  /**
+   *
+   * Instead of calling `column.getSize()` on every render for every header
+   * and especially every data cell (very expensive),
+   * we will calculate all column sizes at once at the root table level in a useMemo
+   * and pass the column sizes down as CSS variables to the <table> element.
+   */
+  readonly columnSizeVars = computed(() => {
+    void this._columnSizing();
+    void this._columnSizingInfo();
+    const headers = untracked(() => this.table.getFlatHeaders());
+    const colSizes: Record<string, number> = {};
+    let i = headers.length;
+    while (--i >= 0) {
+      const header = headers[i]!;
+      colSizes[`--header-${header.id}-size`] = header.getSize();
+      colSizes[`--col-${header.column.id}-size`] = header.column.getSize();
+    }
+    return colSizes;
+  });
 
   /**
    * Computed list of columns that are eligible for being hidden.
@@ -188,47 +213,49 @@ export class Users {
         }),
       enableSorting: false,
       enableHiding: false,
+      enableResizing: false,
+      size: 40,
     },
     {
       id: 'name',
       accessorKey: 'name',
-      header: translateSignal(`users.list.columns.name`),
+      header: translateSignal(`list.columns.name`),
       cell: () => this.nameCell(),
     },
     {
       id: 'email',
       accessorKey: 'email',
-      header: translateSignal(`users.list.columns.email`),
+      header: translateSignal(`list.columns.email`),
     },
     {
       id: 'country',
       accessorKey: 'country',
-      header: translateSignal('users.list.columns.country'),
+      header: translateSignal('list.columns.country'),
       enableSorting: false,
       cell: () => this.countryCell(),
     },
     {
       id: 'phoneNumber',
       accessorKey: 'phoneNumber',
-      header: translateSignal('users.list.columns.phoneNumber'),
+      header: translateSignal('list.columns.phoneNumber'),
       enableSorting: false,
     },
     {
       id: 'createdAt',
       accessorKey: 'createdAt',
-      header: translateSignal('users.list.columns.createdAt'),
+      header: translateSignal('list.columns.createdAt'),
       cell: () => this.dateCell(),
     },
     {
       id: 'role',
       accessorKey: 'role',
-      header: translateSignal('users.list.columns.role'),
+      header: translateSignal('list.columns.role'),
       cell: () => this.roleCell(),
     },
     {
       id: 'status',
       accessorKey: 'status',
-      header: translateSignal('users.list.columns.status'),
+      header: translateSignal('list.columns.status'),
       cell: () => this.statusCell(),
       filterFn: (row, columnId, filterValue: UserStatus[]) => {
         // If no filter is selected, show all rows
@@ -243,6 +270,7 @@ export class Users {
     {
       id: 'actions',
       enableHiding: false,
+      enableResizing: false,
       cell: () => flexRenderComponent(ActionDropdown),
     },
   ];
@@ -268,7 +296,7 @@ export class Users {
       columnVisibility: this._columnVisibility(),
       rowSelection: this._rowSelection(),
     },
-
+    columnResizeMode: 'onChange',
     onSortingChange: (updater) => {
       updater instanceof Function ? this._sorting.update(updater) : this._sorting.set(updater);
     },

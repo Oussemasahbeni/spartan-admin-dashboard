@@ -1,0 +1,20 @@
+{
+    "notFound": {
+        "heading": "Page introuvable",
+        "message": "La page demandée n’existe pas ou a été déplacée.",
+        "goToDashboard": "Aller au tableau de bord",
+        "goBack": "Retour"
+    },
+    "unauthorized": {
+        "heading": "Accès refusé",
+        "message": "Vous n’êtes pas autorisé à accéder à cette page ou votre session a expiré.",
+        "goToLogin": "Aller à la connexion",
+        "goBack": "Retour"
+    },
+    "serviceUnavailable": {
+        "heading": "Service indisponible",
+        "message": "Le service est temporairement indisponible. Veuillez réessayer ultérieurement.",
+        "retry": "Réessayer",
+        "goToDashboard": "Aller au tableau de bord"
+    }
+}

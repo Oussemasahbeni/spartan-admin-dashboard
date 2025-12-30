@@ -12,7 +12,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { countries, Country } from '../../countries';
-import { MatchWidthDirective } from '../../directives/matchWidth.directive';
+import { MatchWidthDirective } from '../../directives/matchWidth';
 import { CountryDisplay } from '../country-display/country-display';
 
 @Component({
