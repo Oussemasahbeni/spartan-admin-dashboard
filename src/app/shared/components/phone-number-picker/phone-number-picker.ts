@@ -12,7 +12,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { countries, Country } from '../../countries';
-import { provideFlagIcons } from '../../flag-icons';
 import { CountryDisplay } from '../country-display/country-display';
 
 @Component({
@@ -29,7 +28,6 @@ import { CountryDisplay } from '../country-display/country-display';
     CountryDisplay,
   ],
   providers: [
-    provideFlagIcons(),
     provideIcons({
       lucideCheck,
       lucideSearch,

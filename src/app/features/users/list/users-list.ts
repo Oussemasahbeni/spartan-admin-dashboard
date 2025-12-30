@@ -141,6 +141,8 @@ export class Users {
   readonly roleCell = viewChild.required('roleCell');
   readonly countryCell = viewChild.required('countryCell');
 
+  readonly isLoading = computed(() => this._userService.isLoading());
+
   /** Signal tracking the current active language for i18n updates */
   protected readonly currentLang = toSignal(this._translocoService.langChanges$, {
     initialValue: this._translocoService.getActiveLang(),

@@ -219,24 +219,37 @@
                 </tr>
               }
             </thead>
-            <!-- Table Body -->
-            <tbody hlmTBody class="w-full">
-              @for (row of table.getRowModel().rows; track row.id) {
-                <tr hlmTr [attr.key]="row.id" [attr.data-state]="row.getIsSelected() && 'selected'">
-                  @for (cell of row.getVisibleCells(); track $index) {
-                    <td hlmTd [tableResizableCell]="cell.column.id">
-                      <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cell">
-                        <div [innerHTML]="cell"></div>
-                      </ng-container>
-                    </td>
-                  }
+
+            @if (isLoading()) {
+              <tbody>
+                <tr>
+                  <td hlmTd class="h-96 text-center" [attr.colspan]="_columns.length">
+                    <div class="flex h-96 items-center justify-center">
+                      <hlm-spinner class="text-[2rem]" />
+                    </div>
+                  </td>
                 </tr>
-              } @empty {
-                <tr hlmTr>
-                  <td hlmTd class="h-24 text-center" [attr.colspan]="_columns.length">{{ t('common.noData') }}</td>
-                </tr>
-              }
-            </tbody>
+              </tbody>
+            } @else {
+              <!-- Table Body -->
+              <tbody hlmTBody class="w-full">
+                @for (row of table.getRowModel().rows; track row.id) {
+                  <tr hlmTr [attr.key]="row.id" [attr.data-state]="row.getIsSelected() && 'selected'">
+                    @for (cell of row.getVisibleCells(); track $index) {
+                      <td hlmTd [tableResizableCell]="cell.column.id">
+                        <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cell">
+                          <div [innerHTML]="cell"></div>
+                        </ng-container>
+                      </td>
+                    }
+                  </tr>
+                } @empty {
+                  <tr hlmTr>
+                    <td hlmTd class="h-24 text-center" [attr.colspan]="_columns.length">{{ t('common.noData') }}</td>
+                  </tr>
+                }
+              </tbody>
+            }
 
             <!-- Date Cell -->
             <ng-template #dateCell let-context>
