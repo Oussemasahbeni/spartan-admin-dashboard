@@ -61,10 +61,6 @@
         "alert": {
             "successTitle": "Succès",
             "resetLinkSent": "Si un compte existe, les instructions de réinitialisation ont été envoyées par e-mail."
-        },
-        "errors": {
-            "emailRequired": "L’adresse e-mail est obligatoire",
-            "emailInvalid": "L’adresse e-mail n’est pas valide"
         }
     }
 }

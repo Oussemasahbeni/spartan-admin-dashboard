@@ -1,5 +1,7 @@
 import { Pipe, type PipeTransform } from '@angular/core';
-import { UserRole } from '../../../core/user/user.type';
+import { provideIcons } from '@ng-icons/core';
+import { lucideBriefcase, lucideShieldCheck, lucideUser } from '@ng-icons/lucide';
+import { UserRole } from '../model/user';
 
 @Pipe({
   name: 'roleIcon',
@@ -14,7 +16,15 @@ export class RoleIconPipe implements PipeTransform {
       case 'user':
         return 'lucideUser';
       default:
-        return 'lucideUser'; // Default icon if not recognized
+        return 'lucideUser';
     }
   }
+}
+
+export function provideUserRoleIcons() {
+  return provideIcons({
+    lucideBriefcase,
+    lucideShieldCheck,
+    lucideUser,
+  });
 }

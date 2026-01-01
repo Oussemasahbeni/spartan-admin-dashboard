@@ -1,4 +1,4 @@
-<app-auth-layout>
+<adm-auth-layout>
   <div *transloco="let t; prefix: 'auth.login'" hlmCard class="mx-auto w-full max-w-xl justify-center p-4">
     <div class="space-y-2 text-center">
       <h1 class="text-2xl font-semibold tracking-tight">
@@ -28,7 +28,7 @@
         @let showEmailErrors = email.touched() && email.invalid();
         @if (showEmailErrors) {
           @for (error of email.errors(); track error) {
-            <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         }
       </hlm-field>
@@ -56,7 +56,7 @@
         @let showPasswordErrors = password.touched() && password.invalid();
         @if (showPasswordErrors) {
           @for (error of password.errors(); track error) {
-            <hlm-field-error>{{ t('errors.' + error.message) }}</hlm-field-error>
+            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         }
       </hlm-field>
@@ -77,7 +77,7 @@
         </a>
       </div>
 
-      <button type="button" hlmBtn [disabled]="isLoading()" (click)="onLogin($event)">
+      <button type="button" hlmBtn [disabled]="isLoading()" (click)="onSubmit()">
         @if (isLoading()) {
           <hlm-spinner />
         }
@@ -98,4 +98,4 @@
       {{ t('github') }}
     </button>
   </div>
-</app-auth-layout>
+</adm-auth-layout>

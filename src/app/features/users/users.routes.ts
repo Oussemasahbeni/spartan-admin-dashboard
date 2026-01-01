@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Users } from './list/users-list';
+import { Users } from './table/users-list';
 
 export default [
   {

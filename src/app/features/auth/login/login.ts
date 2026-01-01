@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { email, Field, form, minLength, required } from '@angular/forms/signals';
+import { email, Field, form, minLength, required, submit } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -12,10 +12,10 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
-import { AuthLayout } from '../auth-layout';
+import { AuthLayout } from '../layout';
 
 @Component({
-  selector: 'app-login',
+  selector: 'adm-login',
   imports: [
     HlmButtonImports,
     HlmIconImports,
@@ -52,23 +52,23 @@ export class Login {
   });
 
   readonly loginForm = form(this.loginModel, (schema) => {
-    required(schema.email, { message: 'emailRequired' });
-    email(schema.email, { message: 'emailInvalid' });
-    required(schema.password, { message: 'passwordRequired' });
-    minLength(schema.password, 6, { message: 'passwordMinLength' });
+    required(schema.email);
+    email(schema.email);
+    required(schema.password);
+    minLength(schema.password, 6);
   });
 
   togglePasswordVisibility(): void {
     this.showPassword.set(!this.showPassword());
   }
 
-  onLogin(event: Event): void {
-    event.preventDefault();
-    if (this.loginForm().invalid()) {
-      this.loginForm.email().markAsTouched();
-      this.loginForm.password().markAsTouched();
-      return;
-    }
+  onSubmit() {
+    submit(this.loginForm, async () => {
+      this.onLogin();
+    });
+  }
+
+  onLogin(): void {
     this.isLoading.set(true);
     localStorage.setItem('token', 'dummy-jwt-token');
     this._router.navigate(['/users']);

@@ -12,13 +12,7 @@
         "noAccount": "Don't have an account?",
         "signUp": "Sign up",
         "loginBtn": "Login",
-        "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
-        "errors": {
-            "emailRequired": "Email is required",
-            "emailInvalid": "Email is invalid",
-            "passwordRequired": "Password is required",
-            "passwordMinLength": "Password must be at least 6 characters"
-        }
+        "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
     },
     "signup": {
         "title": "Create an account",
@@ -39,16 +33,7 @@
         "termsOfService": "Terms of Service",
         "and": "and",
         "privacyPolicy": "Privacy Policy",
-        "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
-        "errors": {
-            "nameRequired": "Name is required",
-            "emailRequired": "Email is required",
-            "emailInvalid": "Email is invalid",
-            "passwordRequired": "Password is required",
-            "passwordMinLength": "Password must be at least 6 characters",
-            "passwordMismatch": "Passwords do not match",
-            "confirmPasswordRequired": "Confirm password is required"
-        }
+        "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
     },
     "forgetPassword": {
         "title": "Forgot your password?",
@@ -61,10 +46,6 @@
         "alert": {
             "successTitle": "Success",
             "resetLinkSent": "Password reset instructions have been sent to your email address if an account exists."
-        },
-        "errors": {
-            "emailRequired": "Email is required",
-            "emailInvalid": "Email is invalid"
         }
     }
 }

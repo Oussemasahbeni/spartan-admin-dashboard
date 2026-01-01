@@ -1,27 +1,19 @@
 import { ViewportScroller } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DOCUMENT,
-  inject,
-  input,
-  signal,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, DOCUMENT, inject, input, signal, ViewEncapsulation } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
-  selector: 'app-back-to-top',
+  selector: 'adm-back-to-top',
   imports: [HlmButtonImports, HlmIconImports],
   providers: [provideIcons({ lucideArrowUp })],
   template: `@if (isVisible()) {
     <button
       type="button"
       hlmBtn
-      class="fixed z-50 bottom-6 end-6"
+      class="fixed end-6 bottom-6 z-50"
       title="Back to top"
       size="icon"
       aria-label="Scroll back to top"
@@ -59,8 +51,7 @@ export class BackToTop {
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
   onWindowScroll(): void {
-    const scrollPosition =
-      this.document.documentElement.scrollTop || this.document.body.scrollTop;
+    const scrollPosition = this.document.documentElement.scrollTop || this.document.body.scrollTop;
     this.isVisible.set(scrollPosition > this.showAfter());
   }
 

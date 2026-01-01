@@ -4,7 +4,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 @Component({
-  selector: 'app-not-found',
+  selector: 'adm-not-found',
   imports: [HlmButtonImports, RouterLink, TranslocoModule],
   host: {
     class: 'block h-full',

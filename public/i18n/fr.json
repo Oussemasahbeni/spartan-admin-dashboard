@@ -67,13 +67,14 @@
     },
     "validation": {
         "required": "Ce champ est obligatoire.",
-        "minlength": "Ce champ doit contenir au moins {{ min }} caractères.",
-        "maxlength": "Ce champ ne peut pas dépasser {{ max }} caractères.",
+        "minLength": "Ce champ doit contenir au moins {{ min }} caractères.",
+        "maxLength": "Ce champ ne peut pas dépasser {{ max }} caractères.",
         "email": "Veuillez entrer une adresse e-mail valide.",
         "invalid": "Ce champ est invalide.",
         "min": "Ce champ doit être au minimum {{ min }}.",
         "max": "Ce champ ne peut pas dépasser {{ max }}.",
-        "pattern": "Ce champ doit respecter le format {{ pattern }}."
+        "pattern": "Ce champ doit respecter le format {{ pattern }}.",
+        "passwordMismatch": "Les mots de passe ne correspondent pas."
     },
     "countryPicker": {
         "selectCountryPlaceholder": "Sélectionner un pays...",

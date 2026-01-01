@@ -17,7 +17,7 @@ import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { Table } from '@tanstack/angular-table';
 
 @Component({
-  selector: 'data-table-pagination',
+  selector: 'adm-pagination',
   imports: [
     BrnSelectImports,
     HlmSelectImports,

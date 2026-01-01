@@ -6,18 +6,18 @@ import { SiteHeader } from './header/site-header';
 import { Navigation } from './navigation/navigation';
 
 @Component({
-  selector: 'app-main-layout',
+  selector: 'adm-main-layout',
   imports: [Navigation, SiteHeader, RouterOutlet, HlmSidebarImports, BackToTop],
   template: `
-    <app-back-to-top />
-    <app-navigation>
+    <adm-back-to-top />
+    <adm-navigation>
       <main hlmSidebarInset>
         <site-header />
         <section class="flex-1 p-6">
           <router-outlet />
         </section>
       </main>
-    </app-navigation>
+    </adm-navigation>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

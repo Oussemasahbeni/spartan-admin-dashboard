@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { delay, finalize, from, tap } from 'rxjs';
+import { User } from '../../features/users/model/user';
 import { makeData } from './data';
-import { User } from './user.type';
 
 @Injectable({
   providedIn: 'root',

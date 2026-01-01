@@ -28,7 +28,7 @@
   <hlm-field>
     @let country = userForm.country();
     <hlm-field-label for="country" class="text-right">{{ t('label.country') }}</hlm-field-label>
-    <app-country-picker [field]="userForm.country" />
+    <adm-country-picker [field]="userForm.country" />
     @let showCountryErrors = country.touched() && country.invalid();
     @if (showCountryErrors) {
       @for (error of country.errors(); track error) {
@@ -39,7 +39,7 @@
 
   <hlm-field>
     <hlm-field-label>{{ t('label.phoneNumber') }}</hlm-field-label>
-    <app-phone-number-picker [field]="userForm.phoneNumber" />
+    <adm-phone-number-picker [field]="userForm.phoneNumber" />
     @let phoneNumber = userForm.phoneNumber();
     @let showPhoneNumberErrors = phoneNumber.touched() && phoneNumber.invalid();
     @if (showPhoneNumberErrors) {
@@ -72,5 +72,5 @@
 </div>
 <hlm-dialog-footer *transloco="let t; prefix: 'buttons'">
   <button type="button" hlmBtn variant="outline" brnDialogClose>{{ t('cancel') }}</button>
-  <button type="submit" hlmBtn (click)="onSaveUser($event)">{{ t('save') }}</button>
+  <button type="submit" hlmBtn (click)="onSubmit()">{{ t('save') }}</button>
 </hlm-dialog-footer>

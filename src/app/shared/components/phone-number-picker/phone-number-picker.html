@@ -9,7 +9,7 @@
       (click)="state.set('open')"
     >
       @if (selectedCountry()) {
-        <app-country-display class="mr-2" [country]="selectedCountry()" [showCountryCode]="true" />
+        <adm-country-display class="mr-2" [country]="selectedCountry()" [showCountryCode]="true" />
       } @else {
         <ng-icon hlm name="lucideGlobe" size="sm" />
       }
@@ -34,7 +34,7 @@
               [value]="country.name[activeLang()]"
               (selected)="countrySelected(country)"
             >
-              <app-country-display class="me-2" [country]="country" />
+              <adm-country-display class="me-2" [country]="country" />
               <span class="text-muted-foreground text-xs">{{ country.code }}</span>
             </button>
           }

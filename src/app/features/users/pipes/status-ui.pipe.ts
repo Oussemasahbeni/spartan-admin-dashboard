@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UserStatus } from '../../../core/user/user.type';
+import { provideIcons } from '@ng-icons/core';
+import { lucideCircleCheck, lucideCircleX, lucideLoader } from '@ng-icons/lucide';
+import { UserStatus } from '../model/user';
 
 @Pipe({ name: 'statusUI' })
 export class StatusUIPipe implements PipeTransform {
@@ -11,4 +13,12 @@ export class StatusUIPipe implements PipeTransform {
     };
     return configs[value] ?? { icon: 'lucideCircleHelp', class: 'text-muted-foreground' };
   }
+}
+
+export function provideUserStatusIcons() {
+  return provideIcons({
+    lucideCircleCheck,
+    lucideCircleX,
+    lucideLoader,
+  });
 }

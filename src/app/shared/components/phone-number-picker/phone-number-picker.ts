@@ -15,7 +15,7 @@ import { countries, Country } from '../../countries';
 import { CountryDisplay } from '../country-display/country-display';
 
 @Component({
-  selector: 'app-phone-number-picker',
+  selector: 'adm-phone-number-picker',
   imports: [
     HlmButtonImports,
     HlmInputImports,

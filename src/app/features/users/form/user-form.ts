@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { email, Field, form, required, validate } from '@angular/forms/signals';
+import { email, Field, form, required, submit, validate } from '@angular/forms/signals';
 import { provideTranslocoScope, TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { BrnSelectImports } from '@spartan-ng/brain/select';
@@ -13,10 +13,10 @@ import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { parsePhoneNumberFromString } from 'libphonenumber-js/mobile';
 import { toast } from 'ngx-sonner';
 import { UserService } from '../../../core/user/user.service';
-import { User, UserRole } from '../../../core/user/user.type';
 import { CountryPicker } from '../../../shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '../../../shared/components/phone-number-picker/phone-number-picker';
 import { countries, Country } from '../../../shared/countries';
+import { User, UserRole } from '../model/user';
 
 export interface UserFormModel {
   name: string;
@@ -27,7 +27,7 @@ export interface UserFormModel {
 }
 
 @Component({
-  selector: 'app-user-form',
+  selector: 'adm-user-form',
   imports: [
     BrnDialogImports,
     HlmDialogImports,
@@ -93,28 +93,23 @@ export class UserForm implements OnInit {
     const user = this._dialogContext.user;
     if (user) {
       this.userModel.set({
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        role: user.role,
+        ...user,
         country: countries.find((c) => c.iso === user.country) || null,
       });
     }
   }
-  onSaveUser(event: Event) {
-    event.preventDefault();
 
-    if (this.userForm().valid()) {
-      if (this.isEditMode()) {
-        this.editUser();
-      } else {
-        this.createUser();
-      }
+  onSubmit() {
+    submit(this.userForm, async () => {
+      this.onSaveUser();
+    });
+  }
+
+  onSaveUser() {
+    if (this.isEditMode()) {
+      this.editUser();
     } else {
-      this.userForm.email().markAsTouched();
-      this.userForm.name().markAsTouched();
-      this.userForm.phoneNumber().markAsTouched();
-      this.userForm.role().markAsTouched();
+      this.createUser();
     }
   }
 
@@ -139,11 +134,6 @@ export class UserForm implements OnInit {
     if (this._dialogContext.user) {
       const updatedUser: User = {
         ...this._dialogContext.user,
-        name: this.userForm.name().value(),
-        email: this.userForm.email().value(),
-        phoneNumber: this.userForm.phoneNumber().value(),
-        country: this.userForm.country().value()?.iso ?? null,
-        role: this.userForm.role().value(),
       };
       this._userService.updateUser(updatedUser);
       this._dialogRef.close();

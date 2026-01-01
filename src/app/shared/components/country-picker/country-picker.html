@@ -16,7 +16,7 @@
   >
     <div class="flex items-center">
       @if (value()) {
-        <app-country-display class="mr-2" [country]="value()" />
+        <adm-country-display class="mr-2" [country]="value()" />
       } @else {
         <span>{{ t('selectCountryPlaceholder') }}</span>
       }
@@ -36,7 +36,7 @@
       <hlm-command-group class="w-full">
         @for (country of _countriesList(); track country.id) {
           <button type="button" hlm-command-item [value]="country.name[activeLang()]" (selected)="countrySelected(country)">
-            <app-country-display class="mr-2" [country]="country" />
+            <adm-country-display class="mr-2" [country]="country" />
             <ng-icon hlm class="ml-auto" name="lucideCheck" hlmCommandIcon [class.opacity-0]="value()?.id !== country.id" />
           </button>
         }

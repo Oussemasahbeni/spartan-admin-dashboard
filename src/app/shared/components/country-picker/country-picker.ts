@@ -16,7 +16,7 @@ import { MatchWidthDirective } from '../../directives/matchWidth';
 import { CountryDisplay } from '../country-display/country-display';
 
 @Component({
-  selector: 'app-country-picker',
+  selector: 'adm-country-picker',
   imports: [
     HlmButtonImports,
     HlmInputImports,

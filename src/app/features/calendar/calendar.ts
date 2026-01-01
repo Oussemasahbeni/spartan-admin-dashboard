@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-calendar',
+  selector: 'adm-calendar',
   imports: [],
   templateUrl: './calendar.html',
   styleUrl: './calendar.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Calendar {
-
-}
+export class Calendar {}

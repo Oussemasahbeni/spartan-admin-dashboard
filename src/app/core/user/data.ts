@@ -1,6 +1,8 @@
+import { User } from '../../features/users/model/user';
 import { countries } from '../../shared/countries';
-import { User } from './user.type';
 
+import { CountryCode, getExampleNumber } from 'libphonenumber-js';
+import examples from 'libphonenumber-js/examples.mobile.json';
 const range = (len: number): number[] => Array.from({ length: len }, (_, i) => i);
 
 export async function makeData(count: number): Promise<User[]> {
@@ -8,13 +10,13 @@ export async function makeData(count: number): Promise<User[]> {
 
   const newUser = (): User => {
     const countryObject = faker.helpers.arrayElement(countries);
-    const randomDigits = faker.string.numeric({ length: { min: 8, max: 10 } });
+    const phoneNumberObj = getExampleNumber(countryObject.iso.toUpperCase() as CountryCode, examples);
 
     return {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
       avatar: faker.image.avatar(),
-      phoneNumber: `${countryObject.code}${randomDigits}`,
+      phoneNumber: phoneNumberObj ? phoneNumberObj.format('E.164') : `+${countryObject.code}${faker.string.numeric(8)}`,
       country: countryObject.iso.toLowerCase(),
       email: faker.internet.email(),
       createdAt: faker.date.past({ years: 4 }),

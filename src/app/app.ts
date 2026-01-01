@@ -4,10 +4,10 @@ import { HlmToasterImports } from '@spartan-ng/helm/sonner';
 import { DirectionalityService } from './core/config/directionality.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'adm-root',
   imports: [RouterOutlet, HlmToasterImports],
   template: `
-    <hlm-toaster [richColors]="true" [position]="toastPosition()" [closeButton]="true" />
+    <hlm-toaster [position]="toastPosition()" />
     <router-outlet />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

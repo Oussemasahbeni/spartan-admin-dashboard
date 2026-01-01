@@ -1,10 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -28,7 +23,7 @@ import { NavSecondary } from '../secondary/nav-secondary';
 import { NavUser } from '../user/user';
 
 @Component({
-  selector: 'app-navigation',
+  selector: 'adm-navigation',
   imports: [
     HlmSidebarImports,
     HlmCollapsibleImports,
@@ -59,9 +54,7 @@ export class Navigation {
   private readonly _directionalityService = inject(DirectionalityService);
   private readonly _userService = inject(UserService);
 
-  readonly side = computed<'left' | 'right'>(() =>
-    this._directionalityService.isRtl() ? 'right' : 'left',
-  );
+  readonly side = computed<'left' | 'right'>(() => (this._directionalityService.isRtl() ? 'right' : 'left'));
 
   protected readonly _items: NavigationItem[] = [
     {
