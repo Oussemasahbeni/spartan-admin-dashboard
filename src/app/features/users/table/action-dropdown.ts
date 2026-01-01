@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEllipsisVertical } from '@ng-icons/lucide';
 import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
-import { HlmAlertDialog, HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
+import { HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
@@ -11,6 +11,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
 import { toast } from 'ngx-sonner';
 import { UserService } from '../../../core/user/user.service';
+import { ConfirmationDialogService } from '../../../shared/components/confirmation-dialog/confirmation-dialog.service';
 import { UserForm } from '../form/user-form';
 import { User } from '../model/user';
 
@@ -54,22 +55,6 @@ import { User } from '../model/user';
         </hlm-dropdown-menu>
       </ng-container>
     </ng-template>
-    <hlm-alert-dialog *transloco="let t; prefix: 'users.confirmationDialog'">
-      <hlm-alert-dialog-content *brnAlertDialogContent="let ctx">
-        <hlm-alert-dialog-header>
-          <h2 hlmAlertDialogTitle>{{ t('deleteTitle') }}</h2>
-          <p hlmAlertDialogDescription>
-            {{ t('deleteMessage') }}
-          </p>
-        </hlm-alert-dialog-header>
-        <hlm-alert-dialog-footer *transloco="let t; prefix: 'buttons'">
-          <button type="button" hlmAlertDialogCancel (click)="ctx.close()">{{ t('cancel') }}</button>
-          <button type="button" variant="destructive" hlmAlertDialogAction (click)="ctx.close('confirm')">
-            {{ t('confirm') }}
-          </button>
-        </hlm-alert-dialog-footer>
-      </hlm-alert-dialog-content>
-    </hlm-alert-dialog>
   `,
 })
 export class ActionDropdown {
@@ -77,12 +62,17 @@ export class ActionDropdown {
   private readonly _transloco = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _context = injectFlexRenderContext<CellContext<User, unknown>>();
-  readonly alertDialog = viewChild.required(HlmAlertDialog);
+  private readonly _confirmationDialogService = inject(ConfirmationDialogService);
 
   openConfirmationDialog() {
-    this.alertDialog().open();
-
-    this.alertDialog().closed.subscribe((result) => {
+    const dialogRef = this._confirmationDialogService.open({
+      title: this._transloco.translate('users.confirmationDialog.deleteTitle'),
+      message: this._transloco.translate('users.confirmationDialog.deleteMessage'),
+      confirmText: this._transloco.translate('buttons.confirm'),
+      cancelText: this._transloco.translate('buttons.cancel'),
+      variant: 'destructive',
+    });
+    dialogRef.closed$.subscribe((result) => {
       if (result === 'confirm') {
         const user = this._context.row.original;
         this._userService.deleteUser(user.id);
@@ -93,7 +83,6 @@ export class ActionDropdown {
 
   onEditUser() {
     const user = this._context.row.original;
-    // this._userService.editUser(user.id);
     this._hlmDialogService.open(UserForm, {
       context: { user },
       contentClass: 'max-w-3xl',

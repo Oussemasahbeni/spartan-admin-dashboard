@@ -5,7 +5,7 @@ import { lucideLifeBuoy, lucideSend } from '@ng-icons/lucide';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 
 @Component({
-  selector: 'nav-secondary',
+  selector: 'adm-nav-secondary',
   imports: [HlmSidebarImports, NgIcon, RouterLink],
   providers: [provideIcons({ lucideLifeBuoy, lucideSend })],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,12 +14,12 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
       <div hlmSidebarGroupContent>
         <ul hlmSidebarMenu>
           @for (item of items(); track $index) {
-          <li hlmSidebarMenuItem>
-            <a hlmSidebarMenuButton size="sm" [routerLink]="item.url">
-              <ng-icon [name]="item.icon" />
-              {{ item.title }}
-            </a>
-          </li>
+            <li hlmSidebarMenuItem>
+              <a hlmSidebarMenuButton size="sm" [routerLink]="item.url">
+                <ng-icon [name]="item.icon" />
+                {{ item.title }}
+              </a>
+            </li>
           }
         </ul>
       </div>

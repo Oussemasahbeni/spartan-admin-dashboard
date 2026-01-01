@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, signal, untracked 
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideChevronDown } from '@ng-icons/lucide';
+import { lucideArrowUpDown } from '@ng-icons/lucide';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTableImports } from '@spartan-ng/helm/table';
@@ -41,16 +41,16 @@ import { DataTablePagination } from '../pagination/pagination';
   styleUrl: './data-table.css',
   providers: [
     provideIcons({
-      lucideChevronDown,
+      lucideArrowUpDown,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTable<T> {
-  readonly columns = input.required<ColumnDef<T>[]>();
+  readonly columns = input<ColumnDef<T>[]>([]);
   readonly isLoading = input<boolean>(false);
   readonly data = input<T[]>([]);
-  readonly paginated  = input<boolean>(true);
+  readonly paginated = input<boolean>(true);
   readonly resizableColumns = input<boolean>(false);
   readonly enableRowSelection = input<boolean>(false);
 

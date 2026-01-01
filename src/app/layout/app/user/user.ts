@@ -24,7 +24,7 @@ import { UserService } from '../../../core/user/user.service';
 import { User } from '../../../features/users/model/user';
 
 @Component({
-  selector: 'user',
+  selector: 'adm-user',
   imports: [HlmSidebarImports, HlmAvatarImports, HlmIconImports, HlmDropdownMenuImports, TranslocoModule],
   templateUrl: './user.html',
   providers: [

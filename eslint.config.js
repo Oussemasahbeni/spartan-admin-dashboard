@@ -7,6 +7,7 @@ const angular = require('angular-eslint');
 module.exports = defineConfig([
   {
     files: ['**/*.ts'],
+    ignores: ['**/src/app/spartan/**'],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -88,6 +89,7 @@ module.exports = defineConfig([
   },
   {
     files: ['**/*.html'],
+    ignores: ['**/src/app/spartan/**'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {
       '@angular-eslint/template/prefer-self-closing-tags': ['warn'],

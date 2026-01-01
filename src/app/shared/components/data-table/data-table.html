@@ -68,7 +68,9 @@
                 </tr>
               } @empty {
                 <tr hlmTr>
-                  <td hlmTd class="h-24 text-center" [attr.colspan]="columns().length">{{ t('common.noData') }}</td>
+                  <td *transloco="let t" hlmTd class="h-24 text-center" [attr.colspan]="columns().length">
+                    {{ t('common.noData') }}
+                  </td>
                 </tr>
               }
             </tbody>

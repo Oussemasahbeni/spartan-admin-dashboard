@@ -12,7 +12,7 @@ import { Navigation } from './navigation/navigation';
     <adm-back-to-top />
     <adm-navigation>
       <main hlmSidebarInset>
-        <site-header />
+        <adm-site-header />
         <section class="flex-1 p-6">
           <router-outlet />
         </section>

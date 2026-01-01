@@ -5,7 +5,7 @@
         <li hlmSidebarMenuItem>
           <a hlmSidebarMenuButton size="lg" href="#">
             <img
-              class="aspect-square size-8 me-2 dark:hidden"
+              class="me-2 aspect-square size-8 dark:hidden"
               ngSrc="/images/logo/logo.svg"
               width="32"
               height="32"
@@ -14,7 +14,7 @@
             />
 
             <img
-              class="aspect-square size-8 me-2 hidden dark:inline-block"
+              class="me-2 hidden aspect-square size-8 dark:inline-block"
               ngSrc="/images/logo/logo-white.svg"
               width="32"
               height="32"
@@ -33,7 +33,7 @@
 
     <hlm-sidebar-content>
       <hlm-sidebar-group>
-        <div hlmSidebarGroupLabel>{{ t("application") }}</div>
+        <div hlmSidebarGroupLabel>{{ t('application') }}</div>
         <div hlmSidebarGroupContent>
           <ul hlmSidebarMenu>
             @for (item of _items; track item.title) {
@@ -54,7 +54,7 @@
                       }
                       <ng-icon
                         name="lucideChevronRight"
-                        class="ms-auto rtl:rotate-180 transition-transform group-data-[state=open]/collapsible:rotate-90"
+                        class="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180"
                         hlmIcon
                       />
                     </button>
@@ -62,12 +62,7 @@
                       <ul hlmSidebarMenuSub>
                         @for (subItem of item.children; track subItem.title) {
                           <li hlmSidebarMenuSubItem>
-                            <button
-                              type="button"
-                              hlmSidebarMenuSubButton
-                              class="w-full"
-                              [routerLink]="subItem.url"
-                            >
+                            <button type="button" hlmSidebarMenuSubButton class="w-full" [routerLink]="subItem.url">
                               @if (subItem.key) {
                                 <span>{{ t(subItem.key) }}</span>
                               } @else {
@@ -102,11 +97,11 @@
           </ul>
         </div>
       </hlm-sidebar-group>
-      <nav-secondary class="mt-auto" />
+      <adm-nav-secondary class="mt-auto" />
     </hlm-sidebar-content>
     <hlm-sidebar-footer>
       @if (user(); as currentUser) {
-        <user [user]="currentUser" />
+        <adm-user [user]="currentUser" />
       }
     </hlm-sidebar-footer>
   </hlm-sidebar>

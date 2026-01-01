@@ -13,9 +13,9 @@ import { Country, countries } from '../../countries';
     @if (resolvedCountry(); as country) {
       <div class="flex items-center gap-2">
         <img
-          width="24"
+          width="16"
           height="16"
-          class="h-4 w-6 rounded-sm object-cover"
+          class="h-4 w-4 object-cover"
           [ngSrc]="'/images/flags/' + country.iso.toLowerCase() + '.svg'"
           [alt]="country.name[activeLang()]"
         />
