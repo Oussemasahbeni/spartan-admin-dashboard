@@ -50,7 +50,7 @@
             "confirmPasswordRequired": "La confirmation du mot de passe est obligatoire"
         }
     },
-    "forgetPassword": {
+    "forgotPassword": {
         "title": "Mot de passe oublié ?",
         "description": "Saisissez votre adresse e-mail afin de recevoir un lien de réinitialisation.",
         "emailLabel": "Adresse e-mail",

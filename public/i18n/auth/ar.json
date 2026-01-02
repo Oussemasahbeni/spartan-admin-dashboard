@@ -50,7 +50,7 @@
             "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب"
         }
     },
-    "forgetPassword": {
+    "forgotPassword": {
         "title": "نسيت كلمة المرور؟",
         "description": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة تعيين كلمة المرور.",
         "emailLabel": "البريد الإلكتروني",

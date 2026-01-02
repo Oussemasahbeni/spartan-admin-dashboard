@@ -35,7 +35,7 @@
         "privacyPolicy": "Privacy Policy",
         "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
     },
-    "forgetPassword": {
+    "forgotPassword": {
         "title": "Forgot your password?",
         "description": "Enter your email address and we'll send you a link to reset your password",
         "emailLabel": "Email",

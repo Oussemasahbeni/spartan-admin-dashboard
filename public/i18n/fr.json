@@ -11,7 +11,7 @@
     "titles": {
         "login": "Connexion",
         "signup": "Inscription",
-        "forgetPassword": "Mot de passe oublié",
+        "forgotPassword": "Mot de passe oublié",
         "dashboard": "Tableau de bord",
         "users": "Utilisateurs",
         "notFound": "Page introuvable",
@@ -20,13 +20,22 @@
     },
     "navigation": {
         "application": "Application",
+        "pages": "Pages",
+        "authentication": "Accès & Sécurité",
+        "errors": "Pages d'erreur",
+        "login": "Connexion",
+        "signup": "Inscription",
+        "forgotPassword": "Mot de passe oublié",
         "dashboard": "Tableau de bord",
-        "analytics": "Analytique",
-        "overview": "Vue d’ensemble",
+        "analytics": "Analyses",
+        "overview": "Vue d'ensemble",
         "reports": "Rapports",
-        "tasks": "Tâches",
+        "tasks": "Gestion des tâches",
         "calendar": "Calendrier",
-        "users": "Utilisateurs"
+        "users": "Utilisateurs",
+        "notFound": "Page introuvable",
+        "unauthorized": "Accès refusé",
+        "serviceUnavailable": "Service indisponible"
     },
     "pagination": {
         "itemsPerPage": "Éléments par page",

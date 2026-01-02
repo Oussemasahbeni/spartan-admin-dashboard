@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { provideTranslocoScope } from '@jsverse/transloco';
 import { authGuard } from './core/guards/auth.guard';
-import { noAuthGuard } from './core/guards/no-auth.guard';
 import { MainLayout } from './layout/app/layout';
 import { EmptyLayout } from './layout/empty/empty';
 
@@ -18,23 +17,20 @@ export const routes: Routes = [
       {
         path: 'login',
         title: 'login',
-        canActivate: [noAuthGuard],
         component: EmptyLayout,
         loadChildren: () => import('./features/auth/login/login.routes'),
       },
       {
         path: 'signup',
         title: 'signup',
-        canActivate: [noAuthGuard],
         component: EmptyLayout,
         loadChildren: () => import('./features/auth/signup/signup.routes'),
       },
       {
-        path: 'forget-password',
-        title: 'forgetPassword',
-        canActivate: [noAuthGuard],
+        path: 'forgot-password',
+        title: 'forgotPassword',
         component: EmptyLayout,
-        loadChildren: () => import('./features/auth/forget-password/forget-password.routes'),
+        loadChildren: () => import('./features/auth/forgot-password/forgot-password.routes'),
       },
     ],
   },
@@ -69,7 +65,6 @@ export const routes: Routes = [
     pathMatch: 'full',
     component: EmptyLayout,
     providers: [provideTranslocoScope('system')],
-
     loadChildren: () => import('./shared/pages/unauthorized/unauthorized.routes'),
   },
   {

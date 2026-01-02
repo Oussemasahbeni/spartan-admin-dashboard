@@ -29,31 +29,31 @@ import { AuthLayout } from '../layout';
     AuthLayout,
   ],
   providers: [provideIcons({ lucideCircleCheck })],
-  templateUrl: './forget-password.html',
+  templateUrl: './forgot-password.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ForgetPassword {
+export class ForgotPassword {
   private readonly _router = inject(Router);
   public readonly isLoading = signal(false);
   readonly showAlert = signal(false);
 
-  readonly forgetPasswordModel = signal({
+  readonly forgotPasswordModel = signal({
     email: '',
   });
 
-  readonly forgetPasswordForm = form(this.forgetPasswordModel, (schema) => {
+  readonly forgotPasswordForm = form(this.forgotPasswordModel, (schema) => {
     required(schema.email);
     email(schema.email);
   });
 
   onSubmit(): void {
-    submit(this.forgetPasswordForm, async () => {
+    submit(this.forgotPasswordForm, async () => {
       this.isLoading.set(true);
 
       // Simulate API call
       setTimeout(() => {
         this.isLoading.set(false);
-        this.forgetPasswordForm().reset({ email: '' });
+        this.forgotPasswordForm().reset({ email: '' });
         this.showAlert.set(true);
       }, 2000);
     });

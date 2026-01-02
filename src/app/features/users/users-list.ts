@@ -23,13 +23,14 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { debounce, Field, form } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideDownload, lucideFileUp, lucideRefreshCcw, lucideUserPlus } from '@ng-icons/lucide';
+import { lucideDownload, lucideRefreshCcw, lucideSearch, lucideUpload, lucideUserPlus, lucideX } from '@ng-icons/lucide';
 import { CountryDisplay } from '@shared/components/country-display/country-display';
 import { DataTable } from '@shared/components/data-table/data-table';
 import { DataTableColumnManager } from '@shared/components/data-table/data-table-column-manager';
 import { PaginatedResponse } from '@shared/models/page';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { CardSection } from './components/cards/card-section';
 import { RoleFilter } from './components/filters/role-filter';
 import { StatusFilter } from './components/filters/status-filter';
@@ -47,6 +48,7 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
     HlmIconImports,
     HlmInputImports,
     HlmLabelImports,
+    HlmInputGroupImports,
     HlmAvatarImports,
     HlmBadgeImports,
     DatePipe,
@@ -69,7 +71,9 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
       lucideRefreshCcw,
       lucideUserPlus,
       lucideDownload,
-      lucideFileUp,
+      lucideUpload,
+      lucideSearch,
+      lucideX,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -105,6 +109,7 @@ export class Users {
     const sort = this.sorting()[0];
     const roles = this.selectedRoles();
     const statuses = this.selectedStatuses();
+    console.log(this.pagination());
 
     return {
       url: '/api/users',
@@ -229,6 +234,7 @@ export class Users {
   }
 
   protected handleStateChange(state: { pagination: PaginationState; sorting: SortingState }) {
+    console.log('State changed:', state);
     this.pagination.set(state.pagination);
     this.sorting.set(state.sorting);
   }

@@ -45,7 +45,9 @@ export class DataTablePagination<T> {
 
   handlePageSizeChange(value: string | number) {
     const size = Number(value);
-    this.table().setPageSize(size);
-    this.table().resetPageIndex();
+    this.table().setPagination({
+      pageIndex: 0,
+      pageSize: size,
+    });
   }
 }

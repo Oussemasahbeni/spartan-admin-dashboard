@@ -32,71 +32,65 @@
     </hlm-sidebar-header>
 
     <hlm-sidebar-content>
-      <hlm-sidebar-group>
-        <div hlmSidebarGroupLabel>{{ t('application') }}</div>
-        <div hlmSidebarGroupContent>
-          <ul hlmSidebarMenu>
-            @for (item of _items; track item.title) {
-              @if (item.children; as children) {
-                <hlm-collapsible class="group/collapsible">
+      @for (group of _navigationGroups; track group.label) {
+        <hlm-sidebar-group>
+          @if (group.label) {
+            <div hlmSidebarGroupLabel>{{ t(group.label) }}</div>
+          }
+          <div hlmSidebarGroupContent>
+            <ul hlmSidebarMenu>
+              @for (item of group.items; track item.key || item.title) {
+                @if (item.children; as children) {
+                  <!-- Collapsible Item -->
+                  <hlm-collapsible class="group/collapsible">
+                    <li hlmSidebarMenuItem>
+                      <button
+                        type="button"
+                        hlmCollapsibleTrigger
+                        hlmSidebarMenuButton
+                        class="flex w-full items-center justify-between"
+                      >
+                        <ng-icon hlmIcon [name]="item.icon" />
+                        <span>{{ item.key ? t(item.key) : item.title }}</span>
+                        <ng-icon
+                          name="lucideChevronRight"
+                          class="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180"
+                          hlmIcon
+                        />
+                      </button>
+                      <hlm-collapsible-content>
+                        <ul hlmSidebarMenuSub>
+                          @for (subItem of children; track subItem.key || subItem.title) {
+                            <li hlmSidebarMenuSubItem>
+                              <button type="button" hlmSidebarMenuSubButton class="w-full" [routerLink]="subItem.url">
+                                {{ subItem.key ? t(subItem.key) : subItem.title }}
+                              </button>
+                            </li>
+                          }
+                        </ul>
+                      </hlm-collapsible-content>
+                    </li>
+                  </hlm-collapsible>
+                } @else {
+                  <!-- Single Link Item -->
                   <li hlmSidebarMenuItem>
-                    <button
-                      type="button"
-                      hlmCollapsibleTrigger
+                    <a
                       hlmSidebarMenuButton
-                      class="flex w-full items-center justify-between"
+                      routerLinkActive="bg-primary/10 text-primary !font-semibold group active-link"
+                      class="relative overflow-hidden transition-all duration-200"
+                      [routerLinkActiveOptions]="{ exact: false }"
+                      [routerLink]="item.url"
                     >
                       <ng-icon hlmIcon [name]="item.icon" />
-                      @if (item.key) {
-                        <span>{{ t(item.key) }}</span>
-                      } @else {
-                        {{ item.title }}
-                      }
-                      <ng-icon
-                        name="lucideChevronRight"
-                        class="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180"
-                        hlmIcon
-                      />
-                    </button>
-                    <hlm-collapsible-content>
-                      <ul hlmSidebarMenuSub>
-                        @for (subItem of item.children; track subItem.title) {
-                          <li hlmSidebarMenuSubItem>
-                            <button type="button" hlmSidebarMenuSubButton class="w-full" [routerLink]="subItem.url">
-                              @if (subItem.key) {
-                                <span>{{ t(subItem.key) }}</span>
-                              } @else {
-                                {{ subItem.title }}
-                              }
-                            </button>
-                          </li>
-                        }
-                      </ul>
-                    </hlm-collapsible-content>
+                      <span>{{ item.key ? t(item.key) : item.title }}</span>
+                    </a>
                   </li>
-                </hlm-collapsible>
-              } @else {
-                <li hlmSidebarMenuItem>
-                  <a
-                    hlmSidebarMenuButton
-                    routerLinkActive="bg-primary/10 text-primary !font-semibold group active-link"
-                    class="relative overflow-hidden transition-all duration-200"
-                    [routerLinkActiveOptions]="{ exact: false }"
-                    [routerLink]="item.url"
-                  >
-                    <ng-icon hlmIcon [name]="item.icon" />
-                    @if (item.key) {
-                      <span>{{ t(item.key) }}</span>
-                    } @else {
-                      {{ item.title }}
-                    }
-                  </a>
-                </li>
+                }
               }
-            }
-          </ul>
-        </div>
-      </hlm-sidebar-group>
+            </ul>
+          </div>
+        </hlm-sidebar-group>
+      }
       <adm-nav-secondary class="mt-auto" />
     </hlm-sidebar-content>
     <hlm-sidebar-footer>

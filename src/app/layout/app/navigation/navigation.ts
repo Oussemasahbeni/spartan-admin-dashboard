@@ -5,6 +5,7 @@ import { AuthService } from '@core/user/auth.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
+  lucideAlertTriangle,
   lucideBarChart3,
   lucideCalendarDays,
   lucideCheckSquare,
@@ -12,13 +13,14 @@ import {
   lucideFileText,
   lucideGauge,
   lucideLayoutDashboard,
+  lucideLock,
   lucideUsers,
 } from '@ng-icons/lucide';
 import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { DirectionalityService } from '../../../core/config/directionality.service';
-import { NavigationItem } from '../navigation.types';
+import { NavGroup } from '../navigation.types';
 import { NavSecondary } from '../secondary/nav-secondary';
 import { NavUser } from '../user/user';
 
@@ -46,6 +48,8 @@ import { NavUser } from '../user/user';
       lucideUsers,
       lucideCalendarDays,
       lucideCheckSquare,
+      lucideLock,
+      lucideAlertTriangle,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,49 +60,49 @@ export class Navigation {
 
   readonly side = computed<'left' | 'right'>(() => (this._directionalityService.isRtl() ? 'right' : 'left'));
 
-  protected readonly _items: NavigationItem[] = [
+  protected readonly _navigationGroups: NavGroup[] = [
     {
-      title: 'Dashboard',
-      key: 'dashboard',
-      icon: 'lucideLayoutDashboard',
-      children: [
+      label: 'application',
+      items: [
         {
-          title: 'Overview',
-          key: 'overview',
-          url: '#',
-          icon: 'lucideGauge',
+          title: 'Dashboard',
+          key: 'dashboard',
+          icon: 'lucideLayoutDashboard',
+          children: [
+            { title: 'Overview', key: 'overview', url: '#', icon: 'lucideGauge' },
+            { title: 'Analytics', key: 'analytics', url: '#', icon: 'lucideBarChart3' },
+            { title: 'Reports', key: 'reports', url: '#', icon: 'lucideFileText' },
+          ],
         },
-        {
-          title: 'Analytics',
-          key: 'analytics',
-          url: '#',
-          icon: 'lucideBarChart3',
-        },
-        {
-          title: 'Reports',
-          key: 'reports',
-          url: '#',
-          icon: 'lucideFileText',
-        },
+        { title: 'Users', key: 'users', url: '/users', icon: 'lucideUsers' },
+        { title: 'Calendar', key: 'calendar', url: '#', icon: 'lucideCalendarDays' },
+        { title: 'Tasks', key: 'tasks', url: '#', icon: 'lucideCheckSquare' },
       ],
     },
     {
-      title: 'Users',
-      key: 'users',
-      url: '/users',
-      icon: 'lucideUsers',
-    },
-    {
-      title: 'Calendar',
-      key: 'calendar',
-      url: '#',
-      icon: 'lucideCalendarDays',
-    },
-    {
-      title: 'Tasks',
-      key: 'tasks',
-      url: '#',
-      icon: 'lucideCheckSquare',
+      label: 'pages',
+      items: [
+        {
+          title: 'Authentication',
+          key: 'authentication',
+          icon: 'lucideLock',
+          children: [
+            { title: 'Login', key: 'login', url: '/login' },
+            { title: 'Sign Up', key: 'signup', url: '/signup' },
+            { title: 'Forgot Password', key: 'forgotPassword', url: '/forgot-password' },
+          ],
+        },
+        {
+          title: 'Errors',
+          key: 'errors',
+          icon: 'lucideAlertTriangle',
+          children: [
+            { title: 'Not Found', key: 'notFound', url: '/404-not-found' },
+            { title: 'Service Unavailable', key: 'serviceUnavailable', url: '/503-service-unavailable' },
+            { title: 'Unauthorized', key: 'unauthorized', url: '/401-unauthorized' },
+          ],
+        },
+      ],
     },
   ];
 

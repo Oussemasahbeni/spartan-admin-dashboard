@@ -11,7 +11,7 @@
     "titles": {
         "login": "Login",
         "signup": "Sign Up",
-        "forgetPassword": "Forgot Password",
+        "forgotPassword": "Forgot Password",
         "dashboard": "Dashboard",
         "users": "Users",
         "notFound": "Page Not Found",
@@ -20,13 +20,22 @@
     },
     "navigation": {
         "application": "Application",
+        "pages": "Pages",
+        "authentication": "Authentication",
+        "errors": "Errors",
+        "login": "Login",
+        "signup": "Sign Up",
+        "forgotPassword": "Forgot Password",
         "dashboard": "Dashboard",
         "analytics": "Analytics",
         "overview": "Overview",
         "reports": "Reports",
         "tasks": "Tasks",
         "calendar": "Calendar",
-        "users": "Users"
+        "users": "Users",
+        "notFound": "Page Not Found",
+        "unauthorized": "Unauthorized",
+        "serviceUnavailable": "Service Unavailable"
     },
     "pagination": {
         "itemsPerPage": "Items per page",

@@ -102,17 +102,20 @@ export class DataTable<T> {
     },
     columnResizeMode: 'onChange',
     onSortingChange: (updater) => {
-      const next = updater instanceof Function ? updater(this.sortingState()) : updater;
-      // Reset page to 0 when sorting changes
-      const resetPage = { ...this.paginationState(), pageIndex: 0 };
+      const next = updater instanceof Function ? updater(this.table.getState().sorting) : updater;
+      const resetPage = { ...this.table.getState().pagination, pageIndex: 0 };
       this.stateChange.emit({ pagination: resetPage, sorting: next });
     },
     onColumnFiltersChange: (updater) => {
       updater instanceof Function ? this.columnFilters.update(updater) : this.columnFilters.set(updater);
     },
     onPaginationChange: (updaterOrValue) => {
-      const next = typeof updaterOrValue === 'function' ? updaterOrValue(this.paginationState()) : updaterOrValue;
-      this.stateChange.emit({ pagination: next, sorting: this.sortingState() });
+      const next = typeof updaterOrValue === 'function' ? updaterOrValue(this.table.getState().pagination) : updaterOrValue;
+
+      this.stateChange.emit({
+        pagination: next,
+        sorting: this.sortingState(),
+      });
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

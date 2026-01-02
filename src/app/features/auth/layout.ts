@@ -7,7 +7,7 @@ import { TranslocoModule } from '@jsverse/transloco';
   imports: [NgOptimizedImage, TranslocoModule],
   template: `
     <div
-      *transloco="let t; prefix: 'auth.forgetPassword'"
+      *transloco="let t; prefix: 'auth.forgotPassword'"
       class="bg-background en block h-full border shadow-md md:shadow-xl"
     >
       <div

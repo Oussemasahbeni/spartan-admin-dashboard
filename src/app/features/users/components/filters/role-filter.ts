@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideBriefcase, lucideCirclePlus, lucideSearch, lucideShieldCheck, lucideUser } from '@ng-icons/lucide';
+import { lucideBriefcase, lucideListFilter, lucideSearch, lucideShieldCheck, lucideUser } from '@ng-icons/lucide';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { BrnPopoverImports } from '@spartan-ng/brain/popover';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -25,7 +25,7 @@ import { RoleIconPipe } from '../../pipes/role-icon.pipe';
     TranslocoModule,
     RoleIconPipe,
   ],
-  providers: [provideIcons({ lucideSearch, lucideCirclePlus, lucideUser, lucideBriefcase, lucideShieldCheck })],
+  providers: [provideIcons({ lucideSearch, lucideListFilter, lucideUser, lucideBriefcase, lucideShieldCheck })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <hlm-popover
@@ -37,7 +37,7 @@ import { RoleIconPipe } from '../../pipes/role-icon.pipe';
       (stateChanged)="rolesStateChanged($event)"
     >
       <button type="button" hlmBtn hlmPopoverTrigger variant="outline" size="sm" class="border-dashed">
-        <ng-icon hlm name="lucideCirclePlus" class="mr-2" size="sm" />
+        <ng-icon hlm name="lucideListFilter" size="sm" />
         {{ t('users.list.columns.role') }}
         @if (_rolesFilter().length) {
           <div data-orientation="vertical" role="none" class="bg-border mx-2 h-4 w-px shrink-0"></div>

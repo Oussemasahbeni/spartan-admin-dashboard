@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideCirclePlus, lucideSearch } from '@ng-icons/lucide';
+import { lucideListFilter, lucideSearch } from '@ng-icons/lucide';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { BrnPopoverImports } from '@spartan-ng/brain/popover';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -25,7 +25,7 @@ import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe
     TranslocoModule,
     StatusUIPipe,
   ],
-  providers: [provideUserStatusIcons(), provideIcons({ lucideSearch, lucideCirclePlus })],
+  providers: [provideUserStatusIcons(), provideIcons({ lucideSearch, lucideListFilter })],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
   template: `
@@ -38,7 +38,7 @@ import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe
       (stateChanged)="statusStateChanged($event)"
     >
       <button type="button" hlmBtn hlmPopoverTrigger variant="outline" size="sm" class="border-dashed">
-        <ng-icon hlm name="lucideCirclePlus" class="mr-2" size="sm" />
+        <ng-icon hlm name="lucideListFilter" size="sm" />
         {{ t('users.list.columns.status') }}
         @if (_statusFilter().length) {
           <div data-orientation="vertical" role="none" class="bg-border mx-2 h-4 w-px shrink-0"></div>

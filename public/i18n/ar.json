@@ -11,7 +11,7 @@
     "titles": {
         "login": "تسجيل الدخول",
         "signup": "إنشاء حساب",
-        "forgetPassword": "نسيت كلمة المرور",
+        "forgotPassword": "نسيت كلمة المرور",
         "dashboard": "لوحة التحكم",
         "users": "المستخدمون",
         "notFound": "الصفحة غير موجودة",
@@ -19,14 +19,23 @@
         "serviceUnavailable": "الخدمة غير متوفرة"
     },
     "navigation": {
-        "application": "التطبيق",
-        "dashboard": "لوحة التحكم",
-        "analytics": "التحليلات",
+        "application": "النظام",
+        "pages": "الصفحات العامة",
+        "authentication": "بوابة الدخول",
+        "errors": "حالات الخطأ",
+        "login": "تسجيل الدخول",
+        "signup": "فتح حساب جديد",
+        "forgotPassword": "استعادة كلمة المرور",
+        "dashboard": "لوحة البيانات",
+        "analytics": "التحليلات والبيانات",
         "overview": "نظرة عامة",
-        "reports": "التقارير",
-        "tasks": "المهام",
-        "calendar": "التقويم",
-        "users": "المستخدمون"
+        "reports": "التقارير المركزية",
+        "tasks": "إدارة المهام",
+        "calendar": "الجدول الزمني",
+        "users": "شؤون المستخدمين",
+        "notFound": "الصفحة غير متوفرة",
+        "unauthorized": "صلاحيات محدودة",
+        "serviceUnavailable": "الخدمة قيد الصيانة"
     },
     "pagination": {
         "itemsPerPage": "عدد العناصر في الصفحة",
