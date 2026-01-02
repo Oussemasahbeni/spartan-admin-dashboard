@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { provideRouter, TitleStrategy, withViewTransitions } from '@angular/router';
 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
@@ -19,6 +19,7 @@ import { TranslocoHttpLoader } from './transloco-loader';
 import { registerLocaleData } from '@angular/common';
 import localeAr from '@angular/common/locales/ar';
 import localeFr from '@angular/common/locales/fr';
+import { mockApiInterceptor } from '@core/interceptor/mock-api.interceptor';
 
 registerLocaleData(localeFr, 'fr');
 registerLocaleData(localeAr, 'ar');
@@ -43,7 +44,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withViewTransitions()),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([mockApiInterceptor])),
     provideTransloco({
       config: {
         availableLangs: ['en', 'fr', 'ar'],

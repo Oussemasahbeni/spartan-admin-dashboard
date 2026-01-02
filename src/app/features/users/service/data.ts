@@ -1,13 +1,12 @@
-import { User } from '../../features/users/model/user';
-import { countries } from '../../shared/countries';
-
+import { faker } from '@faker-js/faker';
+import { countries } from '@shared/countries';
 import { CountryCode, getExampleNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/examples.mobile.json';
+import { User } from '../model/user';
+
 const range = (len: number): number[] => Array.from({ length: len }, (_, i) => i);
 
-export async function makeData(count: number): Promise<User[]> {
-  const { faker } = await import('@faker-js/faker');
-
+export function makeData(count: number): User[] {
   const newUser = (): User => {
     const countryObject = faker.helpers.arrayElement(countries);
     const phoneNumberObj = getExampleNumber(countryObject.iso.toUpperCase() as CountryCode, examples);

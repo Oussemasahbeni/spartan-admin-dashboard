@@ -1,6 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
+import { AuthService } from '@core/user/auth.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -17,7 +18,6 @@ import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { DirectionalityService } from '../../../core/config/directionality.service';
-import { UserService } from '../../../core/user/user.service';
 import { NavigationItem } from '../navigation.types';
 import { NavSecondary } from '../secondary/nav-secondary';
 import { NavUser } from '../user/user';
@@ -52,7 +52,7 @@ import { NavUser } from '../user/user';
 })
 export class Navigation {
   private readonly _directionalityService = inject(DirectionalityService);
-  private readonly _userService = inject(UserService);
+  private readonly _authService = inject(AuthService);
 
   readonly side = computed<'left' | 'right'>(() => (this._directionalityService.isRtl() ? 'right' : 'left'));
 
@@ -102,5 +102,5 @@ export class Navigation {
     },
   ];
 
-  protected readonly user = this._userService.user;
+  protected readonly user = this._authService.currentUser;
 }

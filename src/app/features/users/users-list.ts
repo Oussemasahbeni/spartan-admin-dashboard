@@ -1,5 +1,14 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, TemplateRef, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  signal,
+  TemplateRef,
+  viewChild,
+} from '@angular/core';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
@@ -7,37 +16,40 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
-import { CellContext, ColumnDef, flexRenderComponent } from '@tanstack/angular-table';
+import { CellContext, ColumnDef, flexRenderComponent, PaginationState, SortingState } from '@tanstack/angular-table';
 
-import { toSignal } from '@angular/core/rxjs-interop';
+import { httpResource } from '@angular/common/http';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { debounce, Field, form } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideDownload, lucideFileUp, lucideRefreshCcw, lucideUserPlus } from '@ng-icons/lucide';
+import { CountryDisplay } from '@shared/components/country-display/country-display';
+import { DataTable } from '@shared/components/data-table/data-table';
+import { DataTableColumnManager } from '@shared/components/data-table/data-table-column-manager';
+import { PaginatedResponse } from '@shared/models/page';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
-import { UserService } from '../../../core/user/user.service';
-import { CountryDisplay } from '../../../shared/components/country-display/country-display';
-import { DataTable } from '../../../shared/components/data-table/data-table';
-import { DataTableColumnManager } from '../../../shared/components/data-table/data-table-column-manager';
-import { UserForm } from '../form/user-form';
-import { User, UserStatus } from '../model/user';
-import { provideUserRoleIcons, RoleIconPipe } from '../pipes/role-icon.pipe';
-import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
-import { ActionDropdown } from './action-dropdown';
-import { CardSection } from './card-section';
-import { RoleFilter } from './role-filter';
-import { TableHeadSelection, TableRowSelection } from './selection-column';
-import { StatusFilter } from './status-filter';
+
+import { CardSection } from './components/cards/card-section';
+import { RoleFilter } from './components/filters/role-filter';
+import { StatusFilter } from './components/filters/status-filter';
+import { UserForm } from './components/form/user-form';
+import { ActionDropdown } from './components/table/action-dropdown';
+import { TableHeadSelection, TableRowSelection } from './components/table/selection-column';
+import { User, UserRole, UserStatus } from './model/user';
+import { provideUserRoleIcons, RoleIconPipe } from './pipes/role-icon.pipe';
+import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
 
 @Component({
   selector: 'adm-users',
   imports: [
-    DatePipe,
     HlmButtonImports,
     HlmIconImports,
     HlmInputImports,
     HlmLabelImports,
     HlmAvatarImports,
     HlmBadgeImports,
+    DatePipe,
     CardSection,
     TranslocoModule,
     RoleIconPipe,
@@ -47,6 +59,7 @@ import { StatusFilter } from './status-filter';
     DataTableColumnManager,
     StatusFilter,
     RoleFilter,
+    Field,
   ],
   templateUrl: './users-list.html',
   providers: [
@@ -63,9 +76,9 @@ import { StatusFilter } from './status-filter';
 })
 export class Users {
   // --- Services ---
-  private readonly _userService = inject(UserService);
   private readonly _translocoService = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
+  private readonly _destroyRef = inject(DestroyRef);
 
   /**
    * Template references for custom cell rendering.
@@ -79,14 +92,44 @@ export class Users {
   readonly countryCell = viewChild.required<TemplateRef<CellContext<User, string>>>('countryCell');
 
   protected readonly table = computed(() => this.dataTable().table);
-  protected readonly isLoading = computed(() => this._userService.isLoading());
 
-  readonly users = this._userService.users;
+  protected readonly pagination = signal<PaginationState>({ pageIndex: 0, pageSize: 10 });
+  protected readonly sorting = signal<SortingState>([]);
+  protected readonly selectedRoles = signal<UserRole[]>([]);
+  protected readonly selectedStatuses = signal<UserStatus[]>([]);
+
+  readonly usersResource = httpResource<PaginatedResponse<User>>(() => {
+    const page = this.pagination().pageIndex;
+    const size = this.pagination().pageSize;
+    const search = this.searchForm.search().value();
+    const sort = this.sorting()[0];
+    const roles = this.selectedRoles();
+    const statuses = this.selectedStatuses();
+
+    return {
+      url: '/api/users',
+      params: {
+        page: page.toString(),
+        pageSize: size.toString(),
+        search,
+        sortField: sort?.id ?? '',
+        sortOrder: sort?.desc ? 'desc' : 'asc',
+        roles,
+        statuses,
+      },
+    };
+  });
+
+  readonly users = computed(() => this.usersResource.value()?.content ?? []);
+  readonly totalElements = computed(() => this.usersResource.value()?.total ?? 0);
+  readonly isLoading = this.usersResource.isLoading;
 
   /** Signal tracking the current active language for i18n updates */
   protected readonly currentLang = toSignal(this._translocoService.langChanges$, {
     initialValue: this._translocoService.getActiveLang(),
   });
+
+  protected readonly searchForm = form(signal({ search: '' }), (schema) => debounce(schema.search, 300));
 
   /**
    * TanStack Table Column Definitions.
@@ -106,7 +149,7 @@ export class Users {
       enableSorting: false,
       enableHiding: false,
       enableResizing: false,
-      size: 40,
+      size: 30,
     },
     {
       id: 'name',
@@ -163,24 +206,34 @@ export class Users {
       id: 'actions',
       enableHiding: false,
       enableResizing: false,
-      cell: () => flexRenderComponent(ActionDropdown),
+      size: 40,
+      cell: () =>
+        flexRenderComponent(ActionDropdown, {
+          inputs: {
+            onSuccess: () => this.refreshTable(),
+          },
+        }),
     },
   ];
 
   protected addUser() {
-    this._hlmDialogService.open(UserForm, {
+    const dialogRef = this._hlmDialogService.open(UserForm, {
       contentClass: 'max-w-3xl',
       autoFocus: 'dialog',
     });
+
+    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
+      console.log(result);
+      if (result) this.refreshTable();
+    });
+  }
+
+  protected handleStateChange(state: { pagination: PaginationState; sorting: SortingState }) {
+    this.pagination.set(state.pagination);
+    this.sorting.set(state.sorting);
   }
 
   refreshTable(): void {
-    console.log('Refreshing table data...');
-  }
-
-  protected _filterChanged(event: Event) {
-    this.table()
-      .getColumn('email')
-      ?.setFilterValue((event.target as HTMLInputElement).value);
+    this.usersResource.reload();
   }
 }

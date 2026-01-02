@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBriefcase, lucideCirclePlus, lucideSearch, lucideShieldCheck, lucideUser } from '@ng-icons/lucide';
@@ -9,9 +9,8 @@ import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
-import { Table } from '@tanstack/angular-table';
-import { User, UserRole } from '../model/user';
-import { RoleIconPipe } from '../pipes/role-icon.pipe';
+import { USER_ROLES, UserRole } from '../../model/user';
+import { RoleIconPipe } from '../../pipes/role-icon.pipe';
 
 @Component({
   selector: 'adm-users-role-filter',
@@ -88,10 +87,10 @@ import { RoleIconPipe } from '../pipes/role-icon.pipe';
   `,
 })
 export class RoleFilter {
-  readonly table = input.required<Table<User>>();
+  readonly rolesChanged = output<UserRole[]>();
 
   protected readonly _rolesFilter = signal<UserRole[]>([]);
-  protected readonly _rolesList = signal(['admin', 'user', 'manager'] satisfies UserRole[]);
+  protected readonly _rolesList = signal([...USER_ROLES]);
   protected readonly _rolesState = signal<'closed' | 'open'>('closed');
 
   protected rolesStateChanged(state: 'open' | 'closed') {
@@ -110,11 +109,11 @@ export class RoleFilter {
     } else {
       this._rolesFilter.set(current.filter((r) => r !== role));
     }
-    this.table().getColumn('role')?.setFilterValue(this._rolesFilter());
+    this.rolesChanged.emit(this._rolesFilter());
   }
 
   protected clearRolesFilter(): void {
     this._rolesFilter.set([]);
-    this.table().getColumn('role')?.setFilterValue([]);
+    this.rolesChanged.emit(this._rolesFilter());
   }
 }

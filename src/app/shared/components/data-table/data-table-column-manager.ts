@@ -23,8 +23,8 @@ import { Table } from '@tanstack/angular-table';
   template: `
     <button type="button" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">
       <ng-icon hlmIcon name="lucideSettings2" size="sm" />
-      <span class="ml-2">{{ 'buttons.columns' | transloco }}</span>
-      <ng-icon hlmIcon name="lucideChevronDown" class="ms-2" size="sm" />
+      <span>{{ 'buttons.columns' | transloco }}</span>
+      <ng-icon hlmIcon name="lucideChevronDown" size="sm" />
     </button>
 
     <ng-template #columnMenu>

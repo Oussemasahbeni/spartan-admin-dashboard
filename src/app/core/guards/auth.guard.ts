@@ -1,13 +1,13 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '@core/user/auth.service';
 import { User } from '../../features/users/model/user';
-import { UserService } from '../user/user.service';
 
 export const authGuard: CanActivateFn = (_route, _state) => {
-  const userService = inject(UserService);
+  const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (userService.user()) return true;
+  if (authService.currentUser()) return true;
 
   const token = localStorage.getItem('token');
   if (token) {
@@ -21,7 +21,7 @@ export const authGuard: CanActivateFn = (_route, _state) => {
       status: 'active',
       createdAt: new Date('2023-01-01T00:00:00Z'),
     };
-    userService.setUser(user);
+    authService.setUser(user);
     return true;
   }
 

@@ -7,14 +7,14 @@
           hlmInput
           class="h-8 w-full md:w-80"
           [placeholder]="t('common.searchPlaceholder')"
-          (input)="_filterChanged($event)"
+          [field]="searchForm.search"
         />
 
         <!-- STATUS FILTER -->
-        <adm-users-status-filter [table]="table()" />
+        <adm-users-status-filter (statusChanged)="selectedStatuses.set($event)" />
 
         <!-- ROLE FILTER -->
-        <adm-users-role-filter [table]="table()" />
+        <adm-users-role-filter (rolesChanged)="selectedRoles.set($event)" />
       </div>
 
       <div class="flex gap-2">
@@ -45,8 +45,12 @@
       [columns]="columns"
       [isLoading]="isLoading()"
       [data]="users()"
+      [totalElements]="totalElements()"
+      [paginationState]="pagination()"
+      [sortingState]="sorting()"
       [resizableColumns]="true"
       [enableRowSelection]="true"
+      (stateChange)="handleStateChange($event)"
     >
       <!-- Date Cell -->
       <ng-template #dateCell let-context>

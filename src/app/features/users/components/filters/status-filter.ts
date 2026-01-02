@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCirclePlus, lucideSearch } from '@ng-icons/lucide';
@@ -9,9 +9,8 @@ import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
-import { Table } from '@tanstack/angular-table';
-import { User, UserStatus } from '../model/user';
-import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
+import { USER_STATUSES, UserStatus } from '../../model/user';
+import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe';
 
 @Component({
   selector: 'adm-users-status-filter',
@@ -90,15 +89,15 @@ import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
   `,
 })
 export class StatusFilter {
-  readonly table = input.required<Table<User>>();
+  readonly statusChanged = output<UserStatus[]>();
 
   protected readonly _statusFilter = signal<UserStatus[]>([]);
-  protected readonly _statusList = signal(['active', 'inactive', 'pending'] satisfies UserStatus[]);
+  protected readonly _statusList = signal([...USER_STATUSES]);
   protected readonly _statusState = signal<'closed' | 'open'>('closed');
 
   protected clearStatusFilter(): void {
     this._statusFilter.set([]);
-    this.table().getColumn('status')?.setFilterValue([]);
+    this.statusChanged.emit(this._statusFilter());
   }
 
   protected statusStateChanged(state: 'open' | 'closed') {
@@ -116,6 +115,6 @@ export class StatusFilter {
     } else {
       this._statusFilter.set(current.filter((s) => s !== status));
     }
-    this.table().getColumn('status')?.setFilterValue(this._statusFilter());
+    this.statusChanged.emit(this._statusFilter());
   }
 }

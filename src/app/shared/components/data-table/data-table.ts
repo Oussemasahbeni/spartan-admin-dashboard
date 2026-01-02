@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal, untracked } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal, untracked } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -14,8 +14,6 @@ import {
   FlexRenderDirective,
   getCoreRowModel,
   getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   PaginationState,
   RowSelectionState,
   SortingState,
@@ -50,22 +48,21 @@ export class DataTable<T> {
   readonly columns = input<ColumnDef<T>[]>([]);
   readonly isLoading = input<boolean>(false);
   readonly data = input<T[]>([]);
+  readonly totalElements = input<number>(0);
   readonly paginated = input<boolean>(true);
   readonly resizableColumns = input<boolean>(false);
   readonly enableRowSelection = input<boolean>(false);
+  readonly paginationState = input<PaginationState>({ pageIndex: 0, pageSize: 10 });
+  readonly sortingState = input<SortingState>([]);
 
-  private readonly _columnOrder = signal<string[]>([]);
-  private readonly _columnFilters = signal<ColumnFiltersState>([]);
-  private readonly _sorting = signal<SortingState>([]);
-  private readonly _rowSelection = signal<RowSelectionState>({});
-  private readonly _columnVisibility = signal<VisibilityState>({});
+  readonly stateChange = output<{ pagination: PaginationState; sorting: SortingState }>();
+
+  private readonly columnOrder = signal<string[]>([]);
+  private readonly columnFilters = signal<ColumnFiltersState>([]);
+  private readonly rowSelection = signal<RowSelectionState>({});
+  private readonly columnVisibility = signal<VisibilityState>({});
   readonly _columnSizingInfo = computed(() => this.table.getState().columnSizingInfo);
   readonly _columnSizing = computed(() => this.table.getState().columnSizing);
-  /** Current pagination state (page index and size) */
-  private readonly _pagination = signal<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
 
   /**
    *
@@ -91,37 +88,42 @@ export class DataTable<T> {
   readonly table = createAngularTable<T>(() => ({
     data: this.data(),
     columns: this.columns(),
+    manualPagination: true,
+    manualSorting: true,
+    manualFiltering: true,
+    rowCount: this.totalElements(),
     state: {
-      pagination: this._pagination(),
-      columnOrder: this._columnOrder(),
-      sorting: this._sorting(),
-      columnFilters: this._columnFilters(),
-      columnVisibility: this._columnVisibility(),
-      rowSelection: this._rowSelection(),
+      pagination: this.paginationState(),
+      sorting: this.sortingState(),
+      columnOrder: this.columnOrder(),
+      columnFilters: this.columnFilters(),
+      columnVisibility: this.columnVisibility(),
+      rowSelection: this.rowSelection(),
     },
     columnResizeMode: 'onChange',
     onSortingChange: (updater) => {
-      updater instanceof Function ? this._sorting.update(updater) : this._sorting.set(updater);
+      const next = updater instanceof Function ? updater(this.sortingState()) : updater;
+      // Reset page to 0 when sorting changes
+      const resetPage = { ...this.paginationState(), pageIndex: 0 };
+      this.stateChange.emit({ pagination: resetPage, sorting: next });
     },
     onColumnFiltersChange: (updater) => {
-      updater instanceof Function ? this._columnFilters.update(updater) : this._columnFilters.set(updater);
+      updater instanceof Function ? this.columnFilters.update(updater) : this.columnFilters.set(updater);
     },
     onPaginationChange: (updaterOrValue) => {
-      const next = typeof updaterOrValue === 'function' ? updaterOrValue(this._pagination()) : updaterOrValue;
-      this._pagination.set(next);
+      const next = typeof updaterOrValue === 'function' ? updaterOrValue(this.paginationState()) : updaterOrValue;
+      this.stateChange.emit({ pagination: next, sorting: this.sortingState() });
     },
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: (updater) => {
-      updater instanceof Function ? this._columnVisibility.update(updater) : this._columnVisibility.set(updater);
+      updater instanceof Function ? this.columnVisibility.update(updater) : this.columnVisibility.set(updater);
     },
     onRowSelectionChange: (updater) => {
-      updater instanceof Function ? this._rowSelection.update(updater) : this._rowSelection.set(updater);
+      updater instanceof Function ? this.rowSelection.update(updater) : this.rowSelection.set(updater);
     },
     onColumnOrderChange: (updater) => {
-      updater instanceof Function ? this._columnOrder.update(updater) : this._columnOrder.set(updater);
+      updater instanceof Function ? this.columnOrder.update(updater) : this.columnOrder.set(updater);
     },
   }));
 

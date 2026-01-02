@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { email, Field, form, required, submit, validate } from '@angular/forms/signals';
 import { provideTranslocoScope, TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { CountryPicker } from '@shared/components/country-picker/country-picker';
+import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
+import { countries, Country } from '@shared/countries';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -10,13 +13,11 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
+import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { parsePhoneNumberFromString } from 'libphonenumber-js/mobile';
 import { toast } from 'ngx-sonner';
-import { UserService } from '../../../core/user/user.service';
-import { CountryPicker } from '../../../shared/components/country-picker/country-picker';
-import { PhoneNumberPicker } from '../../../shared/components/phone-number-picker/phone-number-picker';
-import { countries, Country } from '../../../shared/countries';
-import { User, UserRole } from '../model/user';
+import { User, USER_ROLES, UserRole } from '../../model/user';
+import { UserService } from '../../service/user.service';
 
 export interface UserFormModel {
   name: string;
@@ -35,6 +36,7 @@ export interface UserFormModel {
     HlmInputImports,
     HlmFieldImports,
     HlmButtonImports,
+    HlmSpinnerImports,
     HlmIconImports,
     HlmButtonImports,
     BrnSelectImports,
@@ -55,11 +57,12 @@ export interface UserFormModel {
 export class UserForm implements OnInit {
   private readonly _userService = inject(UserService);
   private readonly _transloco = inject(TranslocoService);
-  private readonly _dialogRef = inject<BrnDialogRef<UserForm>>(BrnDialogRef);
+  private readonly _dialogRef = inject<BrnDialogRef>(BrnDialogRef);
   private readonly _dialogContext = injectBrnDialogContext<{ user?: User }>();
 
-  protected readonly rolesList = signal(['admin', 'user', 'manager'] satisfies UserRole[]);
+  protected readonly rolesList = signal([...USER_ROLES]);
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.user);
+  protected readonly isSubmitting = signal(false);
 
   private readonly userModel = signal<UserFormModel>({
     name: '',
@@ -101,44 +104,45 @@ export class UserForm implements OnInit {
 
   onSubmit() {
     submit(this.userForm, async () => {
+      if (!this.userForm().dirty()) {
+        this._dialogRef.close(false);
+        return;
+      }
       this.onSaveUser();
     });
   }
 
   onSaveUser() {
-    if (this.isEditMode()) {
-      this.editUser();
-    } else {
-      this.createUser();
-    }
+    this.isSubmitting.set(true);
+    const payload = this._mapFormToUser();
+    const userId = this._dialogContext.user?.id;
+
+    const request$ =
+      this.isEditMode() && userId ? this._userService.updateUser(userId, payload) : this._userService.createUser(payload);
+
+    request$.subscribe({
+      next: () => {
+        this.showToast();
+        this._dialogRef.close(true);
+      },
+      error: (err) => {
+        console.error(err);
+        toast.error('Save failed');
+        this.isSubmitting.set(false);
+      },
+    });
   }
 
-  createUser() {
-    const user: User = {
-      id: crypto.randomUUID(),
-      avatar: '',
-      name: this.userForm.name().value(),
-      email: this.userForm.email().value(),
-      phoneNumber: this.userForm.phoneNumber().value(),
-      country: this.userForm.country().value()?.iso ?? null,
-      role: this.userForm.role().value(),
-      status: 'active',
-      createdAt: new Date(),
+  private _mapFormToUser(): Partial<User> {
+    const val = this.userForm;
+    return {
+      name: val.name().value(),
+      email: val.email().value(),
+      phoneNumber: val.phoneNumber().value(),
+      country: val.country().value()?.iso ?? null,
+      role: val.role().value(),
+      status: this._dialogContext.user?.status ?? 'active',
     };
-    this._userService.addUser(user);
-    this._dialogRef.close();
-    this.showToast();
-  }
-
-  editUser() {
-    if (this._dialogContext.user) {
-      const updatedUser: User = {
-        ...this._dialogContext.user,
-      };
-      this._userService.updateUser(updatedUser);
-      this._dialogRef.close();
-      this.showToast();
-    }
   }
 
   showToast() {
@@ -152,6 +156,7 @@ export class UserForm implements OnInit {
     const isDirty = this.userForm().dirty();
 
     if (isDirty) {
+      // TODO: replace with a translation and a proper confirmation dialog
       const confirmDiscard = confirm('You have unsaved changes. Are you sure you want to discard them?');
       if (!confirmDiscard) {
         return;

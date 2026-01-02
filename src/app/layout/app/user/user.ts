@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from '@core/user/auth.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -20,7 +20,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
 import { LanguageOptions, LanguageService } from '../../../core/config/language.service';
 import { ThemeService } from '../../../core/config/theme.service';
-import { UserService } from '../../../core/user/user.service';
 import { User } from '../../../features/users/model/user';
 
 @Component({
@@ -47,8 +46,7 @@ export class NavUser {
   private readonly _sidebarService = inject(HlmSidebarService);
   private readonly _languageService = inject(LanguageService);
   private readonly _themeService = inject(ThemeService);
-  private readonly _router = inject(Router);
-  private readonly _userService = inject(UserService);
+  private readonly _authService = inject(AuthService);
   readonly currentTheme = this._themeService.theme;
   readonly currentLang = this._languageService.currentLang;
 
@@ -66,8 +64,6 @@ export class NavUser {
   }
 
   onLogout(): void {
-    localStorage.removeItem('token');
-    this._userService.clearUser();
-    this._router.navigate(['/login']);
+    this._authService.logout();
   }
 }
