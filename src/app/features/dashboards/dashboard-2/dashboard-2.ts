@@ -19,12 +19,13 @@ import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { TransactionsTableComponent } from './components/transactions-table/transactions-table';
 import { ChartOptions, Transaction } from './model/dashboard-2';
-import { TransactionStatusUIPipe, provideTransactionStatusIcons } from './pipes/status-ui.pipe';
+import { provideTransactionStatusIcons } from './pipes/status-ui.pipe';
 
 @Component({
   selector: 'adm-dashboard-2',
-  imports: [NgApexchartsModule, HlmButtonImports, HlmIconImports, HlmBadgeImports, TransactionStatusUIPipe],
+  imports: [NgApexchartsModule, HlmButtonImports, HlmIconImports, HlmBadgeImports, TransactionsTableComponent],
   providers: [
     provideIcons({
       lucideFilter,
@@ -44,11 +45,10 @@ import { TransactionStatusUIPipe, provideTransactionStatusIcons } from './pipes/
   templateUrl: './dashboard-2.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// TODO: Update the colors of the charts to better match the overall theme
+// TODO: Add more interactivity to the dashboard elements
 export class Dashboard2 implements OnInit {
-  // Signals for data
   readonly transactions = signal<Transaction[]>([]);
-
-  // Revenue Chart Configuration (Bar Chart)
   public revenueChartOptions: Partial<ChartOptions> | any = {
     series: [
       {
@@ -71,7 +71,7 @@ export class Dashboard2 implements OnInit {
       bar: {
         horizontal: false,
         columnWidth: '40%',
-        borderRadius: 4, // Rounded bars like in image
+        borderRadius: 4,
       },
     },
     dataLabels: { enabled: false },
@@ -85,7 +85,7 @@ export class Dashboard2 implements OnInit {
       axisBorder: { show: false },
       axisTicks: { show: false },
       labels: {
-        style: { colors: '#94a3b8' }, // Tailwind slate-400
+        style: { colors: '#94a3b8' },
       },
     },
     yaxis: {
@@ -97,11 +97,11 @@ export class Dashboard2 implements OnInit {
       },
     },
     grid: {
-      borderColor: '#1e293b', // Tailwind slate-800
+      borderColor: '#1e293b',
       strokeDashArray: 4,
     },
     fill: { opacity: 1 },
-    colors: ['#3b82f6', '#10b981'], // Blue and Emerald to match image
+    colors: ['#3b82f6', '#10b981'],
     legend: {
       position: 'bottom',
       labels: { colors: '#cbd5e1' },
@@ -111,7 +111,6 @@ export class Dashboard2 implements OnInit {
     },
   };
 
-  // Visitor Chart Configuration (Donut)
   public donutChartOptions: Partial<ChartOptions> | any = {
     series: [500, 300, 200, 125],
     labels: ['Desktop', 'Mobile', 'Tablet', 'Other'],
@@ -120,7 +119,7 @@ export class Dashboard2 implements OnInit {
       height: 320,
       background: 'transparent',
     },
-    colors: ['#3b82f6', '#f43f5e', '#10b981', '#f59e0b'], // Colors from image
+    colors: ['#3b82f6', '#f43f5e', '#10b981', '#f59e0b'],
     plotOptions: {
       pie: {
         donut: {
@@ -159,7 +158,7 @@ export class Dashboard2 implements OnInit {
     },
     dataLabels: { enabled: false },
     stroke: { show: false },
-    legend: { show: false }, // Hiding legend to match the clean donut look
+    legend: { show: false },
     tooltip: { theme: 'dark' },
   };
 
@@ -170,7 +169,6 @@ export class Dashboard2 implements OnInit {
   }
 
   generateMockData() {
-    // Generate 5 mock transactions using Faker
     const data: Transaction[] = Array.from({ length: 5 }).map(() => ({
       id: faker.string.numeric(6),
       user: {

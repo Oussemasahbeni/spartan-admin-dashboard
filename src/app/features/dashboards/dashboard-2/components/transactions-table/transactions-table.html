@@ -1,0 +1,52 @@
+<div class="border-border bg-card w-full overflow-hidden rounded-xl p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <h3 class="text-lg font-semibold">Recent Activity</h3>
+    <!-- TODO: Add filter functionality and fix the styling -->
+    <button type="button" hlmBtn variant="outline" size="sm">Period</button>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="text-muted-foreground w-full text-left text-sm">
+      <thead class="text-xs text-white">
+        <tr>
+          <th scope="col" class="px-4 py-3">User</th>
+          <th scope="col" class="px-4 py-3">Status</th>
+          <th scope="col" class="px-4 py-3">ID</th>
+          <th scope="col" class="px-4 py-3">Date</th>
+          <th scope="col" class="px-4 py-3 text-right">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of transactions(); track item.id) {
+          <tr class="border-border hover:bg-accent border-b transition">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <div class="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-slate-700">
+                  <img alt="User" class="h-full w-full object-cover" height="100" width="100" [ngSrc]="item.user.avatar" />
+                </div>
+                <div>
+                  <div class="font-medium text-white">{{ item.user.name }}</div>
+                  <div class="text-muted-foreground text-xs">{{ item.user.email }}</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <span hlmBadge variant="outline" class="text-muted-foreground">
+                @let status = item.status;
+                @let ui = status | transactionStatusUI;
+                <ng-icon hlmIcon [class]="ui.class" [name]="ui.icon" />
+                {{ item.status }}
+              </span>
+            </td>
+            <td class="text-muted-foreground px-4 py-3">#{{ item.id }}</td>
+            <td class="px-4 py-3 text-white">{{ item.date }}</td>
+            <td class="px-4 py-3 text-right font-medium text-white">{{ item.amount }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-4 text-center">
+    <button type="button" hlmBtn variant="link" size="sm">A list of your recent activity.</button>
+  </div>
+</div>
