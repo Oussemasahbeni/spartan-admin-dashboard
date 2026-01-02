@@ -1,0 +1,209 @@
+<div class="min-h-screen font-sans text-slate-100">
+  <header class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight">Dashboard</h1>
+      <p class="mt-1 text-slate-400">Here's the details of your analysis.</p>
+    </div>
+    <div class="flex gap-3">
+      <button type="button" hlmBtn variant="outline">
+        <ng-icon hlmIcon name="lucideFilter" size="sm" />
+        Filter By
+      </button>
+      <button type="button" hlmBtn variant="default">
+        <ng-icon hlmIcon name="lucideDownload" size="sm" />
+        Export
+      </button>
+    </div>
+  </header>
+
+  <div class="mb-6 grid grid-cols-1 gap-6 xl:grid-cols-12">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:col-span-5">
+      <div class="border-border bg-card flex flex-col justify-between rounded-xl p-6">
+        <div class="mb-4 flex items-start justify-between">
+          <ng-icon hlmIcon name="lucideShoppingBag" />
+          <button type="button" hlmBtn variant="ghost" size="icon">
+            <ng-icon hlmIcon name="lucideMoreHorizontal" size="sm" />
+          </button>
+        </div>
+        <div>
+          <span class="text-sm font-medium text-slate-400">Total Sales</span>
+          <div class="mt-1 text-2xl font-bold">$4,523,189</div>
+          <div class="mt-2 flex items-center gap-1 text-xs text-emerald-400">
+            <ng-icon hlmIcon class="text-success" name="lucideTrendingUp" size="xs" />
+            <span>+20.1%</span>
+            <span class="ml-1 text-slate-500">from last month</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-border bg-card flex flex-col justify-between rounded-xl p-6">
+        <div class="mb-4 flex items-start justify-between">
+          <ng-icon hlmIcon name="lucideLayoutDashboard" />
+          <button type="button" hlmBtn variant="ghost" size="icon">
+            <ng-icon hlmIcon name="lucideMoreHorizontal" size="sm" />
+          </button>
+        </div>
+        <div>
+          <span class="text-sm font-medium text-slate-400">Total Orders</span>
+          <div class="mt-1 text-2xl font-bold">12,545</div>
+          <div class="mt-2 flex items-center gap-1 text-xs text-emerald-400">
+            <ng-icon hlmIcon class="text-success" name="lucideTrendingUp" size="xs" />
+            <span>+10.2%</span>
+            <span class="ml-1 text-slate-500">from last month</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-border bg-card flex flex-col justify-between rounded-xl p-6">
+        <div class="mb-4 flex items-start justify-between">
+          <ng-icon hlmIcon name="lucideUsers" />
+          <button type="button" hlmBtn variant="ghost" size="icon">
+            <ng-icon hlmIcon name="lucideMoreHorizontal" size="sm" />
+          </button>
+        </div>
+        <div>
+          <span class="text-sm font-medium text-slate-400">Total Visitors</span>
+          <div class="mt-1 text-2xl font-bold">8,344</div>
+          <div class="mt-2 flex items-center gap-1 text-xs text-rose-400">
+            <ng-icon hlmIcon class="text-rose-400" name="lucideTrendingDown" size="xs" />
+            <span>-14.2%</span>
+            <span class="ml-1 text-slate-500">from last month</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-border bg-card flex flex-col justify-between rounded-xl p-6">
+        <div class="mb-4 flex items-start justify-between">
+          <ng-icon hlmIcon name="lucideCreditCard" />
+          <button type="button" hlmBtn variant="ghost" size="icon">
+            <ng-icon hlmIcon name="lucideMoreHorizontal" size="sm" />
+          </button>
+        </div>
+        <div>
+          <span class="text-sm font-medium text-slate-400">Refunded</span>
+          <div class="mt-1 text-2xl font-bold">3,148</div>
+          <div class="mt-2 flex items-center gap-1 text-xs text-emerald-400">
+            <ng-icon hlmIcon class="text-success" name="lucideTrendingUp" size="xs" />
+            <span>+12.6%</span>
+            <span class="ml-1 text-slate-500">from last month</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-border bg-card rounded-xl p-6 xl:col-span-7">
+      <div class="mb-6 flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-semibold">Revenue</h3>
+          <div class="mt-1 flex items-center gap-2">
+            <span class="text-2xl font-bold">$14,324</span>
+            <span class="flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-xs text-emerald-400">
+              <ng-icon hlmIcon class="text-success" name="lucideTrendingUp" size="xs" />
+              <span>6.5%</span>
+            </span>
+          </div>
+        </div>
+        <select
+          class="rounded-md border border-slate-800 bg-slate-950 px-3 py-1 text-sm outline-none focus:border-indigo-500"
+        >
+          <option>Year</option>
+          <option>Month</option>
+        </select>
+      </div>
+
+      <apx-chart
+        [series]="revenueChartOptions.series"
+        [chart]="revenueChartOptions.chart"
+        [dataLabels]="revenueChartOptions.dataLabels"
+        [plotOptions]="revenueChartOptions.plotOptions"
+        [yaxis]="revenueChartOptions.yaxis"
+        [xaxis]="revenueChartOptions.xaxis"
+        [grid]="revenueChartOptions.grid"
+        [colors]="revenueChartOptions.colors"
+        [legend]="revenueChartOptions.legend"
+        [tooltip]="revenueChartOptions.tooltip"
+      ></apx-chart>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 xl:grid-cols-12">
+    <div class="border-border bg-card overflow-hidden rounded-xl p-6 xl:col-span-8">
+      <div class="mb-6 flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Recent Activity</h3>
+        <button type="button" hlmBtn variant="outline" size="sm">Period</button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-400">
+          <thead class="bg-slate-900/50 text-xs text-slate-300 uppercase">
+            <tr>
+              <th scope="col" class="px-4 py-3">User</th>
+              <th scope="col" class="px-4 py-3">Status</th>
+              <th scope="col" class="px-4 py-3">ID</th>
+              <th scope="col" class="px-4 py-3">Date</th>
+              <th scope="col" class="px-4 py-3 text-right">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of transactions(); track item.id) {
+              <tr class="border-b border-slate-800 transition hover:bg-slate-800/30">
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-slate-700">
+                      <img [src]="item.user.avatar" alt="User" class="h-full w-full object-cover" />
+                    </div>
+                    <div>
+                      <div class="font-medium text-slate-200">{{ item.user.name }}</div>
+                      <div class="text-xs text-slate-500">{{ item.user.email }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3">
+                  <span hlmBadge variant="outline" class="text-muted-foreground">
+                    @let status = item.status;
+                    @let ui = status | transactionStatusUI;
+                    <ng-icon hlmIcon [class]="ui.class" [name]="ui.icon" />
+                    {{ item.status }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-slate-500">#{{ item.id }}</td>
+                <td class="px-4 py-3 text-slate-300">{{ item.date }}</td>
+                <td class="px-4 py-3 text-right font-medium text-slate-200">{{ item.amount }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-4 text-center">
+        <button type="button" hlmBtn variant="link" size="sm">A list of your recent activity.</button>
+      </div>
+    </div>
+
+    <div class="border-border bg-card flex flex-col rounded-xl p-6 xl:col-span-4">
+      <div class="mb-2 text-center">
+        <h3 class="text-lg font-semibold">Total Visitor - Chart</h3>
+        <p class="text-xs text-slate-500">January - June 2024</p>
+      </div>
+
+      <div class="flex min-h-[300px] flex-1 items-center justify-center">
+        <apx-chart
+          [series]="donutChartOptions.series"
+          [chart]="donutChartOptions.chart"
+          [labels]="donutChartOptions.labels"
+          [colors]="donutChartOptions.colors"
+          [dataLabels]="donutChartOptions.dataLabels"
+          [legend]="donutChartOptions.legend"
+          [plotOptions]="donutChartOptions.plotOptions"
+          [stroke]="donutChartOptions.stroke"
+        ></apx-chart>
+      </div>
+
+      <div class="mt-4 text-center">
+        <div class="flex items-center justify-center gap-2 text-sm font-medium text-emerald-400">
+          Trending up by 5.2% this month <ng-icon hlmIcon name="lucideTrendingUp" size="sm" />
+        </div>
+        <p class="mt-1 text-sm text-slate-500">Showing total visitors for the last 6 months</p>
+      </div>
+    </div>
+  </div>
+</div>

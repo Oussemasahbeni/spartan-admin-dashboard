@@ -72,6 +72,7 @@ export class Navigation {
             { title: 'Overview', key: 'overview', url: '#', icon: 'lucideGauge' },
             { title: 'Analytics', key: 'analytics', url: '#', icon: 'lucideBarChart3' },
             { title: 'Reports', key: 'reports', url: '#', icon: 'lucideFileText' },
+            { title: 'Dashboard 2', key: 'dashboard-2', url: '/dashboard/dashboard-2', icon: 'lucideLayoutDashboard' },
           ],
         },
         { title: 'Users', key: 'users', url: '/users', icon: 'lucideUsers' },

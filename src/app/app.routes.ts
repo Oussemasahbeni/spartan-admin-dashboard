@@ -42,6 +42,11 @@ export const routes: Routes = [
     canActivateChild: [authGuard],
     children: [
       {
+        path: 'dashboard',
+        title: 'dashboard',
+        loadChildren: () => import('./features/dashboards/dashboards.routes'),
+      },
+      {
         path: 'users',
         title: 'users',
         providers: [provideTranslocoScope('users')],
