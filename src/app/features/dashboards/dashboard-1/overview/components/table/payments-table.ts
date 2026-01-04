@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, viewChild } from '@angular/core';
-import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { provideTranslocoScope, translateSignal, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUpDown,
@@ -102,20 +102,20 @@ export class PaymentsTable {
     {
       accessorKey: 'email',
       id: 'email',
-      header: 'Email',
+      header: translateSignal('paymentsTable.columns.email'),
       meta: { translationKey: 'dashboard1.paymentsTable.columns.email' },
     },
     {
       accessorKey: 'status',
       id: 'status',
-      header: 'Status',
+      header: translateSignal('paymentsTable.columns.status'),
       enableSorting: false,
       meta: { translationKey: 'dashboard1.paymentsTable.columns.status' },
     },
     {
       accessorKey: 'amount',
       id: 'amount',
-      header: 'Amount',
+      header: translateSignal('paymentsTable.columns.amount'),
       enableSorting: false,
       meta: { translationKey: 'dashboard1.paymentsTable.columns.amount' },
       cell: (info) => {
