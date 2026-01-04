@@ -9,7 +9,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
   imports: [RouterOutlet, HlmToasterImports, NgScrollbarModule, HlmScrollAreaImports],
   template: `
     <hlm-toaster position="top-center" />
-    <ng-scrollbar hlm [withButtons]="true">
+    <ng-scrollbar hlm appearance="native" [withButtons]="true">
       <router-outlet />
     </ng-scrollbar>
   `,

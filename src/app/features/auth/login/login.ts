@@ -70,6 +70,6 @@ export class Login {
   onLogin(): void {
     this.isLoading.set(true);
     localStorage.setItem('token', 'dummy-jwt-token');
-    this._router.navigate(['/users']);
+    this._router.navigate(['/dashboard/overview']);
   }
 }

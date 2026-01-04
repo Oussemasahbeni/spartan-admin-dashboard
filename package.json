@@ -36,6 +36,7 @@
     "clsx": "^2.1.1",
     "libphonenumber-js": "^1.12.33",
     "ng-apexcharts": "^2.0.4",
+    "ngx-oneforall": "^1.0.2",
     "ngx-scrollbar": "^19.1.1",
     "ngx-sonner": ">=3.0.0",
     "prettier": "^3.7.4",

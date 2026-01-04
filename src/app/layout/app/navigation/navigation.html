@@ -59,9 +59,14 @@
                         <ul hlmSidebarMenuSub>
                           @for (subItem of children; track subItem.key || subItem.title) {
                             <li hlmSidebarMenuSubItem>
-                              <button type="button" hlmSidebarMenuSubButton class="w-full" [routerLink]="subItem.url">
+                              <a
+                                routerLinkActive="!bg-primary/10 !text-primary !font-semibold hover:!bg-primary/10 hover:!text-primary"
+                                hlmSidebarMenuSubButton
+                                class="hover:none w-full"
+                                [routerLink]="subItem.url"
+                              >
                                 {{ subItem.key ? t(subItem.key) : subItem.title }}
-                              </button>
+                              </a>
                             </li>
                           }
                         </ul>
@@ -73,8 +78,8 @@
                   <li hlmSidebarMenuItem>
                     <a
                       hlmSidebarMenuButton
-                      routerLinkActive="bg-primary/10 text-primary !font-semibold group active-link"
-                      class="relative overflow-hidden transition-all duration-200"
+                      routerLinkActive="!bg-primary/10 !text-primary !font-semibold hover:!bg-primary/10 hover:!text-primary"
+                      class="hover:none w-full"
                       [routerLinkActiveOptions]="{ exact: false }"
                       [routerLink]="item.url"
                     >

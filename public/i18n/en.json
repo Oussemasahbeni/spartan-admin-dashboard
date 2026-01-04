@@ -16,7 +16,9 @@
         "users": "Users",
         "notFound": "Page Not Found",
         "unauthorized": "Unauthorized",
-        "serviceUnavailable": "Service Unavailable"
+        "serviceUnavailable": "Service Unavailable",
+        "overview": "Overview",
+        "analytics": "Analytics"
     },
     "navigation": {
         "application": "Application",
@@ -93,5 +95,49 @@
         "selectCountryPlaceholder": "Select country code...",
         "searchCountryPlaceholder": "Search a country...",
         "enterPhoneNumberPlaceholder": "Enter phone number..."
+    },
+    "notifications": {
+        "title": "Notifications",
+        "markAllAsRead": "Mark all as read",
+        "clearAll": "Clear All",
+        "noNotifications": "No notifications",
+        "noNotificationsDescription": "You're all caught up. New notifications will appear here.",
+        "actions": {
+            "commentedOn": "commented on",
+            "liked": "liked",
+            "shared": "shared",
+            "mentionedYouIn": "mentioned you in",
+            "repliedTo": "replied to",
+            "assignedYouTo": "assigned you to"
+        },
+        "subjects": {
+            "yourPost": "your post",
+            "theProject": "the project",
+            "aTask": "a task",
+            "anIssue": "an issue",
+            "aDocument": "a document",
+            "theReport": "the report"
+        }
+    },
+    "timeAgo": {
+        "justNow": "just now",
+        "prefix": "",
+        "suffix": "ago",
+        "futurePrefix": "in",
+        "futureSuffix": "",
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hour",
+        "hours": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years"
     }
 }

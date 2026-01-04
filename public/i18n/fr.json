@@ -16,7 +16,9 @@
         "users": "Utilisateurs",
         "notFound": "Page introuvable",
         "unauthorized": "Non autorisé",
-        "serviceUnavailable": "Service indisponible"
+        "serviceUnavailable": "Service indisponible",
+        "overview": "Vue d'ensemble",
+        "analytics": "Analyses"
     },
     "navigation": {
         "application": "Application",
@@ -90,8 +92,52 @@
         "searchCountryPlaceholder": "Rechercher un pays..."
     },
     "phoneNumberPicker": {
-        "selectCountryPlaceholder": "Sélectionner l’indicatif du pays...",
+        "selectCountryPlaceholder": "Sélectionner l'indicatif du pays...",
         "searchCountryPlaceholder": "Rechercher un pays...",
         "enterPhoneNumberPlaceholder": "Saisir le numéro de téléphone..."
+    },
+    "notifications": {
+        "title": "Notifications",
+        "markAllAsRead": "Tout marquer comme lu",
+        "clearAll": "Tout effacer",
+        "noNotifications": "Aucune notification",
+        "noNotificationsDescription": "Vous êtes à jour. Les nouvelles notifications apparaîtront ici.",
+        "actions": {
+            "commentedOn": "a commenté",
+            "liked": "a aimé",
+            "shared": "a partagé",
+            "mentionedYouIn": "vous a mentionné dans",
+            "repliedTo": "a répondu à",
+            "assignedYouTo": "vous a assigné à"
+        },
+        "subjects": {
+            "yourPost": "votre publication",
+            "theProject": "le projet",
+            "aTask": "une tâche",
+            "anIssue": "un problème",
+            "aDocument": "un document",
+            "theReport": "le rapport"
+        }
+    },
+    "timeAgo": {
+        "justNow": "à l'instant",
+        "prefix": "il y a",
+        "suffix": "",
+        "futurePrefix": "dans",
+        "futureSuffix": "",
+        "second": "seconde",
+        "seconds": "secondes",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "heure",
+        "hours": "heures",
+        "day": "jour",
+        "days": "jours",
+        "week": "semaine",
+        "weeks": "semaines",
+        "month": "mois",
+        "months": "mois",
+        "year": "an",
+        "years": "ans"
     }
 }
