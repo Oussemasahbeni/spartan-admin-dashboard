@@ -55,7 +55,7 @@ import { Notification } from '../../model/notification';
           }
         </div>
         <hr class="border-muted -mx-1" />
-        <ng-scrollbar class="max-h-96 overflow-y-auto" hlm appearance="compact">
+        <ng-scrollbar class="max-h-96 overflow-y-auto" hlm appearance="native">
           <ul>
             @for (notification of notifications(); track $index) {
               <button
