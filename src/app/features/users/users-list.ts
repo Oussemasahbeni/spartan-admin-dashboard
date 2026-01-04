@@ -23,15 +23,15 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { debounce, Field, form } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideDownload, lucideRefreshCcw, lucideSearch, lucideUpload, lucideUserPlus, lucideX } from '@ng-icons/lucide';
+import { lucideRefreshCcw, lucideSearch, lucideUserPlus, lucideX } from '@ng-icons/lucide';
+import { DataTableColumnManager } from '@shared/components/columns-manager/data-table-column-manager';
 import { CountryDisplay } from '@shared/components/country-display/country-display';
 import { DataTable } from '@shared/components/data-table/data-table';
-import { DataTableColumnManager } from '@shared/components/data-table/data-table-column-manager';
 import { PaginatedResponse } from '@shared/models/page';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
-import { CardSection } from './components/cards/card-section';
+import { UsersCardSection } from './components/cards/card-section';
 import { RoleFilter } from './components/filters/role-filter';
 import { StatusFilter } from './components/filters/status-filter';
 import { UserForm } from './components/form/user-form';
@@ -52,7 +52,7 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
     HlmAvatarImports,
     HlmBadgeImports,
     DatePipe,
-    CardSection,
+    UsersCardSection,
     TranslocoModule,
     RoleIconPipe,
     StatusUIPipe,
@@ -70,8 +70,6 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
     provideIcons({
       lucideRefreshCcw,
       lucideUserPlus,
-      lucideDownload,
-      lucideUpload,
       lucideSearch,
       lucideX,
     }),
@@ -79,7 +77,6 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Users {
-  // --- Services ---
   private readonly _translocoService = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _destroyRef = inject(DestroyRef);
@@ -109,7 +106,6 @@ export class Users {
     const sort = this.sorting()[0];
     const roles = this.selectedRoles();
     const statuses = this.selectedStatuses();
-    console.log(this.pagination());
 
     return {
       url: '/api/users',
@@ -160,17 +156,20 @@ export class Users {
       id: 'name',
       accessorKey: 'name',
       header: translateSignal(`list.columns.name`),
+      meta: { translationKey: 'users.list.columns.name' },
       cell: () => this.nameCell(),
     },
     {
       id: 'email',
       accessorKey: 'email',
+      meta: { translationKey: 'users.list.columns.email' },
       header: translateSignal(`list.columns.email`),
     },
     {
       id: 'country',
       accessorKey: 'country',
       header: translateSignal('list.columns.country'),
+      meta: { translationKey: 'users.list.columns.country' },
       enableSorting: false,
       cell: () => this.countryCell(),
     },
@@ -178,24 +177,28 @@ export class Users {
       id: 'phoneNumber',
       accessorKey: 'phoneNumber',
       header: translateSignal('list.columns.phoneNumber'),
+      meta: { translationKey: 'users.list.columns.phoneNumber' },
       enableSorting: false,
     },
     {
       id: 'createdAt',
       accessorKey: 'createdAt',
       header: translateSignal('list.columns.createdAt'),
+      meta: { translationKey: 'users.list.columns.createdAt' },
       cell: () => this.dateCell(),
     },
     {
       id: 'role',
       accessorKey: 'role',
       header: translateSignal('list.columns.role'),
+      meta: { translationKey: 'users.list.columns.role' },
       cell: () => this.roleCell(),
     },
     {
       id: 'status',
       accessorKey: 'status',
       header: translateSignal('list.columns.status'),
+      meta: { translationKey: 'users.list.columns.status' },
       cell: () => this.statusCell(),
       filterFn: (row, columnId, filterValue: UserStatus[]) => {
         // If no filter is selected, show all rows
@@ -228,13 +231,11 @@ export class Users {
     });
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
-      console.log(result);
       if (result) this.refreshTable();
     });
   }
 
   protected handleStateChange(state: { pagination: PaginationState; sorting: SortingState }) {
-    console.log('State changed:', state);
     this.pagination.set(state.pagination);
     this.sorting.set(state.sorting);
   }

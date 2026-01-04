@@ -3,7 +3,7 @@ import { email, Field, form, minLength, required, submit, validate } from '@angu
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideEye, lucideEyeOff, lucideGithub } from '@ng-icons/lucide';
+import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
@@ -32,7 +32,6 @@ import { AuthLayout } from '../layout';
   ],
   providers: [
     provideIcons({
-      lucideGithub,
       lucideEye,
       lucideEyeOff,
     }),

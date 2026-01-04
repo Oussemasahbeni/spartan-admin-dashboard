@@ -2,11 +2,11 @@ import { faker } from '@faker-js/faker';
 import { countries } from '@shared/countries';
 import { CountryCode, getExampleNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/examples.mobile.json';
-import { User } from '../model/user';
+import { User } from '../../features/users/model/user';
 
 const range = (len: number): number[] => Array.from({ length: len }, (_, i) => i);
 
-export function makeData(count: number): User[] {
+export function makeUsersData(count: number): User[] {
   const newUser = (): User => {
     const countryObject = faker.helpers.arrayElement(countries);
     const phoneNumberObj = getExampleNumber(countryObject.iso.toUpperCase() as CountryCode, examples);

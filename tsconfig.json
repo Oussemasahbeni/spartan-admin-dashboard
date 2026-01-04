@@ -120,6 +120,12 @@
       ],
       "@spartan-ng/helm/input-group": [
         "./src/app/spartan/input-group/src/index.ts"
+      ],
+      "@spartan-ng/helm/scroll-area": [
+        "./src/app/spartan/scroll-area/src/index.ts"
+      ],
+      "@spartan-ng/helm/tabs": [
+        "./src/app/spartan/tabs/src/index.ts"
       ]
     }
   },

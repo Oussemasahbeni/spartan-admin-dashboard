@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
 import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
@@ -10,7 +11,7 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
   template: `
     <header class="bg-background/95 sticky top-0 z-30 flex h-14 w-full shrink-0 items-center gap-2 border-b backdrop-blur">
       <div class="flex items-center gap-2 px-4">
-        <button type="button" hlmSidebarTrigger>
+        <button type="button" hlmSidebarTrigger (click)="onResize()">
           <span class="sr-only"></span>
         </button>
         <hlm-separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
@@ -29,4 +30,14 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
     </header>
   `,
 })
-export class SiteHeader {}
+export class SiteHeader {
+  private readonly _platformId = inject(PLATFORM_ID);
+  onResize() {
+    if (isPlatformBrowser(this._platformId)) {
+      // Trigger a resize event to notify charts to resize
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 250);
+    }
+  }
+}

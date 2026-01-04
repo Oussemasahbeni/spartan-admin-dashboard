@@ -18,7 +18,7 @@ import {
 } from '@ng-icons/lucide';
 import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
+import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
 import { DirectionalityService } from '../../../core/config/directionality.service';
 import { NavGroup } from '../navigation.types';
 import { NavSecondary } from '../secondary/nav-secondary';
@@ -55,10 +55,12 @@ import { NavUser } from '../user/user';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navigation {
-  private readonly _directionalityService = inject(DirectionalityService);
+  private readonly _dir = inject(DirectionalityService);
   private readonly _authService = inject(AuthService);
+  private readonly _sidebarService = inject(HlmSidebarService);
 
-  readonly side = computed<'left' | 'right'>(() => (this._directionalityService.isRtl() ? 'right' : 'left'));
+  readonly side = computed<'left' | 'right'>(() => (this._dir.isRtl() ? 'right' : 'left'));
+  readonly sideBarCollapsed = computed(() => this._sidebarService.state() === 'collapsed');
 
   protected readonly _navigationGroups: NavGroup[] = [
     {
@@ -69,7 +71,7 @@ export class Navigation {
           key: 'dashboard',
           icon: 'lucideLayoutDashboard',
           children: [
-            { title: 'Overview', key: 'overview', url: '#', icon: 'lucideGauge' },
+            { title: 'Overview', key: 'overview', url: '/dashboard/overview', icon: 'lucideGauge' },
             { title: 'Analytics', key: 'analytics', url: '#', icon: 'lucideBarChart3' },
             { title: 'Reports', key: 'reports', url: '#', icon: 'lucideFileText' },
             { title: 'Dashboard 2', key: 'dashboard-2', url: '/dashboard/dashboard-2', icon: 'lucideLayoutDashboard' },

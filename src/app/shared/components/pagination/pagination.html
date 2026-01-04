@@ -1,6 +1,6 @@
-<div *transloco="let t; prefix: 'pagination'" class="mt-2 flex gap-8 sm:mt-0">
+<div *transloco="let t; prefix: 'pagination'" class="mt-2 flex justify-end gap-5 sm:mt-0">
   <div class="flex gap-2">
-    <span hlmLabel>{{ t('itemsPerPage') }}</span>
+    <span class="hidden sm:flex" hlmLabel>{{ t('itemsPerPage') }}</span>
     <brn-select
       class="inline-block"
       [ngModel]="table().getState().pagination.pageSize"

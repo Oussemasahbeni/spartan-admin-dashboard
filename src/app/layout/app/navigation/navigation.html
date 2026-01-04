@@ -44,21 +44,29 @@
                   <!-- Collapsible Item -->
                   <hlm-collapsible class="group/collapsible">
                     <li hlmSidebarMenuItem>
-                      <button
-                        type="button"
-                        hlmCollapsibleTrigger
-                        hlmSidebarMenuButton
-                        class="flex w-full items-center justify-between"
+                      @if (sideBarCollapsed()) {
+                        <button type="button" hlmSidebarMenuButton class="flex w-full items-center justify-center">
+                          <ng-icon hlmIcon [name]="item.icon" />
+                        </button>
+                      } @else {
+                        <button
+                          type="button"
+                          hlmCollapsibleTrigger
+                          hlmSidebarMenuButton
+                          class="flex w-full items-center justify-between"
+                        >
+                          <ng-icon hlmIcon [name]="item.icon" />
+                          <span>{{ item.key ? t(item.key) : item.title }}</span>
+                          <ng-icon
+                            name="lucideChevronRight"
+                            class="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180"
+                            hlmIcon
+                          />
+                        </button>
+                      }
+                      <hlm-collapsible-content
+                        class="transition-all data-[state=closed]:h-0 data-[state=open]:h-(--brn-collapsible-content-height)"
                       >
-                        <ng-icon hlmIcon [name]="item.icon" />
-                        <span>{{ item.key ? t(item.key) : item.title }}</span>
-                        <ng-icon
-                          name="lucideChevronRight"
-                          class="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180"
-                          hlmIcon
-                        />
-                      </button>
-                      <hlm-collapsible-content>
                         <ul hlmSidebarMenuSub>
                           @for (subItem of children; track subItem.key || subItem.title) {
                             <li hlmSidebarMenuSubItem>

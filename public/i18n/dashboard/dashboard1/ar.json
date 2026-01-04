@@ -1,0 +1,88 @@
+{
+    "layout": {
+        "title": "لوحة التحكم",
+        "filterBy": "تصفية حسب",
+        "export": "تصدير",
+        "tabs": {
+            "overview": "نظرة عامة",
+            "analytics": "التحليلات",
+            "reports": "التقارير",
+            "activity": "النشاط"
+        }
+    },
+    "overview": {
+        "cards": {
+            "newSubscriptions": {
+                "title": "الاشتراكات الجديدة",
+                "description": "منذ الأسبوع الماضي"
+            },
+            "newOrders": {
+                "title": "الطلبات الجديدة",
+                "description": "منذ الأسبوع الماضي"
+            },
+            "avgOrderRevenue": {
+                "title": "متوسط إيرادات الطلب",
+                "description": "منذ الأسبوع الماضي"
+            },
+            "totalRevenue": {
+                "title": "إجمالي الإيرادات",
+                "description": "+20.1% مقارنة بالشهر الماضي"
+            }
+        }
+    },
+    "metricCard": {
+        "details": "التفاصيل"
+    },
+    "barChart": {
+        "title": "الاشتراكات",
+        "value": "+2350",
+        "description": "+180.1% مقارنة بالشهر الماضي",
+        "seriesName": "الاشتراكات"
+    },
+    "areaChart": {
+        "title": "نشاط المبيعات - شهري",
+        "description": "عرض إجمالي المبيعات لآخر 6 أشهر",
+        "series": {
+            "mobile": "الجوال",
+            "desktop": "سطح المكتب"
+        }
+    },
+    "paymentsTable": {
+        "title": "المدفوعات",
+        "description": "إدارة مدفوعاتك.",
+        "columns": {
+            "status": "الحالة",
+            "email": "البريد الإلكتروني",
+            "amount": "المبلغ"
+        },
+        "status": {
+            "success": "ناجح",
+            "processing": "قيد المعالجة",
+            "failed": "فشل"
+        }
+    },
+    "teamMembersCard": {
+        "title": "أعضاء الفريق",
+        "description": "ادعُ أعضاء فريقك للتعاون.",
+        "roles": {
+            "user": "مستخدم",
+            "admin": "مشرف",
+            "manager": "مدير"
+        },
+        "remove": "إزالة"
+    },
+    "months": {
+        "jan": "يناير",
+        "feb": "فبراير",
+        "mar": "مارس",
+        "apr": "أبريل",
+        "may": "مايو",
+        "jun": "يونيو",
+        "jul": "يوليو",
+        "aug": "أغسطس",
+        "sep": "سبتمبر",
+        "oct": "أكتوبر",
+        "nov": "نوفمبر",
+        "dec": "ديسمبر"
+    }
+}
