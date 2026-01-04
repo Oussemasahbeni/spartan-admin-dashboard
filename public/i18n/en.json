@@ -18,7 +18,8 @@
         "unauthorized": "Unauthorized",
         "serviceUnavailable": "Service Unavailable",
         "overview": "Overview",
-        "analytics": "Analytics"
+        "analytics": "Analytics",
+        "dashboard-2": "Dashboard 2"
     },
     "navigation": {
         "application": "Application",
@@ -32,6 +33,7 @@
         "analytics": "Analytics",
         "overview": "Overview",
         "reports": "Reports",
+        "dashboard-2": "Dashboard 2",
         "tasks": "Tasks",
         "calendar": "Calendar",
         "users": "Users",

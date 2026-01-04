@@ -18,7 +18,8 @@
         "unauthorized": "Non autorisé",
         "serviceUnavailable": "Service indisponible",
         "overview": "Vue d'ensemble",
-        "analytics": "Analyses"
+        "analytics": "Analyses",
+        "dashboard-2": "Tableau de bord 2"
     },
     "navigation": {
         "application": "Application",
@@ -32,6 +33,7 @@
         "analytics": "Analyses",
         "overview": "Vue d'ensemble",
         "reports": "Rapports",
+        "dashboard-2": "Tableau de bord 2",
         "tasks": "Gestion des tâches",
         "calendar": "Calendrier",
         "users": "Utilisateurs",

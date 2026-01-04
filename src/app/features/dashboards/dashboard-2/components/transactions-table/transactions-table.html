@@ -1,52 +1,62 @@
-<div class="border-border bg-card w-full overflow-hidden rounded-xl p-6">
-  <div class="mb-6 flex items-center justify-between">
-    <h3 class="text-lg font-semibold">Recent Activity</h3>
-    <!-- TODO: Add filter functionality and fix the styling -->
-    <button type="button" hlmBtn variant="outline" size="sm">Period</button>
+<section *transloco="let t; prefix: 'dashboard2.recentActivity'" hlmCard class="h-full w-full">
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>{{ t('title') }}</h3>
+    <p hlmCardDescription>{{ t('description') }}</p>
   </div>
+  <div hlmCardContent>
+    <div class="mb-4 flex items-center justify-between gap-4">
+      <hlm-input-group>
+        <input
+          *transloco="let t"
+          class="h-8 w-full md:w-80"
+          hlmInputGroupInput
+          [placeholder]="t('common.searchPlaceholder')"
+          [field]="searchForm.search"
+        />
+        <div hlmInputGroupAddon>
+          <ng-icon name="lucideSearch" />
+        </div>
+        <hlm-input-group-addon align="inline-end">
+          @if (searchForm.search().value()) {
+            <ng-icon class="cursor-pointer" name="lucideX" (click)="searchForm.search().value.set('')" />
+          }
+        </hlm-input-group-addon>
+      </hlm-input-group>
 
-  <div class="overflow-x-auto">
-    <table class="text-muted-foreground w-full text-left text-sm">
-      <thead class="text-xs text-white">
-        <tr>
-          <th scope="col" class="px-4 py-3">User</th>
-          <th scope="col" class="px-4 py-3">Status</th>
-          <th scope="col" class="px-4 py-3">ID</th>
-          <th scope="col" class="px-4 py-3">Date</th>
-          <th scope="col" class="px-4 py-3 text-right">Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of transactions(); track item.id) {
-          <tr class="border-border hover:bg-accent border-b transition">
-            <td class="px-4 py-3">
-              <div class="flex items-center gap-3">
-                <div class="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-slate-700">
-                  <img alt="User" class="h-full w-full object-cover" height="100" width="100" [ngSrc]="item.user.avatar" />
-                </div>
-                <div>
-                  <div class="font-medium text-white">{{ item.user.name }}</div>
-                  <div class="text-muted-foreground text-xs">{{ item.user.email }}</div>
-                </div>
-              </div>
-            </td>
-            <td class="px-4 py-3">
-              <span hlmBadge variant="outline" class="text-muted-foreground">
-                @let status = item.status;
-                @let ui = status | transactionStatusUI;
-                <ng-icon hlmIcon [class]="ui.class" [name]="ui.icon" />
-                {{ item.status }}
-              </span>
-            </td>
-            <td class="text-muted-foreground px-4 py-3">#{{ item.id }}</td>
-            <td class="px-4 py-3 text-white">{{ item.date }}</td>
-            <td class="px-4 py-3 text-right font-medium text-white">{{ item.amount }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+      <adm-data-table-column-manager [table]="table()" />
+    </div>
+
+    <adm-data-table [columns]="columns" [data]="filteredTransactions()" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]">
+      <!-- User Cell -->
+      <ng-template #userCell let-context>
+        <div class="flex items-center gap-3">
+          <hlm-avatar>
+            <img hlmAvatarImage [src]="context.row.original.user.avatar" [alt]="context.row.original.user.name" />
+            <span class="bg-destructive text-white" hlmAvatarFallback>
+              {{ context.row.original.user.name.charAt(0) + context.row.original.user.name.charAt(1).toUpperCase() }}
+            </span>
+          </hlm-avatar>
+          <div>
+            <div class="text-foreground font-medium">{{ context.row.original.user.name }}</div>
+            <div class="text-muted-foreground text-xs">{{ context.row.original.user.email }}</div>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Status Cell -->
+      <ng-template #statusCell let-context>
+        <span hlmBadge variant="outline" class="text-muted-foreground">
+          @let status = context.getValue();
+          @let ui = status | transactionStatusUI;
+          <ng-icon hlmIcon [class]="ui.class" [name]="ui.icon" />
+          <span *transloco="let t; prefix: 'dashboard2.recentActivity.status'">{{ t(status) }}</span>
+        </span>
+      </ng-template>
+
+      <!-- Amount Cell -->
+      <ng-template #amountCell let-context>
+        <div class="font-medium">{{ context.getValue() }}</div>
+      </ng-template>
+    </adm-data-table>
   </div>
-  <div class="mt-4 text-center">
-    <button type="button" hlmBtn variant="link" size="sm">A list of your recent activity.</button>
-  </div>
-</div>
+</section>

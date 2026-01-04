@@ -1,0 +1,97 @@
+{
+    "header": {
+        "title": "لوحة التحكم",
+        "subtitle": "إليك تفاصيل تحليلك.",
+        "filterBy": "تصفية حسب",
+        "export": "تصدير"
+    },
+    "stats": {
+        "totalSales": {
+            "label": "إجمالي المبيعات",
+            "changeDescription": "من الشهر الماضي"
+        },
+        "totalOrders": {
+            "label": "إجمالي الطلبات",
+            "changeDescription": "من الشهر الماضي"
+        },
+        "totalVisitors": {
+            "label": "إجمالي الزوار",
+            "changeDescription": "من الشهر الماضي"
+        },
+        "refunded": {
+            "label": "المبالغ المستردة",
+            "changeDescription": "من الشهر الماضي"
+        }
+    },
+    "recentActivity": {
+        "title": "النشاط الأخير",
+        "period": "الفترة",
+        "columns": {
+            "user": "المستخدم",
+            "status": "الحالة",
+            "id": "المعرف",
+            "date": "التاريخ",
+            "amount": "المبلغ"
+        },
+        "footer": "قائمة بنشاطك الأخير.",
+        "description": "عرض سجل المعاملات الخاصة بك",
+        "status": {
+            "New": "جديد",
+            "Suspended": "معلق",
+            "Delete": "حذف"
+        }
+    },
+    "filter": {
+        "title": "خيارات التصفية",
+        "description": "تخصيص عرض لوحة التحكم الخاصة بك",
+        "dateRange": "نطاق التاريخ",
+        "status": "الحالة",
+        "minAmount": "الحد الأدنى للمبلغ",
+        "maxAmount": "الحد الأقصى للمبلغ",
+        "dateOptions": {
+            "all": "كل الوقت",
+            "today": "اليوم",
+            "week": "هذا الأسبوع",
+            "month": "هذا الشهر",
+            "year": "هذه السنة"
+        },
+        "statusOptions": {
+            "all": "جميع الحالات",
+            "new": "جديد",
+            "suspended": "معلق",
+            "delete": "حذف"
+        },
+        "reset": "إعادة تعيين",
+        "apply": "تطبيق التصفية"
+    },
+    "revenueChart": {
+        "title": "الإيرادات",
+        "value": "14,324 دولار",
+        "change": "6.5%",
+        "period": "السنة",
+        "series": {
+            "desktop": "سطح المكتب",
+            "mobile": "الهاتف المحمول"
+        }
+    },
+    "visitorChart": {
+        "title": "مخطط إجمالي الزوار",
+        "period": "يناير - يونيو 2024",
+        "trendingText": "ارتفاع بنسبة 5.2٪ هذا الشهر",
+        "description": "عرض إجمالي الزوار خلال الأشهر الستة الماضية",
+        "series": {
+            "desktop": "سطح المكتب",
+            "mobile": "الهاتف المحمول",
+            "tablet": "الجهاز اللوحي",
+            "other": "أخرى"
+        }
+    },
+    "months": {
+        "jan": "يناير",
+        "feb": "فبراير",
+        "mar": "مارس",
+        "apr": "أبريل",
+        "may": "مايو",
+        "jun": "يونيو"
+    }
+}

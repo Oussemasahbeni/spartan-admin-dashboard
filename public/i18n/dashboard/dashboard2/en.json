@@ -1,0 +1,97 @@
+{
+    "header": {
+        "title": "Dashboard",
+        "subtitle": "Here's the details of your analysis.",
+        "filterBy": "Filter By",
+        "export": "Export"
+    },
+    "stats": {
+        "totalSales": {
+            "label": "Total Sales",
+            "changeDescription": "from last month"
+        },
+        "totalOrders": {
+            "label": "Total Orders",
+            "changeDescription": "from last month"
+        },
+        "totalVisitors": {
+            "label": "Total Visitors",
+            "changeDescription": "from last month"
+        },
+        "refunded": {
+            "label": "Refunded",
+            "changeDescription": "from last month"
+        }
+    },
+    "recentActivity": {
+        "title": "Recent Activity",
+        "period": "Period",
+        "columns": {
+            "user": "User",
+            "status": "Status",
+            "id": "ID",
+            "date": "Date",
+            "amount": "Amount"
+        },
+        "footer": "A list of your recent activity.",
+        "description": "View your transaction history",
+        "status": {
+            "New": "New",
+            "Suspended": "Suspended",
+            "Delete": "Delete"
+        }
+    },
+    "filter": {
+        "title": "Filter Options",
+        "description": "Customize your dashboard view",
+        "dateRange": "Date Range",
+        "status": "Status",
+        "minAmount": "Min Amount",
+        "maxAmount": "Max Amount",
+        "dateOptions": {
+            "all": "All Time",
+            "today": "Today",
+            "week": "This Week",
+            "month": "This Month",
+            "year": "This Year"
+        },
+        "statusOptions": {
+            "all": "All Status",
+            "new": "New",
+            "suspended": "Suspended",
+            "delete": "Delete"
+        },
+        "reset": "Reset",
+        "apply": "Apply Filters"
+    },
+    "revenueChart": {
+        "title": "Revenue",
+        "value": "$14,324",
+        "change": "6.5%",
+        "period": "Year",
+        "series": {
+            "desktop": "Desktop",
+            "mobile": "Mobile"
+        }
+    },
+    "visitorChart": {
+        "title": "Total Visitor - Chart",
+        "period": "January - June 2024",
+        "trendingText": "Trending up by 5.2% this month",
+        "description": "Showing total visitors for the last 6 months",
+        "series": {
+            "desktop": "Desktop",
+            "mobile": "Mobile",
+            "tablet": "Tablet",
+            "other": "Other"
+        }
+    },
+    "months": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun"
+    }
+}
