@@ -7,7 +7,7 @@ import { EmptyLayout } from './layout/empty/empty';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard/overview',
+    redirectTo: 'dashboard/dashboard-1',
     pathMatch: 'full',
   },
   {
@@ -46,14 +46,14 @@ export const routes: Routes = [
         title: 'dashboard',
         children: [
           {
+            path: 'dashboard-1',
+            title: 'dashboard-1',
+            loadChildren: () => import('./features/dashboards/dashboard-1/dashboard1.routes'),
+          },
+          {
             path: 'dashboard-2',
             title: 'dashboard-2',
             loadChildren: () => import('./features/dashboards/dashboard-2/dashboards.routes'),
-          },
-          {
-            path: 'overview',
-            title: 'overview',
-            loadChildren: () => import('./features/dashboards/dashboard-1/dashboard1.routes'),
           },
         ],
       },

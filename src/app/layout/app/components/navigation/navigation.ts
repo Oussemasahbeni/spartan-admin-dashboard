@@ -72,9 +72,7 @@ export class Navigation {
           key: 'dashboard',
           icon: 'lucideLayoutDashboard',
           children: [
-            { title: 'Overview', key: 'overview', url: '/dashboard/overview', icon: 'lucideGauge' },
-            { title: 'Analytics', key: 'analytics', url: '#', icon: 'lucideBarChart3' },
-            { title: 'Reports', key: 'reports', url: '#', icon: 'lucideFileText' },
+            { title: 'Dashboard 1', key: 'dashboard-1', url: '/dashboard/dashboard-1', icon: 'lucideGauge' },
             { title: 'Dashboard 2', key: 'dashboard-2', url: '/dashboard/dashboard-2', icon: 'lucideLayoutDashboard' },
           ],
         },
