@@ -19,27 +19,33 @@ import { Table } from '@tanstack/angular-table';
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
+  styleUrl: 'data-table-column-manager.css',
   template: `
-    <button type="button" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">
+    <button type="button" class="hidden sm:flex" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">
       <ng-icon hlmIcon name="lucideSettings2" size="sm" />
       <span>{{ 'buttons.columns' | transloco }}</span>
       <ng-icon hlmIcon name="lucideChevronDown" size="sm" />
     </button>
 
     <ng-template #columnMenu>
-      <hlm-dropdown-menu class="columns-list w-56" cdkDropList (cdkDropListDropped)="onDrop($event)">
+      <hlm-dropdown-menu class="columns-list" cdkDropList (cdkDropListDropped)="onDrop($event)">
+        <!-- <hlm-dropdown-menu-label>{{ 'label' | transloco }}</hlm-dropdown-menu-label>
+        <hlm-dropdown-menu-separator /> -->
         @for (column of hidableColumns(); track column.id) {
           <div cdkDrag class="group column-box flex items-center gap-2 px-2">
             <button
               type="button"
               hlmDropdownMenuCheckbox
-              class="flex-1 capitalize"
+              class="flex-1"
               [checked]="column.getIsVisible()"
               (triggered)="column.toggleVisibility()"
             >
               <hlm-dropdown-menu-checkbox-indicator />
-              {{ translatePrefix() + '.' + column.id | transloco }}
+              @if (column.columnDef.meta?.translationKey) {
+                {{ column.columnDef.meta?.translationKey | transloco }}
+              } @else {
+                {{ column.columnDef.header }}
+              }
             </button>
             <ng-icon
               cdkDragHandle
@@ -55,9 +61,6 @@ import { Table } from '@tanstack/angular-table';
 })
 export class DataTableColumnManager<T> {
   readonly table = input.required<Table<T>>();
-
-  /** The i18n prefix for column names */
-  readonly translatePrefix = input.required<string>();
 
   protected readonly hidableColumns = computed(() => {
     return this.table()

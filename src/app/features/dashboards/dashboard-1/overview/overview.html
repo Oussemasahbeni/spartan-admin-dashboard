@@ -1,0 +1,36 @@
+<div *transloco="let t; prefix: 'dashboard1'" class="flex flex-col gap-2">
+  <div class="flex flex-col gap-4 md:gap-6">
+    <!-- Metric Cards Row -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      @for (card of cards(); track card.titleKey) {
+        <!-- [class]="{ '@3xl/main:col-span-2': card.variant === 'large' }" -->
+
+        <adm-metric-card
+          [class]="{ 'xl:col-span-2': card.variant === 'large' }"
+          [variant]="card.variant"
+          [title]="t(card.titleKey)"
+          [value]="card.value"
+          [description]="t(card.descriptionKey)"
+          [icon]="card.icon"
+          [chartData]="card.chartData"
+          [chartColor]="card.chartColor"
+          [trendValue]="card.trendValue"
+          [trendUp]="card.trendUp"
+        />
+      }
+    </div>
+
+    <!-- Chart Cards Row -->
+    <div class="grid grid-cols-1 gap-4 xl:grid-cols-3">
+      <adm-area-chart-card class="xl:col-span-2" />
+
+      <adm-bar-chart-card />
+    </div>
+
+    <!-- Payments and Team Members Row -->
+    <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <adm-payments-table [payments]="payments()" />
+      <adm-team-members-card [members]="teamMembers()" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+{
+    "layout": {
+        "title": "Tableau de bord",
+        "filterBy": "Filtrer par",
+        "export": "Exporter",
+        "tabs": {
+            "overview": "Aperçu",
+            "analytics": "Analytique",
+            "reports": "Rapports",
+            "activity": "Activité"
+        }
+    },
+    "overview": {
+        "cards": {
+            "newSubscriptions": {
+                "title": "Nouveaux abonnements",
+                "description": "Depuis la semaine dernière"
+            },
+            "newOrders": {
+                "title": "Nouvelles commandes",
+                "description": "Depuis la semaine dernière"
+            },
+            "avgOrderRevenue": {
+                "title": "Revenu moyen par commande",
+                "description": "Depuis la semaine dernière"
+            },
+            "totalRevenue": {
+                "title": "Revenu total",
+                "description": "+20,1% par rapport au mois dernier"
+            }
+        }
+    },
+    "metricCard": {
+        "details": "Détails"
+    },
+    "barChart": {
+        "title": "Abonnements",
+        "value": "+2350",
+        "description": "+180,1% par rapport au mois dernier",
+        "seriesName": "Abonnements"
+    },
+    "areaChart": {
+        "title": "Activité des ventes - Mensuel",
+        "description": "Affichage des ventes totales des 6 derniers mois",
+        "series": {
+            "mobile": "Mobile",
+            "desktop": "Bureau"
+        }
+    },
+    "paymentsTable": {
+        "title": "Paiements",
+        "description": "Gérez vos paiements.",
+        "columns": {
+            "status": "Statut",
+            "email": "E-mail",
+            "amount": "Montant"
+        },
+        "actions": {
+            "label": "Actions",
+            "copyPaymentId": "Copier l'ID de paiement",
+            "viewCustomer": "Voir le client",
+            "viewPaymentDetails": "Voir les détails du paiement"
+        },
+        "status": {
+            "success": "Succès",
+            "processing": "En cours",
+            "failed": "Échoué"
+        }
+    },
+    "teamMembersCard": {
+        "title": "Membres de l'équipe",
+        "description": "Invitez les membres de votre équipe à collaborer.",
+        "roles": {
+            "user": "Utilisateur",
+            "admin": "Administrateur",
+            "manager": "Gestionnaire"
+        },
+        "remove": "Supprimer"
+    },
+    "months": {
+        "jan": "Janv",
+        "feb": "Févr",
+        "mar": "Mars",
+        "apr": "Avr",
+        "may": "Mai",
+        "jun": "Juin",
+        "jul": "Juil",
+        "aug": "Août",
+        "sep": "Sept",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Déc"
+    }
+}

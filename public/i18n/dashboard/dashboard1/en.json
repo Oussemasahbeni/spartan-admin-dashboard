@@ -1,0 +1,94 @@
+{
+    "layout": {
+        "title": "Dashboard",
+        "filterBy": "Filter By",
+        "export": "Export",
+        "tabs": {
+            "overview": "Overview",
+            "analytics": "Analytics",
+            "reports": "Reports",
+            "activity": "Activity"
+        }
+    },
+    "overview": {
+        "cards": {
+            "newSubscriptions": {
+                "title": "New Subscriptions",
+                "description": "Since last week"
+            },
+            "newOrders": {
+                "title": "New Orders",
+                "description": "Since last week"
+            },
+            "avgOrderRevenue": {
+                "title": "Avg Order Revenue",
+                "description": "Since last week"
+            },
+            "totalRevenue": {
+                "title": "Total Revenue",
+                "description": "+20.1% from last month"
+            }
+        }
+    },
+    "metricCard": {
+        "details": "Details"
+    },
+    "barChart": {
+        "title": "Subscriptions",
+        "value": "+2350",
+        "description": "+180.1% from last month",
+        "seriesName": "Subscriptions"
+    },
+    "areaChart": {
+        "title": "Sale Activity - Monthly",
+        "description": "Showing total sales for the last 6 months",
+        "series": {
+            "mobile": "Mobile",
+            "desktop": "Desktop"
+        }
+    },
+    "paymentsTable": {
+        "title": "Payments",
+        "description": "Manage your payments.",
+        "columns": {
+            "status": "Status",
+            "email": "Email",
+            "amount": "Amount"
+        },
+        "actions": {
+            "label": "Actions",
+            "copyPaymentId": "Copy payment ID",
+            "viewCustomer": "View customer",
+            "viewPaymentDetails": "View payment details"
+        },
+        "status": {
+            "success": "Success",
+            "processing": "Processing",
+            "failed": "Failed"
+        }
+    },
+    "teamMembersCard": {
+        "title": "Team Members",
+        "description": "Invite your team members to collaborate.",
+        "roles": {
+            "user": "User",
+            "admin": "Admin",
+            "manager": "Manager"
+        },
+        "remove": "Remove"
+    },
+    "months": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec"
+    }
+}

@@ -16,7 +16,9 @@
         "users": "المستخدمون",
         "notFound": "الصفحة غير موجودة",
         "unauthorized": "غير مصرح",
-        "serviceUnavailable": "الخدمة غير متوفرة"
+        "serviceUnavailable": "الخدمة غير متوفرة",
+        "overview": "نظرة عامة",
+        "analytics": "التحليلات"
     },
     "navigation": {
         "application": "النظام",
@@ -93,5 +95,49 @@
         "selectCountryPlaceholder": "اختر رمز الدولة...",
         "searchCountryPlaceholder": "ابحث عن دولة...",
         "enterPhoneNumberPlaceholder": "أدخل رقم الهاتف..."
+    },
+    "notifications": {
+        "title": "الإشعارات",
+        "markAllAsRead": "تحديد الكل كمقروء",
+        "clearAll": "مسح الكل",
+        "noNotifications": "لا توجد إشعارات",
+        "noNotificationsDescription": "أنت على اطلاع بكل شيء. ستظهر الإشعارات الجديدة هنا.",
+        "actions": {
+            "commentedOn": "علّق على",
+            "liked": "أعجب بـ",
+            "shared": "شارك",
+            "mentionedYouIn": "أشار إليك في",
+            "repliedTo": "رد على",
+            "assignedYouTo": "أسند إليك"
+        },
+        "subjects": {
+            "yourPost": "منشورك",
+            "theProject": "المشروع",
+            "aTask": "مهمة",
+            "anIssue": "مشكلة",
+            "aDocument": "مستند",
+            "theReport": "التقرير"
+        }
+    },
+    "timeAgo": {
+        "justNow": "الآن",
+        "prefix": "منذ",
+        "suffix": "",
+        "futurePrefix": "بعد",
+        "futureSuffix": "",
+        "second": "ثانية",
+        "seconds": "ثواني",
+        "minute": "دقيقة",
+        "minutes": "دقائق",
+        "hour": "ساعة",
+        "hours": "ساعات",
+        "day": "يوم",
+        "days": "أيام",
+        "week": "أسبوع",
+        "weeks": "أسابيع",
+        "month": "شهر",
+        "months": "أشهر",
+        "year": "سنة",
+        "years": "سنوات"
     }
 }

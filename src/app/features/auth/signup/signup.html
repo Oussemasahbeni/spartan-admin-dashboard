@@ -125,20 +125,6 @@
       </button>
     </form>
 
-    <div class="relative mb-2">
-      <div class="absolute inset-0 flex items-center">
-        <span class="w-full border-t"></span>
-      </div>
-      <div class="relative flex justify-center text-xs uppercase">
-        <span class="bg-background text-muted-foreground px-2">{{ t('orContinueWith') }}</span>
-      </div>
-    </div>
-
-    <button type="button" hlmBtn variant="outline" [disabled]="isLoading()">
-      <ng-icon hlm class="mr-2" size="sm" name="lucideGithub" />
-      {{ t('github') }}
-    </button>
-
     <p class="text-muted-foreground text-center text-sm sm:px-8">
       {{ t('termsText') }}
       <a class="hover:text-primary cursor-pointer underline underline-offset-4">{{ t('termsOfService') }}</a>

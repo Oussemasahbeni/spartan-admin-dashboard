@@ -16,6 +16,20 @@ import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { Table } from '@tanstack/angular-table';
 
+/**
+ * Pagination controls for the DataTable component.
+ * Provides navigation buttons and page size selection.
+ *
+ * @example
+ * ```html
+ * <adm-pagination
+ *   [table]="table"
+ *   [pageSizeOptions]="[5, 10, 25, 50]"
+ * />
+ * ```
+ *
+ * @template T - The type of data rows in the table
+ */
 @Component({
   selector: 'adm-pagination',
   imports: [
@@ -40,13 +54,41 @@ import { Table } from '@tanstack/angular-table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTablePagination<T> {
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INPUTS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /**
+   * Available options for the page size dropdown.
+   * @default [10, 25, 50, 100]
+   *
+   * @example
+   * ```html
+   * <adm-pagination [pageSizeOptions]="[5, 10, 20]" />
+   * ```
+   */
   readonly pageSizeOptions = input([10, 25, 50, 100]);
+
+  /**
+   * The TanStack Table instance to control.
+   * Required for accessing pagination state and methods.
+   */
   readonly table = input.required<Table<T>>();
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // METHODS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /**
+   * Handles page size selection changes.
+   * Resets to the first page when page size changes.
+   *
+   * @param value - The new page size (from select dropdown)
+   */
   handlePageSizeChange(value: string | number) {
     const size = Number(value);
     this.table().setPagination({
-      pageIndex: 0,
+      pageIndex: 0, // Reset to first page
       pageSize: size,
     });
   }

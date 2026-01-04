@@ -106,4 +106,4 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     </div>
   `,
 })
-export class CardSection {}
+export class UsersCardSection {}
