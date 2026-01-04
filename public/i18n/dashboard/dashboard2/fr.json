@@ -1,0 +1,97 @@
+{
+    "header": {
+        "title": "Tableau de bord",
+        "subtitle": "Voici les détails de votre analyse.",
+        "filterBy": "Filtrer par",
+        "export": "Exporter"
+    },
+    "stats": {
+        "totalSales": {
+            "label": "Ventes totales",
+            "changeDescription": "par rapport au mois dernier"
+        },
+        "totalOrders": {
+            "label": "Commandes totales",
+            "changeDescription": "par rapport au mois dernier"
+        },
+        "totalVisitors": {
+            "label": "Visiteurs totaux",
+            "changeDescription": "par rapport au mois dernier"
+        },
+        "refunded": {
+            "label": "Remboursements",
+            "changeDescription": "par rapport au mois dernier"
+        }
+    },
+    "recentActivity": {
+        "title": "Activité récente",
+        "period": "Période",
+        "columns": {
+            "user": "Utilisateur",
+            "status": "Statut",
+            "id": "ID",
+            "date": "Date",
+            "amount": "Montant"
+        },
+        "footer": "Une liste de vos activités récentes.",
+        "description": "Voir l'historique de vos transactions",
+        "status": {
+            "New": "Nouveau",
+            "Suspended": "Suspendu",
+            "Delete": "Supprimer"
+        }
+    },
+    "filter": {
+        "title": "Options de filtrage",
+        "description": "Personnalisez votre vue du tableau de bord",
+        "dateRange": "Plage de dates",
+        "status": "Statut",
+        "minAmount": "Montant minimum",
+        "maxAmount": "Montant maximum",
+        "dateOptions": {
+            "all": "Tout le temps",
+            "today": "Aujourd'hui",
+            "week": "Cette semaine",
+            "month": "Ce mois-ci",
+            "year": "Cette année"
+        },
+        "statusOptions": {
+            "all": "Tous les statuts",
+            "new": "Nouveau",
+            "suspended": "Suspendu",
+            "delete": "Supprimer"
+        },
+        "reset": "Réinitialiser",
+        "apply": "Appliquer les filtres"
+    },
+    "revenueChart": {
+        "title": "Revenus",
+        "value": "14 324 $",
+        "change": "6,5 %",
+        "period": "Année",
+        "series": {
+            "desktop": "Bureau",
+            "mobile": "Mobile"
+        }
+    },
+    "visitorChart": {
+        "title": "Graphique des visiteurs totaux",
+        "period": "Janvier - Juin 2024",
+        "trendingText": "En hausse de 5,2 % ce mois-ci",
+        "description": "Affichage du nombre total de visiteurs des 6 derniers mois",
+        "series": {
+            "desktop": "Bureau",
+            "mobile": "Mobile",
+            "tablet": "Tablette",
+            "other": "Autre"
+        }
+    },
+    "months": {
+        "jan": "Jan",
+        "feb": "Fév",
+        "mar": "Mar",
+        "apr": "Avr",
+        "may": "Mai",
+        "jun": "Juin"
+    }
+}

@@ -18,7 +18,8 @@
         "unauthorized": "غير مصرح",
         "serviceUnavailable": "الخدمة غير متوفرة",
         "overview": "نظرة عامة",
-        "analytics": "التحليلات"
+        "analytics": "التحليلات",
+        "dashboard-2": "لوحة التحكم 2"
     },
     "navigation": {
         "application": "النظام",
@@ -32,6 +33,7 @@
         "analytics": "التحليلات والبيانات",
         "overview": "نظرة عامة",
         "reports": "التقارير المركزية",
+        "dashboard-2": "لوحة التحكم 2",
         "tasks": "إدارة المهام",
         "calendar": "الجدول الزمني",
         "users": "شؤون المستخدمين",

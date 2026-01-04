@@ -1,0 +1,62 @@
+<section *transloco="let t; prefix: 'dashboard2.recentActivity'" hlmCard class="h-full w-full">
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>{{ t('title') }}</h3>
+    <p hlmCardDescription>{{ t('description') }}</p>
+  </div>
+  <div hlmCardContent>
+    <div class="mb-4 flex items-center justify-between gap-4">
+      <hlm-input-group>
+        <input
+          *transloco="let t"
+          class="h-8 w-full md:w-80"
+          hlmInputGroupInput
+          [placeholder]="t('common.searchPlaceholder')"
+          [field]="searchForm.search"
+        />
+        <div hlmInputGroupAddon>
+          <ng-icon name="lucideSearch" />
+        </div>
+        <hlm-input-group-addon align="inline-end">
+          @if (searchForm.search().value()) {
+            <ng-icon class="cursor-pointer" name="lucideX" (click)="searchForm.search().value.set('')" />
+          }
+        </hlm-input-group-addon>
+      </hlm-input-group>
+
+      <adm-data-table-column-manager [table]="table()" />
+    </div>
+
+    <adm-data-table [columns]="columns" [data]="filteredTransactions()" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]">
+      <!-- User Cell -->
+      <ng-template #userCell let-context>
+        <div class="flex items-center gap-3">
+          <hlm-avatar>
+            <img hlmAvatarImage [src]="context.row.original.user.avatar" [alt]="context.row.original.user.name" />
+            <span class="bg-destructive text-white" hlmAvatarFallback>
+              {{ context.row.original.user.name.charAt(0) + context.row.original.user.name.charAt(1).toUpperCase() }}
+            </span>
+          </hlm-avatar>
+          <div>
+            <div class="text-foreground font-medium">{{ context.row.original.user.name }}</div>
+            <div class="text-muted-foreground text-xs">{{ context.row.original.user.email }}</div>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Status Cell -->
+      <ng-template #statusCell let-context>
+        <span hlmBadge variant="outline" class="text-muted-foreground">
+          @let status = context.getValue();
+          @let ui = status | transactionStatusUI;
+          <ng-icon hlmIcon [class]="ui.class" [name]="ui.icon" />
+          <span *transloco="let t; prefix: 'dashboard2.recentActivity.status'">{{ t(status) }}</span>
+        </span>
+      </ng-template>
+
+      <!-- Amount Cell -->
+      <ng-template #amountCell let-context>
+        <div class="font-medium">{{ context.getValue() }}</div>
+      </ng-template>
+    </adm-data-table>
+  </div>
+</section>
