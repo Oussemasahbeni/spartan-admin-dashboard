@@ -15,7 +15,7 @@
     </div>
 
     <div class="flex w-full flex-col gap-4">
-      <hlm-tabs tab="overview">
+      <hlm-tabs [tab]="selectedTab()" (tabActivated)="onTabChange($event)">
         <hlm-tabs-list aria-label="tabs example">
           <button type="button" hlmTabsTrigger="overview">
             <ng-icon hlmIcon name="lucideHome" size="sm" />
@@ -35,14 +35,10 @@
           </button>
         </hlm-tabs-list>
         <div hlmTabsContent="overview">
-          @defer (on viewport) {
-            <adm-dashboard1-overview />
-          } @placeholder {
-            <hlm-spinner />
-          }
+          <adm-dashboard1-overview />
         </div>
         <div hlmTabsContent="analytics">
-          @defer {
+          @defer (when selectedTab() === 'analytics') {
             <adm-dashboard1-analytics />
           } @placeholder {
             <hlm-spinner />

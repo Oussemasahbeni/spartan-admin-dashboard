@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideActivity, lucideBarChart2, lucideDownload, lucideFileText, lucideFilter, lucideHome } from '@ng-icons/lucide';
@@ -34,4 +34,10 @@ import { OverviewDashboard } from './overview/overview';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Dashboard1Layout {}
+export class Dashboard1Layout {
+  protected readonly selectedTab = signal('overview');
+
+  onTabChange(tab: string) {
+    this.selectedTab.set(tab);
+  }
+}

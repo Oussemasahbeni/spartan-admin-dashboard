@@ -80,5 +80,5 @@ export class OverviewDashboard {
 
   readonly payments = signal<Payment[]>(makePaymentData(30));
 
-  readonly teamMembers = signal<User[]>(makeUsersData(6));
+  readonly teamMembers = signal<User[]>(makeUsersData(8));
 }

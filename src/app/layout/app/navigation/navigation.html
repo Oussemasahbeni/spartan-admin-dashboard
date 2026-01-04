@@ -12,7 +12,6 @@
               priority
               alt="logo"
             />
-
             <img
               class="me-2 hidden aspect-square size-8 dark:inline-block"
               ngSrc="/images/logo/logo-white.svg"
@@ -21,16 +20,13 @@
               priority
               alt="logo"
             />
-
             <div class="grid flex-1 text-left text-sm leading-tight">
-              <span class="truncate font-medium">Acme Inc</span>
-              <span class="truncate text-xs">Enterprise</span>
+              <span class="truncate font-medium">Acme Inc</span> <span class="truncate text-xs">Enterprise</span>
             </div>
           </a>
         </li>
       </ul>
     </hlm-sidebar-header>
-
     <hlm-sidebar-content>
       @for (group of _navigationGroups; track group.label) {
         <hlm-sidebar-group>
@@ -44,28 +40,21 @@
                   <!-- Collapsible Item -->
                   <hlm-collapsible class="group/collapsible">
                     <li hlmSidebarMenuItem>
-                      @if (sideBarCollapsed()) {
-                        <button type="button" hlmSidebarMenuButton class="flex w-full items-center justify-center">
-                          <ng-icon hlmIcon [name]="item.icon" />
-                        </button>
-                      } @else {
-                        <button
-                          type="button"
-                          hlmCollapsibleTrigger
-                          hlmSidebarMenuButton
-                          class="flex w-full items-center justify-between"
-                        >
-                          <ng-icon hlmIcon [name]="item.icon" />
-                          <span>{{ item.key ? t(item.key) : item.title }}</span>
-                          <ng-icon
-                            name="lucideChevronRight"
-                            class="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180"
-                            hlmIcon
-                          />
-                        </button>
-                      }
+                      <button
+                        type="button"
+                        hlmCollapsibleTrigger
+                        hlmSidebarMenuButton
+                        class="flex w-full items-center justify-between"
+                      >
+                        <ng-icon hlmIcon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
+                        <ng-icon
+                          name="lucideChevronRight"
+                          class="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180"
+                          hlmIcon
+                        />
+                      </button>
                       <hlm-collapsible-content
-                        class="transition-all data-[state=closed]:h-0 data-[state=open]:h-(--brn-collapsible-content-height)"
+                        class="transition-all data-[state=closed]:h-0 data-[state=open]:h-(--hlm-collapsible-content-height)"
                       >
                         <ul hlmSidebarMenuSub>
                           @for (subItem of children; track subItem.key || subItem.title) {
@@ -89,8 +78,7 @@
                       [routerLinkActiveOptions]="{ exact: false }"
                       [routerLink]="item.url"
                     >
-                      <ng-icon hlmIcon [name]="item.icon" />
-                      <span>{{ item.key ? t(item.key) : item.title }}</span>
+                      <ng-icon hlmIcon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
                     </a>
                   </li>
                 }

@@ -6,4 +6,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './analytics.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnalyticsDashboard {}
+export class AnalyticsDashboard {
+  constructor() {
+    console.log('Analytics Dashboard Loaded');
+  }
+}
