@@ -12,7 +12,6 @@
         "noAccount": "Vous n’avez pas de compte ?",
         "signUp": "Créer un compte",
         "loginBtn": "Se connecter",
-        "testimonial": "Cette bibliothèque m’a fait gagner un temps considérable et m’a permis de livrer des interfaces modernes plus rapidement.",
         "errors": {
             "emailRequired": "L’adresse e-mail est obligatoire",
             "emailInvalid": "L’adresse e-mail n’est pas valide",
@@ -39,7 +38,6 @@
         "termsOfService": "conditions d’utilisation",
         "and": "et",
         "privacyPolicy": "politique de confidentialité",
-        "testimonial": "Cette bibliothèque m’a permis de concevoir des interfaces élégantes en un temps record.",
         "errors": {
             "nameRequired": "Le nom est obligatoire",
             "emailRequired": "L’adresse e-mail est obligatoire",
@@ -62,5 +60,6 @@
             "successTitle": "Succès",
             "resetLinkSent": "Si un compte existe, les instructions de réinitialisation ont été envoyées par e-mail."
         }
-    }
+    },
+    "testimonial": "Cette bibliothèque m’a fait gagner un temps considérable et m’a permis de livrer des interfaces modernes plus rapidement."
 }

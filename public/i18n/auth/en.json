@@ -11,8 +11,7 @@
         "rememberMe": "Remember me",
         "noAccount": "Don't have an account?",
         "signUp": "Sign up",
-        "loginBtn": "Login",
-        "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
+        "loginBtn": "Login"
     },
     "signup": {
         "title": "Create an account",
@@ -32,8 +31,7 @@
         "termsText": "By clicking continue, you agree to our",
         "termsOfService": "Terms of Service",
         "and": "and",
-        "privacyPolicy": "Privacy Policy",
-        "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
+        "privacyPolicy": "Privacy Policy"
     },
     "forgotPassword": {
         "title": "Forgot your password?",
@@ -42,10 +40,10 @@
         "emailPlaceholder": "name@example.com",
         "submitBtn": "Send reset link",
         "backToLogin": "Back to login",
-        "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before.",
         "alert": {
             "successTitle": "Success",
             "resetLinkSent": "Password reset instructions have been sent to your email address if an account exists."
         }
-    }
+    },
+    "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
 }

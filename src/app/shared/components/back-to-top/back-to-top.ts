@@ -13,7 +13,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     <button
       type="button"
       hlmBtn
-      class="fixed end-6 bottom-6 z-50"
+      class="fixed end-6 bottom-6 z-50 hidden md:inline-flex"
       title="Back to top"
       size="icon"
       aria-label="Scroll back to top"

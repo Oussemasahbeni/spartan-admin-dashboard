@@ -6,18 +6,13 @@ import { TranslocoModule } from '@jsverse/transloco';
   selector: 'adm-auth-layout',
   imports: [NgOptimizedImage, TranslocoModule],
   template: `
-    <div
-      *transloco="let t; prefix: 'auth.forgotPassword'"
-      class="bg-background en block h-full border shadow-md md:shadow-xl"
-    >
-      <div
-        class="relative container flex h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
-      >
+    <div *transloco="let t" class="bg-background block border shadow-md md:shadow-xl">
+      <div class="relative flex min-h-screen flex-col md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <!-- Form Section -->
-        <div class="lg:p-8">
-          <div class="absolute top-0 left-0 mb-4 flex items-center gap-3 p-6">
+        <div class="flex flex-col px-6 py-8 sm:px-8 lg:p-8">
+          <div class="mb-8 flex items-center gap-3 lg:absolute lg:top-0 lg:left-0 lg:mb-0 lg:p-6">
             <img
-              class="me-2 aspect-square size-8 dark:hidden"
+              class="aspect-square size-8 dark:hidden"
               ngSrc="/images/logo/logo.svg"
               width="32"
               height="32"
@@ -26,18 +21,20 @@ import { TranslocoModule } from '@jsverse/transloco';
             />
 
             <img
-              class="me-2 hidden aspect-square size-8 dark:inline-block"
+              class="hidden aspect-square size-8 dark:inline-block"
               ngSrc="/images/logo/logo-white.svg"
               width="32"
               height="32"
               priority
               alt="logo"
             />
-            <span class="text-xl text-white"> Acme Inc </span>
+            <span class="text-xl"> Acme Inc </span>
           </div>
 
           <!-- Content Projection for Form -->
-          <ng-content />
+          <div class="my-auto w-full">
+            <ng-content />
+          </div>
         </div>
 
         <!-- Illustration Section -->
@@ -51,7 +48,7 @@ import { TranslocoModule } from '@jsverse/transloco';
             </div>
 
             <div class="my-auto flex max-w-xs flex-col items-center justify-center">
-              <p class="text-center text-gray-400 dark:text-white/60">"{{ t('testimonial') }}"</p>
+              <p class="text-center text-gray-400 dark:text-white/60">"{{ t('auth.testimonial') }}"</p>
             </div>
           </div>
         </div>
