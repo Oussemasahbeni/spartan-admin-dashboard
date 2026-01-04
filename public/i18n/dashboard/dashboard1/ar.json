@@ -6,8 +6,7 @@
         "tabs": {
             "overview": "نظرة عامة",
             "analytics": "التحليلات",
-            "reports": "التقارير",
-            "activity": "النشاط"
+            "reports": "التقارير"
         }
     },
     "overview": {

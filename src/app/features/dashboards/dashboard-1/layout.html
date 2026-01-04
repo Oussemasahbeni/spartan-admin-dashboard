@@ -1,6 +1,6 @@
-<div *transloco="let t; prefix: 'dashboard1.layout'" class="min-h-screen font-sans">
-  <header class="mb-8 flex flex-col items-start justify-between gap-4">
-    <div class="flex w-full items-center justify-between">
+<div *transloco="let t; prefix: 'dashboard1.layout'">
+  <header class="mb-8">
+    <div class="flex w-full flex-col items-start justify-between gap-4 sm:flex-row">
       <h1 class="text-3xl font-bold tracking-tight">{{ t('title') }}</h1>
       <div class="flex gap-3">
         <button type="button" hlmBtn variant="outline">
@@ -13,38 +13,31 @@
         </button>
       </div>
     </div>
-
-    <div class="flex w-full flex-col gap-4">
-      <hlm-tabs [tab]="selectedTab()" (tabActivated)="onTabChange($event)">
-        <hlm-tabs-list aria-label="tabs example">
-          <button type="button" hlmTabsTrigger="overview">
-            <ng-icon hlmIcon name="lucideHome" size="sm" />
-            {{ t('tabs.overview') }}
-          </button>
-          <button type="button" hlmTabsTrigger="analytics">
-            <ng-icon hlmIcon name="lucideBarChart2" size="sm" />
-            {{ t('tabs.analytics') }}
-          </button>
-          <button type="button" disabled hlmTabsTrigger="reports">
-            <ng-icon hlmIcon name="lucideFileText" size="sm" />
-            {{ t('tabs.reports') }}
-          </button>
-          <button type="button" disabled hlmTabsTrigger="activity">
-            <ng-icon hlmIcon name="lucideActivity" size="sm" />
-            {{ t('tabs.activity') }}
-          </button>
-        </hlm-tabs-list>
-        <div hlmTabsContent="overview">
-          <adm-dashboard1-overview />
-        </div>
-        <div hlmTabsContent="analytics">
-          @defer (when selectedTab() === 'analytics') {
-            <adm-dashboard1-analytics />
-          } @placeholder {
-            <hlm-spinner />
-          }
-        </div>
-      </hlm-tabs>
-    </div>
   </header>
+  <hlm-tabs class="space-y-2" [tab]="selectedTab()" (tabActivated)="onTabChange($event)">
+    <hlm-tabs-list>
+      <button type="button" hlmTabsTrigger="overview">
+        <ng-icon hlmIcon name="lucideHome" size="sm" />
+        {{ t('tabs.overview') }}
+      </button>
+      <button type="button" hlmTabsTrigger="analytics">
+        <ng-icon hlmIcon name="lucideBarChart2" size="sm" />
+        {{ t('tabs.analytics') }}
+      </button>
+      <button type="button" disabled hlmTabsTrigger="reports">
+        <ng-icon hlmIcon name="lucideFileText" size="sm" />
+        {{ t('tabs.reports') }}
+      </button>
+    </hlm-tabs-list>
+    <div hlmTabsContent="overview">
+      <adm-dashboard1-overview />
+    </div>
+    <div hlmTabsContent="analytics">
+      @defer (when selectedTab() === 'analytics') {
+        <adm-dashboard1-analytics />
+      } @placeholder {
+        <hlm-spinner />
+      }
+    </div>
+  </hlm-tabs>
 </div>

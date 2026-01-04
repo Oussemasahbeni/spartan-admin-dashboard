@@ -29,8 +29,6 @@ import { Table } from '@tanstack/angular-table';
 
     <ng-template #columnMenu>
       <hlm-dropdown-menu class="columns-list" cdkDropList (cdkDropListDropped)="onDrop($event)">
-        <!-- <hlm-dropdown-menu-label>{{ 'label' | transloco }}</hlm-dropdown-menu-label>
-        <hlm-dropdown-menu-separator /> -->
         @for (column of hidableColumns(); track column.id) {
           <div cdkDrag class="group column-box flex items-center gap-2 px-2">
             <button

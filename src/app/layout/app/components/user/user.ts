@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { LanguageOptions, LanguageService } from '@core/config/language.service';
+import { ThemeService } from '@core/config/theme.service';
 import { AuthService } from '@core/user/auth.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -18,9 +20,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
-import { LanguageOptions, LanguageService } from '../../../core/config/language.service';
-import { ThemeService } from '../../../core/config/theme.service';
-import { User } from '../../../features/users/model/user';
+import { User } from '../../../../features/users/model/user';
 
 @Component({
   selector: 'adm-user',

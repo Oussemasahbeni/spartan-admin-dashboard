@@ -13,7 +13,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { Notification } from './notification';
+import { Notification } from '../../model/notification';
 
 @Component({
   selector: 'adm-notifications',
@@ -55,7 +55,7 @@ import { Notification } from './notification';
           }
         </div>
         <hr class="border-muted -mx-1" />
-        <ng-scrollbar class="max-h-96 overflow-y-auto" hlm appearance="native">
+        <ng-scrollbar class="max-h-96 overflow-y-auto" hlm appearance="compact">
           <ul>
             @for (notification of notifications(); track $index) {
               <button

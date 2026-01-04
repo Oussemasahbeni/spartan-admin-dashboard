@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideArrowUpDown } from '@ng-icons/lucide';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
@@ -62,6 +63,7 @@ import { DataTablePagination } from '../pagination/pagination';
     HlmTableImports,
     HlmIconImports,
     HlmSpinnerImports,
+    HlmButtonImports,
     HlmScrollAreaImports,
     FlexRenderDirective,
     FormsModule,

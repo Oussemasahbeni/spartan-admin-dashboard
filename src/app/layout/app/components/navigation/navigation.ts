@@ -19,8 +19,9 @@ import {
 import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
-import { DirectionalityService } from '../../../core/config/directionality.service';
-import { NavGroup } from '../navigation.types';
+
+import { DirectionalityService } from '@core/config/directionality.service';
+import { NavGroup } from '../../model/navigation';
 import { NavSecondary } from '../secondary/nav-secondary';
 import { NavUser } from '../user/user';
 

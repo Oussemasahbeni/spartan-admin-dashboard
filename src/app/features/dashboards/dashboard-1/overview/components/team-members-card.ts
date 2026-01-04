@@ -24,40 +24,38 @@ import { User } from '../../../../users/model/user';
         <h3 hlmCardTitle>{{ t('title') }}</h3>
         <p hlmCardDescription>{{ t('description') }}</p>
       </div>
-      <div hlmCardContent>
-        <div class="space-y-4">
-          @for (member of members(); track member.email) {
-            <div class="flex items-center justify-between gap-4">
-              <div class="flex items-center gap-3">
-                <hlm-avatar>
-                  <img hlmAvatarImage [src]="member.avatar" [alt]="member.name" />
-                  <span hlmAvatarFallback>
-                    {{ member.name.split(' ')[0].charAt(0) + member.name.split(' ')[1].charAt(0) }}
-                  </span>
-                </hlm-avatar>
-                <div class="flex flex-col">
-                  <span class="text-sm font-medium">{{ member.name }}</span>
-                  <span class="text-muted-foreground text-sm">{{ member.email }}</span>
-                </div>
+      <div hlmCardContent class="space-y-4">
+        @for (member of members(); track member.email) {
+          <div class="flex min-w-0 items-center justify-between gap-4">
+            <div class="flex min-w-0 flex-1 items-center gap-3">
+              <hlm-avatar>
+                <img hlmAvatarImage [src]="member.avatar" [alt]="member.name" />
+                <span hlmAvatarFallback>
+                  {{ member.name.split(' ')[0].charAt(0) + member.name.split(' ')[1].charAt(0) }}
+                </span>
+              </hlm-avatar>
+              <div class="flex min-w-0 flex-col">
+                <span class="truncate text-sm font-medium">{{ member.name }}</span>
+                <span class="text-muted-foreground truncate text-sm">{{ member.email }}</span>
               </div>
-              <button type="button" hlmBtn variant="outline" size="sm" [hlmDropdownMenuTrigger]="roleMenu">
-                {{ t('roles.' + member.role) }}
-                <ng-icon hlmIcon name="lucideChevronDown" size="sm" />
-              </button>
-
-              <!-- Role Dropdown Menu -->
-              <ng-template #roleMenu>
-                <hlm-dropdown-menu>
-                  <button type="button" hlmDropdownMenuItem>{{ t('roles.user') }}</button>
-                  <button type="button" hlmDropdownMenuItem>{{ t('roles.admin') }}</button>
-                  <button type="button" hlmDropdownMenuItem>{{ t('roles.manager') }}</button>
-                  <hlm-dropdown-menu-separator />
-                  <button type="button" hlmDropdownMenuItem class="text-destructive">{{ t('remove') }}</button>
-                </hlm-dropdown-menu>
-              </ng-template>
             </div>
-          }
-        </div>
+            <button type="button" hlmBtn variant="outline" size="sm"  [hlmDropdownMenuTrigger]="roleMenu">
+              {{ t('roles.' + member.role) }}
+              <ng-icon hlmIcon name="lucideChevronDown" size="sm" />
+            </button>
+
+            <!-- Role Dropdown Menu -->
+            <ng-template #roleMenu>
+              <hlm-dropdown-menu>
+                <button type="button" hlmDropdownMenuItem>{{ t('roles.user') }}</button>
+                <button type="button" hlmDropdownMenuItem>{{ t('roles.admin') }}</button>
+                <button type="button" hlmDropdownMenuItem>{{ t('roles.manager') }}</button>
+                <hlm-dropdown-menu-separator />
+                <button type="button" hlmDropdownMenuItem class="text-destructive">{{ t('remove') }}</button>
+              </hlm-dropdown-menu>
+            </ng-template>
+          </div>
+        }
       </div>
     </div>
   `,

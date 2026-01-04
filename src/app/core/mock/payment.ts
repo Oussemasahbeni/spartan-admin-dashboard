@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Payment } from '../../features/dashboards/dashboard-1/overview/components/table/payments-table';
+import { Payment } from '../../features/dashboards/dashboard-1/overview/model/payment';
 
 const range = (len: number): number[] => Array.from({ length: len }, (_, i) => i);
 

@@ -6,8 +6,9 @@ import { User } from '../../../users/model/user';
 import { AreaChartCard } from './components/charts/area-chart-card';
 import { BarChartCard } from './components/charts/bar-chart-card';
 import { CardVariant, OverviewMetricCard } from './components/metric-card';
-import { PaymentsTable, type Payment } from './components/table/payments-table';
+import { PaymentsTable } from './components/table/payments-table';
 import { TeamMembersCard } from './components/team-members-card';
+import { Payment } from './model/payment';
 
 export interface OverviewMetric {
   titleKey: string;

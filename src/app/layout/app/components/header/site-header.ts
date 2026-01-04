@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angula
 import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
-import { Notifications } from '../../notifications/notifications';
+import { Notifications } from '../notifications/notifications';
 
 @Component({
   selector: 'adm-site-header',

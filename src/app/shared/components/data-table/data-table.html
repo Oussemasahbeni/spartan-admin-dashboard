@@ -6,7 +6,7 @@
         <ng-scrollbar hlm [withButtons]="true">
           <table hlmTable [style]="columnSizeVars()">
             <!-- Table Header -->
-            <thead hlmTHead class="bg-muted sticky top-0 z-10">
+            <thead hlmTHead class="bg-card sticky top-0 z-10">
               @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
                 <tr hlmTr>
                   @for (header of headerGroup.headers; track header.id) {

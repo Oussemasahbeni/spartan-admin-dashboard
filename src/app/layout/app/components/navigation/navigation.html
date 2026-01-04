@@ -60,7 +60,7 @@
                           @for (subItem of children; track subItem.key || subItem.title) {
                             <li hlmSidebarMenuSubItem>
                               <a
-                                routerLinkActive="!bg-primary/10 !text-primary !font-semibold hover:!bg-primary/10 hover:!text-primary"
+                                routerLinkActive="bg-primary/10 text-primary font-semibold"
                                 hlmSidebarMenuSubButton
                                 class="hover:none w-full"
                                 [routerLink]="subItem.url"
@@ -78,7 +78,7 @@
                   <li hlmSidebarMenuItem>
                     <a
                       hlmSidebarMenuButton
-                      routerLinkActive="!bg-primary/10 !text-primary !font-semibold hover:!bg-primary/10 hover:!text-primary"
+                      routerLinkActive="bg-primary/10 text-primary font-semibold"
                       class="hover:none w-full"
                       [routerLinkActiveOptions]="{ exact: false }"
                       [routerLink]="item.url"

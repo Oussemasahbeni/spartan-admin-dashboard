@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Notification } from '../../layout/notifications/notification';
+import { Notification } from '../../layout/app/model/notification';
 
 const range = (len: number): number[] => Array.from({ length: len }, (_, i) => i);
 

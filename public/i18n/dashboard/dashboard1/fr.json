@@ -6,8 +6,7 @@
         "tabs": {
             "overview": "Aperçu",
             "analytics": "Analytique",
-            "reports": "Rapports",
-            "activity": "Activité"
+            "reports": "Rapports"
         }
     },
     "overview": {
