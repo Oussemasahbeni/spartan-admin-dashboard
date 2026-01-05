@@ -31,7 +31,7 @@
 
                         @if (header.column.getCanResize() && resizableColumns()) {
                           <div
-                            class="resizer"
+                            class="resizer hidden md:block"
                             [class.isResizing]="header.column.getIsResizing()"
                             (dblclick)="header.column.resetSize()"
                             (mousedown)="header.getResizeHandler()($event)"

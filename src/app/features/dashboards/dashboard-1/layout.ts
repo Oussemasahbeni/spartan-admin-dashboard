@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Directionality } from '@angular/cdk/bidi';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideActivity, lucideBarChart2, lucideDownload, lucideFileText, lucideFilter, lucideHome } from '@ng-icons/lucide';
@@ -35,6 +36,11 @@ import { OverviewDashboard } from './overview/overview';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dashboard1Layout {
+  private readonly _dir = inject(Directionality);
+
+  // TODO: to be removed once spartan fixes the dir issue
+  readonly dir = this._dir.valueSignal;
+
   protected readonly selectedTab = signal('overview');
 
   onTabChange(tab: string) {
