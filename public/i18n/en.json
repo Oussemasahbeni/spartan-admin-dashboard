@@ -8,6 +8,9 @@
         "system": "System",
         "logout": "Logout"
     },
+    "breadcrumbs": {
+        "home": "Home"
+    },
     "titles": {
         "login": "Login",
         "signup": "Sign Up",

@@ -8,6 +8,9 @@
         "system": "النظام",
         "logout": "تسجيل الخروج"
     },
+    "breadcrumbs": {
+        "home": "الرئيسية"
+    },
     "titles": {
         "login": "تسجيل الدخول",
         "signup": "إنشاء حساب",

@@ -8,6 +8,9 @@
         "system": "Système",
         "logout": "Déconnexion"
     },
+    "breadcrumbs": {
+        "home": "Accueil"
+    },
     "titles": {
         "login": "Connexion",
         "signup": "Inscription",

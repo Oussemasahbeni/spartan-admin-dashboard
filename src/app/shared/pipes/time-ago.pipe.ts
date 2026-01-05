@@ -99,27 +99,34 @@ export class TimeAgoPipe implements PipeTransform {
   }
 
   private getLabels(): TimeAgoLabels {
-    return {
-      prefix: this.transloco.translate('timeAgo.prefix'),
-      suffix: this.transloco.translate('timeAgo.suffix'),
-      futurePrefix: this.transloco.translate('timeAgo.futurePrefix'),
-      futureSuffix: this.transloco.translate('timeAgo.futureSuffix'),
-      justNow: this.transloco.translate('timeAgo.justNow'),
-      second: this.transloco.translate('timeAgo.second'),
-      seconds: this.transloco.translate('timeAgo.seconds'),
-      minute: this.transloco.translate('timeAgo.minute'),
-      minutes: this.transloco.translate('timeAgo.minutes'),
-      hour: this.transloco.translate('timeAgo.hour'),
-      hours: this.transloco.translate('timeAgo.hours'),
-      day: this.transloco.translate('timeAgo.day'),
-      days: this.transloco.translate('timeAgo.days'),
-      week: this.transloco.translate('timeAgo.week'),
-      weeks: this.transloco.translate('timeAgo.weeks'),
-      month: this.transloco.translate('timeAgo.month'),
-      months: this.transloco.translate('timeAgo.months'),
-      year: this.transloco.translate('timeAgo.year'),
-      years: this.transloco.translate('timeAgo.years'),
+    // Default labels (fallback if translations aren't loaded)
+    const defaults: TimeAgoLabels = {
+      prefix: '',
+      suffix: 'ago',
+      futurePrefix: 'in',
+      futureSuffix: '',
+      justNow: 'just now',
+      second: 'second',
+      seconds: 'seconds',
+      minute: 'minute',
+      minutes: 'minutes',
+      hour: 'hour',
+      hours: 'hours',
+      day: 'day',
+      days: 'days',
+      week: 'week',
+      weeks: 'weeks',
+      month: 'month',
+      months: 'months',
+      year: 'year',
+      years: 'years',
     };
+
+    // Use translateObject to get all timeAgo translations at once
+    const translations = this.transloco.translateObject<Partial<TimeAgoLabels>>('timeAgo');
+
+    // Merge translations with defaults, preferring translations when available
+    return { ...defaults, ...translations };
   }
 
   private constructResponse(timestamp: number): string {

@@ -50,15 +50,23 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         title: 'dashboard',
+        data: { breadcrumb: 'navigation.dashboard' },
         children: [
+          {
+            path: '',
+            redirectTo: 'dashboard-1',
+            pathMatch: 'full',
+          },
           {
             path: 'dashboard-1',
             title: 'dashboard-1',
+            data: { breadcrumb: 'navigation.dashboard-1' },
             loadChildren: () => import('./features/dashboards/dashboard-1/dashboard1.routes'),
           },
           {
             path: 'dashboard-2',
             title: 'dashboard-2',
+            data: { breadcrumb: 'navigation.dashboard-2' },
             loadChildren: () => import('./features/dashboards/dashboard-2/dashboards.routes'),
           },
         ],
@@ -67,6 +75,7 @@ export const routes: Routes = [
       {
         path: 'users',
         title: 'users',
+        data: { breadcrumb: 'navigation.users' },
         providers: [provideTranslocoScope('users')],
         loadChildren: () => import('./features/users/users.routes'),
       },

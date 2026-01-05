@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
+import { BreadcrumbsHeader } from '@shared/components/breadcrumbs-header/breadcrumbs-header';
 import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
@@ -7,7 +8,7 @@ import { Notifications } from '../notifications/notifications';
 
 @Component({
   selector: 'adm-site-header',
-  imports: [HlmSidebarImports, HlmSeparatorImports, HlmBreadCrumbImports, Notifications],
+  imports: [HlmSidebarImports, HlmSeparatorImports, HlmBreadCrumbImports, Notifications, BreadcrumbsHeader],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <header
@@ -15,20 +16,10 @@ import { Notifications } from '../notifications/notifications';
     >
       <div class="flex items-center gap-2">
         <button type="button" hlmSidebarTrigger (click)="onResize()">
-          <span class="sr-only"></span>
+          <span class="sr-only">Toggle sidebar</span>
         </button>
         <hlm-separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
-        <nav hlmBreadcrumb>
-          <ol hlmBreadcrumbList>
-            <li hlmBreadcrumbItem class="hidden sm:block">
-              <a hlmBreadcrumbLink link="/">Home</a>
-            </li>
-            <li hlmBreadcrumbSeparator class="hidden sm:block"></li>
-            <li hlmBreadcrumbItem>
-              <a hlmBreadcrumbPage>Data Fetching</a>
-            </li>
-          </ol>
-        </nav>
+        <adm-breadcrumbs-header />
       </div>
       <adm-notifications />
     </header>
@@ -36,6 +27,7 @@ import { Notifications } from '../notifications/notifications';
 })
 export class SiteHeader {
   private readonly _platformId = inject(PLATFORM_ID);
+
   onResize() {
     if (isPlatformBrowser(this._platformId)) {
       // Trigger a resize event to notify charts to resize
