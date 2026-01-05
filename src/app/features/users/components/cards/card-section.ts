@@ -13,10 +13,11 @@ import {
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 
 @Component({
   selector: 'adm-users-card-section',
-  imports: [HlmCardImports, HlmIconImports, HlmBadgeImports, TranslocoModule],
+  imports: [HlmCardImports, HlmIconImports, HlmBadgeImports, HlmTooltipImports, TranslocoModule],
   providers: [
     provideIcons({
       lucideUsers,
@@ -42,7 +43,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
               <p class="text-muted-foreground text-xs">{{ t('subtitle') }}</p>
             </div>
           </div>
-          <ng-icon hlm name="lucideInfo" class="text-muted-foreground" size="sm" />
+          <ng-icon hlm name="lucideInfo" class="text-muted-foreground" size="sm" [hlmTooltipTrigger]="t('infoTooltip')" />
         </div>
       </div>
       <div *transloco="let t; prefix: 'users.cards.newUsers'" class="border-border bg-card rounded-lg border p-6">

@@ -3,7 +3,8 @@
         "totalUsers": {
             "label": "Total Users",
             "value": "12,000",
-            "subtitle": "+5% than last month"
+            "subtitle": "+5% than last month",
+            "infoTooltip": "Total number of registered users in the system."
         },
         "newUsers": {
             "label": "New Users",

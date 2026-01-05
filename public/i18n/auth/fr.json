@@ -7,14 +7,13 @@
         "passwordPlaceholder": "Votre mot de passe",
         "forgotPassword": "Mot de passe oublié ?",
         "orContinueWith": "Ou continuer avec",
-        "github": "GitHub",
         "rememberMe": "Se souvenir de moi",
-        "noAccount": "Vous n’avez pas de compte ?",
+        "noAccount": "Vous n'avez pas de compte ?",
         "signUp": "Créer un compte",
         "loginBtn": "Se connecter",
         "errors": {
-            "emailRequired": "L’adresse e-mail est obligatoire",
-            "emailInvalid": "L’adresse e-mail n’est pas valide",
+            "emailRequired": "L'adresse e-mail est obligatoire",
+            "emailInvalid": "L'adresse e-mail n'est pas valide",
             "passwordRequired": "Le mot de passe est obligatoire",
             "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères"
         }
@@ -31,24 +30,24 @@
         "passwordPlaceholder": "Votre mot de passe",
         "confirmPasswordLabel": "Confirmer le mot de passe",
         "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
-        "signupButton": "S’inscrire",
+        "signupButton": "S'inscrire",
         "orContinueWith": "Ou continuer avec",
         "github": "GitHub",
         "termsText": "En continuant, vous acceptez nos",
-        "termsOfService": "conditions d’utilisation",
+        "termsOfService": "conditions d'utilisation",
         "and": "et",
         "privacyPolicy": "politique de confidentialité",
         "errors": {
             "nameRequired": "Le nom est obligatoire",
-            "emailRequired": "L’adresse e-mail est obligatoire",
-            "emailInvalid": "L’adresse e-mail n’est pas valide",
+            "emailRequired": "L'adresse e-mail est obligatoire",
+            "emailInvalid": "L'adresse e-mail n'est pas valide",
             "passwordRequired": "Le mot de passe est obligatoire",
             "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
             "passwordMismatch": "Les mots de passe ne correspondent pas",
             "confirmPasswordRequired": "La confirmation du mot de passe est obligatoire"
         }
     },
-    "forgotPassword": {
+    "resetPassword": {
         "title": "Mot de passe oublié ?",
         "description": "Saisissez votre adresse e-mail afin de recevoir un lien de réinitialisation.",
         "emailLabel": "Adresse e-mail",
@@ -61,5 +60,18 @@
             "resetLinkSent": "Si un compte existe, les instructions de réinitialisation ont été envoyées par e-mail."
         }
     },
-    "testimonial": "Cette bibliothèque m’a fait gagner un temps considérable et m’a permis de livrer des interfaces modernes plus rapidement."
+    "twoStepVerification": {
+        "title": "Entrez le code de vérification",
+        "description": "Nous avons envoyé un code à 6 chiffres à votre e-mail",
+        "helperText": "Entrez le code à 6 chiffres envoyé à votre e-mail.",
+        "verifyBtn": "Vérifier",
+        "didntReceive": "Vous n'avez pas reçu le code ?",
+        "resend": "Renvoyer",
+        "resendIn": "Renvoyer dans {{seconds}}s",
+        "errors": {
+            "invalidCode": "Code de vérification invalide",
+            "invalidCodeDescription": "Le code que vous avez entré est incorrect. Veuillez vérifier et réessayer."
+        }
+    },
+    "testimonial": "Cette bibliothèque m'a fait gagner un temps considérable et m'a permis de livrer des interfaces modernes plus rapidement."
 }

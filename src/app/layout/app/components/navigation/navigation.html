@@ -45,6 +45,7 @@
                         hlmCollapsibleTrigger
                         hlmSidebarMenuButton
                         class="flex w-full items-center justify-between"
+                        [tooltip]="item.key ? t(item.key) : item.title"
                       >
                         <ng-icon hlmIcon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
                         <ng-icon
@@ -80,6 +81,7 @@
                       hlmSidebarMenuButton
                       routerLinkActive="bg-primary/10 text-primary font-semibold"
                       class="hover:none w-full"
+                      [tooltip]="item.key ? t(item.key) : item.title"
                       [routerLinkActiveOptions]="{ exact: false }"
                       [routerLink]="item.url"
                     >

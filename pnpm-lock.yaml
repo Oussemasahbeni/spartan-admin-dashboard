@@ -47,6 +47,9 @@ importers:
       '@ng-icons/lucide':
         specifier: '>=32.0.0 <34.0.0'
         version: 33.0.0
+      '@ng-icons/svgl':
+        specifier: ^33.0.0
+        version: 33.0.0
       '@spartan-ng/brain':
         specifier: 0.0.1-alpha.595
         version: 0.0.1-alpha.595(@angular/cdk@21.0.0(@angular/common@21.0.6(@angular/core@21.0.6(@angular/compiler@21.0.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.6(@angular/compiler@21.0.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/common@21.0.6(@angular/core@21.0.6(@angular/compiler@21.0.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.6(@angular/compiler@21.0.6)(rxjs@7.8.2))(@angular/forms@21.0.6(@angular/common@21.0.6(@angular/core@21.0.6(@angular/compiler@21.0.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.6(@angular/compiler@21.0.6)(rxjs@7.8.2))(@angular/platform-browser@21.0.6(@angular/common@21.0.6(@angular/core@21.0.6(@angular/compiler@21.0.6)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.6(@angular/compiler@21.0.6)(rxjs@7.8.2)))(rxjs@7.8.2))(clsx@2.1.1)(luxon@3.7.2)(rxjs@7.8.2)(tailwindcss@4.1.18)
@@ -2112,6 +2115,9 @@ packages:
 
   '@ng-icons/lucide@33.0.0':
     resolution: {integrity: sha512-HX4tAihCPE3jYgzrlPpM8O/6d/1hbHNHW37GtCQOcY8JFeBc3v5a2MCwFQQwqFm74zBnQbY6iJeGIP6dsaMnuA==}
+
+  '@ng-icons/svgl@33.0.0':
+    resolution: {integrity: sha512-Jjzx61jowQZTU8GPbDxpd13ql0JOrO1tCLwo9a4Yw+BpF2bg84kREXkAh7HiiUBqi/UH0MMXseCXk7xIf0cscQ==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -9377,6 +9383,10 @@ snapshots:
       tslib: 2.8.1
 
   '@ng-icons/lucide@33.0.0':
+    dependencies:
+      tslib: 2.8.1
+
+  '@ng-icons/svgl@33.0.0':
     dependencies:
       tslib: 2.8.1
 

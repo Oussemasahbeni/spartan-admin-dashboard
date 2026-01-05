@@ -21,6 +21,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
 
 import { DirectionalityService } from '@core/config/directionality.service';
+import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { NavGroup } from '../../model/navigation';
 import { NavSecondary } from '../secondary/nav-secondary';
 import { NavUser } from '../user/user';
@@ -31,6 +32,7 @@ import { NavUser } from '../user/user';
     HlmSidebarImports,
     HlmCollapsibleImports,
     HlmIconImports,
+    HlmTooltipImports,
     NavUser,
     NavSecondary,
     RouterLink,
@@ -91,7 +93,8 @@ export class Navigation {
           children: [
             { title: 'Login', key: 'login', url: '/login' },
             { title: 'Sign Up', key: 'signup', url: '/signup' },
-            { title: 'Forgot Password', key: 'forgotPassword', url: '/forgot-password' },
+            { title: 'Reset Password', key: 'resetPassword', url: '/reset-password' },
+            { title: 'Two Step Verification', key: 'twoStepVerification', url: '/two-step-verification' },
           ],
         },
         {

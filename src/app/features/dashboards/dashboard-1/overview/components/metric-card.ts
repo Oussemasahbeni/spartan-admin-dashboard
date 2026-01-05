@@ -13,13 +13,14 @@ import {
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
+import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
 
 export type CardVariant = 'compact' | 'large';
 
 @Component({
   selector: 'adm-metric-card',
-  imports: [HlmIconImports, HlmLabelImports, HlmCardImports, TranslocoModule, NgApexchartsModule],
+  imports: [HlmIconImports, HlmLabelImports, HlmCardImports, HlmTooltipImports, TranslocoModule, NgApexchartsModule],
   providers: [
     provideIcons({
       lucideInfo,
@@ -44,7 +45,7 @@ export type CardVariant = 'compact' | 'large';
           </div>
 
           <div hlmCardAction>
-            <ng-icon hlm name="lucideInfo" size="sm" />
+            <ng-icon hlm name="lucideInfo" size="sm" [hlmTooltipTrigger]="tooltip() ?? ''" />
           </div>
         </div>
 
@@ -105,6 +106,7 @@ export class OverviewMetricCard {
 
   readonly variant = input<CardVariant>('compact');
   readonly title = input.required<string>();
+  readonly tooltip = input<string>();
   readonly value = input.required<string>();
   readonly description = input.required<string>();
   readonly icon = input.required<string>();

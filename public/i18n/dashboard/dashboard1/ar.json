@@ -13,14 +13,17 @@
         "cards": {
             "newSubscriptions": {
                 "title": "الاشتراكات الجديدة",
+                "infoTooltip": "عدد الاشتراكات الجديدة في الأسبوع الماضي",
                 "description": "منذ الأسبوع الماضي"
             },
             "newOrders": {
                 "title": "الطلبات الجديدة",
+                "infoTooltip": "عدد الطلبات الجديدة في الأسبوع الماضي",
                 "description": "منذ الأسبوع الماضي"
             },
             "avgOrderRevenue": {
                 "title": "متوسط إيرادات الطلب",
+                "infoTooltip": "متوسط الإيرادات لكل طلب في الأسبوع الماضي",
                 "description": "منذ الأسبوع الماضي"
             },
             "totalRevenue": {

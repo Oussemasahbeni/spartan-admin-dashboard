@@ -14,6 +14,8 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
+import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
+
 import { Table } from '@tanstack/angular-table';
 
 /**
@@ -38,6 +40,7 @@ import { Table } from '@tanstack/angular-table';
     HlmLabelImports,
     HlmButtonImports,
     HlmIconImports,
+    HlmTooltipImports,
     FormsModule,
     TranslocoModule,
   ],

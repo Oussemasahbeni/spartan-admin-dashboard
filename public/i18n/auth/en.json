@@ -7,7 +7,6 @@
         "passwordPlaceholder": "Your password",
         "forgotPassword": "Forgot your password?",
         "orContinueWith": "Or continue with",
-        "github": "GitHub",
         "rememberMe": "Remember me",
         "noAccount": "Don't have an account?",
         "signUp": "Sign up",
@@ -33,7 +32,7 @@
         "and": "and",
         "privacyPolicy": "Privacy Policy"
     },
-    "forgotPassword": {
+    "resetPassword": {
         "title": "Forgot your password?",
         "description": "Enter your email address and we'll send you a link to reset your password",
         "emailLabel": "Email",
@@ -43,6 +42,19 @@
         "alert": {
             "successTitle": "Success",
             "resetLinkSent": "Password reset instructions have been sent to your email address if an account exists."
+        }
+    },
+    "twoStepVerification": {
+        "title": "Enter verification code",
+        "description": "We sent a 6-digit code to your email",
+        "helperText": "Enter the 6-digit code sent to your email.",
+        "verifyBtn": "Verify",
+        "didntReceive": "Didn't receive the code?",
+        "resend": "Resend",
+        "resendIn": "Resend in {{seconds}}s",
+        "errors": {
+            "invalidCode": "Invalid verification code",
+            "invalidCodeDescription": "The code you entered is incorrect. Please check and try again."
         }
     },
     "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."

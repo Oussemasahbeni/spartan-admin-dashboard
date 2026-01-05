@@ -28,6 +28,7 @@
       variant="outline"
       hlmBtn
       [disabled]="!table().getCanPreviousPage()"
+      [hlmTooltipTrigger]="t('firstPage')"
       (click)="table().firstPage()"
     >
       <ng-icon hlmIcon class="rtl:rotate-180" name="lucideChevronFirst" size="sm" />
@@ -38,6 +39,7 @@
       variant="outline"
       hlmBtn
       [disabled]="!table().getCanPreviousPage()"
+      [hlmTooltipTrigger]="t('previousPage')"
       (click)="table().previousPage()"
     >
       <ng-icon hlmIcon class="rtl:rotate-180" name="lucideChevronLeft" size="sm" />
@@ -48,6 +50,7 @@
       variant="outline"
       hlmBtn
       [disabled]="!table().getCanNextPage()"
+      [hlmTooltipTrigger]="t('nextPage')"
       (click)="table().nextPage()"
     >
       <ng-icon hlmIcon class="rtl:rotate-180" name="lucideChevronRight" size="sm" />
@@ -58,6 +61,7 @@
       variant="outline"
       hlmBtn
       [disabled]="!table().getCanNextPage()"
+      [hlmTooltipTrigger]="t('lastPage')"
       (click)="table().lastPage()"
     >
       <ng-icon hlmIcon class="rtl:rotate-180" name="lucideChevronLast" size="sm" />

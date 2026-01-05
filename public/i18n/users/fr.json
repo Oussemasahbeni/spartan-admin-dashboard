@@ -3,7 +3,8 @@
         "totalUsers": {
             "label": "Utilisateurs totaux",
             "value": "12 000",
-            "subtitle": "+5 % par rapport au mois dernier"
+            "subtitle": "+5 % par rapport au mois dernier",
+            "infoTooltip": "Nombre total d'utilisateurs enregistrés dans le système."
         },
         "newUsers": {
             "label": "Nouveaux utilisateurs",

@@ -1,0 +1,74 @@
+<adm-auth-layout>
+  <div *transloco="let t; prefix: 'auth.twoStepVerification'" hlmCard class="mx-auto w-full max-w-lg justify-center p-4">
+    <div class="space-y-2 text-center">
+      <h1 class="text-2xl font-semibold tracking-tight">
+        {{ t('title') }}
+      </h1>
+      <p class="text-muted-foreground text-center text-sm">
+        {{ t('description') }}
+      </p>
+    </div>
+
+    @if (showError()) {
+      <div hlmAlert variant="destructive" class="mt-4">
+        <h4 hlmAlertTitle>{{ t('errors.invalidCode') }}</h4>
+        <div hlmAlertDescription>
+          {{ t('errors.invalidCodeDescription') }}
+        </div>
+      </div>
+    }
+
+    <form class="mt-4 flex flex-col gap-4" [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+      <div class="flex flex-col items-center gap-3">
+        <brn-input-otp
+          id="otp-input"
+          hlmInputOtp
+          formControlName="otp"
+          [maxLength]="maxLength"
+          [transformPaste]="transformPaste"
+          (completed)="onOtpComplete()"
+        >
+          <div hlmInputOtpGroup>
+            <hlm-input-otp-slot [index]="0" />
+            <hlm-input-otp-slot [index]="1" />
+            <hlm-input-otp-slot [index]="2" />
+          </div>
+          <hlm-input-otp-separator />
+          <div hlmInputOtpGroup>
+            <hlm-input-otp-slot [index]="3" />
+            <hlm-input-otp-slot [index]="4" />
+            <hlm-input-otp-slot [index]="5" />
+          </div>
+        </brn-input-otp>
+        <p class="text-muted-foreground text-center text-sm">
+          {{ t('helperText') }}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <button type="submit" hlmBtn [disabled]="isLoading() || otpForm.invalid">
+          @if (isLoading()) {
+            <hlm-spinner />
+          }
+          {{ t('verifyBtn') }}
+        </button>
+
+        <p class="text-muted-foreground text-center text-sm">
+          {{ t('didntReceive') }}
+          <button
+            type="button"
+            class="text-foreground hover:text-primary underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-50"
+            [disabled]="isResendDisabled() || isLoading()"
+            (click)="resendOtp()"
+          >
+            @if (isResendDisabled()) {
+              {{ t('resendIn', { seconds: countdown() }) }}
+            } @else {
+              {{ t('resend') }}
+            }
+          </button>
+        </p>
+      </div>
+    </form>
+  </div>
+</adm-auth-layout>

@@ -13,14 +13,17 @@
         "cards": {
             "newSubscriptions": {
                 "title": "Nouveaux abonnements",
+                "infoTooltip": "Nombre de nouveaux abonnements la semaine dernière",
                 "description": "Depuis la semaine dernière"
             },
             "newOrders": {
                 "title": "Nouvelles commandes",
+                "infoTooltip": "Nombre de nouvelles commandes la semaine dernière",
                 "description": "Depuis la semaine dernière"
             },
             "avgOrderRevenue": {
                 "title": "Revenu moyen par commande",
+                "infoTooltip": "Revenu moyen par commande la semaine dernière",
                 "description": "Depuis la semaine dernière"
             },
             "totalRevenue": {

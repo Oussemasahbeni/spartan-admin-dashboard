@@ -7,7 +7,6 @@
         "passwordPlaceholder": "كلمة المرور الخاصة بك",
         "forgotPassword": "هل نسيت كلمة المرور؟",
         "orContinueWith": "أو المتابعة باستخدام",
-        "github": "GitHub",
         "rememberMe": "تذكرني",
         "noAccount": "ليس لديك حساب؟",
         "signUp": "إنشاء حساب",
@@ -48,7 +47,7 @@
             "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب"
         }
     },
-    "forgotPassword": {
+    "resetPassword": {
         "title": "نسيت كلمة المرور؟",
         "description": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة تعيين كلمة المرور.",
         "emailLabel": "البريد الإلكتروني",
@@ -58,6 +57,19 @@
         "alert": {
             "successTitle": "تم بنجاح",
             "resetLinkSent": "إذا كان الحساب موجودًا، فسيتم إرسال تعليمات إعادة التعيين إلى بريدك الإلكتروني."
+        }
+    },
+    "twoStepVerification": {
+        "title": "أدخل رمز التحقق",
+        "description": "أرسلنا رمزًا مكونًا من 6 أرقام إلى بريدك الإلكتروني",
+        "helperText": "أدخل الرمز المكون من 6 أرقام المرسل إلى بريدك الإلكتروني.",
+        "verifyBtn": "تحقق",
+        "didntReceive": "لم تستلم الرمز؟",
+        "resend": "إعادة الإرسال",
+        "resendIn": "إعادة الإرسال خلال {{seconds}} ثانية",
+        "errors": {
+            "invalidCode": "رمز التحقق غير صالح",
+            "invalidCodeDescription": "الرمز الذي أدخلته غير صحيح. يرجى التحقق والمحاولة مرة أخرى."
         }
     },
     "testimonial": "تجربة سلسة لإدارة حسابات المستخدمين."

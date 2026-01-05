@@ -1,44 +1,46 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ThemeService } from '@core/config/theme.service';
 import { TranslocoModule } from '@jsverse/transloco';
+import { provideIcons } from '@ng-icons/core';
+import { lucideHome, lucideMoon, lucideSun } from '@ng-icons/lucide';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'adm-auth-layout',
-  imports: [NgOptimizedImage, TranslocoModule],
+  imports: [HlmButtonImports, HlmIconImports, RouterLink, NgOptimizedImage, TranslocoModule],
+  providers: [
+    provideIcons({
+      lucideMoon,
+      lucideSun,
+      lucideHome,
+    }),
+  ],
   template: `
-    <div *transloco="let t" class="bg-background block border shadow-md md:shadow-xl">
-      <div class="relative flex min-h-screen flex-col md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+    <div *transloco="let t" class="bg-background block h-screen overflow-hidden border shadow-md md:shadow-xl">
+      <div class="relative flex h-full flex-col md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+        <div class="absolute top-6 left-6 flex space-x-2">
+          <a routerLink="/">
+            <button type="button" variant="outline" hlmBtn size="icon">
+              <ng-icon hlmIcon size="sm" name="lucideHome" />
+            </button>
+          </a>
+          <button type="button" variant="outline" hlmBtn size="icon" (click)="toggleDarkMode()">
+            <ng-icon hlmIcon size="sm" [name]="currentTheme() === 'dark' ? 'lucideSun' : 'lucideMoon'" />
+          </button>
+        </div>
+
         <!-- Form Section -->
-        <div class="flex flex-col px-6 py-8 sm:px-8 lg:p-8">
-          <div class="mb-8 flex items-center gap-3 lg:absolute lg:top-0 lg:left-0 lg:mb-0 lg:p-6">
-            <img
-              class="aspect-square size-8 dark:hidden"
-              ngSrc="/images/logo/logo.svg"
-              width="32"
-              height="32"
-              priority
-              alt="logo"
-            />
-
-            <img
-              class="hidden aspect-square size-8 dark:inline-block"
-              ngSrc="/images/logo/logo-white.svg"
-              width="32"
-              height="32"
-              priority
-              alt="logo"
-            />
-            <span class="text-xl"> Acme Inc </span>
-          </div>
-
-          <!-- Content Projection for Form -->
-          <div class="my-auto w-full">
-            <ng-content />
-          </div>
+        <div class="my-auto w-full overflow-y-auto">
+          <ng-content />
         </div>
 
         <!-- Illustration Section -->
-        <div class="bg-muted text-primary relative hidden h-full flex-col border-r p-10 lg:flex dark:border-r-zinc-800">
+        <div
+          class="dark:bg-card text-primary relative hidden h-full flex-col border-r bg-slate-950 p-10 lg:flex dark:border-r-zinc-800"
+        >
           <div class="z-1 flex h-full items-center justify-center pt-20">
             <div class="absolute top-0 right-0 w-full max-w-62.5 xl:max-w-112.5">
               <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="grid" />
@@ -47,7 +49,18 @@ import { TranslocoModule } from '@jsverse/transloco';
               <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="grid" />
             </div>
 
-            <div class="my-auto flex max-w-xs flex-col items-center justify-center">
+            <div class="flex max-w-sm flex-col items-center justify-center gap-3">
+              <div class="flex items-center gap-3">
+                <img
+                  class="aspect-square size-12"
+                  ngSrc="/images/logo/logo-white.svg"
+                  width="32"
+                  height="32"
+                  priority
+                  alt="logo"
+                />
+                <span class="text-xl text-white"> Acme Inc </span>
+              </div>
               <p class="text-center text-gray-400 dark:text-white/60">"{{ t('auth.testimonial') }}"</p>
             </div>
           </div>
@@ -57,4 +70,12 @@ import { TranslocoModule } from '@jsverse/transloco';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthLayout {}
+export class AuthLayout {
+  private readonly _themeService = inject(ThemeService);
+
+  readonly currentTheme = this._themeService.theme;
+
+  toggleDarkMode() {
+    this._themeService.setTheme(this._themeService.theme() === 'dark' ? 'light' : 'dark');
+  }
+}

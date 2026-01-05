@@ -14,7 +14,8 @@
       </div>
     </div>
   </header>
-  <hlm-tabs class="space-y-2" [dir]="dir()" [tab]="selectedTab()" (tabActivated)="onTabChange($event)">
+
+  <hlm-tabs class="space-y-2" [tab]="selectedTab()" (tabActivated)="onTabChange($event)">
     <hlm-tabs-list>
       <button type="button" hlmTabsTrigger="overview">
         <ng-icon hlmIcon name="lucideHome" size="sm" />

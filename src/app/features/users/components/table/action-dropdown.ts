@@ -10,6 +10,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
 import { toast } from 'ngx-sonner';
 import { exhaustMap, filter } from 'rxjs';
@@ -25,6 +26,7 @@ import { UserForm } from '../form/user-form';
     HlmDropdownMenuImports,
     BrnAlertDialogImports,
     HlmAlertDialogImports,
+    HlmTooltipImports,
     TranslocoModule,
   ],
   providers: [provideIcons({ lucideEllipsisVertical })],

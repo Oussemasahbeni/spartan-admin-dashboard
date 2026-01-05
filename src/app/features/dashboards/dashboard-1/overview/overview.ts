@@ -12,6 +12,7 @@ import { Payment } from './model/payment';
 
 export interface OverviewMetric {
   titleKey: string;
+  tooltipKey?: string;
   value: string;
   descriptionKey: string;
   icon: string;
@@ -35,6 +36,7 @@ export class OverviewDashboard {
   readonly cards = signal<OverviewMetric[]>([
     {
       titleKey: 'overview.cards.newSubscriptions.title',
+      tooltipKey: 'overview.cards.newSubscriptions.infoTooltip',
       value: '4,682',
       descriptionKey: 'overview.cards.newSubscriptions.description',
       icon: 'lucideSubscript',
@@ -46,6 +48,7 @@ export class OverviewDashboard {
     },
     {
       titleKey: 'overview.cards.newOrders.title',
+      tooltipKey: 'overview.cards.newOrders.infoTooltip',
       value: '1,226',
       descriptionKey: 'overview.cards.newOrders.description',
       icon: 'lucideArrowUpDown',
@@ -57,6 +60,7 @@ export class OverviewDashboard {
     },
     {
       titleKey: 'overview.cards.avgOrderRevenue.title',
+      tooltipKey: 'overview.cards.avgOrderRevenue.infoTooltip',
       value: '1,080',
       descriptionKey: 'overview.cards.avgOrderRevenue.description',
       icon: 'lucideGift',

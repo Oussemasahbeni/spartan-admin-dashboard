@@ -70,7 +70,7 @@
         </div>
 
         <a
-          routerLink="/forgot-password"
+          routerLink="/reset-password"
           class="text-primary text-sm font-medium underline-offset-4 hover:cursor-pointer hover:underline"
         >
           {{ t('forgotPassword') }}
@@ -89,13 +89,18 @@
         <span class="w-full border-t"></span>
       </div>
       <div class="relative flex justify-center text-xs uppercase">
-        <span class="bg-background text-muted-foreground px-2">{{ t('orContinueWith') }}</span>
+        <span class="bg-card text-muted-foreground px-2">{{ t('orContinueWith') }}</span>
       </div>
     </div>
-    <button type="button" hlmBtn variant="outline" [disabled]="isLoading()">
-      <ng-icon hlm class="mr-2" size="sm" name="lucideGithub" />
-
-      {{ t('github') }}
-    </button>
+    <div class="grid grid-cols-2 gap-2">
+      <button type="button" class="flex-1" hlmBtn variant="outline" [disabled]="isLoading()">
+        <ng-icon hlmIcon size="sm" name="lucideGithub" />
+        Github
+      </button>
+      <button type="button" class="flex-1" hlmBtn variant="outline" [disabled]="isLoading()">
+        <ng-icon hlmIcon size="sm" name="svglGoogle" />
+        Google
+      </button>
+    </div>
   </div>
 </adm-auth-layout>
