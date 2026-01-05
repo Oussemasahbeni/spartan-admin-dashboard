@@ -45,12 +45,12 @@
         </button>
 
         <ng-template #themeTpl>
-          <hlm-dropdown-menu-sub>
+          <hlm-dropdown-menu-sub *transloco="let t">
             @let theme = currentTheme();
 
             <button type="button" hlmDropdownMenuItem (click)="setTheme('light')">
               <ng-icon hlmIcon name="lucideSun" size="sm" />
-              <span> {{ t('light') }} </span>
+              <span> {{ t('theme.light') }} </span>
               @if (theme === 'light') {
                 <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }
@@ -58,7 +58,7 @@
 
             <button type="button" hlmDropdownMenuItem (click)="setTheme('dark')">
               <ng-icon hlmIcon name="lucideMoon" size="sm" />
-              <span> {{ t('dark') }} </span>
+              <span> {{ t('theme.dark') }} </span>
               @if (theme === 'dark') {
                 <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }
@@ -66,7 +66,7 @@
 
             <button type="button" hlmDropdownMenuItem (click)="setTheme('system')">
               <ng-icon hlmIcon name="lucideMonitor" size="sm" />
-              <span> {{ t('system') }} </span>
+              <span> {{ t('theme.system') }} </span>
               @if (theme === 'system') {
                 <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
               }

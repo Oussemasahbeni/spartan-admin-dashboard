@@ -1,11 +1,13 @@
 {
+    "theme": {
+        "light": "فاتح",
+        "dark": "داكن",
+        "system": "النظام"
+    },
     "navUser": {
         "account": "الحساب",
         "theme": "المظهر",
         "language": "اللغة",
-        "light": "فاتح",
-        "dark": "داكن",
-        "system": "النظام",
         "logout": "تسجيل الخروج"
     },
     "breadcrumbs": {

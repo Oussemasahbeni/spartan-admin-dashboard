@@ -1,11 +1,13 @@
 {
+    "theme": {
+        "light": "Clair",
+        "dark": "Sombre",
+        "system": "Système"
+    },
     "navUser": {
         "account": "Compte",
         "theme": "Thème",
         "language": "Langue",
-        "light": "Clair",
-        "dark": "Sombre",
-        "system": "Système",
         "logout": "Déconnexion"
     },
     "breadcrumbs": {

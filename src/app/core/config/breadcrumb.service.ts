@@ -73,7 +73,6 @@ export class BreadcrumbService {
         continue;
       }
 
-      // Resolve dynamic parameters (e.g., ':id' -> actual value)
       const resolvedLabel = this._resolveLabel(label, segment);
 
       // Skip duplicates (same label as previous breadcrumb)

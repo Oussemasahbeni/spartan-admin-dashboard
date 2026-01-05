@@ -1,11 +1,13 @@
 {
+    "theme": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+    },
     "navUser": {
         "account": "Account",
         "theme": "Theme",
         "language": "Language",
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System",
         "logout": "Logout"
     },
     "breadcrumbs": {

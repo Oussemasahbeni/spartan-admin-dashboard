@@ -1,20 +1,18 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ThemeService } from '@core/config/theme.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideHome, lucideMoon, lucideSun } from '@ng-icons/lucide';
+import { lucideHome } from '@ng-icons/lucide';
+import { ThemeSwitch } from '@shared/components/theme-switch/theme-switch';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'adm-auth-layout',
-  imports: [HlmButtonImports, HlmIconImports, RouterLink, NgOptimizedImage, TranslocoModule],
+  imports: [HlmButtonImports, HlmIconImports, RouterLink, NgOptimizedImage, TranslocoModule, ThemeSwitch],
   providers: [
     provideIcons({
-      lucideMoon,
-      lucideSun,
       lucideHome,
     }),
   ],
@@ -27,9 +25,8 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
               <ng-icon hlmIcon size="sm" name="lucideHome" />
             </button>
           </a>
-          <button type="button" variant="outline" hlmBtn size="icon" (click)="toggleDarkMode()">
-            <ng-icon hlmIcon size="sm" [name]="currentTheme() === 'dark' ? 'lucideSun' : 'lucideMoon'" />
-          </button>
+
+          <adm-theme-switch />
         </div>
 
         <!-- Form Section -->
@@ -70,12 +67,4 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthLayout {
-  private readonly _themeService = inject(ThemeService);
-
-  readonly currentTheme = this._themeService.theme;
-
-  toggleDarkMode() {
-    this._themeService.setTheme(this._themeService.theme() === 'dark' ? 'light' : 'dark');
-  }
-}
+export class AuthLayout {}
