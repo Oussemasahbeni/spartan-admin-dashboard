@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { email, Field, form, required, submit, validate } from '@angular/forms/signals';
+import { email, form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { provideTranslocoScope, TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
@@ -43,7 +43,7 @@ export interface UserFormModel {
     HlmSelectImports,
     HlmIconImports,
     TranslocoModule,
-    Field,
+    FormField,
     CountryPicker,
     PhoneNumberPicker,
   ],

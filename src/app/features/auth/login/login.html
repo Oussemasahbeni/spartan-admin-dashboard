@@ -22,7 +22,7 @@
           type="email"
           autocomplete="off"
           [placeholder]="t('emailPlaceholder')"
-          [field]="loginForm.email"
+          [formField]="loginForm.email"
         />
 
         @let showEmailErrors = email.touched() && email.invalid();
@@ -41,7 +41,7 @@
             autocomplete="new-password"
             [type]="showPassword() ? 'text' : 'password'"
             [placeholder]="t('passwordPlaceholder')"
-            [field]="loginForm.password"
+            [formField]="loginForm.password"
           />
           <ng-icon
             hlmIcon

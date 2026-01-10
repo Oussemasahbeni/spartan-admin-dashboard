@@ -73,6 +73,44 @@
         },
         "remove": "إزالة"
     },
+    "analytics": {
+        "salesCard": {
+            "title": "المبيعات",
+            "description": "عرض اتجاهات أداء المبيعات",
+            "netSales": "صافي المبيعات",
+            "orders": "الطلبات"
+        },
+        "visitorsCard": {
+            "title": "الزوار",
+            "description": "معلومات أساسية عن الزوار في لمحة",
+            "newVisitors": "زوار جدد",
+            "returning": "زوار عائدون"
+        },
+        "trafficSourceCard": {
+            "title": "مصادر الزيارات",
+            "description": "تعرّف على مصادر قدوم زوارك.",
+            "sources": {
+                "google": "جوجل",
+                "social": "وسائل التواصل",
+                "direct": "مباشر"
+            }
+        },
+        "customersCard": {
+            "title": "العملاء",
+            "description": "أداء العملاء واتجاهات النمو.",
+            "trendingText": "ارتفاع بنسبة 5.2٪ هذا الشهر"
+        },
+        "buyersProfileCard": {
+            "title": "ملف المشترين",
+            "description": "اكتشف أهم المعلومات حول تفضيلات المشترين",
+            "buyers": "المشترون",
+            "trendingText": "ارتفاع بنسبة 5.2٪ هذا الشهر"
+        }
+    },
+    "period": {
+        "month": "شهر",
+        "week": "أسبوع"
+    },
     "months": {
         "jan": "يناير",
         "feb": "فبراير",

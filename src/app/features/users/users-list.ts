@@ -20,7 +20,7 @@ import { CellContext, ColumnDef, flexRenderComponent, PaginationState, SortingSt
 
 import { httpResource } from '@angular/common/http';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { debounce, Field, form } from '@angular/forms/signals';
+import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideRefreshCcw, lucideSearch, lucideUserPlus, lucideX } from '@ng-icons/lucide';
@@ -61,7 +61,7 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
     DataTableColumnManager,
     StatusFilter,
     RoleFilter,
-    Field,
+    FormField,
   ],
   templateUrl: './users-list.html',
   providers: [

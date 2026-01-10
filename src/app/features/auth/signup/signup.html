@@ -22,7 +22,7 @@
           type="text"
           autocomplete="name"
           [placeholder]="t('namePlaceholder')"
-          [field]="signupForm.name"
+          [formField]="signupForm.name"
         />
 
         @let showNameErrors = name.touched() && name.invalid();
@@ -42,7 +42,7 @@
           type="email"
           autocomplete="email"
           [placeholder]="t('emailPlaceholder')"
-          [field]="signupForm.email"
+          [formField]="signupForm.email"
         />
 
         @let showEmailErrors = email.touched() && email.invalid();
@@ -62,7 +62,7 @@
             autocomplete="new-password"
             [type]="showPassword() ? 'text' : 'password'"
             [placeholder]="t('passwordPlaceholder')"
-            [field]="signupForm.password"
+            [formField]="signupForm.password"
           />
           <ng-icon
             hlmIcon
@@ -97,7 +97,7 @@
             autocomplete="new-password"
             [type]="showConfirmPassword() ? 'text' : 'password'"
             [placeholder]="t('confirmPasswordPlaceholder')"
-            [field]="signupForm.confirmPassword"
+            [formField]="signupForm.confirmPassword"
           />
           <ng-icon
             hlmIcon

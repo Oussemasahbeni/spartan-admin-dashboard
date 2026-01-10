@@ -8,7 +8,7 @@
     <hlm-field>
       @let name = userForm.name();
       <hlm-field-label for="name" class="text-right">{{ t('label.name') }}</hlm-field-label>
-      <input hlmInput id="name" [field]="userForm.name" />
+      <input hlmInput id="name" [formField]="userForm.name" />
       @if (name.touched() && name.invalid()) {
         @for (error of name.errors(); track error) {
           <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
@@ -18,7 +18,7 @@
     <hlm-field>
       @let email = userForm.email();
       <hlm-field-label for="email" class="text-right">{{ t('label.email') }}</hlm-field-label>
-      <input hlmInput id="email" [field]="userForm.email" />
+      <input hlmInput id="email" [formField]="userForm.email" />
       @if (email.touched() && email.invalid()) {
         @for (error of email.errors(); track error) {
           <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
@@ -28,7 +28,7 @@
     <hlm-field>
       @let country = userForm.country();
       <hlm-field-label for="country" class="text-right">{{ t('label.country') }}</hlm-field-label>
-      <adm-country-picker [field]="userForm.country" />
+      <adm-country-picker [formField]="userForm.country" />
       @if (country.touched() && country.invalid()) {
         @for (error of country.errors(); track error) {
           <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
@@ -38,7 +38,7 @@
 
     <hlm-field>
       <hlm-field-label>{{ t('label.phoneNumber') }}</hlm-field-label>
-      <adm-phone-number-picker [field]="userForm.phoneNumber" />
+      <adm-phone-number-picker [formField]="userForm.phoneNumber" />
       @let phoneNumber = userForm.phoneNumber();
       @if (phoneNumber.touched() && phoneNumber.invalid()) {
         @for (error of phoneNumber.errors(); track error) {
@@ -50,7 +50,7 @@
     <hlm-field>
       @let role = userForm.role();
       <hlm-field-label for="role">{{ t('label.role') }}</hlm-field-label>
-      <hlm-select class="text-start" [placeholder]="t('selectRolePlaceholder')" [field]="userForm.role">
+      <hlm-select class="text-start" [placeholder]="t('selectRolePlaceholder')" [formField]="userForm.role">
         <hlm-select-trigger id="role" class="w-full">
           <hlm-select-value />
         </hlm-select-trigger>

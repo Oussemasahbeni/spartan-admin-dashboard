@@ -21,7 +21,7 @@ import { User } from '../../../../users/model/user';
   template: `
     <div *transloco="let t; prefix: 'dashboard1.teamMembersCard'" hlmCard class="h-full">
       <div hlmCardHeader>
-        <h3 hlmCardTitle>{{ t('title') }}</h3>
+        <h3 hlmCardTitle class="text-base font-semibold">{{ t('title') }}</h3>
         <p hlmCardDescription>{{ t('description') }}</p>
       </div>
       <div hlmCardContent class="space-y-4">
@@ -39,7 +39,7 @@ import { User } from '../../../../users/model/user';
                 <span class="text-muted-foreground truncate text-sm">{{ member.email }}</span>
               </div>
             </div>
-            <button type="button" hlmBtn variant="outline" size="sm"  [hlmDropdownMenuTrigger]="roleMenu">
+            <button type="button" hlmBtn variant="outline" size="sm" [hlmDropdownMenuTrigger]="roleMenu">
               {{ t('roles.' + member.role) }}
               <ng-icon hlmIcon name="lucideChevronDown" size="sm" />
             </button>

@@ -57,7 +57,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
   template: `
     <div *transloco="let t; prefix: 'dashboard1.paymentsTable'" hlmCard class="h-full">
       <div hlmCardHeader>
-        <h3 hlmCardTitle>{{ t('title') }}</h3>
+        <h3 hlmCardTitle class="text-base font-semibold">{{ t('title') }}</h3>
         <p hlmCardDescription>{{ t('description') }}</p>
       </div>
       <div hlmCardContent class="space-y-4">

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal, TemplateRef, viewChild } from '@angular/core';
-import { debounce, Field, form } from '@angular/forms/signals';
+import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideX } from '@ng-icons/lucide';
@@ -30,7 +30,7 @@ import { provideTransactionStatusIcons, TransactionStatusUIPipe } from '../../pi
     TranslocoModule,
     DataTable,
     DataTableColumnManager,
-    Field,
+    FormField,
   ],
   providers: [
     provideTransactionStatusIcons(),
@@ -49,7 +49,7 @@ export class TransactionsTableComponent {
    * Template references for custom cell rendering.
    */
   readonly dataTable = viewChild.required(DataTable<Transaction>);
-  readonly userCell = viewChild.required<TemplateRef<CellContext<Transaction, any>>>('userCell');
+  readonly userCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('userCell');
   readonly statusCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('statusCell');
   readonly amountCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('amountCell');
 

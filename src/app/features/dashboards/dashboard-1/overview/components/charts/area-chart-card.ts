@@ -33,7 +33,7 @@ interface MonthsTranslation {
     <section hlmCard class="h-full w-full">
       <div hlmCardHeader>
         <h3 hlmCardTitle class="text-base font-semibold">{{ areaChart().title }}</h3>
-        <p hlmCardDescription class="text-muted-foreground text-sm">{{ areaChart().description }}</p>
+        <p hlmCardDescription>{{ areaChart().description }}</p>
       </div>
 
       <div hlmCardContent class="w-full overflow-hidden">

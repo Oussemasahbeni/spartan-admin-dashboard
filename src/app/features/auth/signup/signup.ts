@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { email, Field, form, minLength, required, submit, validate } from '@angular/forms/signals';
+import { email, form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -24,7 +24,7 @@ import { AuthLayout } from '../layout';
     HlmCheckboxImports,
     HlmLabelImports,
     HlmSpinnerImports,
-    Field,
+    FormField,
     TranslocoModule,
     HlmCard,
     RouterLink,

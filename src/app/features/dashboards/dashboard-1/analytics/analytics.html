@@ -1,1 +1,14 @@
-<p>analytics works!</p>
+<div class="@container/main flex flex-col gap-4">
+  <!-- Top Row: Sales & Visitors -->
+  <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+    <adm-sales-card />
+    <adm-visitors-card />
+  </div>
+
+  <!-- Bottom Row: Traffic Source, Customers, Buyers Profile -->
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+    <adm-traffic-source-card />
+    <adm-customers-card />
+    <adm-buyers-profile-card />
+  </div>
+</div>

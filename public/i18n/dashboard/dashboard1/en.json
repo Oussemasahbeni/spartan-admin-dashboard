@@ -79,6 +79,46 @@
         },
         "remove": "Remove"
     },
+    "analytics": {
+        "salesCard": {
+            "title": "Sales",
+            "description": "Visualize sales performance trends",
+            "netSales": "Net Sales",
+            "orders": "Orders"
+           
+        },
+        "visitorsCard": {
+            "title": "Visitors",
+            "description": "Key visitor information at a glance",
+            "newVisitors": "New Visitors",
+            "returning": "Returning"
+            
+        },
+        "trafficSourceCard": {
+            "title": "Traffic Source",
+            "description": "Gain insights into where your visitors are coming from.",
+            "sources": {
+                "google": "Google",
+                "social": "Social",
+                "direct": "Direct"
+            }
+        },
+        "customersCard": {
+            "title": "Customers",
+            "description": "Customer performance and growth trends.",
+            "trendingText": "Trending up by 5.2% this month"
+        },
+        "buyersProfileCard": {
+            "title": "Buyers Profile",
+            "description": "Discover key insights into the buyer's preferences",
+            "buyers": "Buyers",
+            "trendingText": "Trending up by 5.2% this month"
+        }
+    },
+    "period": {
+        "week": "Week",
+        "month": "Month"
+    },
     "months": {
         "jan": "Jan",
         "feb": "Feb",
