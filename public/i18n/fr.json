@@ -26,6 +26,8 @@
         "serviceUnavailable": "Service indisponible",
         "overview": "Vue d'ensemble",
         "analytics": "Analyses",
+        "settings": "Paramètres",
+        "assistant": "Assistant IA",
         "dashboard-2": "Tableau de bord 2"
     },
     "navigation": {
@@ -45,6 +47,8 @@
         "users": "Utilisateurs",
         "notFound": "Page introuvable",
         "unauthorized": "Accès refusé",
+        "settings": "Paramètres",
+        "assistant": "Assistant IA",
         "serviceUnavailable": "Service indisponible"
     },
     "pagination": {

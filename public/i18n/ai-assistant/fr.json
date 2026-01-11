@@ -1,0 +1,61 @@
+{
+    "emptyState": {
+        "title": "Comment puis-je vous aider aujourd'hui ?",
+        "description": "Démarrez une conversation ou choisissez une suggestion ci-dessous",
+        "disclaimer": "Ceci est une démo, aucune IA réelle n'est connectée.",
+        "suggestions": {
+            "explainComponents": {
+                "title": "Expliquer les composants",
+                "prompt": "Pouvez-vous expliquer comment fonctionnent les composants de chat dans Angular AI Kit ?"
+            },
+            "customizeStyling": {
+                "title": "Personnaliser le style",
+                "prompt": "Comment puis-je personnaliser le style et les thèmes des composants ?"
+            },
+            "performanceTips": {
+                "title": "Conseils de performance",
+                "prompt": "Quelles sont les meilleures pratiques de performance lors de l'utilisation de ces composants ?"
+            },
+            "integrationGuide": {
+                "title": "Guide d'intégration",
+                "prompt": "Comment intégrer Angular AI Kit avec mon projet Angular existant ?"
+            }
+        }
+    },
+    "input": {
+        "placeholder": "Comment puis-je vous aider aujourd'hui ?",
+        "keyboardHint": "Appuyez sur Entrée pour envoyer, Maj+Entrée pour une nouvelle ligne, Échap pour effacer",
+        "attachFile": "Joindre un fichier",
+        "addPhotosFiles": "Ajouter des photos et fichiers",
+        "voiceInput": "Entrée vocale",
+        "sendMessage": "Envoyer le message",
+        "remove": "Supprimer"
+    },
+    "capabilities": {
+        "webSearch": "Recherche Web",
+        "thinking": "Réflexion",
+        "deepReasoning": "Raisonnement approfondi",
+        "more": "Plus",
+        "exploreApps": "Explorer les applications",
+        "studyAndLearn": "Étudier et apprendre",
+        "canvas": "Canevas"
+    },
+    "promptSuggestions": {
+        "explainComponents": {
+            "label": "Expliquer les composants",
+            "prompt": "Pouvez-vous expliquer comment fonctionnent les composants de chat ?"
+        },
+        "customizeStyling": {
+            "label": "Personnaliser le style",
+            "prompt": "Comment puis-je personnaliser le style et les thèmes ?"
+        },
+        "performanceTips": {
+            "label": "Conseils de performance",
+            "prompt": "Quelles sont les meilleures pratiques de performance ?"
+        }
+    },
+    "ariaLabels": {
+        "suggestedPrompts": "Suggestions de prompts",
+        "useSuggestion": "Utiliser la suggestion :"
+    }
+}

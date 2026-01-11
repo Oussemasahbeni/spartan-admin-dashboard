@@ -49,7 +49,7 @@ interface MonthsTranslation {
         <div class="flex flex-col justify-center gap-4 lg:w-1/3">
           <!-- New Visitors Metric -->
           <div class="bg-muted/50 rounded-lg border p-4">
-            <span class="text-chart-teal text-sm font-medium">{{ t('newVisitors') }}</span>
+            <span class="text-muted-foreground text-sm font-medium">{{ t('newVisitors') }}</span>
             <div class="mt-1 text-2xl font-bold">36,786</div>
             <div class="text-success mt-1 flex items-center gap-1 text-xs">
               <ng-icon hlmIcon name="lucideTrendingUp" size="xs" />

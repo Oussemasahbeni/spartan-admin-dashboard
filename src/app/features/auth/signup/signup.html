@@ -14,7 +14,6 @@
 
     <form class="flex flex-col gap-4">
       <hlm-field>
-        @let name = signupForm.name();
         <hlm-field-label for="name">{{ t('nameLabel') }}</hlm-field-label>
         <input
           hlmInput
@@ -24,17 +23,10 @@
           [placeholder]="t('namePlaceholder')"
           [formField]="signupForm.name"
         />
-
-        @let showNameErrors = name.touched() && name.invalid();
-        @if (showNameErrors) {
-          @for (error of name.errors(); track error) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
-          }
-        }
+        <adm-validation-errors [fieldState]="signupForm.name()" />
       </hlm-field>
 
       <hlm-field>
-        @let email = signupForm.email();
         <hlm-field-label for="email">{{ t('emailLabel') }}</hlm-field-label>
         <input
           hlmInput
@@ -44,13 +36,7 @@
           [placeholder]="t('emailPlaceholder')"
           [formField]="signupForm.email"
         />
-
-        @let showEmailErrors = email.touched() && email.invalid();
-        @if (showEmailErrors) {
-          @for (error of email.errors(); track error) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
-          }
-        }
+        <adm-validation-errors [fieldState]="signupForm.email()" />
       </hlm-field>
 
       <hlm-field>
@@ -73,19 +59,7 @@
           />
         </div>
 
-        @let password = signupForm.password();
-        @let showPasswordErrors = password.touched() && password.invalid();
-        @if (showPasswordErrors) {
-          @for (error of password.errors(); track error) {
-            @if (error.kind === 'minLength') {
-              <hlm-field-error *transloco="let t">{{
-                t('validation.minLength', { min: passwordMinLength })
-              }}</hlm-field-error>
-            } @else {
-              <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
-            }
-          }
-        }
+        <adm-validation-errors [fieldState]="signupForm.password()" [errorParams]="{ min: passwordMinLength }" />
       </hlm-field>
 
       <hlm-field>
@@ -108,13 +82,7 @@
           />
         </div>
 
-        @let confirmPassword = signupForm.confirmPassword();
-        @let showConfirmPasswordErrors = confirmPassword.touched() && confirmPassword.invalid();
-        @if (showConfirmPasswordErrors) {
-          @for (error of confirmPassword.errors(); track error) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
-          }
-        }
+        <adm-validation-errors [fieldState]="signupForm.confirmPassword()" />
       </hlm-field>
 
       <button type="button" hlmBtn [disabled]="isLoading()" (click)="onSubmit()">

@@ -1,0 +1,61 @@
+{
+    "emptyState": {
+        "title": "كيف يمكنني مساعدتك اليوم؟",
+        "description": "ابدأ محادثة أو اختر اقتراحاً أدناه",
+        "disclaimer": "هذا عرض توضيحي، لا يوجد ذكاء اصطناعي حقيقي متصل.",
+        "suggestions": {
+            "explainComponents": {
+                "title": "شرح المكونات",
+                "prompt": "هل يمكنك شرح كيفية عمل مكونات الدردشة في Angular AI Kit؟"
+            },
+            "customizeStyling": {
+                "title": "تخصيص التصميم",
+                "prompt": "كيف يمكنني تخصيص التصميم والسمات للمكونات؟"
+            },
+            "performanceTips": {
+                "title": "نصائح الأداء",
+                "prompt": "ما هي أفضل ممارسات الأداء عند استخدام هذه المكونات؟"
+            },
+            "integrationGuide": {
+                "title": "دليل التكامل",
+                "prompt": "كيف أدمج Angular AI Kit مع مشروع Angular الحالي الخاص بي؟"
+            }
+        }
+    },
+    "input": {
+        "placeholder": "كيف يمكنني مساعدتك اليوم؟",
+        "keyboardHint": "اضغط Enter للإرسال، Shift+Enter لسطر جديد، Escape للمسح",
+        "attachFile": "إرفاق ملف",
+        "addPhotosFiles": "إضافة صور وملفات",
+        "voiceInput": "إدخال صوتي",
+        "sendMessage": "إرسال الرسالة",
+        "remove": "إزالة"
+    },
+    "capabilities": {
+        "webSearch": "بحث الويب",
+        "thinking": "التفكير",
+        "deepReasoning": "الاستدلال العميق",
+        "more": "المزيد",
+        "exploreApps": "استكشاف التطبيقات",
+        "studyAndLearn": "الدراسة والتعلم",
+        "canvas": "لوحة الرسم"
+    },
+    "promptSuggestions": {
+        "explainComponents": {
+            "label": "شرح المكونات",
+            "prompt": "هل يمكنك شرح كيفية عمل مكونات الدردشة؟"
+        },
+        "customizeStyling": {
+            "label": "تخصيص التصميم",
+            "prompt": "كيف يمكنني تخصيص التصميم والسمات؟"
+        },
+        "performanceTips": {
+            "label": "نصائح الأداء",
+            "prompt": "ما هي أفضل ممارسات الأداء؟"
+        }
+    },
+    "ariaLabels": {
+        "suggestedPrompts": "الاقتراحات المقترحة",
+        "useSuggestion": "استخدم الاقتراح:"
+    }
+}

@@ -79,6 +79,12 @@ export const routes: Routes = [
         providers: [provideTranslocoScope('users')],
         loadChildren: () => import('./features/users/users.routes'),
       },
+      {
+        path: 'assistant',
+        title: 'AI Assistant',
+        data: { breadcrumb: 'navigation.aiAssistant' },
+        loadChildren: () => import('./features/ai-assistant/ai-assistant.routes'),
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

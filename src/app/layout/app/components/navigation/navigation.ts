@@ -7,6 +7,7 @@ import { provideIcons } from '@ng-icons/core';
 import {
   lucideAlertTriangle,
   lucideBarChart3,
+  lucideBot,
   lucideCalendarDays,
   lucideCheckSquare,
   lucideChevronRight,
@@ -14,6 +15,7 @@ import {
   lucideGauge,
   lucideLayoutDashboard,
   lucideLock,
+  lucideSettings,
   lucideUsers,
 } from '@ng-icons/lucide';
 import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
@@ -53,6 +55,8 @@ import { NavUser } from '../user/user';
       lucideCheckSquare,
       lucideLock,
       lucideAlertTriangle,
+      lucideSettings,
+      lucideBot,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -107,6 +111,13 @@ export class Navigation {
             { title: 'Unauthorized', key: 'unauthorized', url: '/401-unauthorized' },
           ],
         },
+      ],
+    },
+    {
+      label: 'other',
+      items: [
+        { title: 'settings', key: 'settings', url: '/settings', icon: 'lucideSettings' },
+        { title: 'assistant', key: 'assistant', url: '/assistant', icon: 'lucideBot' },
       ],
     },
   ];

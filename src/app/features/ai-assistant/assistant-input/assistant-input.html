@@ -1,0 +1,201 @@
+<ng-container *transloco="let t; prefix: 'aiAssistant'">
+  <div class="flex flex-col gap-3">
+    <!-- Hidden file input for attachments -->
+    <input
+      #fileInput
+      type="file"
+      multiple
+      accept="image/*,.pdf,.doc,.docx,.txt,.csv,.json,.xml"
+      hidden
+      aria-hidden="true"
+      (change)="handleFileSelect($event)"
+    />
+
+    <!-- Main Input Group -->
+    <div hlmInputGroup class="rounded-2xl">
+      <!-- Attachments Display -->
+      @if (hasAttachments()) {
+        <div hlmInputGroupAddon align="block-start">
+          <div class="no-scrollbar -m-2 flex gap-3 overflow-y-auto px-2 pt-2 pb-4">
+            @for (file of attachments(); track file.name + file.size) {
+              <adm-attachment-card [file]="file" (remove)="removeAttachment(file)" />
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Textarea -->
+      <textarea
+        #textareaRef
+        hlmInputGroupTextarea
+        class="max-h-96"
+        aria-describedby="keyboard-hint"
+        [attr.aria-label]="t('input.placeholder')"
+        [placeholder]="t('input.placeholder')"
+        [disabled]="disabled()"
+        [value]="inputValue()"
+        (input)="handleInput($event)"
+        (keydown)="handleKeydown($event)"
+      ></textarea>
+
+      <span id="keyboard-hint" class="sr-only"> {{ t('input.keyboardHint') }} </span>
+
+      <!-- Block-end: Toolbar -->
+      <div hlmInputGroupAddon align="block-end" class="flex justify-between gap-2">
+        <div class="flex items-center gap-1">
+          <button type="button" class="rounded-full" hlmInputGroupButton size="icon-sm" [hlmDropdownMenuTrigger]="plusMenu">
+            <ng-icon hlm name="lucidePlus" size="sm" />
+          </button>
+
+          <ng-template #plusMenu>
+            <hlm-dropdown-menu class="w-56">
+              <!-- Attachments -->
+              <hlm-dropdown-menu-group>
+                <button
+                  type="button"
+                  hlmDropdownMenuItem
+                  [attr.aria-label]="t('input.attachFile')"
+                  (click)="triggerFileInput()"
+                >
+                  <ng-icon hlm name="lucidePaperclip" size="sm" />
+                  {{ t('input.addPhotosFiles') }}
+                </button>
+              </hlm-dropdown-menu-group>
+
+              <hlm-dropdown-menu-separator />
+
+              <!--  Capabilities -->
+              <hlm-dropdown-menu-group>
+                <!-- Web Search -->
+                <button
+                  type="button"
+                  hlmDropdownMenuCheckbox
+                  checkBoxAlign="end"
+                  [checked]="enableWebSearch()"
+                  (click)="enableWebSearch.set(!enableWebSearch())"
+                >
+                  <div class="flex items-center gap-2">
+                    <ng-icon hlm name="lucideGlobe" size="sm" class="text-muted-foreground" />
+                    <span>{{ t('capabilities.webSearch') }}</span>
+                  </div>
+                  <hlm-dropdown-menu-checkbox-indicator />
+                </button>
+                <!-- Thinking -->
+                <button
+                  type="button"
+                  hlmDropdownMenuCheckbox
+                  checkBoxAlign="end"
+                  [checked]="enableThinking()"
+                  (click)="enableThinking.set(!enableThinking())"
+                >
+                  <div class="flex items-center gap-2">
+                    <ng-icon hlm name="lucideLightbulb" size="sm" class="text-muted-foreground" />
+                    <span>{{ t('capabilities.thinking') }}</span>
+                  </div>
+                  <hlm-dropdown-menu-checkbox-indicator />
+                </button>
+
+                <!-- Deep Reasoning -->
+                <button
+                  type="button"
+                  hlmDropdownMenuCheckbox
+                  checkBoxAlign="end"
+                  [checked]="enableReasoning()"
+                  (click)="enableReasoning.set(!enableReasoning())"
+                >
+                  <div class="flex items-center gap-2">
+                    <ng-icon hlm name="lucideBrainCircuit" size="sm" class="text-muted-foreground" />
+                    <span>{{ t('capabilities.deepReasoning') }}</span>
+                  </div>
+                  <hlm-dropdown-menu-checkbox-indicator />
+                </button>
+
+                <button type="button" hlmDropdownMenuItem side="right" align="start" [hlmDropdownMenuTrigger]="moreFeatures">
+                  <ng-icon hlm name="lucideMoreHorizontal" size="sm" class="text-muted-foreground" />
+                  <span>{{ t('capabilities.more') }}</span>
+                  <hlm-dropdown-menu-item-sub-indicator class="rtl:rotate-180" />
+                </button>
+
+                <ng-template #moreFeatures>
+                  <hlm-dropdown-menu-sub>
+                    <button type="button" hlmDropdownMenuItem>
+                      <ng-icon hlm name="lucideAppWindow" size="sm" class="text-muted-foreground" />
+                      {{ t('capabilities.exploreApps') }}
+                    </button>
+                    <button type="button" hlmDropdownMenuItem>
+                      <ng-icon hlm name="lucideGraduationCap" size="sm" class="text-muted-foreground" />
+                      {{ t('capabilities.studyAndLearn') }}
+                    </button>
+                    <button type="button" hlmDropdownMenuItem>
+                      <ng-icon hlm name="lucidePencilRuler" size="sm" class="text-muted-foreground" />
+                      {{ t('capabilities.canvas') }}
+                    </button>
+                  </hlm-dropdown-menu-sub>
+                </ng-template>
+              </hlm-dropdown-menu-group>
+            </hlm-dropdown-menu>
+          </ng-template>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <!-- Model selector dropdown -->
+          <button type="button" hlmBtn variant="ghost" [hlmDropdownMenuTrigger]="modelMenu">
+            {{ selectedModel() }}
+            <ng-icon hlm name="lucideChevronDown" size="xs" />
+          </button>
+          <ng-template #modelMenu>
+            <hlm-dropdown-menu class="w-56">
+              <hlm-dropdown-menu-group>
+                @for (model of models(); track model) {
+                  <button
+                    type="button"
+                    hlmDropdownMenuCheckbox
+                    checkBoxAlign="end"
+                    [checked]="selectedModel() === model"
+                    (click)="selectModel(model)"
+                  >
+                    <hlm-dropdown-menu-checkbox-indicator />
+                    <span>{{ model }}</span>
+                  </button>
+                }
+              </hlm-dropdown-menu-group>
+            </hlm-dropdown-menu>
+          </ng-template>
+
+          <!-- Mic button -->
+          <button
+            type="button"
+            hlmInputGroupButton
+            class="rounded-full"
+            size="icon-sm"
+            [attr.aria-label]="t('input.voiceInput')"
+            [class.animate-pulse]="isRecording()"
+            [class.text-red-500]="isRecording()"
+            [attr.aria-pressed]="isRecording()"
+            (click)="toggleMic()"
+          >
+            <ng-icon hlm name="lucideMic" size="sm" />
+          </button>
+
+          <!-- Send button -->
+          <button
+            type="button"
+            hlmInputGroupButton
+            class="rounded-full"
+            size="icon-sm"
+            [attr.aria-label]="t('input.sendMessage')"
+            [variant]="canSend() ? 'default' : 'secondary'"
+            [disabled]="!canSend()"
+            [attr.aria-disabled]="!canSend()"
+            (click)="handleSend()"
+          >
+            <ng-icon hlm name="lucideArrowUp" size="sm" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Suggestions -->
+    <adm-prompt-suggestions (suggestionSelected)="handleSuggestionSelect($event)" />
+  </div>
+</ng-container>

@@ -14,7 +14,6 @@
 
     <form class="flex flex-col gap-4">
       <hlm-field>
-        @let email = loginForm.email();
         <hlm-field-label for="email">{{ t('emailLabel') }}</hlm-field-label>
         <input
           hlmInput
@@ -24,13 +23,7 @@
           [placeholder]="t('emailPlaceholder')"
           [formField]="loginForm.email"
         />
-
-        @let showEmailErrors = email.touched() && email.invalid();
-        @if (showEmailErrors) {
-          @for (error of email.errors(); track error) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
-          }
-        }
+        <adm-validation-errors [fieldState]="loginForm.email()" />
       </hlm-field>
       <hlm-field>
         <hlm-field-label for="password">{{ t('passwordLabel') }}</hlm-field-label>
@@ -52,13 +45,7 @@
           />
         </div>
 
-        @let password = loginForm.password();
-        @let showPasswordErrors = password.touched() && password.invalid();
-        @if (showPasswordErrors) {
-          @for (error of password.errors(); track error) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
-          }
-        }
+        <adm-validation-errors [fieldState]="loginForm.password()" />
       </hlm-field>
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">

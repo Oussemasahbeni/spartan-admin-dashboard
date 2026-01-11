@@ -26,6 +26,8 @@
         "serviceUnavailable": "Service Unavailable",
         "overview": "Overview",
         "analytics": "Analytics",
+        "settings": "Settings",
+        "assistant": "AI Assistant",
         "dashboard-2": "Dashboard 2"
     },
     "navigation": {
@@ -43,6 +45,8 @@
         "tasks": "Tasks",
         "calendar": "Calendar",
         "users": "Users",
+        "settings": "Settings",
+        "assistant": "AI Assistant",
         "notFound": "Page Not Found",
         "unauthorized": "Unauthorized",
         "serviceUnavailable": "Service Unavailable"

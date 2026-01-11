@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# TODO: Sitemap
+Sitemap: https://spartan-admin-dashboard.vercel.app/sitemap.xml
+
+Crawl-delay: 1

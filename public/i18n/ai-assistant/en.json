@@ -1,0 +1,61 @@
+{
+    "emptyState": {
+        "title": "How can I help you today?",
+        "description": "Start a conversation or choose a suggestion below",
+        "disclaimer": "This is a demo, no real AI is connected.",
+        "suggestions": {
+            "explainComponents": {
+                "title": "Explain components",
+                "prompt": "Can you explain how the chat components in Angular AI Kit work?"
+            },
+            "customizeStyling": {
+                "title": "Customize styling",
+                "prompt": "How can I customize the styling and themes of the components?"
+            },
+            "performanceTips": {
+                "title": "Performance tips",
+                "prompt": "What are some performance best practices when using these components?"
+            },
+            "integrationGuide": {
+                "title": "Integration guide",
+                "prompt": "How do I integrate Angular AI Kit with my existing Angular project?"
+            }
+        }
+    },
+    "input": {
+        "placeholder": "How can I assist you today?",
+        "keyboardHint": "Press Enter to send, Shift+Enter for new line, Escape to clear",
+        "attachFile": "Attach file",
+        "addPhotosFiles": "Add photos & files",
+        "voiceInput": "Voice input",
+        "sendMessage": "Send message",
+        "remove": "Remove"
+    },
+    "capabilities": {
+        "webSearch": "Web Search",
+        "thinking": "Thinking",
+        "deepReasoning": "Deep Reasoning",
+        "more": "More",
+        "exploreApps": "Explore Apps",
+        "studyAndLearn": "Study and Learn",
+        "canvas": "Canvas"
+    },
+    "promptSuggestions": {
+        "explainComponents": {
+            "label": "Explain components",
+            "prompt": "Can you explain how the chat components work?"
+        },
+        "customizeStyling": {
+            "label": "Customize styling",
+            "prompt": "How can I customize the styling and themes?"
+        },
+        "performanceTips": {
+            "label": "Performance tips",
+            "prompt": "What are some performance best practices?"
+        }
+    },
+    "ariaLabels": {
+        "suggestedPrompts": "Suggested prompts",
+        "useSuggestion": "Use suggestion:"
+    }
+}

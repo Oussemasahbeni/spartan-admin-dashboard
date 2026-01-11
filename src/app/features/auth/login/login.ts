@@ -14,6 +14,7 @@ import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { AuthLayout } from '../layout';
+import { ValidationErrors } from "@shared/components/validation-errors/validation-errors";
 
 @Component({
   selector: 'adm-login',
@@ -31,7 +32,8 @@ import { AuthLayout } from '../layout';
     RouterLink,
     AuthLayout,
     FormField,
-  ],
+    ValidationErrors
+],
   providers: [
     provideIcons({
       lucideGithub,

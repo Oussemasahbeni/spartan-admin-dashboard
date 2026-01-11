@@ -26,6 +26,8 @@
         "serviceUnavailable": "الخدمة غير متوفرة",
         "overview": "نظرة عامة",
         "analytics": "التحليلات",
+        "settings": "الإعدادات",
+        "assistant": "مساعد الذكاء الاصطناعي",
         "dashboard-2": "لوحة التحكم 2"
     },
     "navigation": {
@@ -43,6 +45,8 @@
         "tasks": "إدارة المهام",
         "calendar": "الجدول الزمني",
         "users": "شؤون المستخدمين",
+        "settings": "الإعدادات",
+        "assistant": "مساعد الذكاء الاصطناعي",
         "notFound": "الصفحة غير متوفرة",
         "unauthorized": "صلاحيات محدودة",
         "serviceUnavailable": "الخدمة قيد الصيانة"

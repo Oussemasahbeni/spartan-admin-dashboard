@@ -41,7 +41,7 @@ export type CardVariant = 'compact' | 'large';
         <div hlmCardHeader class="flex flex-row items-center justify-between">
           <div class="flex items-center gap-2">
             <ng-icon hlm size="sm" [name]="icon()" />
-            <h3 hlmCardTitle class="text-sm font-medium">{{ title() }}</h3>
+            <h3 hlmCardTitle class="text-muted-foreground text-sm font-medium">{{ title() }}</h3>
           </div>
 
           <div hlmCardAction>
