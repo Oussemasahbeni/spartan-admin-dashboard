@@ -19,6 +19,8 @@ export interface PromptSuggestion {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PromptSuggestions {
+  readonly suggestionSelected = output<string>();
+
   readonly suggestions = signal<PromptSuggestion[]>([
     {
       icon: 'lucidePanelsTopLeft',
@@ -37,9 +39,7 @@ export class PromptSuggestions {
     },
   ]);
 
-  readonly suggestionSelected = output<PromptSuggestion>();
-
-  handleClick(suggestion: PromptSuggestion): void {
-    this.suggestionSelected.emit(suggestion);
+  handleClick(prompt: string): void {
+    this.suggestionSelected.emit(prompt);
   }
 }

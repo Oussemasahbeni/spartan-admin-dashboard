@@ -12,7 +12,7 @@
       </p>
     </div>
 
-    <form class="flex flex-col gap-4">
+    <form class="flex flex-col gap-4" (submit)="onSubmit($event)">
       <hlm-field>
         <hlm-field-label for="name">{{ t('nameLabel') }}</hlm-field-label>
         <input
@@ -85,7 +85,7 @@
         <adm-validation-errors [fieldState]="signupForm.confirmPassword()" />
       </hlm-field>
 
-      <button type="button" hlmBtn [disabled]="isLoading()" (click)="onSubmit()">
+      <button type="submit" hlmBtn [disabled]="isLoading()">
         @if (isLoading()) {
           <hlm-spinner />
         }

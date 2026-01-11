@@ -1,4 +1,4 @@
-<div class="mx-auto w-full max-w-4xl p-4">
+<div class="mx-auto w-full max-w-4xl">
   @if (isEmpty()) {
     <div class="flex min-h-full items-center justify-center">
       <div class="mx-auto w-full max-w-3xl">
@@ -6,16 +6,15 @@
       </div>
     </div>
   } @else {
-    <!-- Message List (no internal scroll) -->
-    <!-- <div class="mx-auto w-full max-w-3xl">
-        <app-message-list
-          [messages]="messages()"
-          [loading]="isLoading()"
-          [showAvatars]="true"
-          (messageCopy)="handleMessageCopy($event)"
-          (messageRegenerate)="handleMessageRegenerate($event)"
-        />
-      </div> -->
+    <div class="mx-auto w-full max-w-3xl">
+      <!-- <adm-chat-list
+        [messages]="messages()"
+        [loading]="isLoading()"
+        (messageCopy)="handleMessageCopy($event)"
+        (messageRegenerate)="handleMessageRegenerate($event)"
+      /> -->
+      <adm-chat-list [loading]="isLoading()" />
+    </div>
   }
 
   <div class="mx-auto w-full max-w-3xl">

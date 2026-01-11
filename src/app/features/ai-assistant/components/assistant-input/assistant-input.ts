@@ -1,15 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  ElementRef,
-  inject,
-  input,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild } from '@angular/core';
+import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideAppWindow,
@@ -30,8 +20,8 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
+import { PromptSuggestions } from '../prompt-suggestions/prompt-suggestions';
 import { AttachmentCard } from '../attachment-card/attachment-card';
-import { PromptSuggestion, PromptSuggestions } from '../prompt-suggestions/prompt-suggestions';
 
 @Component({
   selector: 'adm-assistant-input',
@@ -143,10 +133,8 @@ export class AssistantInput {
     this.selectedModel.set(model);
   }
 
-  private readonly _transloco = inject(TranslocoService);
-
-  handleSuggestionSelect(suggestion: PromptSuggestion): void {
-    this.inputValue.set(this._transloco.translate(suggestion.promptKey));
+  handleSuggestionSelect(suggestion: string): void {
+    this.inputValue.set(suggestion);
     // this.resetTextarea();
   }
   handleClear(): void {

@@ -4,7 +4,7 @@
 </hlm-dialog-header>
 
 <div class="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-0 overflow-y-auto sm:max-h-[min(640px,80vh)]">
-  <form *transloco="let t; prefix: 'users.form'" class="flex w-full flex-col gap-4">
+  <form *transloco="let t; prefix: 'users.form'" class="flex w-full flex-col gap-4" (submit)="onSubmit($event)">
     <hlm-field>
       <hlm-field-label for="name" class="text-right">{{ t('label.name') }}</hlm-field-label>
       <input hlmInput id="name" [formField]="userForm.name" />
@@ -46,7 +46,7 @@
 
 <hlm-dialog-footer *transloco="let t; prefix: 'buttons'">
   <button type="button" hlmBtn variant="outline" brnDialogClose>{{ t('cancel') }}</button>
-  <button type="submit" hlmBtn [disabled]="isSubmitting()" (click)="onSubmit()">
+  <button type="submit" hlmBtn [disabled]="isSubmitting()">
     @if (isSubmitting()) {
       <hlm-spinner />
     }

@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
-import { AssistantInput } from './assistant-input/assistant-input';
-import { AssistantEmptyState } from './empty-state/empty-state';
+import { AssistantInput } from './components/assistant-input/assistant-input';
+import { AssistantEmptyState } from './components/empty-state/empty-state';
+import { ChatList } from "./components/chat-list/chat-list";
 
 @Component({
   selector: 'adm-ai-assistant',
-  imports: [AssistantEmptyState, AssistantInput, TranslocoModule],
+  imports: [AssistantEmptyState, AssistantInput, TranslocoModule, ChatList],
   templateUrl: './ai-assistant.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideTranslocoScope({ scope: 'ai-assistant', alias: 'aiAssistant' })],

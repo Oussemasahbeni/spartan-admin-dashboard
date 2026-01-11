@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCircleCheck } from '@ng-icons/lucide';
+import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
@@ -12,7 +13,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { AuthLayout } from '../layout';
-import { ValidationErrors } from "@shared/components/validation-errors/validation-errors";
 
 @Component({
   selector: 'adm-forget-password',
@@ -28,8 +28,8 @@ import { ValidationErrors } from "@shared/components/validation-errors/validatio
     HlmCard,
     RouterLink,
     AuthLayout,
-    ValidationErrors
-],
+    ValidationErrors,
+  ],
   providers: [provideIcons({ lucideCircleCheck })],
   templateUrl: './reset-password.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,7 +48,8 @@ export class ResetPassword {
     email(schema.email);
   });
 
-  onSubmit(): void {
+  onSubmit(event: Event): void {
+    event.preventDefault();
     submit(this.resetPasswordForm, async () => {
       this.isLoading.set(true);
 

@@ -5,6 +5,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff, lucideGithub } from '@ng-icons/lucide';
 import { svglGoogle } from '@ng-icons/svgl';
+import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
@@ -14,7 +15,6 @@ import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { AuthLayout } from '../layout';
-import { ValidationErrors } from "@shared/components/validation-errors/validation-errors";
 
 @Component({
   selector: 'adm-login',
@@ -32,8 +32,8 @@ import { ValidationErrors } from "@shared/components/validation-errors/validatio
     RouterLink,
     AuthLayout,
     FormField,
-    ValidationErrors
-],
+    ValidationErrors,
+  ],
   providers: [
     provideIcons({
       lucideGithub,
@@ -65,7 +65,8 @@ export class Login {
     this.showPassword.set(!this.showPassword());
   }
 
-  onSubmit() {
+  onSubmit(event: Event): void {
+    event.preventDefault();
     submit(this.loginForm, async () => {
       this.onLogin();
     });

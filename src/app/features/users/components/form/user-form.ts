@@ -104,7 +104,8 @@ export class UserForm implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     submit(this.userForm, async () => {
       if (!this.userForm().dirty()) {
         this._dialogRef.close(false);

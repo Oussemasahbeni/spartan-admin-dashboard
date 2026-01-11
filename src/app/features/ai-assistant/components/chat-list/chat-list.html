@@ -1,0 +1,43 @@
+<div role="log" aria-live="polite" aria-atomic="false" aria-label="Chat messages">
+  @if (messages().length > 0) {
+    <!-- Messages -->
+    <div class="flex flex-col gap-4 px-4 py-8 sm:py-12">
+      @for (message of messages(); track message.id) {
+        @if (message.role === 'assistant') {
+          <!-- AI Response for assistant messages -->
+          <!-- <ai-response
+            [content]="message.content"
+            [isStreaming]="message.status === 'streaming'"
+            [showActions]="true"
+            [actionsAlwaysVisible]="true"
+            [showAvatar]="showAvatars()"
+            (copy)="handleMessageCopy($event, message)"
+            (regenerate)="handleMessageRegenerate(message)"
+          /> -->
+        } @else if (message.role === 'user') {
+          <!-- User Message Component -->
+          <!-- <ai-user-message
+            [message]="message"
+            [showAvatar]="showAvatars()"
+            (copy)="handleMessageCopy($event, message)"
+            (edit)="handleMessageEdit($event, message)"
+          /> -->
+        }
+      }
+
+      <!-- Loading indicator -->
+      @if (loading()) {
+        <!-- <app-typing-indicator [showAvatar]="showAvatars()" /> -->
+      }
+    </div>
+  }
+  <!-- Empty state -->
+
+  <!-- @else {
+    <div [class]="emptyStateClasses()" role="status" aria-live="polite">
+      <p class="text-foreground-muted">
+        {{ emptyMessage() }}
+      </p>
+    </div>
+  } -->
+</div>

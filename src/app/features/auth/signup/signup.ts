@@ -82,7 +82,8 @@ export class Signup {
     this.showConfirmPassword.set(!this.showConfirmPassword());
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     submit(this.signupForm, async () => {
       this.onSignup();
     });

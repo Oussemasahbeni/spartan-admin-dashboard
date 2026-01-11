@@ -48,13 +48,7 @@
           <hlm-dropdown-menu-sub *transloco="let t">
             @let theme = currentTheme();
 
-            <button
-              type="button"
-              hlmDropdownMenuCheckbox
-              checkBoxAlign="end"
-              [checked]="theme === 'light'"
-              (click)="setTheme('light')"
-            >
+            <button type="button" hlmDropdownMenuCheckbox [checked]="theme === 'light'" (click)="setTheme('light')">
               <div class="flex items-center gap-2">
                 <ng-icon hlmIcon name="lucideSun" size="sm" />
                 <span> {{ t('theme.light') }} </span>
@@ -62,13 +56,7 @@
               <hlm-dropdown-menu-checkbox-indicator />
             </button>
 
-            <button
-              type="button"
-              hlmDropdownMenuCheckbox
-              checkBoxAlign="end"
-              [checked]="theme === 'dark'"
-              (click)="setTheme('dark')"
-            >
+            <button type="button" hlmDropdownMenuCheckbox [checked]="theme === 'dark'" (click)="setTheme('dark')">
               <div class="flex items-center gap-2">
                 <ng-icon hlmIcon name="lucideMoon" size="sm" />
                 <span> {{ t('theme.dark') }} </span>
@@ -76,13 +64,7 @@
               <hlm-dropdown-menu-checkbox-indicator />
             </button>
 
-            <button
-              type="button"
-              hlmDropdownMenuCheckbox
-              checkBoxAlign="end"
-              [checked]="theme === 'system'"
-              (click)="setTheme('system')"
-            >
+            <button type="button" hlmDropdownMenuCheckbox [checked]="theme === 'system'" (click)="setTheme('system')">
               <div class="flex items-center gap-2">
                 <ng-icon hlmIcon name="lucideMonitor" size="sm" />
                 <span> {{ t('theme.system') }} </span>

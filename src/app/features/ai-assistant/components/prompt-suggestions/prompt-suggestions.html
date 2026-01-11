@@ -10,7 +10,7 @@
         hlmBtn
         variant="outline"
         [attr.aria-label]="t('ariaLabels.useSuggestion') + ' ' + t(suggestion.labelKey)"
-        (click)="handleClick(suggestion)"
+        (click)="handleClick(t(suggestion.promptKey))"
       >
         @if (suggestion.icon) {
           <ng-icon hlmIcon size="sm" [name]="suggestion.icon" />
