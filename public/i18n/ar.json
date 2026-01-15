@@ -27,7 +27,7 @@
         "overview": "نظرة عامة",
         "analytics": "التحليلات",
         "settings": "الإعدادات",
-        "assistant": "مساعد الذكاء الاصطناعي",
+        "aiAssistant": "مساعد الذكاء الاصطناعي",
         "dashboard-2": "لوحة التحكم 2"
     },
     "navigation": {
@@ -46,7 +46,8 @@
         "calendar": "الجدول الزمني",
         "users": "شؤون المستخدمين",
         "settings": "الإعدادات",
-        "assistant": "مساعد الذكاء الاصطناعي",
+        "other": "أخرى",
+        "aiAssistant": "مساعد الذكاء الاصطناعي",
         "notFound": "الصفحة غير متوفرة",
         "unauthorized": "صلاحيات محدودة",
         "serviceUnavailable": "الخدمة قيد الصيانة"

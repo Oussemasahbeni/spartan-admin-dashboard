@@ -16,11 +16,7 @@
                           *flexRender="header.column.columnDef.header; props: header.getContext(); let headerText"
                         >
                           @if (header.column.getCanSort()) {
-                            <button
-                              type="button"
-                              class="flex cursor-pointer items-center gap-2 capitalize"
-                              (click)="onSort(header.column)"
-                            >
+                            <button type="button" class="flex items-center gap-2 capitalize" (click)="onSort(header.column)">
                               <div [innerHTML]="headerText"></div>
                               <ng-icon hlm size="sm" name="lucideArrowUpDown" />
                             </button>

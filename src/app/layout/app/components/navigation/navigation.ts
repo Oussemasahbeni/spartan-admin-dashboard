@@ -117,7 +117,7 @@ export class Navigation {
       label: 'other',
       items: [
         { title: 'settings', key: 'settings', url: '/settings', icon: 'lucideSettings' },
-        { title: 'assistant', key: 'assistant', url: '/assistant', icon: 'lucideBot' },
+        { title: 'aiAssistant', key: 'aiAssistant', url: '/assistant', icon: 'lucideBot' },
       ],
     },
   ];

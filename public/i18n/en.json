@@ -27,7 +27,7 @@
         "overview": "Overview",
         "analytics": "Analytics",
         "settings": "Settings",
-        "assistant": "AI Assistant",
+        "aiAssistant": "AI Assistant",
         "dashboard-2": "Dashboard 2"
     },
     "navigation": {
@@ -46,7 +46,8 @@
         "calendar": "Calendar",
         "users": "Users",
         "settings": "Settings",
-        "assistant": "AI Assistant",
+        "other": "Other",
+        "aiAssistant": "AI Assistant",
         "notFound": "Page Not Found",
         "unauthorized": "Unauthorized",
         "serviceUnavailable": "Service Unavailable"

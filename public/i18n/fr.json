@@ -27,7 +27,7 @@
         "overview": "Vue d'ensemble",
         "analytics": "Analyses",
         "settings": "Paramètres",
-        "assistant": "Assistant IA",
+        "aiAssistant": "Assistant IA",
         "dashboard-2": "Tableau de bord 2"
     },
     "navigation": {
@@ -47,8 +47,9 @@
         "users": "Utilisateurs",
         "notFound": "Page introuvable",
         "unauthorized": "Accès refusé",
+        "other": "Autre",
         "settings": "Paramètres",
-        "assistant": "Assistant IA",
+        "aiAssistant": "Assistant IA",
         "serviceUnavailable": "Service indisponible"
     },
     "pagination": {

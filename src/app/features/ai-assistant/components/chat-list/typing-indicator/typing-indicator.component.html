@@ -1,0 +1,27 @@
+<div class="flex items-center gap-3 px-4 py-3">
+  <!-- Avatar -->
+  <hlm-avatar variant="large">
+    <!-- <img src="/assets/avatar.png" alt="spartan logo. Resembling a spartanic shield" hlmAvatarImage /> -->
+    <ng-icon name="lucideBot" hlmAvatarImage />
+    <span class="bg-primary text-white" hlmAvatarFallback>Ai</span>
+  </hlm-avatar>
+
+  <!-- Bubble with dots -->
+  <div class="bg-card border-border flex items-center gap-1.5 rounded-2xl rounded-tl-sm border px-4 py-3 shadow-sm">
+    <!-- Animated dots -->
+    @for (i of dots(); track i) {
+      <span
+        aria-hidden="true"
+        class="bg-foreground-muted h-2 w-2 rounded-full"
+        [class.typing-dot-wave]="animation() === 'wave'"
+        [class.typing-dot-shimmer]="animation() === 'shimmer'"
+        [style.animation-delay]="getDotDelay(i)"
+      ></span>
+    }
+
+    <span class="text-foreground-muted ml-2 text-sm">Thinking ...</span>
+  </div>
+
+  <!-- Screen reader text -->
+  <span class="sr-only">AI is thinking...</span>
+</div>

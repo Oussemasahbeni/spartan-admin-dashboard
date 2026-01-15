@@ -1,0 +1,45 @@
+<div [class]="containerClasses()">
+  <!-- Avatar -->
+  @if (showAvatar()) {
+    <div [class]="avatarClasses()">
+      <hlm-avatar>
+        <span hlmAvatarFallback class="bg-primary text-primary-foreground">
+          <ng-icon hlm name="lucideSparkle" size="sm" />
+        </span>
+      </hlm-avatar>
+    </div>
+  }
+
+  <!-- Content Wrapper -->
+  <div class="min-w-0 flex-1">
+    <!-- Content Area with Markdown Rendering -->
+    <div [class]="contentClasses()">
+      <ai-markdown-renderer
+        [content]="content()"
+        (codeBlockCopy)="handleCodeBlockCopy($event)"
+      />
+      @if (isStreaming() && showCursor()) {
+        <span [class]="cursorClasses()">▊</span>
+      }
+    </div>
+
+    <!-- Action Bar -->
+    @if (showActions()) {
+      <div [class]="actionsWrapperClasses()">
+        <ai-response-actions
+          [content]="content()"
+          [showCopy]="showCopy()"
+          [showRegenerate]="showRegenerate()"
+          [showFeedback]="showFeedback()"
+          [alwaysVisible]="actionsAlwaysVisible()"
+          [isHovered]="isHovered()"
+          [isFocused]="isFocused()"
+          (copy)="handleCopy($event)"
+          (regenerate)="handleRegenerate()"
+          (thumbsUp)="handleThumbsUp()"
+          (thumbsDown)="handleThumbsDown()"
+        />
+      </div>
+    }
+  </div>
+</div>

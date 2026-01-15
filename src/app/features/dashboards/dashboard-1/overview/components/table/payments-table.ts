@@ -76,7 +76,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
             </div>
             <hlm-input-group-addon align="inline-end">
               @if (searchValue()) {
-                <ng-icon hlmIcon class="cursor-pointer" name="lucideX" size="sm" (click)="_clearSearch()" />
+                <ng-icon name="lucideX" size="sm" (click)="_clearSearch()" />
               }
             </hlm-input-group-addon>
           </hlm-input-group>

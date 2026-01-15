@@ -81,7 +81,7 @@ export const routes: Routes = [
       },
       {
         path: 'assistant',
-        title: 'AI Assistant',
+        title: 'aiAssistant',
         data: { breadcrumb: 'navigation.aiAssistant' },
         loadChildren: () => import('./features/ai-assistant/ai-assistant.routes'),
       },
