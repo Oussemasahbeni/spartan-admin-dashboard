@@ -40,20 +40,6 @@
         "studyAndLearn": "Étudier et apprendre",
         "canvas": "Canevas"
     },
-    "promptSuggestions": {
-        "explainComponents": {
-            "label": "Expliquer les composants",
-            "prompt": "Pouvez-vous expliquer comment fonctionnent les composants de chat ?"
-        },
-        "customizeStyling": {
-            "label": "Personnaliser le style",
-            "prompt": "Comment puis-je personnaliser le style et les thèmes ?"
-        },
-        "performanceTips": {
-            "label": "Conseils de performance",
-            "prompt": "Quelles sont les meilleures pratiques de performance ?"
-        }
-    },
     "ariaLabels": {
         "suggestedPrompts": "Suggestions de prompts",
         "useSuggestion": "Utiliser la suggestion :"

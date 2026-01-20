@@ -40,20 +40,6 @@
         "studyAndLearn": "Study and Learn",
         "canvas": "Canvas"
     },
-    "promptSuggestions": {
-        "explainComponents": {
-            "label": "Explain components",
-            "prompt": "Can you explain how the chat components work?"
-        },
-        "customizeStyling": {
-            "label": "Customize styling",
-            "prompt": "How can I customize the styling and themes?"
-        },
-        "performanceTips": {
-            "label": "Performance tips",
-            "prompt": "What are some performance best practices?"
-        }
-    },
     "ariaLabels": {
         "suggestedPrompts": "Suggested prompts",
         "useSuggestion": "Use suggestion:"

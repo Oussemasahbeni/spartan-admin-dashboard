@@ -40,20 +40,6 @@
         "studyAndLearn": "الدراسة والتعلم",
         "canvas": "لوحة الرسم"
     },
-    "promptSuggestions": {
-        "explainComponents": {
-            "label": "شرح المكونات",
-            "prompt": "هل يمكنك شرح كيفية عمل مكونات الدردشة؟"
-        },
-        "customizeStyling": {
-            "label": "تخصيص التصميم",
-            "prompt": "كيف يمكنني تخصيص التصميم والسمات؟"
-        },
-        "performanceTips": {
-            "label": "نصائح الأداء",
-            "prompt": "ما هي أفضل ممارسات الأداء؟"
-        }
-    },
     "ariaLabels": {
         "suggestedPrompts": "الاقتراحات المقترحة",
         "useSuggestion": "استخدم الاقتراح:"

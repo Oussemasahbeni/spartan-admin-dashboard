@@ -32,15 +32,13 @@
         aria-describedby="keyboard-hint"
         [attr.aria-label]="t('input.placeholder')"
         [placeholder]="t('input.placeholder')"
-        [disabled]="disabled()"
-        [value]="inputValue()"
-        (input)="handleInput($event)"
+        [formField]="promptForm.prompt"
         (keydown)="handleKeydown($event)"
       ></textarea>
 
       <span id="keyboard-hint" class="sr-only"> {{ t('input.keyboardHint') }} </span>
 
-      <!-- Block-end: Toolbar -->
+      <!--  Toolbar -->
       <div hlmInputGroupAddon align="block-end" class="flex justify-between gap-2">
         <div class="flex items-center gap-1">
           <button type="button" class="rounded-full" hlmInputGroupButton size="icon-sm" [hlmDropdownMenuTrigger]="plusMenu">
@@ -184,9 +182,8 @@
             class="rounded-full"
             size="icon-sm"
             [attr.aria-label]="t('input.sendMessage')"
-            [variant]="canSend() ? 'default' : 'secondary'"
+            [variant]="'default'"
             [disabled]="!canSend()"
-            [attr.aria-disabled]="!canSend()"
             (click)="handleSend()"
           >
             <ng-icon hlm name="lucideArrowUp" size="sm" />
@@ -194,8 +191,5 @@
         </div>
       </div>
     </div>
-
-    <!-- Quick Suggestions -->
-    <adm-prompt-suggestions (suggestionSelected)="handleSuggestionSelect($event)" />
   </div>
 </ng-container>

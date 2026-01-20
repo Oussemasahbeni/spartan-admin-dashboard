@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, output, signal } from '@angular/core';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
+import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBookOpen, lucidePalette, lucidePlug, lucideZap } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
@@ -56,9 +56,7 @@ export class AssistantEmptyState {
     },
   ]);
 
-  private readonly _transloco = inject(TranslocoService);
-
-  handlePromptClick(promptKey: string): void {
-    this.promptSelect.emit(this._transloco.translate(promptKey));
+  handlePromptClick(prompt: string): void {
+    this.promptSelect.emit(prompt);
   }
 }

@@ -1,23 +1,18 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { lucideBot } from '@ng-icons/lucide';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'adm-typing-indicator',
   templateUrl: './typing-indicator.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmAvatarImports, HlmIconImports],
-  providers: [provideIcons({ lucideBot })],
+  imports: [HlmAvatarImports],
   host: {
     '[attr.role]': '"status"',
     '[attr.aria-label]': '"AI is typing"',
   },
 })
-export class TypingIndicatorComponent {
+export class TypingIndicator {
   readonly dotCount = input<number>(3);
-  readonly showBackground = input<boolean>(true);
   readonly animation = input<'shimmer' | 'wave'>('shimmer');
 
   readonly dots = computed(() => {

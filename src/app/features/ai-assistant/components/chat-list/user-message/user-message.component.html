@@ -1,75 +1,47 @@
-<article [class]="containerClasses()" role="article" [attr.aria-label]="ariaLabel()">
-  <!-- Avatar -->
-  @if (showAvatar()) {
-    <div [class]="avatarClasses()">
-      <hlm-avatar>
-        <span hlmAvatarFallback class="bg-muted text-muted-foreground">
-          <ng-icon hlm name="lucideUser" size="sm" />
-        </span>
-      </hlm-avatar>
+<article class="group flex min-w-0 flex-1 flex-col items-end" role="article">
+  <!-- Message Card -->
+  @if (isEditing()) {
+    <div hlmInputGroup>
+      <textarea
+        hlmInputGroupTextarea
+        [value]="editContent()"
+        (input)="handleEditInput($event)"
+        (keydown)="handleEditKeydown($event)"
+      ></textarea>
+      <div hlmInputGroupAddon align="block-end">
+        <div class="ms-auto flex items-center gap-4">
+          <button type="button" hlmInputGroupButton size="sm" variant="secondary" (click)="cancelEdit()">
+            <span>Cancel</span>
+          </button>
+          <button type="button" hlmInputGroupButton size="sm" variant="default" (click)="saveEdit()">
+            <span>Save</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Display Mode -->
+    <div hlmCard class="py-3">
+      <p hlmCardContent class="w-fit text-sm leading-relaxed">{{ message().content }}</p>
     </div>
   }
 
-  <!-- Content Wrapper -->
-  <div class="flex min-w-0 flex-1 flex-col items-end">
-    <!-- Message Card -->
-    <div [class]="cardClasses()">
-      @if (isEditing()) {
-        <!-- Edit Mode -->
-        <textarea
-          #editTextarea
-          id="ai-user-message-edit"
-          name="ai-user-message-edit"
-          [class]="textareaClasses()"
-          [value]="editContent()"
-          (input)="handleEditInput($event)"
-          (keydown)="handleEditKeydown($event)"
-          rows="3"
-          aria-label="Edit message"
-        ></textarea>
-
-        <!-- Edit Actions -->
-        <div class="mt-2 flex justify-end gap-2">
-          <button
-            type="button"
-            class="text-muted-foreground hover:bg-accent hover:text-foreground rounded px-3 py-1 text-sm transition-colors"
-            (click)="cancelEdit()"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            class="bg-primary text-primary-foreground hover:bg-primary/90 rounded px-3 py-1 text-sm transition-colors"
-            (click)="saveEdit()"
-          >
-            Save
-          </button>
-        </div>
-      } @else {
-        <!-- Display Mode -->
-        <p [class]="contentClasses()">{{ displayContent() }}</p>
-
-        <!-- Show More / Show Less -->
-        @if (isLongMessage()) {
-          <button type="button" class="text-muted-foreground mt-1 block text-xs hover:underline" (click)="toggleExpand()">
-            {{ isExpanded() ? 'Show less' : 'Show more' }}
-          </button>
+  <!-- Action Buttons -->
+  @if (!isEditing()) {
+    <div
+      class="mt-2 flex items-center gap-2 opacity-0 transition-opacity duration-200 ease-in-out group-focus-within:opacity-100 group-hover:opacity-100"
+    >
+      <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
+        @if (copied()) {
+          <ng-icon hlmIcon name="lucideCheck" size="sm" />
+        } @else {
+          <ng-icon hlmIcon name="lucideCopy" size="sm" />
         }
-      }
-    </div>
+      </button>
 
-    <!-- Action Buttons via MessageActions -->
-    @if (!isEditing()) {
-      <div [class]="actionsWrapperClasses()">
-        <ai-message-actions
-          [content]="message().content"
-          [showCopy]="showCopy()"
-          [showEdit]="showEdit()"
-          [isVisible]="actionsVisible()"
-          (copy)="handleCopy()"
-          (edit)="startEdit()"
-        />
-      </div>
-    }
-  </div>
+      <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="startEdit()">
+        <ng-icon hlm size="sm" name="lucidePencil" />
+      </button>
+    </div>
+  }
 </article>

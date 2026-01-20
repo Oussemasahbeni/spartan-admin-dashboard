@@ -50,7 +50,7 @@ export interface UserFormModel {
     ValidationErrors,
   ],
   host: {
-    class: 'flex flex-col gap-4 sm:min-w-lg',
+    class: 'flex flex-col gap-4 sm:min-w-lg ',
   },
   providers: [provideTranslocoScope('users')],
   templateUrl: './user-form.html',

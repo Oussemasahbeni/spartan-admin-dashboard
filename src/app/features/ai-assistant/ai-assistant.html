@@ -1,27 +1,31 @@
-<div class="mx-auto w-full max-w-4xl">
-  @if (isEmpty()) {
-    <div class="flex min-h-full items-center justify-center">
-      <div class="mx-auto w-full max-w-3xl">
-        <adm-assistant-empty-state (promptSelect)="handlePromptSelect($event)" />
+<div class="mx-auto flex h-[calc(100vh-120px)] w-full max-w-4xl flex-col">
+  <ng-scrollbar class="flex-1 overflow-y-auto p-4" hlm appearance="compact">
+    @if (isEmpty()) {
+      <div class="flex min-h-full items-center justify-center">
+        <div class="mx-auto w-full max-w-3xl">
+          <adm-assistant-empty-state (promptSelect)="handleSendMessage($event)" />
+        </div>
       </div>
-    </div>
-  } @else {
-    <div class="mx-auto w-full max-w-3xl">
-      <!-- <adm-chat-list
+    } @else {
+      <div class="mx-auto w-full max-w-3xl">
+        <!-- <adm-chat-list
         [messages]="messages()"
         [loading]="isLoading()"
         (messageCopy)="handleMessageCopy($event)"
         (messageRegenerate)="handleMessageRegenerate($event)"
       /> -->
-      <adm-chat-list [loading]="isLoading()" />
-    </div>
-  }
+        <adm-chat-list [loading]="isLoading()" [messages]="messages()" />
+      </div>
+    }
+  </ng-scrollbar>
 
-  <div class="mx-auto w-full max-w-3xl">
-    <adm-assistant-input
-      [disabled]="isLoading()"
-      [suggestions]="activeSuggestions()"
-      (messageSend)="handleSendMessage($event)"
-    />
+  <div class="bg-background shrink-0">
+    <div class="mx-auto w-full max-w-3xl">
+      <adm-assistant-input
+        [disabled]="isLoading()"
+        [suggestions]="activeSuggestions()"
+        (messageSend)="handleSendMessage($event)"
+      />
+    </div>
   </div>
 </div>

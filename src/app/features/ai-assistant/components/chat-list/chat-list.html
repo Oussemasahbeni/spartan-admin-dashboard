@@ -5,23 +5,14 @@
       @for (message of messages(); track message.id) {
         @if (message.role === 'assistant') {
           <!-- AI Response for assistant messages -->
-          <!-- <ai-response
+          <adm-ai-response
             [content]="message.content"
             [isStreaming]="message.status === 'streaming'"
-            [showActions]="true"
-            [actionsAlwaysVisible]="true"
-            [showAvatar]="showAvatars()"
-            (copy)="handleMessageCopy($event, message)"
-            (regenerate)="handleMessageRegenerate(message)"
-          /> -->
+            (regenerate)="handleMessageRegenerate()"
+          />
         } @else if (message.role === 'user') {
           <!-- User Message Component -->
-          <!-- <ai-user-message
-            [message]="message"
-            [showAvatar]="showAvatars()"
-            (copy)="handleMessageCopy($event, message)"
-            (edit)="handleMessageEdit($event, message)"
-          /> -->
+          <adm-user-message [message]="message" (edit)="handleMessageEdit(message)" />
         }
       }
 
@@ -31,13 +22,4 @@
       }
     </div>
   }
-  <!-- Empty state -->
-
-  <!-- @else {
-    <div [class]="emptyStateClasses()" role="status" aria-live="polite">
-      <p class="text-foreground-muted">
-        {{ emptyMessage() }}
-      </p>
-    </div>
-  } -->
 </div>

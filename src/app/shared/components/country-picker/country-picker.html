@@ -1,46 +1,27 @@
-<hlm-popover
-  *transloco="let t; prefix: 'countryPicker'"
-  align="start"
-  [state]="state()"
-  (stateChanged)="stateChanged($event)"
->
-  <button
-    #trigger
-    type="button"
-    class="w-full justify-between"
-    id="edit-profile"
-    hlmPopoverTrigger
-    hlmBtn
-    variant="outline"
-    (click)="state.set('open')"
-  >
-    <div class="flex items-center">
-      @if (value()) {
-        <adm-country-display class="mr-2" [country]="value()" />
-      } @else {
-        <span>{{ t('selectCountryPlaceholder') }}</span>
+<hlm-combobox *transloco="let t; prefix: 'countryPicker'" [value]="value()" (valueChange)="value.set($event)">
+  <hlm-combobox-trigger class="w-full justify-between font-normal">
+    @if (value()) {
+      <adm-country-display [country]="value()" />
+    } @else {
+      {{ t('selectCountryPlaceholder') }}
+    }
+  </hlm-combobox-trigger>
+
+  <div *brnPopoverContent hlmComboboxContent>
+    <hlm-combobox-input showTrigger="false" mode="popup" [placeholder]="t('searchCountryPlaceholder')">
+      <hlm-input-group-addon>
+        <ng-icon name="lucideSearch" />
+      </hlm-input-group-addon>
+    </hlm-combobox-input>
+
+    <hlm-combobox-empty *transloco="let t">{{ t('common.noData') }}</hlm-combobox-empty>
+
+    <div hlmComboboxList>
+      @for (country of countriesList(); track country.id) {
+        <hlm-combobox-item [value]="country">
+          <adm-country-display [country]="country" />
+        </hlm-combobox-item>
       }
     </div>
-
-    <ng-icon hlm size="sm" name="lucideChevronsUpDown" class="opacity-50" />
-  </button>
-  <hlm-command *brnPopoverContent="let ctx" hlmPopoverContent class="p-0" [matchWidth]="trigger">
-    <hlm-command-search>
-      <ng-icon hlm name="lucideSearch" />
-      <input hlm-command-search-input [placeholder]="t('searchCountryPlaceholder')" />
-    </hlm-command-search>
-    <div *brnCommandEmpty hlmCommandEmpty>
-      <span *transloco="let t"> {{ t('common.noData') }}</span>
-    </div>
-    <hlm-command-list class="w-full">
-      <hlm-command-group class="w-full">
-        @for (country of _countriesList(); track country.id) {
-          <button type="button" hlm-command-item [value]="country.name[activeLang()]" (selected)="countrySelected(country)">
-            <adm-country-display class="mr-2" [country]="country" />
-            <ng-icon hlm class="ml-auto" name="lucideCheck" hlmCommandIcon [class.opacity-0]="value()?.id !== country.id" />
-          </button>
-        }
-      </hlm-command-group>
-    </hlm-command-list>
-  </hlm-command>
-</hlm-popover>
+  </div>
+</hlm-combobox>

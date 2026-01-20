@@ -51,7 +51,8 @@
       "@spartan-ng/helm/avatar": ["./src/app/spartan/avatar/src/index.ts"],
       "@spartan-ng/helm/utils": ["./src/app/spartan/utils/src/index.ts"],
       "@spartan-ng/helm/input-otp": ["./src/app/spartan/input-otp/src/index.ts"],
-      "@spartan-ng/helm/tabs": ["./src/app/spartan/tabs/src/index.ts"]
+      "@spartan-ng/helm/tabs": ["./src/app/spartan/tabs/src/index.ts"],
+      "@spartan-ng/helm/combobox": ["./src/app/spartan/combobox/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

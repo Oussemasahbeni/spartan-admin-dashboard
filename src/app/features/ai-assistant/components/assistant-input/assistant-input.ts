@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -20,7 +21,6 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
-import { PromptSuggestions } from '../prompt-suggestions/prompt-suggestions';
 import { AttachmentCard } from '../attachment-card/attachment-card';
 
 @Component({
@@ -31,9 +31,9 @@ import { AttachmentCard } from '../attachment-card/attachment-card';
     HlmDropdownMenuImports,
     HlmInputImports,
     HlmInputGroupImports,
-    PromptSuggestions,
     AttachmentCard,
     TranslocoModule,
+    FormField,
   ],
   templateUrl: './assistant-input.html',
   providers: [
@@ -60,8 +60,8 @@ export class AssistantInput {
   readonly disabled = input<boolean>(false);
   readonly suggestions = input<string[]>([]);
   readonly messageSend = output<string>();
+  readonly inputCleared = output<void>();
 
-  readonly inputValue = signal('');
   readonly attachments = signal<File[]>([]);
   readonly models = signal<string[]>([
     'Claude Opus 4.5',
@@ -71,7 +71,7 @@ export class AssistantInput {
     'GPT-3.5 Turbo',
     'Gemini 3.0 Pro',
   ]);
-  readonly selectedModel = signal<string>('Claude Opus 4.5');
+  readonly selectedModel = signal<string>(this.models()[0]);
   readonly hasAttachments = computed(() => this.attachments().length > 0);
 
   readonly enableWebSearch = signal(false);
@@ -79,16 +79,22 @@ export class AssistantInput {
   readonly enableThinking = signal(false);
 
   readonly isRecording = signal(false);
-  readonly canSend = signal(false);
+
+  readonly canSend = computed(() => this.promptForm.prompt().value().trim().length > 0 || this.hasAttachments());
+
+  readonly promptModel = signal({ prompt: '' });
+
+  readonly promptForm = form(this.promptModel);
 
   toggleMic() {
     this.isRecording.set(!this.isRecording());
   }
 
   handleSend() {
-    // if (this.canSend() && message.trim().length) {
-    //   this.messageSend.emit(message.trim());
-    // }
+    if (this.canSend()) {
+      this.messageSend.emit(this.promptForm.prompt().value());
+      this.promptForm.prompt().value.set('');
+    }
   }
 
   handleFileSelect(event: Event) {
@@ -100,12 +106,6 @@ export class AssistantInput {
       // Reset input so same file can be selected again
       input.value = '';
     }
-  }
-
-  handleInput(event: Event): void {
-    const textarea = event.target as HTMLTextAreaElement;
-    this.inputValue.set(textarea.value);
-    // this.resizeTextarea();
   }
 
   handleKeydown(event: KeyboardEvent): void {
@@ -133,15 +133,8 @@ export class AssistantInput {
     this.selectedModel.set(model);
   }
 
-  handleSuggestionSelect(suggestion: string): void {
-    this.inputValue.set(suggestion);
-    // this.resetTextarea();
-  }
   handleClear(): void {
-    if (this.inputValue().length > 0) {
-      this.inputValue.set('');
-      // this.resetTextarea();
-      // this.inputCleared.emit();
-    }
+    this.promptForm.prompt().value.set('');
+    this.inputCleared.emit();
   }
 }
