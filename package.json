@@ -46,7 +46,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-eslint/builder": "21.1.0",
+    "@angular-eslint/builder": "21.2.0",
     "@angular/build": "^21.0.5",
     "@angular/cli": "^21.0.5",
     "@angular/compiler-cli": "^21.0.8",
@@ -54,7 +54,7 @@
     "@jsverse/transloco-keys-manager": "^7.1.0",
     "@spartan-ng/cli": "0.0.1-alpha.612",
     "@tailwindcss/postcss": "^4.1.12",
-    "angular-eslint": "21.1.0",
+    "angular-eslint": "21.2.0",
     "eslint": "^9.39.1",
     "jsdom": "^27.1.0",
     "postcss": "^8.5.3",
