@@ -83,6 +83,7 @@ module.exports = defineConfig([
         },
       ],
       '@angular-eslint/component-selector': ['error', { type: 'element', prefix: 'adm', style: 'kebab-case' }],
+      '@angular-eslint/no-implicit-take-until-destroyed': 'error',
       // Needed to be off because spartan uses input renaming frequently
       '@angular-eslint/no-input-rename': ['off'],
     },
@@ -93,6 +94,7 @@ module.exports = defineConfig([
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {
       '@angular-eslint/template/prefer-self-closing-tags': ['warn'],
+      '@angular-eslint/template/prefer-class-binding': 'error',
       '@angular-eslint/template/prefer-ngsrc': ['warn'],
       '@angular-eslint/template/attributes-order': ['error'],
       '@angular-eslint/template/button-has-type': ['error'],

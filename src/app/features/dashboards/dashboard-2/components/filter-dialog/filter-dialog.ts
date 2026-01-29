@@ -20,7 +20,7 @@ export interface FilterOptions {
   providers: [provideIcons({ lucideFilter, lucideCalendar })],
   template: `
     <hlm-dialog>
-      <button type="button" hlmBtn variant="outline" brnDialogTrigger>
+      <button type="button" hlmBtn variant="outline" hlmDialogTrigger>
         <ng-icon hlmIcon name="lucideFilter" size="sm" />
         {{ 'dashboard2.header.filterBy' | transloco }}
       </button>

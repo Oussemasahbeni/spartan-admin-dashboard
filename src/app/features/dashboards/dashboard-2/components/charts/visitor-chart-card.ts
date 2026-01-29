@@ -52,7 +52,7 @@ interface VisitorChartTranslation {
         />
       </div>
 
-      <div hlmCardFooter class="text-center flex flex-col items-center">
+      <div hlmCardFooter class="flex flex-col items-center text-center">
         <div class="flex items-center justify-center gap-2 text-sm font-medium text-emerald-400">
           {{ visitorChart().trendingText }}
           <ng-icon hlmIcon name="lucideTrendingUp" size="sm" />

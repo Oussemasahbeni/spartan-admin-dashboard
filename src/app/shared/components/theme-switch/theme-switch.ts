@@ -64,7 +64,7 @@ export class ThemeSwitch {
     const theme = this.currentTheme();
     const isDarkSystem = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDark = theme === 'dark' || (theme === 'system' && isDarkSystem);
-    
+
     return isDark ? 'lucideSun' : 'lucideMoon';
   });
 

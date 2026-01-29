@@ -21,14 +21,14 @@ export * from './lib/hlm-alert-dialog-title';
 export * from './lib/hlm-alert-dialog-trigger';
 
 export const HlmAlertDialogImports = [
-	HlmAlertDialog,
-	HlmAlertDialogContent,
-	HlmAlertDialogDescription,
-	HlmAlertDialogFooter,
-	HlmAlertDialogHeader,
-	HlmAlertDialogOverlay,
-	HlmAlertDialogTitle,
-	HlmAlertDialogAction,
-	HlmAlertDialogCancel,
-	HlmAlertDialogTrigger,
+  HlmAlertDialog,
+  HlmAlertDialogContent,
+  HlmAlertDialogDescription,
+  HlmAlertDialogFooter,
+  HlmAlertDialogHeader,
+  HlmAlertDialogOverlay,
+  HlmAlertDialogTitle,
+  HlmAlertDialogAction,
+  HlmAlertDialogCancel,
+  HlmAlertDialogTrigger,
 ] as const;

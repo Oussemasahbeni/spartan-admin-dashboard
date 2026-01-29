@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/helm/utils';
@@ -21,7 +16,5 @@ import type { ClassValue } from 'clsx';
 })
 export class HlmDropdownMenuItemSubIndicator {
   public readonly userClass = input<ClassValue>('', { alias: 'class' });
-  protected readonly _computedClass = computed(() =>
-    hlm('ms-auto size-4', this.userClass())
-  );
+  protected readonly _computedClass = computed(() => hlm('ms-auto size-4', this.userClass()));
 }

@@ -1,11 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  DOCUMENT,
-  inject,
-  Injectable,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
+import { DOCUMENT, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -21,9 +15,7 @@ export class ThemeService {
   private readonly _theme = signal<Theme>('system');
   readonly theme = this._theme.asReadonly();
 
-  private readonly _darkMediaQuery = window.matchMedia(
-    '(prefers-color-scheme: dark)'
-  );
+  private readonly _darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
   init(): void {
     if (!isPlatformBrowser(this._platformId)) return;
@@ -32,9 +24,7 @@ export class ThemeService {
 
     const validThemes: Theme[] = ['light', 'dark', 'system'];
 
-    const initialTheme = validThemes.includes(savedTheme)
-      ? savedTheme
-      : 'system';
+    const initialTheme = validThemes.includes(savedTheme) ? savedTheme : 'system';
     this.setTheme(initialTheme);
   }
 
@@ -48,8 +38,7 @@ export class ThemeService {
   }
 
   private _applyDomChanges(theme: Theme): void {
-    const isDark =
-      theme === 'dark' || (theme === 'system' && this._darkMediaQuery.matches);
+    const isDark = theme === 'dark' || (theme === 'system' && this._darkMediaQuery.matches);
 
     if (isDark) {
       this.document.documentElement.classList.add('dark');

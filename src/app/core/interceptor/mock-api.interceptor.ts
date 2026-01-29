@@ -3,7 +3,6 @@ import { makeUsersData } from '@core/mock/users';
 import { delay, of, switchMap, tap } from 'rxjs';
 import { User } from '../../features/users/model/user';
 
-
 let db: User[] | null = null;
 
 const getDb$ = () => {

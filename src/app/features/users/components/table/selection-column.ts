@@ -1,15 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
-import {
-  type CellContext,
-  type HeaderContext,
-  injectFlexRenderContext,
-} from '@tanstack/angular-table';
+import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@tanstack/angular-table';
 
 @Component({
   imports: [HlmCheckboxImports],
   host: {
-    'class': 'flex',
+    class: 'flex',
     'aria-label': 'Select all',
   },
   template: `
@@ -22,14 +18,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableHeadSelection<T> {
-  protected readonly _context =
-    injectFlexRenderContext<HeaderContext<T, unknown>>();
+  protected readonly _context = injectFlexRenderContext<HeaderContext<T, unknown>>();
 }
 
 @Component({
   imports: [HlmCheckboxImports],
   host: {
-    'class': 'flex',
+    class: 'flex',
     'aria-label': 'Select Row',
   },
   template: `
@@ -41,6 +36,5 @@ export class TableHeadSelection<T> {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableRowSelection<T> {
-  protected readonly _context =
-    injectFlexRenderContext<CellContext<T, unknown>>();
+  protected readonly _context = injectFlexRenderContext<CellContext<T, unknown>>();
 }

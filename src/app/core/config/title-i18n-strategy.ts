@@ -26,7 +26,7 @@ export class TranslateTitleStrategy extends TitleStrategy {
         .selectTranslate<string>('titles.' + titleKey)
         .pipe(
           filter((translatedTitle) => translatedTitle !== titleKey),
-          take(1),
+          take(1)
         )
         .subscribe((translatedTitle) => this.title.setTitle(translatedTitle));
     }
