@@ -29,25 +29,37 @@ import { EditEvent } from '../../../model/user-message.types';
   viewProviders: [provideIcons({ lucideUser, lucideCopy, lucideCheck, lucidePencil })],
 })
 export class UserMessageCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _clipboard = inject(Clipboard);
   private readonly _platformId = inject(PLATFORM_ID);
 
   // ==========================================
-  // Properties
+  // Inputs
   // ==========================================
 
   /** The user message to display */
   readonly message = input.required<UserMessage>();
 
+  // ==========================================
+  // Outputs
+  // ==========================================
+
   /** Emitted when message is edited and saved */
   readonly edit = output<EditEvent>();
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly isEditing = signal(false);
   readonly editContent = signal('');
   readonly copied = signal(false);
 
   // ==========================================
-  // Methods
+  // Public Methods
   // ==========================================
 
   /** Handle copy from MessageActions */

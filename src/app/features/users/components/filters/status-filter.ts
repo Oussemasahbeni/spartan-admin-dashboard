@@ -89,11 +89,23 @@ import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe
   `,
 })
 export class StatusFilter {
+  // ==========================================
+  // Outputs
+  // ==========================================
+
   readonly statusChanged = output<UserStatus[]>();
+
+  // ==========================================
+  // State
+  // ==========================================
 
   protected readonly _statusFilter = signal<UserStatus[]>([]);
   protected readonly _statusList = signal([...USER_STATUSES]);
   protected readonly _statusState = signal<'closed' | 'open'>('closed');
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   protected clearStatusFilter(): void {
     this._statusFilter.set([]);

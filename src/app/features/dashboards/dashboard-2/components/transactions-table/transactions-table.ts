@@ -43,7 +43,15 @@ import { provideTransactionStatusIcons, TransactionStatusUIPipe } from '../../pi
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsTableComponent {
+  // ==========================================
+  // Inputs
+  // ==========================================
+
   readonly transactions = input.required<Transaction[]>();
+
+  // ==========================================
+  // View Children
+  // ==========================================
 
   /**
    * Template references for custom cell rendering.
@@ -52,6 +60,10 @@ export class TransactionsTableComponent {
   readonly userCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('userCell');
   readonly statusCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('statusCell');
   readonly amountCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('amountCell');
+
+  // ==========================================
+  // State
+  // ==========================================
 
   protected readonly table = computed(() => this.dataTable().table);
   protected readonly searchForm = form(signal({ search: '' }), (schema) => debounce(schema.search, 300));

@@ -57,9 +57,9 @@ import { Table } from '@tanstack/angular-table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTablePagination<T> {
-  // ═══════════════════════════════════════════════════════════════════════════
-  // INPUTS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ==========================================
+  // Inputs
+  // ==========================================
 
   /**
    * Available options for the page size dropdown.
@@ -78,9 +78,9 @@ export class DataTablePagination<T> {
    */
   readonly table = input.required<Table<T>>();
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // METHODS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   /**
    * Handles page size selection changes.

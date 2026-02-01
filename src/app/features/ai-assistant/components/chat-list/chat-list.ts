@@ -12,10 +12,22 @@ import { UserMessageCard } from './user-message/user-message';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatList {
-  private readonly assistantService = inject(AssistantService);
-  readonly messages = input<ChatMessage[]>([]);
+  // ==========================================
+  // Services
+  // ==========================================
 
+  private readonly assistantService = inject(AssistantService);
+
+  // ==========================================
+  // Inputs
+  // ==========================================
+
+  readonly messages = input<ChatMessage[]>([]);
   readonly loading = input<boolean>(false);
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   handleMessageEdit(_message: UserMessage) {}
 

@@ -77,9 +77,17 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Users {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _translocoService = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _destroyRef = inject(DestroyRef);
+
+  // ==========================================
+  // View Children
+  // ==========================================
 
   /**
    * Template references for custom cell rendering.
@@ -91,6 +99,10 @@ export class Users {
   readonly statusCell = viewChild.required<TemplateRef<CellContext<User, UserStatus>>>('statusCell');
   readonly roleCell = viewChild.required<TemplateRef<CellContext<User, string>>>('roleCell');
   readonly countryCell = viewChild.required<TemplateRef<CellContext<User, string>>>('countryCell');
+
+  // ==========================================
+  // State
+  // ==========================================
 
   protected readonly table = computed(() => this.dataTable().table);
 
@@ -224,6 +236,10 @@ export class Users {
     },
   ];
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
+
   protected addUser() {
     const dialogRef = this._hlmDialogService.open(UserForm, {
       contentClass: 'max-w-4xl',
@@ -239,6 +255,10 @@ export class Users {
     this.pagination.set(state.pagination);
     this.sorting.set(state.sorting);
   }
+
+  // ==========================================
+  // Private Methods
+  // ==========================================
 
   refreshTable(): void {
     this.usersResource.reload();

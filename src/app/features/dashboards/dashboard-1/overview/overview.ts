@@ -33,6 +33,10 @@ const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OverviewDashboard {
+  // ==========================================
+  // State
+  // ==========================================
+
   readonly cards = signal<OverviewMetric[]>([
     {
       titleKey: 'overview.cards.newSubscriptions.title',

@@ -62,5 +62,9 @@ import { User } from '../../../../users/model/user';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamMembersCard {
+  // ==========================================
+  // Inputs
+  // ==========================================
+
   readonly members = input.required<User[]>();
 }

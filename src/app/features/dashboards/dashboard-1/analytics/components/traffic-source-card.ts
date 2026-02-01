@@ -55,8 +55,16 @@ interface TrafficSourceCardTranslation {
   `,
 })
 export class TrafficSourceCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _dir = inject(DirectionalityService);
   readonly rtl = this._dir.isRtl;
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly selectedPeriod = signal<string>('month');
 

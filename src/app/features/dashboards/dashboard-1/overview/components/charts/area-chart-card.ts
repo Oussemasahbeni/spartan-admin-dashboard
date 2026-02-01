@@ -54,8 +54,16 @@ interface MonthsTranslation {
   `,
 })
 export class AreaChartCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _dir = inject(DirectionalityService);
   private readonly rtl = this._dir.isRtl;
+
+  // ==========================================
+  // State
+  // ==========================================
 
   private readonly _areaChart = translateObjectSignal('areaChart', {}, SCOPE);
   private readonly _months = translateObjectSignal('months', {}, SCOPE);

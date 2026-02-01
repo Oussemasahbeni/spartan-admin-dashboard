@@ -15,30 +15,18 @@ export interface Conversation {
 
 @Injectable({ providedIn: 'root' })
 export class AssistantService {
-  // State
-  private readonly conversationsSignal = signal<Conversation[]>([]);
-  private readonly activeConversationIdSignal = signal<string | null>(null);
+  private readonly conversationSignal = signal<Conversation | null>(null);
   private readonly isLoadingSignal = signal(false);
+  private streamAbortController: AbortController | null = null;
 
-  // Public computed signals
-  readonly conversations = this.conversationsSignal.asReadonly();
-  readonly activeConversationId = this.activeConversationIdSignal.asReadonly();
+  readonly conversation = this.conversationSignal.asReadonly();
   readonly isLoading = this.isLoadingSignal.asReadonly();
-
-  /**
-   * Get the active conversation
-   */
-  readonly activeConversation = computed(() => {
-    const id = this.activeConversationIdSignal();
-    if (!id) return null;
-    return this.conversationsSignal().find((c) => c.id === id) ?? null;
-  });
 
   /**
    * Get messages for the active conversation
    */
   readonly messages = computed(() => {
-    return this.activeConversation()?.messages ?? [];
+    return this.conversation()?.messages ?? [];
   });
 
   /**
@@ -49,10 +37,20 @@ export class AssistantService {
   });
 
   /**
+   * Check if the last message is currently streaming
+   */
+  readonly isStreaming = computed(() => {
+    const msgs = this.messages();
+    if (msgs.length === 0) return false;
+    const lastMsg = msgs[msgs.length - 1];
+    return lastMsg.status === 'streaming';
+  });
+
+  /**
    * Create a new conversation
    */
   createConversation(): string {
-    const id = this.generateId();
+    const id = crypto.randomUUID();
     const now = new Date();
 
     const newConversation: Conversation = {
@@ -63,20 +61,9 @@ export class AssistantService {
       updatedAt: now,
     };
 
-    this.conversationsSignal.update((convos) => [newConversation, ...convos]);
-    this.activeConversationIdSignal.set(id);
+    this.conversationSignal.set(newConversation);
 
     return id;
-  }
-
-  /**
-   * Select a conversation by ID
-   */
-  selectConversation(id: string): void {
-    const exists = this.conversationsSignal().some((c) => c.id === id);
-    if (exists) {
-      this.activeConversationIdSignal.set(id);
-    }
   }
 
   /**
@@ -85,7 +72,7 @@ export class AssistantService {
   async sendMessage(content: string): Promise<void> {
     if (!content.trim()) return;
 
-    let conversationId = this.activeConversationIdSignal();
+    let conversationId = this.conversationSignal()?.id ?? null;
 
     // Create new conversation if none active
     if (!conversationId) {
@@ -96,19 +83,13 @@ export class AssistantService {
 
     // Add user message
     const userMessage: ChatMessage = {
-      id: this.generateId(),
+      id: crypto.randomUUID(),
       role: 'user',
       content: content.trim(),
       timestamp: now,
     };
 
-    this.addMessageToConversation(conversationId, userMessage);
-
-    // Update conversation title if this is the first message
-    const conversation = this.conversationsSignal().find((c) => c.id === conversationId);
-    if (conversation && conversation.messages.length === 1) {
-      this.updateConversationTitle(conversationId, this.generateTitle(content));
-    }
+    this.addMessageToConversation(userMessage);
 
     // Simulate AI response with streaming
     this.isLoadingSignal.set(true);
@@ -117,9 +98,9 @@ export class AssistantService {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     const fullResponse = this.getRandomResponse();
-    const aiMessageId = this.generateId();
 
     // Add streaming message with empty content
+    const aiMessageId = crypto.randomUUID();
     const aiMessage: ChatMessage = {
       id: aiMessageId,
       role: 'assistant',
@@ -128,61 +109,84 @@ export class AssistantService {
       status: 'streaming',
     };
 
-    this.addMessageToConversation(conversationId, aiMessage);
+    this.addMessageToConversation(aiMessage);
     this.isLoadingSignal.set(false);
 
     // Stream the response character by character
-    await this.streamResponse(conversationId, aiMessageId, fullResponse);
+    await this.streamResponse(aiMessageId, fullResponse);
   }
 
   /**
    * Stream response content character by character
    */
-  private async streamResponse(conversationId: string, messageId: string, fullContent: string): Promise<void> {
+  private async streamResponse(messageId: string, fullContent: string): Promise<void> {
     const chunkSize = 3; // Characters per chunk
     const delayMs = 15; // Delay between chunks
 
-    for (let i = 0; i < fullContent.length; i += chunkSize) {
-      const partialContent = fullContent.slice(0, i + chunkSize);
+    // Create abort controller for this stream
+    this.streamAbortController = new AbortController();
+    const signal = this.streamAbortController.signal;
 
-      this.updateMessageContent(conversationId, messageId, partialContent, 'streaming');
+    try {
+      for (let i = 0; i < fullContent.length; i += chunkSize) {
+        // Check if streaming was aborted
+        if (signal.aborted) {
+          return;
+        }
 
-      await new Promise((resolve) => setTimeout(resolve, delayMs));
+        const partialContent = fullContent.slice(0, i + chunkSize);
+        this.updateMessageContent(messageId, partialContent, 'streaming');
+
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+      }
+
+      // Mark streaming complete
+      this.updateMessageContent(messageId, fullContent, undefined);
+    } finally {
+      this.streamAbortController = null;
     }
-
-    // Mark streaming complete
-    this.updateMessageContent(conversationId, messageId, fullContent, undefined);
   }
 
   /**
    * Update a message's content and status
    */
-  private updateMessageContent(
-    conversationId: string,
-    messageId: string,
-    content: string,
-    status: MessageStatus | undefined
-  ): void {
-    this.conversationsSignal.update((convos) =>
-      convos.map((c) => {
-        if (c.id !== conversationId) return c;
-        return {
-          ...c,
-          messages: c.messages.map((m) => {
-            if (m.id !== messageId) return m;
-            return { ...m, content, status };
-          }),
-          updatedAt: new Date(),
-        };
-      })
-    );
+  private updateMessageContent(messageId: string, content: string, status: MessageStatus | undefined): void {
+    this.conversationSignal.update((conversation) => {
+      if (conversation === null) return conversation;
+      return {
+        ...conversation,
+        messages: conversation.messages.map((m) => {
+          if (m.id !== messageId) return m;
+          return { ...m, content, status };
+        }),
+        updatedAt: new Date(),
+      };
+    });
+  }
+
+  /**
+   * Stop the current streaming response
+   */
+  stopStreaming(): void {
+    if (this.streamAbortController) {
+      this.streamAbortController.abort();
+      this.streamAbortController = null;
+
+      // Mark the last streaming message as complete
+      if (!this.conversationSignal()) return;
+
+      const streamingMsg = this.conversationSignal()?.messages.find((m) => m.status === 'streaming');
+      if (streamingMsg) {
+        this.updateMessageContent(streamingMsg.id, streamingMsg.content, undefined);
+      }
+    }
   }
 
   /**
    * Regenerate the last assistant message with streaming
    */
   async regenerateLastMessage(): Promise<void> {
-    const conversation = this.activeConversation();
+    const conversation = this.conversationSignal();
     if (!conversation) return;
 
     const messages = conversation.messages;
@@ -197,80 +201,48 @@ export class AssistantService {
     if (lastAssistantIndex === undefined) return;
 
     // Remove the last assistant message
-    this.conversationsSignal.update((convos) =>
-      convos.map((c) => {
-        if (c.id !== conversation.id) return c;
-        return {
-          ...c,
-          messages: c.messages.filter((_, i) => i !== lastAssistantIndex),
-          updatedAt: new Date(),
-        };
-      })
-    );
+    this.conversationSignal.update((conversation) => {
+      if (conversation === null) return conversation;
+      return {
+        ...conversation,
+        messages: conversation.messages.filter((_, i) => i !== lastAssistantIndex),
+        updatedAt: new Date(),
+      };
+    });
 
     // Generate new response with streaming
     this.isLoadingSignal.set(true);
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     const fullResponse = this.getRandomResponse();
-    const aiMessageId = this.generateId();
 
     // Add streaming message
     const aiMessage: ChatMessage = {
-      id: aiMessageId,
+      id: crypto.randomUUID(),
       role: 'assistant',
       content: '',
       timestamp: new Date(),
       status: 'streaming',
     };
 
-    this.addMessageToConversation(conversation.id, aiMessage);
+    this.addMessageToConversation(aiMessage);
     this.isLoadingSignal.set(false);
 
     // Stream the response
-    await this.streamResponse(conversation.id, aiMessageId, fullResponse);
-  }
-
-  /**
-   * Clear all conversations
-   */
-  clearAllConversations(): void {
-    this.conversationsSignal.set([]);
-    this.activeConversationIdSignal.set(null);
+    await this.streamResponse(aiMessage.id, fullResponse);
   }
 
   // Private methods
 
-  private addMessageToConversation(conversationId: string, message: ChatMessage): void {
-    this.conversationsSignal.update((convos) =>
-      convos.map((c) => {
-        if (c.id !== conversationId) return c;
-        return {
-          ...c,
-          messages: [...c.messages, message],
-          updatedAt: new Date(),
-        };
-      })
-    );
-  }
-
-  private updateConversationTitle(id: string, title: string): void {
-    this.conversationsSignal.update((convos) =>
-      convos.map((c) => {
-        if (c.id !== id) return c;
-        return { ...c, title };
-      })
-    );
-  }
-
-  private generateTitle(content: string): string {
-    // Use first 50 chars of message as title
-    const truncated = content.slice(0, 50);
-    return truncated.length < content.length ? `${truncated}...` : truncated;
-  }
-
-  private generateId(): string {
-    return `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+  private addMessageToConversation(message: ChatMessage): void {
+    this.conversationSignal.update((conversation) => {
+      if (conversation === null) return conversation;
+      return {
+        ...conversation,
+        messages: [...conversation.messages, message],
+        updatedAt: new Date(),
+      };
+    });
   }
 
   private getRandomResponse(): string {

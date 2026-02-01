@@ -29,11 +29,20 @@ import { Country, countries } from '../../countries';
   `,
 })
 export class CountryDisplay {
+  // ==========================================
+  // Services
+  // ==========================================
   private readonly _transloco = inject(TranslocoService);
 
+  // ==========================================
+  // Inputs
+  // ==========================================
   readonly country = input.required<string | Country | null | undefined>();
   readonly showCountryCode = input<boolean>(false);
 
+  // ==========================================
+  // State
+  // ==========================================
   protected readonly activeLang = toSignal(this._transloco.langChanges$, { initialValue: this._transloco.getActiveLang() });
 
   protected readonly resolvedCountry = computed(() => {

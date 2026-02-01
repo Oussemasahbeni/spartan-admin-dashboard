@@ -20,6 +20,9 @@ import { HlmFieldError } from '@spartan-ng/helm/field';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ValidationErrors {
+  // ==========================================
+  // Inputs
+  // ==========================================
   readonly fieldState = input.required<FieldState<unknown, string>>();
   readonly errorParams = input<Record<string, unknown>>({});
 }

@@ -56,8 +56,14 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSwitch {
+  // ==========================================
+  // Services
+  // ==========================================
   private readonly _themeService = inject(ThemeService);
 
+  // ==========================================
+  // State
+  // ==========================================
   readonly currentTheme = this._themeService.theme;
 
   readonly iconName = computed(() => {
@@ -68,6 +74,9 @@ export class ThemeSwitch {
     return isDark ? 'lucideSun' : 'lucideMoon';
   });
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
   setTheme(theme: 'light' | 'dark' | 'system'): void {
     this._themeService.setTheme(theme);
   }

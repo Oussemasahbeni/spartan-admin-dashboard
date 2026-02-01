@@ -61,9 +61,17 @@ import { provideTransactionStatusIcons } from './pipes/status-ui.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dashboard2 implements OnInit {
+  // ==========================================
+  // State
+  // ==========================================
+
   readonly transactions = signal<Transaction[]>([]);
   readonly statCards = signal<StatCardData[]>([]);
   readonly activeFilters = signal<FilterOptions | null>(null);
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   ngOnInit() {
     this.generateMockData();
@@ -106,6 +114,10 @@ export class Dashboard2 implements OnInit {
       },
     ]);
   }
+
+  // ==========================================
+  // Private Methods
+  // ==========================================
 
   generateMockData() {
     const data: Transaction[] = Array.from({ length: 5 }).map(() => ({

@@ -100,12 +100,24 @@ import { PaymentsActionDropdown } from './action-dropdown';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentsTable {
+  // ==========================================
+  // Inputs
+  // ==========================================
+
   readonly payments = input<Payment[]>([]);
+
+  // ==========================================
+  // View Children
+  // ==========================================
 
   readonly statusCell = viewChild.required('statusCell');
   readonly dataTable = viewChild.required(DataTable<Payment>);
-  protected readonly table = computed(() => this.dataTable().table);
 
+  // ==========================================
+  // State
+  // ==========================================
+
+  protected readonly table = computed(() => this.dataTable().table);
   protected readonly searchValue = signal('');
   protected readonly columns: ColumnDef<Payment>[] = [
     {
@@ -145,6 +157,11 @@ export class PaymentsTable {
       cell: () => flexRenderComponent(PaymentsActionDropdown),
     },
   ];
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
+
   protected _filterChanged(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchValue.set(value);

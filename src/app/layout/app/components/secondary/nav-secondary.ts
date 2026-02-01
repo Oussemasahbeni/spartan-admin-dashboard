@@ -27,7 +27,11 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
   `,
 })
 export class NavSecondary {
-  public readonly items = signal([
+  // ==========================================
+  // State
+  // ==========================================
+
+  readonly items = signal([
     {
       title: 'Support',
       url: '/support',

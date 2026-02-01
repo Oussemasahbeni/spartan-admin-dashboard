@@ -35,7 +35,15 @@ import { OverviewDashboard } from './overview/overview';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dashboard1Layout {
+  // ==========================================
+  // State
+  // ==========================================
+
   protected readonly selectedTab = signal('overview');
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   onTabChange(tab: string) {
     this.selectedTab.set(tab);

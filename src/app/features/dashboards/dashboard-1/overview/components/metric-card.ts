@@ -101,8 +101,16 @@ export type CardVariant = 'compact' | 'large';
   `,
 })
 export class OverviewMetricCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _dir = inject(DirectionalityService);
   private readonly rtl = this._dir.isRtl;
+
+  // ==========================================
+  // Inputs
+  // ==========================================
 
   readonly variant = input<CardVariant>('compact');
   readonly title = input.required<string>();
@@ -114,6 +122,10 @@ export class OverviewMetricCard {
   readonly chartColor = input.required<string>();
   readonly trendValue = input.required<string>();
   readonly trendUp = input.required<boolean>();
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly chartSeries = computed<ApexAxisChartSeries>(() => {
     const data = this.chartData();

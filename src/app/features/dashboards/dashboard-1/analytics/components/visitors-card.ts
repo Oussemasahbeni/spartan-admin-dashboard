@@ -88,8 +88,16 @@ interface MonthsTranslation {
   `,
 })
 export class VisitorsCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _dir = inject(DirectionalityService);
   private readonly rtl = this._dir.isRtl;
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly selectedPeriod = signal<string>('week');
 

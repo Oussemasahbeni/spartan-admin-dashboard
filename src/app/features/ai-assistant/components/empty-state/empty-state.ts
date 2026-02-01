@@ -31,7 +31,15 @@ interface SuggestedPrompt {
   imports: [HlmEmptyImports, HlmCardImports, HlmIconImports, NgOptimizedImage, TranslocoModule],
 })
 export class AssistantEmptyState {
+  // ==========================================
+  // Outputs
+  // ==========================================
+
   readonly promptSelect = output<string>();
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly suggestedPrompts = signal<SuggestedPrompt[]>([
     {
@@ -55,6 +63,10 @@ export class AssistantEmptyState {
       promptKey: 'suggestions.integrationGuide.prompt',
     },
   ]);
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   handlePromptClick(prompt: string): void {
     this.promptSelect.emit(prompt);

@@ -28,9 +28,15 @@ import { ConfirmDialogData } from './confirmation-dialog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmationDialog {
+  // ==========================================
+  // Services
+  // ==========================================
   protected readonly ctx = injectBrnDialogContext<ConfirmDialogData>();
   private readonly _dialogRef = inject(BrnDialogRef);
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
   close() {
     this._dialogRef.close();
   }

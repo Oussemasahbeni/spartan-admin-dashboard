@@ -29,27 +29,27 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackToTop {
-  // -----------------------------------------------------------------------------------------------------
-  // @ Dependencies
-  // -----------------------------------------------------------------------------------------------------
+  // ==========================================
+  // Services
+  // ==========================================
   private readonly document = inject(DOCUMENT);
   private readonly viewportScroller = inject(ViewportScroller);
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Inputs
-  // -----------------------------------------------------------------------------------------------------
+  // ==========================================
+  // Inputs
+  // ==========================================
   readonly showAfter = input(300); // Pixels scrolled before showing
   readonly scrollToPosition = input(0); // Position to scroll to
   readonly animationDuration = input(500); // Animation duration in ms
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Signals and State
-  // -----------------------------------------------------------------------------------------------------
+  // ==========================================
+  // State
+  // ==========================================
   readonly isVisible = signal(false);
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
+  // ==========================================
+  // Public Methods
+  // ==========================================
   onWindowScroll(): void {
     const scrollPosition = this.document.documentElement.scrollTop || this.document.body.scrollTop;
     this.isVisible.set(scrollPosition > this.showAfter());

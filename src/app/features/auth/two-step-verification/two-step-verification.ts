@@ -32,17 +32,24 @@ import { AuthLayout } from '../layout';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TwoStepVerification implements OnDestroy {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _router = inject(Router);
   private readonly _formBuilder = inject(FormBuilder);
 
-  public readonly isLoading = signal(false);
-  public readonly showError = signal(false);
-  public readonly countdown = signal(60);
-  public readonly maxLength = 6;
+  // ==========================================
+  // State
+  // ==========================================
+
+  readonly isLoading = signal(false);
+  readonly showError = signal(false);
+  readonly countdown = signal(60);
+  readonly maxLength = 6;
+  readonly email = signal('user@example.com');
 
   private _intervalId?: ReturnType<typeof setInterval>;
-
-  public readonly email = signal('user@example.com');
 
   public readonly otpForm = this._formBuilder.group({
     otp: ['', [Validators.required, Validators.minLength(this.maxLength), Validators.maxLength(this.maxLength)]],
@@ -52,7 +59,11 @@ export class TwoStepVerification implements OnDestroy {
     this.startCountdown();
   }
 
-  public readonly isResendDisabled = () => this.countdown() > 0;
+  // ==========================================
+  // Public Methods
+  // ==========================================
+
+  readonly isResendDisabled = () => this.countdown() > 0;
 
   /** Handles paste by removing dashes */
   public transformPaste = (pastedText: string) => pastedText.replaceAll('-', '');
@@ -102,6 +113,10 @@ export class TwoStepVerification implements OnDestroy {
       this.resetCountdown();
     }, 1000);
   }
+
+  // ==========================================
+  // Private Methods
+  // ==========================================
 
   private resetCountdown(): void {
     this.countdown.set(60);

@@ -33,6 +33,13 @@ import { CountryDisplay } from '../country-display/country-display';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountryPicker implements FormValueControl<Country | null> {
+  // ==========================================
+  // Inputs
+  // ==========================================
   readonly value = model<Country | null>(null);
+
+  // ==========================================
+  // State
+  // ==========================================
   protected readonly countriesList = signal(countries);
 }

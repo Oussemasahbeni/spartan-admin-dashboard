@@ -58,14 +58,23 @@ import { Table } from '@tanstack/angular-table';
   `,
 })
 export class DataTableColumnManager<T> {
+  // ==========================================
+  // Inputs
+  // ==========================================
   readonly table = input.required<Table<T>>();
 
+  // ==========================================
+  // State
+  // ==========================================
   protected readonly hidableColumns = computed(() => {
     return this.table()
       .getAllLeafColumns()
       .filter((col) => col.getCanHide());
   });
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
   protected onDrop(event: CdkDragDrop<string[]>) {
     const table = this.table();
     const hidableIds = this.hidableColumns().map((c) => c.id);

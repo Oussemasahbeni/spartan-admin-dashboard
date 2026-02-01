@@ -106,8 +106,16 @@ interface MonthsTranslation {
   `,
 })
 export class SalesCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _dir = inject(DirectionalityService);
   private readonly rtl = this._dir.isRtl;
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly selectedPeriod = signal<string>('month');
 

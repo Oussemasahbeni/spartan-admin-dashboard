@@ -15,14 +15,23 @@ import { AssistantService } from './service/chat.service';
   providers: [provideTranslocoScope({ scope: 'ai-assistant', alias: 'aiAssistant' })],
 })
 export class AiAssistant {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _assistantService = inject(AssistantService);
 
-  readonly conversation = this._assistantService.activeConversation;
+  // ==========================================
+  // State
+  // ==========================================
+
+  readonly conversation = this._assistantService.conversation;
 
   readonly messages = this._assistantService.messages;
 
   readonly isEmpty = computed(() => this.messages().length === 0);
   readonly isLoading = this._assistantService.isLoading;
+  readonly isStreaming = this._assistantService.isStreaming;
 
   readonly activeSuggestions = computed(() => {
     if (this.isLoading()) {
@@ -31,19 +40,15 @@ export class AiAssistant {
     return ['Tell me a joke', 'What is the weather today?', 'Give me a coding tip'];
   });
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
+
   handleSendMessage(prompt: string) {
     this._assistantService.sendMessage(prompt);
+  }
 
-    // const updatedConversation = [...this.conversation(), prompt];
-    // this.conversation.set(updatedConversation);
-
-    // const chatMessage: ChatMessage = {
-    //   id: crypto.randomUUID(),
-    //   role: 'user',
-    //   content: prompt,
-    //   timestamp: new Date(),
-    // };
-    // this.messages.set([...this.messages(), chatMessage]);
-    // this.isLoading.set(true);
+  handleStopStreaming() {
+    this._assistantService.stopStreaming();
   }
 }

@@ -46,9 +46,18 @@ import { AuthLayout } from '../layout';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _router = inject(Router);
-  public readonly isLoading = signal(false);
-  public readonly showPassword = signal(false);
+
+  // ==========================================
+  // State
+  // ==========================================
+
+  readonly isLoading = signal(false);
+  readonly showPassword = signal(false);
 
   readonly loginModel = signal({
     email: '',
@@ -61,6 +70,10 @@ export class Login {
     required(schema.password);
   });
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
+
   togglePasswordVisibility(): void {
     this.showPassword.set(!this.showPassword());
   }
@@ -71,6 +84,10 @@ export class Login {
       this.onLogin();
     });
   }
+
+  // ==========================================
+  // Private Methods
+  // ==========================================
 
   onLogin(): void {
     this.isLoading.set(true);

@@ -58,8 +58,16 @@ interface MonthsTranslation {
   `,
 })
 export class BarChartCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _dir = inject(DirectionalityService);
   private readonly rtl = this._dir.isRtl;
+
+  // ==========================================
+  // State
+  // ==========================================
 
   private readonly _barChart = translateObjectSignal('barChart', {}, SCOPE);
   private readonly _months = translateObjectSignal('months', {}, SCOPE);

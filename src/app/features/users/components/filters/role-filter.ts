@@ -87,11 +87,23 @@ import { RoleIconPipe } from '../../pipes/role-icon.pipe';
   `,
 })
 export class RoleFilter {
+  // ==========================================
+  // Outputs
+  // ==========================================
+
   readonly rolesChanged = output<UserRole[]>();
+
+  // ==========================================
+  // State
+  // ==========================================
 
   protected readonly _rolesFilter = signal<UserRole[]>([]);
   protected readonly _rolesList = signal([...USER_ROLES]);
   protected readonly _rolesState = signal<'closed' | 'open'>('closed');
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   protected rolesStateChanged(state: 'open' | 'closed') {
     this._rolesState.set(state);

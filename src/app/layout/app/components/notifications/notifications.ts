@@ -117,9 +117,17 @@ import { Notification } from '../../model/notification';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Notifications {
+  // ==========================================
+  // State
+  // ==========================================
+
   readonly notifications = signal<Notification[]>(makeNotificationsData(10));
 
   readonly unreadCount = computed(() => this.notifications().filter((notification) => notification.unread).length);
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   public markAsRead(index: number): void {
     this.notifications.update((notifications) =>

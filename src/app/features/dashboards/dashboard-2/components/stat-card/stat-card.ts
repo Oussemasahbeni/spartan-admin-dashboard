@@ -50,6 +50,15 @@ export interface StatCardData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatCardComponent {
+  // ==========================================
+  // Inputs
+  // ==========================================
+
   readonly data = input.required<StatCardData>();
+
+  // ==========================================
+  // Outputs
+  // ==========================================
+
   readonly menuClick = output<void>();
 }

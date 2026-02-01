@@ -5,7 +5,7 @@ import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@
 @Component({
   imports: [HlmCheckboxImports],
   host: {
-    'class': 'flex',
+    class: 'flex',
     'aria-label': 'Select all',
   },
   template: `
@@ -18,13 +18,17 @@ import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableHeadSelection<T> {
+  // ==========================================
+  // State
+  // ==========================================
+
   protected readonly _context = injectFlexRenderContext<HeaderContext<T, unknown>>();
 }
 
 @Component({
   imports: [HlmCheckboxImports],
   host: {
-    'class': 'flex',
+    class: 'flex',
     'aria-label': 'Select Row',
   },
   template: `
@@ -36,5 +40,9 @@ export class TableHeadSelection<T> {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableRowSelection<T> {
+  // ==========================================
+  // State
+  // ==========================================
+
   protected readonly _context = injectFlexRenderContext<CellContext<T, unknown>>();
 }

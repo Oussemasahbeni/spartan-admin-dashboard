@@ -62,9 +62,17 @@ import { NavUser } from '../user/user';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navigation {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _dir = inject(DirectionalityService);
   private readonly _authService = inject(AuthService);
   private readonly _sidebarService = inject(HlmSidebarService);
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly side = computed<'left' | 'right'>(() => (this._dir.isRtl() ? 'right' : 'left'));
   readonly sideBarCollapsed = computed(() => this._sidebarService.state() === 'collapsed');

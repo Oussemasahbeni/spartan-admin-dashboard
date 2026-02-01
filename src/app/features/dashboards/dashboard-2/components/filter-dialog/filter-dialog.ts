@@ -42,8 +42,21 @@ export interface FilterOptions {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterDialogComponent {
+  // ==========================================
+  // Outputs
+  // ==========================================
+
   readonly filterApplied = output<FilterOptions>();
+
+  // ==========================================
+  // State
+  // ==========================================
+
   readonly isOpen = signal(false);
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   onApply() {
     this.filterApplied.emit({

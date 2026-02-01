@@ -83,9 +83,9 @@ import { DataTablePagination } from '../pagination/pagination';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTable<T> {
-  // ═══════════════════════════════════════════════════════════════════════════
-  // INPUTS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ==========================================
+  // Inputs
+  // ==========================================
 
   /**
    * Column definitions for the table.
@@ -176,9 +176,9 @@ export class DataTable<T> {
    */
   readonly pageSizeOptions = input([10, 25, 50, 100]);
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // OUTPUTS
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ==========================================
+  // Outputs
+  // ==========================================
 
   /**
    * Emitted when pagination or sorting state changes.
@@ -193,9 +193,9 @@ export class DataTable<T> {
    */
   readonly stateChange = output<{ pagination: PaginationState; sorting: SortingState }>();
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // INTERNAL STATE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ==========================================
+  // State
+  // ==========================================
 
   private readonly columnOrder = signal<string[]>([]);
   private readonly columnFilters = signal<ColumnFiltersState>([]);
@@ -246,9 +246,9 @@ export class DataTable<T> {
     return colSizes;
   });
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // TABLE INSTANCE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   /**
    * The TanStack Table instance.

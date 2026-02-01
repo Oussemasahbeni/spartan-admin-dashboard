@@ -38,13 +38,22 @@ import { CountryDisplay } from '../country-display/country-display';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhoneNumberPicker implements FormValueControl<string> {
+  // ==========================================
+  // Services
+  // ==========================================
   private readonly _translocoService = inject(TranslocoService);
 
+  // ==========================================
+  // Inputs
+  // ==========================================
   readonly value = model<string>('');
   readonly touched = model<boolean>(false);
   readonly invalid = input<boolean>(false);
   readonly disabled = input<boolean>(false);
 
+  // ==========================================
+  // State
+  // ==========================================
   protected readonly selectedCountry = linkedSignal<string, Country | null>({
     source: this.value,
     computation: (fullValue) => {
@@ -71,6 +80,9 @@ export class PhoneNumberPicker implements FormValueControl<string> {
     initialValue: this._translocoService.getActiveLang(),
   });
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
   countrySelected(country: Country) {
     this.selectedCountry.set(country);
     this.updateValue();

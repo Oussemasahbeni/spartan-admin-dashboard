@@ -26,7 +26,15 @@ import { Notifications } from '../notifications/notifications';
   `,
 })
 export class SiteHeader {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _platformId = inject(PLATFORM_ID);
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   onResize() {
     if (isPlatformBrowser(this._platformId)) {

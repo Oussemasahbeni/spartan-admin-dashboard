@@ -62,6 +62,10 @@ interface VisitorChartTranslation {
   `,
 })
 export class VisitorChartCard {
+  // ==========================================
+  // State
+  // ==========================================
+
   private readonly _visitorChart = translateObjectSignal('visitorChart', {}, SCOPE);
 
   readonly visitorChart = computed(() => this._visitorChart() as Translation & VisitorChartTranslation);

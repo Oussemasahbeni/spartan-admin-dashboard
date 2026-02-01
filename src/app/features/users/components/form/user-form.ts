@@ -57,10 +57,18 @@ export interface UserFormModel {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserForm implements OnInit {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _userService = inject(UserService);
   private readonly _transloco = inject(TranslocoService);
   private readonly _dialogRef = inject<BrnDialogRef>(BrnDialogRef);
   private readonly _dialogContext = injectBrnDialogContext<{ user?: User }>();
+
+  // ==========================================
+  // State
+  // ==========================================
 
   protected readonly rolesList = signal([...USER_ROLES]);
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.user);
@@ -94,6 +102,10 @@ export class UserForm implements OnInit {
     });
   });
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
+
   ngOnInit(): void {
     const user = this._dialogContext.user;
     if (user) {
@@ -114,6 +126,10 @@ export class UserForm implements OnInit {
       this.onSaveUser();
     });
   }
+
+  // ==========================================
+  // Private Methods
+  // ==========================================
 
   onSaveUser() {
     this.isSubmitting.set(true);

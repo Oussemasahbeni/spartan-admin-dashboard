@@ -29,8 +29,16 @@ import { Marked, Renderer } from 'marked';
   },
 })
 export class AiMarkdownRenderer {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private platformId = inject(PLATFORM_ID);
   private sanitizer = inject(DomSanitizer);
+
+  // ==========================================
+  // State
+  // ==========================================
 
   private marked: Marked;
   private purify: DOMPurifyType | null = null;
@@ -163,6 +171,10 @@ export class AiMarkdownRenderer {
     }
     return html;
   }
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   onHostClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;

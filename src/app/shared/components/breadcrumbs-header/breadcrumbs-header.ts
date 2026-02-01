@@ -30,7 +30,13 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsHeader {
+  // ==========================================
+  // Services
+  // ==========================================
   private readonly _breadcrumbService = inject(BreadcrumbService);
 
+  // ==========================================
+  // State
+  // ==========================================
   readonly breadcrumbs = this._breadcrumbService.breadcrumbs;
 }

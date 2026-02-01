@@ -16,9 +16,11 @@
   <div class="bg-background shrink-0">
     <div class="mx-auto w-full max-w-3xl">
       <adm-assistant-input
-        [disabled]="isLoading()"
+        [isLoading]="isLoading()"
+        [isStreaming]="isStreaming()"
         [suggestions]="activeSuggestions()"
         (messageSend)="handleSendMessage($event)"
+        (streamingStopped)="handleStopStreaming()"
       />
     </div>
   </div>

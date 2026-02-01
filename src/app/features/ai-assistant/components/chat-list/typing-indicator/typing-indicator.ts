@@ -12,12 +12,24 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
   },
 })
 export class TypingIndicator {
+  // ==========================================
+  // Inputs
+  // ==========================================
+
   readonly dotCount = input<number>(3);
   readonly animation = input<'shimmer' | 'wave'>('shimmer');
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly dots = computed(() => {
     return Array.from({ length: this.dotCount() }, (_, i) => i);
   });
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   /** Get animation delay for each dot */
   getDotDelay(index: number): string {

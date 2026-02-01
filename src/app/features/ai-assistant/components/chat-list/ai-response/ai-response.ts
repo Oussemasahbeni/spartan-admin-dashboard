@@ -40,6 +40,10 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
   },
 })
 export class AiResponseCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _clipboard = inject(Clipboard);
   private readonly _platformId = inject(PLATFORM_ID);
 
@@ -47,10 +51,8 @@ export class AiResponseCard {
   // Inputs
   // ==========================================
 
-  /** The markdown content to display */
   readonly content = input.required<string>();
 
-  /** Whether the content is currently streaming */
   readonly isStreaming = input<boolean>(false);
 
   // ==========================================
@@ -79,10 +81,9 @@ export class AiResponseCard {
   readonly copied = signal(false);
 
   // ==========================================
-  // Event Handlers
+  // Public Methods
   // ==========================================
 
-  /** Handle copy from ResponseActions */
   handleCopy(): void {
     if (!isPlatformBrowser(this._platformId)) return;
 
@@ -98,22 +99,18 @@ export class AiResponseCard {
     }
   }
 
-  /** Handle code block copy from MarkdownRenderer */
   handleCodeBlockCopy(code: string): void {
     this.codeBlockCopy.emit(code);
   }
 
-  /** Handle regenerate from ResponseActions */
   handleRegenerate(): void {
     this.regenerate.emit();
   }
 
-  /** Handle thumbs up from ResponseActions */
   handleThumbsUp(): void {
     this.thumbsUp.emit();
   }
 
-  /** Handle thumbs down from ResponseActions */
   handleThumbsDown(): void {
     this.thumbsDown.emit();
   }

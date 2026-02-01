@@ -176,18 +176,33 @@
           </button>
 
           <!-- Send button -->
-          <button
-            type="button"
-            hlmInputGroupButton
-            class="rounded-full"
-            size="icon-sm"
-            [attr.aria-label]="t('input.sendMessage')"
-            [variant]="'default'"
-            [disabled]="!canSend()"
-            (click)="handleSend()"
-          >
-            <ng-icon hlm name="lucideArrowUp" size="sm" />
-          </button>
+
+          @if (isStreaming()) {
+            <button
+              type="button"
+              hlmInputGroupButton
+              class="rounded-full"
+              size="icon-sm"
+              [attr.aria-label]="t('input.stopStreaming')"
+              [variant]="'secondary'"
+              (click)="handleStopStreaming()"
+            >
+              <ng-icon hlm name="lucideSquareStop" class="text-white" size="sm" />
+            </button>
+          } @else {
+            <button
+              type="button"
+              hlmInputGroupButton
+              class="rounded-full"
+              size="icon-sm"
+              [attr.aria-label]="t('input.sendMessage')"
+              [variant]="'default'"
+              [disabled]="!canSend()"
+              (click)="handleSend()"
+            >
+              <ng-icon hlm name="lucideArrowUp" size="sm" />
+            </button>
+          }
         </div>
       </div>
     </div>

@@ -42,10 +42,19 @@ import { AuthLayout } from '../layout';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Signup {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _router = inject(Router);
-  public readonly isLoading = signal(false);
-  public readonly showPassword = signal(false);
-  public readonly showConfirmPassword = signal(false);
+
+  // ==========================================
+  // State
+  // ==========================================
+
+  readonly isLoading = signal(false);
+  readonly showPassword = signal(false);
+  readonly showConfirmPassword = signal(false);
   readonly passwordMinLength = 8;
 
   readonly signupModel = signal({
@@ -74,6 +83,10 @@ export class Signup {
     });
   });
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
+
   togglePasswordVisibility(): void {
     this.showPassword.set(!this.showPassword());
   }
@@ -88,6 +101,10 @@ export class Signup {
       this.onSignup();
     });
   }
+
+  // ==========================================
+  // Private Methods
+  // ==========================================
 
   onSignup(): void {
     this.isLoading.set(true);

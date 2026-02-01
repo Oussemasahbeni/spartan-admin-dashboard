@@ -50,6 +50,10 @@ const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
   `,
 })
 export class BuyersProfileCard {
+  // ==========================================
+  // State
+  // ==========================================
+
   readonly chartOptions = signal<ApexOptions>({
     series: [75], // 75% completion
     chart: {

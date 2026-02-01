@@ -62,6 +62,10 @@ import { UserForm } from '../form/user-form';
   `,
 })
 export class ActionDropdown {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _userService = inject(UserService);
   private readonly _transloco = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
@@ -69,7 +73,15 @@ export class ActionDropdown {
   private readonly _confirmationDialogService = inject(ConfirmationDialogService);
   private readonly _destroyRef = inject(DestroyRef);
 
+  // ==========================================
+  // Inputs
+  // ==========================================
+
   readonly onSuccess = input<() => void>();
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   openConfirmationDialog() {
     const user = this._context.row.original;

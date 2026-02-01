@@ -19,15 +19,35 @@ import { BytesPipe } from 'ngx-oneforall/pipes/bytes';
   ],
 })
 export class AttachmentCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly platformId = inject(PLATFORM_ID);
+
+  // ==========================================
+  // Inputs
+  // ==========================================
 
   readonly file = input.required<File>();
 
-  remove = output<void>();
+  // ==========================================
+  // Outputs
+  // ==========================================
+
+  readonly remove = output<void>();
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   handleRemove(): void {
     this.remove.emit();
   }
+
+  // ==========================================
+  // Private Methods
+  // ==========================================
 
   /** Check if file is an image */
   isImageFile(): boolean {

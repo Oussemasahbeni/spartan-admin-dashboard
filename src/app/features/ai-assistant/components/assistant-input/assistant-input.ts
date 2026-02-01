@@ -15,6 +15,7 @@ import {
   lucidePaperclip,
   lucidePencilRuler,
   lucidePlus,
+  lucideSquareStop,
 } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
@@ -50,17 +51,37 @@ import { AttachmentCard } from '../attachment-card/attachment-card';
       lucideAppWindow,
       lucideGraduationCap,
       lucidePencilRuler,
+      lucideSquareStop,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssistantInput {
+  // ==========================================
+  // View Children
+  // ==========================================
+
   private readonly fileInputRef = viewChild<ElementRef<HTMLInputElement>>('fileInput');
 
-  readonly disabled = input<boolean>(false);
+  // ==========================================
+  // Inputs
+  // ==========================================
+
+  readonly isLoading = input<boolean>(false);
+  readonly isStreaming = input<boolean>(false);
   readonly suggestions = input<string[]>([]);
+
+  // ==========================================
+  // Outputs
+  // ==========================================
+
   readonly messageSend = output<string>();
   readonly inputCleared = output<void>();
+  readonly streamingStopped = output<void>();
+
+  // ==========================================
+  // State
+  // ==========================================
 
   readonly attachments = signal<File[]>([]);
   readonly models = signal<string[]>([
@@ -86,6 +107,10 @@ export class AssistantInput {
 
   readonly promptForm = form(this.promptModel);
 
+  // ==========================================
+  // Public Methods
+  // ==========================================
+
   toggleMic() {
     this.isRecording.set(!this.isRecording());
   }
@@ -95,6 +120,10 @@ export class AssistantInput {
       this.messageSend.emit(this.promptForm.prompt().value());
       this.promptForm.prompt().value.set('');
     }
+  }
+
+  handleStopStreaming() {
+    this.streamingStopped.emit();
   }
 
   handleFileSelect(event: Event) {
@@ -133,7 +162,11 @@ export class AssistantInput {
     this.selectedModel.set(model);
   }
 
-  handleClear(): void {
+  // ==========================================
+  // Private Methods
+  // ==========================================
+
+  private handleClear(): void {
     this.promptForm.prompt().value.set('');
     this.inputCleared.emit();
   }

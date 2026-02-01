@@ -60,8 +60,16 @@ interface MonthsTranslation {
   `,
 })
 export class CustomersCard {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _dir = inject(DirectionalityService);
   private readonly rtl = this._dir.isRtl;
+
+  // ==========================================
+  // State
+  // ==========================================
 
   private readonly _months = translateObjectSignal('months', {}, SCOPE);
 

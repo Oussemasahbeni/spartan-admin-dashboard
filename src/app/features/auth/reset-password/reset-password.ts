@@ -35,8 +35,17 @@ import { AuthLayout } from '../layout';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPassword {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _router = inject(Router);
-  public readonly isLoading = signal(false);
+
+  // ==========================================
+  // State
+  // ==========================================
+
+  readonly isLoading = signal(false);
   readonly showAlert = signal(false);
 
   readonly resetPasswordModel = signal({
@@ -47,6 +56,10 @@ export class ResetPassword {
     required(schema.email);
     email(schema.email);
   });
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   onSubmit(event: Event): void {
     event.preventDefault();

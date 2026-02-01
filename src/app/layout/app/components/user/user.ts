@@ -43,18 +43,34 @@ import { User } from '../../../../features/users/model/user';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavUser {
+  // ==========================================
+  // Services
+  // ==========================================
+
   private readonly _sidebarService = inject(HlmSidebarService);
   private readonly _languageService = inject(LanguageService);
   private readonly _themeService = inject(ThemeService);
   private readonly _authService = inject(AuthService);
+
+  // ==========================================
+  // Inputs
+  // ==========================================
+
+  readonly user = input.required<User>();
+
+  // ==========================================
+  // State
+  // ==========================================
+
   readonly currentTheme = this._themeService.theme;
   readonly currentLang = this._languageService.currentLang;
-
   readonly availableLanguages = this._languageService.availableLanguages;
 
   protected readonly _menuSide = computed(() => (this._sidebarService.isMobile() ? 'top' : 'right'));
 
-  public readonly user = input.required<User>();
+  // ==========================================
+  // Public Methods
+  // ==========================================
 
   setLang(lang: LanguageOptions): void {
     this._languageService.setLanguage(lang);
