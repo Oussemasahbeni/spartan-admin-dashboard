@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AssistantInput } from './components/assistant-input/assistant-input';
@@ -12,7 +12,6 @@ import { AssistantService } from './service/chat.service';
   imports: [AssistantEmptyState, AssistantInput, TranslocoModule, ChatList, HlmScrollAreaImports, NgScrollbarModule],
   templateUrl: './ai-assistant.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [provideTranslocoScope({ scope: 'ai-assistant', alias: 'aiAssistant' })],
 })
 export class AiAssistant {
   // ==========================================

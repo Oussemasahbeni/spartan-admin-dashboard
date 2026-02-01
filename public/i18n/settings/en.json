@@ -1,0 +1,48 @@
+{
+    "title": "Settings",
+    "description": "Manage your account and application settings",
+    "panels": {
+        "account": {
+            "title": "Account",
+            "description": "Manage your public profile and private information"
+        },
+        "security": {
+            "title": "Security",
+            "description": "Manage your password and 2-step verification preferences"
+        },
+        "planBilling": {
+            "title": "Plan & Billing",
+            "description": "Manage your subscription plan, payment method and billing information"
+        },
+        "notifications": {
+            "title": "Notifications",
+            "description": "Manage when you'll be notified on which channels"
+        },
+        "team": {
+            "title": "Team",
+            "description": "Manage your existing team and change roles/permissions"
+        }
+    },
+    "account": {
+        "name": "Name",
+        "username": "Username",
+        "title": "Title",
+        "company": "Company",
+        "about": "About",
+        "aboutDescription": "Brief description for your profile. Basic HTML and Emoji are allowed.",
+        "personalInfo": {
+            "title": "Personal Information",
+            "description": "Communication details in case we want to connect with you. These will be kept private."
+        },
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "language": "Language",
+        "selectLanguage": "Select a language",
+        "languages": {
+            "english": "English",
+            "french": "French",
+            "arabic": "Arabic"
+        }
+    }
+}

@@ -1,0 +1,96 @@
+<div *transloco="let t; prefix: 'settings'" class="flex w-full min-w-0 flex-col gap-8">
+  <!-- Header -->
+  <header class="flex items-start gap-4 md:flex-col">
+    <!-- Mobile Navigation -->
+    <hlm-sheet [side]="dir() ? 'right' : 'left'">
+      <button type="button" class="md:hidden" id="edit-profile" hlmSheetTrigger hlmBtn size="sm" variant="outline">
+        <ng-icon hlm size="sm" name="lucideMenu" />
+      </button>
+      <hlm-sheet-content *brnSheetContent="let ctx" class="px-3">
+        <hlm-sheet-header>
+          <h3 hlmSheetTitle>{{ t('title') }}</h3>
+          <p hlmSheetDescription>{{ t('description') }}</p>
+        </hlm-sheet-header>
+        @for (panel of panels(); track panel.id) {
+          <button
+            type="button"
+            class="justify-start text-left"
+            hlmBtn
+            size="sm"
+            [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
+            (click)="goToPanel(panel)"
+          >
+            <ng-icon hlm size="sm" [name]="panel.icon" />
+            {{ t('panels.' + panel.id + '.title') }}
+          </button>
+        }
+      </hlm-sheet-content>
+    </hlm-sheet>
+    <div class="space-y-2">
+      <h1 class="text-2xl leading-none font-extrabold tracking-tight">{{ t('title') }}</h1>
+      <p class="text-muted-foreground text-sm">{{ t('description') }}</p>
+    </div>
+  </header>
+  <div class="flex flex-auto sm:h-full">
+    <!-- Desktop Navigation -->
+    <nav class="hidden sm:w-72 md:block" aria-label="Settings navigation">
+      <!-- Panel links -->
+      <div class="flex flex-col gap-2">
+        @for (panel of panels(); track panel.id) {
+          <button
+            type="button"
+            class="justify-start text-left"
+            hlmBtn
+            size="sm"
+            [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
+            (click)="goToPanel(panel)"
+          >
+            <ng-icon hlm size="sm" [name]="panel.icon" />
+            {{ t('panels.' + panel.id + '.title') }}
+          </button>
+        }
+      </div>
+    </nav>
+
+    <!-- Drawer content -->
+    <main class="flex-auto pb-12 md:px-10 md:pb-12">
+      <!-- Panel header -->
+      <header class="flex flex-col gap-2">
+        <!-- Panel title -->
+        <h1 class="text-xl leading-none font-bold tracking-tight lg:ml-0">
+          {{ t('panels.' + selectedPanel().id + '.title') }}
+        </h1>
+        <p class="text-muted-foreground text-sm">
+          {{ t('panels.' + selectedPanel().id + '.description') }}
+        </p>
+      </header>
+      <hlm-separator class="my-4" />
+
+      <!-- Load settings panel -->
+      <section>
+        @switch (selectedPanel().id) {
+          <!-- Account -->
+          @case ('account') {
+            <adm-settings-account />
+          }
+          <!-- Security -->
+          @case ('security') {
+            <!-- <settings-security /> -->
+          }
+          <!-- Plan & Billing -->
+          @case ('plan-billing') {
+            <!-- <settings-plan-billing /> -->
+          }
+          <!-- Notifications -->
+          @case ('notifications') {
+            <!-- <settings-notifications /> -->
+          }
+          <!-- Team -->
+          @case ('team') {
+            <!-- <settings-team /> -->
+          }
+        }
+      </section>
+    </main>
+  </div>
+</div>

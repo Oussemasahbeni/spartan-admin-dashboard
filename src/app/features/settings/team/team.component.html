@@ -1,0 +1,99 @@
+<div class="w-full max-w-3xl">
+    <!-- Add team member -->
+    <div class="w-full">
+        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+            <mat-label>Add team members</mat-label>
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:user'"
+                matPrefix
+            ></mat-icon>
+            <input matInput [placeholder]="'Email address'" />
+            <button mat-icon-button matSuffix>
+                <mat-icon
+                    class="icon-size-5"
+                    [svgIcon]="'heroicons_solid:plus-circle'"
+                ></mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <!-- Team members -->
+    <div class="mt-8 flex flex-col divide-y border-b border-t">
+        @for (member of members; track trackByFn($index, member)) {
+            <div class="flex flex-col py-6 sm:flex-row sm:items-center">
+                <div class="flex items-center">
+                    <div
+                        class="flex h-10 w-10 flex-0 items-center justify-center overflow-hidden rounded-full"
+                    >
+                        @if (member.avatar) {
+                            <img
+                                class="h-full w-full object-cover"
+                                [src]="member.avatar"
+                                alt="Contact avatar"
+                            />
+                        }
+                        @if (!member.avatar) {
+                            <div
+                                class="flex h-full w-full items-center justify-center rounded-full bg-gray-200 text-lg uppercase text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                            >
+                                {{ member.name.charAt(0) }}
+                            </div>
+                        }
+                    </div>
+                    <div class="ml-4">
+                        <div class="font-medium">{{ member.name }}</div>
+                        <div class="text-secondary">{{ member.email }}</div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center sm:ml-auto sm:mt-0">
+                    <div class="order-2 ml-4 sm:order-1 sm:ml-0">
+                        <mat-form-field
+                            class="fuse-mat-dense w-32"
+                            [subscriptSizing]="'dynamic'"
+                        >
+                            <mat-select
+                                [panelClass]="
+                                    'w-72 min-w-72 max-w-72 h-auto max-h-none'
+                                "
+                                [value]="member.role"
+                                disableOptionCentering
+                                #roleSelect="matSelect"
+                            >
+                                <mat-select-trigger class="text-md">
+                                    <span>Role:</span>
+                                    <span class="ml-1 font-medium">{{
+                                        roleSelect.value | titlecase
+                                    }}</span>
+                                </mat-select-trigger>
+                                @for (role of roles; track role) {
+                                    <mat-option
+                                        class="h-auto py-4 leading-none"
+                                        [value]="role.value"
+                                    >
+                                        <div class="font-medium">
+                                            {{ role.label }}
+                                        </div>
+                                        <div
+                                            class="text-secondary mt-1.5 whitespace-normal text-sm leading-normal"
+                                        >
+                                            {{ role.description }}
+                                        </div>
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="order-1 sm:order-2 sm:ml-3">
+                        <button mat-icon-button>
+                            <mat-icon
+                                class="text-hint"
+                                [svgIcon]="'heroicons_outline:trash'"
+                            ></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

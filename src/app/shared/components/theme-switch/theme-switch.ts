@@ -24,7 +24,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     </button>
 
     <ng-template #menu>
-      <hlm-dropdown-menu *transloco="let t" class="w-56">
+      <hlm-dropdown-menu *transloco="let t">
         @let theme = currentTheme();
 
         <button type="button" hlmDropdownMenuItem (click)="setTheme('light')">

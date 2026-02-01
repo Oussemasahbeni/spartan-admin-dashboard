@@ -80,9 +80,17 @@ export const routes: Routes = [
         loadChildren: () => import('./features/users/users.routes'),
       },
       {
+        path: 'settings',
+        title: 'settings',
+        data: { breadcrumb: 'navigation.settings' },
+        providers: [provideTranslocoScope('settings')],
+        loadChildren: () => import('./features/settings/settings.routes'),
+      },
+      {
         path: 'assistant',
         title: 'aiAssistant',
         data: { breadcrumb: 'navigation.aiAssistant' },
+        providers: [provideTranslocoScope({ scope: 'ai-assistant', alias: 'aiAssistant' })],
         loadChildren: () => import('./features/ai-assistant/ai-assistant.routes'),
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

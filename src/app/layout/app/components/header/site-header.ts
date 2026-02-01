@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
 import { BreadcrumbsHeader } from '@shared/components/breadcrumbs-header/breadcrumbs-header';
+import { ThemeSwitch } from '@shared/components/theme-switch/theme-switch';
 import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
@@ -8,7 +9,7 @@ import { Notifications } from '../notifications/notifications';
 
 @Component({
   selector: 'adm-site-header',
-  imports: [HlmSidebarImports, HlmSeparatorImports, HlmBreadCrumbImports, Notifications, BreadcrumbsHeader],
+  imports: [HlmSidebarImports, HlmSeparatorImports, HlmBreadCrumbImports, Notifications, BreadcrumbsHeader, ThemeSwitch],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <header
@@ -21,7 +22,10 @@ import { Notifications } from '../notifications/notifications';
         <hlm-separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
         <adm-breadcrumbs-header />
       </div>
-      <adm-notifications />
+      <div class="flex items-center gap-4">
+        <adm-theme-switch />
+        <adm-notifications />
+      </div>
     </header>
   `,
 })

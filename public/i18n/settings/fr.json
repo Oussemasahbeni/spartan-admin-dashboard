@@ -1,0 +1,48 @@
+{
+    "title": "Paramètres",
+    "description": "Gérez votre compte et les paramètres de l'application",
+    "panels": {
+        "account": {
+            "title": "Compte",
+            "description": "Gérez votre profil public et vos informations privées"
+        },
+        "security": {
+            "title": "Sécurité",
+            "description": "Gérez votre mot de passe et vos préférences de vérification en 2 étapes"
+        },
+        "planBilling": {
+            "title": "Plan et facturation",
+            "description": "Gérez votre plan d'abonnement, votre mode de paiement et vos informations de facturation"
+        },
+        "notifications": {
+            "title": "Notifications",
+            "description": "Gérez quand vous serez notifié et sur quels canaux"
+        },
+        "team": {
+            "title": "Équipe",
+            "description": "Gérez votre équipe existante et modifiez les rôles/permissions"
+        }
+    },
+    "account": {
+        "name": "Nom",
+        "username": "Nom d'utilisateur",
+        "title": "Titre",
+        "company": "Entreprise",
+        "about": "À propos",
+        "aboutDescription": "Brève description de votre profil. HTML de base et Emoji sont autorisés.",
+        "personalInfo": {
+            "title": "Informations personnelles",
+            "description": "Coordonnées de contact au cas où nous voudrions vous joindre. Elles resteront privées."
+        },
+        "email": "Email",
+        "phone": "Téléphone",
+        "country": "Pays",
+        "language": "Langue",
+        "selectLanguage": "Sélectionnez une langue",
+        "languages": {
+            "english": "Anglais",
+            "french": "Français",
+            "arabic": "Arabe"
+        }
+    }
+}

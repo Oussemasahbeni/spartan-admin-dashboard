@@ -1,0 +1,121 @@
+<div *transloco="let t; prefix: 'settings.account'" class="w-full max-w-5xl">
+  <!-- Form -->
+  <form (submit)="onSubmit($event)">
+    <div class="grid w-full gap-6 sm:grid-cols-4">
+      <!-- Name -->
+      <div class="sm:col-span-4">
+        <hlm-field>
+          <hlm-field-label for="name">{{ t('name') }}</hlm-field-label>
+          <input hlmInput id="name" type="text" [formField]="accountForm.name" />
+          <adm-validation-errors [fieldState]="accountForm.name()" />
+        </hlm-field>
+      </div>
+
+      <!-- Username -->
+      <div class="sm:col-span-4">
+        <hlm-field>
+          <hlm-field-label for="username">{{ t('username') }}</hlm-field-label>
+          <input hlmInput id="username" type="text" [formField]="accountForm.username" />
+        </hlm-field>
+      </div>
+
+      <!-- Title -->
+      <div class="sm:col-span-2">
+        <hlm-field>
+          <hlm-field-label for="title">{{ t('title') }}</hlm-field-label>
+          <input hlmInput id="title" type="text" [formField]="accountForm.title" />
+        </hlm-field>
+      </div>
+
+      <!-- Company -->
+      <div class="sm:col-span-2">
+        <hlm-field>
+          <hlm-field-label for="company">{{ t('company') }}</hlm-field-label>
+          <input hlmInput id="company" type="text" [formField]="accountForm.company" />
+        </hlm-field>
+      </div>
+
+      <!-- About -->
+      <div class="sm:col-span-4">
+        <hlm-field>
+          <hlm-field-label for="about">{{ t('about') }}</hlm-field-label>
+          <textarea hlmTextarea id="about" rows="5" [formField]="accountForm.about"></textarea>
+          <hlm-field-description>{{ t('aboutDescription') }}</hlm-field-description>
+        </hlm-field>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hlm-separator class="my-10" />
+
+    <!-- Section -->
+    <div class="w-full">
+      <h2 class="text-xl font-semibold">{{ t('personalInfo.title') }}</h2>
+      <p class="text-muted-foreground text-sm">
+        {{ t('personalInfo.description') }}
+      </p>
+    </div>
+
+    <div class="mt-8 grid w-full gap-6 sm:grid-cols-4">
+      <!-- Email -->
+      <div class="sm:col-span-2">
+        <hlm-field>
+          <hlm-field-label for="email">{{ t('email') }}</hlm-field-label>
+          <input hlmInput id="email" type="email" [formField]="accountForm.email" />
+          <adm-validation-errors [fieldState]="accountForm.email()" />
+        </hlm-field>
+      </div>
+
+      <!-- Phone -->
+      <div class="sm:col-span-2">
+        <hlm-field>
+          <hlm-field-label>{{ t('phone') }}</hlm-field-label>
+          <adm-phone-number-picker [formField]="accountForm.phone" />
+          <adm-validation-errors [fieldState]="accountForm.phone()" />
+        </hlm-field>
+      </div>
+
+      <!-- Country -->
+      <div class="sm:col-span-2">
+        <hlm-field>
+          <hlm-field-label for="country">{{ t('country') }}</hlm-field-label>
+          <adm-country-picker [formField]="accountForm.country" />
+          <adm-validation-errors [fieldState]="accountForm.country()" />
+        </hlm-field>
+      </div>
+
+      <!-- Language -->
+      <div class="sm:col-span-2">
+        <hlm-field>
+          <hlm-field-label for="language">{{ t('language') }}</hlm-field-label>
+          <brn-select [placeholder]="t('selectLanguage')" [formField]="accountForm.language">
+            <hlm-select-trigger class="w-full">
+              <div class="flex items-center gap-2">
+                <ng-icon hlm size="sm" name="lucideGlobe" />
+                <hlm-select-value />
+              </div>
+            </hlm-select-trigger>
+            <hlm-select-content>
+              @for (language of languages; track language) {
+                <hlm-option [value]="language">{{ t('languages.' + language) }}</hlm-option>
+              }
+            </hlm-select-content>
+          </brn-select>
+        </hlm-field>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hlm-separator class="my-5" />
+
+    <!-- Actions -->
+    <div *transloco="let t; prefix: 'buttons'" class="flex items-center justify-end gap-4">
+      <button type="submit" hlmBtn [disabled]="isLoading()">
+        @if (isLoading()) {
+          <hlm-spinner />
+        }
+        {{ t('save') }}
+      </button>
+    </div>
+  </form>
+</div>
