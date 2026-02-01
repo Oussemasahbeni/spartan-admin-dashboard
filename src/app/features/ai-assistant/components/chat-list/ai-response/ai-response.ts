@@ -23,12 +23,14 @@ import {
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 
+import { AiMarkdownRenderer } from './ai-markdown-renderer';
+
 @Component({
   selector: 'adm-ai-response',
-  templateUrl: './ai-response.component.html',
+  templateUrl: './ai-response.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmIconImports, HlmButtonImports],
+  imports: [HlmIconImports, HlmButtonImports, AiMarkdownRenderer],
   viewProviders: [
     provideIcons({ lucideSparkle, lucideRefreshCcw, lucideCheck, lucideCopy, lucideThumbsDown, lucideThumbsUp }),
   ],
@@ -56,27 +58,23 @@ export class AiResponseCard {
   // ==========================================
 
   /** Emitted when copy button is clicked with full content */
-  messageCopied = output<string>();
+  readonly messageCopied = output<string>();
 
   /** Emitted when a code block is copied */
-  codeBlockCopy = output<string>();
+  readonly codeBlockCopy = output<string>();
 
   /** Emitted when regenerate button is clicked */
-  regenerate = output<void>();
+  readonly regenerate = output<void>();
 
   /** Emitted when thumbs up is clicked */
-  thumbsUp = output<void>();
+  readonly thumbsUp = output<void>();
 
   /** Emitted when thumbs down is clicked */
-  thumbsDown = output<void>();
+  readonly thumbsDown = output<void>();
 
   // ==========================================
   // State
   // ==========================================
-
-  readonly isHovered = signal(false);
-
-  readonly isFocused = signal(false);
 
   readonly copied = signal(false);
 

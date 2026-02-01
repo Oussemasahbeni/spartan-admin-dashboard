@@ -4,14 +4,12 @@
     <div class="flex flex-col gap-4 px-4 py-8 sm:py-12">
       @for (message of messages(); track message.id) {
         @if (message.role === 'assistant') {
-          <!-- AI Response for assistant messages -->
           <adm-ai-response
             [content]="message.content"
             [isStreaming]="message.status === 'streaming'"
             (regenerate)="handleMessageRegenerate()"
           />
         } @else if (message.role === 'user') {
-          <!-- User Message Component -->
           <adm-user-message [message]="message" (edit)="handleMessageEdit(message)" />
         }
       }

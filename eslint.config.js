@@ -84,6 +84,7 @@ module.exports = defineConfig([
       ],
       '@angular-eslint/component-selector': ['error', { type: 'element', prefix: 'adm', style: 'kebab-case' }],
       '@angular-eslint/no-implicit-take-until-destroyed': 'error',
+      '@angular-eslint/prefer-signal-model': 'error',
       // Needed to be off because spartan uses input renaming frequently
       '@angular-eslint/no-input-rename': ['off'],
     },

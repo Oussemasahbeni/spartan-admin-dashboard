@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { DirectionalityService } from '@core/config/directionality.service';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { provideTranslocoScope, translateObjectSignal, Translation } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
@@ -63,16 +62,12 @@ interface VisitorChartTranslation {
   `,
 })
 export class VisitorChartCard {
-  private readonly _dir = inject(DirectionalityService);
-  private readonly rtl = this._dir.isRtl;
-
   private readonly _visitorChart = translateObjectSignal('visitorChart', {}, SCOPE);
 
   readonly visitorChart = computed(() => this._visitorChart() as Translation & VisitorChartTranslation);
 
   readonly chartOptions = computed<ApexOptions>(() => {
     const chart = this.visitorChart();
-    // const isRtl = this.rtl();
 
     return {
       series: [500, 300, 200, 125],
@@ -102,7 +97,7 @@ export class VisitorChartCard {
                 fontSize: '36px',
                 fontWeight: 'bold',
                 color: 'var(--foreground)',
-                formatter: function (val: string) {
+                formatter(val: string) {
                   return val;
                 },
               },
@@ -112,12 +107,15 @@ export class VisitorChartCard {
                 label: 'Visitors',
                 fontSize: '14px',
                 color: 'var(--muted-foreground)',
-                formatter: function (w: any) {
-                  return w.globals.seriesTotals
-                    .reduce((a: any, b: any) => {
-                      return a + b;
-                    }, 0)
-                    .toLocaleString();
+                formatter(w) {
+                  return (
+                    w.globals.seriesTotals
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      .reduce((a: any, b: any) => {
+                        return a + b;
+                      }, 0)
+                      .toLocaleString()
+                  );
                 },
               },
             },

@@ -8,12 +8,6 @@
       </div>
     } @else {
       <div class="mx-auto w-full max-w-3xl">
-        <!-- <adm-chat-list
-        [messages]="messages()"
-        [loading]="isLoading()"
-        (messageCopy)="handleMessageCopy($event)"
-        (messageRegenerate)="handleMessageRegenerate($event)"
-      /> -->
         <adm-chat-list [loading]="isLoading()" [messages]="messages()" />
       </div>
     }

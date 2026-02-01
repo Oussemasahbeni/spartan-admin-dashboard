@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { AuthService } from '@core/auth/auth.service';
 import { LanguageOptions, LanguageService } from '@core/config/language.service';
 import { ThemeService } from '@core/config/theme.service';
-import { AuthService } from '@core/user/auth.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {

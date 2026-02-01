@@ -1,5 +1,5 @@
 export interface ChartOptions {
-  series: ApexAxisChartSeries | any;
+  series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
   title: ApexTitleSubtitle;

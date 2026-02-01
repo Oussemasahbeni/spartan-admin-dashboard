@@ -2,8 +2,7 @@
 <div class="group min-w-0 flex-1">
   <!-- Content Area with Markdown Rendering -->
   <div class="text-foreground text-sm leading-relaxed">
-    <!-- <ai-markdown-renderer [content]="content()" (codeBlockCopy)="handleCodeBlockCopy($event)" /> -->
-    {{ content() }}
+    <adm-ai-markdown-renderer [content]="content()" />
     @if (isStreaming()) {
       <span class="text-foreground ml-0.5 inline-block animate-pulse">▊</span>
     }

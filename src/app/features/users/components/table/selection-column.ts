@@ -5,7 +5,7 @@ import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@
 @Component({
   imports: [HlmCheckboxImports],
   host: {
-    class: 'flex',
+    'class': 'flex',
     'aria-label': 'Select all',
   },
   template: `
@@ -24,7 +24,7 @@ export class TableHeadSelection<T> {
 @Component({
   imports: [HlmCheckboxImports],
   host: {
-    class: 'flex',
+    'class': 'flex',
     'aria-label': 'Select Row',
   },
   template: `

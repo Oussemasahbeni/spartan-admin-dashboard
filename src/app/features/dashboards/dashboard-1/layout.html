@@ -30,9 +30,13 @@
         {{ t('tabs.reports') }}
       </button>
     </hlm-tabs-list>
-    <div hlmTabsContent="overview">
+
+    @defer (when selectedTab() === 'overview') {
       <adm-dashboard1-overview />
-    </div>
+    } @placeholder {
+      <hlm-spinner />
+    }
+
     <div hlmTabsContent="analytics">
       @defer (when selectedTab() === 'analytics') {
         <adm-dashboard1-analytics />

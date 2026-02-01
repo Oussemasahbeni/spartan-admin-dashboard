@@ -22,7 +22,7 @@ import { EditEvent } from '../../../model/user-message.types';
 
 @Component({
   selector: 'adm-user-message',
-  templateUrl: './user-message.component.html',
+  templateUrl: './user-message.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [HlmCardImports, HlmTextareaImports, HlmInputGroupImports, HlmButtonImports, HlmIconImports],

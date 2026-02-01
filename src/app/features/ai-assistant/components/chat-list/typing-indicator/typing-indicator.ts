@@ -3,7 +3,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 
 @Component({
   selector: 'adm-typing-indicator',
-  templateUrl: './typing-indicator.component.html',
+  templateUrl: './typing-indicator.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmAvatarImports],
   host: {
