@@ -1,0 +1,108 @@
+<form *transloco="let t; prefix: 'settings.notifications'" class="w-full" (submit)="onSubmit($event)">
+  <div class="flex flex-col gap-6">
+    <!-- Alerts -->
+    <div class="col-span-full">
+      <h3 class="text-lg font-medium">{{ t('alerts.title') }}</h3>
+      <p class="text-muted-foreground text-sm">
+        {{ t('alerts.description') }}
+      </p>
+    </div>
+
+    <!-- Communication -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-sm leading-none font-medium">{{ t('alerts.communication.title') }}</span>
+        <p class="text-muted-foreground text-sm">
+          {{ t('alerts.communication.description') }}
+        </p>
+      </div>
+      <hlm-checkbox [formField]="notificationsForm.communication" />
+    </div>
+
+    <!-- Security -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-sm leading-none font-medium">{{ t('alerts.security.title') }}</span>
+        <p class="text-muted-foreground text-sm">
+          {{ t('alerts.security.description') }}
+        </p>
+      </div>
+      <hlm-checkbox [formField]="notificationsForm.security" />
+    </div>
+
+    <!-- Meetups -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-sm leading-none font-medium">{{ t('alerts.meetups.title') }}</span>
+        <p class="text-muted-foreground text-sm">
+          {{ t('alerts.meetups.description') }}
+        </p>
+      </div>
+      <hlm-checkbox [formField]="notificationsForm.meetups" />
+    </div>
+
+    <hlm-separator class="col-span-full" />
+
+    <!-- Account Activity -->
+    <div class="col-span-full">
+      <h3 class="text-lg font-medium">{{ t('accountActivity.title') }}</h3>
+      <p class="text-muted-foreground text-sm">
+        {{ t('accountActivity.description') }}
+      </p>
+    </div>
+
+    <!-- Comments -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-sm leading-none font-medium">{{ t('accountActivity.comments.title') }}</span>
+        <p class="text-muted-foreground text-sm">
+          {{ t('accountActivity.comments.description') }}
+        </p>
+      </div>
+      <hlm-checkbox [formField]="notificationsForm.comments" />
+    </div>
+
+    <!-- Mention -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-sm leading-none font-medium">{{ t('accountActivity.mention.title') }}</span>
+        <p class="text-muted-foreground text-sm">
+          {{ t('accountActivity.mention.description') }}
+        </p>
+      </div>
+      <hlm-checkbox [formField]="notificationsForm.mention" />
+    </div>
+
+    <!-- Follow -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-sm leading-none font-medium">{{ t('accountActivity.follow.title') }}</span>
+        <p class="text-muted-foreground text-sm">
+          {{ t('accountActivity.follow.description') }}
+        </p>
+      </div>
+      <hlm-checkbox [formField]="notificationsForm.follow" />
+    </div>
+
+    <!-- Inquiry -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-sm leading-none font-medium">{{ t('accountActivity.inquiry.title') }}</span>
+        <p class="text-muted-foreground text-sm">
+          {{ t('accountActivity.inquiry.description') }}
+        </p>
+      </div>
+      <hlm-checkbox [formField]="notificationsForm.inquiry" />
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="mt-11 flex items-center justify-end gap-4">
+    @if (isLoading()) {
+      <hlm-spinner size="sm" />
+    }
+    <button hlmBtn type="submit" [disabled]="isLoading()">
+      {{ t('save') }}
+    </button>
+  </div>
+</form>

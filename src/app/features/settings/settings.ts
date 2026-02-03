@@ -2,12 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  input,
   linkedSignal,
   signal,
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DirectionalityService } from '@core/config/directionality.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -18,6 +19,9 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { HlmSheetImports } from '@spartan-ng/helm/sheet';
 import { SettingsAccount } from './account/account-panel';
+import { SettingsNotifications } from './notifications/notifications';
+import { SettingsPlanBilling } from './plan-billing/plan-billing';
+import { SettingsSecurity } from './security/security-panel';
 
 interface Panel {
   id: string;
@@ -36,6 +40,9 @@ interface Panel {
     BrnSheetImports,
     SettingsAccount,
     TranslocoModule,
+    SettingsSecurity,
+    SettingsPlanBilling,
+    SettingsNotifications,
   ],
   templateUrl: './settings.html',
   providers: [provideIcons({ lucideUserCircle, lucideLock, lucideCreditCard, lucideBell, lucideUsers, lucideMenu })],
@@ -48,7 +55,6 @@ export class Settings {
   // ==========================================
 
   private readonly _router = inject(Router);
-  private readonly _route = inject(ActivatedRoute);
   private readonly _dir = inject(DirectionalityService);
 
   // ==========================================
@@ -56,6 +62,12 @@ export class Settings {
   // ==========================================
 
   public readonly viewchildSheetRef = viewChild(BrnSheet);
+
+  // ==========================================
+  // Inputs (from route query params)
+  // ==========================================
+
+  readonly panel = input<string>(); // Automatically bound from ?panel=xxx
 
   // ==========================================
   // State
@@ -97,9 +109,9 @@ export class Settings {
   readonly dir = this._dir.isRtl;
 
   readonly selectedPanel = linkedSignal<Panel>(() => {
-    const panelId = this._route.snapshot.queryParamMap.get('panel');
+    const panelId = this.panel();
 
-    if (this._route.snapshot.queryParamMap.get('panel')) {
+    if (panelId) {
       const panel = this.panels().find((p) => p.id === panelId);
       if (panel) {
         return panel;
@@ -116,7 +128,6 @@ export class Settings {
     this.selectedPanel.set(panel);
     this.viewchildSheetRef()?.close({});
     this._router.navigate([], {
-      relativeTo: this._route,
       queryParams: { panel: panel.id },
       queryParamsHandling: 'merge',
     });

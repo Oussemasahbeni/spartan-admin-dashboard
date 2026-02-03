@@ -34,7 +34,7 @@ import { AuthLayout } from '../layout';
   templateUrl: './reset-password.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ResetPassword {
+export default class ResetPassword {
   // ==========================================
   // Services
   // ==========================================

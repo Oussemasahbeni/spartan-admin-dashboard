@@ -1,99 +1,85 @@
-<div class="w-full max-w-3xl">
-    <!-- Add team member -->
-    <div class="w-full">
-        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
-            <mat-label>Add team members</mat-label>
-            <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:user'"
-                matPrefix
-            ></mat-icon>
-            <input matInput [placeholder]="'Email address'" />
-            <button mat-icon-button matSuffix>
-                <mat-icon
-                    class="icon-size-5"
-                    [svgIcon]="'heroicons_solid:plus-circle'"
-                ></mat-icon>
-            </button>
-        </mat-form-field>
-    </div>
+<div *transloco="let t; prefix: 'settings.team'" class="w-full">
+  <!-- Add team member -->
+  <form novalidate class="grid grid-cols-1 gap-4 sm:grid-cols-12" (submit)="onAddMember($event)">
+    <hlm-field class="col-span-full sm:col-span-8">
+      <hlm-input-group>
+        <hlm-input-group-addon>
+          <ng-icon name="lucideMail" size="16" />
+        </hlm-input-group-addon>
+        <input hlmInputGroupInput type="email" [placeholder]="t('emailPlaceholder')" [formField]="addMemberForm.email" />
+      </hlm-input-group>
+      <adm-validation-errors [fieldState]="addMemberForm.email" />
+    </hlm-field>
 
-    <!-- Team members -->
-    <div class="mt-8 flex flex-col divide-y border-b border-t">
-        @for (member of members; track trackByFn($index, member)) {
-            <div class="flex flex-col py-6 sm:flex-row sm:items-center">
-                <div class="flex items-center">
-                    <div
-                        class="flex h-10 w-10 flex-0 items-center justify-center overflow-hidden rounded-full"
-                    >
-                        @if (member.avatar) {
-                            <img
-                                class="h-full w-full object-cover"
-                                [src]="member.avatar"
-                                alt="Contact avatar"
-                            />
-                        }
-                        @if (!member.avatar) {
-                            <div
-                                class="flex h-full w-full items-center justify-center rounded-full bg-gray-200 text-lg uppercase text-gray-600 dark:bg-gray-700 dark:text-gray-200"
-                            >
-                                {{ member.name.charAt(0) }}
-                            </div>
-                        }
-                    </div>
-                    <div class="ml-4">
-                        <div class="font-medium">{{ member.name }}</div>
-                        <div class="text-secondary">{{ member.email }}</div>
-                    </div>
-                </div>
-                <div class="mt-4 flex items-center sm:ml-auto sm:mt-0">
-                    <div class="order-2 ml-4 sm:order-1 sm:ml-0">
-                        <mat-form-field
-                            class="fuse-mat-dense w-32"
-                            [subscriptSizing]="'dynamic'"
-                        >
-                            <mat-select
-                                [panelClass]="
-                                    'w-72 min-w-72 max-w-72 h-auto max-h-none'
-                                "
-                                [value]="member.role"
-                                disableOptionCentering
-                                #roleSelect="matSelect"
-                            >
-                                <mat-select-trigger class="text-md">
-                                    <span>Role:</span>
-                                    <span class="ml-1 font-medium">{{
-                                        roleSelect.value | titlecase
-                                    }}</span>
-                                </mat-select-trigger>
-                                @for (role of roles; track role) {
-                                    <mat-option
-                                        class="h-auto py-4 leading-none"
-                                        [value]="role.value"
-                                    >
-                                        <div class="font-medium">
-                                            {{ role.label }}
-                                        </div>
-                                        <div
-                                            class="text-secondary mt-1.5 whitespace-normal text-sm leading-normal"
-                                        >
-                                            {{ role.description }}
-                                        </div>
-                                    </mat-option>
-                                }
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="order-1 sm:order-2 sm:ml-3">
-                        <button mat-icon-button>
-                            <mat-icon
-                                class="text-hint"
-                                [svgIcon]="'heroicons_outline:trash'"
-                            ></mat-icon>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        }
+    <hlm-field class="col-span-full sm:col-span-4">
+      <hlm-select [formField]="addMemberForm.role" [placeholder]="t('selectRole')">
+        <hlm-select-trigger>
+          <hlm-select-value />
+        </hlm-select-trigger>
+        <hlm-select-content>
+          @for (role of roles; track role.value) {
+            <hlm-select-option [value]="role.value">
+              {{ t('roles.' + role.value + '.label') }}
+            </hlm-select-option>
+          }
+        </hlm-select-content>
+      </hlm-select>
+    </hlm-field>
+
+    <div class="col-span-full flex items-center justify-end gap-4">
+      @if (isLoading()) {
+        <hlm-spinner size="sm" />
+      }
+      <button hlmBtn type="submit" [disabled]="isLoading()">
+        {{ t('addMember') }}
+      </button>
     </div>
+  </form>
+
+  <!-- Team members -->
+  <div class="mt-8 flex flex-col divide-y border-t border-b">
+    @for (member of members(); track trackByFn($index, member)) {
+      <div class="flex flex-col gap-4 py-6 sm:flex-row sm:items-center">
+        <!-- Member info -->
+        <div class="flex items-center gap-4">
+          <hlm-avatar>
+            <img hlmAvatarImage [src]="member.avatar" [alt]="member.name" />
+            <span hlmAvatarFallback>{{ member.name.charAt(0) }}</span>
+          </hlm-avatar>
+          <div>
+            <div class="font-medium">{{ member.name }}</div>
+            <div class="text-muted-foreground text-sm">{{ member.email }}</div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-3 sm:ml-auto">
+          <!-- Role selector -->
+          <hlm-select [value]="member.role" (valueChange)="updateMemberRole(member.id, $event)">
+            <hlm-select-trigger class="w-[180px]">
+              <span class="text-sm">{{ t('role') }}:</span>
+              <hlm-select-value class="ml-1 font-medium" />
+            </hlm-select-trigger>
+            <hlm-select-content class="w-72">
+              @for (role of roles; track role.value) {
+                <hlm-select-option [value]="role.value">
+                  <div class="flex flex-col gap-1.5 py-2">
+                    <div class="font-medium">{{ t('roles.' + role.value + '.label') }}</div>
+                    <div class="text-muted-foreground text-sm leading-normal whitespace-normal">
+                      {{ t('roles.' + role.value + '.description') }}
+                    </div>
+                  </div>
+                </hlm-select-option>
+              }
+            </hlm-select-content>
+          </hlm-select>
+
+          <!-- Delete button -->
+          <button hlmBtn variant="ghost" size="icon" type="button" (click)="removeMember(member.id)">
+            <ng-icon name="lucideTrash2" size="16" />
+          </button>
+        </div>
+      </div>
+    }
+  </div>
 </div>

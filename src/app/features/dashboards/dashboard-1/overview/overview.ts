@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { makePaymentData } from '@core/mock/payment';
 import { makeUsersData } from '@core/mock/users';
-import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { User } from '../../../users/model/user';
 import { AreaChartCard } from './components/charts/area-chart-card';
 import { BarChartCard } from './components/charts/bar-chart-card';
@@ -23,13 +23,10 @@ export interface OverviewMetric {
   variant: CardVariant;
 }
 
-const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
-
 @Component({
   selector: 'adm-dashboard1-overview',
   imports: [OverviewMetricCard, AreaChartCard, BarChartCard, PaymentsTable, TeamMembersCard, TranslocoModule],
   templateUrl: './overview.html',
-  providers: [provideTranslocoScope(SCOPE)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OverviewDashboard {

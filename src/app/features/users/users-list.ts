@@ -76,7 +76,7 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Users {
+export default class Users {
   // ==========================================
   // Services
   // ==========================================

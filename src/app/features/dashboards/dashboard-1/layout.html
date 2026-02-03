@@ -31,11 +31,13 @@
       </button>
     </hlm-tabs-list>
 
-    @defer (when selectedTab() === 'overview') {
-      <adm-dashboard1-overview />
-    } @placeholder {
-      <hlm-spinner />
-    }
+    <div hlmTabsContent="overview">
+      @defer (when selectedTab() === 'overview') {
+        <adm-dashboard1-overview />
+      } @placeholder {
+        <hlm-spinner />
+      }
+    </div>
 
     <div hlmTabsContent="analytics">
       @defer (when selectedTab() === 'analytics') {

@@ -5,16 +5,16 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 @Component({
-  selector: 'adm-not-found',
+  selector: 'adm-service-unavailable',
   imports: [HlmButtonImports, RouterLink, NgOptimizedImage, TranslocoModule],
   host: {
     class: 'block h-full',
   },
-  templateUrl: './not-found.html',
+  templateUrl: './service-unavailable.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotFound {
-  onGoBack(): void {
-    window.history.back();
+export default class ServiceUnavailable {
+  onRetry(): void {
+    window.location.reload();
   }
 }

@@ -31,7 +31,7 @@ import { AuthLayout } from '../layout';
   templateUrl: './two-step-verification.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TwoStepVerification implements OnDestroy {
+export default class TwoStepVerification implements OnDestroy {
   // ==========================================
   // Services
   // ==========================================

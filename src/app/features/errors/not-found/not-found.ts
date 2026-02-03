@@ -5,15 +5,15 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 @Component({
-  selector: 'adm-unauthorized',
+  selector: 'adm-not-found',
   imports: [HlmButtonImports, RouterLink, NgOptimizedImage, TranslocoModule],
   host: {
     class: 'block h-full',
   },
-  templateUrl: './unauthorized.html',
+  templateUrl: './not-found.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Unauthorized {
+export default class NotFound {
   onGoBack(): void {
     window.history.back();
   }

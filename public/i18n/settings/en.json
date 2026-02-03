@@ -44,5 +44,118 @@
             "french": "French",
             "arabic": "Arabic"
         }
+    },
+    "security": {
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "passwordRequirements": "Minimum 8 characters. Must include numbers, letters and special characters.",
+        "securityPreferences": {
+            "title": "Security preferences",
+            "description": "Keep your account more secure with following preferences."
+        },
+        "twoStepAuth": {
+            "title": "Enable 2-step authentication",
+            "description": "Protects you against password theft by requesting an authentication code via SMS on every login."
+        },
+        "passwordChangeReminder": {
+            "title": "Ask to change password every 6 months",
+            "description": "A simple but effective way to be protected against data leaks and password theft."
+        }
+    },
+    "planBilling": {
+        "planAlert": "Changing the plan will take effect immediately. You will be charged for the rest of the current month.",
+        "plans": {
+            "basic": {
+                "label": "BASIC",
+                "details": "Starter plan for individuals."
+            },
+            "team": {
+                "label": "TEAM",
+                "details": "Collaborate up to 10 people."
+            },
+            "enterprise": {
+                "label": "ENTERPRISE",
+                "details": "For bigger businesses."
+            }
+        },
+        "perMonth": "/ month",
+        "paymentDetails": {
+            "title": "Payment Details",
+            "description": "Update your billing information. Make sure to set your location correctly as it could affect your tax rates."
+        },
+        "cardHolder": "Card holder",
+        "cardNumber": "Card number",
+        "expirationDate": "Expiration date",
+        "expirationPlaceholder": "MM / YY",
+        "cvc": "CVC / CVC2",
+        "country": "Country",
+        "zipCode": "ZIP / Postal code",
+        "countries": {
+            "usa": "United States",
+            "canada": "Canada",
+            "mexico": "Mexico",
+            "france": "France",
+            "germany": "Germany",
+            "italy": "Italy"
+        }
+    },
+    "notifications": {
+        "save": "Save",
+        "alerts": {
+            "title": "Alerts",
+            "description": "These settings allow you to manage your alerts and be notified about important events.",
+            "communication": {
+                "title": "Communication",
+                "description": "Get news, announcements, and product updates."
+            },
+            "security": {
+                "title": "Security",
+                "description": "Get important notifications about your account security."
+            },
+            "meetups": {
+                "title": "Meetups",
+                "description": "Get meetups, workshops, and other events near you."
+            }
+        },
+        "accountActivity": {
+            "title": "Account Activity",
+            "description": "These settings allow you to manage your account activity and be notified about important events.",
+            "comments": {
+                "title": "Comments",
+                "description": "Notify when someone comments on your post or profile."
+            },
+            "mention": {
+                "title": "Mention",
+                "description": "Notify when someone mentions you in a comment, post or story."
+            },
+            "follow": {
+                "title": "Follow",
+                "description": "Notify when someone follows you."
+            },
+            "inquiry": {
+                "title": "Inquiry",
+                "description": "Notify when someone sends you a message."
+            }
+        }
+    },
+    "team": {
+        "emailPlaceholder": "Email address",
+        "selectRole": "Select role",
+        "addMember": "Add Member",
+        "role": "Role",
+        "roles": {
+            "read": {
+                "label": "Read",
+                "description": "Can read and clone this repository. Can also open and comment on issues and pull requests."
+            },
+            "write": {
+                "label": "Write",
+                "description": "Can read, clone, and push to this repository. Can also manage issues and pull requests."
+            },
+            "admin": {
+                "label": "Admin",
+                "description": "Can read, clone, and push to this repository. Can also manage issues, pull requests, and repository settings, including adding collaborators."
+            }
+        }
     }
 }

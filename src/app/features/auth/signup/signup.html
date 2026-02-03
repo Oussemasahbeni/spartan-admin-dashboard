@@ -41,7 +41,7 @@
 
       <hlm-field>
         <hlm-field-label for="password">{{ t('passwordLabel') }}</hlm-field-label>
-        <div class="relative">
+        <!-- <div class="relative">
           <input
             hlmInput
             id="password"
@@ -55,33 +55,51 @@
             size="sm"
             class="absolute inset-y-2.5 end-2 cursor-pointer"
             [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
-            (click)="togglePasswordVisibility()"
+            (click)="showPassword.set(!showPassword())"
           />
-        </div>
+        </div> -->
+        <hlm-input-group>
+          <input
+            hlmInputGroupInput
+            id="password"
+            autocomplete="new-password"
+            [type]="showPassword() ? 'text' : 'password'"
+            [placeholder]="t('passwordPlaceholder')"
+            [formField]="signupForm.password"
+          />
+          <hlm-input-group-addon align="inline-end">
+            <ng-icon
+              hlmIcon
+              size="sm"
+              class="cursor-pointer"
+              [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
+              (click)="showPassword.set(!showPassword())"
+          /></hlm-input-group-addon>
+        </hlm-input-group>
 
         <adm-validation-errors [fieldState]="signupForm.password()" [errorParams]="{ min: passwordMinLength }" />
       </hlm-field>
 
       <hlm-field>
         <hlm-field-label for="confirmPassword">{{ t('confirmPasswordLabel') }}</hlm-field-label>
-        <div class="relative">
+        <hlm-input-group>
           <input
-            hlmInput
+            hlmInputGroupInput
             id="confirmPassword"
             autocomplete="new-password"
             [type]="showConfirmPassword() ? 'text' : 'password'"
             [placeholder]="t('confirmPasswordPlaceholder')"
             [formField]="signupForm.confirmPassword"
           />
-          <ng-icon
-            hlmIcon
-            size="sm"
-            class="absolute inset-y-2.5 end-2 cursor-pointer"
-            [name]="showConfirmPassword() ? 'lucideEye' : 'lucideEyeOff'"
-            (click)="toggleConfirmPasswordVisibility()"
-          />
-        </div>
-
+          <hlm-input-group-addon align="inline-end">
+            <ng-icon
+              hlmIcon
+              size="sm"
+              class="cursor-pointer"
+              [name]="showConfirmPassword() ? 'lucideEye' : 'lucideEyeOff'"
+              (click)="showConfirmPassword.set(!showConfirmPassword())"
+          /></hlm-input-group-addon>
+        </hlm-input-group>
         <adm-validation-errors [fieldState]="signupForm.confirmPassword()" />
       </hlm-field>
 

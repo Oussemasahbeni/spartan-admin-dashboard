@@ -13,32 +13,8 @@ export const routes: Routes = [
   {
     path: '',
     providers: [provideTranslocoScope('auth')],
-    children: [
-      {
-        path: 'login',
-        title: 'login',
-        component: EmptyLayout,
-        loadChildren: () => import('./features/auth/login/login.routes'),
-      },
-      {
-        path: 'signup',
-        title: 'signup',
-        component: EmptyLayout,
-        loadChildren: () => import('./features/auth/signup/signup.routes'),
-      },
-      {
-        path: 'reset-password',
-        title: 'resetPassword',
-        component: EmptyLayout,
-        loadChildren: () => import('./features/auth/reset-password/reset-password.routes'),
-      },
-      {
-        path: 'two-step-verification',
-        title: 'twoStepVerification',
-        component: EmptyLayout,
-        loadChildren: () => import('./features/auth/two-step-verification/two-step-verification.routes'),
-      },
-    ],
+    component: EmptyLayout,
+    loadChildren: () => import('./features/auth/routes'),
   },
 
   {
@@ -61,12 +37,14 @@ export const routes: Routes = [
             path: 'dashboard-1',
             title: 'dashboard-1',
             data: { breadcrumb: 'navigation.dashboard-1' },
+            providers: [provideTranslocoScope({ scope: 'dashboard/dashboard1', alias: 'dashboard1' })],
             loadChildren: () => import('./features/dashboards/dashboard-1/dashboard1.routes'),
           },
           {
             path: 'dashboard-2',
             title: 'dashboard-2',
             data: { breadcrumb: 'navigation.dashboard-2' },
+            providers: [provideTranslocoScope({ scope: 'dashboard/dashboard2', alias: 'dashboard2' })],
             loadChildren: () => import('./features/dashboards/dashboard-2/dashboards.routes'),
           },
         ],
@@ -98,28 +76,11 @@ export const routes: Routes = [
   },
 
   {
-    path: '404-not-found',
-    title: 'notFound',
-    pathMatch: 'full',
+    path: '',
     component: EmptyLayout,
     providers: [provideTranslocoScope('system')],
-    loadChildren: () => import('./shared/pages/not-found/not-found.routes'),
+    loadChildren: () => import('./features/errors/routes'),
   },
-  {
-    path: '401-unauthorized',
-    title: 'unauthorized',
-    pathMatch: 'full',
-    component: EmptyLayout,
-    providers: [provideTranslocoScope('system')],
-    loadChildren: () => import('./shared/pages/unauthorized/unauthorized.routes'),
-  },
-  {
-    path: '503-service-unavailable',
-    title: 'serviceUnavailable',
-    pathMatch: 'full',
-    component: EmptyLayout,
-    providers: [provideTranslocoScope('system')],
-    loadChildren: () => import('./shared/pages/service-unavailable/service-unavailable.routes'),
-  },
+
   { path: '**', redirectTo: '404-not-found' },
 ];

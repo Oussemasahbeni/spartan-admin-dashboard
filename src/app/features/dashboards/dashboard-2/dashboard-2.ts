@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
-import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideArrowDownRight,
@@ -55,7 +55,6 @@ import { provideTransactionStatusIcons } from './pipes/status-ui.pipe';
       lucideCreditCard,
     }),
     provideTransactionStatusIcons(),
-    provideTranslocoScope({ scope: 'dashboard/dashboard2', alias: 'dashboard2' }),
   ],
   templateUrl: './dashboard-2.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

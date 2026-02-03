@@ -27,23 +27,24 @@
       </hlm-field>
       <hlm-field>
         <hlm-field-label for="password">{{ t('passwordLabel') }}</hlm-field-label>
-        <div class="relative">
+        <hlm-input-group>
           <input
-            hlmInput
+            hlmInputGroupInput
             id="password"
             autocomplete="new-password"
             [type]="showPassword() ? 'text' : 'password'"
             [placeholder]="t('passwordPlaceholder')"
             [formField]="loginForm.password"
           />
-          <ng-icon
-            hlmIcon
-            size="sm"
-            class="absolute inset-y-2.5 end-2 cursor-pointer"
-            [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
-            (click)="togglePasswordVisibility()"
-          />
-        </div>
+          <hlm-input-group-addon align="inline-end">
+            <ng-icon
+              hlmIcon
+              size="sm"
+              class="cursor-pointer"
+              [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
+              (click)="showPassword.set(!showPassword())"
+          /></hlm-input-group-addon>
+        </hlm-input-group>
 
         <adm-validation-errors [fieldState]="loginForm.password()" />
       </hlm-field>

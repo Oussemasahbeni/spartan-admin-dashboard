@@ -12,6 +12,7 @@ import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { AuthLayout } from '../layout';
@@ -27,6 +28,7 @@ import { AuthLayout } from '../layout';
     HlmLabelImports,
     HlmSpinnerImports,
     HlmCheckboxImports,
+    HlmInputGroupImports,
     TranslocoModule,
     HlmCard,
     RouterLink,
@@ -45,7 +47,7 @@ import { AuthLayout } from '../layout';
   templateUrl: './login.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Login {
+export default class Login {
   // ==========================================
   // Services
   // ==========================================
@@ -73,10 +75,6 @@ export class Login {
   // ==========================================
   // Public Methods
   // ==========================================
-
-  togglePasswordVisibility(): void {
-    this.showPassword.set(!this.showPassword());
-  }
 
   onSubmit(event: Event): void {
     event.preventDefault();

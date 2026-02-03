@@ -44,5 +44,118 @@
             "french": "Français",
             "arabic": "Arabe"
         }
+    },
+    "security": {
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "passwordRequirements": "Minimum 8 caractères. Doit inclure des chiffres, des lettres et des caractères spéciaux.",
+        "securityPreferences": {
+            "title": "Préférences de sécurité",
+            "description": "Sécurisez davantage votre compte avec les préférences suivantes."
+        },
+        "twoStepAuth": {
+            "title": "Activer l'authentification en 2 étapes",
+            "description": "Vous protège contre le vol de mot de passe en demandant un code d'authentification par SMS à chaque connexion."
+        },
+        "passwordChangeReminder": {
+            "title": "Demander le changement de mot de passe tous les 6 mois",
+            "description": "Un moyen simple mais efficace de se protéger contre les fuites de données et le vol de mots de passe."
+        }
+    },
+    "planBilling": {
+        "planAlert": "Le changement de plan prendra effet immédiatement. Vous serez facturé pour le reste du mois en cours.",
+        "plans": {
+            "basic": {
+                "label": "BASIQUE",
+                "details": "Plan de démarrage pour les particuliers."
+            },
+            "team": {
+                "label": "ÉQUIPE",
+                "details": "Collaborez jusqu'à 10 personnes."
+            },
+            "enterprise": {
+                "label": "ENTREPRISE",
+                "details": "Pour les grandes entreprises."
+            }
+        },
+        "perMonth": "/ mois",
+        "paymentDetails": {
+            "title": "Détails de paiement",
+            "description": "Mettez à jour vos informations de facturation. Assurez-vous de définir correctement votre emplacement car cela pourrait affecter vos taux d'imposition."
+        },
+        "cardHolder": "Titulaire de la carte",
+        "cardNumber": "Numéro de carte",
+        "expirationDate": "Date d'expiration",
+        "expirationPlaceholder": "MM / AA",
+        "cvc": "CVC / CVC2",
+        "country": "Pays",
+        "zipCode": "Code postal",
+        "countries": {
+            "usa": "États-Unis",
+            "canada": "Canada",
+            "mexico": "Mexique",
+            "france": "France",
+            "germany": "Allemagne",
+            "italy": "Italie"
+        }
+    },
+    "notifications": {
+        "save": "Enregistrer",
+        "alerts": {
+            "title": "Alertes",
+            "description": "Ces paramètres vous permettent de gérer vos alertes et d'être notifié des événements importants.",
+            "communication": {
+                "title": "Communication",
+                "description": "Recevez des actualités, des annonces et des mises à jour de produits."
+            },
+            "security": {
+                "title": "Sécurité",
+                "description": "Recevez des notifications importantes sur la sécurité de votre compte."
+            },
+            "meetups": {
+                "title": "Rencontres",
+                "description": "Recevez des rencontres, des ateliers et d'autres événements près de chez vous."
+            }
+        },
+        "accountActivity": {
+            "title": "Activité du compte",
+            "description": "Ces paramètres vous permettent de gérer l'activité de votre compte et d'être notifié des événements importants.",
+            "comments": {
+                "title": "Commentaires",
+                "description": "Notifier lorsque quelqu'un commente votre publication ou profil."
+            },
+            "mention": {
+                "title": "Mention",
+                "description": "Notifier lorsque quelqu'un vous mentionne dans un commentaire, une publication ou une histoire."
+            },
+            "follow": {
+                "title": "Suivi",
+                "description": "Notifier lorsque quelqu'un vous suit."
+            },
+            "inquiry": {
+                "title": "Demande",
+                "description": "Notifier lorsque quelqu'un vous envoie un message."
+            }
+        }
+    },
+    "team": {
+        "emailPlaceholder": "Adresse email",
+        "selectRole": "Sélectionner un rôle",
+        "addMember": "Ajouter un membre",
+        "role": "Rôle",
+        "roles": {
+            "read": {
+                "label": "Lecture",
+                "description": "Peut lire et cloner ce référentiel. Peut également ouvrir et commenter des problèmes et des demandes de tirage."
+            },
+            "write": {
+                "label": "Écriture",
+                "description": "Peut lire, cloner et pousser vers ce référentiel. Peut également gérer les problèmes et les demandes de tirage."
+            },
+            "admin": {
+                "label": "Administrateur",
+                "description": "Peut lire, cloner et pousser vers ce référentiel. Peut également gérer les problèmes, les demandes de tirage et les paramètres du référentiel, y compris l'ajout de collaborateurs."
+            }
+        }
     }
 }
