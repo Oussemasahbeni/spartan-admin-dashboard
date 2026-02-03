@@ -1,32 +1,34 @@
 <div *transloco="let t; prefix: 'settings.team'" class="w-full">
   <!-- Add team member -->
-  <form novalidate class="grid grid-cols-1 gap-4 sm:grid-cols-12" (submit)="onAddMember($event)">
-    <hlm-field class="col-span-full sm:col-span-8">
-      <hlm-input-group>
-        <hlm-input-group-addon>
-          <ng-icon name="lucideMail" size="16" />
-        </hlm-input-group-addon>
-        <input hlmInputGroupInput type="email" [placeholder]="t('emailPlaceholder')" [formField]="addMemberForm.email" />
-      </hlm-input-group>
-      <adm-validation-errors [fieldState]="addMemberForm.email" />
-    </hlm-field>
+  <form class="flex justify-between" (submit)="onAddMember($event)">
+    <div class="flex w-full gap-3">
+      <hlm-field>
+        <hlm-input-group>
+          <hlm-input-group-addon>
+            <ng-icon name="lucideMail" size="16" />
+          </hlm-input-group-addon>
+          <input hlmInputGroupInput type="email" [placeholder]="t('emailPlaceholder')" [formField]="addMemberForm.email" />
+        </hlm-input-group>
+        <adm-validation-errors [fieldState]="addMemberForm.email()" />
+      </hlm-field>
 
-    <hlm-field class="col-span-full sm:col-span-4">
-      <hlm-select [formField]="addMemberForm.role" [placeholder]="t('selectRole')">
-        <hlm-select-trigger>
-          <hlm-select-value />
-        </hlm-select-trigger>
-        <hlm-select-content>
-          @for (role of roles; track role.value) {
-            <hlm-select-option [value]="role.value">
-              {{ t('roles.' + role.value + '.label') }}
-            </hlm-select-option>
-          }
-        </hlm-select-content>
-      </hlm-select>
-    </hlm-field>
+      <hlm-field class="">
+        <brn-select class="inline-block" [formField]="addMemberForm.role" [placeholder]="t('selectRole')">
+          <hlm-select-trigger>
+            <hlm-select-value />
+          </hlm-select-trigger>
+          <hlm-select-content>
+            @for (role of roles; track role) {
+              <hlm-option [value]="role">
+                {{ t('roles.' + role) }}
+              </hlm-option>
+            }
+          </hlm-select-content>
+        </brn-select>
+      </hlm-field>
+    </div>
 
-    <div class="col-span-full flex items-center justify-end gap-4">
+    <div class="flex items-center justify-end gap-4">
       @if (isLoading()) {
         <hlm-spinner size="sm" />
       }
@@ -38,7 +40,7 @@
 
   <!-- Team members -->
   <div class="mt-8 flex flex-col divide-y border-t border-b">
-    @for (member of members(); track trackByFn($index, member)) {
+    @for (member of members(); track member.id) {
       <div class="flex flex-col gap-4 py-6 sm:flex-row sm:items-center">
         <!-- Member info -->
         <div class="flex items-center gap-4">
@@ -55,24 +57,18 @@
         <!-- Actions -->
         <div class="flex items-center gap-3 sm:ml-auto">
           <!-- Role selector -->
-          <hlm-select [value]="member.role" (valueChange)="updateMemberRole(member.id, $event)">
-            <hlm-select-trigger class="w-[180px]">
-              <span class="text-sm">{{ t('role') }}:</span>
-              <hlm-select-value class="ml-1 font-medium" />
+          <brn-select class="inline-block" [value]="member.role">
+            <hlm-select-trigger>
+              <hlm-select-value />
             </hlm-select-trigger>
-            <hlm-select-content class="w-72">
-              @for (role of roles; track role.value) {
-                <hlm-select-option [value]="role.value">
-                  <div class="flex flex-col gap-1.5 py-2">
-                    <div class="font-medium">{{ t('roles.' + role.value + '.label') }}</div>
-                    <div class="text-muted-foreground text-sm leading-normal whitespace-normal">
-                      {{ t('roles.' + role.value + '.description') }}
-                    </div>
-                  </div>
-                </hlm-select-option>
+            <hlm-select-content>
+              @for (role of roles; track role) {
+                <hlm-option [value]="role">
+                  <div class="font-medium">{{ t('roles.' + role) }}</div>
+                </hlm-option>
               }
             </hlm-select-content>
-          </hlm-select>
+          </brn-select>
 
           <!-- Delete button -->
           <button hlmBtn variant="ghost" size="icon" type="button" (click)="removeMember(member.id)">

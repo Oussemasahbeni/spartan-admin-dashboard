@@ -144,18 +144,9 @@
         "addMember": "Ajouter un membre",
         "role": "Rôle",
         "roles": {
-            "read": {
-                "label": "Lecture",
-                "description": "Peut lire et cloner ce référentiel. Peut également ouvrir et commenter des problèmes et des demandes de tirage."
-            },
-            "write": {
-                "label": "Écriture",
-                "description": "Peut lire, cloner et pousser vers ce référentiel. Peut également gérer les problèmes et les demandes de tirage."
-            },
-            "admin": {
-                "label": "Administrateur",
-                "description": "Peut lire, cloner et pousser vers ce référentiel. Peut également gérer les problèmes, les demandes de tirage et les paramètres du référentiel, y compris l'ajout de collaborateurs."
-            }
+            "read": "Lire",
+            "write": "Écrire",
+            "admin": "Admin"
         }
     }
 }

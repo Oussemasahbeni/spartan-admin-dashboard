@@ -1,4 +1,4 @@
-<form *transloco="let t; prefix: 'settings.notifications'" class="w-full" (submit)="onSubmit($event)">
+<form *transloco="let t; prefix: 'settings.notifications'" (submit)="onSubmit($event)">
   <div class="flex flex-col gap-6">
     <!-- Alerts -->
     <div class="col-span-full">
@@ -9,7 +9,7 @@
     </div>
 
     <!-- Communication -->
-    <div class="flex items-start justify-between gap-3">
+    <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
         <span class="text-sm leading-none font-medium">{{ t('alerts.communication.title') }}</span>
         <p class="text-muted-foreground text-sm">
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Security -->
-    <div class="flex items-start justify-between gap-3">
+    <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
         <span class="text-sm leading-none font-medium">{{ t('alerts.security.title') }}</span>
         <p class="text-muted-foreground text-sm">
@@ -31,7 +31,7 @@
     </div>
 
     <!-- Meetups -->
-    <div class="flex items-start justify-between gap-3">
+    <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
         <span class="text-sm leading-none font-medium">{{ t('alerts.meetups.title') }}</span>
         <p class="text-muted-foreground text-sm">
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Comments -->
-    <div class="flex items-start justify-between gap-3">
+    <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
         <span class="text-sm leading-none font-medium">{{ t('accountActivity.comments.title') }}</span>
         <p class="text-muted-foreground text-sm">
@@ -63,7 +63,7 @@
     </div>
 
     <!-- Mention -->
-    <div class="flex items-start justify-between gap-3">
+    <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
         <span class="text-sm leading-none font-medium">{{ t('accountActivity.mention.title') }}</span>
         <p class="text-muted-foreground text-sm">
@@ -74,7 +74,7 @@
     </div>
 
     <!-- Follow -->
-    <div class="flex items-start justify-between gap-3">
+    <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
         <span class="text-sm leading-none font-medium">{{ t('accountActivity.follow.title') }}</span>
         <p class="text-muted-foreground text-sm">
@@ -85,7 +85,7 @@
     </div>
 
     <!-- Inquiry -->
-    <div class="flex items-start justify-between gap-3">
+    <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
         <span class="text-sm leading-none font-medium">{{ t('accountActivity.inquiry.title') }}</span>
         <p class="text-muted-foreground text-sm">
@@ -98,10 +98,10 @@
 
   <!-- Actions -->
   <div class="mt-11 flex items-center justify-end gap-4">
-    @if (isLoading()) {
-      <hlm-spinner size="sm" />
-    }
     <button hlmBtn type="submit" [disabled]="isLoading()">
+      @if (isLoading()) {
+        <hlm-spinner size="sm" />
+      }
       {{ t('save') }}
     </button>
   </div>
