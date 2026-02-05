@@ -5,28 +5,33 @@
 
 <div class="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-0 overflow-y-auto sm:max-h-[min(640px,80vh)]">
   <form *transloco="let t; prefix: 'users.form'" class="flex w-full flex-col gap-4 p-2" (submit)="onSubmit($event)">
+    <!-- Name -->
     <hlm-field>
       <hlm-field-label for="name">{{ t('label.name') }}</hlm-field-label>
       <input hlmInput id="name" [formField]="userForm.name" />
       <adm-validation-errors [fieldState]="userForm.name()" />
     </hlm-field>
+    <!-- Email -->
     <hlm-field>
       <hlm-field-label for="email">{{ t('label.email') }}</hlm-field-label>
       <input hlmInput id="email" [formField]="userForm.email" />
       <adm-validation-errors [fieldState]="userForm.email()" />
     </hlm-field>
+    <!-- Country -->
     <hlm-field>
       <hlm-field-label for="country">{{ t('label.country') }}</hlm-field-label>
       <adm-country-picker [formField]="userForm.country" />
       <adm-validation-errors [fieldState]="userForm.country()" />
     </hlm-field>
 
+    <!-- Phone Number -->
     <hlm-field>
-      <hlm-field-label>{{ t('label.phoneNumber') }}</hlm-field-label>
-      <adm-phone-number-picker [formField]="userForm.phoneNumber" />
+      <hlm-field-label for="phoneNumber">{{ t('label.phoneNumber') }}</hlm-field-label>
+      <adm-phone-number-picker id="phoneNumber" [formField]="userForm.phoneNumber" />
       <adm-validation-errors [fieldState]="userForm.phoneNumber()" />
     </hlm-field>
 
+    <!-- Role -->
     <hlm-field>
       <hlm-field-label for="role">{{ t('label.role') }}</hlm-field-label>
       <hlm-select class="text-start" [placeholder]="t('selectRolePlaceholder')" [formField]="userForm.role">

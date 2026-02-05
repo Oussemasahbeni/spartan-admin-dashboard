@@ -1,0 +1,36 @@
+{
+    "header": {
+        "title": "التقويم",
+        "subtitle": "مكوّن تقويم مبني باستخدام FullCalendar و Angular."
+    },
+    "addEvent": "إضافة حدث",
+    "labels": {
+        "month": "شهر",
+        "week": "أسبوع",
+        "day": "يوم",
+        "list": "قائمة"
+    },
+    "today": "اليوم",
+    "form": {
+        "addTitle": "إضافة حدث",
+        "addDescription": "املأ النموذج أدناه لإضافة حدث جديد إلى التقويم.",
+        "editTitle": "تعديل الحدث",
+        "editDescription": "قم بتعديل تفاصيل الحدث ثم احفظ التغييرات.",
+        "label": {
+            "title": "العنوان",
+            "description": "الوصف",
+            "startDate": "تاريخ البدء",
+            "startTime": "وقت البدء",
+            "endDate": "تاريخ الانتهاء",
+            "endTime": "وقت الانتهاء",
+            "allDay": "حدث طوال اليوم"
+        },
+        "placeholder": {
+            "selectDate": "اختر تاريخًا"
+        }
+    },
+    "toast": {
+        "eventCreated": "تم إنشاء الحدث بنجاح!",
+        "eventUpdated": "تم تحديث الحدث بنجاح!"
+    }
+}

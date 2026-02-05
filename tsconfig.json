@@ -135,6 +135,9 @@
       ],
       "@spartan-ng/helm/dialog": [
         "./src/app/spartan/dialog/src/index.ts"
+      ],
+      "@spartan-ng/helm/hover-card": [
+        "./src/app/spartan/hover-card/src/index.ts"
       ]
     }
   },

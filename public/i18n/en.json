@@ -98,7 +98,8 @@
         "min": "This field should be at least {{ min }}.",
         "max": "This field cannot be more than {{ max }}.",
         "pattern": "This field should follow pattern for {{ pattern }}.",
-        "passwordMismatch": "Passwords do not match."
+        "passwordMismatch": "Passwords do not match.",
+        "endBeforeStart": "End date must be after start date."
     },
     "countryPicker": {
         "selectCountryPlaceholder": "Select country...",

@@ -64,7 +64,7 @@
             <hlm-select-content>
               @for (role of roles; track role) {
                 <hlm-option [value]="role">
-                  <div class="font-medium">{{ t('roles.' + role) }}</div>
+                  <div class="font-medium">{{ t(`roles.${role}`) }}</div>
                 </hlm-option>
               }
             </hlm-select-content>

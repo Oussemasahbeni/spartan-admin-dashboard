@@ -97,7 +97,7 @@
             </hlm-select-trigger>
             <hlm-select-content>
               @for (language of languages; track language) {
-                <hlm-option [value]="language">{{ t('languages.' + language) }}</hlm-option>
+                <hlm-option [value]="language">{{ t(`languages.${language}`) }}</hlm-option>
               }
             </hlm-select-content>
           </brn-select>

@@ -1,0 +1,38 @@
+.apexcharts-tooltip {
+  background: var(--card) !important;
+  color: var(--card-foreground) !important;
+  border: 1px solid var(--border) !important;
+  text-align: start !important;
+}
+
+.apexcharts-tooltip-title {
+  background: var(--muted) !important;
+  color: var(--muted-foreground) !important;
+  text-align: start !important;
+}
+
+.apexcharts-tooltip-series-group {
+  text-align: start !important;
+  margin-inline-end: auto;
+}
+
+.apexcharts-tooltip-marker {
+  margin-inline-end: 10px !important;
+  margin-inline-start: 0 !important;
+}
+
+.apexcharts-text {
+  fill: var(--foreground) !important;
+}
+
+.apexcharts-legend-text {
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* RTL support for ApexCharts - direction only */
+html[dir='rtl'] .apexcharts-tooltip,
+html[dir='rtl'] .apexcharts-tooltip-title,
+html[dir='rtl'] .apexcharts-xaxistooltip {
+  direction: rtl;
+}

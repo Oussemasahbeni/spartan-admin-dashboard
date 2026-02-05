@@ -98,7 +98,8 @@
         "min": "يجب أن تكون القيمة {{ min }} على الأقل.",
         "max": "يجب ألا تتجاوز القيمة {{ max }}.",
         "pattern": "يجب أن يتبع هذا الحقل النمط {{ pattern }}.",
-        "passwordMismatch": "كلمات المرور غير متطابقة."
+        "passwordMismatch": "كلمات المرور غير متطابقة.",
+        "endBeforeStart": "يجب أن تكون تاريخ النهاية بعد تاريخ البداية."
     },
     "countryPicker": {
         "selectCountryPlaceholder": "اختر دولة...",

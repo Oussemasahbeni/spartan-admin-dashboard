@@ -1,1 +1,90 @@
-<p>calendar works!</p>
+<div *transloco="let t; prefix: 'calendar'" class="flex h-full w-full gap-5 py-4 sm:px-6">
+  <!-- Main Content -->
+  <div class="flex min-w-0 flex-1 flex-col px-6">
+    <!-- Header -->
+    <div class="mb-6 flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight">{{ t('header.title') }}</h2>
+          <p class="mt-1 text-sm text-gray-500">{{ t('header.subtitle') }}</p>
+        </div>
+      </div>
+
+      <!-- Custom Calendar Navigation -->
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div class="flex items-center gap-2">
+          <button type="button" hlmBtn variant="outline" (click)="goToToday()">
+            {{ t('today') }}
+          </button>
+          <button type="button" hlmBtn variant="outline" size="icon" (click)="previousMonth()">
+            <ng-icon hlmIcon name="lucideChevronLeft" class="rtl:rotate-180" size="sm" />
+          </button>
+          <button type="button" hlmBtn variant="outline" size="icon" (click)="nextMonth()">
+            <ng-icon hlmIcon name="lucideChevronRight" class="rtl:rotate-180" size="sm" />
+          </button>
+          <h3 class="text-lg font-semibold">{{ currentTitle() }}</h3>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button type="button" class="hidden sm:block" hlmBtn variant="outline" [hlmDropdownMenuTrigger]="menu">
+            {{ t(`labels.${currentView().label}`) }}
+          </button>
+
+          <ng-template #menu>
+            <hlm-dropdown-menu>
+              <hlm-dropdown-menu-group>
+                @for (view of availableViews(); track $index) {
+                  <button
+                    type="button"
+                    hlmDropdownMenuCheckbox
+                    [checked]="view.value === currentView().value"
+                    (click)="changeView(view)"
+                  >
+                    <hlm-dropdown-menu-checkbox-indicator />
+                    {{ t(`labels.${view.label}`) }}
+                  </button>
+                }
+              </hlm-dropdown-menu-group>
+            </hlm-dropdown-menu>
+          </ng-template>
+
+          <!-- Add new event -->
+          <button type="button" hlmBtn (click)="addEvent()">
+            <ng-icon hlmIcon name="lucidePlus" size="sm" />
+            {{ t('addEvent') }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar -->
+    <full-calendar #calendar class="overflow-x-scroll" [options]="calendarOptions()" />
+
+    <ng-template #eventContent let-arg>
+      <brn-hover-card>
+        <span
+          brnHoverCardTrigger
+          class="flex h-full w-full items-center gap-1 overflow-hidden p-1 text-ellipsis whitespace-nowrap"
+          >{{ arg.event.title }}</span
+        >
+        <hlm-hover-card-content *brnHoverCardContent class="w-80">
+          <div class="flex justify-between space-x-4">
+            <div class="space-y-1">
+              <h4 class="text-sm font-semibold">{{ arg.event.title }}</h4>
+              <p class="text-sm">{{ arg.event.extendedProps['description'] }}</p>
+              <div class="flex items-center pt-2">
+                <ng-icon hlm size="sm" name="lucideCalendar" class="mr-2 opacity-70" />
+                <span class="text-muted-foreground text-xs">
+                  {{ arg.event.start | date: 'short' }}
+                  @if (arg.event.end) {
+                    - {{ arg.event.end | date: 'short' }}
+                  }
+                </span>
+              </div>
+            </div>
+          </div>
+        </hlm-hover-card-content>
+      </brn-hover-card>
+    </ng-template>
+  </div>
+</div>

@@ -98,7 +98,8 @@
         "min": "Ce champ doit être au minimum {{ min }}.",
         "max": "Ce champ ne peut pas dépasser {{ max }}.",
         "pattern": "Ce champ doit respecter le format {{ pattern }}.",
-        "passwordMismatch": "Les mots de passe ne correspondent pas."
+        "passwordMismatch": "Les mots de passe ne correspondent pas.",
+        "endBeforeStart": "La date de fin doit être après la date de début."
     },
     "countryPicker": {
         "selectCountryPlaceholder": "Sélectionner un pays...",

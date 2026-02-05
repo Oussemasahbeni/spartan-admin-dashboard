@@ -1,0 +1,36 @@
+{
+    "header": {
+        "title": "Calendar",
+        "subtitle": "A calendar component built with FullCalendar and Angular."
+    },
+    "addEvent": "Add Event",
+    "labels": {
+        "month": "Month",
+        "week": "Week",
+        "day": "Day",
+        "list": "List"
+    },
+    "today": "Today",
+    "form": {
+        "addTitle": "Add Event",
+        "addDescription": "Fill out the form below to add a new event to your calendar.",
+        "editTitle": "Edit Event",
+        "editDescription": "Make changes to the event details and save your changes.",
+        "label": {
+            "title": "Title",
+            "description": "Description",
+            "startDate": "Start Date",
+            "startTime": "Start Time",
+            "endDate": "End Date",
+            "endTime": "End Time",
+            "allDay": "All Day Event"
+        },
+        "placeholder": {
+            "selectDate": "Select a date "
+        }
+    },
+    "toast": {
+        "eventCreated": "Event created successfully!",
+        "eventUpdated": "Event updated successfully!"
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "header": {
+        "title": "Calendrier",
+        "subtitle": "Un composant calendrier construit avec FullCalendar et Angular."
+    },
+    "addEvent": "Ajouter un événement",
+    "labels": {
+        "month": "Mois",
+        "week": "Semaine",
+        "day": "Jour",
+        "list": "Liste"
+    },
+    "today": "Aujourd’hui",
+    "form": {
+        "addTitle": "Ajouter un événement",
+        "addDescription": "Remplissez le formulaire ci-dessous pour ajouter un nouvel événement à votre calendrier.",
+        "editTitle": "Modifier l’événement",
+        "editDescription": "Modifiez les détails de l’événement puis enregistrez vos changements.",
+        "label": {
+            "title": "Titre",
+            "description": "Description",
+            "startDate": "Date de début",
+            "startTime": "Heure de début",
+            "endDate": "Date de fin",
+            "endTime": "Heure de fin",
+            "allDay": "Événement toute la journée"
+        },
+        "placeholder": {
+            "selectDate": "Sélectionnez une date"
+        }
+    },
+    "toast": {
+        "eventCreated": "Événement créé avec succès !",
+        "eventUpdated": "Événement mis à jour avec succès !"
+    }
+}
