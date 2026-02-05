@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'adm-calendar',
   imports: [],
   templateUrl: './calendar.html',
-  styleUrl: './calendar.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Calendar {}
+export default class Calendar {}

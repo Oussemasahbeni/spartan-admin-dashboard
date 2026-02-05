@@ -53,10 +53,10 @@ import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe
         }
       </button>
       <hlm-command *brnPopoverContent="let ctx" hlmPopoverContent class="w-50 p-0">
-        <hlm-command-search>
+        <hlm-command-input>
           <ng-icon hlm name="lucideSearch" class="text-muted-foreground" />
           <input hlm-command-search-input [placeholder]="t('users.list.columns.status')" />
-        </hlm-command-search>
+        </hlm-command-input>
         <div *brnCommandEmpty hlmCommandEmpty>
           {{ t('common.noData') }}
         </div>

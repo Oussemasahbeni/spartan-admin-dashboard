@@ -34,9 +34,6 @@
       "@spartan-ng/helm/date-picker": [
         "./src/app/spartan/date-picker/src/index.ts"
       ],
-      "@spartan-ng/helm/dialog": [
-        "./src/app/spartan/dialog/src/index.ts"
-      ],
       "@spartan-ng/helm/dropdown-menu": [
         "./src/app/spartan/dropdown-menu/src/index.ts"
       ],
@@ -82,9 +79,6 @@
       "@spartan-ng/helm/textarea": [
         "./src/app/spartan/textarea/src/index.ts"
       ],
-      "@spartan-ng/helm/tooltip": [
-        "./src/app/spartan/tooltip/src/index.ts"
-      ],
       "@spartan-ng/helm/calendar": [
         "./src/app/spartan/calendar/src/index.ts"
       ],
@@ -109,9 +103,6 @@
       "@spartan-ng/helm/alert-dialog": [
         "./src/app/spartan/alert-dialog/src/index.ts"
       ],
-      "@spartan-ng/helm/command": [
-        "./src/app/spartan/command/src/index.ts"
-      ],
       "@spartan-ng/helm/input-group": [
         "./src/app/spartan/input-group/src/index.ts"
       ],
@@ -135,6 +126,15 @@
       ],
       "@spartan-ng/helm/radio-group": [
         "./src/app/spartan/radio-group/src/index.ts"
+      ],
+      "@spartan-ng/helm/tooltip": [
+        "./src/app/spartan/tooltip/src/index.ts"
+      ],
+      "@spartan-ng/helm/command": [
+        "./src/app/spartan/command/src/index.ts"
+      ],
+      "@spartan-ng/helm/dialog": [
+        "./src/app/spartan/dialog/src/index.ts"
       ]
     }
   },

@@ -58,6 +58,13 @@ export const routes: Routes = [
         loadChildren: () => import('./features/users/users.routes'),
       },
       {
+        path: 'calendar',
+        title: 'calendar',
+        data: { breadcrumb: 'navigation.calendar' },
+        providers: [provideTranslocoScope('calendar')],
+        loadChildren: () => import('./features/calendar/calendar.routes'),
+      },
+      {
         path: 'settings',
         title: 'settings',
         data: { breadcrumb: 'navigation.settings' },
