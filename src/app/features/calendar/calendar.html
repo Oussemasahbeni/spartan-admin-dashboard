@@ -58,7 +58,7 @@
     </div>
 
     <!-- Calendar -->
-    <full-calendar #calendar class="overflow-x-scroll" [options]="calendarOptions()" />
+    <full-calendar #calendar [options]="calendarOptions()" />
 
     <ng-template #eventContent let-arg>
       <brn-hover-card>
