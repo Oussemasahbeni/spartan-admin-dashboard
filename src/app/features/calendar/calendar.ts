@@ -1,15 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { DatePipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  signal,
-  TemplateRef,
-  viewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { makeEventsData } from '@core/mock/events';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
@@ -36,7 +26,6 @@ import { CalendarForm } from './calendar-form/calendar-form';
     HlmHoverCardImports,
     BrnHoverCardImports,
     HlmDropdownMenuImports,
-    DatePipe,
     FullCalendarModule,
     TranslocoModule,
   ],
@@ -57,7 +46,6 @@ export default class Calendar {
   // ViewChild
   // ==========================================
   readonly calendar = viewChild<FullCalendarComponent>('calendar');
-  readonly eventContentTemplate = viewChild<TemplateRef<unknown>>('eventContent');
 
   // ==========================================
   // State
@@ -90,7 +78,6 @@ export default class Calendar {
     locale: this.activeLanguage(),
     editable: true,
     droppable: true,
-    eventContent: this.eventContentTemplate(),
     eventDrop: (info) => this.handleEventDrop(info),
     eventClick: (info) => this.handleEventClick(info),
     dateClick: (info) => this.handleDateClick(info),
