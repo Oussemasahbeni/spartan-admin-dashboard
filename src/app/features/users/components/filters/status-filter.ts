@@ -3,7 +3,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideListFilter, lucideSearch } from '@ng-icons/lucide';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
-import { BrnPopoverImports } from '@spartan-ng/brain/popover';
+
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
@@ -18,7 +18,6 @@ import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe
     HlmButtonImports,
     HlmIconImports,
     HlmPopoverImports,
-    BrnPopoverImports,
     BrnCommandImports,
     HlmCommandImports,
     HlmCheckboxImports,
@@ -52,7 +51,7 @@ import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe
           </div>
         }
       </button>
-      <hlm-command *brnPopoverContent="let ctx" hlmPopoverContent class="w-50 p-0">
+      <hlm-command *hlmPopoverPortal="let ctx" hlmPopoverContent class="w-50 p-0">
         <hlm-command-input>
           <ng-icon hlm name="lucideSearch" class="text-muted-foreground" />
           <input hlm-command-search-input [placeholder]="t('users.list.columns.status')" />

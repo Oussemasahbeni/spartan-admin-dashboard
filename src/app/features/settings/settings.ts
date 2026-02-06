@@ -22,7 +22,7 @@ import { SettingsAccount } from './account/account-panel';
 import { SettingsNotifications } from './notifications/notifications';
 import { SettingsPlanBilling } from './plan-billing/plan-billing';
 import { SettingsSecurity } from './security/security-panel';
-import { SettingsTeam } from "./team/team.component";
+import { SettingsTeam } from './team/team.component';
 
 interface Panel {
   id: string;
@@ -44,8 +44,8 @@ interface Panel {
     SettingsSecurity,
     SettingsPlanBilling,
     SettingsNotifications,
-    SettingsTeam
-],
+    SettingsTeam,
+  ],
   templateUrl: './settings.html',
   providers: [provideIcons({ lucideUserCircle, lucideLock, lucideCreditCard, lucideBell, lucideUsers, lucideMenu })],
   changeDetection: ChangeDetectionStrategy.OnPush,

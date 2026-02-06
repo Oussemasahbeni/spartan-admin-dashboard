@@ -6,7 +6,7 @@
       <button type="button" class="md:hidden" id="edit-profile" hlmSheetTrigger hlmBtn size="sm" variant="outline">
         <ng-icon hlm size="sm" name="lucideMenu" />
       </button>
-      <hlm-sheet-content *brnSheetContent="let ctx" class="px-3">
+      <hlm-sheet-content *hlmSheetPortal="let ctx" class="px-3">
         <hlm-sheet-header>
           <h3 hlmSheetTitle>{{ t('title') }}</h3>
           <p hlmSheetDescription>{{ t('description') }}</p>

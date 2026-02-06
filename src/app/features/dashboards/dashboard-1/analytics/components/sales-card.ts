@@ -57,7 +57,7 @@ interface MonthsTranslation {
                 name="lucideInfo"
                 size="sm"
                 class="text-muted-foreground"
-                hlmTooltipTrigger="Net sales information"
+                hlmTooltip="Net sales information"
               />
             </div>
             <div class="text-2xl font-bold">$4,567,820</div>
@@ -71,13 +71,7 @@ interface MonthsTranslation {
           <div class="bg-muted/50 rounded-lg border p-4">
             <div class="mb-1 flex items-center justify-between">
               <span class="text-muted-foreground text-sm font-medium">{{ t('orders') }}</span>
-              <ng-icon
-                hlmIcon
-                name="lucideInfo"
-                size="sm"
-                class="text-muted-foreground"
-                hlmTooltipTrigger="Orders information"
-              />
+              <ng-icon hlmIcon name="lucideInfo" size="sm" class="text-muted-foreground" hlmTooltip="Orders information" />
             </div>
             <div class="text-2xl font-bold">1,246</div>
             <div class="text-destructive mt-1 flex items-center gap-1 text-xs">

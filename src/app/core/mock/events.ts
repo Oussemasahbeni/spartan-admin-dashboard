@@ -17,7 +17,7 @@ export function makeEventsData(count: number): EventInput[] {
 
     const isAllDay = faker.datatype.boolean();
 
-    const themeColors = ['var(--chart-azure)', 'var(--chart-teal)', 'var(--chart-indigo)'];
+    const themeColors = ['var(--color-blue-500)', 'var(--color-green-700)', 'var(--color-purple-500)'];
 
     return {
       id: faker.string.uuid(),

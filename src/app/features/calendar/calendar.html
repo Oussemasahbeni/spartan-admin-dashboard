@@ -58,33 +58,6 @@
     </div>
 
     <!-- Calendar -->
-    <full-calendar #calendar [options]="calendarOptions()" />
-
-    <ng-template #eventContent let-arg>
-      <brn-hover-card>
-        <span
-          brnHoverCardTrigger
-          class="flex h-full w-full items-center gap-1 overflow-hidden p-1 text-ellipsis whitespace-nowrap"
-          >{{ arg.event.title }}</span
-        >
-        <hlm-hover-card-content *brnHoverCardContent class="w-80">
-          <div class="flex justify-between space-x-4">
-            <div class="space-y-1">
-              <h4 class="text-sm font-semibold">{{ arg.event.title }}</h4>
-              <p class="text-sm">{{ arg.event.extendedProps['description'] }}</p>
-              <div class="flex items-center pt-2">
-                <ng-icon hlm size="sm" name="lucideCalendar" class="mr-2 opacity-70" />
-                <span class="text-muted-foreground text-xs">
-                  {{ arg.event.start | date: 'short' }}
-                  @if (arg.event.end) {
-                    - {{ arg.event.end | date: 'short' }}
-                  }
-                </span>
-              </div>
-            </div>
-          </div>
-        </hlm-hover-card-content>
-      </brn-hover-card>
-    </ng-template>
+    <full-calendar #calendar class="bg-card rounded-lg p-4" [options]="calendarOptions()" />
   </div>
 </div>

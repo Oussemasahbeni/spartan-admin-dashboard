@@ -45,7 +45,7 @@ export type CardVariant = 'compact' | 'large';
           </div>
 
           <div hlmCardAction>
-            <ng-icon hlm name="lucideInfo" size="sm" [hlmTooltipTrigger]="tooltip() ?? ''" />
+            <ng-icon hlm name="lucideInfo" size="sm" [hlmTooltip]="tooltip() ?? ''" />
           </div>
         </div>
 

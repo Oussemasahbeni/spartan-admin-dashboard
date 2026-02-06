@@ -122,7 +122,7 @@ export const countries: Country[] = [
     iso: 'sh',
     name: {
       en: 'Ascension Island',
-      fr: 'Île de l\'Ascension',
+      fr: "Île de l'Ascension",
       ar: 'جزيرة أسينشين',
     },
     code: '+247',
@@ -302,7 +302,7 @@ export const countries: Country[] = [
     iso: 'io',
     name: {
       en: 'British Indian Ocean Territory',
-      fr: 'Territoire britannique de l\'océan Indien',
+      fr: "Territoire britannique de l'océan Indien",
       ar: 'إقليم المحيط الهندي البريطاني',
     },
     code: '+246',
@@ -522,7 +522,7 @@ export const countries: Country[] = [
     iso: 'ci',
     name: {
       en: 'Côte d’Ivoire',
-      fr: 'Côte d\'Ivoire',
+      fr: "Côte d'Ivoire",
       ar: 'كوت ديفوار',
     },
     code: '+225',

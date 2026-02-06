@@ -43,7 +43,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
               <p class="text-muted-foreground text-xs">{{ t('subtitle') }}</p>
             </div>
           </div>
-          <ng-icon hlm name="lucideInfo" class="text-muted-foreground" size="sm" [hlmTooltipTrigger]="t('infoTooltip')" />
+          <ng-icon hlm name="lucideInfo" class="text-muted-foreground" size="sm" [hlmTooltip]="t('infoTooltip')" />
         </div>
       </div>
       <div *transloco="let t; prefix: 'users.cards.newUsers'" class="border-border bg-card rounded-lg border p-6">

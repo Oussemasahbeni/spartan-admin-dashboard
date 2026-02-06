@@ -28,7 +28,8 @@
         "analytics": "Analytics",
         "settings": "Settings",
         "aiAssistant": "AI Assistant",
-        "dashboard-2": "Dashboard 2"
+        "dashboard-2": "Dashboard 2",
+        "calendar": "Calendar"
     },
     "navigation": {
         "application": "Application",

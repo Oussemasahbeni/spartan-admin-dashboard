@@ -3,7 +3,6 @@ import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideSearch } from '@ng-icons/lucide';
-import { BrnPopoverContent } from '@spartan-ng/brain/popover';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmComboboxImports } from '@spartan-ng/helm/combobox';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -20,7 +19,6 @@ import { CountryDisplay } from '../country-display/country-display';
     HlmIconImports,
     HlmComboboxImports,
     HlmInputGroupAddon,
-    BrnPopoverContent,
     TranslocoModule,
     CountryDisplay,
   ],

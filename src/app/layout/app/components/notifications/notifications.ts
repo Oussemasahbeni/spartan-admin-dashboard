@@ -4,7 +4,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideX } from '@ng-icons/lucide';
 import { TimeAgoPipe } from '@shared/pipes/time-ago.pipe';
-import { BrnPopoverImports } from '@spartan-ng/brain/popover';
+
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmButton } from '@spartan-ng/helm/button';
@@ -26,7 +26,6 @@ import { Notification } from '../../model/notification';
     NgScrollbarModule,
     HlmIconImports,
     HlmPopoverImports,
-    BrnPopoverImports,
     TranslocoModule,
     TimeAgoPipe,
   ],
@@ -45,7 +44,7 @@ import { Notification } from '../../model/notification';
           </span>
         }
       </button>
-      <div *brnPopoverContent="let ctx" hlmPopoverContent class="grid w-80 gap-1 p-1">
+      <div *hlmPopoverPortal="let ctx" hlmPopoverContent class="grid w-80 gap-1 p-1">
         <div class="flex items-center justify-between px-3 py-2">
           <span class="text-sm font-semibold">{{ t('title') }}</span>
           @if (unreadCount() > 0) {

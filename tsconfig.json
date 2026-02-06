@@ -127,17 +127,14 @@
       "@spartan-ng/helm/radio-group": [
         "./src/app/spartan/radio-group/src/index.ts"
       ],
-      "@spartan-ng/helm/tooltip": [
-        "./src/app/spartan/tooltip/src/index.ts"
-      ],
       "@spartan-ng/helm/command": [
         "./src/app/spartan/command/src/index.ts"
       ],
       "@spartan-ng/helm/dialog": [
         "./src/app/spartan/dialog/src/index.ts"
       ],
-      "@spartan-ng/helm/hover-card": [
-        "./src/app/spartan/hover-card/src/index.ts"
+      "@spartan-ng/helm/tooltip": [
+        "./src/app/spartan/tooltip/src/index.ts"
       ]
     }
   },
