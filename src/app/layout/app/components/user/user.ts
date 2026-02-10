@@ -73,6 +73,7 @@ export class NavUser {
   // ==========================================
 
   setLang(lang: LanguageOptions): void {
+    if (lang === this.currentLang()) return;
     this._languageService.setLanguage(lang);
   }
   setTheme(theme: 'light' | 'dark' | 'system'): void {

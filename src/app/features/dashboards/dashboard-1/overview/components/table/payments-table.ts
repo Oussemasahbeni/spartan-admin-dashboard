@@ -89,7 +89,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
             <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
               @let status = context.getValue();
               @let ui = status | statusUI;
-              <ng-icon size="sm" hlmIcon [class]="ui.class" [name]="ui.icon" />
+              <ng-icon size="xs" hlmIcon [class]="ui.class" [name]="ui.icon" />
               <span *transloco="let t; prefix: 'dashboard1.paymentsTable.status'"> {{ t(status) }} </span>
             </span>
           </ng-template>

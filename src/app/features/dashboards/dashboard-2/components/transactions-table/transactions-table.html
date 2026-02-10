@@ -48,7 +48,7 @@
         <span hlmBadge variant="outline" class="text-muted-foreground">
           @let status = context.getValue();
           @let ui = status | transactionStatusUI;
-          <ng-icon hlmIcon [class]="ui.class" [name]="ui.icon" />
+          <ng-icon size="xs" hlmIcon [class]="ui.class" [name]="ui.icon" />
           <span *transloco="let t; prefix: 'dashboard2.recentActivity.status'">{{ t(status) }}</span>
         </span>
       </ng-template>

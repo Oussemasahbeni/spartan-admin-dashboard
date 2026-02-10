@@ -84,7 +84,7 @@
         <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
           @let status = context.getValue();
           @let ui = status | statusUI;
-          <ng-icon hlmIcon [class]="ui.class" [name]="ui.icon" />
+          <ng-icon hlmIcon size="xs" [class]="ui.class" [name]="ui.icon" />
           <span *transloco="let t; prefix: 'users.status'"> {{ t(status) }} </span>
         </span>
       </ng-template>

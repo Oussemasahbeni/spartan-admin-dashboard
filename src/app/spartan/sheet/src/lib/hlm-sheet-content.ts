@@ -1,9 +1,10 @@
+import type { BooleanInput } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   Renderer2,
-  computed,
+  booleanAttribute,
   effect,
   inject,
   input,
@@ -12,10 +13,10 @@ import {
 import { provideIcons } from '@ng-icons/core';
 import { lucideX } from '@ng-icons/lucide';
 import { injectExposedSideProvider, injectExposesStateProvider } from '@spartan-ng/brain/core';
+import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { hlm } from '@spartan-ng/helm/utils';
+import { classes } from '@spartan-ng/helm/utils';
 import { cva } from 'class-variance-authority';
-import type { ClassValue } from 'clsx';
 import { HlmSheetClose } from './hlm-sheet-close';
 
 export const sheetVariants = cva(
@@ -39,20 +40,22 @@ export const sheetVariants = cva(
 
 @Component({
   selector: 'hlm-sheet-content',
-  imports: [HlmSheetClose, HlmIconImports],
+  imports: [HlmSheetClose, HlmIconImports, HlmButton],
   providers: [provideIcons({ lucideX })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'sheet-content',
-    '[class]': '_computedClass()',
     '[attr.data-state]': 'state()',
   },
   template: `
     <ng-content />
-    <button hlmSheetClose>
-      <span class="sr-only">Close</span>
-      <ng-icon hlm size="sm" name="lucideX" />
-    </button>
+
+    @if (showCloseButton()) {
+      <button hlmSheetClose hlmBtn variant="ghost" size="icon-sm" data-slot="sheet-close">
+        <span class="sr-only">Close</span>
+        <ng-icon hlm size="sm" name="lucideX" />
+      </button>
+    }
   `,
 })
 export class HlmSheetContent {
@@ -62,14 +65,12 @@ export class HlmSheetContent {
   private readonly _renderer = inject(Renderer2);
   private readonly _element = inject(ElementRef);
 
+  public readonly showCloseButton = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
+
   constructor() {
+    classes(() => sheetVariants({ side: this._sideProvider.side() }));
     effect(() => {
       this._renderer.setAttribute(this._element.nativeElement, 'data-state', this.state());
     });
   }
-
-  public readonly userClass = input<ClassValue>('', { alias: 'class' });
-  protected readonly _computedClass = computed(() =>
-    hlm(sheetVariants({ side: this._sideProvider.side() }), this.userClass())
-  );
 }

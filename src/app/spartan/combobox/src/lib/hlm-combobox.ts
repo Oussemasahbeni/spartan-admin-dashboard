@@ -18,12 +18,30 @@ import { classes } from '@spartan-ng/helm/utils';
   hostDirectives: [
     {
       directive: BrnCombobox,
-      inputs: ['disabled', 'filter', 'value', 'itemToString', 'filterOptions', 'isItemEqualToValue'],
-      outputs: ['valueChange'],
+      inputs: [
+        'autoHighlight',
+        'disabled',
+        'filter',
+        'search',
+        'value',
+        'itemToString',
+        'filterOptions',
+        'isItemEqualToValue',
+      ],
+      outputs: ['searchChange', 'valueChange'],
     },
     {
       directive: BrnPopover,
-      inputs: ['align', 'autoFocus', 'closeDelay', 'closeOnOutsidePointerEvents', 'sideOffset', 'state', 'offsetX'],
+      inputs: [
+        'align',
+        'autoFocus',
+        'closeDelay',
+        'closeOnOutsidePointerEvents',
+        'sideOffset',
+        'state',
+        'offsetX',
+        'restoreFocus',
+      ],
       outputs: ['stateChanged', 'closed'],
     },
   ],

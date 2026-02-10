@@ -54,7 +54,7 @@ let nextId = 0;
         <ng-icon hlm size="sm" name="lucideChevronDown" />
       </button>
 
-      <div hlmPopoverContent class="w-auto p-0" *hlmPopoverPortal="let ctx">
+      <hlm-popover-content class="w-auto p-0" *hlmPopoverPortal="let ctx">
         <hlm-calendar-multi
           calendarClass="border-0 rounded-none"
           [date]="_mutableDate()"
@@ -66,7 +66,7 @@ let nextId = 0;
           [disabled]="_mutableDisabled()"
           (dateChange)="_handleChange($event)"
         />
-      </div>
+      </hlm-popover-content>
     </hlm-popover>
   `,
 })
@@ -145,7 +145,7 @@ export class HlmDatePickerMulti<T> implements ControlValueAccessor {
     if (value === undefined) return;
 
     if (this._mutableDisabled()) return;
-    const transformedDate = this.transformDates()(value);
+    const transformedDate = value !== undefined ? this.transformDates()(value) : value;
 
     this._mutableDate.set(transformedDate);
     this._onChange?.(transformedDate);
