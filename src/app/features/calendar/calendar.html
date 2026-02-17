@@ -53,7 +53,81 @@
           </div>
         </div>
 
+        <!--  Settings and View Switcher -->
         <div class="flex items-center gap-4">
+          <button
+            type="button"
+            class="hidden sm:flex"
+            hlmBtn
+            variant="outline"
+            size="icon"
+            [hlmDropdownMenuTrigger]="typesMenu"
+          >
+            <ng-icon hlmIcon name="lucideFilter" size="sm" />
+          </button>
+
+          <ng-template #typesMenu>
+            <hlm-dropdown-menu>
+              <hlm-dropdown-menu-label>{{ t('filter-menu.title') }}</hlm-dropdown-menu-label>
+              <hlm-dropdown-menu-separator />
+
+              <hlm-dropdown-menu-group>
+                @for (type of eventTypes; track type.value) {
+                  <button
+                    type="button"
+                    hlmDropdownMenuCheckbox
+                    [checked]="selectedTypes().includes(type.value)"
+                    (click)="toggleFilter(type.value)"
+                  >
+                    <span class="flex items-center gap-2">
+                      <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+                      <span class="bg- mr-1 h-3 w-3 rounded-full" [style.backgroundColor]="type.color"></span>
+                      {{ t(`filter-menu.labels.${type.value}`) }}
+                    </span>
+                    <hlm-dropdown-menu-checkbox-indicator />
+                  </button>
+                }
+              </hlm-dropdown-menu-group>
+              <hlm-dropdown-menu-separator />
+              <button type="button" hlmDropdownMenuItem (click)="clearFilters()">
+                {{ t('filter-menu.clear') }}
+              </button>
+            </hlm-dropdown-menu>
+          </ng-template>
+
+          <button
+            type="button"
+            class="hidden sm:flex"
+            hlmBtn
+            variant="outline"
+            size="icon"
+            [hlmDropdownMenuTrigger]="settingsMenu"
+          >
+            <ng-icon hlmIcon name="lucideSettings" size="sm" />
+          </button>
+          <ng-template #settingsMenu>
+            <hlm-dropdown-menu>
+              <hlm-dropdown-menu-label>{{ t('settings.title') }}</hlm-dropdown-menu-label>
+              <hlm-dropdown-menu-separator />
+
+              <hlm-dropdown-menu-group>
+                <button type="button" hlmDropdownMenuCheckbox [checked]="use24HourFormat()" (click)="toggleTimeFormat()">
+                  <hlm-dropdown-menu-checkbox-indicator />
+                  {{ t('settings.use24HourFormat') }}
+                </button>
+
+                <button
+                  type="button"
+                  hlmDropdownMenuCheckbox
+                  [checked]="eventDisplayMode() === 'block'"
+                  (click)="toggleEventDisplayMode()"
+                >
+                  <hlm-dropdown-menu-checkbox-indicator />
+                  {{ t('settings.cardView') }}
+                </button>
+              </hlm-dropdown-menu-group>
+            </hlm-dropdown-menu>
+          </ng-template>
           <!--  View Switcher -->
           <button
             type="button"
@@ -110,20 +184,9 @@
     <!-- Calendar -->
     <full-calendar
       #calendar
-      class="bg-card rounded-lg p-4"
+      class="bg-card flex rounded-lg p-4"
       [class.overflow-y-auto]="currentView().value === 'listWeek'"
       [options]="calendarOptions()"
-    >
-      <ng-template #eventContent let-arg>
-        <div class="flex items-center justify-between gap-2">
-          <span class="flex-1 truncate">{{ arg.event.title }}</span>
-          @if (arg.event.start && !arg.event.allDay) {
-            <span class="text-xs font-medium whitespace-nowrap opacity-90">
-              {{ arg.event.start | date: 'HH:mm' }}
-            </span>
-          }
-        </div>
-      </ng-template>
-    </full-calendar>
+    />
   </div>
 </div>

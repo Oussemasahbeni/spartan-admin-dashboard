@@ -1,15 +1,18 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { EventApi } from '@fullcalendar/core/index.js';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideAlignLeft, lucideCalendar, lucideClock, lucideMapPin, lucideTag } from '@ng-icons/lucide';
-import { injectBrnDialogContext } from '@spartan-ng/brain/dialog';
+import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmDialogImports } from '@spartan-ng/helm/dialog';
+import { HlmDialogImports, HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
+import { CalendarForm } from '../calendar-form/calendar-form';
+import { CalendarService } from '../calendar.service';
 
 @Component({
   selector: 'adm-event-details',
@@ -31,11 +34,63 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
       lucideTag,
     }),
   ],
+  host: {
+    class: 'flex flex-col gap-4 sm:min-w-lg ',
+  },
   templateUrl: './event-details.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventDetails {
+  // ==========================================
+  // Services
+  // ==========================================
+  private readonly _hlmDialogService = inject(HlmDialogService);
+  private readonly _dialogRef = inject<BrnDialogRef>(BrnDialogRef);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _calendarService = inject(CalendarService);
   private readonly _dialogContext = injectBrnDialogContext<{ event: EventApi }>();
 
+  // ==========================================
+  // State
+  // ==========================================
   readonly event = signal(this._dialogContext.event);
+
+  // ==========================================
+  // Public Methods
+  // ==========================================
+  onEditEvent() {
+    const dialogRef = this._hlmDialogService.open(CalendarForm, {
+      contentClass: 'max-w-3xl',
+      context: {
+        event: this.event(),
+        date: this.event().start,
+      },
+    });
+
+    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
+      if (!result) return;
+
+      this._calendarService.updateEvent(result);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.event.update((current: any) => ({
+        ...current,
+        id: current.id,
+        title: result.title,
+        start: result.start instanceof String ? new Date(result.start as string) : result.start,
+        end: result.end instanceof String ? new Date(result.end as string) : result.end,
+        extendedProps: {
+          ...current.extendedProps,
+          ...result.extendedProps,
+        },
+      }));
+    });
+  }
+
+  onDeleteEvent() {
+    const id = this.event().id;
+    if (id) {
+      this._calendarService.deleteEvent(id);
+      this._dialogRef.close();
+    }
+  }
 }

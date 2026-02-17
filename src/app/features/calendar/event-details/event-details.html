@@ -1,9 +1,10 @@
 <hlm-dialog-header *transloco="let t; prefix: 'calendar.details'">
-  <h3 hlmDialogTitle>{{ event().title }}</h3>
-
-  @if (event().allDay) {
-    <hlm-badge variant="secondary">{{ t('allDay') }}</hlm-badge>
-  }
+  <h3 hlmDialogTitle>
+    {{ event().title }}
+    @if (event().allDay) {
+      <hlm-badge variant="secondary">{{ t('allDay') }}</hlm-badge>
+    }
+  </h3>
 </hlm-dialog-header>
 
 <div
@@ -29,7 +30,7 @@
     }
 
     @let endDate = event().end;
-    @if (endDate && !event().allDay) {
+    @if (endDate) {
       <div class="flex items-center gap-3">
         <ng-icon hlmIcon name="lucideClock" size="sm" class="text-muted-foreground" />
         <div class="flex-1">
@@ -47,7 +48,7 @@
         <ng-icon hlmIcon name="lucideAlignLeft" size="sm" class="text-muted-foreground" />
         <div class="flex-1">
           <p class="text-sm font-medium">{{ t('description') }}</p>
-          <p class="text-muted-foreground text-sm">
+          <p class="text-muted-foreground text-sm whitespace-pre-wrap">
             {{ description }}
           </p>
         </div>
@@ -56,6 +57,6 @@
   </div>
 </div>
 <hlm-dialog-footer *transloco="let t; prefix: 'buttons'" class="mt-6">
-  <button type="button" hlmBtn variant="destructive">{{ t('delete') }}</button>
-  <button hlmBtn type="button">{{ t('edit') }}</button>
+  <button type="button" hlmBtn variant="destructive" (click)="onDeleteEvent()">{{ t('delete') }}</button>
+  <button hlmBtn type="button" (click)="onEditEvent()">{{ t('edit') }}</button>
 </hlm-dialog-footer>

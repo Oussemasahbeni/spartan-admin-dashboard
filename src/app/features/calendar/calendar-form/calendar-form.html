@@ -4,7 +4,12 @@
 </hlm-dialog-header>
 
 <div class="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-0 overflow-y-auto sm:max-h-[min(640px,80vh)]">
-  <form *transloco="let t; prefix: 'calendar.form'" class="flex w-full flex-col gap-4 p-2" (submit)="onSubmit($event)">
+  <form
+    *transloco="let t; prefix: 'calendar.form'"
+    class="flex w-full flex-col gap-4 p-2"
+    novalidate
+    (submit)="onSubmit($event)"
+  >
     <!-- Title -->
     <hlm-field>
       <hlm-field-label for="title">{{ t('label.title') }}</hlm-field-label>
@@ -26,21 +31,19 @@
         </hlm-date-picker>
         <adm-validation-errors [fieldState]="eventForm.startDate()" />
       </hlm-field>
-      @if (!eventForm.allDay().value()) {
-        <div class="flex flex-col gap-3">
-          <label for="time-picker" hlmLabel class="px-1">
-            {{ t('label.startTime') }}
-          </label>
-          <input
-            hlmInput
-            id="time-picker"
-            type="time"
-            step="1"
-            class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
-            [formField]="eventForm.startTime"
-          />
-        </div>
-      }
+      <div class="flex flex-col gap-3">
+        <label for="time-picker" hlmLabel class="px-1">
+          {{ t('label.startTime') }}
+        </label>
+        <input
+          hlmInput
+          id="time-picker"
+          type="time"
+          step="1"
+          class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+          [formField]="eventForm.startTime"
+        />
+      </div>
     </div>
 
     <!-- End Date -->
@@ -52,25 +55,19 @@
         </hlm-date-picker>
         <adm-validation-errors [fieldState]="eventForm.endDate()" />
       </hlm-field>
-      @if (!eventForm.allDay().value()) {
-        <div class="flex flex-col gap-3">
-          <label for="time-picker" hlmLabel class="px-1">
-            {{ t('label.endTime') }}
-          </label>
-          <input
-            hlmInput
-            id="time-picker"
-            type="time"
-            step="1"
-            class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
-            [formField]="eventForm.endTime"
-          />
-        </div>
-      }
-    </div>
-    <div class="flex items-start gap-2">
-      <hlm-checkbox id="allDay" [formField]="eventForm.allDay" />
-      <label hlmLabel for="allDay">All day</label>
+      <div class="flex flex-col gap-3">
+        <label for="time-picker" hlmLabel class="px-1">
+          {{ t('label.endTime') }}
+        </label>
+        <input
+          hlmInput
+          id="time-picker"
+          type="time"
+          step="1"
+          class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+          [formField]="eventForm.endTime"
+        />
+      </div>
     </div>
 
     <hlm-dialog-footer *transloco="let t; prefix: 'buttons'">

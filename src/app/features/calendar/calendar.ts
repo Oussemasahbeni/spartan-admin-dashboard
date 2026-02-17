@@ -2,13 +2,13 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { makeEventsData } from '@core/mock/events';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core/index.js';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
+
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -16,9 +16,11 @@ import {
   lucideChevronLeft,
   lucideChevronRight,
   lucideColumns3,
+  lucideFilter,
   lucideGrid2x2,
   lucideList,
   lucidePlus,
+  lucideSettings,
   lucideSquare,
 } from '@ng-icons/lucide';
 import { BrnHoverCardImports } from '@spartan-ng/brain/hover-card';
@@ -30,6 +32,7 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { isBefore, subDays } from 'date-fns';
 import { CalendarForm } from './calendar-form/calendar-form';
+import { CalendarService, EVENT_TYPES } from './calendar.service';
 import { EventDetails } from './event-details/event-details';
 
 @Component({
@@ -55,6 +58,8 @@ import { EventDetails } from './event-details/event-details';
       lucideColumns3,
       lucideSquare,
       lucideList,
+      lucideSettings,
+      lucideFilter,
     }),
   ],
   templateUrl: './calendar.html',
@@ -65,6 +70,7 @@ export default class Calendar {
   // Services
   // ==========================================
   private readonly _hlmDialogService = inject(HlmDialogService);
+  private readonly _calendarService = inject(CalendarService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _translocoService = inject(TranslocoService);
   private readonly _breakpointObserver = inject(BreakpointObserver);
@@ -73,7 +79,6 @@ export default class Calendar {
   // ViewChild
   // ==========================================
   readonly calendar = viewChild<FullCalendarComponent>('calendar');
-  // readonly eventTemplate = viewChild<TemplateRef<any>>('eventTemplate');
   // ==========================================
   // State
   // ==========================================
@@ -83,12 +88,20 @@ export default class Calendar {
   readonly currentEnd = signal<Date | null>(null);
   readonly currentDate = signal<Date>(new Date());
 
+  readonly eventTypes = EVENT_TYPES;
+
+  readonly selectedTypes = this._calendarService.selectedTypes;
+
   readonly showDatePicker = computed(() => this.currentView().value === 'timeGridDay');
   readonly calendarApi = computed(() => this.calendar()?.getApi());
 
   readonly selectedDate = signal<Date>(new Date());
 
   readonly visibleEventCount = signal(0);
+
+  readonly use24HourFormat = signal(true);
+
+  readonly eventDisplayMode = signal<'block' | 'list-item'>('block');
 
   readonly availableViews = signal([
     { value: 'dayGridMonth', label: 'month', icon: 'lucideGrid2x2' },
@@ -98,8 +111,6 @@ export default class Calendar {
   ]);
   readonly currentView = signal(this.availableViews()[0]);
 
-  readonly events = signal<EventInput[]>(makeEventsData(40));
-
   readonly activeLanguage = toSignal(this._translocoService.langChanges$, {
     initialValue: this._translocoService.getActiveLang(),
   });
@@ -108,16 +119,18 @@ export default class Calendar {
     initialView: this.currentView().value,
     headerToolbar: false,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-    events: this.events(),
+    events: this._calendarService.filteredEvents(),
     contentHeight: 'auto',
-    eventDisplay: 'block',
+    eventDisplay: this.eventDisplayMode(),
+    eventTimeFormat: this.use24HourFormat()
+      ? { hour: '2-digit', minute: '2-digit', hour12: false } // 14:30
+      : { hour: 'numeric', minute: '2-digit', meridiem: 'short' }, // 2:30 PM
     aspectRatio: 2,
     locale: this.activeLanguage(),
     editable: true,
     droppable: true,
     showNonCurrentDates: false,
     fixedWeekCount: false,
-    
     eventDrop: (info) => this.handleEventDrop(info),
     eventClick: (info) => this.handleEventClick(info),
     dateClick: (info) => this.handleDateClick(info),
@@ -186,17 +199,32 @@ export default class Calendar {
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
       if (result) {
-        this.events.update((events) => [...events, result]);
+        this._calendarService.addEvent(result);
       }
     });
   }
 
-  onDatePickerChange(dateStr: string) {
+  protected onDatePickerChange(dateStr: string) {
     const api = this.calendarApi();
     if (api) {
       api.gotoDate(dateStr);
       api.updateSize();
     }
+  }
+
+  protected toggleTimeFormat() {
+    this.use24HourFormat.update((current) => !current);
+  }
+  protected toggleEventDisplayMode(): void {
+    this.eventDisplayMode.update((current) => (current === 'block' ? 'list-item' : 'block'));
+  }
+
+  protected toggleFilter(typeValue: string) {
+    this._calendarService.toggleType(typeValue);
+  }
+
+  protected clearFilters(): void {
+    this._calendarService.clearFilters();
   }
 
   // ==========================================
@@ -214,7 +242,7 @@ export default class Calendar {
       extendedProps: { ...event.extendedProps },
     };
 
-    this.events.update((events) => [...events.filter((e) => e.id !== updatedEvent.id), updatedEvent]);
+    this._calendarService.updateEvent(updatedEvent);
   }
 
   private handleEventClick(info: EventClickArg): void {
@@ -227,7 +255,7 @@ export default class Calendar {
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
       if (result) {
-        this.events.update((events) => [...events.filter((e) => e.id !== result.id), result]);
+        this._calendarService.updateEvent(result);
       }
     });
   }
@@ -242,7 +270,7 @@ export default class Calendar {
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
       if (result) {
-        this.events.update((events) => [...events, result]);
+        this._calendarService.addEvent(result);
       }
     });
   }

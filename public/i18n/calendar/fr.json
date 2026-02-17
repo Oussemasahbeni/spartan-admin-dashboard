@@ -12,14 +12,6 @@
     },
     "today": "Aujourd’hui",
     "events": "Événements",
-    "allDay": "Toute la journée",
-    "eventDetails": {
-        "startDate": "Date de début",
-        "endDate": "Date de fin",
-        "at": "à",
-        "location": "Lieu",
-        "tags": "Étiquettes"
-    },
     "form": {
         "addTitle": "Ajouter un événement",
         "addDescription": "Remplissez le formulaire ci-dessous pour ajouter un nouvel événement à votre calendrier.",
@@ -31,12 +23,34 @@
             "startDate": "Date de début",
             "startTime": "Heure de début",
             "endDate": "Date de fin",
-            "endTime": "Heure de fin",
-            "allDay": "Événement toute la journée"
+            "endTime": "Heure de fin"
         },
         "placeholder": {
             "selectDate": "Sélectionnez une date"
         }
+    },
+    "settings": {
+        "title": "Paramètres",
+        "use24HourFormat": "Format 24 heures",
+        "cardView": "Vue carte"
+    },
+    "filter-menu": {
+        "title": "Filtrer par type",
+        "all": "Tous les types",
+        "clear": "Effacer les filtres",
+        "labels": {
+            "work": "Travail",
+            "personal": "Personnel",
+            "urgent": "Urgent",
+            "meeting": "Réunion"
+        }
+    },
+    "details": {
+        "allDay": "Toute la journée",
+        "startDate": "Date de début",
+        "endDate": "Date de fin",
+        "description": "Description",
+        "at": "à"
     },
     "toast": {
         "eventCreated": "Événement créé avec succès !",

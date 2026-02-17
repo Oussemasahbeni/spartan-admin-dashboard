@@ -1,6 +1,6 @@
 <div *transloco="let t; prefix: 'settings.security'" class="w-full max-w-5xl">
   <!-- Form -->
-  <form (submit)="onSubmit($event)">
+  <form novalidate (submit)="onSubmit($event)">
     <div class="grid w-full gap-6 sm:grid-cols-4">
       <!-- Current Password -->
       <div class="sm:col-span-4">

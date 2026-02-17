@@ -15,7 +15,17 @@ import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
+import { format, isAfter, parse, set } from 'date-fns';
 import { toast } from 'ngx-sonner';
+
+export interface CalendarEventModel {
+  title: string;
+  description: string;
+  startDate: Date | null;
+  startTime: string;
+  endDate: Date | null;
+  endTime: string;
+}
 
 @Component({
   selector: 'adm-calendar-form',
@@ -60,14 +70,13 @@ export class CalendarForm implements OnInit {
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.event);
   protected readonly isSubmitting = signal(false);
 
-  private readonly eventModel = signal({
+  private readonly eventModel = signal<CalendarEventModel>({
     title: '',
     description: '',
-    startDate: new Date(),
+    startDate: null,
     startTime: '09:00',
-    endDate: new Date(),
+    endDate: null,
     endTime: '10:00',
-    allDay: false,
   });
 
   readonly eventForm = form(this.eventModel, (schema) => {
@@ -77,28 +86,14 @@ export class CalendarForm implements OnInit {
     required(schema.endDate);
     validate(schema.endDate, ({ value }) => {
       const endBase = value();
-      if (!endBase) return null;
+      const model = this.eventModel();
 
-      //  Get current form values
-      const currentModel = this.eventModel();
-      const isAllDay = currentModel.allDay;
+      if (!endBase || !model.startDate) return null;
 
-      //  Combine Start Date + Time
-      const startCombined = new Date(currentModel.startDate);
-      if (!isAllDay) {
-        const [h, m] = currentModel.startTime.split(':').map(Number);
-        startCombined.setHours(h, m, 0, 0);
-      }
+      const startCombined = mergeTime(model.startDate, model.startTime);
+      const endCombined = mergeTime(endBase, model.endTime);
 
-      //  Combine End Date + Time
-      const endCombined = new Date(endBase);
-      if (!isAllDay) {
-        const [h, m] = currentModel.endTime.split(':').map(Number);
-        endCombined.setHours(h, m, 0, 0);
-      }
-
-      //  Compare
-      return endCombined > startCombined ? null : { kind: 'endBeforeStart' };
+      return isAfter(endCombined, startCombined) ? null : { kind: 'endBeforeStart' };
     });
   });
 
@@ -107,28 +102,24 @@ export class CalendarForm implements OnInit {
   // ==========================================
 
   ngOnInit(): void {
-    const event = this._dialogContext.event;
-    if (event) {
-      const startDate = new Date(event.start as Date);
-      const endDate = new Date(event.end as Date);
-      this.eventModel.set({
-        title: event.title || '',
-        description: event.extendedProps['description'] || '',
-        startDate,
-        startTime: startDate.toTimeString().slice(0, 5),
-        endDate,
-        endTime: endDate.toTimeString().slice(0, 5),
-        allDay: event.allDay || false,
-      });
-    }
+    const { event, date } = this._dialogContext;
 
-    if (!event && this._dialogContext.date) {
-      const selectedDate = new Date(this._dialogContext.date);
+    if (event) {
+      const start = event.start ? new Date(event.start) : new Date();
+      const end = event.end ? new Date(event.end) : new Date(start);
+
       this.eventModel.set({
-        ...this.eventModel(),
-        startDate: selectedDate,
-        endDate: selectedDate,
+        title: event.title,
+        description: event.extendedProps['description'] || '',
+        startDate: start,
+        endDate: end,
+        startTime: format(start, 'HH:mm'),
+        endTime: format(end, 'HH:mm'),
       });
+    } else {
+      // For new events, use the clicked date or today
+      const baseDate = date ? new Date(date) : new Date();
+      this.eventModel.update((m) => ({ ...m, startDate: baseDate, endDate: baseDate }));
     }
   }
 
@@ -148,32 +139,26 @@ export class CalendarForm implements OnInit {
   // ==========================================
 
   onSaveEvent() {
-    this.isSubmitting.set(true);
-    const eventId = this._dialogContext.event?.id;
     const formValue = this.eventForm;
+    const startDate = formValue.startDate().value();
+    const endDate = formValue.endDate().value();
 
-    let start = formValue.startDate().value();
-    let end = formValue.endDate().value();
+    if (!startDate || !endDate) return;
 
-    if (!formValue.allDay().value()) {
-      start = this._combineDateAndTime(start, formValue.startTime().value());
-      end = this._combineDateAndTime(end, formValue.endTime().value());
-    }
+    const start = mergeTime(startDate, formValue.startTime().value());
+    const end = mergeTime(endDate, formValue.endTime().value());
 
     const event: EventInput = {
-      id: eventId ?? crypto.randomUUID(),
+      id: this._dialogContext.event?.id ?? crypto.randomUUID(),
       title: formValue.title().value(),
       start,
       end,
-      allDay: formValue.allDay().value(),
       extendedProps: {
         description: formValue.description().value(),
       },
     };
 
-    this.showToast();
     this._dialogRef.close(event);
-    this.isSubmitting.set(false);
   }
 
   showToast() {
@@ -181,13 +166,6 @@ export class CalendarForm implements OnInit {
       ? this._transloco.translate('calendar.toast.eventUpdated')
       : this._transloco.translate('calendar.toast.eventCreated');
     toast.success(message);
-  }
-
-  private _combineDateAndTime(date: Date, time: string): Date {
-    const [hours, minutes] = time.split(':').map(Number);
-    const newDate = new Date(date);
-    newDate.setHours(hours, minutes, 0, 0);
-    return newDate;
   }
 
   protected closeDialog(): void {
@@ -205,3 +183,15 @@ export class CalendarForm implements OnInit {
     this._dialogRef.close();
   }
 }
+export const mergeTime = (date: Date, timeStr: string) => {
+  const formatPattern = timeStr.length > 5 ? 'HH:mm:ss' : 'HH:mm';
+
+  const timeDate = parse(timeStr, formatPattern, date);
+
+  return set(date, {
+    hours: timeDate.getHours(),
+    minutes: timeDate.getMinutes(),
+    seconds: timeDate.getSeconds() || 0,
+    milliseconds: 0,
+  });
+};

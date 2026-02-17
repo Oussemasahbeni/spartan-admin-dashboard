@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { EventInput } from '@fullcalendar/core/index.js';
+import { EVENT_TYPES } from '../../features/calendar/calendar.service';
 
 const range = (len: number): number[] => Array.from({ length: len }, (_, i) => i);
 
@@ -15,20 +16,17 @@ export function makeEventsData(count: number): EventInput[] {
     const endDate = new Date(startDate);
     endDate.setHours(startDate.getHours() + faker.number.int({ min: 1, max: 4 }));
 
-    const isAllDay = faker.datatype.boolean();
-
-    const themeColors = ['var(--fc-red)', 'var(--fc-yellow)', 'var(--fc-green)', 'var(--fc-blue)'];
+    const typeObj = faker.helpers.arrayElement(EVENT_TYPES);
 
     return {
       id: faker.string.uuid(),
       title: faker.lorem.words({ min: 2, max: 3 }),
       start: startDate,
-      end: isAllDay ? undefined : endDate,
-      allDay: isAllDay,
-      backgroundColor: faker.helpers.arrayElement(themeColors),
-      borderColor: 'transparent',
+      end: endDate,
+      backgroundColor: typeObj.color,
       extendedProps: {
         description: faker.lorem.sentence(),
+        type: typeObj.value,
       },
     };
   };
