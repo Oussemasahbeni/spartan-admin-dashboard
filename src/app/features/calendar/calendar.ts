@@ -1,4 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { makeEventsData } from '@core/mock/events';
@@ -10,13 +11,27 @@ import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideCalendar, lucideChevronLeft, lucideChevronRight, lucidePlus } from '@ng-icons/lucide';
+import {
+  lucideCalendar,
+  lucideChevronLeft,
+  lucideChevronRight,
+  lucideColumns3,
+  lucideGrid2x2,
+  lucideList,
+  lucidePlus,
+  lucideSquare,
+} from '@ng-icons/lucide';
 import { BrnHoverCardImports } from '@spartan-ng/brain/hover-card';
+import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { isBefore, subDays } from 'date-fns';
 import { CalendarForm } from './calendar-form/calendar-form';
+import { EventDetails } from './event-details/event-details';
+
 @Component({
   selector: 'adm-calendar',
   imports: [
@@ -24,10 +39,24 @@ import { CalendarForm } from './calendar-form/calendar-form';
     HlmIconImports,
     BrnHoverCardImports,
     HlmDropdownMenuImports,
+    HlmBadgeImports,
+    HlmDatePickerImports,
     FullCalendarModule,
     TranslocoModule,
+    DatePipe,
   ],
-  providers: [provideIcons({ lucideChevronLeft, lucideChevronRight, lucidePlus, lucideCalendar })],
+  providers: [
+    provideIcons({
+      lucideChevronLeft,
+      lucideChevronRight,
+      lucidePlus,
+      lucideCalendar,
+      lucideGrid2x2,
+      lucideColumns3,
+      lucideSquare,
+      lucideList,
+    }),
+  ],
   templateUrl: './calendar.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -44,18 +73,28 @@ export default class Calendar {
   // ViewChild
   // ==========================================
   readonly calendar = viewChild<FullCalendarComponent>('calendar');
-
+  // readonly eventTemplate = viewChild<TemplateRef<any>>('eventTemplate');
   // ==========================================
   // State
   // ==========================================
-  readonly calendarApi = computed(() => this.calendar()?.getApi());
 
   readonly currentTitle = signal('');
+  readonly currentStart = signal<Date | null>(null);
+  readonly currentEnd = signal<Date | null>(null);
+  readonly currentDate = signal<Date>(new Date());
+
+  readonly showDatePicker = computed(() => this.currentView().value === 'timeGridDay');
+  readonly calendarApi = computed(() => this.calendar()?.getApi());
+
+  readonly selectedDate = signal<Date>(new Date());
+
+  readonly visibleEventCount = signal(0);
+
   readonly availableViews = signal([
-    { value: 'dayGridMonth', label: 'month' },
-    { value: 'timeGridWeek', label: 'week' },
-    { value: 'timeGridDay', label: 'day' },
-    { value: 'listWeek', label: 'list' },
+    { value: 'dayGridMonth', label: 'month', icon: 'lucideGrid2x2' },
+    { value: 'timeGridWeek', label: 'week', icon: 'lucideColumns3' },
+    { value: 'timeGridDay', label: 'day', icon: 'lucideSquare' },
+    { value: 'listWeek', label: 'list', icon: 'lucideList' },
   ]);
   readonly currentView = signal(this.availableViews()[0]);
 
@@ -76,14 +115,31 @@ export default class Calendar {
     locale: this.activeLanguage(),
     editable: true,
     droppable: true,
+    showNonCurrentDates: false,
+    fixedWeekCount: false,
+    
     eventDrop: (info) => this.handleEventDrop(info),
     eventClick: (info) => this.handleEventClick(info),
     dateClick: (info) => this.handleDateClick(info),
-    datesSet: () => {
+    datesSet: (dateInfo) => {
       const api = this.calendar()?.getApi();
       if (api) {
         this.currentTitle.set(api.view.title);
       }
+      this.currentStart.set(dateInfo.start);
+      // FullCalendar's end date is exclusive, so we adjust it to be inclusive for display purposes
+      const adjustedEnd = subDays(dateInfo.end, 1);
+      this.currentEnd.set(adjustedEnd);
+      // Calculate visible events in the current view
+      const viewStart = dateInfo.start;
+      const viewEnd = dateInfo.end;
+      const visibleCount = dateInfo.view.calendar.getEvents().filter((eventApi) => {
+        const eventStart = eventApi.start;
+        const eventEnd = eventApi.end ?? eventApi.start;
+        if (!eventStart || !eventEnd) return false;
+        return isBefore(eventStart, viewEnd) && !isBefore(eventEnd, viewStart);
+      }).length;
+      this.visibleEventCount.set(visibleCount);
     },
   }));
 
@@ -93,7 +149,7 @@ export default class Calendar {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((result) => {
         if (result.matches) {
-          this.changeView({ value: 'listWeek', label: 'list' });
+          this.changeView({ value: 'listWeek', label: 'list', icon: 'lucideList' });
         } else {
           this.changeView(this.availableViews()[0]);
         }
@@ -105,24 +161,27 @@ export default class Calendar {
   // ==========================================
   protected nextMonth(): void {
     this.calendarApi()?.next();
+    this.calendarApi()?.updateSize();
   }
 
   protected previousMonth(): void {
     this.calendarApi()?.prev();
+    this.calendarApi()?.updateSize();
   }
 
   protected goToToday(): void {
     this.calendarApi()?.today();
+    this.calendarApi()?.updateSize();
   }
-  protected changeView(viewName: { value: string; label: string }): void {
+  protected changeView(viewName: { value: string; label: string; icon: string }): void {
     this.calendarApi()?.changeView(viewName.value);
+    this.calendarApi()?.updateSize();
     this.currentView.set(viewName);
   }
 
   protected addEvent(): void {
     const dialogRef = this._hlmDialogService.open(CalendarForm, {
       contentClass: 'max-w-3xl',
-      autoFocus: 'dialog',
     });
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
@@ -130,6 +189,14 @@ export default class Calendar {
         this.events.update((events) => [...events, result]);
       }
     });
+  }
+
+  onDatePickerChange(dateStr: string) {
+    const api = this.calendarApi();
+    if (api) {
+      api.gotoDate(dateStr);
+      api.updateSize();
+    }
   }
 
   // ==========================================
@@ -151,9 +218,8 @@ export default class Calendar {
   }
 
   private handleEventClick(info: EventClickArg): void {
-    const dialogRef = this._hlmDialogService.open(CalendarForm, {
+    const dialogRef = this._hlmDialogService.open(EventDetails, {
       contentClass: 'max-w-3xl',
-      autoFocus: 'dialog',
       context: {
         event: info.event,
       },
@@ -168,8 +234,7 @@ export default class Calendar {
 
   private handleDateClick(info: DateClickArg): void {
     const dialogRef = this._hlmDialogService.open(CalendarForm, {
-      contentClass: 'max-w-3xl',
-      autoFocus: 'dialog',
+      contentClass: 'max-w-3xl min-w-xl',
       context: {
         date: info.date,
       },

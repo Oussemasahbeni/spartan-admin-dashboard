@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { LOCAL_STORAGE } from '@shared/tokens';
 import { User } from '../../features/users/model/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly _http = inject(HttpClient);
   private readonly _router = inject(Router);
+  private readonly _localStorage = inject(LOCAL_STORAGE);
 
   private readonly _currentUser = signal<User | null>(null);
   readonly currentUser = this._currentUser.asReadonly();
@@ -18,7 +20,7 @@ export class AuthService {
 
   logout(): void {
     this._currentUser.set(null);
-    localStorage.removeItem('token');
+    this._localStorage?.removeItem('token');
     this._router.navigate(['/login']);
   }
 }

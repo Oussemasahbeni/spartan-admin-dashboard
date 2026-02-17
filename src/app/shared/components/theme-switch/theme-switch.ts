@@ -3,6 +3,7 @@ import { ThemeService } from '@core/config/theme.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideMonitor, lucideMoon, lucideSun } from '@ng-icons/lucide';
+import { WINDOW } from '@shared/tokens';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -60,6 +61,7 @@ export class ThemeSwitch {
   // Services
   // ==========================================
   private readonly _themeService = inject(ThemeService);
+  private readonly window = inject(WINDOW);
 
   // ==========================================
   // State
@@ -68,7 +70,7 @@ export class ThemeSwitch {
 
   readonly iconName = computed(() => {
     const theme = this.currentTheme();
-    const isDarkSystem = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDarkSystem = this.window?.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDark = theme === 'dark' || (theme === 'system' && isDarkSystem);
 
     return isDark ? 'lucideSun' : 'lucideMoon';

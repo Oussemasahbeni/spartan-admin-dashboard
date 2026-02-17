@@ -17,11 +17,11 @@ export function makeEventsData(count: number): EventInput[] {
 
     const isAllDay = faker.datatype.boolean();
 
-    const themeColors = ['var(--color-blue-500)', 'var(--color-green-700)', 'var(--color-purple-500)'];
+    const themeColors = ['var(--fc-red)', 'var(--fc-yellow)', 'var(--fc-green)', 'var(--fc-blue)'];
 
     return {
       id: faker.string.uuid(),
-      title: faker.lorem.words({ min: 2, max: 5 }),
+      title: faker.lorem.words({ min: 2, max: 3 }),
       start: startDate,
       end: isAllDay ? undefined : endDate,
       allDay: isAllDay,

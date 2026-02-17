@@ -59,7 +59,7 @@ import { provideTransactionStatusIcons } from './pipes/status-ui.pipe';
   templateUrl: './dashboard-2.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Dashboard2 implements OnInit {
+export default class Dashboard2 implements OnInit {
   // ==========================================
   // State
   // ==========================================

@@ -52,6 +52,11 @@
   --chart-indigo: oklch(0.6 0.2 300);
   --chart-amber: oklch(0.75 0.15 85);
   --chart-orange: oklch(0.6767 0.1572 35.1);
+
+  --fc-red: oklch(0.63 0.22 22.216);
+  --fc-yellow: oklch(0.68 0.18 70.08);
+  --fc-green: oklch(0.6 0.19 149.214);
+  --fc-blue: oklch(0.6 0.22 253.36);
 }
 
 :root.dark {
@@ -89,6 +94,11 @@
   --chart-indigo: oklch(0.58 0.23 305.88);
   --chart-amber: oklch(0.82 0.17 90.47);
   --chart-orange: oklch(0.6767 0.1572 35.1);
+
+  --fc-red: oklch(0.48 0.15 22.216);
+  --fc-yellow: oklch(0.52 0.13 70.08);
+  --fc-green: oklch(0.45 0.14 149.214);
+  --fc-blue: oklch(0.42 0.16 253.36);
 }
 
 @layer base {

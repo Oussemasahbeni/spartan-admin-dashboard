@@ -1,15 +1,17 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
+import { LOCAL_STORAGE } from '@shared/tokens';
 import { User } from '../../features/users/model/user';
 
 export const authGuard: CanActivateFn = (_route, _state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
+  const _localStorage = inject(LOCAL_STORAGE);
 
   if (authService.currentUser()) return true;
 
-  const token = localStorage.getItem('token');
+  const token = _localStorage?.getItem('token');
   if (token) {
     const user: User = {
       id: '1',

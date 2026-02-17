@@ -11,6 +11,15 @@
         "list": "List"
     },
     "today": "Today",
+    "events": "Events",
+    "allDay": "All Day",
+    "eventDetails": {
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "at": "at",
+        "location": "Location",
+        "tags": "Tags"
+    },
     "form": {
         "addTitle": "Add Event",
         "addDescription": "Fill out the form below to add a new event to your calendar.",
@@ -28,6 +37,13 @@
         "placeholder": {
             "selectDate": "Select a date "
         }
+    },
+    "details": {
+        "allDay": "All Day",
+        "startDate": "Starts at",
+        "endDate": "Ends at",
+        "description": "Description",
+        "at": "at"
     },
     "toast": {
         "eventCreated": "Event created successfully!",

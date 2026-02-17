@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { DOCUMENT, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { LOCAL_STORAGE } from '@shared/tokens';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -9,7 +10,7 @@ export type Theme = 'light' | 'dark' | 'system';
 export class ThemeService {
   private readonly document = inject(DOCUMENT);
   private readonly _platformId = inject(PLATFORM_ID);
-
+  private readonly _localStorage = inject(LOCAL_STORAGE);
   private readonly _localStorageKey = 'theme-preference';
 
   private readonly _theme = signal<Theme>('system');
@@ -20,7 +21,7 @@ export class ThemeService {
   init(): void {
     if (!isPlatformBrowser(this._platformId)) return;
 
-    const savedTheme = localStorage.getItem(this._localStorageKey) as Theme;
+    const savedTheme = this._localStorage?.getItem(this._localStorageKey) as Theme;
 
     const validThemes: Theme[] = ['light', 'dark', 'system'];
 
@@ -32,7 +33,7 @@ export class ThemeService {
     this._theme.set(theme);
 
     if (isPlatformBrowser(this._platformId)) {
-      localStorage.setItem(this._localStorageKey, theme);
+      this._localStorage?.setItem(this._localStorageKey, theme);
       this._applyDomChanges(theme);
     }
   }

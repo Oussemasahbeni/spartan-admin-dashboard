@@ -26,6 +26,8 @@ import { registerLocaleData } from '@angular/common';
 import localeAr from '@angular/common/locales/ar';
 import localeFr from '@angular/common/locales/fr';
 import { mockApiInterceptor } from '@core/interceptor/mock-api.interceptor';
+import { provideHlmDatePickerConfig } from '@spartan-ng/helm/date-picker';
+import { format } from 'date-fns/format';
 
 registerLocaleData(localeFr, 'fr');
 registerLocaleData(localeAr, 'ar');
@@ -77,6 +79,9 @@ export const appConfig: ApplicationConfig = {
         languageService.setLanguage(savedLang);
       }
       themeService.init();
+    }),
+    provideHlmDatePickerConfig({
+      formatDate: (date: Date) => format(date, 'dd-MM-yyyy'),
     }),
 
     {

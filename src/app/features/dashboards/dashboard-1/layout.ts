@@ -33,7 +33,7 @@ import { OverviewDashboard } from './overview/overview';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Dashboard1Layout {
+export default class Dashboard1Layout {
   // ==========================================
   // State
   // ==========================================

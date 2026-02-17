@@ -6,6 +6,7 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff, lucideGithub } from '@ng-icons/lucide';
 import { svglGoogle } from '@ng-icons/svgl';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
+import { LOCAL_STORAGE } from '@shared/tokens';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
@@ -53,6 +54,7 @@ export default class Login {
   // ==========================================
 
   private readonly _router = inject(Router);
+  private readonly _localStorage = inject(LOCAL_STORAGE);
 
   // ==========================================
   // State
@@ -89,7 +91,7 @@ export default class Login {
 
   onLogin(): void {
     this.isLoading.set(true);
-    localStorage.setItem('token', 'dummy-jwt-token');
+    this._localStorage?.setItem('token', 'dummy-jwt-token');
     this._router.navigate(['/dashboard/dashboard-1']);
   }
 }

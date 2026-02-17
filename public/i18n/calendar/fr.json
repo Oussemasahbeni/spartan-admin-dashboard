@@ -11,6 +11,15 @@
         "list": "Liste"
     },
     "today": "Aujourd’hui",
+    "events": "Événements",
+    "allDay": "Toute la journée",
+    "eventDetails": {
+        "startDate": "Date de début",
+        "endDate": "Date de fin",
+        "at": "à",
+        "location": "Lieu",
+        "tags": "Étiquettes"
+    },
     "form": {
         "addTitle": "Ajouter un événement",
         "addDescription": "Remplissez le formulaire ci-dessous pour ajouter un nouvel événement à votre calendrier.",

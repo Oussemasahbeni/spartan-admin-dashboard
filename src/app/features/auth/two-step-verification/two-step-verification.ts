@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideMail } from '@ng-icons/lucide';
+import { LOCAL_STORAGE } from '@shared/tokens';
 import { BrnInputOtp } from '@spartan-ng/brain/input-otp';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -31,13 +32,15 @@ import { AuthLayout } from '../layout';
   templateUrl: './two-step-verification.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TwoStepVerification implements OnDestroy {
+export default class TwoStepVerification {
   // ==========================================
   // Services
   // ==========================================
 
   private readonly _router = inject(Router);
   private readonly _formBuilder = inject(FormBuilder);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _localStorage = inject(LOCAL_STORAGE);
 
   // ==========================================
   // State
@@ -57,6 +60,10 @@ export default class TwoStepVerification implements OnDestroy {
 
   constructor() {
     this.startCountdown();
+
+    this._destroyRef.onDestroy(() => {
+      this.stopCountdown();
+    });
   }
 
   // ==========================================
@@ -89,11 +96,9 @@ export default class TwoStepVerification implements OnDestroy {
 
       // Simulate verification
       if (otp === '123456') {
-        // Success - navigate to dashboard
-        localStorage.setItem('token', 'dummy-jwt-token');
+        this._localStorage?.setItem('token', 'dummy-jwt-token');
         this._router.navigate(['/dashboard/dashboard-1']);
       } else {
-        // Error - show error message
         this.showError.set(true);
         this.otpForm.reset();
       }
@@ -138,9 +143,5 @@ export default class TwoStepVerification implements OnDestroy {
       clearInterval(this._intervalId);
       this._intervalId = undefined;
     }
-  }
-
-  ngOnDestroy(): void {
-    this.stopCountdown();
   }
 }

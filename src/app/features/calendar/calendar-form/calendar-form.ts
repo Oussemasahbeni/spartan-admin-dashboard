@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { form, FormField, required, submit, validate } from '@angular/forms/signals';
-import { EventInput } from '@fullcalendar/core/index.js';
+import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
@@ -51,7 +51,7 @@ export class CalendarForm implements OnInit {
 
   private readonly _transloco = inject(TranslocoService);
   private readonly _dialogRef = inject<BrnDialogRef>(BrnDialogRef);
-  private readonly _dialogContext = injectBrnDialogContext<{ event?: EventInput; date?: Date }>();
+  private readonly _dialogContext = injectBrnDialogContext<{ event?: EventApi; date?: Date }>();
 
   // ==========================================
   // State
@@ -113,7 +113,7 @@ export class CalendarForm implements OnInit {
       const endDate = new Date(event.end as Date);
       this.eventModel.set({
         title: event.title || '',
-        description: event.extendedProps?.['description'] || '',
+        description: event.extendedProps['description'] || '',
         startDate,
         startTime: startDate.toTimeString().slice(0, 5),
         endDate,

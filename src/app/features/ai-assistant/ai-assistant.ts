@@ -13,7 +13,7 @@ import { AssistantService } from './service/chat.service';
   templateUrl: './ai-assistant.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AiAssistant {
+export default class AiAssistant {
   // ==========================================
   // Services
   // ==========================================

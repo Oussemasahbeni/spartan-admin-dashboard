@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
-import { Settings } from './settings';
 
 export default [
   {
     path: '',
-    component: Settings,
+    loadComponent: () => import('./settings'),
   },
 ] as Routes;

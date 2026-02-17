@@ -51,7 +51,7 @@ interface Panel {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class Settings {
+export default class Settings {
   // ==========================================
   // Services
   // ==========================================
