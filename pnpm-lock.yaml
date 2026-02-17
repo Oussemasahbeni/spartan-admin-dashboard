@@ -110,9 +110,6 @@ importers:
       ngx-sonner:
         specifier: '>=3.0.0'
         version: 3.1.0(@angular/common@21.1.2(@angular/core@21.1.2(@angular/compiler@21.1.2)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.1.2(@angular/compiler@21.1.2)(rxjs@7.8.2)(zone.js@0.16.0))
-      prettier:
-        specifier: ^3.7.4
-        version: 3.7.4
       rxjs:
         specifier: ~7.8.0
         version: 7.8.2
@@ -162,6 +159,9 @@ importers:
       postcss:
         specifier: ^8.5.3
         version: 8.5.6
+      prettier:
+        specifier: ^3.7.4
+        version: 3.7.4
       prettier-plugin-organize-imports:
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.7.4)(typescript@5.9.3)
