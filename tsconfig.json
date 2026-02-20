@@ -17,7 +17,6 @@
       "@shared/*": ["./src/app/shared/*"],
       "@spartan-ng/helm/button": ["./src/app/spartan/button/src/index.ts"],
       "@spartan-ng/helm/table": ["./src/app/spartan/table/src/index.ts"],
-      "@spartan-ng/helm/textarea": ["./src/app/spartan/textarea/src/index.ts"],
       "@spartan-ng/helm/alert": ["./src/app/spartan/alert/src/index.ts"],
       "@spartan-ng/helm/utils": ["./src/app/spartan/utils/src/index.ts"],
       "@spartan-ng/helm/alert-dialog": ["./src/app/spartan/alert-dialog/src/index.ts"],
@@ -36,7 +35,6 @@
       "@spartan-ng/helm/field": ["./src/app/spartan/field/src/index.ts"],
       "@spartan-ng/helm/icon": ["./src/app/spartan/icon/src/index.ts"],
       "@spartan-ng/helm/input": ["./src/app/spartan/input/src/index.ts"],
-      "@spartan-ng/helm/input-group": ["./src/app/spartan/input-group/src/index.ts"],
       "@spartan-ng/helm/input-otp": ["./src/app/spartan/input-otp/src/index.ts"],
       "@spartan-ng/helm/label": ["./src/app/spartan/label/src/index.ts"],
       "@spartan-ng/helm/pagination": ["./src/app/spartan/pagination/src/index.ts"],
@@ -53,7 +51,9 @@
       "@spartan-ng/helm/spinner": ["./src/app/spartan/spinner/src/index.ts"],
       "@spartan-ng/helm/tabs": ["./src/app/spartan/tabs/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./src/app/spartan/tooltip/src/index.ts"],
-      "@spartan-ng/helm/dialog": ["./src/app/spartan/dialog/src/index.ts"]
+      "@spartan-ng/helm/dialog": ["./src/app/spartan/dialog/src/index.ts"],
+      "@spartan-ng/helm/input-group": ["./src/app/spartan/input-group/src/index.ts"],
+      "@spartan-ng/helm/textarea": ["./src/app/spartan/textarea/src/index.ts"]
     }
   },
   "angularCompilerOptions": {
