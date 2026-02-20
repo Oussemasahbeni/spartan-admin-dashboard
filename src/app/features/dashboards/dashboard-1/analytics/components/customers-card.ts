@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality.service';
-import { provideTranslocoScope, translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
+import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideEllipsisVertical, lucideTrendingUp } from '@ng-icons/lucide';
+import { lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
-
-const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
 
 interface MonthsTranslation {
   jan: string;
@@ -22,22 +20,16 @@ interface MonthsTranslation {
 @Component({
   selector: 'adm-customers-card',
   imports: [HlmCardImports, HlmButtonImports, HlmIconImports, NgApexchartsModule, TranslocoModule],
-  providers: [provideTranslocoScope(SCOPE), provideIcons({ lucideEllipsisVertical, lucideTrendingUp })],
+  providers: [provideIcons({ lucideTrendingUp })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.customersCard'" hlmCard class="h-full w-full">
-      <div hlmCardHeader class="flex flex-row items-start justify-between gap-2">
-        <div>
-          <h3 hlmCardTitle class="text-lg font-semibold">{{ t('title') }}</h3>
-          <p hlmCardDescription>{{ t('description') }}</p>
-        </div>
+      <header hlmCardHeader class="flex flex-col items-start justify-between gap-2">
+        <h1 hlmCardTitle class="text-lg font-semibold">{{ t('title') }}</h1>
+        <p hlmCardDescription>{{ t('description') }}</p>
+      </header>
 
-        <button type="button" hlmBtn variant="ghost" size="icon">
-          <ng-icon hlmIcon name="lucideEllipsisVertical" size="sm" />
-        </button>
-      </div>
-
-      <div hlmCardContent>
+      <main hlmCardContent>
         <apx-chart
           [grid]="chartOptions().grid!"
           [series]="chartOptions().series!"
@@ -50,12 +42,12 @@ interface MonthsTranslation {
           [dataLabels]="chartOptions().dataLabels!"
           [colors]="chartOptions().colors!"
         />
-      </div>
+      </main>
 
-      <div hlmCardFooter class="flex items-center gap-2 text-sm">
+      <footer hlmCardFooter class="flex items-center gap-2 text-sm">
         <ng-icon hlmIcon name="lucideTrendingUp" size="sm" class="text-success" />
         <span class="text-success font-medium">{{ t('trendingText') }}</span>
-      </div>
+      </footer>
     </section>
   `,
 })
@@ -71,7 +63,7 @@ export class CustomersCard {
   // State
   // ==========================================
 
-  private readonly _months = translateObjectSignal('months', {}, SCOPE);
+  private readonly _months = translateObjectSignal('months');
 
   readonly months = computed(() => this._months() as MonthsTranslation);
 

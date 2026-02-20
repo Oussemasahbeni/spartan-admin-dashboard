@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
@@ -16,15 +16,14 @@ import { User } from '../../../../users/model/user';
     provideIcons({
       lucideChevronDown,
     }),
-    provideTranslocoScope({ scope: 'dashboard/dashboard1', alias: 'dashboard1' }),
   ],
   template: `
-    <div *transloco="let t; prefix: 'dashboard1.teamMembersCard'" hlmCard class="h-full">
-      <div hlmCardHeader>
-        <h3 hlmCardTitle class="text-base font-semibold">{{ t('title') }}</h3>
+    <section *transloco="let t; prefix: 'dashboard1.teamMembersCard'" hlmCard class="h-full">
+      <header hlmCardHeader>
+        <h1 hlmCardTitle class="text-base font-semibold">{{ t('title') }}</h1>
         <p hlmCardDescription>{{ t('description') }}</p>
-      </div>
-      <div hlmCardContent class="space-y-4">
+      </header>
+      <main hlmCardContent class="space-y-4">
         @for (member of members(); track member.email) {
           <div class="flex min-w-0 items-center justify-between gap-4">
             <div class="flex min-w-0 flex-1 items-center gap-3">
@@ -56,8 +55,8 @@ import { User } from '../../../../users/model/user';
             </ng-template>
           </div>
         }
-      </div>
-    </div>
+      </main>
+    </section>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -38,10 +38,10 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
         >
           <div class="z-1 flex h-full items-center justify-center pt-20">
             <div class="absolute top-0 right-0 w-full max-w-62.5 xl:max-w-112.5">
-              <img src="/images/auth/shape.svg" width="450" height="254" fetchpriority="high" decoding="async" alt="" />
+              <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="grid" />
             </div>
             <div class="absolute bottom-0 left-0 w-full max-w-62.5 rotate-180 xl:max-w-112.5">
-              <img src="/images/auth/shape.svg" width="450" height="254" loading="lazy" decoding="async" alt="" />
+              <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="grid" />
             </div>
 
             <div class="flex max-w-sm flex-col items-center justify-center gap-3">

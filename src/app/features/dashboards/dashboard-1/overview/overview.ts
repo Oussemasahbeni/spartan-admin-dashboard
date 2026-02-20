@@ -3,7 +3,7 @@ import { makePaymentData } from '@core/mock/payment';
 import { makeUsersData } from '@core/mock/users';
 import { TranslocoModule } from '@jsverse/transloco';
 import { User } from '../../../users/model/user';
-import { AreaChartCard } from './components/charts/area-chart-card';
+import { AreaChartCard } from './components/charts/subscriptions-card';
 import { BarChartCard } from './components/charts/bar-chart-card';
 import { CardVariant, OverviewMetricCard } from './components/metric-card';
 import { PaymentsTable } from './components/table/payments-table';

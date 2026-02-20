@@ -38,14 +38,15 @@
               @for (item of group.items; track item.key || item.title) {
                 @if (item.children; as children) {
                   <!-- Collapsible Item -->
-                  <hlm-collapsible class="group/collapsible">
-                    <li hlmSidebarMenuItem>
+                  <li hlmSidebarMenuItem>
+                    <hlm-collapsible class="group/collapsible">
                       <button
                         type="button"
                         hlmCollapsibleTrigger
                         hlmSidebarMenuButton
                         class="flex w-full items-center justify-between"
                         [tooltip]="item.key ? t(item.key) : item.title"
+                        [aria-label]="item.key ? t(item.key) : item.title"
                       >
                         <ng-icon hlmIcon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
                         <ng-icon
@@ -65,6 +66,7 @@
                                 hlmSidebarMenuSubButton
                                 class="hover:none w-full"
                                 [routerLink]="subItem.url"
+                                [aria-label]="subItem.key ? t(subItem.key) : subItem.title"
                               >
                                 {{ subItem.key ? t(subItem.key) : subItem.title }}
                               </a>
@@ -72,8 +74,8 @@
                           }
                         </ul>
                       </hlm-collapsible-content>
-                    </li>
-                  </hlm-collapsible>
+                    </hlm-collapsible>
+                  </li>
                 } @else {
                   <!-- Single Link Item -->
                   <li hlmSidebarMenuItem>
@@ -84,6 +86,7 @@
                       [tooltip]="item.key ? t(item.key) : item.title"
                       [routerLinkActiveOptions]="{ exact: false }"
                       [routerLink]="item.url"
+                      [aria-label]="item.key ? t(item.key) : item.title"
                     >
                       <ng-icon hlmIcon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
                     </a>

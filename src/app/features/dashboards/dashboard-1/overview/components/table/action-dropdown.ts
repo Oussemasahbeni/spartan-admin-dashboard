@@ -22,7 +22,15 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 
   template: `
-    <button type="button" hlmBtn variant="ghost" size="icon" align="end" [hlmDropdownMenuTrigger]="menu">
+    <button
+      type="button"
+      hlmBtn
+      variant="ghost"
+      size="icon"
+      align="end"
+      aria-label="Open actions"
+      [hlmDropdownMenuTrigger]="menu"
+    >
       <ng-icon hlmIcon size="sm" name="lucideEllipsisVertical" />
     </button>
     <ng-template #menu>

@@ -38,13 +38,13 @@ export default class Dashboard1Layout {
   // State
   // ==========================================
 
-  protected readonly selectedTab = signal('overview');
+  protected readonly selectedTab = signal<'overview' | 'analytics'>('overview');
 
   // ==========================================
   // Public Methods
   // ==========================================
 
   onTabChange(tab: string) {
-    this.selectedTab.set(tab);
+    this.selectedTab.set(tab as 'overview' | 'analytics');
   }
 }

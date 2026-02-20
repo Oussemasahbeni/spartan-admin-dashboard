@@ -31,12 +31,12 @@ interface MonthsTranslation {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section hlmCard class="h-full w-full">
-      <div hlmCardHeader>
-        <h3 hlmCardTitle class="text-base font-semibold">{{ areaChart().title }}</h3>
+      <header hlmCardHeader>
+        <h1 hlmCardTitle class="text-base font-semibold">{{ areaChart().title }}</h1>
         <p hlmCardDescription>{{ areaChart().description }}</p>
-      </div>
+      </header>
 
-      <div hlmCardContent class="w-full overflow-hidden">
+      <main hlmCardContent class="w-full overflow-hidden">
         <apx-chart
           [grid]="chartOptions().grid!"
           [series]="chartOptions().series!"
@@ -49,7 +49,7 @@ interface MonthsTranslation {
           [dataLabels]="chartOptions().dataLabels!"
           [colors]="chartOptions().colors!"
         />
-      </div>
+      </main>
     </section>
   `,
 })

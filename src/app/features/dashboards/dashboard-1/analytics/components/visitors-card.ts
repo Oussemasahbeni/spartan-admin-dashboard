@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality.service';
-import { provideTranslocoScope, translateObjectSignal, Translation, TranslocoModule } from '@jsverse/transloco';
+import { translateObjectSignal, Translation, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideTrendingDown, lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
-
-const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
 
 interface MonthsTranslation {
   jan: string;
@@ -22,68 +20,68 @@ interface MonthsTranslation {
 @Component({
   selector: 'adm-visitors-card',
   imports: [HlmCardImports, HlmIconImports, HlmTabsImports, NgApexchartsModule, TranslocoModule],
-  providers: [provideTranslocoScope(SCOPE), provideIcons({ lucideTrendingUp, lucideTrendingDown })],
+  providers: [provideIcons({ lucideTrendingUp, lucideTrendingDown })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.visitorsCard'" hlmCard class="h-full w-full">
-      <div hlmCardHeader class="flex flex-row items-start justify-between">
-        <div>
-          <h3 hlmCardTitle class="text-lg font-semibold">{{ t('title') }}</h3>
-          <p hlmCardDescription>{{ t('description') }}</p>
-        </div>
+      <hlm-tabs [tab]="selectedPeriod()" (tabActivated)="selectedPeriod.set($event)">
+        <header hlmCardHeader class="flex flex-row items-start justify-between">
+          <div>
+            <h1 hlmCardTitle class="text-lg font-semibold">{{ t('title') }}</h1>
+            <p hlmCardDescription>{{ t('description') }}</p>
+          </div>
 
-        <hlm-tabs [tab]="selectedPeriod()" (tabActivated)="selectedPeriod.set($event)">
           <hlm-tabs-list *transloco="let t; prefix: 'dashboard1'">
-            <button type="button" hlmTabsTrigger="month">
+            <button type="button" hlmTabsTrigger="month" [aria-label]="t('period.month')">
               {{ t('period.month') }}
             </button>
-            <button type="button" hlmTabsTrigger="week">
+            <button type="button" hlmTabsTrigger="week" [aria-label]="t('period.week')">
               {{ t('period.week') }}
             </button>
           </hlm-tabs-list>
-        </hlm-tabs>
-      </div>
+        </header>
 
-      <div hlmCardContent class="flex flex-col gap-4 lg:flex-row">
-        <!-- Metrics Panel -->
-        <div class="flex flex-col justify-center gap-4 lg:w-1/3">
-          <!-- New Visitors Metric -->
-          <div class="bg-muted/50 rounded-lg border p-4">
-            <span class="text-muted-foreground text-sm font-medium">{{ t('newVisitors') }}</span>
-            <div class="mt-1 text-2xl font-bold">36,786</div>
-            <div class="text-success mt-1 flex items-center gap-1 text-xs">
-              <ng-icon hlmIcon name="lucideTrendingUp" size="xs" />
-              <span>88.7% (+10)</span>
+        <div hlmCardContent class="flex flex-col gap-4 lg:flex-row" [hlmTabsContent]="selectedPeriod()">
+          <!-- Metrics Panel -->
+          <div class="flex flex-col justify-center gap-4 lg:w-1/3">
+            <!-- New Visitors Metric -->
+            <div class="bg-muted/50 rounded-lg border p-4">
+              <span class="text-muted-foreground text-sm font-medium">{{ t('newVisitors') }}</span>
+              <div class="mt-1 text-2xl font-bold">36,786</div>
+              <div class="text-success mt-1 flex items-center gap-1 text-xs">
+                <ng-icon hlmIcon name="lucideTrendingUp" size="xs" />
+                <span>88.7% (+10)</span>
+              </div>
+            </div>
+
+            <!-- Returning Visitors Metric -->
+            <div class="bg-muted/50 rounded-lg border p-4">
+              <span class="text-muted-foreground text-sm font-medium">{{ t('returning') }}</span>
+              <div class="mt-1 text-2xl font-bold">467</div>
+              <div class="text-destructive mt-1 flex items-center gap-1 text-xs">
+                <ng-icon hlmIcon name="lucideTrendingDown" size="xs" />
+                <span>8.5% (-6)</span>
+              </div>
             </div>
           </div>
 
-          <!-- Returning Visitors Metric -->
-          <div class="bg-muted/50 rounded-lg border p-4">
-            <span class="text-muted-foreground text-sm font-medium">{{ t('returning') }}</span>
-            <div class="mt-1 text-2xl font-bold">467</div>
-            <div class="text-destructive mt-1 flex items-center gap-1 text-xs">
-              <ng-icon hlmIcon name="lucideTrendingDown" size="xs" />
-              <span>8.5% (-6)</span>
-            </div>
-          </div>
+          <!-- Chart -->
+          <main class="flex-1">
+            <apx-chart
+              [grid]="chartOptions().grid!"
+              [series]="chartOptions().series!"
+              [chart]="chartOptions().chart!"
+              [xaxis]="chartOptions().xaxis!"
+              [yaxis]="chartOptions().yaxis!"
+              [legend]="chartOptions().legend!"
+              [fill]="chartOptions().fill!"
+              [stroke]="chartOptions().stroke!"
+              [dataLabels]="chartOptions().dataLabels!"
+              [colors]="chartOptions().colors!"
+            />
+          </main>
         </div>
-
-        <!-- Chart -->
-        <div class="flex-1">
-          <apx-chart
-            [grid]="chartOptions().grid!"
-            [series]="chartOptions().series!"
-            [chart]="chartOptions().chart!"
-            [xaxis]="chartOptions().xaxis!"
-            [yaxis]="chartOptions().yaxis!"
-            [legend]="chartOptions().legend!"
-            [fill]="chartOptions().fill!"
-            [stroke]="chartOptions().stroke!"
-            [dataLabels]="chartOptions().dataLabels!"
-            [colors]="chartOptions().colors!"
-          />
-        </div>
-      </div>
+      </hlm-tabs>
     </section>
   `,
 })
@@ -101,7 +99,7 @@ export class VisitorsCard {
 
   readonly selectedPeriod = signal<string>('week');
 
-  private readonly _months = translateObjectSignal('months', {}, SCOPE);
+  private readonly _months = translateObjectSignal('months', {});
 
   readonly months = computed(() => this._months() as Translation & MonthsTranslation);
 

@@ -6,7 +6,7 @@
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-3xl font-bold tracking-tight">{{ t('header.title') }}</h2>
-          <p class="mt-1 text-sm text-gray-500">{{ t('header.subtitle') }}</p>
+          <p class="mt-1 text-sm">{{ t('header.subtitle') }}</p>
         </div>
       </div>
 
@@ -36,7 +36,15 @@
               <span hlmBadge> {{ visibleEventCount() }} {{ t('events') }} </span>
             </div>
             <div class="text-muted-foreground flex items-center gap-2 text-sm">
-              <button type="button" hlmBtn variant="outline" size="icon" class="h-5 w-5" (click)="previousMonth()">
+              <button
+                type="button"
+                hlmBtn
+                variant="outline"
+                size="icon"
+                class="h-5 w-5"
+                aria-label="Previous month"
+                (click)="previousMonth()"
+              >
                 <ng-icon hlmIcon name="lucideChevronLeft" class="rtl:rotate-180" size="xs" />
               </button>
               <span>
@@ -46,7 +54,15 @@
                   {{ currentStart() | date: 'mediumDate' }} - {{ currentEnd() | date: 'mediumDate' }}
                 }
               </span>
-              <button type="button" hlmBtn variant="outline" size="icon" class="h-5 w-5" (click)="nextMonth()">
+              <button
+                type="button"
+                hlmBtn
+                variant="outline"
+                size="icon"
+                class="h-5 w-5"
+                aria-label="Next month"
+                (click)="nextMonth()"
+              >
                 <ng-icon hlmIcon name="lucideChevronRight" class="rtl:rotate-180" size="xs" />
               </button>
             </div>
@@ -61,6 +77,7 @@
             hlmBtn
             variant="outline"
             size="icon"
+            aria-label="Filter events by type"
             [hlmDropdownMenuTrigger]="typesMenu"
           >
             <ng-icon hlmIcon name="lucideFilter" size="sm" />
@@ -101,6 +118,7 @@
             hlmBtn
             variant="outline"
             size="icon"
+            aria-label="Calendar settings"
             [hlmDropdownMenuTrigger]="settingsMenu"
           >
             <ng-icon hlmIcon name="lucideSettings" size="sm" />

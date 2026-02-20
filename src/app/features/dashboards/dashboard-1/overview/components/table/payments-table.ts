@@ -56,11 +56,11 @@ import { PaymentsActionDropdown } from './action-dropdown';
   ],
   template: `
     <div *transloco="let t; prefix: 'dashboard1.paymentsTable'" hlmCard class="h-full">
-      <div hlmCardHeader>
-        <h3 hlmCardTitle class="text-base font-semibold">{{ t('title') }}</h3>
+      <header hlmCardHeader>
+        <h1 hlmCardTitle class="text-base font-semibold">{{ t('title') }}</h1>
         <p hlmCardDescription>{{ t('description') }}</p>
-      </div>
-      <div hlmCardContent class="space-y-4">
+      </header>
+      <main hlmCardContent class="space-y-4">
         <div class="flex items-center justify-between gap-4">
           <hlm-input-group>
             <input
@@ -94,7 +94,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
             </span>
           </ng-template>
         </adm-data-table>
-      </div>
+      </main>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

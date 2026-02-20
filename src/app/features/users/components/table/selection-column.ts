@@ -6,7 +6,6 @@ import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@
   imports: [HlmCheckboxImports],
   host: {
     class: 'flex',
-    'aria-label': 'Select all',
   },
   template: `
     <hlm-checkbox
@@ -29,7 +28,6 @@ export class TableHeadSelection<T> {
   imports: [HlmCheckboxImports],
   host: {
     class: 'flex',
-    'aria-label': 'Select Row',
   },
   template: `
     <hlm-checkbox
