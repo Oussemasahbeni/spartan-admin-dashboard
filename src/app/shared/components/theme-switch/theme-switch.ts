@@ -20,7 +20,14 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     }),
   ],
   template: `
-    <button type="button" variant="outline" hlmBtn size="icon" [hlmDropdownMenuTrigger]="menu">
+    <button
+      type="button"
+      variant="outline"
+      hlmBtn
+      size="icon"
+      [hlmDropdownMenuTrigger]="menu"
+      [attr.aria-label]="'navUser.theme' | transloco"
+    >
       <ng-icon hlmIcon size="sm" [name]="iconName()" />
     </button>
 

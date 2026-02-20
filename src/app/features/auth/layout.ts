@@ -20,19 +20,17 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     <div *transloco="let t" class="bg-background block h-screen overflow-hidden">
       <div class="relative flex h-full flex-col md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <div class="absolute top-6 left-6 flex space-x-2">
-          <a routerLink="/">
-            <button type="button" variant="outline" hlmBtn size="icon">
-              <ng-icon hlmIcon size="sm" name="lucideHome" />
-            </button>
+          <a routerLink="/" hlmBtn variant="outline" size="icon" [attr.aria-label]="t('breadcrumbs.home')">
+            <ng-icon hlmIcon size="sm" name="lucideHome" />
           </a>
 
           <adm-theme-switch />
         </div>
 
         <!-- Form Section -->
-        <div class="my-auto w-full overflow-y-auto">
+        <main class="my-auto w-full overflow-y-auto">
           <ng-content />
-        </div>
+        </main>
 
         <!-- Illustration Section -->
         <div
@@ -40,10 +38,10 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
         >
           <div class="z-1 flex h-full items-center justify-center pt-20">
             <div class="absolute top-0 right-0 w-full max-w-62.5 xl:max-w-112.5">
-              <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="grid" />
+              <img src="/images/auth/shape.svg" width="450" height="254" fetchpriority="high" decoding="async" alt="" />
             </div>
             <div class="absolute bottom-0 left-0 w-full max-w-62.5 rotate-180 xl:max-w-112.5">
-              <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="grid" />
+              <img src="/images/auth/shape.svg" width="450" height="254" loading="lazy" decoding="async" alt="" />
             </div>
 
             <div class="flex max-w-sm flex-col items-center justify-center gap-3">
