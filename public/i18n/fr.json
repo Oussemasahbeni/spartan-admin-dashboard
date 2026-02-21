@@ -85,10 +85,15 @@
         "update": "Mettre à jour",
         "columns": "Colonnes",
         "refresh": "Actualiser",
+        "clear": "Effacer",
         "import": "Importer",
         "export": "Exporter",
         "clearFilter": "Effacer le filtre",
         "addNew": "Ajouter"
+    },
+    "sort": {
+        "asc": "Ascendant",
+        "desc": "Descendant"
     },
     "validation": {
         "required": "Ce champ est obligatoire.",

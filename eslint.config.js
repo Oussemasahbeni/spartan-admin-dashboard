@@ -3,11 +3,15 @@ const eslint = require('@eslint/js');
 const { defineConfig } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
+const unusedImports = require('eslint-plugin-unused-imports');
 
 module.exports = defineConfig([
   {
     files: ['**/*.ts'],
     ignores: ['**/src/app/spartan/**'],
+    plugins: {
+      'unused-imports': unusedImports,
+    },
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -32,6 +36,7 @@ module.exports = defineConfig([
           ignoreTemplateLiterals: true,
         },
       ],
+      'unused-imports/no-unused-imports': 'error',
       'object-shorthand': ['warn', 'always', { avoidQuotes: true }],
       'quote-props': ['warn', 'consistent-as-needed'],
       '@angular-eslint/prefer-on-push-component-change-detection': ['error'],
