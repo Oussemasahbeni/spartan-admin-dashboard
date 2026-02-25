@@ -1,6 +1,6 @@
 <div *transloco="let t; prefix: 'settings.planBilling'" class="w-full max-w-5xl">
   <!-- Form -->
-  <form novalidate (submit)="onSubmit($event)">
+  <form [formRoot]="planBillingForm">
     <div class="grid w-full gap-6 sm:grid-cols-3">
       <!-- Plan Alert -->
       <div class="sm:col-span-3">

@@ -27,7 +27,6 @@
       "@spartan-ng/helm/card": ["./src/app/spartan/card/src/index.ts"],
       "@spartan-ng/helm/checkbox": ["./src/app/spartan/checkbox/src/index.ts"],
       "@spartan-ng/helm/collapsible": ["./src/app/spartan/collapsible/src/index.ts"],
-      "@spartan-ng/helm/combobox": ["./src/app/spartan/combobox/src/index.ts"],
       "@spartan-ng/helm/command": ["./src/app/spartan/command/src/index.ts"],
       "@spartan-ng/helm/date-picker": ["./src/app/spartan/date-picker/src/index.ts"],
       "@spartan-ng/helm/dropdown-menu": ["./src/app/spartan/dropdown-menu/src/index.ts"],
@@ -51,9 +50,10 @@
       "@spartan-ng/helm/spinner": ["./src/app/spartan/spinner/src/index.ts"],
       "@spartan-ng/helm/tabs": ["./src/app/spartan/tabs/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./src/app/spartan/tooltip/src/index.ts"],
-      "@spartan-ng/helm/dialog": ["./src/app/spartan/dialog/src/index.ts"],
       "@spartan-ng/helm/input-group": ["./src/app/spartan/input-group/src/index.ts"],
-      "@spartan-ng/helm/textarea": ["./src/app/spartan/textarea/src/index.ts"]
+      "@spartan-ng/helm/textarea": ["./src/app/spartan/textarea/src/index.ts"],
+      "@spartan-ng/helm/combobox": ["./src/app/spartan/combobox/src/index.ts"],
+      "@spartan-ng/helm/dialog": ["./src/app/spartan/dialog/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

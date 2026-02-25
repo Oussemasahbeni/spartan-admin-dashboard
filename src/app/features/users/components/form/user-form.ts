@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { email, form, FormField, required, submit, validate } from '@angular/forms/signals';
+import { email, form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
@@ -45,6 +45,7 @@ export interface UserFormModel {
     HlmIconImports,
     TranslocoModule,
     FormField,
+    FormRoot,
     CountryPicker,
     PhoneNumberPicker,
     ValidationErrors,
@@ -73,6 +74,21 @@ export class UserForm implements OnInit {
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.user);
   protected readonly isSubmitting = signal(false);
 
+  public countries = [
+    { code: '', value: '', continent: '', label: 'Select country' },
+    { code: 'af', value: 'afghanistan', label: 'Afghanistan', continent: 'Asia' },
+    { code: 'al', value: 'albania', label: 'Albania', continent: 'Europe' },
+    { code: 'dz', value: 'algeria', label: 'Algeria', continent: 'Africa' },
+    { code: 'ad', value: 'andorra', label: 'Andorra', continent: 'Europe' },
+    { code: 'ao', value: 'angola', label: 'Angola', continent: 'Africa' },
+    {
+      code: 'ar',
+      value: 'argentina',
+      label: 'Argentina',
+      continent: 'South America',
+    },
+  ];
+
   private readonly userModel = signal<UserFormModel>({
     name: '',
     email: '',
@@ -81,25 +97,33 @@ export class UserForm implements OnInit {
     role: 'user',
   });
 
-  readonly userForm = form(this.userModel, (schema) => {
-    required(schema.name);
-    required(schema.email);
-    email(schema.email);
-    required(schema.phoneNumber);
-    required(schema.role);
-    validate(schema.phoneNumber, ({ value }) => {
-      if (!value()) {
-        return null;
-      }
-      const phoneNumber = parsePhoneNumberFromString(value());
+  readonly userForm = form(
+    this.userModel,
+    (schema) => {
+      required(schema.name);
+      required(schema.email);
+      email(schema.email);
+      required(schema.phoneNumber);
+      required(schema.role);
+      validate(schema.phoneNumber, ({ value }) => {
+        if (!value()) {
+          return null;
+        }
+        const phoneNumber = parsePhoneNumberFromString(value());
 
-      return phoneNumber && phoneNumber.isValid()
-        ? null
-        : {
-            kind: 'invalid',
-          };
-    });
-  });
+        return phoneNumber && phoneNumber.isValid()
+          ? null
+          : {
+              kind: 'invalid',
+            };
+      });
+    },
+    {
+      submission: {
+        action: async () => this.onSubmit(),
+      },
+    }
+  );
 
   // ==========================================
   // Public Methods
@@ -115,15 +139,12 @@ export class UserForm implements OnInit {
     }
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-    submit(this.userForm, async () => {
-      if (!this.userForm().dirty()) {
-        this._dialogRef.close(false);
-        return;
-      }
-      this.onSaveUser();
-    });
+  onSubmit() {
+    if (!this.userForm().dirty()) {
+      this._dialogRef.close(false);
+      return;
+    }
+    this.onSaveUser();
   }
 
   // ==========================================

@@ -1,6 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { form, FormField, required, submit } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -55,6 +55,7 @@ interface Plan {
     HlmRadioGroupImports,
     HlmSpinner,
     FormField,
+    FormRoot,
     ValidationErrors,
     TranslocoModule,
     CurrencyPipe,
@@ -123,12 +124,20 @@ export class SettingsPlanBilling {
     zip: '',
   });
 
-  readonly planBillingForm = form(this.planBillingModel, (schema) => {
-    required(schema.cardHolder);
-    required(schema.cardNumber);
-    required(schema.cardExpiration);
-    required(schema.cardCVC);
-  });
+  readonly planBillingForm = form(
+    this.planBillingModel,
+    (schema) => {
+      required(schema.cardHolder);
+      required(schema.cardNumber);
+      required(schema.cardExpiration);
+      required(schema.cardCVC);
+    },
+    {
+      submission: {
+        action: async () => this.savePlanBilling(),
+      },
+    }
+  );
 
   // ==========================================
   // Public Methods
@@ -136,13 +145,6 @@ export class SettingsPlanBilling {
 
   selectPlan(planValue: string): void {
     this.planBillingModel.update((m) => ({ ...m, plan: planValue }));
-  }
-
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    submit(this.planBillingForm, async () => {
-      this.savePlanBilling();
-    });
   }
 
   // ==========================================

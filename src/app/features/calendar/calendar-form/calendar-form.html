@@ -7,8 +7,7 @@
   <form
     *transloco="let t; prefix: 'calendar.form'"
     class="flex w-full flex-col gap-4 p-2"
-    novalidate
-    (submit)="onSubmit($event)"
+    [formRoot]="eventForm"
   >
     <!-- Title -->
     <hlm-field>

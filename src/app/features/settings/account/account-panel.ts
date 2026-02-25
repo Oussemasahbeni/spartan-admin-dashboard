@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { email, form, FormField, required, submit } from '@angular/forms/signals';
+import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideGlobe } from '@ng-icons/lucide';
@@ -33,6 +33,7 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
     HlmTextareaImports,
     BrnSelectImports,
     FormField,
+    FormRoot,
     ValidationErrors,
     CountryPicker,
     PhoneNumberPicker,
@@ -51,6 +52,7 @@ export class SettingsAccount {
   // ==========================================
 
   readonly isLoading = signal(false);
+  readonly languages = ['english', 'french', 'arabic'];
 
   readonly accountModel = signal({
     name: 'Oussema Sahbeni',
@@ -65,24 +67,19 @@ export class SettingsAccount {
     language: 'english',
   });
 
-  readonly accountForm = form(this.accountModel, (schema) => {
-    required(schema.name);
-    required(schema.email);
-    email(schema.email);
-  });
-
-  readonly languages = ['english', 'french', 'arabic'];
-
-  // ==========================================
-  // Public Methods
-  // ==========================================
-
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    submit(this.accountForm, async () => {
-      this.saveAccount();
-    });
-  }
+  readonly accountForm = form(
+    this.accountModel,
+    (schema) => {
+      required(schema.name);
+      required(schema.email);
+      email(schema.email);
+    },
+    {
+      submission: {
+        action: async () => this.saveAccount(),
+      },
+    }
+  );
 
   // ==========================================
   // Private Methods

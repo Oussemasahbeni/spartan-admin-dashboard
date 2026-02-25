@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { email, form, FormField, required, submit } from '@angular/forms/signals';
+import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -35,6 +35,7 @@ import { AuthLayout } from '../layout';
     RouterLink,
     AuthLayout,
     FormField,
+    FormRoot,
     ValidationErrors,
   ],
   providers: [
@@ -68,22 +69,19 @@ export default class Login {
     password: '',
   });
 
-  readonly loginForm = form(this.loginModel, (schema) => {
-    required(schema.email);
-    email(schema.email);
-    required(schema.password);
-  });
-
-  // ==========================================
-  // Public Methods
-  // ==========================================
-
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    submit(this.loginForm, async () => {
-      this.onLogin();
-    });
-  }
+  readonly loginForm = form(
+    this.loginModel,
+    (schema) => {
+      required(schema.email);
+      email(schema.email);
+      required(schema.password);
+    },
+    {
+      submission: {
+        action: async () => this.onLogin(),
+      },
+    }
+  );
 
   // ==========================================
   // Private Methods

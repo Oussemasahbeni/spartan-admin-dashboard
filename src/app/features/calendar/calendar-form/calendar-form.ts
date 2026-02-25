@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { form, FormField, required, submit, validate } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
@@ -46,6 +46,7 @@ export interface CalendarEventModel {
     HlmCheckboxImports,
     TranslocoModule,
     FormField,
+    FormRoot,
     ValidationErrors,
   ],
   templateUrl: './calendar-form.html',
@@ -79,23 +80,32 @@ export class CalendarForm implements OnInit {
     endTime: '10:00',
   });
 
-  readonly eventForm = form(this.eventModel, (schema) => {
-    required(schema.title);
-    required(schema.description);
-    required(schema.startDate);
-    required(schema.endDate);
-    validate(schema.endDate, ({ value }) => {
-      const endBase = value();
-      const model = this.eventModel();
+  readonly eventForm = form(
+    this.eventModel,
+    (schema) => {
+      required(schema.title);
+      required(schema.description);
+      required(schema.startDate);
+      required(schema.endDate);
+      validate(schema.endDate, ({ value }) => {
+        const endBase = value();
+        const model = this.eventModel();
 
-      if (!endBase || !model.startDate) return null;
+        if (!endBase || !model.startDate) return null;
 
-      const startCombined = mergeTime(model.startDate, model.startTime);
-      const endCombined = mergeTime(endBase, model.endTime);
+        const startCombined = mergeTime(model.startDate, model.startTime);
+        const endCombined = mergeTime(endBase, model.endTime);
 
-      return isAfter(endCombined, startCombined) ? null : { kind: 'endBeforeStart' };
-    });
-  });
+        return isAfter(endCombined, startCombined) ? null : { kind: 'endBeforeStart' };
+      });
+    },
+
+    {
+      submission: {
+        action: async () => this.onSubmit(),
+      },
+    }
+  );
 
   // ==========================================
   // Public Methods
@@ -123,15 +133,12 @@ export class CalendarForm implements OnInit {
     }
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-    submit(this.eventForm, async () => {
-      if (!this.eventForm().dirty()) {
-        this._dialogRef.close(false);
-        return;
-      }
-      this.onSaveEvent();
-    });
+  onSubmit() {
+    if (!this.eventForm().dirty()) {
+      this._dialogRef.close(false);
+      return;
+    }
+    this.onSaveEvent();
   }
 
   // ==========================================

@@ -12,7 +12,7 @@
       </p>
     </div>
 
-    <form class="flex flex-col gap-4" novalidate (submit)="onSubmit($event)">
+    <form class="flex flex-col gap-4" [formRoot]="loginForm">
       <hlm-field>
         <hlm-field-label for="email">{{ t('emailLabel') }}</hlm-field-label>
         <input

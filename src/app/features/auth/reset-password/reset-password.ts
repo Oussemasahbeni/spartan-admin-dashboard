@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { email, form, FormField, required, submit } from '@angular/forms/signals';
+import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -24,6 +24,7 @@ import { AuthLayout } from '../layout';
     HlmSpinnerImports,
     HlmAlertImports,
     FormField,
+    FormRoot,
     TranslocoModule,
     HlmCard,
     RouterLink,
@@ -52,26 +53,30 @@ export default class ResetPassword {
     email: '',
   });
 
-  readonly resetPasswordForm = form(this.resetPasswordModel, (schema) => {
-    required(schema.email);
-    email(schema.email);
-  });
+  readonly resetPasswordForm = form(
+    this.resetPasswordModel,
+    (schema) => {
+      required(schema.email);
+      email(schema.email);
+    },
+    {
+      submission: {
+        action: async () => this.onSubmit(),
+      },
+    }
+  );
 
   // ==========================================
   // Public Methods
   // ==========================================
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    submit(this.resetPasswordForm, async () => {
-      this.isLoading.set(true);
-
-      // Simulate API call
-      setTimeout(() => {
-        this.isLoading.set(false);
-        this.resetPasswordForm().reset({ email: '' });
-        this.showAlert.set(true);
-      }, 2000);
-    });
+  onSubmit(): void {
+    this.isLoading.set(true);
+    // Simulate API call
+    setTimeout(() => {
+      this.isLoading.set(false);
+      this.resetPasswordForm().reset({ email: '' });
+      this.showAlert.set(true);
+    }, 2000);
   }
 }
