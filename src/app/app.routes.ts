@@ -21,6 +21,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     canActivateChild: [authGuard],
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: 'dashboard',
         title: 'dashboard',
@@ -35,7 +36,7 @@ export const routes: Routes = [
             path: 'dashboard-1',
             title: 'dashboard-1',
             data: { breadcrumb: 'navigation.dashboard-1' },
-            loadChildren: () => import('./features/dashboards/dashboard-1/dashboard1.routes'),
+            loadChildren: () => import('./features/dashboards/dashboard-1/routes'),
           },
           {
             path: 'dashboard-2',
@@ -50,27 +51,26 @@ export const routes: Routes = [
         path: 'users',
         title: 'users',
         data: { breadcrumb: 'navigation.users' },
-        loadChildren: () => import('./features/users/users.routes'),
+        loadChildren: () => import('./features/users/routes'),
       },
       {
         path: 'calendar',
         title: 'calendar',
         data: { breadcrumb: 'navigation.calendar' },
-        loadChildren: () => import('./features/calendar/calendar.routes'),
+        loadChildren: () => import('./features/calendar/routes'),
       },
       {
         path: 'settings',
         title: 'settings',
         data: { breadcrumb: 'navigation.settings' },
-        loadChildren: () => import('./features/settings/settings.routes'),
+        loadChildren: () => import('./features/settings/routes'),
       },
       {
         path: 'assistant',
         title: 'aiAssistant',
         data: { breadcrumb: 'navigation.aiAssistant' },
-        loadChildren: () => import('./features/ai-assistant/ai-assistant.routes'),
+        loadChildren: () => import('./features/ai-assistant/routes'),
       },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
 

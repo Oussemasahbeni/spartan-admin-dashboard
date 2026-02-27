@@ -29,9 +29,6 @@ importers:
       '@angular/router':
         specifier: ^21.2.0
         version: 21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(@angular/platform-browser@21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)))(rxjs@7.8.2)
-      '@faker-js/faker':
-        specifier: ^10.1.0
-        version: 10.1.0
       '@fullcalendar/angular':
         specifier: ^6.1.20
         version: 6.1.20(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(@fullcalendar/core@6.1.20)
@@ -53,12 +50,6 @@ importers:
       '@jsverse/transloco':
         specifier: 8.2.0
         version: 8.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2)(typescript@5.9.3)
-      '@jsverse/transloco-optimize':
-        specifier: ^8.2.0
-        version: 8.2.0
-      '@jsverse/transloco-schematics':
-        specifier: ^8.2.0
-        version: 8.2.0
       '@ng-icons/core':
         specifier: '>=32.0.0 <34.0.0'
         version: 33.0.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2)
@@ -101,9 +92,6 @@ importers:
       ng-apexcharts:
         specifier: ^2.0.4
         version: 2.0.4(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(apexcharts@5.3.6)(rxjs@7.8.2)
-      ngx-oneforall:
-        specifier: ^1.0.2
-        version: 1.0.2(182c38b7b1bcd7fb47b34f84d2bbfebe)
       ngx-scrollbar:
         specifier: ^19.1.1
         version: 19.1.1(@angular/cdk@21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(@angular/platform-browser@21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)))(rxjs@7.8.2))(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2)
@@ -138,6 +126,12 @@ importers:
       '@jsverse/transloco-keys-manager':
         specifier: ^7.1.0
         version: 7.1.0(typescript@5.9.3)
+      '@jsverse/transloco-optimize':
+        specifier: ^8.2.0
+        version: 8.2.0
+      '@jsverse/transloco-schematics':
+        specifier: ^8.2.0
+        version: 8.2.0
       '@spartan-ng/cli':
         specifier: 0.0.1-alpha.639
         version: 0.0.1-alpha.639(5c34e5d83e7615b7fc6ec244f77aef3f)
@@ -1313,10 +1307,6 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@faker-js/faker@10.1.0':
-    resolution: {integrity: sha512-C3mrr3b5dRVlKPJdfrAXS8+dq+rq8Qm5SNRazca0JKgw1HQERFmrVb0towvMmw5uu8hHKNiQasMaR/tydf3Zsg==}
-    engines: {node: ^20.19.0 || ^22.13.0 || ^23.5.0 || >=24.0.0, npm: '>=10'}
 
   '@fullcalendar/angular@6.1.20':
     resolution: {integrity: sha512-/V5wZuZSzWZxD3dnVteqY844Onv6we5ah0RU9ZJdRIeNbBFknHLeVYpIjYKsAPwkGigYX7UGOJR6NNpyarBLlQ==}
@@ -5197,26 +5187,6 @@ packages:
       apexcharts: ^5.3.2
       rxjs: ^7.8.2
 
-  ngx-oneforall@1.0.2:
-    resolution: {integrity: sha512-JfaPVHL1HObzKZglAUkbpXbDrmB7HgYfq0Q4cBZJ3MZ6dfkkFdZPodEJpu9ow38HQWWAJgw5Sl4MHLyjhBwkrg==}
-    peerDependencies:
-      '@angular/common': ^17.1.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/core': ^17.1.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/forms': ^17.1.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/platform-browser': ^17.1.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      '@angular/router': ^17.1.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
-      libphonenumber-js: ^1.10.0
-      rxjs: ^7.0.0 || ^8.0.0
-    peerDependenciesMeta:
-      '@angular/forms':
-        optional: true
-      '@angular/platform-browser':
-        optional: true
-      '@angular/router':
-        optional: true
-      libphonenumber-js:
-        optional: true
-
   ngx-scrollbar@19.1.1:
     resolution: {integrity: sha512-gZ0xjPmj3swaVjBvx+ilUSlKWA1WTc33ogq4O131A9bXMFbfGXmI+++7c4GBrFIMgpOCoFqcICz9t/c8uyPdvw==}
     peerDependencies:
@@ -8498,8 +8468,6 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
-
-  '@faker-js/faker@10.1.0': {}
 
   '@fullcalendar/angular@6.1.20(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(@fullcalendar/core@6.1.20)':
     dependencies:
@@ -12910,18 +12878,6 @@ snapshots:
       apexcharts: 5.3.6
       rxjs: 7.8.2
       tslib: 2.8.1
-
-  ngx-oneforall@1.0.2(182c38b7b1bcd7fb47b34f84d2bbfebe):
-    dependencies:
-      '@angular/common': 21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2)
-      '@angular/core': 21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)
-      rxjs: 7.8.2
-      tslib: 2.8.1
-    optionalDependencies:
-      '@angular/forms': 21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(@angular/platform-browser@21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)))(rxjs@7.8.2)
-      '@angular/platform-browser': 21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))
-      '@angular/router': 21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(@angular/platform-browser@21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)))(rxjs@7.8.2)
-      libphonenumber-js: 1.12.33
 
   ngx-scrollbar@19.1.1(@angular/cdk@21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(@angular/platform-browser@21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)))(rxjs@7.8.2))(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2):
     dependencies:

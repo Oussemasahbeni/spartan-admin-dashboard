@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { makePaymentData } from '@core/mock/payment';
-import { makeUsersData } from '@core/mock/users';
+import { STATIC_PAYMENTS } from '@core/mock/payments.data';
+import { STATIC_USERS } from '@core/mock/users.data';
 import { TranslocoModule } from '@jsverse/transloco';
 import { User } from '../../../users/model/user';
-import { AreaChartCard } from './components/charts/subscriptions-card';
 import { BarChartCard } from './components/charts/bar-chart-card';
+import { AreaChartCard } from './components/charts/subscriptions-card';
 import { CardVariant, OverviewMetricCard } from './components/metric-card';
 import { PaymentsTable } from './components/table/payments-table';
 import { TeamMembersCard } from './components/team-members-card';
@@ -84,7 +84,7 @@ export class OverviewDashboard {
     },
   ]);
 
-  readonly payments = signal<Payment[]>(makePaymentData(30));
+  readonly payments = signal<Payment[]>(structuredClone(STATIC_PAYMENTS));
 
-  readonly teamMembers = signal<User[]>(makeUsersData(8));
+  readonly teamMembers = signal<User[]>(structuredClone(STATIC_USERS.slice(0, 8)));
 }

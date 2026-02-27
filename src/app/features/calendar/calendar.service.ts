@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { makeEventsData } from '@core/mock/events';
+import { STATIC_EVENTS } from '@core/mock/events.data';
 import { EventInput } from '@fullcalendar/core/index.js';
 
 export interface EventType {
@@ -16,7 +16,7 @@ export const EVENT_TYPES: EventType[] = [
 
 @Injectable({ providedIn: 'root' })
 export class CalendarService {
-  private readonly _events = signal<EventInput[]>(makeEventsData(40));
+  private readonly _events = signal<EventInput[]>(structuredClone(STATIC_EVENTS));
   private readonly _selectedTypes = signal<string[]>([]);
 
   readonly events = this._events.asReadonly();

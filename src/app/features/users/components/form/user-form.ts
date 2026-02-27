@@ -74,21 +74,6 @@ export class UserForm implements OnInit {
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.user);
   protected readonly isSubmitting = signal(false);
 
-  public countries = [
-    { code: '', value: '', continent: '', label: 'Select country' },
-    { code: 'af', value: 'afghanistan', label: 'Afghanistan', continent: 'Asia' },
-    { code: 'al', value: 'albania', label: 'Albania', continent: 'Europe' },
-    { code: 'dz', value: 'algeria', label: 'Algeria', continent: 'Africa' },
-    { code: 'ad', value: 'andorra', label: 'Andorra', continent: 'Europe' },
-    { code: 'ao', value: 'angola', label: 'Angola', continent: 'Africa' },
-    {
-      code: 'ar',
-      value: 'argentina',
-      label: 'Argentina',
-      continent: 'South America',
-    },
-  ];
-
   private readonly userModel = signal<UserFormModel>({
     name: '',
     email: '',

@@ -98,7 +98,7 @@ export default class Settings {
       id: 'notifications',
       icon: 'lucideBell',
       title: 'Notifications',
-      description: 'Manage when you\'ll be notified on which channels',
+      description: "Manage when you'll be notified on which channels",
     },
     {
       id: 'team',

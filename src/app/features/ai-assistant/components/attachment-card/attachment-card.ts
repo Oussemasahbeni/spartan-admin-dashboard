@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, PLATFORM_ID, inject, input, output 
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideFile, lucideX } from '@ng-icons/lucide';
+import { BytesPipe } from '@shared/pipes/bytes.pipe';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { BytesPipe } from 'ngx-oneforall/pipes/bytes';
 
 @Component({
   selector: 'adm-attachment-card',

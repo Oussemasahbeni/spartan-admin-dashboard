@@ -48,12 +48,12 @@
       "@spartan-ng/helm/skeleton": ["./src/app/spartan/skeleton/src/index.ts"],
       "@spartan-ng/helm/sonner": ["./src/app/spartan/sonner/src/index.ts"],
       "@spartan-ng/helm/spinner": ["./src/app/spartan/spinner/src/index.ts"],
-      "@spartan-ng/helm/tabs": ["./src/app/spartan/tabs/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./src/app/spartan/tooltip/src/index.ts"],
       "@spartan-ng/helm/input-group": ["./src/app/spartan/input-group/src/index.ts"],
       "@spartan-ng/helm/textarea": ["./src/app/spartan/textarea/src/index.ts"],
       "@spartan-ng/helm/combobox": ["./src/app/spartan/combobox/src/index.ts"],
-      "@spartan-ng/helm/dialog": ["./src/app/spartan/dialog/src/index.ts"]
+      "@spartan-ng/helm/dialog": ["./src/app/spartan/dialog/src/index.ts"],
+      "@spartan-ng/helm/tabs": ["./src/app/spartan/tabs/src/index.ts"]
     }
   },
   "angularCompilerOptions": {
