@@ -6,6 +6,38 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
   templateUrl: './typing-indicator.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmAvatarImports],
+  styles: `
+    .typing-dot-wave {
+      animation: typing-wave 1s infinite ease-in-out;
+    }
+
+    @keyframes typing-wave {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .typing-dot {
+      animation: typing-bounce 1.4s infinite ease-in-out both;
+    }
+
+    @keyframes typing-bounce {
+      0%,
+      80%,
+      100% {
+        transform: scale(0.6);
+        opacity: 0.4;
+      }
+      40% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  `,
   host: {
     '[attr.role]': '"status"',
     '[attr.aria-label]': '"AI is typing"',
