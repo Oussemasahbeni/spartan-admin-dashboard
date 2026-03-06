@@ -9,7 +9,7 @@ import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
-import { USER_STATUSES, UserStatus } from '../../model/user';
+import { USER_STATUSES, UserStatus } from '../../../../shared/models/user';
 import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe';
 
 @Component({

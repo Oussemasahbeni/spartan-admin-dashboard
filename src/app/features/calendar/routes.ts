@@ -5,6 +5,6 @@ export default [
   {
     path: '',
     providers: [provideTranslocoScope('calendar')],
-    loadComponent: () => import('./calendar'),
+    loadComponent: () => import('./pages/calendar'),
   },
 ] as Routes;

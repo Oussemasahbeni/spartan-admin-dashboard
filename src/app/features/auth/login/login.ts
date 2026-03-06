@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
+import { LOCAL_STORAGE } from '@core/config/tokens';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff, lucideGithub } from '@ng-icons/lucide';
 import { svglGoogle } from '@ng-icons/svgl';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
-import { LOCAL_STORAGE } from '@shared/tokens';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';

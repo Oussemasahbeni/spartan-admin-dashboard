@@ -31,15 +31,15 @@ import { PaginatedResponse } from '@shared/models/page';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
-import { UsersCardSection } from './components/cards/card-section';
-import { RoleFilter } from './components/filters/role-filter';
-import { StatusFilter } from './components/filters/status-filter';
-import { UserForm } from './components/form/user-form';
-import { ActionDropdown } from './components/table/action-dropdown';
-import { TableHeadSelection, TableRowSelection } from './components/table/selection-column';
-import { User, UserRole, UserStatus } from './model/user';
-import { provideUserRoleIcons, RoleIconPipe } from './pipes/role-icon.pipe';
-import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
+import { User, UserRole, UserStatus } from '../../../shared/models/user';
+import { UsersCardSection } from '../components/cards/card-section';
+import { RoleFilter } from '../components/filters/role-filter';
+import { StatusFilter } from '../components/filters/status-filter';
+import { UserForm } from '../components/form/user-form';
+import { ActionDropdown } from '../components/table/action-dropdown';
+import { TableHeadSelection, TableRowSelection } from '../components/table/selection-column';
+import { provideUserRoleIcons, RoleIconPipe } from '../pipes/role-icon.pipe';
+import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
 
 @Component({
   selector: 'adm-users',
@@ -63,7 +63,7 @@ import { provideUserStatusIcons, StatusUIPipe } from './pipes/status-ui.pipe';
     RoleFilter,
     FormField,
   ],
-  templateUrl: './users-list.html',
+  templateUrl: './users.html',
   providers: [
     provideUserStatusIcons(),
     provideUserRoleIcons(),

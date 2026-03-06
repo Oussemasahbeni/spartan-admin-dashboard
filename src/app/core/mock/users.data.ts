@@ -1,4 +1,4 @@
-import { User } from '../../features/users/model/user';
+import { User } from '../../shared/models/user';
 
 export const STATIC_USERS: User[] = [
   {

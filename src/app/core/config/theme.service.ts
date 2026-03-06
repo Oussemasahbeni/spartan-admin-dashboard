@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { DOCUMENT, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
-import { LOCAL_STORAGE } from '@shared/tokens';
+import { LOCAL_STORAGE } from '@core/config/tokens';
 
 export type Theme = 'light' | 'dark' | 'system';
 

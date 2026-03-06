@@ -11,8 +11,8 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports, HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
+import { CalendarStore } from '../../state/calendar.store';
 import { CalendarForm } from '../calendar-form/calendar-form';
-import { CalendarService } from '../calendar.service';
 
 @Component({
   selector: 'adm-event-details',
@@ -47,7 +47,7 @@ export class EventDetails {
   private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _dialogRef = inject<BrnDialogRef>(BrnDialogRef);
   private readonly _destroyRef = inject(DestroyRef);
-  private readonly _calendarService = inject(CalendarService);
+  private readonly _calendarStore = inject(CalendarStore);
   private readonly _dialogContext = injectBrnDialogContext<{ event: EventApi }>();
 
   // ==========================================
@@ -70,7 +70,7 @@ export class EventDetails {
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
       if (!result) return;
 
-      this._calendarService.updateEvent(result);
+      this._calendarStore.updateEvent(result);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.event.update((current: any) => ({
         ...current,
@@ -89,7 +89,7 @@ export class EventDetails {
   onDeleteEvent() {
     const id = this.event().id;
     if (id) {
-      this._calendarService.deleteEvent(id);
+      this._calendarStore.deleteEvent(id);
       this._dialogRef.close();
     }
   }

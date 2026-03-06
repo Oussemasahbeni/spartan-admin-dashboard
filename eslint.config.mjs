@@ -1,24 +1,19 @@
-// @ts-check
-const eslint = require('@eslint/js');
-const { defineConfig } = require('eslint/config');
-const tseslint = require('typescript-eslint');
-const angular = require('angular-eslint');
-const unusedImports = require('eslint-plugin-unused-imports');
+import eslintJs from '@eslint/js';
+import { configs as angularConfigs, processInlineTemplates } from 'angular-eslint';
+import unusedImports from 'eslint-plugin-unused-imports';
+import { defineConfig } from 'eslint/config';
+import { configs as tsConfigs } from 'typescript-eslint';
+const { configs: jsConfigs } = eslintJs;
 
-module.exports = defineConfig([
+export default defineConfig([
   {
     files: ['**/*.ts'],
     ignores: ['**/src/app/spartan/**'],
     plugins: {
       'unused-imports': unusedImports,
     },
-    extends: [
-      eslint.configs.recommended,
-      tseslint.configs.recommended,
-      tseslint.configs.stylistic,
-      angular.configs.tsRecommended,
-    ],
-    processor: angular.processInlineTemplates,
+    extends: [jsConfigs.recommended, tsConfigs.recommended, tsConfigs.stylistic, angularConfigs.tsRecommended],
+    processor: processInlineTemplates,
     rules: {
       complexity: ['warn', 16],
       quotes: ['warn', 'single', { allowTemplateLiterals: true }],
@@ -100,7 +95,7 @@ module.exports = defineConfig([
   {
     files: ['**/*.html'],
     ignores: ['**/src/app/spartan/**'],
-    extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
+    extends: [angularConfigs.templateRecommended, angularConfigs.templateAccessibility],
     rules: {
       '@angular-eslint/template/prefer-self-closing-tags': ['warn'],
       '@angular-eslint/template/prefer-class-binding': 'error',

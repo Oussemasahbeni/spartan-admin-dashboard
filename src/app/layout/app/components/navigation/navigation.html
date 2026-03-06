@@ -56,7 +56,7 @@
                         />
                       </button>
                       <hlm-collapsible-content
-                        class="block overflow-hidden transition-all data-[state=closed]:h-0 data-[state=open]:h-(--brn-collapsible-content-height)"
+                        class="block overflow-hidden transition-all data-[state=closed]:h-0 data-[state=open]:h-(--brn-collapsible-content-height) in-data-[state=collapsed]:h-0!"
                       >
                         <ul hlmSidebarMenuSub>
                           @for (subItem of children; track subItem.key || subItem.title) {

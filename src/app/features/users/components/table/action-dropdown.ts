@@ -14,7 +14,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
 import { toast } from 'ngx-sonner';
 import { exhaustMap, filter } from 'rxjs';
-import { User } from '../../model/user';
+import { User } from '../../../../shared/models/user';
 import { UserService } from '../../service/user.service';
 import { UserForm } from '../form/user-form';
 

@@ -15,7 +15,7 @@ export const EVENT_TYPES: EventType[] = [
 ];
 
 @Injectable({ providedIn: 'root' })
-export class CalendarService {
+export class CalendarStore {
   private readonly _events = signal<EventInput[]>(structuredClone(STATIC_EVENTS));
   private readonly _selectedTypes = signal<string[]>([]);
 

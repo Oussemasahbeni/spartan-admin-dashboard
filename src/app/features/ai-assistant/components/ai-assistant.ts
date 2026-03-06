@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { TranslocoModule } from '@jsverse/transloco';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { AssistantInput } from './components/assistant-input/assistant-input';
-import { ChatList } from './components/chat-list/chat-list';
-import { AssistantEmptyState } from './components/empty-state/empty-state';
-import { AssistantService } from './service/chat.service';
+import { AssistantService } from '../service/chat.service';
+import { AssistantInput } from './assistant-input/assistant-input';
+import { ChatList } from './chat-list/chat-list';
+import { AssistantEmptyState } from './empty-state/empty-state';
 
 @Component({
   selector: 'adm-ai-assistant',

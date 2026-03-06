@@ -7,7 +7,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { User } from '../../../../users/model/user';
+import { User } from '../../../../../shared/models/user';
 
 @Component({
   selector: 'adm-team-members-card',

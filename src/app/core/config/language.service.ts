@@ -2,6 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import { inject, Injectable, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { DirectionalityService } from './directionality.service';
+import { LOCAL_STORAGE } from './tokens';
 
 export type LanguageOptions = 'en' | 'fr' | 'ar';
 
@@ -18,8 +19,9 @@ const registeredLocales = new Set<string>(['en']);
 export class LanguageService {
   private readonly _translocoService = inject(TranslocoService);
   private readonly _directionalityService = inject(DirectionalityService);
+  private readonly _localStorage = inject(LOCAL_STORAGE);
 
-  readonly _currentLang = signal<LanguageOptions>('en');
+  private readonly _currentLang = signal<LanguageOptions>('en');
   readonly currentLang = this._currentLang.asReadonly();
 
   readonly availableLanguages = signal<AvailableLanguage[]>([
@@ -39,7 +41,7 @@ export class LanguageService {
 
   async setLanguage(lang: LanguageOptions): Promise<void> {
     this._currentLang.set(lang);
-    localStorage.setItem('lang', lang);
+    this._localStorage?.setItem('lang', lang);
     await this._ensureLocaleRegistered(lang);
     this._translocoService.setActiveLang(lang);
     const direction = lang === 'ar' ? 'rtl' : 'ltr';

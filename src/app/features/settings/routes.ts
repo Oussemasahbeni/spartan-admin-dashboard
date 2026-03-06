@@ -5,6 +5,6 @@ export default [
   {
     path: '',
     providers: [provideTranslocoScope('settings')],
-    loadComponent: () => import('./settings'),
+    loadComponent: () => import('./pages/settings'),
   },
 ] as Routes;

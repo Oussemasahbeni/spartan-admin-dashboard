@@ -5,6 +5,6 @@ export default [
   {
     path: '',
     providers: [provideTranslocoScope('users')],
-    loadComponent: () => import('./users-list'),
+    loadComponent: () => import('./pages/users'),
   },
 ] as Routes;

@@ -9,7 +9,7 @@ import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
-import { USER_ROLES, UserRole } from '../../model/user';
+import { USER_ROLES, UserRole } from '../../../../shared/models/user';
 import { RoleIconPipe } from '../../pipes/role-icon.pipe';
 
 @Component({

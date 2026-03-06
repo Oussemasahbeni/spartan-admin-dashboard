@@ -31,9 +31,9 @@ import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { isBefore, subDays } from 'date-fns';
-import { CalendarForm } from './calendar-form/calendar-form';
-import { CalendarService, EVENT_TYPES } from './calendar.service';
-import { EventDetails } from './event-details/event-details';
+import { CalendarForm } from '../components/calendar-form/calendar-form';
+import { EventDetails } from '../components/event-details/event-details';
+import { CalendarStore, EVENT_TYPES } from '../state/calendar.store';
 
 @Component({
   selector: 'adm-calendar',
@@ -70,7 +70,7 @@ export default class Calendar {
   // Services
   // ==========================================
   private readonly _hlmDialogService = inject(HlmDialogService);
-  private readonly _calendarService = inject(CalendarService);
+  private readonly _calendarStore = inject(CalendarStore);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _translocoService = inject(TranslocoService);
   private readonly _breakpointObserver = inject(BreakpointObserver);
@@ -90,7 +90,7 @@ export default class Calendar {
 
   readonly eventTypes = EVENT_TYPES;
 
-  readonly selectedTypes = this._calendarService.selectedTypes;
+  readonly selectedTypes = this._calendarStore.selectedTypes;
 
   readonly showDatePicker = computed(() => this.currentView().value === 'timeGridDay');
   readonly calendarApi = computed(() => this.calendar()?.getApi());
@@ -119,7 +119,7 @@ export default class Calendar {
     initialView: this.currentView().value,
     headerToolbar: false,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-    events: this._calendarService.filteredEvents(),
+    events: this._calendarStore.filteredEvents(),
     contentHeight: 'auto',
     eventDisplay: this.eventDisplayMode(),
     eventTimeFormat: this.use24HourFormat()
@@ -199,7 +199,7 @@ export default class Calendar {
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
       if (result) {
-        this._calendarService.addEvent(result);
+        this._calendarStore.addEvent(result);
       }
     });
   }
@@ -220,11 +220,11 @@ export default class Calendar {
   }
 
   protected toggleFilter(typeValue: string) {
-    this._calendarService.toggleType(typeValue);
+    this._calendarStore.toggleType(typeValue);
   }
 
   protected clearFilters(): void {
-    this._calendarService.clearFilters();
+    this._calendarStore.clearFilters();
   }
 
   // ==========================================
@@ -242,7 +242,7 @@ export default class Calendar {
       extendedProps: { ...event.extendedProps },
     };
 
-    this._calendarService.updateEvent(updatedEvent);
+    this._calendarStore.updateEvent(updatedEvent);
   }
 
   private handleEventClick(info: EventClickArg): void {
@@ -255,7 +255,7 @@ export default class Calendar {
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
       if (result) {
-        this._calendarService.updateEvent(result);
+        this._calendarStore.updateEvent(result);
       }
     });
   }
@@ -270,7 +270,7 @@ export default class Calendar {
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
       if (result) {
-        this._calendarService.addEvent(result);
+        this._calendarStore.addEvent(result);
       }
     });
   }
