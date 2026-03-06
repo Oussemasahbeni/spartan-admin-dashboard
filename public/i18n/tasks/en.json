@@ -1,0 +1,16 @@
+{
+  "tasks": {
+    "header": {
+      "title": "Kanban",
+      "home": "Home",
+      "kanban": "Kanban"
+    },
+    "addTask": "Add New Task",
+    "allTasks": "All Tasks",
+    "columns": {
+      "todo": "To Do",
+      "inprogress": "In Progress",
+      "completed": "Completed"
+    }
+  }
+}

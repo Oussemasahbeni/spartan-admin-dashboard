@@ -1,0 +1,16 @@
+{
+  "tasks": {
+    "header": {
+      "title": "لوحة كانبان",
+      "home": "الرئيسية",
+      "kanban": "كانبان"
+    },
+    "addTask": "إضافة مهمة جديدة",
+    "allTasks": "جميع المهام",
+    "columns": {
+      "todo": "مهام",
+      "inprogress": "قيد التنفيذ",
+      "completed": "مكتملة"
+    }
+  }
+}

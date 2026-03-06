@@ -1,1 +1,61 @@
-<p>tasks works!</p>
+<div
+  *transloco="let t; prefix: 'tasks'"
+  class="bg-background flex h-full w-full flex-col p-6 transition-colors duration-300"
+>
+  <div class="mb-8 flex flex-col gap-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-3xl font-bold tracking-tight">{{ t('header.title') }}</h2>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button type="button" hlmBtn variant="default">
+          <ng-icon hlmIcon name="lucidePlus" size="sm" class="mr-2" />
+          {{ t('addTask') }}
+        </button>
+      </div>
+    </div>
+
+    <div class="border-border bg-card flex w-fit gap-2 overflow-x-auto rounded-xl border p-1 shadow-sm">
+      <button type="button" hlmBtn variant="ghost" class="h-8 rounded-lg px-4 text-xs font-semibold">
+        {{ t('allTasks') }}
+        <span class="bg-primary/10 text-primary ml-2 rounded-full px-1.5 py-0.5">{{ tasks().length }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3" cdkDropListGroup>
+    @for (col of columns; track col.id) {
+      <div class="flex flex-col">
+        <div class="mb-4 flex items-center justify-between px-2">
+          <div class="flex items-center gap-2">
+            <h3 class="text-foreground text-sm font-bold tracking-wider uppercase">
+              {{ t('columns.' + col.id) }}
+            </h3>
+            <span
+              class="bg-muted text-muted-foreground flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold"
+            >
+              {{ getTasksByStatus(col.id).length }}
+            </span>
+          </div>
+
+          <button type="button" hlmBtn size="icon" variant="ghost" class="text-muted-foreground h-8 w-8">
+            <ng-icon name="lucideMoreVertical" size="sm" />
+          </button>
+        </div>
+
+        <div
+          cdkDropList
+          class="bg-muted/40 hover:border-border/50 min-h-150 gap-3 rounded-xl border-2 border-dashed border-transparent p-3 transition-colors"
+          [id]="col.id"
+          [cdkDropListData]="getTasksByStatus(col.id)"
+          (cdkDropListDropped)="drop($event)"
+        >
+          @for (task of getTasksByStatus(col.id); track task.id) {
+            <adm-task-card cdkDrag [task]="task" />
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,16 @@
+{
+  "tasks": {
+    "header": {
+      "title": "Kanban",
+      "home": "Accueil",
+      "kanban": "Kanban"
+    },
+    "addTask": "Ajouter une tâche",
+    "allTasks": "Toutes les tâches",
+    "columns": {
+      "todo": "À faire",
+      "inprogress": "En cours",
+      "completed": "Terminées"
+    }
+  }
+}
