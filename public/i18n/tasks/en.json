@@ -31,10 +31,30 @@
       "description": "Optional — add more context about this task",
       "status": "Select status",
       "dueDate": "Select due date",
-      "tagName": "e.g. Frontend"
+      "tagName": "e.g. Frontend",
+      "selectTag": "Select a tag",
+      "noTags": "No existing tags.",
+      "createTag": "Create new tag",
+      "backToTags": "Back to tags"
     },
     "tagPreview": "Preview",
     "cancel": "Cancel",
     "save": "Add Task"
+  },
+  "details": {
+    "description": "Description",
+    "activity": "Activity",
+    "members": "Members",
+    "labels": "Labels",
+    "assignee": "Assignee",
+    "dueDate": "Due Date",
+    "comments": "Comments",
+    "commentsCount": "comment(s)",
+    "noComments": "No comments yet.",
+    "attachments": "Attachments",
+    "files": "file(s)",
+    "tags": "Tags",
+    "noDescription": "No description provided.",
+    "close": "Close"
   }
 }

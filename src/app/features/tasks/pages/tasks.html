@@ -5,7 +5,12 @@
   <header class="mb-6 flex flex-col gap-5">
     <div class="flex items-center justify-between">
       <div class="space-y-1">
-        <h2 class="text-2xl font-bold tracking-tight">{{ t('header.title') }}</h2>
+        <div class="flex items-center gap-2">
+          <h2 class="text-2xl font-bold tracking-tight">{{ t('header.title') }}</h2>
+          <span class="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums">
+            {{ taskGroups().count }}
+          </span>
+        </div>
         <p class="text-muted-foreground text-sm">{{ t('header.subtitle') }}</p>
       </div>
 
@@ -20,23 +25,6 @@
         </button>
       </div>
     </div>
-
-    <nav class="border-border bg-card flex w-fit items-center gap-1 overflow-x-auto rounded-xl border p-1 shadow-xs">
-      <button hlmBtn variant="ghost" type="button" class="h-8 rounded-lg px-3 text-xs font-medium">
-        {{ t('allTasks') }}
-        <span class="bg-primary/10 text-primary ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums">
-          {{ taskGroups().count }}
-        </span>
-      </button>
-      @for (col of columns; track col.id) {
-        <button hlmBtn variant="ghost" type="button" class="h-8 rounded-lg px-3 text-xs font-medium">
-          {{ t('columns.' + col.id) }}
-          <span class="ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums">
-            {{ taskGroups()[col.id].length }}
-          </span>
-        </button>
-      }
-    </nav>
   </header>
 
   <main class="grid grid-cols-1 gap-5 md:grid-cols-3" cdkDropListGroup>
@@ -65,7 +53,13 @@
         >
           <div class="flex min-h-40 flex-1 flex-col gap-3 p-3">
             @for (task of taskGroups()[col.id]; track task.id) {
-              <adm-task-card cdkDrag [cdkDragData]="task" [task]="task" />
+              <adm-task-card
+                cdkDrag
+                [cdkDragData]="task"
+                [task]="task"
+                (taskClick)="openTaskDetailsDialog($event)"
+                (toggleComplete)="toggleTaskComplete($event)"
+              />
             }
           </div>
 

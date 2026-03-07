@@ -13,4 +13,5 @@ export interface Task {
   assigneeAvatar: string;
   imageUrl?: string;
   status: TaskStatus;
+  isCompleted: boolean;
 }

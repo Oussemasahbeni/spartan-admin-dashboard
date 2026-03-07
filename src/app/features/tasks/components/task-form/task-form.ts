@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucidePlus, lucideTag, lucideX } from '@ng-icons/lucide';
+import { lucideChevronLeft, lucidePlus, lucideTag, lucideX } from '@ng-icons/lucide';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { BrnSelectImports } from '@spartan-ng/brain/select';
@@ -13,6 +13,7 @@ import { HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
+import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
@@ -46,12 +47,13 @@ export interface TaskFormModel {
     HlmSpinnerImports,
     HlmIconImports,
     HlmLabelImports,
+    HlmPopoverImports,
     TranslocoModule,
     FormField,
     FormRoot,
     ValidationErrors,
   ],
-  providers: [provideIcons({ lucideTag, lucidePlus, lucideX })],
+  providers: [provideIcons({ lucideTag, lucidePlus, lucideX, lucideChevronLeft })],
   host: {
     class: 'flex flex-col gap-4 sm:min-w-lg',
   },
@@ -83,6 +85,10 @@ export class TaskForm {
     this._dialogContext.existingTags.filter((et) => !this.addedTags().some((at) => at.name === et.name))
   );
 
+  // Popover state
+  protected readonly tagPopoverState = signal<'open' | 'closed'>('closed');
+  protected readonly tagPopoverView = signal<'list' | 'create'>('list');
+
   private readonly taskModel = signal<TaskFormModel>({
     title: '',
     description: '',
@@ -111,11 +117,22 @@ export class TaskForm {
   // Methods
   // ==========================================
 
+  protected onTagPopoverStateChanged(state: string): void {
+    this.tagPopoverState.set(state as 'open' | 'closed');
+    if (state === 'closed') {
+      this.tagPopoverView.set('list');
+      this.pendingTagName.set('');
+      this.pendingTagColor.set('indigo');
+    }
+  }
+
   protected addTag(): void {
     const name = this.pendingTagName().trim();
     if (!name) return;
     this.addedTags.update((tags) => [...tags, { name, color: this.pendingTagColor() }]);
     this.pendingTagName.set('');
+    this.pendingTagColor.set('indigo');
+    this.tagPopoverView.set('list');
   }
 
   protected pickExistingTag(tag: Tag): void {
@@ -136,6 +153,7 @@ export class TaskForm {
       status: val.status().value(),
       dueDate: val.dueDate().value() ? format(val.dueDate().value()!, 'MMM d, yyyy') : '',
       commentsCount: 0,
+      isCompleted: false,
       tags: this.addedTags(),
       assigneeAvatar: `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`,
     };

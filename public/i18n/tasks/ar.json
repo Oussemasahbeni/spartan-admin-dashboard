@@ -31,10 +31,30 @@
       "description": "اختياري — أضف مزيدًا من السياق حول هذه المهمة",
       "status": "اختر الحالة",
       "dueDate": "اختر تاريخًا",
-      "tagName": "مثال: الواجهة الأمامية"
+      "tagName": "مثال: الواجهة الأمامية",
+      "selectTag": "اختر وسمًا",
+      "noTags": "لا توجد وسوم حالية.",
+      "createTag": "إنشاء وسم جديد",
+      "backToTags": "العودة إلى الوسوم"
     },
     "tagPreview": "معاينة",
     "cancel": "إلغاء",
     "save": "إضافة مهمة"
+  },
+  "details": {
+    "description": "الوصف",
+    "activity": "النشاط",
+    "members": "الأعضاء",
+    "labels": "البطاقات",
+    "assignee": "المُكلَّف",
+    "dueDate": "تاريخ الاستحقاق",
+    "comments": "التعليقات",
+    "commentsCount": "تعليق",
+    "noComments": "لا تعليقات حتى الآن.",
+    "attachments": "المرفقات",
+    "files": "ملف",
+    "tags": "الوسوم",
+    "noDescription": "لم يتم تقديم وصف.",
+    "close": "إغلاق"
   }
 }

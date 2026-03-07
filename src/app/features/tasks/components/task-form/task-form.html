@@ -66,94 +66,109 @@
     </div>
 
     <!-- Tags -->
-    <fieldset hlmFieldSet>
-      <legend hlmFieldLegend>
-        <ng-icon hlmIcon name="lucideTag" size="xs" class="mr-1" />
-        {{ t('label.tag') }}
-      </legend>
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-wrap items-center gap-1.5">
+        <!-- Popover trigger -->
+        <hlm-popover [state]="tagPopoverState()" (stateChanged)="onTagPopoverStateChanged($event)">
+          <button type="button" hlmBtn hlmPopoverTrigger variant="outline" size="sm" class="h-8 gap-1.5 px-3 text-sm">
+            <ng-icon hlmIcon name="lucidePlus" size="xs" />
+            {{ t('label.tag') }}
+          </button>
 
-      <!-- Existing tag suggestions -->
-      @if (existingTags().length > 0) {
-        <div class="mb-2 flex flex-wrap gap-1.5">
-          @for (tag of existingTags(); track tag.name) {
+          <div *hlmPopoverPortal hlmPopoverContent class="w-80 p-4">
+            @if (tagPopoverView() === 'list') {
+              <!-- List view: pick from existing tags -->
+              <p class="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase">
+                {{ t('placeholder.selectTag') }}
+              </p>
+
+              @if (existingTags().length > 0) {
+                <div class="mb-3 flex flex-wrap gap-1.5">
+                  @for (tag of existingTags(); track tag.name) {
+                    <button
+                      type="button"
+                      [class]="
+                        'inline-flex cursor-pointer items-center rounded-full border px-2 py-0.5 text-[10px] font-medium transition-opacity hover:opacity-100 ' +
+                        tagColorClasses[tag.color]
+                      "
+                      (click)="pickExistingTag(tag)"
+                    >
+                      + {{ tag.name }}
+                    </button>
+                  }
+                </div>
+              } @else {
+                <p class="text-muted-foreground mb-3 text-xs">{{ t('placeholder.noTags') }}</p>
+              }
+
+              <button type="button" hlmBtn variant="outline" size="sm" class="w-full" (click)="tagPopoverView.set('create')">
+                <ng-icon hlmIcon name="lucidePlus" size="xs" />
+                {{ t('placeholder.createTag') }}
+              </button>
+            } @else {
+              <!-- Create view: new tag name + color picker -->
+              <button
+                type="button"
+                class="text-muted-foreground mb-3 flex items-center gap-1 text-xs hover:text-current"
+                (click)="tagPopoverView.set('list')"
+              >
+                <ng-icon hlmIcon name="lucideChevronLeft" size="xs" />
+                {{ t('placeholder.backToTags') }}
+              </button>
+
+              <div class="flex flex-col gap-3">
+                <input
+                  hlmInput
+                  class="h-10 w-full text-sm"
+                  [placeholder]="t('placeholder.tagName')"
+                  [value]="pendingTagName()"
+                  (input)="pendingTagName.set($any($event.target).value)"
+                  (keydown.enter)="$event.preventDefault(); addTag()"
+                />
+
+                <div class="flex flex-wrap gap-2">
+                  @for (color of tagColors; track color) {
+                    <button
+                      type="button"
+                      [title]="color"
+                      [class]="
+                        'h-6 w-6 rounded-full border-2 transition-all ' +
+                        tagColorClasses[color] +
+                        (pendingTagColor() === color ? ' scale-110 border-current' : ' border-transparent')
+                      "
+                      (click)="pendingTagColor.set(color)"
+                    ></button>
+                  }
+                </div>
+
+                <button type="button" hlmBtn size="sm" class="w-full" (click)="addTag()">
+                  {{ t('save') }}
+                </button>
+              </div>
+            }
+          </div>
+        </hlm-popover>
+
+        <!-- Added tag chips -->
+        @for (tag of addedTags(); track $index) {
+          <span
+            [class]="
+              'inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ' +
+              tagColorClasses[tag.color]
+            "
+          >
+            {{ tag.name }}
             <button
               type="button"
-              [class]="
-                'inline-flex cursor-pointer items-center rounded-full border px-2 py-0.5 text-[10px] font-medium opacity-70 transition-opacity hover:opacity-100 ' +
-                tagColorClasses[tag.color]
-              "
-              (click)="pickExistingTag(tag)"
+              class="ml-0.5 flex items-center justify-center rounded-full opacity-60 hover:opacity-100"
+              (click)="removeTag($index)"
             >
-              + {{ tag.name }}
+              <ng-icon hlmIcon name="lucideX" size="xs" />
             </button>
-          }
-        </div>
-      }
-
-      <div class="flex gap-2">
-        <!-- Tag name input -->
-        <input
-          hlmInput
-          class="flex-1"
-          [placeholder]="t('placeholder.tagName')"
-          [value]="pendingTagName()"
-          (input)="pendingTagName.set($any($event.target).value)"
-          (keydown.enter)="$event.preventDefault(); addTag()"
-        />
-
-        <!-- Tag color select -->
-        <brn-select [value]="pendingTagColor()" (valueChange)="$event && pendingTagColor.set($any($event))">
-          <hlm-select-trigger class="w-36">
-            <span
-              [class]="
-                'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ' +
-                tagColorClasses[pendingTagColor()]
-              "
-            >
-              {{ pendingTagColor() }}
-            </span>
-          </hlm-select-trigger>
-          <hlm-select-content>
-            @for (color of tagColors; track color) {
-              <hlm-option [value]="color">
-                <span
-                  [class]="
-                    'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ' +
-                    tagColorClasses[color]
-                  "
-                >
-                  {{ color }}
-                </span>
-              </hlm-option>
-            }
-          </hlm-select-content>
-        </brn-select>
-
-        <!-- Add tag button -->
-        <button type="button" hlmBtn variant="outline" size="icon" (click)="addTag()">
-          <ng-icon hlmIcon name="lucidePlus" size="sm" />
-        </button>
+          </span>
+        }
       </div>
-
-      <!-- Added tags chips -->
-      @if (addedTags().length > 0) {
-        <div class="mt-2 flex flex-wrap gap-1.5">
-          @for (tag of addedTags(); track $index) {
-            <span
-              [class]="
-                'inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ' +
-                tagColorClasses[tag.color]
-              "
-            >
-              {{ tag.name }}
-              <button type="button" class="ml-0.5 rounded-full opacity-60 hover:opacity-100" (click)="removeTag($index)">
-                <ng-icon hlmIcon name="lucideX" size="xs" />
-              </button>
-            </span>
-          }
-        </div>
-      }
-    </fieldset>
+    </div>
 
     <hlm-dialog-footer>
       <button type="button" hlmBtn variant="outline" (click)="cancel()">{{ t('cancel') }}</button>

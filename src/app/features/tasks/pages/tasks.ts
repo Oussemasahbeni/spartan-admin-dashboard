@@ -8,8 +8,8 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { TaskCardComponent } from '../components/task-card/task-card';
+import { TaskDetails } from '../components/task-details/task-details';
 import { TaskForm } from '../components/task-form/task-form';
-import { Tag } from '../model/tag';
 import { Task, TaskStatus } from '../model/task';
 
 @Component({
@@ -36,90 +36,108 @@ export default class TasksComponent {
     {
       id: '1',
       title: 'Finish user onboarding',
+      description: 'Complete onboarding checklist and send welcome email to new users.',
       status: 'todo',
-      dueDate: 'Tomorrow',
+      dueDate: '2026-10-03',
       commentsCount: 1,
-      tags: [{ name: 'Development', color: 'indigo' }] satisfies Tag[],
+      isCompleted: false,
+      tags: [{ name: 'Development', color: 'indigo' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=1',
     },
     {
       id: '2',
       title: 'Work in progress(WIP) Dashboard',
+      description: 'Polish dashboard widgets and finalize layout for the release.',
       status: 'inprogress',
-      dueDate: 'Today',
+      dueDate: '2025-09-29',
       commentsCount: 1,
-      tags: [{ name: 'Development', color: 'indigo' }] satisfies Tag[],
+      isCompleted: false,
+      tags: [{ name: 'Development', color: 'indigo' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=2',
     },
     {
       id: '3',
       title: 'Manage internal feedback',
+      description: 'Review and triage internal feedback from the team; log action items.',
       status: 'completed',
-      dueDate: 'Tomorrow',
+      dueDate: '2025-10-04',
       commentsCount: 1,
-      tags: [{ name: 'Dev', color: 'slate' }] satisfies Tag[],
+      isCompleted: true,
+      tags: [{ name: 'Dev', color: 'slate' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=3',
     },
     {
       id: '4',
       title: 'Design landing page',
+      description: 'Create final designs and hand off assets to frontend for implementation.',
       status: 'inprogress',
-      dueDate: 'Next week',
+      dueDate: '2025-10-11',
       commentsCount: 2,
       attachmentsCount: 1,
-      tags: [{ name: 'Design', color: 'violet' }] satisfies Tag[],
+      isCompleted: false,
+      tags: [{ name: 'Design', color: 'violet' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=4',
     },
     {
       id: '5',
       title: 'Fix payment bug',
+      description: 'Investigate transaction failure and deploy hotfix to production.',
       status: 'todo',
-      dueDate: 'Today',
+      dueDate: '2025-09-30',
       commentsCount: 3,
+      isCompleted: false,
       tags: [
         { name: 'Bugfix', color: 'red' },
         { name: 'Payments', color: 'amber' },
-      ] satisfies Tag[],
+      ],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=5',
     },
     {
       id: '6',
       title: 'Prepare release v1.2',
+      description: 'Finalize changelog, run release checklist and coordinate deployment.',
       status: 'inprogress',
-      dueDate: 'Mar 10',
+      dueDate: '2025-03-10',
       commentsCount: 0,
       attachmentsCount: 2,
-      tags: [{ name: 'Release', color: 'emerald' }] satisfies Tag[],
+      isCompleted: false,
+      tags: [{ name: 'Release', color: 'emerald' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=6',
     },
     {
       id: '7',
       title: 'Customer feedback review',
+      description: 'Aggregate customer feedback and prepare items for product backlog.',
       status: 'todo',
-      dueDate: 'Friday',
+      dueDate: '2025-10-17',
       commentsCount: 4,
-      tags: [{ name: 'Support', color: 'sky' }] satisfies Tag[],
+      isCompleted: false,
+      tags: [{ name: 'Support', color: 'sky' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=7',
     },
     {
       id: '8',
       title: 'Refactor auth module',
+      description: 'Refactor authentication flows to improve testability and security.',
       status: 'inprogress',
-      dueDate: 'Next Monday',
+      dueDate: '2025-10-06',
       commentsCount: 1,
+      isCompleted: false,
       tags: [
         { name: 'Refactor', color: 'fuchsia' },
         { name: 'Auth', color: 'rose' },
-      ] satisfies Tag[],
+      ],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=8',
     },
     {
       id: '9',
       title: 'Write unit tests',
+      description: 'Increase unit test coverage for core services and components.',
       status: 'completed',
-      dueDate: 'Yesterday',
+      dueDate: '2025-09-25',
       commentsCount: 0,
-      tags: [{ name: 'Testing', color: 'green' }] satisfies Tag[],
+      isCompleted: true,
+      tags: [{ name: 'Testing', color: 'green' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=9',
     },
   ]);
@@ -210,5 +228,16 @@ export default class TasksComponent {
       .subscribe((newTask) => {
         if (newTask) this.tasks.update((t) => [...t, newTask as Task]);
       });
+  }
+
+  protected toggleTaskComplete(task: Task): void {
+    this.tasks.update((all) => all.map((t) => (t.id === task.id ? { ...t, isCompleted: !t.isCompleted } : t)));
+  }
+
+  protected openTaskDetailsDialog(task: Task): void {
+    this._hlmDialogService.open(TaskDetails, {
+      contentClass: 'w-4xl',
+      context: { task },
+    });
   }
 }
