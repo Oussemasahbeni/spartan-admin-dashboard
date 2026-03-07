@@ -1,10 +1,9 @@
 {
-  "tasks": {
     "header": {
-      "title": "Kanban",
+      "title": "Tâches",
       "subtitle": "Glissez-déposez les tâches pour mettre à jour leur statut",
       "home": "Accueil",
-      "kanban": "Kanban"
+      "kanban": "Tâches"
     },
     "addTask": "Ajouter une tâche",
     "filter": "Filtrer",
@@ -38,5 +37,4 @@
       "cancel": "Annuler",
       "save": "Ajouter"
     }
-  }
 }

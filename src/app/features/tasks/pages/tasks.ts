@@ -148,6 +148,17 @@ export default class TasksComponent {
   /** Tracks which column the user is currently dragging over for visual feedback. */
   readonly draggingOverColumn = signal<TaskStatus | null>(null);
 
+  /**
+   * Returns the full class string for a kanban drop zone.
+   * Applies a highlight style when the user drags over the column.
+   */
+  dropZoneClass(colId: TaskStatus): string {
+    const base = 'relative flex flex-1 flex-col overflow-hidden rounded-xl border-2 transition-all duration-200';
+    return this.draggingOverColumn() === colId
+      ? `${base} bg-primary/10 border-primary/50 scale-[1.01] shadow-sm`
+      : `${base} bg-muted/30 border-transparent hover:bg-muted/50`;
+  }
+
   /** Unique tags derived from all tasks, deduplicated by name. */
   readonly existingTags = computed(() => {
     const tags = this.tasks().flatMap((t) => t.tags);
@@ -165,11 +176,24 @@ export default class TasksComponent {
     const newStatus = event.container.id as TaskStatus;
 
     if (previousStatus === newStatus) {
-      return;
+      // Reorder within the same column
+      this.tasks.update((allTasks) => {
+        const colTasks = [...allTasks.filter((t) => t.status === previousStatus)];
+        const otherTasks = allTasks.filter((t) => t.status !== previousStatus);
+        const [moved] = colTasks.splice(event.previousIndex, 1);
+        colTasks.splice(event.currentIndex, 0, moved);
+        return [...otherTasks, ...colTasks];
+      });
+    } else {
+      // Move to a different column and insert at the drop position
+      const task = event.item.data as Task;
+      this.tasks.update((allTasks) => {
+        const targetTasks = [...allTasks.filter((t) => t.status === newStatus)];
+        const otherTasks = allTasks.filter((t) => t.status !== newStatus && t.id !== task.id);
+        targetTasks.splice(event.currentIndex, 0, { ...task, status: newStatus });
+        return [...otherTasks, ...targetTasks];
+      });
     }
-
-    const taskId = event.item.data.id;
-    this.tasks.update((tasks) => tasks.map((t) => (t.id === taskId ? { ...t, status: newStatus } : t)));
   }
 
   // ==========================================

@@ -56,13 +56,9 @@
 
         <div
           cdkDropList
-          class="bg-muted/30 hover:bg-muted/50 relative flex flex-1 flex-col overflow-hidden rounded-xl border-2 border-transparent transition-all duration-200"
+          [class]="dropZoneClass(col.id)"
           [id]="col.id"
           [cdkDropListData]="taskGroups()[col.id]"
-          [class.bg-primary\/10]="draggingOverColumn() === col.id"
-          [class.border-primary\/50]="draggingOverColumn() === col.id"
-          [class.scale-\[1\.01\]]="draggingOverColumn() === col.id"
-          [class.shadow-sm]="draggingOverColumn() === col.id"
           (cdkDropListDropped)="drop($event)"
           (cdkDropListEntered)="draggingOverColumn.set(col.id)"
           (cdkDropListExited)="draggingOverColumn.set(null)"

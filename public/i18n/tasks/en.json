@@ -1,42 +1,40 @@
 {
-  "tasks": {
-    "header": {
-      "title": "Kanban",
-      "subtitle": "Drag and drop tasks across columns to update their status",
-      "home": "Home",
-      "kanban": "Kanban"
+  "header": {
+    "title": "Tasks",
+    "subtitle": "Drag and drop tasks across columns to update their status",
+    "home": "Home",
+    "kanban": "Tasks"
+  },
+  "addTask": "Add New Task",
+  "filter": "Filter",
+  "allTasks": "All Tasks",
+  "emptyColumn": "Drop tasks here",
+  "columns": {
+    "todo": "To Do",
+    "inprogress": "In Progress",
+    "completed": "Completed"
+  },
+  "form": {
+    "title": "Add New Task",
+    "description": "Fill in the details below to create a new task on the board.",
+    "label": {
+      "title": "Title",
+      "description": "Description",
+      "status": "Status",
+      "dueDate": "Due Date",
+      "tag": "Tag",
+      "tagName": "Tag name",
+      "tagColor": "Color"
     },
-    "addTask": "Add New Task",
-    "filter": "Filter",
-    "allTasks": "All Tasks",
-    "emptyColumn": "Drop tasks here",
-    "columns": {
-      "todo": "To Do",
-      "inprogress": "In Progress",
-      "completed": "Completed"
+    "placeholder": {
+      "title": "e.g. Fix login bug",
+      "description": "Optional — add more context about this task",
+      "status": "Select status",
+      "dueDate": "Select due date",
+      "tagName": "e.g. Frontend"
     },
-    "form": {
-      "title": "Add New Task",
-      "description": "Fill in the details below to create a new task on the board.",
-      "label": {
-        "title": "Title",
-        "description": "Description",
-        "status": "Status",
-        "dueDate": "Due Date",
-        "tag": "Tag",
-        "tagName": "Tag name",
-        "tagColor": "Color"
-      },
-      "placeholder": {
-        "title": "e.g. Fix login bug",
-        "description": "Optional — add more context about this task",
-        "status": "Select status",
-        "dueDate": "Select due date",
-        "tagName": "e.g. Frontend"
-      },
-      "tagPreview": "Preview",
-      "cancel": "Cancel",
-      "save": "Add Task"
-    }
+    "tagPreview": "Preview",
+    "cancel": "Cancel",
+    "save": "Add Task"
   }
 }
