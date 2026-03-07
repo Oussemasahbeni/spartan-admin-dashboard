@@ -85,10 +85,15 @@
         "update": "تحديث",
         "columns": "الأعمدة",
         "refresh": "تحديث",
+        "clear": "مسح",
         "import": "استيراد",
         "export": "تصدير",
         "clearFilter": "مسح الفلتر",
         "addNew": "إضافة جديد"
+    },
+    "sort": {
+        "asc": "تصاعدي",
+        "desc": "تنازلي"
     },
     "validation": {
         "required": "هذا الحقل مطلوب.",

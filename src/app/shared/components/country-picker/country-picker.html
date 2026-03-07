@@ -7,7 +7,7 @@
     }
   </hlm-combobox-trigger>
 
-  <div *hlmComboboxPortal>
+  <hlm-combobox-content *hlmComboboxPortal>
     <hlm-combobox-input showTrigger="false" mode="popup" [placeholder]="t('searchCountryPlaceholder')">
       <hlm-input-group-addon>
         <ng-icon name="lucideSearch" />
@@ -23,5 +23,5 @@
         </hlm-combobox-item>
       }
     </div>
-  </div>
+  </hlm-combobox-content>
 </hlm-combobox>

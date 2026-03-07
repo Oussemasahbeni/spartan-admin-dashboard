@@ -1,0 +1,210 @@
+<div *transloco="let t; prefix: 'calendar'" class="flex h-full w-full gap-5 py-4 sm:px-6">
+  <!-- Main Content -->
+  <div class="flex min-w-0 flex-1 flex-col">
+    <!-- Header -->
+    <div class="mb-6 flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight">{{ t('header.title') }}</h2>
+          <p class="mt-1 text-sm">{{ t('header.subtitle') }}</p>
+        </div>
+      </div>
+
+      <!-- Custom Calendar Navigation -->
+      <div class="flex flex-col justify-between gap-4 rounded-lg border-2 p-4 sm:flex-row sm:items-center">
+        <div class="flex items-center gap-4">
+          <!-- Date Badge -->
+          <button type="button" class="flex flex-col items-center overflow-hidden rounded-lg border" (click)="goToToday()">
+            <span class="bg-primary text-primary-foreground w-full px-3 py-0.5 text-center text-xs font-bold uppercase">
+              {{ currentDate() | date: 'MMM' }}
+            </span>
+            <span class="px-3 py-1 text-lg font-bold">
+              {{ currentDate() | date: 'd' }}
+            </span>
+          </button>
+
+          <!-- Title and Date Range -->
+          <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-semibold">
+                @if (currentView().value === 'timeGridDay') {
+                  {{ currentStart() | date: 'MMMM yyyy' }}
+                } @else {
+                  {{ currentTitle() }}
+                }
+              </h3>
+              <span hlmBadge> {{ visibleEventCount() }} {{ t('events') }} </span>
+            </div>
+            <div class="text-muted-foreground flex items-center gap-2 text-sm">
+              <button
+                type="button"
+                hlmBtn
+                variant="outline"
+                size="icon"
+                class="h-5 w-5"
+                aria-label="Previous month"
+                (click)="previousMonth()"
+              >
+                <ng-icon hlmIcon name="lucideChevronLeft" class="rtl:rotate-180" size="xs" />
+              </button>
+              <span>
+                @if (currentView().value === 'timeGridDay') {
+                  {{ currentStart() | date: 'mediumDate' }}
+                } @else {
+                  {{ currentStart() | date: 'mediumDate' }} - {{ currentEnd() | date: 'mediumDate' }}
+                }
+              </span>
+              <button
+                type="button"
+                hlmBtn
+                variant="outline"
+                size="icon"
+                class="h-5 w-5"
+                aria-label="Next month"
+                (click)="nextMonth()"
+              >
+                <ng-icon hlmIcon name="lucideChevronRight" class="rtl:rotate-180" size="xs" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!--  Settings and View Switcher -->
+        <div class="flex items-center gap-4">
+          <button
+            type="button"
+            class="hidden sm:flex"
+            hlmBtn
+            variant="outline"
+            size="icon"
+            aria-label="Filter events by type"
+            [hlmDropdownMenuTrigger]="typesMenu"
+          >
+            <ng-icon hlmIcon name="lucideFilter" size="sm" />
+          </button>
+
+          <ng-template #typesMenu>
+            <hlm-dropdown-menu>
+              <hlm-dropdown-menu-label>{{ t('filter-menu.title') }}</hlm-dropdown-menu-label>
+              <hlm-dropdown-menu-separator />
+
+              <hlm-dropdown-menu-group>
+                @for (type of eventTypes; track type.value) {
+                  <button
+                    type="button"
+                    hlmDropdownMenuCheckbox
+                    [checked]="selectedTypes().includes(type.value)"
+                    (click)="toggleFilter(type.value)"
+                  >
+                    <span class="flex items-center gap-2">
+                      <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+                      <span class="bg- mr-1 h-3 w-3 rounded-full" [style.backgroundColor]="type.color"></span>
+                      {{ t(`filter-menu.labels.${type.value}`) }}
+                    </span>
+                    <hlm-dropdown-menu-checkbox-indicator />
+                  </button>
+                }
+              </hlm-dropdown-menu-group>
+              <hlm-dropdown-menu-separator />
+              <button type="button" hlmDropdownMenuItem (click)="clearFilters()">
+                {{ t('filter-menu.clear') }}
+              </button>
+            </hlm-dropdown-menu>
+          </ng-template>
+
+          <button
+            type="button"
+            class="hidden sm:flex"
+            hlmBtn
+            variant="outline"
+            size="icon"
+            aria-label="Calendar settings"
+            [hlmDropdownMenuTrigger]="settingsMenu"
+          >
+            <ng-icon hlmIcon name="lucideSettings" size="sm" />
+          </button>
+          <ng-template #settingsMenu>
+            <hlm-dropdown-menu>
+              <hlm-dropdown-menu-label>{{ t('settings.title') }}</hlm-dropdown-menu-label>
+              <hlm-dropdown-menu-separator />
+
+              <hlm-dropdown-menu-group>
+                <button type="button" hlmDropdownMenuCheckbox [checked]="use24HourFormat()" (click)="toggleTimeFormat()">
+                  <hlm-dropdown-menu-checkbox-indicator />
+                  {{ t('settings.use24HourFormat') }}
+                </button>
+
+                <button
+                  type="button"
+                  hlmDropdownMenuCheckbox
+                  [checked]="eventDisplayMode() === 'block'"
+                  (click)="toggleEventDisplayMode()"
+                >
+                  <hlm-dropdown-menu-checkbox-indicator />
+                  {{ t('settings.cardView') }}
+                </button>
+              </hlm-dropdown-menu-group>
+            </hlm-dropdown-menu>
+          </ng-template>
+          <!--  View Switcher -->
+          <button
+            type="button"
+            class="hidden items-center gap-2 sm:flex"
+            hlmBtn
+            variant="outline"
+            [hlmDropdownMenuTrigger]="menu"
+          >
+            <ng-icon hlmIcon size="sm" [name]="currentView().icon" />
+            {{ t(`labels.${currentView().label}`) }}
+          </button>
+
+          <ng-template #menu>
+            <hlm-dropdown-menu>
+              <hlm-dropdown-menu-group>
+                @for (view of availableViews(); track $index) {
+                  <button
+                    type="button"
+                    hlmDropdownMenuCheckbox
+                    [checked]="view.value === currentView().value"
+                    (click)="changeView(view)"
+                  >
+                    <span class="flex items-center gap-2">
+                      <ng-icon hlmIcon size="sm" [name]="view.icon" />
+                      {{ t(`labels.${view.label}`) }}
+                    </span>
+
+                    <hlm-dropdown-menu-checkbox-indicator />
+                  </button>
+                }
+              </hlm-dropdown-menu-group>
+            </hlm-dropdown-menu>
+          </ng-template>
+
+          @if (showDatePicker()) {
+            <hlm-date-picker
+              buttonId="date"
+              class="w-fit"
+              [date]="selectedDate()"
+              [autoCloseOnSelect]="true"
+              (dateChange)="onDatePickerChange($event)"
+            />
+          }
+
+          <!-- Add new event -->
+          <button type="button" hlmBtn (click)="addEvent()">
+            <ng-icon hlmIcon name="lucidePlus" size="sm" />
+            {{ t('addEvent') }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar -->
+    <full-calendar
+      #calendar
+      class="bg-card flex rounded-lg p-4"
+      [class.overflow-y-auto]="currentView().value === 'listWeek'"
+      [options]="calendarOptions()"
+    />
+  </div>
+</div>

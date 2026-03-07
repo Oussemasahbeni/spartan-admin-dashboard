@@ -12,14 +12,6 @@
     },
     "today": "Today",
     "events": "Events",
-    "allDay": "All Day",
-    "eventDetails": {
-        "startDate": "Start Date",
-        "endDate": "End Date",
-        "at": "at",
-        "location": "Location",
-        "tags": "Tags"
-    },
     "form": {
         "addTitle": "Add Event",
         "addDescription": "Fill out the form below to add a new event to your calendar.",
@@ -31,17 +23,32 @@
             "startDate": "Start Date",
             "startTime": "Start Time",
             "endDate": "End Date",
-            "endTime": "End Time",
-            "allDay": "All Day Event"
+            "endTime": "End Time"
         },
         "placeholder": {
             "selectDate": "Select a date "
         }
     },
+    "settings": {
+        "title": "Settings",
+        "use24HourFormat": "24-hour format",
+        "cardView": "Card view"
+    },
+    "filter-menu": {
+        "title": "Filter by Type",
+        "all": "All Types",
+        "clear": "Clear Filters",
+        "labels": {
+            "work": "Work",
+            "personal": "Personal",
+            "urgent": "Urgent",
+            "meeting": "Meeting"
+        }
+    },
     "details": {
         "allDay": "All Day",
-        "startDate": "Starts at",
-        "endDate": "Ends at",
+        "startDate": "Start Date",
+        "endDate": "End Date",
         "description": "Description",
         "at": "at"
     },

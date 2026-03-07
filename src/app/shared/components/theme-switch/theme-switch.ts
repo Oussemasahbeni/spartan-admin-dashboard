@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { ThemeService } from '@core/config/theme.service';
+import { WINDOW } from '@core/config/tokens';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideMonitor, lucideMoon, lucideSun } from '@ng-icons/lucide';
-import { WINDOW } from '@shared/tokens';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -20,7 +20,14 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     }),
   ],
   template: `
-    <button type="button" variant="outline" hlmBtn size="icon" [hlmDropdownMenuTrigger]="menu">
+    <button
+      type="button"
+      variant="outline"
+      hlmBtn
+      size="icon"
+      [hlmDropdownMenuTrigger]="menu"
+      [attr.aria-label]="'navUser.theme' | transloco"
+    >
       <ng-icon hlmIcon size="sm" [name]="iconName()" />
     </button>
 

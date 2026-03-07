@@ -1,17 +1,15 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
 
-const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
-
 @Component({
   selector: 'adm-buyers-profile-card',
   imports: [HlmCardImports, HlmIconImports, NgApexchartsModule, TranslocoModule],
-  providers: [provideTranslocoScope(SCOPE), provideIcons({ lucideTrendingUp })],
+  providers: [provideIcons({ lucideTrendingUp })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section
@@ -19,12 +17,12 @@ const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
       hlmCard
       class="flex h-full w-full flex-col"
     >
-      <div hlmCardHeader>
-        <h3 hlmCardTitle class="text-lg font-semibold">{{ t('title') }}</h3>
+      <header hlmCardHeader>
+        <h1 hlmCardTitle class="text-lg font-semibold">{{ t('title') }}</h1>
         <p hlmCardDescription>{{ t('description') }}</p>
-      </div>
+      </header>
 
-      <div hlmCardContent class="flex flex-1 items-center justify-center">
+      <main hlmCardContent class="flex flex-1 items-center justify-center">
         <div class="relative">
           <apx-chart
             [series]="chartOptions().series!"
@@ -40,12 +38,12 @@ const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
             <span class="text-muted-foreground text-sm">{{ t('buyers') }}</span>
           </div>
         </div>
-      </div>
+      </main>
 
-      <div hlmCardFooter class="flex items-center gap-2 text-sm">
+      <footer hlmCardFooter class="flex items-center gap-2 text-sm">
         <ng-icon hlmIcon name="lucideTrendingUp" size="sm" class="text-success" />
         <span class="text-success font-medium">{{ t('trendingText') }}</span>
-      </div>
+      </footer>
     </section>
   `,
 })

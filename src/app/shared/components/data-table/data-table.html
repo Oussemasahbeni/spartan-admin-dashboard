@@ -1,4 +1,4 @@
-<div *transloco="let t; prefix: 'table'" class="flex flex-col gap-4 md:gap-6">
+<div class="flex flex-col gap-4 md:gap-6">
   <div class="overflow-hidden rounded-md border">
     <!-- we defer the loading of the table, because tanstack manipulates the DOM with flexRender which can cause errors during SSR -->
     @defer {
@@ -16,10 +16,49 @@
                           *flexRender="header.column.columnDef.header; props: header.getContext(); let headerText"
                         >
                           @if (header.column.getCanSort()) {
-                            <button type="button" class="flex items-center gap-2 capitalize" (click)="onSort(header.column)">
+                            <button type="button" class="flex items-center gap-2 capitalize" [hlmDropdownMenuTrigger]="menu">
                               <div [innerHTML]="headerText"></div>
                               <ng-icon hlm size="sm" name="lucideArrowUpDown" />
                             </button>
+
+                            <ng-template #menu>
+                              <hlm-dropdown-menu>
+                                <hlm-dropdown-menu-group *transloco="let t">
+                                  <button
+                                    type="button"
+                                    hlmDropdownMenuCheckbox
+                                    [checked]="header.column.getIsSorted() === 'asc'"
+                                    (click)="onSort(header.column, 'asc')"
+                                  >
+                                    <div class="flex items-center gap-2">
+                                      <ng-icon hlm size="sm" name="lucideSortAsc" />
+                                      <span>{{ t('sort.asc') }}</span>
+                                    </div>
+
+                                    <hlm-dropdown-menu-checkbox-indicator />
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    hlmDropdownMenuCheckbox
+                                    [checked]="header.column.getIsSorted() === 'desc'"
+                                    (click)="onSort(header.column, 'desc')"
+                                  >
+                                    <div class="flex items-center gap-2">
+                                      <ng-icon hlm size="sm" name="lucideSortDesc" />
+                                      <span>{{ t('sort.desc') }}</span>
+                                    </div>
+                                    <hlm-dropdown-menu-checkbox-indicator />
+                                  </button>
+                                  @if (header.column.getIsSorted()) {
+                                    <button type="button" hlmDropdownMenuItem (click)="onClearSorting(header.column)">
+                                      <ng-icon hlm size="sm" name="lucideX" />
+                                      {{ t('buttons.clear') }}
+                                    </button>
+                                  }
+                                </hlm-dropdown-menu-group>
+                              </hlm-dropdown-menu>
+                            </ng-template>
                           } @else {
                             <div [innerHTML]="headerText"></div>
                           }

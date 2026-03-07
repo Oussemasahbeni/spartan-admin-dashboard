@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { email, form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
+import { email, form, FormField, FormRoot, minLength, required, validate } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -28,6 +28,7 @@ import { AuthLayout } from '../layout';
     HlmSpinnerImports,
     HlmInputGroupImports,
     FormField,
+    FormRoot,
     TranslocoModule,
     HlmCard,
     RouterLink,
@@ -66,35 +67,32 @@ export default class Signup {
     confirmPassword: '',
   });
 
-  readonly signupForm = form(this.signupModel, (schema) => {
-    required(schema.name);
-    required(schema.email);
-    email(schema.email);
-    required(schema.password);
-    minLength(schema.password, this.passwordMinLength);
-    required(schema.confirmPassword);
-    validate(schema.confirmPassword, ({ value, valueOf }) => {
-      const confirmPassword = value();
-      const password = valueOf(schema.password);
-      if (confirmPassword !== password) {
-        return {
-          kind: 'passwordMismatch',
-        };
-      }
-      return null;
-    });
-  });
-
-  // ==========================================
-  // Public Methods
-  // ==========================================
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-    submit(this.signupForm, async () => {
-      this.onSignup();
-    });
-  }
+  readonly signupForm = form(
+    this.signupModel,
+    (schema) => {
+      required(schema.name);
+      required(schema.email);
+      email(schema.email);
+      required(schema.password);
+      minLength(schema.password, this.passwordMinLength);
+      required(schema.confirmPassword);
+      validate(schema.confirmPassword, ({ value, valueOf }) => {
+        const confirmPassword = value();
+        const password = valueOf(schema.password);
+        if (confirmPassword !== password) {
+          return {
+            kind: 'passwordMismatch',
+          };
+        }
+        return null;
+      });
+    },
+    {
+      submission: {
+        action: async () => this.onSignup(),
+      },
+    }
+  );
 
   // ==========================================
   // Private Methods

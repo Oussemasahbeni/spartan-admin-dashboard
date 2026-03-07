@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { email, form, FormField, required, submit, validate } from '@angular/forms/signals';
+import { email, form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
@@ -17,7 +17,7 @@ import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { parsePhoneNumberFromString } from 'libphonenumber-js/mobile';
 import { toast } from 'ngx-sonner';
-import { User, USER_ROLES, UserRole } from '../../model/user';
+import { User, USER_ROLES, UserRole } from '../../../../shared/models/user';
 import { UserService } from '../../service/user.service';
 
 export interface UserFormModel {
@@ -45,6 +45,7 @@ export interface UserFormModel {
     HlmIconImports,
     TranslocoModule,
     FormField,
+    FormRoot,
     CountryPicker,
     PhoneNumberPicker,
     ValidationErrors,
@@ -81,25 +82,33 @@ export class UserForm implements OnInit {
     role: 'user',
   });
 
-  readonly userForm = form(this.userModel, (schema) => {
-    required(schema.name);
-    required(schema.email);
-    email(schema.email);
-    required(schema.phoneNumber);
-    required(schema.role);
-    validate(schema.phoneNumber, ({ value }) => {
-      if (!value()) {
-        return null;
-      }
-      const phoneNumber = parsePhoneNumberFromString(value());
+  readonly userForm = form(
+    this.userModel,
+    (schema) => {
+      required(schema.name);
+      required(schema.email);
+      email(schema.email);
+      required(schema.phoneNumber);
+      required(schema.role);
+      validate(schema.phoneNumber, ({ value }) => {
+        if (!value()) {
+          return null;
+        }
+        const phoneNumber = parsePhoneNumberFromString(value());
 
-      return phoneNumber && phoneNumber.isValid()
-        ? null
-        : {
-            kind: 'invalid',
-          };
-    });
-  });
+        return phoneNumber && phoneNumber.isValid()
+          ? null
+          : {
+              kind: 'invalid',
+            };
+      });
+    },
+    {
+      submission: {
+        action: async () => this.onSubmit(),
+      },
+    }
+  );
 
   // ==========================================
   // Public Methods
@@ -115,15 +124,12 @@ export class UserForm implements OnInit {
     }
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-    submit(this.userForm, async () => {
-      if (!this.userForm().dirty()) {
-        this._dialogRef.close(false);
-        return;
-      }
-      this.onSaveUser();
-    });
+  onSubmit() {
+    if (!this.userForm().dirty()) {
+      this._dialogRef.close(false);
+      return;
+    }
+    this.onSaveUser();
   }
 
   // ==========================================

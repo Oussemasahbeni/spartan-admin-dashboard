@@ -16,7 +16,7 @@ import { Notifications } from '../notifications/notifications';
       class="bg-background/95 sticky top-0 z-30 flex h-14 w-full shrink-0 items-center justify-between gap-2 border-b px-6 backdrop-blur"
     >
       <div class="flex items-center gap-2">
-        <button type="button" hlmSidebarTrigger (click)="onResize()">
+        <button type="button" hlmSidebarTrigger [aria-label]="'Toggle sidebar'" (click)="onResize()">
           <span class="sr-only">Toggle sidebar</span>
         </button>
         <hlm-separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />

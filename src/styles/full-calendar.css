@@ -17,3 +17,21 @@ full-calendar {
   background-clip: padding-box !important;
   @apply rounded-md! border-none px-2 py-1 shadow-sm;
 }
+
+.fc-h-event {
+  border: none !important;
+}
+
+.fc-h-event .fc-event-main-frame {
+  flex-direction: row-reverse;
+}
+.fc-h-event .fc-event-title {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fc-h-event .fc-event-time {
+  overflow: visible !important;
+}

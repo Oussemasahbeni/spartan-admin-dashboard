@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCircleCheck, lucideCircleX, lucideLoader } from '@ng-icons/lucide';
-import { UserStatus } from '../model/user';
+import { UserStatus } from '../../../shared/models/user';
 
 @Pipe({ name: 'statusUI' })
 export class StatusUIPipe implements PipeTransform {

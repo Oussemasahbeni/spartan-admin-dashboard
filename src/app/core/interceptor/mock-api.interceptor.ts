@@ -1,13 +1,13 @@
 import { HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpResponse } from '@angular/common/http';
-import { makeUsersData } from '@core/mock/users';
+import { STATIC_USERS } from '@core/mock/users.data';
 import { delay, of, switchMap, tap } from 'rxjs';
-import { User } from '../../features/users/model/user';
+import { User } from '../../shared/models/user';
 
 let db: User[] | null = null;
 
 const getDb$ = () => {
   if (db) return of(db);
-  return of(makeUsersData(200)).pipe(tap((data) => (db = data)));
+  return of(structuredClone(STATIC_USERS)).pipe(tap((data) => (db = data)));
 };
 
 export const mockApiInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {

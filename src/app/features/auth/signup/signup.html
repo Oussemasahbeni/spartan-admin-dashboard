@@ -12,7 +12,7 @@
       </p>
     </div>
 
-    <form class="flex flex-col gap-4" (submit)="onSubmit($event)">
+    <form class="flex flex-col gap-4" [formRoot]="signupForm">
       <hlm-field>
         <hlm-field-label for="name">{{ t('nameLabel') }}</hlm-field-label>
         <input

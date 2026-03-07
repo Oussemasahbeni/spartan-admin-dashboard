@@ -12,7 +12,7 @@
       </p>
     </div>
 
-    <form class="flex flex-col gap-4" (submit)="onSubmit($event)">
+    <form class="flex flex-col gap-4" [formRoot]="loginForm">
       <hlm-field>
         <hlm-field-label for="email">{{ t('emailLabel') }}</hlm-field-label>
         <input
@@ -72,7 +72,7 @@
         {{ t('loginBtn') }}
       </button>
     </form>
-    <div class="relative mb-2">
+    <div class="relative mb-1">
       <div class="absolute inset-0 flex items-center">
         <span class="w-full border-t"></span>
       </div>

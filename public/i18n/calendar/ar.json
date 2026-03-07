@@ -12,14 +12,6 @@
     },
     "today": "اليوم",
     "events": "الأحداث",
-    "allDay": "طوال اليوم",
-    "eventDetails": {
-        "startDate": "تاريخ البدء",
-        "endDate": "تاريخ الانتهاء",
-        "at": "في",
-        "location": "الموقع",
-        "tags": "الوسوم"
-    },
     "form": {
         "addTitle": "إضافة حدث",
         "addDescription": "املأ النموذج أدناه لإضافة حدث جديد إلى التقويم.",
@@ -31,12 +23,34 @@
             "startDate": "تاريخ البدء",
             "startTime": "وقت البدء",
             "endDate": "تاريخ الانتهاء",
-            "endTime": "وقت الانتهاء",
-            "allDay": "حدث طوال اليوم"
+            "endTime": "وقت الانتهاء"
         },
         "placeholder": {
             "selectDate": "اختر تاريخًا"
         }
+    },
+    "settings": {
+        "title": "الإعدادات",
+        "use24HourFormat": "تنسيق 24 ساعة",
+        "cardView": "عرض البطاقة"
+    },
+    "filter-menu": {
+        "title": "تصفية حسب النوع",
+        "all": "جميع الأنواع",
+        "clear": "مسح عوامل التصفية",
+        "labels": {
+            "work": "عمل",
+            "personal": "شخصي",
+            "urgent": "عاجل",
+            "meeting": "اجتماع"
+        }
+    },
+    "details": {
+        "allDay": "طوال اليوم",
+        "startDate": "تاريخ البداية",
+        "endDate": "تاريخ النهاية",
+        "description": "الوصف",
+        "at": "في"
     },
     "toast": {
         "eventCreated": "تم إنشاء الحدث بنجاح!",

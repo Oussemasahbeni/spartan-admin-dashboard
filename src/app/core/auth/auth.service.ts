@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { LOCAL_STORAGE } from '@shared/tokens';
-import { User } from '../../features/users/model/user';
+import { LOCAL_STORAGE } from '@core/config/tokens';
+import { User } from '../../shared/models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

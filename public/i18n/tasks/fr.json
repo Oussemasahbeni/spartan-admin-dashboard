@@ -2,15 +2,41 @@
   "tasks": {
     "header": {
       "title": "Kanban",
+      "subtitle": "Glissez-déposez les tâches pour mettre à jour leur statut",
       "home": "Accueil",
       "kanban": "Kanban"
     },
     "addTask": "Ajouter une tâche",
+    "filter": "Filtrer",
     "allTasks": "Toutes les tâches",
+    "emptyColumn": "Déposez des tâches ici",
     "columns": {
       "todo": "À faire",
       "inprogress": "En cours",
       "completed": "Terminées"
+    },
+    "form": {
+      "title": "Nouvelle tâche",
+      "description": "Remplissez les détails ci-dessous pour créer une nouvelle tâche.",
+      "label": {
+        "title": "Titre",
+        "description": "Description",
+        "status": "Statut",
+        "dueDate": "Échéance",
+        "tag": "Étiquette",
+        "tagName": "Nom de l'étiquette",
+        "tagColor": "Couleur"
+      },
+      "placeholder": {
+        "title": "ex. Corriger le bug de connexion",
+        "description": "Facultatif — ajoutez plus de contexte sur cette tâche",
+        "status": "Choisir un statut",
+        "dueDate": "Choisir une date",
+        "tagName": "ex. Frontend"
+      },
+      "tagPreview": "Aperçu",
+      "cancel": "Annuler",
+      "save": "Ajouter"
     }
   }
 }

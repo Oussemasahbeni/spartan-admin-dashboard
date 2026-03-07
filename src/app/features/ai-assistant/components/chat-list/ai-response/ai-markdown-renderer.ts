@@ -24,7 +24,7 @@ import { Marked, Renderer } from 'marked';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'block',
+    'class': 'block',
     '(click)': 'onHostClick($event)',
   },
 })

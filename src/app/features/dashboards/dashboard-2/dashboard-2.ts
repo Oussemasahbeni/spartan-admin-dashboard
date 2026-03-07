@@ -15,7 +15,7 @@ import {
   lucideUsers,
 } from '@ng-icons/lucide';
 
-import { faker } from '@faker-js/faker';
+import { STATIC_TRANSACTIONS } from '@core/mock/transactions.data';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -73,7 +73,7 @@ export default class Dashboard2 implements OnInit {
   // ==========================================
 
   ngOnInit() {
-    this.generateMockData();
+    this.transactions.set(structuredClone(STATIC_TRANSACTIONS));
     this.generateStatCards();
   }
 
@@ -117,22 +117,6 @@ export default class Dashboard2 implements OnInit {
   // ==========================================
   // Private Methods
   // ==========================================
-
-  generateMockData() {
-    const data: Transaction[] = Array.from({ length: 5 }).map(() => ({
-      id: faker.string.numeric(6),
-      user: {
-        name: faker.person.firstName(),
-        email: faker.internet.email().toLowerCase(),
-        avatar: faker.image.avatar(),
-      },
-      status: faker.helpers.arrayElement(['Suspended', 'New', 'Delete', 'Suspended']),
-      date: `${faker.number.int({ min: 2, max: 59 })} min ago`,
-      amount: `$${faker.finance.amount({ min: 10, max: 1000, dec: 2 })}`,
-    }));
-
-    this.transactions.set(data);
-  }
 
   onFilterApplied(filters: FilterOptions) {
     this.activeFilters.set(filters);

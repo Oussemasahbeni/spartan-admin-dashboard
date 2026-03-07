@@ -34,23 +34,22 @@ export type CardVariant = 'compact' | 'large';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <!-- New Subscriptions Card -->
     <section *transloco="let t; prefix: 'dashboard1.metricCard'" hlmCard class="h-full w-full py-4">
       @if (variant() === 'compact') {
         <!-- Header -->
-        <div hlmCardHeader class="flex flex-row items-center justify-between">
+        <header hlmCardHeader class="flex flex-row items-center justify-between">
           <div class="flex items-center gap-2">
             <ng-icon hlm size="sm" [name]="icon()" />
-            <h3 hlmCardTitle class="text-muted-foreground text-sm font-medium">{{ title() }}</h3>
+            <h1 hlmCardTitle class="text-muted-foreground text-sm font-medium">{{ title() }}</h1>
           </div>
 
           <div hlmCardAction>
             <ng-icon hlm name="lucideInfo" size="sm" [hlmTooltip]="tooltip() ?? ''" />
           </div>
-        </div>
+        </header>
 
         <!-- Content: The main metrics and the chart -->
-        <div hlmCardContent class="flex items-end justify-between">
+        <main hlmCardContent class="flex items-end justify-between">
           <div>
             <div class="text-3xl font-bold tracking-tight tabular-nums">{{ value() }}</div>
             <p hlmCardDescription class="mt-1 text-xs font-medium">{{ description() }}</p>
@@ -65,10 +64,10 @@ export type CardVariant = 'compact' | 'large';
               [tooltip]="chartConfig().tooltip!"
             />
           </div>
-        </div>
+        </main>
 
         <!-- Footer -->
-        <div hlmCardFooter class="mt-auto flex items-center justify-between">
+        <footer hlmCardFooter class="mt-auto flex items-center justify-between">
           <a href="#" class="text-foreground text-sm font-medium hover:underline">{{ t('details') }}</a>
 
           <div
@@ -79,10 +78,10 @@ export type CardVariant = 'compact' | 'large';
             <span>{{ trendValue() }}</span>
             <ng-icon hlm class="fill-current" size="xs" [name]="trendUp() ? 'lucideTrendingUp' : 'lucideTrendingDown'" />
           </div>
-        </div>
+        </footer>
       }
       @if (variant() === 'large') {
-        <div hlmCardContent class="px-6">
+        <main hlmCardContent class="px-6">
           <p class="text-muted-foreground text-sm font-medium">{{ title() }}</p>
           <div class="mt-2 text-3xl font-bold tracking-tight tabular-nums">{{ value() }}</div>
           <p class="text-muted-foreground mt-1 text-xs font-medium">{{ description() }}</p>
@@ -95,7 +94,7 @@ export type CardVariant = 'compact' | 'large';
             [colors]="[chartColor()]"
             [tooltip]="chartOptions().tooltip!"
           />
-        </div>
+        </main>
       }
     </section>
   `,

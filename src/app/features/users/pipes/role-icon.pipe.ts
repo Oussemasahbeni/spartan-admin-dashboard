@@ -1,7 +1,7 @@
 import { Pipe, type PipeTransform } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBriefcase, lucideShieldCheck, lucideUser } from '@ng-icons/lucide';
-import { UserRole } from '../model/user';
+import { UserRole } from '../../../shared/models/user';
 
 @Pipe({
   name: 'roleIcon',

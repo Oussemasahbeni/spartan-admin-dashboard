@@ -1,3 +1,5 @@
+import { Tag } from './tag';
+
 export type TaskStatus = 'todo' | 'inprogress' | 'completed';
 
 export interface Task {
@@ -7,7 +9,7 @@ export interface Task {
   dueDate: string;
   commentsCount: number;
   attachmentsCount?: number;
-  tags: string[];
+  tags: Tag[];
   assigneeAvatar: string;
   imageUrl?: string;
   status: TaskStatus;

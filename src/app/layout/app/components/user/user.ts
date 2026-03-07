@@ -20,7 +20,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
-import { User } from '../../../../features/users/model/user';
+import { User } from '../../../../shared/models/user';
 
 @Component({
   selector: 'adm-user',

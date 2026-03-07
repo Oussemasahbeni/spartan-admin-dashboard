@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { makeNotificationsData } from '@core/mock/notifications';
+import { STATIC_NOTIFICATIONS } from '@core/mock/notifications.data';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideX } from '@ng-icons/lucide';
@@ -120,7 +120,7 @@ export class Notifications {
   // State
   // ==========================================
 
-  readonly notifications = signal<Notification[]>(makeNotificationsData(10));
+  readonly notifications = signal<Notification[]>(structuredClone(STATIC_NOTIFICATIONS));
 
   readonly unreadCount = computed(() => this.notifications().filter((notification) => notification.unread).length);
 

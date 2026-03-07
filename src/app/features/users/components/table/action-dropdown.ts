@@ -14,7 +14,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
 import { toast } from 'ngx-sonner';
 import { exhaustMap, filter } from 'rxjs';
-import { User } from '../../model/user';
+import { User } from '../../../../shared/models/user';
 import { UserService } from '../../service/user.service';
 import { UserForm } from '../form/user-form';
 
@@ -33,7 +33,15 @@ import { UserForm } from '../form/user-form';
   changeDetection: ChangeDetectionStrategy.OnPush,
 
   template: `
-    <button type="button" hlmBtn variant="ghost" size="icon" align="end" [hlmDropdownMenuTrigger]="menu">
+    <button
+      type="button"
+      hlmBtn
+      variant="ghost"
+      size="icon"
+      align="end"
+      aria-label="Open row actions"
+      [hlmDropdownMenuTrigger]="menu"
+    >
       <ng-icon hlmIcon size="sm" name="lucideEllipsisVertical" />
     </button>
     <ng-template #menu>

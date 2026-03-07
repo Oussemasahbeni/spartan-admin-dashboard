@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality.service';
-import { provideTranslocoScope, translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
+import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
-
-const SCOPE = { scope: 'dashboard/dashboard1', alias: 'dashboard1' };
 
 interface TrafficSourceCardTranslation {
   google: string;
@@ -16,41 +14,39 @@ interface TrafficSourceCardTranslation {
 @Component({
   selector: 'adm-traffic-source-card',
   imports: [HlmCardImports, HlmTabsImports, NgApexchartsModule, TranslocoModule],
-  providers: [provideTranslocoScope(SCOPE)],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.trafficSourceCard'" hlmCard class="h-full w-full">
-      <div hlmCardHeader class="flex flex-row items-start justify-between gap-2">
-        <div>
-          <h3 hlmCardTitle class="text-lg font-semibold">{{ t('title') }}</h3>
-        </div>
+      <hlm-tabs class="w-auto" [tab]="selectedPeriod()" (tabActivated)="selectedPeriod.set($event)">
+        <header hlmCardHeader class="flex flex-row items-start justify-between gap-2">
+          <div>
+            <h1 hlmCardTitle class="text-lg font-semibold">{{ t('title') }}</h1>
+            <p hlmCardDescription>{{ t('description') }}</p>
+          </div>
 
-        <hlm-tabs class="w-auto" [tab]="selectedPeriod()" (tabActivated)="selectedPeriod.set($event)">
           <hlm-tabs-list *transloco="let t; prefix: 'dashboard1'">
-            <button type="button" hlmTabsTrigger="month">
+            <button type="button" hlmTabsTrigger="month" [aria-label]="t('period.month')">
               {{ t('period.month') }}
             </button>
-            <button type="button" hlmTabsTrigger="week">
+            <button type="button" hlmTabsTrigger="week" [aria-label]="t('period.week')">
               {{ t('period.week') }}
             </button>
           </hlm-tabs-list>
-        </hlm-tabs>
-      </div>
+        </header>
 
-      <p hlmCardDescription class="px-6">{{ t('description') }}</p>
-
-      <div hlmCardContent class="mt-4">
-        <apx-chart
-          [grid]="chartOptions().grid!"
-          [series]="chartOptions().series!"
-          [chart]="chartOptions().chart!"
-          [plotOptions]="chartOptions().plotOptions!"
-          [legend]="chartOptions().legend!"
-          [xaxis]="chartOptions().xaxis!"
-          [yaxis]="chartOptions().yaxis!"
-          [colors]="chartOptions().colors!"
-        />
-      </div>
+        <main hlmCardContent class="mt-4" [hlmTabsContent]="selectedPeriod()">
+          <apx-chart
+            [grid]="chartOptions().grid!"
+            [series]="chartOptions().series!"
+            [chart]="chartOptions().chart!"
+            [plotOptions]="chartOptions().plotOptions!"
+            [legend]="chartOptions().legend!"
+            [xaxis]="chartOptions().xaxis!"
+            [yaxis]="chartOptions().yaxis!"
+            [colors]="chartOptions().colors!"
+          />
+        </main>
+      </hlm-tabs>
     </section>
   `,
 })
@@ -68,7 +64,7 @@ export class TrafficSourceCard {
 
   readonly selectedPeriod = signal<string>('month');
 
-  private readonly _trafficCard = translateObjectSignal('analytics.trafficSourceCard.sources', {}, SCOPE);
+  private readonly _trafficCard = translateObjectSignal('analytics.trafficSourceCard.sources');
 
   readonly trafficCard = computed(() => this._trafficCard() as TrafficSourceCardTranslation);
 

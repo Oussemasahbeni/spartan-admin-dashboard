@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, outp
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideArrowUpDown } from '@ng-icons/lucide';
+import { lucideArrowUpDown, lucideSortAsc, lucideSortDesc, lucideX } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
@@ -20,6 +21,7 @@ import {
   getSortedRowModel,
   PaginationState,
   RowSelectionState,
+  SortDirection,
   SortingState,
   VisibilityState,
 } from '@tanstack/angular-table';
@@ -65,6 +67,7 @@ import { DataTablePagination } from '../pagination/pagination';
     HlmSpinnerImports,
     HlmButtonImports,
     HlmScrollAreaImports,
+    HlmDropdownMenuImports,
     FlexRenderDirective,
     FormsModule,
     TranslocoDirective,
@@ -78,6 +81,9 @@ import { DataTablePagination } from '../pagination/pagination';
   providers: [
     provideIcons({
       lucideArrowUpDown,
+      lucideSortAsc,
+      lucideSortDesc,
+      lucideX
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -315,7 +321,11 @@ export class DataTable<T> {
    * Toggles sorting on a column.
    * Cycles through: none → asc → desc → none
    */
-  protected onSort(column: Column<T, unknown>) {
-    column.toggleSorting(column.getIsSorted() === 'asc');
+  protected onSort(column: Column<T, unknown>, direction: SortDirection) {
+    column.toggleSorting(direction === 'desc', false);
+  }
+
+  protected onClearSorting(column: Column<T, unknown>) {
+    column.clearSorting();
   }
 }

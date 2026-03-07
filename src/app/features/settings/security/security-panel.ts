@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { form, FormField, minLength, submit } from '@angular/forms/signals';
+import { form, FormField, FormRoot, minLength } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideEye, lucideEyeOff, lucideKey, lucideLock, lucideShieldCheck } from '@ng-icons/lucide';
@@ -28,6 +28,7 @@ import { HlmSpinner } from '@spartan-ng/helm/spinner';
     HlmCheckboxImports,
     HlmSpinner,
     FormField,
+    FormRoot,
     ValidationErrors,
     TranslocoModule,
   ],
@@ -49,20 +50,17 @@ export class SettingsSecurity {
     passwordChangeReminder: false,
   });
 
-  readonly securityForm = form(this.securityModel, (schema) => {
-    minLength(schema.newPassword, 8);
-  });
-
-  // ==========================================
-  // Public Methods
-  // ==========================================
-
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    submit(this.securityForm, async () => {
-      this.saveSecurity();
-    });
-  }
+  readonly securityForm = form(
+    this.securityModel,
+    (schema) => {
+      minLength(schema.newPassword, 8);
+    },
+    {
+      submission: {
+        action: async () => this.saveSecurity(),
+      },
+    }
+  );
 
   // ==========================================
   // Private Methods

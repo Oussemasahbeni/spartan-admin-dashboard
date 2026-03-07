@@ -4,7 +4,7 @@
 </hlm-dialog-header>
 
 <div class="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-0 overflow-y-auto sm:max-h-[min(640px,80vh)]">
-  <form *transloco="let t; prefix: 'users.form'" class="flex w-full flex-col gap-4 p-2" (submit)="onSubmit($event)">
+  <form *transloco="let t; prefix: 'users.form'" class="flex w-full flex-col gap-4 p-2" [formRoot]="userForm">
     <!-- Name -->
     <hlm-field>
       <hlm-field-label for="name">{{ t('label.name') }}</hlm-field-label>

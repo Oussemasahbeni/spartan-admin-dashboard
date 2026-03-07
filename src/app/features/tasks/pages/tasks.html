@@ -1,0 +1,89 @@
+<div
+  *transloco="let t; prefix: 'tasks'"
+  class="bg-background flex h-full w-full flex-col p-6 transition-colors duration-300"
+>
+  <header class="mb-6 flex flex-col gap-5">
+    <div class="flex items-center justify-between">
+      <div class="space-y-1">
+        <h2 class="text-2xl font-bold tracking-tight">{{ t('header.title') }}</h2>
+        <p class="text-muted-foreground text-sm">{{ t('header.subtitle') }}</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button hlmBtn variant="outline" type="button" size="sm">
+          <ng-icon hlmIcon name="lucideFilter" size="xs" class="mr-1.5" />
+          {{ t('filter') }}
+        </button>
+        <button hlmBtn variant="default" type="button" size="sm" (click)="openAddTaskDialog()">
+          <ng-icon hlmIcon name="lucidePlus" size="xs" class="mr-1.5" />
+          {{ t('addTask') }}
+        </button>
+      </div>
+    </div>
+
+    <nav class="border-border bg-card flex w-fit items-center gap-1 overflow-x-auto rounded-xl border p-1 shadow-xs">
+      <button hlmBtn variant="ghost" type="button" class="h-8 rounded-lg px-3 text-xs font-medium">
+        {{ t('allTasks') }}
+        <span class="bg-primary/10 text-primary ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums">
+          {{ taskGroups().count }}
+        </span>
+      </button>
+      @for (col of columns; track col.id) {
+        <button hlmBtn variant="ghost" type="button" class="h-8 rounded-lg px-3 text-xs font-medium">
+          {{ t('columns.' + col.id) }}
+          <span class="ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums">
+            {{ taskGroups()[col.id].length }}
+          </span>
+        </button>
+      }
+    </nav>
+  </header>
+
+  <main class="grid grid-cols-1 gap-5 md:grid-cols-3" cdkDropListGroup>
+    @for (col of columns; track col.id) {
+      <div class="flex h-fit flex-col">
+        <div class="mb-3 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span [class]="'h-2.5 w-2.5 rounded-full ' + col.color"></span>
+            <h3 class="text-foreground text-sm font-semibold">{{ t('columns.' + col.id) }}</h3>
+            <span
+              class="bg-muted text-muted-foreground flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold"
+            >
+              {{ taskGroups()[col.id].length }}
+            </span>
+          </div>
+        </div>
+
+        <div
+          cdkDropList
+          class="bg-muted/30 hover:bg-muted/50 relative flex flex-1 flex-col overflow-hidden rounded-xl border-2 border-transparent transition-all duration-200"
+          [id]="col.id"
+          [cdkDropListData]="taskGroups()[col.id]"
+          [class.bg-primary\/10]="draggingOverColumn() === col.id"
+          [class.border-primary\/50]="draggingOverColumn() === col.id"
+          [class.scale-\[1\.01\]]="draggingOverColumn() === col.id"
+          [class.shadow-sm]="draggingOverColumn() === col.id"
+          (cdkDropListDropped)="drop($event)"
+          (cdkDropListEntered)="draggingOverColumn.set(col.id)"
+          (cdkDropListExited)="draggingOverColumn.set(null)"
+        >
+          <div class="flex min-h-40 flex-1 flex-col gap-3 p-3">
+            @for (task of taskGroups()[col.id]; track task.id) {
+              <adm-task-card cdkDrag [cdkDragData]="task" [task]="task" />
+            }
+          </div>
+
+          @if (taskGroups()[col.id].length === 0) {
+            <div
+              class="text-muted-foreground/40 pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 text-center transition-opacity duration-200"
+              [class.opacity-0]="draggingOverColumn() === col.id"
+            >
+              <ng-icon hlmIcon name="lucideChevronRight" size="lg" class="rotate-90 opacity-40" />
+              <p class="text-xs font-medium">{{ t('emptyColumn') }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </main>
+</div>
