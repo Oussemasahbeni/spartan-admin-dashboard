@@ -5,6 +5,7 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { BrnSelectImports } from '@spartan-ng/brain/select';
+import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
@@ -16,7 +17,6 @@ import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { format, isAfter, parse, set } from 'date-fns';
-import { toast } from 'ngx-sonner';
 
 export interface CalendarEventModel {
   title: string;

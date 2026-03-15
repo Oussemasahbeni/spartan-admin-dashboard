@@ -43,7 +43,6 @@
       "@spartan-ng/helm/separator": ["./src/app/spartan/separator/src/index.ts"],
       "@spartan-ng/helm/sheet": ["./src/app/spartan/sheet/src/index.ts"],
       "@spartan-ng/helm/skeleton": ["./src/app/spartan/skeleton/src/index.ts"],
-      "@spartan-ng/helm/sonner": ["./src/app/spartan/sonner/src/index.ts"],
       "@spartan-ng/helm/input-group": ["./src/app/spartan/input-group/src/index.ts"],
       "@spartan-ng/helm/textarea": ["./src/app/spartan/textarea/src/index.ts"],
       "@spartan-ng/helm/combobox": ["./src/app/spartan/combobox/src/index.ts"],
@@ -54,7 +53,8 @@
       "@spartan-ng/helm/tooltip": ["./src/app/spartan/tooltip/src/index.ts"],
       "@spartan-ng/helm/utils": ["./src/app/spartan/utils/src/index.ts"],
       "@spartan-ng/helm/spinner": ["./src/app/spartan/spinner/src/index.ts"],
-      "@spartan-ng/helm/kbd": ["./src/app/spartan/kbd/src/index.ts"]
+      "@spartan-ng/helm/kbd": ["./src/app/spartan/kbd/src/index.ts"],
+      "@spartan-ng/helm/sonner": ["./src/app/spartan/sonner/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

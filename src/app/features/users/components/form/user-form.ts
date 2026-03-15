@@ -16,9 +16,9 @@ import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { parsePhoneNumberFromString } from 'libphonenumber-js/mobile';
-import { toast } from 'ngx-sonner';
 import { User, USER_ROLES, UserRole } from '../../../../shared/models/user';
 import { UserService } from '../../service/user.service';
+import { toast } from '@spartan-ng/brain/sonner';
 
 export interface UserFormModel {
   name: string;

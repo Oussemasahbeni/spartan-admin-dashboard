@@ -46,7 +46,6 @@
     "marked": "^17.0.1",
     "ng-apexcharts": "^2.0.4",
     "ngx-scrollbar": "^19.1.1",
-    "ngx-sonner": ">=3.0.0",
     "rxjs": "~7.8.0",
     "tailwind-merge": "^3.5.0",
     "tslib": "^2.3.0"

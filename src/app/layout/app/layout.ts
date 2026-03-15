@@ -9,7 +9,9 @@ import { Navigation } from './components/navigation/navigation';
   selector: 'adm-main-layout',
   imports: [Navigation, SiteHeader, RouterOutlet, HlmSidebarImports, BackToTop],
   template: `
-    <adm-back-to-top />
+    @defer (on idle) {
+      <adm-back-to-top />
+    }
     <adm-navigation>
       <main hlmSidebarInset>
         <adm-site-header />
