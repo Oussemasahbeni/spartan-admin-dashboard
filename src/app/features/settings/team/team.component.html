@@ -1,6 +1,6 @@
 <div *transloco="let t; prefix: 'settings.team'" class="w-full">
   <!-- Add team member -->
-  <form class="flex justify-between" (submit)="onAddMember($event)">
+  <form class="flex justify-between" novalidate (submit)="onAddMember($event)">
     <div class="flex w-full gap-3">
       <hlm-field>
         <hlm-input-group>

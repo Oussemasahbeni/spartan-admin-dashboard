@@ -24,6 +24,7 @@ import { TranslocoHttpLoader } from './transloco-loader';
 
 import { mockApiInterceptor } from '@core/interceptor/mock-api.interceptor';
 import { provideHlmDatePickerConfig } from '@spartan-ng/helm/date-picker';
+import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
 import { format } from 'date-fns/format';
 
 const availableLangs = ['en', 'fr', 'ar'];
@@ -77,7 +78,9 @@ export const appConfig: ApplicationConfig = {
     provideHlmDatePickerConfig({
       formatDate: (date: Date) => format(date, 'dd-MM-yyyy'),
     }),
-
+    provideHlmSidebarConfig({
+      closeMobileSidebarOnMenuButtonClick: true,
+    }),
     {
       provide: TitleStrategy,
       useClass: TranslateTitleStrategy,

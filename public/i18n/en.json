@@ -10,6 +10,11 @@
         "language": "Language",
         "logout": "Logout"
     },
+    "header": {
+        "toggleTheme": "Toggle theme",
+        "closeSidebar": "Close sidebar",
+        "openSidebar": "Open sidebar"
+    },
     "breadcrumbs": {
         "home": "Home"
     },

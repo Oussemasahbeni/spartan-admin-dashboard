@@ -7,8 +7,14 @@
     "navUser": {
         "account": "الحساب",
         "theme": "المظهر",
+        "toggleTheme": "تبديل المظهر",
         "language": "اللغة",
         "logout": "تسجيل الخروج"
+    },
+    "header": {
+        "toggleTheme": "تبديل المظهر",
+        "closeSidebar": "إغلاق الشريط الجانبي",
+        "openSidebar": "فتح الشريط الجانبي"
     },
     "breadcrumbs": {
         "home": "الرئيسية"

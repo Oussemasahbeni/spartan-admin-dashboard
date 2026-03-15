@@ -16,7 +16,7 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 
       <!-- Dynamic breadcrumbs -->
       @for (crumb of breadcrumbs(); track crumb.url; let isLast = $last) {
-        <li hlmBreadcrumbSeparator class="hidden sm:block"></li>
+        <li hlmBreadcrumbSeparator class="hidden sm:block rtl:rotate-180"></li>
         <li hlmBreadcrumbItem>
           @if (isLast) {
             <span hlmBreadcrumbPage>{{ t(crumb.label) }}</span>

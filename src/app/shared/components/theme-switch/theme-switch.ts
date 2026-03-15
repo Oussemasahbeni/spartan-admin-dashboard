@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { ThemeService } from '@core/config/theme.service';
+import { Theme, THEMES, ThemeService } from '@core/config/theme.service';
 import { WINDOW } from '@core/config/tokens';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -7,10 +7,12 @@ import { lucideCheck, lucideMonitor, lucideMoon, lucideSun } from '@ng-icons/luc
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { HlmKbd } from '@spartan-ng/helm/kbd';
+import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 
 @Component({
   selector: 'adm-theme-switch',
-  imports: [HlmDropdownMenuImports, HlmIconImports, HlmButtonImports, TranslocoModule],
+  imports: [HlmDropdownMenuImports, HlmIconImports, HlmButtonImports, HlmTooltipImports, HlmKbd, TranslocoModule],
   providers: [
     provideIcons({
       lucideMoon,
@@ -26,10 +28,19 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       hlmBtn
       size="icon"
       [hlmDropdownMenuTrigger]="menu"
-      [attr.aria-label]="'navUser.theme' | transloco"
+      [attr.aria-label]="'header.toggleTheme' | transloco"
+      [hlmTooltip]="tooltip"
+      [position]="'bottom'"
     >
       <ng-icon hlmIcon size="sm" [name]="iconName()" />
     </button>
+
+    <ng-template #tooltip>
+      <span class="flex items-center justify-center gap-2">
+        {{ 'header.toggleTheme' | transloco }}
+        <kbd hlmKbd class="bg-primary-foreground/20 text-primary-foreground">D</kbd>
+      </span>
+    </ng-template>
 
     <ng-template #menu>
       <hlm-dropdown-menu *transloco="let t">
@@ -62,6 +73,9 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(window:keydown)': 'onKeydown($event)',
+  },
 })
 export class ThemeSwitch {
   // ==========================================
@@ -86,7 +100,20 @@ export class ThemeSwitch {
   // ==========================================
   // Public Methods
   // ==========================================
-  setTheme(theme: 'light' | 'dark' | 'system'): void {
+  setTheme(theme: Theme): void {
     this._themeService.setTheme(theme);
+  }
+
+  onKeydown(event: KeyboardEvent): void {
+    const target = event.target as HTMLElement;
+    if (target.closest('input, textarea, select, [contenteditable]')) return;
+
+    const themes: Theme[] = THEMES;
+    const current = themes.indexOf(this.currentTheme());
+
+    if (event.key.toLowerCase() === 'd' && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      event.preventDefault();
+      this.setTheme(themes[(current + 1) % themes.length]);
+    }
   }
 }

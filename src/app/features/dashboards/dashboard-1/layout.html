@@ -1,7 +1,9 @@
 <div *transloco="let t; prefix: 'dashboard1.layout'">
+  <button hlmBtn type="button" hlmTooltip="test" position="right">test</button>
   <header class="mb-8">
     <div class="flex w-full flex-col items-start justify-between gap-4 sm:flex-row">
       <h1 class="text-3xl font-bold tracking-tight">{{ t('title') }}</h1>
+
       <div class="flex gap-3">
         <button type="button" hlmBtn variant="outline">
           <ng-icon hlmIcon name="lucideFilter" size="sm" />

@@ -1,6 +1,8 @@
 import { registerLocaleData } from '@angular/common';
 import { inject, Injectable, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
+import { BrnCalendarI18n, injectBrnCalendarI18n } from '@spartan-ng/brain/calendar';
+import { arabicCalendarI18n, englishCalendarI18n, frenchCalendarI18n } from './date-I18n';
 import { DirectionalityService } from './directionality.service';
 import { LOCAL_STORAGE } from './tokens';
 
@@ -20,6 +22,13 @@ export class LanguageService {
   private readonly _translocoService = inject(TranslocoService);
   private readonly _directionalityService = inject(DirectionalityService);
   private readonly _localStorage = inject(LOCAL_STORAGE);
+  private readonly _calendarI18n = injectBrnCalendarI18n();
+
+  readonly calendarI18nMap: Record<LanguageOptions, Partial<BrnCalendarI18n>> = {
+    en: englishCalendarI18n,
+    fr: frenchCalendarI18n,
+    ar: arabicCalendarI18n,
+  };
 
   private readonly _currentLang = signal<LanguageOptions>('en');
   readonly currentLang = this._currentLang.asReadonly();
@@ -41,6 +50,7 @@ export class LanguageService {
 
   async setLanguage(lang: LanguageOptions): Promise<void> {
     this._currentLang.set(lang);
+    this._calendarI18n.use(this.calendarI18nMap[lang]);
     this._localStorage?.setItem('lang', lang);
     await this._ensureLocaleRegistered(lang);
     this._translocoService.setActiveLang(lang);

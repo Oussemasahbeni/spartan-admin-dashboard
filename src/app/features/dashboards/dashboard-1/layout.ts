@@ -6,6 +6,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
+import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { AnalyticsDashboard } from './analytics/analytics';
 import { OverviewDashboard } from './overview/overview';
 
@@ -16,6 +17,7 @@ import { OverviewDashboard } from './overview/overview';
     HlmButtonImports,
     HlmTabsImports,
     HlmSpinnerImports,
+    HlmTooltipImports,
     OverviewDashboard,
     AnalyticsDashboard,
     TranslocoModule,

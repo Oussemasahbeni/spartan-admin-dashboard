@@ -10,6 +10,11 @@
         "language": "Langue",
         "logout": "Déconnexion"
     },
+    "header": {
+        "toggleTheme": "Changer de thème",
+        "closeSidebar": "Fermer la barre latérale",
+        "openSidebar": "Ouvrir la barre latérale"
+    },
     "breadcrumbs": {
         "home": "Accueil"
     },

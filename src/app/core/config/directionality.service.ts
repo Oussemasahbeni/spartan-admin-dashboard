@@ -14,8 +14,8 @@ export class DirectionalityService {
   readonly isRtl = computed(() => this._dir.valueSignal() === 'rtl');
 
   updateDirection(dir: Direction) {
-    this._dir.change.emit(dir);
     this._dir.valueSignal.set(dir);
+    this._dir.change.emit(dir);
     if (isPlatformBrowser(this._platformId)) {
       this._document.documentElement.dir = dir;
     }

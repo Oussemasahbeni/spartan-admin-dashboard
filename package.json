@@ -34,7 +34,7 @@
     "@ng-icons/core": ">=32.0.0 <34.0.0",
     "@ng-icons/lucide": ">=32.0.0 <34.0.0",
     "@ng-icons/svgl": "^33.0.0",
-    "@spartan-ng/brain": "0.0.1-alpha.639",
+    "@spartan-ng/brain": "0.0.1-alpha.653",
     "@tanstack/angular-table": "^8.21.3",
     "apexcharts": "^5.3.6",
     "class-variance-authority": "^0.7.0",
@@ -48,7 +48,7 @@
     "ngx-scrollbar": "^19.1.1",
     "ngx-sonner": ">=3.0.0",
     "rxjs": "~7.8.0",
-    "tailwind-merge": "^3.3.1",
+    "tailwind-merge": "^3.5.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "@jsverse/transloco-keys-manager": "^7.1.0",
     "@jsverse/transloco-optimize": "^8.2.0",
     "@jsverse/transloco-schematics": "^8.2.0",
-    "@spartan-ng/cli": "0.0.1-alpha.639",
+    "@spartan-ng/cli": "0.0.1-alpha.653",
     "@tailwindcss/postcss": "^4.1.12",
     "@tailwindcss/typography": "^0.5.19",
     "angular-eslint": "21.2.0",

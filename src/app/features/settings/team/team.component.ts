@@ -116,8 +116,8 @@ export class SettingsTeam {
   // ==========================================
 
   onAddMember(event: Event): void {
+    event.preventDefault();
     submit(this.addMemberForm, async () => {
-      event.preventDefault();
       this.addMember();
     });
   }
