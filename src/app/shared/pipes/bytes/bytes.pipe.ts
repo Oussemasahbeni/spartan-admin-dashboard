@@ -28,7 +28,12 @@ export class BytesPipe implements PipeTransform {
    * @param useSI - Use SI standard (base 1000) instead of binary (base 1024). Default: false
    * @returns Formatted string with appropriate unit
    */
-  transform(value: number | string, decimals = 2, units: string[] | null = DEFAULT_UNITS, useSI = false): string {
+  transform(
+    value: number | string | null | undefined,
+    decimals = 2,
+    units: string[] | null = DEFAULT_UNITS,
+    useSI = false
+  ): string {
     const unitLabels = units ?? DEFAULT_UNITS;
     const base = useSI ? SI_BASE : BINARY_BASE;
 

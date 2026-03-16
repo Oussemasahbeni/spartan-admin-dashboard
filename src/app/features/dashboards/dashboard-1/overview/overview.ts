@@ -5,7 +5,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { User } from '../../../../shared/models/user';
 import { BarChartCard } from './components/charts/bar-chart-card';
 import { AreaChartCard } from './components/charts/subscriptions-card';
-import { CardVariant, OverviewMetricCard } from './components/metric-card';
+import { OverviewMetricCard } from './components/metric-card';
 import { PaymentsTable } from './components/table/payments-table';
 import { TeamMembersCard } from './components/team-members-card';
 import { Payment } from './model/payment';
@@ -20,7 +20,6 @@ export interface OverviewMetric {
   chartColor: string;
   trendValue: string;
   trendUp: boolean;
-  variant: CardVariant;
 }
 
 @Component({
@@ -45,7 +44,6 @@ export class OverviewDashboard {
       chartColor: 'var(--color-chart-teal)',
       trendValue: '15.54%',
       trendUp: true,
-      variant: 'compact',
     },
     {
       titleKey: 'overview.cards.newOrders.title',
@@ -57,7 +55,6 @@ export class OverviewDashboard {
       chartColor: 'var(--color-destructive)',
       trendValue: '40.2%',
       trendUp: false,
-      variant: 'compact',
     },
     {
       titleKey: 'overview.cards.avgOrderRevenue.title',
@@ -69,18 +66,6 @@ export class OverviewDashboard {
       chartColor: 'var(--color-chart-teal)',
       trendValue: '10.8%',
       trendUp: true,
-      variant: 'compact',
-    },
-    {
-      titleKey: 'overview.cards.totalRevenue.title',
-      value: '$15,231.89',
-      descriptionKey: 'overview.cards.totalRevenue.description',
-      icon: '',
-      chartData: [30, 40, 35, 30, 25, 35, 40, 80],
-      chartColor: 'var(--foreground)',
-      trendValue: '',
-      trendUp: true,
-      variant: 'large',
     },
   ]);
 

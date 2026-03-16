@@ -1,11 +1,9 @@
 <div *transloco="let t; prefix: 'dashboard1'" class="@container/main flex flex-col gap-2">
   <div class="flex flex-col gap-4 md:gap-6">
     <!-- Metric Cards Row -->
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-5">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-3">
       @for (card of cards(); track card.titleKey) {
         <adm-metric-card
-          [class.2xl:col-span-2]="card.variant === 'large'"
-          [variant]="card.variant"
           [title]="t(card.titleKey)"
           [tooltip]="card.tooltipKey ? t(card.tooltipKey) : ''"
           [value]="card.value"

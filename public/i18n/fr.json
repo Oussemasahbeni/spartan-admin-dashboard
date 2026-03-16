@@ -143,26 +143,5 @@
             "aDocument": "un document",
             "theReport": "le rapport"
         }
-    },
-    "timeAgo": {
-        "justNow": "à l'instant",
-        "prefix": "il y a",
-        "suffix": "",
-        "futurePrefix": "dans",
-        "futureSuffix": "",
-        "second": "seconde",
-        "seconds": "secondes",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "heure",
-        "hours": "heures",
-        "day": "jour",
-        "days": "jours",
-        "week": "semaine",
-        "weeks": "semaines",
-        "month": "mois",
-        "months": "mois",
-        "year": "an",
-        "years": "ans"
     }
 }

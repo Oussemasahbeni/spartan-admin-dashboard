@@ -56,9 +56,7 @@
                           hlmIcon
                         />
                       </button>
-                      <hlm-collapsible-content
-                        class="grid transition-[grid-template-rows] duration-200 ease-in-out data-[state=open]:grid-rows-[1fr]"
-                      >
+                      <hlm-collapsible-content class="data-[state=open]:animate-in data-[state=closed]:animate-out">
                         <ul hlmSidebarMenuSub>
                           @for (subItem of children; track subItem.key || subItem.title) {
                             <li hlmSidebarMenuSubItem>

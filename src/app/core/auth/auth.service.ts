@@ -6,7 +6,6 @@ import { User } from '../../shared/models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly _http = inject(HttpClient);
   private readonly _router = inject(Router);
   private readonly _localStorage = inject(LOCAL_STORAGE);
 

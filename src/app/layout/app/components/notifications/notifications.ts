@@ -3,7 +3,7 @@ import { STATIC_NOTIFICATIONS } from '@core/mock/notifications.data';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideX } from '@ng-icons/lucide';
-import { TimeAgoPipe } from '@shared/pipes/time-ago.pipe';
+import { TimeAgoPipe } from '@shared/pipes/timeago/time-ago.pipe';
 
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadge } from '@spartan-ng/helm/badge';
