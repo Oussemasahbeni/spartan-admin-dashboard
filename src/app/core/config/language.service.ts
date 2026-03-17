@@ -1,5 +1,5 @@
-import { registerLocaleData } from '@angular/common';
-import { inject, Injectable, signal } from '@angular/core';
+import { isPlatformBrowser, registerLocaleData } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { BrnCalendarI18n, injectBrnCalendarI18n } from '@spartan-ng/brain/calendar';
 import { arabicCalendarI18n, englishCalendarI18n, frenchCalendarI18n } from './date-I18n';
@@ -22,7 +22,8 @@ const registeredLocales = new Set<string>(['en']);
 })
 export class LanguageService {
   private readonly _translocoService = inject(TranslocoService);
-  private readonly _directionalityService = inject(DirectionalityService);
+  private readonly _dir = inject(DirectionalityService);
+  private readonly _platformId = inject(PLATFORM_ID);
   private readonly _localStorage = inject(LOCAL_STORAGE);
   private readonly _calendarI18n = injectBrnCalendarI18n();
 
@@ -50,6 +51,15 @@ export class LanguageService {
     },
   ]);
 
+  constructor() {
+    if (isPlatformBrowser(this._platformId)) {
+      const browserLang = navigator.language?.split('-')[0];
+      if (browserLang && browserLang === 'ar') {
+        this._dir.updateDirection('rtl');
+      }
+    }
+  }
+
   async setLanguage(lang: LanguageOptions): Promise<void> {
     this._currentLang.set(lang);
     this._calendarI18n.use(this.calendarI18nMap[lang]);
@@ -57,7 +67,7 @@ export class LanguageService {
     await this._ensureLocaleRegistered(lang);
     this._translocoService.setActiveLang(lang);
     const direction = lang === 'ar' ? 'rtl' : 'ltr';
-    this._directionalityService.updateDirection(direction);
+    this._dir.updateDirection(direction);
   }
 
   private async _ensureLocaleRegistered(lang: LanguageOptions): Promise<void> {

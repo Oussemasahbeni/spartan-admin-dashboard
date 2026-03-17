@@ -10,7 +10,6 @@ import { HlmCommandImports } from '@spartan-ng/helm/command';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { USER_ROLES, UserRole } from '../../../../shared/models/user';
-import { RoleIconPipe } from '../../pipes/role-icon.pipe';
 
 @Component({
   selector: 'adm-users-role-filter',
@@ -22,7 +21,6 @@ import { RoleIconPipe } from '../../pipes/role-icon.pipe';
     HlmCommandImports,
     HlmCheckboxImports,
     TranslocoModule,
-    RoleIconPipe,
   ],
   providers: [provideIcons({ lucideSearch, lucideListFilter, lucideUser, lucideBriefcase, lucideShieldCheck })],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,7 +61,17 @@ import { RoleIconPipe } from '../../pipes/role-icon.pipe';
             @for (role of _rolesList(); track role) {
               <button type="button" hlm-command-item [value]="role" (selected)="roleSelected(role)">
                 <hlm-checkbox class="mr-2" [checked]="isRoleSelected(role)" />
-                <ng-icon hlm size="sm" [name]="role | roleIcon" />
+                @switch (role) {
+                  @case ('admin') {
+                    <ng-icon hlmIcon size="sm" name="lucideShieldCheck" />
+                  }
+                  @case ('user') {
+                    <ng-icon hlmIcon size="sm" name="lucideUser" />
+                  }
+                  @case ('manager') {
+                    <ng-icon hlmIcon size="sm" name="lucideBriefcase" />
+                  }
+                }
                 <span *transloco="let t; prefix: 'users.role'"> {{ t(role) }} </span>
               </button>
             }

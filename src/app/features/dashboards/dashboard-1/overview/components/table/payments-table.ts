@@ -5,7 +5,10 @@ import {
   lucideArrowUpDown,
   lucideCheck,
   lucideChevronDown,
+  lucideCircleCheck,
+  lucideCircleX,
   lucideCopy,
+  lucideLoader,
   lucideMoreHorizontal,
   lucideSearch,
   lucideX,
@@ -22,7 +25,6 @@ import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmTableImports } from '@spartan-ng/helm/table';
 import { ColumnDef, flexRenderComponent } from '@tanstack/angular-table';
 import { Payment } from '../../model/payment';
-import { PaymentStatusUIPipe, providePaymentStatusIcons } from '../../pipes/status-ui.pipe';
 import { PaymentsActionDropdown } from './action-dropdown';
 
 @Component({
@@ -39,7 +41,6 @@ import { PaymentsActionDropdown } from './action-dropdown';
     DataTable,
     TranslocoModule,
     DataTableColumnManager,
-    PaymentStatusUIPipe,
   ],
   providers: [
     provideIcons({
@@ -50,8 +51,10 @@ import { PaymentsActionDropdown } from './action-dropdown';
       lucideMoreHorizontal,
       lucideSearch,
       lucideX,
+      lucideCircleCheck,
+      lucideCircleX,
+      lucideLoader,
     }),
-    providePaymentStatusIcons(),
     provideTranslocoScope({ scope: 'dashboard/dashboard1', alias: 'dashboard1' }),
   ],
   template: `
@@ -88,8 +91,17 @@ import { PaymentsActionDropdown } from './action-dropdown';
           <ng-template #statusCell let-context>
             <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
               @let status = context.getValue();
-              @let ui = status | statusUI;
-              <ng-icon size="xs" hlmIcon [class]="ui.class" [name]="ui.icon" />
+              @switch (status) {
+                @case ('success') {
+                  <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
+                }
+                @case ('failed') {
+                  <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
+                }
+                @case ('processing') {
+                  <ng-icon hlmIcon size="xs" class="animate-spin text-yellow-600" name="lucideLoader" />
+                }
+              }
               <span *transloco="let t; prefix: 'dashboard1.paymentsTable.status'"> {{ t(status) }} </span>
             </span>
           </ng-template>

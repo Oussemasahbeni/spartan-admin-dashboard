@@ -23,7 +23,18 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideRefreshCcw, lucideSearch, lucideUserPlus, lucideX } from '@ng-icons/lucide';
+import {
+  lucideBriefcase,
+  lucideCircleCheck,
+  lucideCircleX,
+  lucideLoader,
+  lucideRefreshCcw,
+  lucideSearch,
+  lucideShieldCheck,
+  lucideUser,
+  lucideUserPlus,
+  lucideX,
+} from '@ng-icons/lucide';
 import { DataTableColumnManager } from '@shared/components/columns-manager/data-table-column-manager';
 import { CountryDisplay } from '@shared/components/country-display/country-display';
 import { DataTable } from '@shared/components/data-table/data-table';
@@ -38,8 +49,6 @@ import { StatusFilter } from '../components/filters/status-filter';
 import { UserForm } from '../components/form/user-form';
 import { ActionDropdown } from '../components/table/action-dropdown';
 import { TableHeadSelection, TableRowSelection } from '../components/table/selection-column';
-import { provideUserRoleIcons, RoleIconPipe } from '../pipes/role-icon.pipe';
-import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
 
 @Component({
   selector: 'adm-users',
@@ -54,8 +63,6 @@ import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
     DatePipe,
     UsersCardSection,
     TranslocoModule,
-    RoleIconPipe,
-    StatusUIPipe,
     CountryDisplay,
     DataTable,
     DataTableColumnManager,
@@ -65,13 +72,17 @@ import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
   ],
   templateUrl: './users.html',
   providers: [
-    provideUserStatusIcons(),
-    provideUserRoleIcons(),
     provideIcons({
       lucideRefreshCcw,
       lucideUserPlus,
       lucideSearch,
       lucideX,
+      lucideCircleCheck,
+      lucideCircleX,
+      lucideLoader,
+      lucideBriefcase,
+      lucideShieldCheck,
+      lucideUser,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -103,6 +114,8 @@ export default class Users {
   // ==========================================
   // State
   // ==========================================
+
+  // protected readonly
 
   protected readonly table = computed(() => this.dataTable().table);
 
