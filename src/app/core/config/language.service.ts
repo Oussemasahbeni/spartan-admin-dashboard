@@ -8,6 +8,8 @@ import { LOCAL_STORAGE } from './tokens';
 
 export type LanguageOptions = 'en' | 'fr' | 'ar';
 
+export const availableLangs: string[] = ['en', 'fr', 'ar'];
+
 export interface AvailableLanguage {
   code: LanguageOptions;
   label: string;
@@ -30,7 +32,7 @@ export class LanguageService {
     ar: arabicCalendarI18n,
   };
 
-  private readonly _currentLang = signal<LanguageOptions>('en');
+  private readonly _currentLang = signal<LanguageOptions>(this._translocoService.getActiveLang() as LanguageOptions);
   readonly currentLang = this._currentLang.asReadonly();
 
   readonly availableLanguages = signal<AvailableLanguage[]>([

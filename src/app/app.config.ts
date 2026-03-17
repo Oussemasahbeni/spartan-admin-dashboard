@@ -17,7 +17,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
-import { LanguageOptions, LanguageService } from './core/config/language.service';
+import { availableLangs, LanguageOptions, LanguageService } from './core/config/language.service';
 import { ThemeService } from './core/config/theme.service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
@@ -25,7 +25,6 @@ import { TranslocoHttpLoader } from './transloco-loader';
 import { mockApiInterceptor } from '@core/interceptor/mock-api.interceptor';
 import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
 
-const availableLangs = ['en', 'fr', 'ar'];
 
 function getDefaultLanguage(): string {
   const storedLang = localStorage.getItem('lang');

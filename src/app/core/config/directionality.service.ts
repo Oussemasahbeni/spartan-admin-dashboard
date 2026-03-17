@@ -13,6 +13,15 @@ export class DirectionalityService {
 
   readonly isRtl = computed(() => this._dir.valueSignal() === 'rtl');
 
+  constructor() {
+    if (isPlatformBrowser(this._platformId)) {
+      const browserLang = navigator.language?.split('-')[0];
+      if (browserLang && browserLang === 'ar') {
+        this.updateDirection('rtl');
+      }
+    }
+  }
+
   updateDirection(dir: Direction) {
     this._dir.valueSignal.set(dir);
     this._dir.change.emit(dir);
