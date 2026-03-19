@@ -37,11 +37,11 @@ export class ConfirmationDialog {
   // ==========================================
   // Public Methods
   // ==========================================
-  close() {
+  protected close() {
     this._dialogRef.close();
   }
 
-  confirm() {
+  protected confirm() {
     this._dialogRef.close('confirm');
   }
 }

@@ -27,16 +27,10 @@ export class LanguageService {
   private readonly _localStorage = inject(LOCAL_STORAGE);
   private readonly _calendarI18n = injectBrnCalendarI18n();
 
-  readonly calendarI18nMap: Record<LanguageOptions, Partial<BrnCalendarI18n>> = {
-    en: englishCalendarI18n,
-    fr: frenchCalendarI18n,
-    ar: arabicCalendarI18n,
-  };
-
   private readonly _currentLang = signal<LanguageOptions>(this._translocoService.getActiveLang() as LanguageOptions);
   readonly currentLang = this._currentLang.asReadonly();
 
-  readonly availableLanguages = signal<AvailableLanguage[]>([
+  readonly _availableLanguages = signal<AvailableLanguage[]>([
     {
       code: 'en',
       label: 'English',
@@ -50,6 +44,13 @@ export class LanguageService {
       label: 'العربية',
     },
   ]);
+  readonly availableLanguages = this._availableLanguages.asReadonly();
+
+  readonly brnCaalendarI18nMap: Record<LanguageOptions, Partial<BrnCalendarI18n>> = {
+    en: englishCalendarI18n,
+    fr: frenchCalendarI18n,
+    ar: arabicCalendarI18n,
+  };
 
   constructor() {
     if (isPlatformBrowser(this._platformId)) {
@@ -62,7 +63,7 @@ export class LanguageService {
 
   async setLanguage(lang: LanguageOptions): Promise<void> {
     this._currentLang.set(lang);
-    this._calendarI18n.use(this.calendarI18nMap[lang]);
+    this._calendarI18n.use(this.brnCaalendarI18nMap[lang]);
     this._localStorage?.setItem('lang', lang);
     await this._ensureLocaleRegistered(lang);
     this._translocoService.setActiveLang(lang);

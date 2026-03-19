@@ -1,14 +1,14 @@
-@let u = user();
+@let user = _user();
 <ul hlmSidebarMenu>
   <li hlmSidebarMenuItem>
     <button type="button" hlmSidebarMenuButton size="lg" align="end" [hlmDropdownMenuTrigger]="menu" [side]="_menuSide()">
       <hlm-avatar class="rounded-lg">
-        <img hlmAvatarImage [src]="u.avatar" [alt]="u.name" />
+        <img hlmAvatarImage [src]="user.avatar" [alt]="user.name" />
         <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback>RG</span>
       </hlm-avatar>
       <div class="grid flex-1 text-left text-sm leading-tight">
-        <span class="truncate font-medium">{{ u.name }}</span>
-        <span class="truncate text-xs">{{ u.email }}</span>
+        <span class="truncate font-medium">{{ user.name }}</span>
+        <span class="truncate text-xs">{{ user.email }}</span>
       </div>
       <ng-icon name="lucideChevronsUpDown" class="ml-auto text-base" />
     </button>
@@ -20,12 +20,12 @@
     <hlm-dropdown-menu-label>
       <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
         <hlm-avatar class="rounded-lg">
-          <img hlmAvatarImage [src]="u.avatar" [alt]="u.name" />
+          <img hlmAvatarImage [src]="user.avatar" [alt]="user.name" />
           <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback>RG</span>
         </hlm-avatar>
         <div class="grid flex-1 text-left text-sm leading-tight">
-          <span class="truncate font-medium">{{ u.name }}</span>
-          <span class="truncate text-xs">{{ u.email }}</span>
+          <span class="truncate font-medium">{{ user.name }}</span>
+          <span class="truncate text-xs">{{ user.email }}</span>
         </div>
       </div>
     </hlm-dropdown-menu-label>
@@ -34,6 +34,18 @@
       <button type="button" hlmDropdownMenuItem>
         <ng-icon name="lucideBadgeCheck" />
         {{ 'navUser.account' | transloco }}
+      </button>
+      <!-- Subscription -->
+      <button type="button" hlmDropdownMenuItem class="flex items-center justify-center gap-2">
+        <ng-icon name="lucideCreditCard" />
+        {{ 'navUser.subscription' | transloco }}
+        <span
+          hlmBadge
+          class="ms-auto rounded-sm border border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-green-300"
+        >
+          <ng-icon name="lucideGem" />
+          {{ 'navUser.pro' | transloco }}
+        </span>
       </button>
 
       <!-- Theme Selector -->
@@ -98,6 +110,11 @@
       </ng-template>
     </hlm-dropdown-menu-group>
     <hlm-dropdown-menu-separator />
+    <!-- Help and Support button -->
+    <button type="button" hlmDropdownMenuItem>
+      <ng-icon name="lucideHelpCircle" />
+      {{ 'navUser.help' | transloco }}
+    </button>
     <button type="button" hlmDropdownMenuItem (click)="onLogout()">
       <ng-icon name="lucideLogOut" />
       {{ 'navUser.logout' | transloco }}

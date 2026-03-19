@@ -6,8 +6,11 @@
     },
     "navUser": {
         "account": "Compte",
+        "subscription": "Abonnement",
+        "pro": "Pro",
         "theme": "Thème",
         "language": "Langue",
+        "help": "Aide & Support",
         "logout": "Déconnexion"
     },
     "header": {

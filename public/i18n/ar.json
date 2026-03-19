@@ -6,9 +6,12 @@
     },
     "navUser": {
         "account": "الحساب",
+        "subscription": "الاشتراك",
+        "pro": "المميز",
         "theme": "المظهر",
         "toggleTheme": "تبديل المظهر",
         "language": "اللغة",
+        "help": "المساعدة والدعم",
         "logout": "تسجيل الخروج"
     },
     "header": {

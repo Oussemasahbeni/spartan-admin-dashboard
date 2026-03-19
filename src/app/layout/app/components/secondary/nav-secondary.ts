@@ -31,7 +31,7 @@ export class NavSecondary {
   // State
   // ==========================================
 
-  readonly items = signal([
+  protected readonly items = signal([
     {
       title: 'Support',
       url: '/support',

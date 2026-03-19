@@ -38,5 +38,5 @@ export class BreadcrumbsHeader {
   // ==========================================
   // State
   // ==========================================
-  readonly breadcrumbs = this._breadcrumbService.breadcrumbs;
+  protected readonly breadcrumbs = this._breadcrumbService.breadcrumbs;
 }

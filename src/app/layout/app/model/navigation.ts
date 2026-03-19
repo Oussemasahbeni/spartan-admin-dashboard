@@ -8,6 +8,6 @@ export interface NavigationItem {
   key?: string;
   url?: string;
   icon?: string;
-  // expanded: boolean;
+  expanded?: boolean;
   children?: NavigationItem[];
 }

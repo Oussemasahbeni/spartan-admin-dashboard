@@ -87,9 +87,9 @@ export class ThemeSwitch {
   // ==========================================
   // State
   // ==========================================
-  readonly currentTheme = this._themeService.theme;
+  protected readonly currentTheme = this._themeService.theme;
 
-  readonly iconName = computed(() => {
+  protected readonly iconName = computed(() => {
     const theme = this.currentTheme();
     const isDarkSystem = this.window?.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDark = theme === 'dark' || (theme === 'system' && isDarkSystem);
@@ -100,11 +100,11 @@ export class ThemeSwitch {
   // ==========================================
   // Public Methods
   // ==========================================
-  setTheme(theme: Theme): void {
+  protected setTheme(theme: Theme): void {
     this._themeService.setTheme(theme);
   }
 
-  onKeydown(event: KeyboardEvent): void {
+  protected onKeydown(event: KeyboardEvent): void {
     const target = event.target as HTMLElement;
     if (target.closest('input, textarea, select, [contenteditable]')) return;
 

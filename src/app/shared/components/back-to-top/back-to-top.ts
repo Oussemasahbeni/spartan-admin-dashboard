@@ -43,17 +43,17 @@ export class BackToTop {
   // ==========================================
   // State
   // ==========================================
-  readonly isVisible = signal(false);
+  protected readonly isVisible = signal(false);
 
   // ==========================================
   // Public Methods
   // ==========================================
-  onWindowScroll(): void {
+  protected onWindowScroll(): void {
     const scrollPosition = this.document.documentElement.scrollTop || this.document.body.scrollTop;
     this.isVisible.set(scrollPosition > this.showAfter());
   }
 
-  scrollToTop(): void {
+  protected scrollToTop(): void {
     this.viewportScroller.scrollToPosition([0, 0], { behavior: 'smooth' });
   }
 }
