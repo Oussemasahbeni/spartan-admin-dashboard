@@ -10,6 +10,9 @@
 @import './styles/full-calendar.css' layer(base);
 @import './styles/apex-charts.css' layer(base);
 
+@import '@fontsource/geist';
+@import '@fontsource-variable/noto-sans-arabic';
+
 :root {
   --scrollbar-track-color: transparent;
 
@@ -99,7 +102,7 @@
   }
   html,
   body {
-    @apply bg-background text-foreground h-full;
+    @apply bg-background text-foreground rtl:font-arabic h-full font-sans;
   }
   button:not([disabled]),
   [role='button']:not([disabled]) {
@@ -108,7 +111,8 @@
 }
 
 @theme {
-  --font-sans: Geist, system-ui;
+  --font-sans: Geist, system-ui, sans-serif;
+  --font-arabic: 'Noto Sans Arabic Variable', system-ui, sans-serif;
   --color-success: oklch(0.627 0.194 149.214);
   --color-warning: oklch(0.769 0.188 70.08);
 
