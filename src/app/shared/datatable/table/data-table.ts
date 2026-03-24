@@ -118,23 +118,12 @@ export class DataTable<T> {
   /**
    * Column definitions for the table.
    * Uses TanStack Table's ColumnDef format.
-   *
-   * @example
-   * ```typescript
-   * columns: ColumnDef<User>[] = [
-   *   { accessorKey: 'name', header: 'Name' },
-   *   { accessorKey: 'email', header: 'Email' },
-   * ];
-   * ```
    */
   readonly columns = input<ColumnDef<T>[]>([]);
-
-  readonly columnFiltersState = input<ColumnFiltersState>([]);
 
   /**
    * When true, displays a loading spinner overlay on the table.
    * Useful for indicating server-side data fetching.
-   * @default false
    */
   readonly isLoading = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
@@ -186,6 +175,8 @@ export class DataTable<T> {
    */
   readonly sortingState = input<SortingState>([]);
 
+  readonly columnFiltersState = input<ColumnFiltersState>([]);
+
   /**
    * The operation mode of the table.
    * - `'client'`: All data is in memory; table handles pagination/sorting/filtering.
@@ -195,15 +186,7 @@ export class DataTable<T> {
   readonly mode = input<'client' | 'server'>('client');
 
   /**
-   * Initial page size for client mode.
-   * In server mode, use `paginationState` instead.
-   * @default 10
-   */
-  readonly pageSize = input<number, NumberInput>(10, { transform: numberAttribute });
-
-  /**
    * Available options for the page size dropdown.
-   * @default [10, 25, 50, 100]
    */
   readonly pageSizeOptions = input([10, 25, 50, 100]);
 
@@ -225,27 +208,26 @@ export class DataTable<T> {
   private readonly rowSelection = signal<RowSelectionState>({});
   private readonly columnVisibility = signal<VisibilityState>({});
 
-  /** Internal pagination state for client mode. Uses linkedSignal to react to pageSize changes. */
-  private readonly internalPagination = linkedSignal<PaginationState>(() => ({
-    pageIndex: 0,
-    pageSize: this.pageSize(),
-  }));
-
   private readonly internalColumnFilters = signal<ColumnFiltersState>([]);
 
-  /** Internal sorting state for client mode. */
-  private readonly internalSorting = signal<SortingState>([]);
+  private readonly internalPagination = linkedSignal<PaginationState>(() => this.paginationState());
 
-  /** Selects the appropriate pagination state based on mode. */
   private readonly activePagination = computed(() =>
     this.isServerMode() ? this.paginationState() : this.internalPagination()
   );
+
+  private readonly activeColumnFilters = computed(() =>
+    this.isServerMode() ? this.columnFiltersState() : this.internalColumnFilters()
+  );
+
+  /** Internal sorting state for client mode. */
+  private readonly internalSorting = signal<SortingState>([]);
 
   /** Selects the appropriate sorting state based on mode. */
   private readonly activeSorting = computed(() => (this.isServerMode() ? this.sortingState() : this.internalSorting()));
 
   /** Column sizing info for resize feature. */
-  readonly _columnSizingInfo = computed(() => this.table.getState().columnSizingInfo);
+  readonly _columnSizingInfo = signal(() => this.table.getState().columnSizingInfo);
 
   /** Current column sizes. */
   readonly _columnSizing = computed(() => this.table.getState().columnSizing);
@@ -261,8 +243,8 @@ export class DataTable<T> {
    * Optimizes performance by calculating all sizes at once instead of per-cell.
    */
   readonly columnSizeVars = computed(() => {
-    void this._columnSizing();
-    void this._columnSizingInfo();
+    this._columnSizing();
+    this._columnSizingInfo();
 
     const headers = untracked(() => this.table.getFlatHeaders());
     const colSizes: Record<string, number> = {};
@@ -297,7 +279,7 @@ export class DataTable<T> {
       pagination: this.activePagination(),
       sorting: this.activeSorting(),
       columnOrder: this.columnOrder(),
-      columnFilters: this.internalColumnFilters(),
+      columnFilters: this.activeColumnFilters(),
       columnVisibility: this.columnVisibility(),
       rowSelection: this.rowSelection(),
     },
@@ -344,9 +326,14 @@ export class DataTable<T> {
     },
 
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    ...(this.paginated() ? { getPaginationRowModel: getPaginationRowModel() } : {}),
+    ...(this.isServerMode()
+      ? {}
+      : {
+          getFilteredRowModel: getFilteredRowModel(),
+          getSortedRowModel: getSortedRowModel(),
+        }),
+
     onColumnVisibilityChange: (updater) => {
       updater instanceof Function ? this.columnVisibility.update(updater) : this.columnVisibility.set(updater);
     },

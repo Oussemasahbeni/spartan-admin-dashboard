@@ -90,9 +90,7 @@ export class DataTablePagination<T> {
    */
   handlePageSizeChange(value: string | number) {
     const size = Number(value);
-    this.table().setPagination({
-      pageIndex: 0, // Reset to first page
-      pageSize: size,
-    });
+    if (!Number.isFinite(size) || size <= 0) return;
+    this.table().setPagination({ pageIndex: 0, pageSize: size });
   }
 }
