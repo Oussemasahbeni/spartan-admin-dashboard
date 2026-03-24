@@ -13,11 +13,11 @@
                     <th class="relative" hlmTh [attr.colSpan]="header.colSpan" [tableResizableHeader]="header.id">
                       @if (!header.isPlaceholder) {
                         <ng-container
-                          *flexRender="header.column.columnDef.header; props: header.getContext(); let headerText"
+                          *flexRender="header.column.columnDef.header; props: header.getContext(); let headerCell"
                         >
                           @if (header.column.getCanSort()) {
                             <button type="button" class="flex items-center gap-2 capitalize" [hlmDropdownMenuTrigger]="menu">
-                              <div [innerHTML]="headerText"></div>
+                              {{ headerCell }}
                               <ng-icon hlm size="sm" name="lucideArrowUpDown" />
                             </button>
 
@@ -60,7 +60,7 @@
                               </hlm-dropdown-menu>
                             </ng-template>
                           } @else {
-                            <div [innerHTML]="headerText"></div>
+                            {{ headerCell }}
                           }
                         </ng-container>
 
@@ -83,9 +83,9 @@
             @if (isLoading()) {
               <tbody>
                 <tr>
-                  <td hlmTd class="h-96 text-center" [attr.colspan]="columns().length">
+                  <td hlmTd class="h-96 text-center" [attr.colspan]="visibleColumnCount()">
                     <div class="flex h-96 items-center justify-center">
-                      <hlm-spinner class="text-[2rem]" />
+                      <hlm-spinner class="text-3xl" />
                     </div>
                   </td>
                 </tr>
@@ -94,18 +94,20 @@
               <!-- Table Body -->
               <tbody hlmTBody class="w-full">
                 @for (row of table.getRowModel().rows; track row.id) {
-                  <tr hlmTr [attr.key]="row.id" [attr.data-state]="row.getIsSelected() && 'selected'">
-                    @for (cell of row.getVisibleCells(); track $index) {
+                  <tr hlmTr [attr.data-state]="row.getIsSelected() && 'selected'">
+                    @for (cell of row.getVisibleCells(); track cell.id) {
                       <td hlmTd [tableResizableCell]="cell.column.id">
                         <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cell">
-                          <div [innerHTML]="cell"></div>
+                          @if (cell !== null && cell !== undefined) {
+                            {{ cell }}
+                          }
                         </ng-container>
                       </td>
                     }
                   </tr>
                 } @empty {
                   <tr hlmTr>
-                    <td *transloco="let t" hlmTd class="h-24 text-center" [attr.colspan]="columns().length">
+                    <td *transloco="let t" hlmTd class="h-24 text-center" [attr.colspan]="visibleColumnCount()">
                       {{ t('common.noData') }}
                     </td>
                   </tr>

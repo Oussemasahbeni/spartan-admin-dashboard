@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
@@ -17,9 +16,9 @@ export class AuthService {
     this._currentUser.set(user);
   }
 
-  logout(): void {
+  logout(): Promise<boolean> {
     this._currentUser.set(null);
     this._localStorage?.removeItem('token');
-    this._router.navigate(['/login']);
+    return this._router.navigate(['/login']);
   }
 }

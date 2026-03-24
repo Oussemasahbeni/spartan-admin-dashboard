@@ -35,9 +35,9 @@ import {
   lucideUserPlus,
   lucideX,
 } from '@ng-icons/lucide';
-import { DataTableColumnManager } from '@shared/components/columns-manager/data-table-column-manager';
 import { CountryDisplay } from '@shared/components/country-display/country-display';
-import { DataTable } from '@shared/components/data-table/data-table';
+import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
+import { DataTable, DataTableStateChangeEvent } from '@shared/datatable/table/data-table';
 import { PaginatedResponse } from '@shared/models/page';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 
@@ -65,7 +65,7 @@ import { TableHeadSelection, TableRowSelection } from '../components/table/selec
     TranslocoModule,
     CountryDisplay,
     DataTable,
-    DataTableColumnManager,
+    DataTableColumnsManager,
     StatusFilter,
     RoleFilter,
     FormField,
@@ -264,7 +264,7 @@ export default class Users {
     });
   }
 
-  protected handleStateChange(state: { pagination: PaginationState; sorting: SortingState }) {
+  protected handleStateChange(state: DataTableStateChangeEvent) {
     this.pagination.set(state.pagination);
     this.sorting.set(state.sorting);
   }

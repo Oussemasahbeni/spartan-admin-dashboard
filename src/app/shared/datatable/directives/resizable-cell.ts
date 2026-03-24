@@ -1,4 +1,5 @@
 import { computed, Directive, input } from '@angular/core';
+import { toCssVarToken } from '../utils/css-var-token';
 
 @Directive({
   selector: '[tableResizableHeader]',
@@ -11,7 +12,7 @@ export class TableResizableHeader {
     alias: 'tableResizableHeader',
   });
 
-  readonly width = computed(() => `calc(var(--header-${this.cellId()}-size) * 1px)`);
+  readonly width = computed(() => `calc(var(--header-${toCssVarToken(this.cellId())}-size) * 1px)`);
 }
 
 @Directive({
@@ -26,5 +27,5 @@ export class TableResizableCell {
     alias: 'tableResizableCell',
   });
 
-  readonly width = computed(() => `calc(var(--col-${this.cellId()}-size) * 1px)`);
+  readonly width = computed(() => `calc(var(--col-${toCssVarToken(this.cellId())}-size) * 1px)`);
 }

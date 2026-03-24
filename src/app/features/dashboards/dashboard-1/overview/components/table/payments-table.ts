@@ -13,8 +13,8 @@ import {
   lucideSearch,
   lucideX,
 } from '@ng-icons/lucide';
-import { DataTableColumnManager } from '@shared/components/columns-manager/data-table-column-manager';
-import { DataTable } from '@shared/components/data-table/data-table';
+import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
+import { DataTable } from '@shared/datatable/table/data-table';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
@@ -40,7 +40,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
     HlmBadgeImports,
     DataTable,
     TranslocoModule,
-    DataTableColumnManager,
+    DataTableColumnsManager,
   ],
   providers: [
     provideIcons({
@@ -131,6 +131,12 @@ export class PaymentsTable {
 
   protected readonly table = computed(() => this.dataTable().table);
   protected readonly searchValue = signal('');
+
+  private readonly usdFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
   protected readonly columns: ColumnDef<Payment>[] = [
     {
       accessorKey: 'email',
@@ -153,13 +159,8 @@ export class PaymentsTable {
       enableSorting: false,
       meta: { translationKey: 'dashboard1.paymentsTable.columns.amount' },
       cell: (info) => {
-        const amount = parseFloat(info.getValue<string>());
-        const formatted = new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'USD',
-        }).format(amount);
-
-        return `<div class="text-start">${formatted}</div>`;
+        const amount = Number(info.getValue<string>());
+        return Number.isFinite(amount) ? this.usdFormatter.format(amount) : '-';
       },
     },
     {

@@ -1,4 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, signal, untracked } from '@angular/core';
+import { BooleanInput, NumberInput } from '@angular/cdk/coercion';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  linkedSignal,
+  numberAttribute,
+  output,
+  signal,
+  untracked,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -26,8 +38,9 @@ import {
   VisibilityState,
 } from '@tanstack/angular-table';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { TableResizableCell, TableResizableHeader } from '../../directives/resizable-cell';
+import { TableResizableCell, TableResizableHeader } from '../directives/resizable-cell';
 import { DataTablePagination } from '../pagination/pagination';
+import { toCssVarToken } from '../utils/css-var-token';
 
 /**
  * A flexible data table component built on TanStack Table (Angular Table).
@@ -59,6 +72,15 @@ import { DataTablePagination } from '../pagination/pagination';
  *
  * @template T - The type of data rows in the table
  */
+
+export type DataTableStateChangeReason = 'pagination' | 'sorting' | 'filtering';
+
+export interface DataTableStateChangeEvent {
+  pagination: PaginationState;
+  sorting: SortingState;
+  filters: ColumnFiltersState;
+  reason: DataTableStateChangeReason;
+}
 @Component({
   selector: 'adm-data-table',
   imports: [
@@ -83,7 +105,7 @@ import { DataTablePagination } from '../pagination/pagination';
       lucideArrowUpDown,
       lucideSortAsc,
       lucideSortDesc,
-      lucideX
+      lucideX,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -107,12 +129,14 @@ export class DataTable<T> {
    */
   readonly columns = input<ColumnDef<T>[]>([]);
 
+  readonly columnFiltersState = input<ColumnFiltersState>([]);
+
   /**
    * When true, displays a loading spinner overlay on the table.
    * Useful for indicating server-side data fetching.
    * @default false
    */
-  readonly isLoading = input<boolean>(false);
+  readonly isLoading = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * The data to display in the table.
@@ -127,30 +151,31 @@ export class DataTable<T> {
    * In client mode, this is calculated automatically.
    * @default 0
    */
-  readonly totalElements = input<number>(0);
+  readonly totalElements = input<number, NumberInput>(0, { transform: numberAttribute });
 
   /**
    * Whether to show the pagination controls.
    * @default true
    */
-  readonly paginated = input<boolean>(true);
+  readonly paginated = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
 
   /**
    * Enables column resizing via drag handles.
    * @default false
    */
-  readonly resizableColumns = input<boolean>(false);
+  readonly resizableColumns = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * Enables checkbox selection for rows.
    * @default false
    */
-  readonly enableRowSelection = input<boolean>(false);
+  readonly enableRowSelection = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * External pagination state for server-side mode.
    * Ignored in client mode.
-   * @default { pageIndex: 0, pageSize: 10 }
+   * @default  pageIndex: 0
+   * @default  pageSize: 10
    */
   readonly paginationState = input<PaginationState>({ pageIndex: 0, pageSize: 10 });
 
@@ -174,7 +199,7 @@ export class DataTable<T> {
    * In server mode, use `paginationState` instead.
    * @default 10
    */
-  readonly pageSize = input<number>(10);
+  readonly pageSize = input<number, NumberInput>(10, { transform: numberAttribute });
 
   /**
    * Available options for the page size dropdown.
@@ -189,22 +214,14 @@ export class DataTable<T> {
   /**
    * Emitted when pagination or sorting state changes.
    * **Only used in server mode** to trigger API calls.
-   *
-   * @example
-   * ```typescript
-   * onStateChange(event: { pagination: PaginationState; sorting: SortingState }) {
-   *   this.loadData(event.pagination.pageIndex, event.pagination.pageSize, event.sorting);
-   * }
-   * ```
    */
-  readonly stateChange = output<{ pagination: PaginationState; sorting: SortingState }>();
+  readonly stateChange = output<DataTableStateChangeEvent>();
 
   // ==========================================
   // State
   // ==========================================
 
   private readonly columnOrder = signal<string[]>([]);
-  private readonly columnFilters = signal<ColumnFiltersState>([]);
   private readonly rowSelection = signal<RowSelectionState>({});
   private readonly columnVisibility = signal<VisibilityState>({});
 
@@ -213,6 +230,8 @@ export class DataTable<T> {
     pageIndex: 0,
     pageSize: this.pageSize(),
   }));
+
+  private readonly internalColumnFilters = signal<ColumnFiltersState>([]);
 
   /** Internal sorting state for client mode. */
   private readonly internalSorting = signal<SortingState>([]);
@@ -234,6 +253,9 @@ export class DataTable<T> {
   /** Whether the table is in server mode. */
   private readonly isServerMode = computed(() => this.mode() === 'server');
 
+  /** Number of visible columns, used for colspan in "no data" row. */
+  readonly visibleColumnCount = computed(() => Math.max(this.table.getVisibleLeafColumns().length, 1));
+
   /**
    * Computes CSS variables for column sizes.
    * Optimizes performance by calculating all sizes at once instead of per-cell.
@@ -241,14 +263,17 @@ export class DataTable<T> {
   readonly columnSizeVars = computed(() => {
     void this._columnSizing();
     void this._columnSizingInfo();
+
     const headers = untracked(() => this.table.getFlatHeaders());
     const colSizes: Record<string, number> = {};
     let i = headers.length;
+
     while (--i >= 0) {
       const header = headers[i]!;
-      colSizes[`--header-${header.id}-size`] = header.getSize();
-      colSizes[`--col-${header.column.id}-size`] = header.column.getSize();
+      colSizes[`--header-${toCssVarToken(header.id)}-size`] = header.getSize();
+      colSizes[`--col-${toCssVarToken(header.column.id)}-size`] = header.column.getSize();
     }
+
     return colSizes;
   });
 
@@ -267,37 +292,57 @@ export class DataTable<T> {
     manualSorting: this.isServerMode(),
     manualFiltering: this.isServerMode(),
     rowCount: this.isServerMode() ? this.totalElements() : undefined,
+    enableRowSelection: this.enableRowSelection(),
     state: {
       pagination: this.activePagination(),
       sorting: this.activeSorting(),
       columnOrder: this.columnOrder(),
-      columnFilters: this.columnFilters(),
+      columnFilters: this.internalColumnFilters(),
       columnVisibility: this.columnVisibility(),
       rowSelection: this.rowSelection(),
     },
     columnResizeMode: 'onChange',
     onSortingChange: (updater) => {
-      const next = updater instanceof Function ? updater(this.table.getState().sorting) : updater;
+      const current = this.table.getState().sorting;
+      const next = typeof updater === 'function' ? updater(current) : updater;
 
       if (this.isServerMode()) {
-        // Reset to first page on sort change
-        const resetPage = { ...this.table.getState().pagination, pageIndex: 0 };
-        this.stateChange.emit({ pagination: resetPage, sorting: next });
-      } else {
-        this.internalSorting.set(next);
+        this.emitServerState('sorting', {
+          sorting: next,
+          pagination: { ...this.table.getState().pagination, pageIndex: 0 },
+        });
+        return;
       }
+
+      this.internalSorting.set(next);
     },
+
     onColumnFiltersChange: (updater) => {
-      updater instanceof Function ? this.columnFilters.update(updater) : this.columnFilters.set(updater);
+      const current = this.table.getState().columnFilters;
+      const next = typeof updater === 'function' ? updater(current) : updater;
+
+      if (this.isServerMode()) {
+        this.emitServerState('filtering', {
+          filters: next,
+          pagination: { ...this.table.getState().pagination, pageIndex: 0 },
+        });
+        return;
+      }
+
+      this.internalColumnFilters.set(next);
     },
     onPaginationChange: (updaterOrValue) => {
-      const next = typeof updaterOrValue === 'function' ? updaterOrValue(this.table.getState().pagination) : updaterOrValue;
+      const current = this.table.getState().pagination;
+      const next = typeof updaterOrValue === 'function' ? updaterOrValue(current) : updaterOrValue;
+
       if (this.isServerMode()) {
-        this.stateChange.emit({ pagination: next, sorting: this.sortingState() });
-      } else {
-        this.internalPagination.set(next);
+        this.emitServerState('pagination', { pagination: next });
+        return;
       }
+
+      this.internalPagination.set(next);
     },
+
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -327,5 +372,19 @@ export class DataTable<T> {
 
   protected onClearSorting(column: Column<T, unknown>) {
     column.clearSorting();
+  }
+
+  private emitServerState(
+    reason: DataTableStateChangeReason,
+    overrides: Partial<Omit<DataTableStateChangeEvent, 'reason'>> = {}
+  ) {
+    const state = this.table.getState();
+
+    this.stateChange.emit({
+      reason,
+      pagination: overrides.pagination ?? state.pagination,
+      sorting: overrides.sorting ?? state.sorting,
+      filters: overrides.filters ?? state.columnFilters,
+    });
   }
 }

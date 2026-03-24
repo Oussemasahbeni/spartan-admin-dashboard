@@ -3,8 +3,8 @@ import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideX } from '@ng-icons/lucide';
-import { DataTableColumnManager } from '@shared/components/columns-manager/data-table-column-manager';
-import { DataTable } from '@shared/components/data-table/data-table';
+import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
+import { DataTable } from '@shared/datatable/table/data-table';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -29,7 +29,7 @@ import { provideTransactionStatusIcons, TransactionStatusUIPipe } from '../../pi
     TransactionStatusUIPipe,
     TranslocoModule,
     DataTable,
-    DataTableColumnManager,
+    DataTableColumnsManager,
     FormField,
   ],
   providers: [

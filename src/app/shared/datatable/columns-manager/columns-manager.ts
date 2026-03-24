@@ -6,7 +6,12 @@ import { lucideChevronDown, lucideGripVertical, lucideSettings2 } from '@ng-icon
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { Table } from '@tanstack/angular-table';
+import { Column, Table } from '@tanstack/angular-table';
+
+type DataTableColumnMeta = {
+  translationKey?: string;
+  columnLabel?: string;
+};
 
 @Component({
   selector: 'adm-data-table-column-manager',
@@ -19,7 +24,7 @@ import { Table } from '@tanstack/angular-table';
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrl: 'data-table-column-manager.css',
+  styleUrl: 'columns-manager.css',
   template: `
     <button type="button" class="hidden sm:flex" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">
       <ng-icon hlmIcon name="lucideSettings2" size="sm" />
@@ -38,11 +43,14 @@ import { Table } from '@tanstack/angular-table';
               [checked]="column.getIsVisible()"
               (triggered)="column.toggleVisibility()"
             >
+              @let meta = getMeta(column);
               <hlm-dropdown-menu-checkbox-indicator />
-              @if (column.columnDef.meta?.translationKey) {
-                {{ column.columnDef.meta?.translationKey | transloco }}
+              @if (meta.translationKey) {
+                {{ meta.translationKey | transloco }}
+              } @else if (meta.columnLabel) {
+                {{ meta.columnLabel }}
               } @else {
-                {{ column.columnDef.header }}
+                {{ humanizeColumnId(column.id) }}
               }
             </button>
             <ng-icon
@@ -57,7 +65,7 @@ import { Table } from '@tanstack/angular-table';
     </ng-template>
   `,
 })
-export class DataTableColumnManager<T> {
+export class DataTableColumnsManager<T> {
   // ==========================================
   // Inputs
   // ==========================================
@@ -80,6 +88,23 @@ export class DataTableColumnManager<T> {
     const hidableIds = this.hidableColumns().map((c) => c.id);
 
     moveItemInArray(hidableIds, event.previousIndex, event.currentIndex);
-    table.setColumnOrder(['select', ...hidableIds, 'actions']);
+
+    const hidableSet = new Set(hidableIds);
+    let hidableIndex = 0;
+    const newOrder = table.getAllLeafColumns().map((col) => (hidableSet.has(col.id) ? hidableIds[hidableIndex++] : col.id));
+    table.setColumnOrder(newOrder);
+  }
+
+  protected getMeta(column: Column<T, unknown>): DataTableColumnMeta {
+    return (column.columnDef.meta as DataTableColumnMeta | undefined) ?? {};
+  }
+
+  protected humanizeColumnId(id: string): string {
+    const pretty = id
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .replace(/[._-]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return pretty ? pretty[0].toUpperCase() + pretty.slice(1) : id;
   }
 }
