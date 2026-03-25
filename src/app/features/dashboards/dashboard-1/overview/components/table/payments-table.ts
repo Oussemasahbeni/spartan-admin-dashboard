@@ -86,7 +86,12 @@ import { PaymentsActionDropdown } from './action-dropdown';
 
           <adm-data-table-column-manager [table]="table()" />
         </div>
-        <adm-data-table [columns]="columns" [data]="payments()" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 50, 100]">
+        <adm-data-table
+          [columns]="columns"
+          [data]="payments()"
+          [paginationState]="{ pageIndex: 0, pageSize: 5 }"
+          [pageSizeOptions]="[5, 10, 25, 50, 100]"
+        >
           <!-- Status Cell -->
           <ng-template #statusCell let-context>
             <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
