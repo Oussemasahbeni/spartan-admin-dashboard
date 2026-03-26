@@ -16,7 +16,7 @@ import {
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries } from '@shared/countries';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
@@ -50,7 +50,6 @@ interface Plan {
     HlmSelectImports,
     HlmAlertImports,
     HlmSeparatorImports,
-    BrnSelectImports,
     HlmCardImports,
     HlmRadioGroupImports,
     HlmSpinner,

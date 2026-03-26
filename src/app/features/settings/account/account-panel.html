@@ -88,19 +88,22 @@
       <div class="sm:col-span-2">
         <hlm-field>
           <hlm-field-label for="language">{{ t('language') }}</hlm-field-label>
-          <brn-select [placeholder]="t('selectLanguage')" [formField]="accountForm.language">
+          <hlm-select [formField]="accountForm.language">
             <hlm-select-trigger class="w-full">
               <div class="flex items-center gap-2">
                 <ng-icon hlm size="sm" name="lucideGlobe" />
-                <hlm-select-value />
+                <hlm-select-placeholder>{{ t('selectLanguage') }}</hlm-select-placeholder>
+                <ng-template hlmSelectValueTemplate let-value>
+                  {{ t(`languages.${value}`) }}
+                </ng-template>
               </div>
             </hlm-select-trigger>
-            <hlm-select-content>
-              @for (language of languages; track language) {
-                <hlm-option [value]="language">{{ t(`languages.${language}`) }}</hlm-option>
-              }
+            <hlm-select-content *hlmSelectPortal>
+                @for (language of languages; track language) {
+                  <hlm-select-item [value]="language">{{ t(`languages.${language}`) }}</hlm-select-item>
+                }
             </hlm-select-content>
-          </brn-select>
+          </hlm-select>
         </hlm-field>
       </div>
     </div>

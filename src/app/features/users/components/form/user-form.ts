@@ -6,7 +6,8 @@ import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries, Country } from '@shared/countries';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+
+import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
@@ -18,14 +19,13 @@ import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { parsePhoneNumberFromString } from 'libphonenumber-js/mobile';
 import { User, USER_ROLES, UserRole } from '../../../../shared/models/user';
 import { UserService } from '../../service/user.service';
-import { toast } from '@spartan-ng/brain/sonner';
 
 export interface UserFormModel {
   name: string;
   email: string;
   phoneNumber: string;
   country: Country | null;
-  role: UserRole;
+  role: UserRole | null;
 }
 
 @Component({
@@ -40,7 +40,6 @@ export interface UserFormModel {
     HlmSpinnerImports,
     HlmIconImports,
     HlmButtonImports,
-    BrnSelectImports,
     HlmSelectImports,
     HlmIconImports,
     TranslocoModule,
@@ -79,7 +78,7 @@ export class UserForm implements OnInit {
     email: '',
     phoneNumber: '',
     country: null,
-    role: 'user',
+    role: null,
   });
 
   readonly userForm = form(
@@ -164,7 +163,7 @@ export class UserForm implements OnInit {
       email: val.email().value(),
       phoneNumber: val.phoneNumber().value(),
       country: val.country().value()?.iso ?? null,
-      role: val.role().value(),
+      role: val.role().value() as UserRole,
       status: this._dialogContext.user?.status ?? 'active',
     };
   }

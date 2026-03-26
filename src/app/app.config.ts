@@ -25,7 +25,6 @@ import { TranslocoHttpLoader } from './transloco-loader';
 import { mockApiInterceptor } from '@core/interceptor/mock-api.interceptor';
 import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
 
-
 function getDefaultLanguage(): string {
   const storedLang = localStorage.getItem('lang');
   if (storedLang && availableLangs.includes(storedLang)) {

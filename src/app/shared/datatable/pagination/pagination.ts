@@ -9,7 +9,7 @@ import {
   lucideChevronLeft,
   lucideChevronRight,
 } from '@ng-icons/lucide';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
@@ -35,7 +35,6 @@ import { Table } from '@tanstack/angular-table';
 @Component({
   selector: 'adm-pagination',
   imports: [
-    BrnSelectImports,
     HlmSelectImports,
     HlmLabelImports,
     HlmButtonImports,

@@ -4,7 +4,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMail, lucideTrash2 } from '@ng-icons/lucide';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
@@ -32,7 +32,6 @@ interface TeamMember {
     HlmInputImports,
     HlmInputGroupImports,
     HlmSelectImports,
-    BrnSelectImports,
     HlmSpinner,
     FormField,
     NgIcon,

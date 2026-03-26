@@ -29,7 +29,7 @@ export class TimeAgoPipe implements PipeTransform {
   private readonly justNowFormatter = computed(
     () => new Intl.RelativeTimeFormat(this.lang(), { numeric: 'auto', style: 'long' })
   );
-  
+
   private readonly now = signal(Date.now());
 
   transform(value: string | Date | null | undefined): string {

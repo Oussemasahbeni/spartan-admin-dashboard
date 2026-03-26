@@ -39,13 +39,11 @@
       "@spartan-ng/helm/radio-group": ["./src/app/spartan/radio-group/src/index.ts"],
       "@spartan-ng/helm/resizable": ["./src/app/spartan/resizable/src/index.ts"],
       "@spartan-ng/helm/scroll-area": ["./src/app/spartan/scroll-area/src/index.ts"],
-      "@spartan-ng/helm/select": ["./src/app/spartan/select/src/index.ts"],
       "@spartan-ng/helm/separator": ["./src/app/spartan/separator/src/index.ts"],
       "@spartan-ng/helm/sheet": ["./src/app/spartan/sheet/src/index.ts"],
       "@spartan-ng/helm/skeleton": ["./src/app/spartan/skeleton/src/index.ts"],
       "@spartan-ng/helm/input-group": ["./src/app/spartan/input-group/src/index.ts"],
       "@spartan-ng/helm/textarea": ["./src/app/spartan/textarea/src/index.ts"],
-      "@spartan-ng/helm/combobox": ["./src/app/spartan/combobox/src/index.ts"],
       "@spartan-ng/helm/dialog": ["./src/app/spartan/dialog/src/index.ts"],
       "@spartan-ng/helm/tabs": ["./src/app/spartan/tabs/src/index.ts"],
       "@spartan-ng/helm/collapsible": ["./src/app/spartan/collapsible/src/index.ts"],
@@ -54,7 +52,9 @@
       "@spartan-ng/helm/utils": ["./src/app/spartan/utils/src/index.ts"],
       "@spartan-ng/helm/spinner": ["./src/app/spartan/spinner/src/index.ts"],
       "@spartan-ng/helm/kbd": ["./src/app/spartan/kbd/src/index.ts"],
-      "@spartan-ng/helm/sonner": ["./src/app/spartan/sonner/src/index.ts"]
+      "@spartan-ng/helm/sonner": ["./src/app/spartan/sonner/src/index.ts"],
+      "@spartan-ng/helm/combobox": ["./src/app/spartan/combobox/src/index.ts"],
+      "@spartan-ng/helm/select": ["./src/app/spartan/select/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

@@ -7,7 +7,7 @@ import { CountryPicker } from '@shared/components/country-picker/country-picker'
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries } from '@shared/countries';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -31,7 +31,6 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
     HlmSelectImports,
     HlmSeparatorImports,
     HlmTextareaImports,
-    BrnSelectImports,
     FormField,
     FormRoot,
     ValidationErrors,
@@ -58,7 +57,7 @@ export class SettingsAccount {
     name: 'Oussema Sahbeni',
     username: '@spike',
     title: 'Software engineer',
-    company: 'Oddo Bhf',
+    company: 'Oddo BHF',
     about:
       'Hey! This is oussema; a software engineer based in Tunisia. I love building web applications and exploring new technologies. In my free time, I enjoy gaming and gym 💪.',
     email: 'oussemasahbeni300@gmail.com',

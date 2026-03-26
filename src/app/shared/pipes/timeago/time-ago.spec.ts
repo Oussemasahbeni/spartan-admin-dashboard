@@ -15,7 +15,7 @@ describe('TimeAgoPipe', () => {
   let pipe: TimeAgoPipe;
   let langChanges$: Subject<string>;
   let activeLang: string;
-  let now : Date;
+  let now: Date;
 
   beforeEach(() => {
     now = new Date();
