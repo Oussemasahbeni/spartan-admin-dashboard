@@ -48,7 +48,6 @@ import { RoleFilter } from '../components/filters/role-filter';
 import { StatusFilter } from '../components/filters/status-filter';
 import { UserForm } from '../components/form/user-form';
 import { ActionDropdown } from '../components/table/action-dropdown';
-import { TableHeadSelection, TableRowSelection } from '../components/table/selection-column';
 
 @Component({
   selector: 'adm-users',
@@ -162,21 +161,6 @@ export default class Users {
    * Uses `translateSignal` for reactive header translations.
    */
   protected readonly columns: ColumnDef<User>[] = [
-    {
-      id: 'select',
-      header: () =>
-        flexRenderComponent(TableHeadSelection, {
-          inputs: { header: '' },
-        }),
-      cell: () =>
-        flexRenderComponent(TableRowSelection, {
-          inputs: { header: '' },
-        }),
-      enableSorting: false,
-      enableHiding: false,
-      enableResizing: false,
-      size: 30,
-    },
     {
       id: 'name',
       accessorKey: 'name',

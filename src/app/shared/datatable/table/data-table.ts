@@ -11,13 +11,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
-import { lucideArrowUpDown, lucideSortAsc, lucideSortDesc, lucideX } from '@ng-icons/lucide';
-import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTableImports } from '@spartan-ng/helm/table';
@@ -26,6 +20,7 @@ import {
   ColumnDef,
   ColumnFiltersState,
   createAngularTable,
+  flexRenderComponent,
   FlexRenderDirective,
   getCoreRowModel,
   getFilteredRowModel,
@@ -41,6 +36,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TableResizableCell, TableResizableHeader } from '../directives/resizable-cell';
 import { DataTablePagination } from '../pagination/pagination';
 import { toCssVarToken } from '../utils/css-var-token';
+import { TableHeadSelection, TableRowSelection } from './selection-column';
+import { TableSortHeader } from './sort-header';
 
 /**
  * A flexible data table component built on TanStack Table (Angular Table).
@@ -81,33 +78,28 @@ export interface DataTableStateChangeEvent {
   filters: ColumnFiltersState;
   reason: DataTableStateChangeReason;
 }
+
+export interface DataTableRowSelectionChangeEvent<T> {
+  rowSelection: RowSelectionState;
+  selectedRows: T[];
+}
 @Component({
   selector: 'adm-data-table',
   imports: [
     HlmTableImports,
-    HlmIconImports,
     HlmSpinnerImports,
-    HlmButtonImports,
     HlmScrollAreaImports,
-    HlmDropdownMenuImports,
     FlexRenderDirective,
-    FormsModule,
     TranslocoDirective,
     DataTablePagination,
     TableResizableCell,
     TableResizableHeader,
     NgScrollbarModule,
+    TableSortHeader,
   ],
   templateUrl: './data-table.html',
   styleUrl: './data-table.css',
-  providers: [
-    provideIcons({
-      lucideArrowUpDown,
-      lucideSortAsc,
-      lucideSortDesc,
-      lucideX,
-    }),
-  ],
+
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTable<T> {
@@ -200,9 +192,40 @@ export class DataTable<T> {
    */
   readonly stateChange = output<DataTableStateChangeEvent>();
 
+  /**
+   * Emitted when row selection changes.
+   * Contains both the TanStack selection state and resolved selected row items.
+   */
+  readonly rowSelectionChange = output<DataTableRowSelectionChangeEvent<T>>();
+
   // ==========================================
   // State
   // ==========================================
+
+  /**
+   * Internal column definitions, augmented with selection column if row selection is enabled.
+   * This allows us to keep the original columns input clean and add the selection column dynamically.
+   * The selection column is added as the first column when enableRowSelection is true.
+   * It includes a header checkbox for "select all" and row checkboxes for individual selection.
+   */
+  readonly _columns = computed(() => {
+    const baseColumns = this.columns();
+
+    if (this.enableRowSelection() && !baseColumns.some((column) => column.id === 'select')) {
+      const selectionColumn: ColumnDef<T> = {
+        id: 'select',
+        header: () => flexRenderComponent(TableHeadSelection),
+        cell: () => flexRenderComponent(TableRowSelection),
+        enableSorting: false,
+        enableHiding: false,
+        enableResizing: false,
+        size: 30,
+      };
+
+      return [selectionColumn, ...baseColumns];
+    }
+    return baseColumns;
+  });
 
   private readonly columnOrder = signal<string[]>([]);
   private readonly rowSelection = signal<RowSelectionState>({});
@@ -227,7 +250,7 @@ export class DataTable<T> {
   private readonly activeSorting = computed(() => (this.isServerMode() ? this.sortingState() : this.internalSorting()));
 
   /** Column sizing info for resize feature. */
-  readonly _columnSizingInfo = signal(() => this.table.getState().columnSizingInfo);
+  readonly _columnSizingInfo = computed(() => this.table.getState().columnSizingInfo);
 
   /** Current column sizes. */
   readonly _columnSizing = computed(() => this.table.getState().columnSizing);
@@ -269,7 +292,7 @@ export class DataTable<T> {
    */
   readonly table = createAngularTable<T>(() => ({
     data: this.data(),
-    columns: this.columns(),
+    columns: this._columns(),
     manualPagination: this.isServerMode(),
     manualSorting: this.isServerMode(),
     manualFiltering: this.isServerMode(),
@@ -338,7 +361,11 @@ export class DataTable<T> {
       updater instanceof Function ? this.columnVisibility.update(updater) : this.columnVisibility.set(updater);
     },
     onRowSelectionChange: (updater) => {
-      updater instanceof Function ? this.rowSelection.update(updater) : this.rowSelection.set(updater);
+      const current = this.rowSelection();
+      const next = typeof updater === 'function' ? updater(current) : updater;
+
+      this.rowSelection.set(next);
+      this.emitRowSelectionChange(next);
     },
     onColumnOrderChange: (updater) => {
       updater instanceof Function ? this.columnOrder.update(updater) : this.columnOrder.set(updater);
@@ -359,6 +386,13 @@ export class DataTable<T> {
 
   protected onClearSorting(column: Column<T, unknown>) {
     column.clearSorting();
+  }
+
+  private emitRowSelectionChange(rowSelection: RowSelectionState) {
+    this.rowSelectionChange.emit({
+      rowSelection,
+      selectedRows: this.table.getSelectedRowModel().rows.map((row) => row.original),
+    });
   }
 
   private emitServerState(
