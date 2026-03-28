@@ -97,7 +97,12 @@
         "import": "Import",
         "export": "Export",
         "clearFilter": "Clear Filter",
-        "addNew": "Add New"
+        "addNew": "Add New",
+        "pinStart": "Pin to Start",
+        "pinEnd": "Pin to End",
+        "pinLeft": "Pin Left",
+        "pinRight": "Pin Right",
+        "unpin": "Unpin"
     },
     "sort": {
         "asc": "Asc",

@@ -46,6 +46,7 @@
     <adm-data-table
       mode="server"
       [columns]="columns"
+      [defaultColumnPinning]="defaultColumnPinning"
       [isLoading]="isLoading()"
       [data]="users()"
       [totalElements]="totalElements()"
@@ -53,6 +54,7 @@
       [sortingState]="sorting()"
       [resizableColumns]="true"
       [enableRowSelection]="true"
+      [enableColumnPinning]="true"
       (stateChange)="handleStateChange($event)"
     >
       <!-- Date Cell -->

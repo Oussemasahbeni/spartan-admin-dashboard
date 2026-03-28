@@ -24,3 +24,24 @@
     opacity: 1;
   }
 }
+
+.pinned-col {
+  z-index: 4;
+}
+
+thead .pinned-col {
+  z-index: 12;
+  background: var(--card);
+}
+
+tbody .pinned-col {
+  background: var(--card);
+}
+
+.pinned-boundary-left {
+  border-inline-end: 1px solid var(--border);
+}
+
+.pinned-boundary-right {
+  border-inline-start: 1px solid var(--border);
+}

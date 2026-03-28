@@ -1,102 +1,108 @@
 <div class="flex flex-col gap-4 md:gap-6">
-  <div class="overflow-hidden rounded-md border">
-    <!-- we defer the loading of the table, because tanstack manipulates the DOM with flexRender which can cause errors during SSR -->
-    @defer {
-      <div hlmTableContainer>
-        <ng-scrollbar hlm [withButtons]="true">
-          <table hlmTable [style]="columnSizeVars()">
-            <!-- Table Header -->
-            <thead hlmTHead class="bg-card sticky top-0 z-10">
-              @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
-                <tr hlmTr>
-                  @for (header of headerGroup.headers; track header.id) {
-                    <th
-                      class="relative"
-                      hlmTh
-                      [attr.colSpan]="header.colSpan"
-                      [tableResizableHeader]="header.id"
-                      [attr.aria-sort]="
-                        header.column.getIsSorted() === 'asc'
-                          ? 'ascending'
-                          : header.column.getIsSorted() === 'desc'
-                            ? 'descending'
-                            : 'none'
-                      "
-                    >
-                      @if (!header.isPlaceholder) {
-                        <ng-container
-                          *flexRender="header.column.columnDef.header; props: header.getContext(); let headerCell"
-                        >
-                          @if (header.column.getCanSort()) {
-                            <adm-table-sort-header [headerCell]="headerCell" [header]="header" />
-                          } @else {
-                            {{ headerCell }}
-                          }
-                        </ng-container>
-
-                        @if (header.column.getCanResize() && resizableColumns()) {
-                          <div
-                            class="resizer hidden md:block"
-                            [class.isResizing]="header.column.getIsResizing()"
-                            (dblclick)="header.column.resetSize()"
-                            (mousedown)="header.getResizeHandler()($event)"
-                            (touchstart)="header.getResizeHandler()($event)"
-                          ></div>
-                        }
+  <!-- we defer the loading of the table, because tanstack manipulates the DOM with flexRender which can cause errors during SSR -->
+  @defer {
+    <div hlmTableContainer class="rounded-md border">
+      <table hlmTable class="w-max min-w-full border-spacing-0" [style]="columnSizeVars()">
+        <!-- Table Header -->
+        <thead hlmTHead class="bg-card sticky top-0 z-10">
+          @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+            <tr hlmTr>
+              @for (header of headerGroup.headers; track header.id) {
+                <th
+                  class="relative"
+                  hlmTh
+                  [attr.colSpan]="header.colSpan"
+                  [tableResizableHeader]="header.id"
+                  [style]="getCommonPinningStyles(header.column)"
+                  [class.pinned-col]="!!header.column.getIsPinned()"
+                  [class.pinned-boundary-left]="
+                    header.column.getIsPinned() === 'left' && header.column.getIsLastColumn('left')
+                  "
+                  [class.pinned-boundary-right]="
+                    header.column.getIsPinned() === 'right' && header.column.getIsFirstColumn('right')
+                  "
+                >
+                  @if (!header.isPlaceholder) {
+                    <ng-container *flexRender="header.column.columnDef.header; props: header.getContext(); let headerCell">
+                      @if (header.column.getCanSort()) {
+                        <adm-table-sort-header [headerCell]="headerCell" [header]="header" />
+                      } @else {
+                        {{ headerCell }}
                       }
-                    </th>
-                  }
-                </tr>
-              }
-            </thead>
+                    </ng-container>
 
-            @if (isLoading()) {
-              <tbody>
-                <tr>
-                  <td hlmTd class="h-96 text-center" [attr.colspan]="visibleColumnCount()">
-                    <div class="flex h-96 items-center justify-center">
-                      <hlm-spinner class="text-3xl" />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            } @else {
-              <!-- Table Body -->
-              <tbody hlmTBody class="w-full">
-                @for (row of table.getRowModel().rows; track row.id) {
-                  <tr hlmTr [attr.data-state]="row.getIsSelected() && 'selected'" [attr.aria-selected]="row.getIsSelected()">
-                    @for (cell of row.getVisibleCells(); track cell.id) {
-                      <td hlmTd [tableResizableCell]="cell.column.id">
-                        <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cell">
-                          @if (cell !== null && cell !== undefined) {
-                            {{ cell }}
-                          }
-                        </ng-container>
-                      </td>
+                    @if (header.column.getCanResize() && resizableColumns()) {
+                      <div
+                        class="resizer hidden md:block"
+                        [class.isResizing]="header.column.getIsResizing()"
+                        (dblclick)="header.column.resetSize()"
+                        (mousedown)="header.getResizeHandler()($event)"
+                        (touchstart)="header.getResizeHandler()($event)"
+                      ></div>
                     }
-                  </tr>
-                } @empty {
-                  <tr hlmTr>
-                    <td *transloco="let t" hlmTd class="h-24 text-center" [attr.colspan]="visibleColumnCount()">
-                      {{ t('common.noData') }}
-                    </td>
-                  </tr>
+                  }
+                </th>
+              }
+            </tr>
+          }
+        </thead>
+
+        @if (isLoading()) {
+          <tbody>
+            <tr>
+              <td hlmTd class="h-96 text-center" [attr.colspan]="visibleColumnCount()">
+                <div class="flex h-96 items-center justify-center">
+                  <hlm-spinner class="text-3xl" />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        } @else {
+          <!-- Table Body -->
+          <tbody hlmTBody class="w-full">
+            @for (row of table.getRowModel().rows; track row.id) {
+              <tr hlmTr [attr.data-state]="row.getIsSelected() && 'selected'" [attr.aria-selected]="row.getIsSelected()">
+                @for (cell of row.getVisibleCells(); track cell.id) {
+                  <td
+                    hlmTd
+                    [tableResizableCell]="cell.column.id"
+                    [style]="getCommonPinningStyles(cell.column)"
+                    [class.pinned-col]="!!cell.column.getIsPinned()"
+                    [class.pinned-boundary-left]="
+                      cell.column.getIsPinned() === 'left' && cell.column.getIsLastColumn('left')
+                    "
+                    [class.pinned-boundary-right]="
+                      cell.column.getIsPinned() === 'right' && cell.column.getIsFirstColumn('right')
+                    "
+                  >
+                    <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cell">
+                      @if (cell !== null && cell !== undefined) {
+                        {{ cell }}
+                      }
+                    </ng-container>
+                  </td>
                 }
-              </tbody>
+              </tr>
+            } @empty {
+              <tr hlmTr>
+                <td *transloco="let t" hlmTd class="h-24 text-center" [attr.colspan]="visibleColumnCount()">
+                  {{ t('common.noData') }}
+                </td>
+              </tr>
             }
-          </table>
-        </ng-scrollbar>
-      </div>
-    } @loading {
-         
-      <div class="flex h-96 items-center justify-center"><hlm-spinner /></div>
-       
-    } @placeholder {
-      <div class="flex h-96 items-center justify-center">
-        <hlm-spinner />
-      </div>
-    }
-  </div>
+          </tbody>
+        }
+      </table>
+    </div>
+  } @loading {
+       
+    <div class="flex h-96 items-center justify-center"><hlm-spinner /></div>
+     
+  } @placeholder {
+    <div class="flex h-96 items-center justify-center">
+      <hlm-spinner />
+    </div>
+  }
 
   <div *transloco="let t; prefix: 'pagination'" class="flex flex-col justify-between sm:flex-row sm:items-center">
     @if (table.getRowCount() > 0) {

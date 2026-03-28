@@ -97,7 +97,12 @@
         "import": "Importer",
         "export": "Exporter",
         "clearFilter": "Effacer le filtre",
-        "addNew": "Ajouter"
+        "addNew": "Ajouter",
+        "pinStart": "Épingler au début",
+        "pinEnd": "Épingler à la fin",
+        "pinLeft": "Épingler à gauche",
+        "pinRight": "Épingler à droite",
+        "unpin": "Désépingler"
     },
     "sort": {
         "asc": "Ascendant",

@@ -1,12 +1,22 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideChevronDown, lucideGripVertical, lucideSettings2 } from '@ng-icons/lucide';
+import {
+  lucideCheck,
+  lucideChevronDown,
+  lucideChevronLeft,
+  lucideChevronRight,
+  lucideGripVertical,
+  lucidePin,
+  lucideSettings2,
+  lucideX,
+} from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { Column, Table } from '@tanstack/angular-table';
+import { DirectionalityService } from '@core/config/directionality.service';
+import { Column, ColumnPinningPosition, Table } from '@tanstack/angular-table';
 
 type DataTableColumnMeta = {
   translationKey?: string;
@@ -18,9 +28,14 @@ type DataTableColumnMeta = {
   imports: [DragDropModule, TranslocoModule, HlmDropdownMenuImports, HlmIconImports, HlmButtonImports],
   providers: [
     provideIcons({
+      lucideCheck,
       lucideChevronDown,
+      lucideChevronLeft,
+      lucideChevronRight,
       lucideSettings2,
       lucideGripVertical,
+      lucidePin,
+      lucideX,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,12 +68,58 @@ type DataTableColumnMeta = {
                 {{ humanizeColumnId(column.id) }}
               }
             </button>
-            <ng-icon
-              cdkDragHandle
-              hlmIcon
-              class="text-muted-foreground cursor-grab active:cursor-grabbing"
-              name="lucideGripVertical"
-            />
+            <button cdkDragHandle type="button" hlmBtn variant="ghost" size="icon">
+              <ng-icon hlmIcon class="text-muted-foreground cursor-grab active:cursor-grabbing" name="lucideGripVertical" />
+            </button>
+
+            @if (column.getCanPin()) {
+                <button
+                  type="button"
+                  hlmDropdownMenuItem
+                  class="w-auto"
+                  aria-label="Pin options"
+                  title="Pin options"
+                  [hlmDropdownMenuTrigger]="pinMenu"
+                  [side]="isRtl() ? 'left' : 'right'"
+                  align="start"
+                >
+                  <ng-icon
+                  hlmIcon
+                  size="sm"
+                  name="lucidePin"
+                  [class.text-primary]="!!column.getIsPinned()"
+                  [class.text-muted-foreground]="!column.getIsPinned()"
+                />
+              </button>
+
+              <ng-template #pinMenu>
+                <hlm-dropdown-menu-sub>
+                  <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, 'left')">
+                    <ng-icon hlmIcon size="sm" [name]="isRtl() ? 'lucideChevronRight' : 'lucideChevronLeft'" />
+                    <span>{{ 'buttons.pinStart' | transloco }}</span>
+                    @if (column.getIsPinned() === 'left') {
+                      <ng-icon hlmIcon size="sm" class="ms-auto" name="lucideCheck" />
+                    }
+                  </button>
+
+                  <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, 'right')">
+                    <ng-icon hlmIcon size="sm" [name]="isRtl() ? 'lucideChevronLeft' : 'lucideChevronRight'" />
+                    <span>{{ 'buttons.pinEnd' | transloco }}</span>
+                    @if (column.getIsPinned() === 'right') {
+                      <ng-icon hlmIcon size="sm" class="ms-auto" name="lucideCheck" />
+                    }
+                  </button>
+
+                  <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, false)">
+                    <ng-icon hlmIcon size="sm" name="lucideX" />
+                    <span>{{ 'buttons.unpin' | transloco }}</span>
+                    @if (!column.getIsPinned()) {
+                      <ng-icon hlmIcon size="sm" class="ms-auto" name="lucideCheck" />
+                    }
+                  </button>
+                </hlm-dropdown-menu-sub>
+              </ng-template>
+            }
           </div>
         }
       </hlm-dropdown-menu>
@@ -66,6 +127,8 @@ type DataTableColumnMeta = {
   `,
 })
 export class DataTableColumnsManager<T> {
+  private readonly _dir = inject(DirectionalityService);
+
   // ==========================================
   // Inputs
   // ==========================================
@@ -80,6 +143,8 @@ export class DataTableColumnsManager<T> {
       .filter((col) => col.getCanHide());
   });
 
+  protected readonly isRtl = this._dir.isRtl;
+
   // ==========================================
   // Public Methods
   // ==========================================
@@ -93,6 +158,10 @@ export class DataTableColumnsManager<T> {
     let hidableIndex = 0;
     const newOrder = table.getAllLeafColumns().map((col) => (hidableSet.has(col.id) ? hidableIds[hidableIndex++] : col.id));
     table.setColumnOrder(newOrder);
+  }
+
+  protected pinColumn(column: Column<T, unknown>, position: ColumnPinningPosition | false) {
+    column.pin(position);
   }
 
   protected getMeta(column: Column<T, unknown>): DataTableColumnMeta {

@@ -19,6 +19,7 @@ import {
   Column,
   ColumnDef,
   ColumnFiltersState,
+  ColumnPinningState,
   createAngularTable,
   flexRenderComponent,
   FlexRenderDirective,
@@ -32,7 +33,6 @@ import {
   SortingState,
   VisibilityState,
 } from '@tanstack/angular-table';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TableResizableCell, TableResizableHeader } from '../directives/resizable-cell';
 import { DataTablePagination } from '../pagination/pagination';
 import { toCssVarToken } from '../utils/css-var-token';
@@ -94,7 +94,6 @@ export interface DataTableRowSelectionChangeEvent<T> {
     DataTablePagination,
     TableResizableCell,
     TableResizableHeader,
-    NgScrollbarModule,
     TableSortHeader,
   ],
   templateUrl: './data-table.html',
@@ -130,44 +129,48 @@ export class DataTable<T> {
    * Total number of elements across all pages.
    * **Only required in server mode** for proper pagination display.
    * In client mode, this is calculated automatically.
-   * @default 0
    */
   readonly totalElements = input<number, NumberInput>(0, { transform: numberAttribute });
 
   /**
    * Whether to show the pagination controls.
-   * @default true
    */
   readonly paginated = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
 
   /**
    * Enables column resizing via drag handles.
-   * @default false
    */
   readonly resizableColumns = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * Enables checkbox selection for rows.
-   * @default false
-   */
+=   */
   readonly enableRowSelection = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * External pagination state for server-side mode.
    * Ignored in client mode.
-   * @default  pageIndex: 0
-   * @default  pageSize: 10
    */
   readonly paginationState = input<PaginationState>({ pageIndex: 0, pageSize: 10 });
+
+  readonly enableColumnPinning = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * External sorting state for server-side mode.
    * Ignored in client mode.
-   * @default []
    */
   readonly sortingState = input<SortingState>([]);
 
+  /**
+   * External column filters state for server-side mode.
+   * Ignored in client mode.
+   */
   readonly columnFiltersState = input<ColumnFiltersState>([]);
+
+  /**
+   * External column pinning state for server-side mode.
+   */
+  readonly defaultColumnPinning = input<ColumnPinningState>({});
 
   /**
    * The operation mode of the table.
@@ -231,6 +234,10 @@ export class DataTable<T> {
   private readonly rowSelection = signal<RowSelectionState>({});
   private readonly columnVisibility = signal<VisibilityState>({});
 
+  private readonly columnPinning = linkedSignal<ColumnPinningState>(() =>
+    this.cloneColumnPinningState(this.defaultColumnPinning())
+  );
+
   private readonly internalColumnFilters = signal<ColumnFiltersState>([]);
 
   private readonly internalPagination = linkedSignal<PaginationState>(() => this.paginationState());
@@ -282,6 +289,22 @@ export class DataTable<T> {
     return colSizes;
   });
 
+  readonly getCommonPinningStyles = (column: Column<T>): Record<string, any> => {
+    if (!this.enableColumnPinning()) {
+      return {};
+    }
+    const isPinned = column.getIsPinned();
+    const isPinnedLeft = isPinned === 'left';
+    const isPinnedRight = isPinned === 'right';
+
+    return {
+      insetInlineStart: isPinnedLeft ? `${column.getStart('left')}px` : undefined,
+      insetInlineEnd: isPinnedRight ? `${column.getAfter('right')}px` : undefined,
+      position: isPinned ? 'sticky' : 'relative',
+      width: `${column.getSize()}px`,
+    };
+  };
+
   // ==========================================
   // Public Methods
   // ==========================================
@@ -298,14 +321,17 @@ export class DataTable<T> {
     manualFiltering: this.isServerMode(),
     rowCount: this.isServerMode() ? this.totalElements() : undefined,
     enableRowSelection: this.enableRowSelection(),
+    enableColumnPinning: this.enableColumnPinning(),
     state: {
       pagination: this.activePagination(),
       sorting: this.activeSorting(),
       columnOrder: this.columnOrder(),
       columnFilters: this.activeColumnFilters(),
       columnVisibility: this.columnVisibility(),
+      columnPinning: this.columnPinning(),
       rowSelection: this.rowSelection(),
     },
+
     columnResizeMode: 'onChange',
     onSortingChange: (updater) => {
       const current = this.table.getState().sorting;
@@ -370,6 +396,9 @@ export class DataTable<T> {
     onColumnOrderChange: (updater) => {
       updater instanceof Function ? this.columnOrder.update(updater) : this.columnOrder.set(updater);
     },
+    onColumnPinningChange: (updater) => {
+      updater instanceof Function ? this.columnPinning.update(updater) : this.columnPinning.set(updater);
+    },
   }));
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -407,5 +436,12 @@ export class DataTable<T> {
       sorting: overrides.sorting ?? state.sorting,
       filters: overrides.filters ?? state.columnFilters,
     });
+  }
+
+  private cloneColumnPinningState(state: ColumnPinningState): ColumnPinningState {
+    return {
+      left: state.left ? [...state.left] : [],
+      right: state.right ? [...state.right] : [],
+    };
   }
 }

@@ -16,7 +16,14 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
-import { CellContext, ColumnDef, flexRenderComponent, PaginationState, SortingState } from '@tanstack/angular-table';
+import {
+  CellContext,
+  ColumnDef,
+  ColumnPinningState,
+  flexRenderComponent,
+  PaginationState,
+  SortingState,
+} from '@tanstack/angular-table';
 
 import { httpResource } from '@angular/common/http';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
@@ -122,6 +129,7 @@ export default class Users {
   protected readonly sorting = signal<SortingState>([]);
   protected readonly selectedRoles = signal<UserRole[]>([]);
   protected readonly selectedStatuses = signal<UserStatus[]>([]);
+  protected readonly defaultColumnPinning: ColumnPinningState = { left: ['select'], right: ['actions'] };
 
   readonly usersResource = httpResource<PaginatedResponse<User>>(() => {
     const page = this.pagination().pageIndex;
@@ -223,6 +231,7 @@ export default class Users {
       id: 'actions',
       enableHiding: false,
       enableResizing: false,
+      enablePinning: true,
       size: 40,
       cell: () =>
         flexRenderComponent(ActionDropdown, {
