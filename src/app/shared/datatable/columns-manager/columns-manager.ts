@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -15,7 +15,6 @@ import {
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { DirectionalityService } from '@core/config/directionality.service';
 import { Column, ColumnPinningPosition, Table } from '@tanstack/angular-table';
 
 type DataTableColumnMeta = {
@@ -55,6 +54,7 @@ type DataTableColumnMeta = {
               type="button"
               hlmDropdownMenuCheckbox
               class="flex-1"
+              [keepOpen]="true"
               [checked]="column.getIsVisible()"
               (triggered)="column.toggleVisibility()"
             >
@@ -68,22 +68,22 @@ type DataTableColumnMeta = {
                 {{ humanizeColumnId(column.id) }}
               }
             </button>
-            <button cdkDragHandle type="button" hlmBtn variant="ghost" size="icon">
+            <span class="inline-flex items-center justify-center p-2">
               <ng-icon hlmIcon class="text-muted-foreground cursor-grab active:cursor-grabbing" name="lucideGripVertical" />
-            </button>
+            </span>
 
             @if (column.getCanPin()) {
-                <button
-                  type="button"
-                  hlmDropdownMenuItem
-                  class="w-auto"
-                  aria-label="Pin options"
-                  title="Pin options"
-                  [hlmDropdownMenuTrigger]="pinMenu"
-                  [side]="isRtl() ? 'left' : 'right'"
-                  align="start"
-                >
-                  <ng-icon
+              <button
+                type="button"
+                hlmDropdownMenuItem
+                class="w-auto"
+                aria-label="Pin options"
+                title="Pin options"
+                [hlmDropdownMenuTrigger]="pinMenu"
+                side="right"
+                align="start"
+              >
+                <ng-icon
                   hlmIcon
                   size="sm"
                   name="lucidePin"
@@ -95,7 +95,7 @@ type DataTableColumnMeta = {
               <ng-template #pinMenu>
                 <hlm-dropdown-menu-sub>
                   <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, 'left')">
-                    <ng-icon hlmIcon size="sm" [name]="isRtl() ? 'lucideChevronRight' : 'lucideChevronLeft'" />
+                    <ng-icon hlmIcon size="sm" name="lucideChevronLeft" class="rtl:rotate-180" />
                     <span>{{ 'buttons.pinStart' | transloco }}</span>
                     @if (column.getIsPinned() === 'left') {
                       <ng-icon hlmIcon size="sm" class="ms-auto" name="lucideCheck" />
@@ -103,7 +103,7 @@ type DataTableColumnMeta = {
                   </button>
 
                   <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, 'right')">
-                    <ng-icon hlmIcon size="sm" [name]="isRtl() ? 'lucideChevronLeft' : 'lucideChevronRight'" />
+                    <ng-icon hlmIcon size="sm" name="lucideChevronRight" class="rtl:rotate-180" />
                     <span>{{ 'buttons.pinEnd' | transloco }}</span>
                     @if (column.getIsPinned() === 'right') {
                       <ng-icon hlmIcon size="sm" class="ms-auto" name="lucideCheck" />
@@ -127,8 +127,6 @@ type DataTableColumnMeta = {
   `,
 })
 export class DataTableColumnsManager<T> {
-  private readonly _dir = inject(DirectionalityService);
-
   // ==========================================
   // Inputs
   // ==========================================
@@ -142,8 +140,6 @@ export class DataTableColumnsManager<T> {
       .getAllLeafColumns()
       .filter((col) => col.getCanHide());
   });
-
-  protected readonly isRtl = this._dir.isRtl;
 
   // ==========================================
   // Public Methods
