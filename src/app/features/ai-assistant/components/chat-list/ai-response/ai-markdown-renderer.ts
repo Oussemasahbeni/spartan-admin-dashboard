@@ -16,17 +16,17 @@ import { Marked, Renderer } from 'marked';
 
 @Component({
   selector: 'adm-ai-markdown-renderer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'block',
+    '(click)': 'onHostClick($event)',
+  },
   template: `
     <div #contentArea class="prose dark:prose-invert prose-headings:text-base max-w-full">
       <span [innerHTML]="renderedHtml()"></span>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    'class': 'block',
-    '(click)': 'onHostClick($event)',
-  },
 })
 export class AiMarkdownRenderer {
   // ==========================================

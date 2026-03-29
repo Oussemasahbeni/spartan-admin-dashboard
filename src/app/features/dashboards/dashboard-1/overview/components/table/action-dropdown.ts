@@ -20,7 +20,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   ],
   providers: [provideIcons({ lucideEllipsisVertical })],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   template: `
     <button
       type="button"

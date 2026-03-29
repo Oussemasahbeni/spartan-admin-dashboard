@@ -31,7 +31,6 @@ import { UserForm } from '../form/user-form';
   ],
   providers: [provideIcons({ lucideEllipsisVertical })],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   template: `
     <button
       type="button"

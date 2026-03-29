@@ -21,6 +21,10 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       lucideMonitor,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(window:keydown)': 'onKeydown($event)',
+  },
   template: `
     <button
       type="button"
@@ -72,10 +76,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       </hlm-dropdown-menu>
     </ng-template>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '(window:keydown)': 'onKeydown($event)',
-  },
+  
 })
 export class ThemeSwitch {
   // ==========================================

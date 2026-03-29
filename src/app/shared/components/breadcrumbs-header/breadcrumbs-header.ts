@@ -7,6 +7,7 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 @Component({
   selector: 'adm-breadcrumbs-header',
   imports: [HlmBreadCrumbImports, RouterLink, TranslocoModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <nav *transloco="let t" hlmBreadcrumb>
     <ol hlmBreadcrumbList>
       <!-- Home link - always visible -->
@@ -27,7 +28,6 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
       }
     </ol>
   </nav>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsHeader {
   // ==========================================

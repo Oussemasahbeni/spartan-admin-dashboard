@@ -24,7 +24,6 @@ import { USER_STATUSES, UserStatus } from '../../../../shared/models/user';
   ],
   providers: [provideIcons({ lucideSearch, lucideListFilter })],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   template: `
     <hlm-popover
       *transloco="let t"

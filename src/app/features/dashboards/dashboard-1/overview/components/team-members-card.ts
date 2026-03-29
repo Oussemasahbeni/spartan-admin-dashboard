@@ -17,6 +17,7 @@ import { User } from '../../../../../shared/models/user';
       lucideChevronDown,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section *transloco="let t; prefix: 'dashboard1.teamMembersCard'" hlmCard class="h-full">
       <header hlmCardHeader>
@@ -58,7 +59,6 @@ import { User } from '../../../../../shared/models/user';
       </main>
     </section>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamMembersCard {
   // ==========================================

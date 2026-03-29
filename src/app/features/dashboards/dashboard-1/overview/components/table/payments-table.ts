@@ -57,6 +57,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
     }),
     provideTranslocoScope({ scope: 'dashboard/dashboard1', alias: 'dashboard1' }),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *transloco="let t; prefix: 'dashboard1.paymentsTable'" hlmCard class="h-full">
       <header hlmCardHeader>
@@ -114,7 +115,6 @@ import { PaymentsActionDropdown } from './action-dropdown';
       </main>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentsTable {
   // ==========================================

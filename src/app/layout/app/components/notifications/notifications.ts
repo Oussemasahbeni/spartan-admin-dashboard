@@ -30,7 +30,7 @@ import { Notification } from '../../model/notification';
     TimeAgoPipe,
   ],
   providers: [provideIcons({ lucideBell, lucideX })],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <hlm-popover *transloco="let t; prefix: 'notifications'" sideOffset="10" align="end">
       <button type="button" variant="outline" size="icon" class="relative size-9" hlmPopoverTrigger hlmBtn>
@@ -113,7 +113,6 @@ import { Notification } from '../../model/notification';
       </div>
     </hlm-popover>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Notifications {
   // ==========================================

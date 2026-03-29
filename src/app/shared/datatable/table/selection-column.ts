@@ -7,6 +7,7 @@ import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@
   host: {
     class: 'flex',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <hlm-checkbox
       [checked]="_context.table.getIsAllRowsSelected()"
@@ -14,7 +15,6 @@ import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@
       (checkedChange)="_context.table.toggleAllRowsSelected()"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableHeadSelection<T> {
   // ==========================================
@@ -29,13 +29,13 @@ export class TableHeadSelection<T> {
   host: {
     class: 'flex',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <hlm-checkbox
       [checked]="_context.row.getIsSelected()"
       (checkedChange)="_context.row.getToggleSelectedHandler()($event)"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableRowSelection<T> {
   // ==========================================

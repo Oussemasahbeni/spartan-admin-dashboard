@@ -6,6 +6,7 @@ import { HlmFieldError } from '@spartan-ng/helm/field';
 @Component({
   selector: 'adm-validation-errors',
   imports: [HlmFieldError, TranslocoModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (fieldState().touched() && fieldState().invalid()) {
       @for (error of fieldState().errors(); track error.kind) {
@@ -17,7 +18,7 @@ import { HlmFieldError } from '@spartan-ng/helm/field';
       }
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 export class ValidationErrors {
   // ==========================================

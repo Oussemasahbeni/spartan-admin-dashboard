@@ -13,6 +13,15 @@ import { Column, Header, SortDirection } from '@tanstack/angular-table';
   host: {
     class: 'flex',
   },
+  providers: [
+    provideIcons({
+      lucideArrowUpDown,
+      lucideSortAsc,
+      lucideSortDesc,
+      lucideX,
+    }),
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button type="button" class="flex items-center gap-2 capitalize" [hlmDropdownMenuTrigger]="menu">
       {{ headerCell() }}
@@ -64,15 +73,6 @@ import { Column, Header, SortDirection } from '@tanstack/angular-table';
       </hlm-dropdown-menu>
     </ng-template>
   `,
-  providers: [
-    provideIcons({
-      lucideArrowUpDown,
-      lucideSortAsc,
-      lucideSortDesc,
-      lucideX,
-    }),
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableSortHeader<T> {
   public readonly header = input.required<Header<T, unknown>>();

@@ -18,6 +18,7 @@ export interface FilterOptions {
   selector: 'adm-filter-dialog',
   imports: [BrnDialogImports, HlmDialogImports, HlmButtonImports, HlmIconImports, TranslocoModule],
   providers: [provideIcons({ lucideFilter, lucideCalendar })],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <hlm-dialog>
       <button type="button" hlmBtn variant="outline" hlmDialogTrigger>
@@ -39,7 +40,6 @@ export interface FilterOptions {
       </hlm-dialog-content>
     </hlm-dialog>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterDialogComponent {
   // ==========================================

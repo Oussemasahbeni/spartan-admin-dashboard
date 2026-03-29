@@ -32,6 +32,7 @@ import { CountryDisplay } from '../country-display/country-display';
       lucideGlobe,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *transloco="let t; prefix: 'phoneNumberPicker'" class="flex">
       <hlm-combobox [value]="selectedCountry()" (valueChange)="selectedCountry.set($event)">
@@ -74,7 +75,6 @@ import { CountryDisplay } from '../country-display/country-display';
     </div>
   `,
 
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhoneNumberPicker implements FormValueControl<string> {
   // ==========================================

@@ -11,6 +11,7 @@ import { ConfirmDialogData } from './confirmation-dialog.service';
   host: {
     class: 'sm:max-w-lg',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *transloco="let t; prefix: 'users.confirmationDialog'">
       <hlm-alert-dialog-header>
@@ -25,7 +26,6 @@ import { ConfirmDialogData } from './confirmation-dialog.service';
       </hlm-alert-dialog-footer>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmationDialog {
   // ==========================================
