@@ -121,14 +121,14 @@ export class PaymentsTable {
   // Inputs
   // ==========================================
 
-  readonly payments = input<Payment[]>([]);
+  public readonly payments = input<Payment[]>([]);
 
   // ==========================================
   // View Children
   // ==========================================
 
-  readonly statusCell = viewChild.required('statusCell');
-  readonly dataTable = viewChild.required(DataTable<Payment>);
+  protected readonly statusCell = viewChild.required('statusCell');
+  protected readonly dataTable = viewChild.required(DataTable<Payment>);
 
   // ==========================================
   // State

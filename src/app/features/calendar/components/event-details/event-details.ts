@@ -53,7 +53,7 @@ export class EventDetails {
   // ==========================================
   // State
   // ==========================================
-  readonly event = signal(this._dialogContext.event);
+  protected readonly event = signal(this._dialogContext.event);
 
   // ==========================================
   // Public Methods

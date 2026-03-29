@@ -29,13 +29,13 @@ export class AttachmentCard {
   // Inputs
   // ==========================================
 
-  readonly file = input.required<File>();
+  public readonly file = input.required<File>();
 
   // ==========================================
   // Outputs
   // ==========================================
 
-  readonly remove = output<void>();
+  public readonly remove = output<void>();
 
   // ==========================================
   // Public Methods

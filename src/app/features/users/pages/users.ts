@@ -110,12 +110,12 @@ export default class Users {
    * Template references for custom cell rendering.
    * These are accessed via viewChild and passed to TanStack column definitions.
    */
-  readonly dataTable = viewChild.required(DataTable<User>);
-  readonly dateCell = viewChild.required<TemplateRef<CellContext<User, string>>>('dateCell');
-  readonly nameCell = viewChild.required<TemplateRef<CellContext<User, string>>>('nameCell');
-  readonly statusCell = viewChild.required<TemplateRef<CellContext<User, UserStatus>>>('statusCell');
-  readonly roleCell = viewChild.required<TemplateRef<CellContext<User, string>>>('roleCell');
-  readonly countryCell = viewChild.required<TemplateRef<CellContext<User, string>>>('countryCell');
+  protected readonly dataTable = viewChild.required(DataTable<User>);
+  protected readonly dateCell = viewChild.required<TemplateRef<CellContext<User, string>>>('dateCell');
+  protected readonly nameCell = viewChild.required<TemplateRef<CellContext<User, string>>>('nameCell');
+  protected readonly statusCell = viewChild.required<TemplateRef<CellContext<User, UserStatus>>>('statusCell');
+  protected readonly roleCell = viewChild.required<TemplateRef<CellContext<User, string>>>('roleCell');
+  protected readonly countryCell = viewChild.required<TemplateRef<CellContext<User, string>>>('countryCell');
 
   // ==========================================
   // State
@@ -131,7 +131,7 @@ export default class Users {
   protected readonly selectedStatuses = signal<UserStatus[]>([]);
   protected readonly defaultColumnPinning: ColumnPinningState = { left: ['select'], right: ['actions'] };
 
-  readonly usersResource = httpResource<PaginatedResponse<User>>(() => {
+  protected readonly usersResource = httpResource<PaginatedResponse<User>>(() => {
     const page = this.pagination().pageIndex;
     const size = this.pagination().pageSize;
     const search = this.searchForm.search().value();
@@ -153,9 +153,9 @@ export default class Users {
     };
   });
 
-  readonly users = computed(() => this.usersResource.value()?.content ?? []);
-  readonly totalElements = computed(() => this.usersResource.value()?.total ?? 0);
-  readonly isLoading = this.usersResource.isLoading;
+  protected readonly users = computed(() => this.usersResource.value()?.content ?? []);
+  protected readonly totalElements = computed(() => this.usersResource.value()?.total ?? 0);
+  protected readonly isLoading = this.usersResource.isLoading;
 
   /** Signal tracking the current active language for i18n updates */
   protected readonly currentLang = toSignal(this._translocoService.langChanges$, {

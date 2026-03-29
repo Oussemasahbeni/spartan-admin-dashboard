@@ -85,7 +85,7 @@ export class ActionDropdown {
   // Inputs
   // ==========================================
 
-  readonly onSuccess = input<() => void>();
+  public readonly onSuccess = input<() => void>();
 
   // ==========================================
   // Public Methods

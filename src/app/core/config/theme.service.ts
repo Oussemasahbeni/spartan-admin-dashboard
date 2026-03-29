@@ -16,7 +16,7 @@ export class ThemeService {
   private readonly _localStorageKey = 'theme-preference';
 
   private readonly _theme = signal<Theme>('system');
-  readonly theme = this._theme.asReadonly();
+  public readonly theme = this._theme.asReadonly();
 
   private readonly _darkMediaQuery = this._window?.matchMedia('(prefers-color-scheme: dark)');
 

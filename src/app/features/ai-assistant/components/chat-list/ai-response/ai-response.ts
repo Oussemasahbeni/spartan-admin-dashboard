@@ -51,34 +51,34 @@ export class AiResponseCard {
   // Inputs
   // ==========================================
 
-  readonly content = input.required<string>();
+  public readonly content = input.required<string>();
 
-  readonly isStreaming = input<boolean>(false);
+  public readonly isStreaming = input<boolean>(false);
 
   // ==========================================
   // Outputs
   // ==========================================
 
   /** Emitted when copy button is clicked with full content */
-  readonly messageCopied = output<string>();
+  public readonly messageCopied = output<string>();
 
   /** Emitted when a code block is copied */
-  readonly codeBlockCopy = output<string>();
+  public readonly codeBlockCopy = output<string>();
 
   /** Emitted when regenerate button is clicked */
-  readonly regenerate = output<void>();
+  public readonly regenerate = output<void>();
 
   /** Emitted when thumbs up is clicked */
-  readonly thumbsUp = output<void>();
+  public readonly thumbsUp = output<void>();
 
   /** Emitted when thumbs down is clicked */
-  readonly thumbsDown = output<void>();
+  public readonly thumbsDown = output<void>();
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly copied = signal(false);
+  protected readonly copied = signal(false);
 
   // ==========================================
   // Public Methods

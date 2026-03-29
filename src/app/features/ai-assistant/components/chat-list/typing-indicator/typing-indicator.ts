@@ -48,14 +48,14 @@ export class TypingIndicator {
   // Inputs
   // ==========================================
 
-  readonly dotCount = input<number>(3);
-  readonly animation = input<'shimmer' | 'wave'>('shimmer');
+  public readonly dotCount = input<number>(3);
+  public readonly animation = input<'shimmer' | 'wave'>('shimmer');
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly dots = computed(() => {
+  public readonly dots = computed(() => {
     return Array.from({ length: this.dotCount() }, (_, i) => i);
   });
 

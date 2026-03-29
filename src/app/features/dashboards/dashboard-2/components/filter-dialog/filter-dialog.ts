@@ -46,13 +46,13 @@ export class FilterDialogComponent {
   // Outputs
   // ==========================================
 
-  readonly filterApplied = output<FilterOptions>();
+  public readonly filterApplied = output<FilterOptions>();
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly isOpen = signal(false);
+  protected readonly isOpen = signal(false);
 
   // ==========================================
   // Public Methods

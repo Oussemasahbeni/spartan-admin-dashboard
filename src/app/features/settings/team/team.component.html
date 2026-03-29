@@ -16,7 +16,7 @@
         <hlm-select [formField]="addMemberForm.role">
           <hlm-select-trigger>
             <hlm-select-placeholder>{{ t('selectRole') }}</hlm-select-placeholder>
-            <ng-template hlmSelectValueTemplate let-value>
+            <ng-template let-value hlmSelectValueTemplate>
               {{ t('roles.' + value) }}
             </ng-template>
           </hlm-select-trigger>
@@ -62,7 +62,7 @@
           <!-- Role selector -->
           <hlm-select class="inline-block" [value]="member.role">
             <hlm-select-trigger>
-              <ng-template hlmSelectValueTemplate let-value>
+              <ng-template let-value hlmSelectValueTemplate>
                 {{ t('roles.' + value) }}
               </ng-template>
             </hlm-select-trigger>

@@ -16,7 +16,8 @@
     "header": {
         "toggleTheme": "Toggle theme",
         "closeSidebar": "Close sidebar",
-        "openSidebar": "Open sidebar"
+        "openSidebar": "Open sidebar",
+        "toggleFullScreen": "Toggle full screen"
     },
     "breadcrumbs": {
         "home": "Home"

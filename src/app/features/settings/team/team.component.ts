@@ -45,9 +45,9 @@ export class SettingsTeam {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
+  protected readonly isLoading = signal(false);
 
-  readonly members = signal<TeamMember[]>([
+  protected readonly members = signal<TeamMember[]>([
     {
       id: 1,
       avatar: 'https://avatars.githubusercontent.com/u/12345678',
@@ -99,14 +99,14 @@ export class SettingsTeam {
     },
   ]);
 
-  readonly roles = ['read', 'write', 'admin'];
+  protected readonly roles = ['read', 'write', 'admin'];
 
-  readonly addMemberModel = signal({
+  protected readonly addMemberModel = signal({
     email: '',
     role: 'read' as 'read' | 'write' | 'admin',
   });
 
-  readonly addMemberForm = form(this.addMemberModel, (schema) => {
+  protected readonly addMemberForm = form(this.addMemberModel, (schema) => {
     required(schema.email);
   });
 

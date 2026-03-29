@@ -75,9 +75,9 @@ import { Column, Header, SortDirection } from '@tanstack/angular-table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableSortHeader<T> {
-  readonly header = input.required<Header<T, unknown>>();
+  public readonly header = input.required<Header<T, unknown>>();
 
-  readonly headerCell = input.required<string>();
+  public readonly headerCell = input.required<string>();
 
   /**
    * Toggles sorting on a column.

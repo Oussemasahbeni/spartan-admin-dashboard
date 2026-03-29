@@ -97,13 +97,13 @@ export class VisitorsCard {
   // State
   // ==========================================
 
-  readonly selectedPeriod = signal<string>('week');
+  protected readonly selectedPeriod = signal<string>('week');
 
   private readonly _months = translateObjectSignal('months', {});
 
-  readonly months = computed(() => this._months() as Translation & MonthsTranslation);
+  protected readonly months = computed(() => this._months() as Translation & MonthsTranslation);
 
-  readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly chartOptions = computed<ApexOptions>(() => {
     const m = this.months();
     const isRtl = this.rtl();
     const categories = [m.jan, m.feb, m.mar, m.apr, m.may, m.jun];

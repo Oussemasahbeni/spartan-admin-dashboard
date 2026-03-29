@@ -65,5 +65,5 @@ export class TeamMembersCard {
   // Inputs
   // ==========================================
 
-  readonly members = input.required<User[]>();
+  public readonly members = input.required<User[]>();
 }

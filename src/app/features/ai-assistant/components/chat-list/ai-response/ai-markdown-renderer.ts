@@ -24,7 +24,7 @@ import { Marked, Renderer } from 'marked';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'block',
+    'class': 'block',
     '(click)': 'onHostClick($event)',
   },
 })
@@ -57,14 +57,14 @@ export class AiMarkdownRenderer {
   // ==========================================
 
   /** The markdown content to render */
-  readonly content = input.required<string>();
+  public readonly content = input.required<string>();
 
   // ==========================================
   // Outputs
   // ==========================================
 
   /** Emitted when a code block's copy button is clicked */
-  readonly codeBlockCopy = output<string>();
+  public readonly codeBlockCopy = output<string>();
 
   /**
    * Rendered HTML from markdown.
@@ -72,7 +72,7 @@ export class AiMarkdownRenderer {
    * @security This uses `bypassSecurityTrustHtml` to allow interactive elements
    * in rendered code blocks. This is safe when content comes from trusted sources.
    */
-  readonly renderedHtml = computed((): SafeHtml => {
+  protected readonly renderedHtml = computed((): SafeHtml => {
     const markdown = this.content();
     if (!markdown) return '';
 

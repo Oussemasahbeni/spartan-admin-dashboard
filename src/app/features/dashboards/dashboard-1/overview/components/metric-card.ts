@@ -93,15 +93,15 @@ export class OverviewMetricCard {
   // Inputs
   // ==========================================
 
-  readonly title = input.required<string>();
-  readonly tooltip = input<string>();
-  readonly value = input.required<string>();
-  readonly description = input.required<string>();
-  readonly icon = input.required<string>();
-  readonly chartData = input.required<number[]>();
-  readonly chartColor = input.required<string>();
-  readonly trendValue = input.required<string>();
-  readonly trendUp = input.required<boolean>();
+  public readonly title = input.required<string>();
+  public readonly tooltip = input<string>();
+  public readonly value = input.required<string>();
+  public readonly description = input.required<string>();
+  public readonly icon = input.required<string>();
+  public readonly chartData = input.required<number[]>();
+  public readonly chartColor = input.required<string>();
+  public readonly trendValue = input.required<string>();
+  public readonly trendUp = input.required<boolean>();
 
   // ==========================================
   // State
@@ -112,11 +112,11 @@ export class OverviewMetricCard {
     return this.rtl() ? [...data].reverse() : data;
   });
 
-  readonly compactChartPoints = computed(() => this.buildPolyline(this.orderedChartData(), 96, 48, 8));
+  protected readonly compactChartPoints = computed(() => this.buildPolyline(this.orderedChartData(), 96, 48, 8));
 
-  readonly largeChartPoints = computed(() => this.buildPolyline(this.orderedChartData(), 320, 80, 10));
+  protected readonly largeChartPoints = computed(() => this.buildPolyline(this.orderedChartData(), 320, 80, 10));
 
-  readonly largeChartMarkers = computed(() => this.buildMarkerPoints(this.orderedChartData(), 320, 80, 10));
+  protected readonly largeChartMarkers = computed(() => this.buildMarkerPoints(this.orderedChartData(), 320, 80, 10));
 
   private buildPolyline(data: number[], width: number, height: number, padding: number) {
     const points = this.buildMarkerPoints(data, width, height, padding);

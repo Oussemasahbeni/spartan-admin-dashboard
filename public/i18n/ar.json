@@ -17,7 +17,8 @@
     "header": {
         "toggleTheme": "تبديل المظهر",
         "closeSidebar": "إغلاق الشريط الجانبي",
-        "openSidebar": "فتح الشريط الجانبي"
+        "openSidebar": "فتح الشريط الجانبي",
+        "toggleFullScreen": "تبديل الشاشة الكاملة"
     },
     "breadcrumbs": {
         "home": "الرئيسية"

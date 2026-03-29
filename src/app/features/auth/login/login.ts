@@ -61,15 +61,15 @@ export default class Login {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly showPassword = signal(false);
+  protected readonly isLoading = signal(false);
+  protected readonly showPassword = signal(false);
 
-  readonly loginModel = signal({
-    email: '',
-    password: '',
+  protected readonly loginModel = signal({
+    email: 'admin@gmail.com',
+    password: 'admin',
   });
 
-  readonly loginForm = form(
+  protected readonly loginForm = form(
     this.loginModel,
     (schema) => {
       required(schema.email);

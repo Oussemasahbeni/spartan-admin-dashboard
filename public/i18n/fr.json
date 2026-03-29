@@ -16,7 +16,8 @@
     "header": {
         "toggleTheme": "Changer de thème",
         "closeSidebar": "Fermer la barre latérale",
-        "openSidebar": "Ouvrir la barre latérale"
+        "openSidebar": "Ouvrir la barre latérale",
+        "toggleFullScreen": "Basculer en plein écran"
     },
     "breadcrumbs": {
         "home": "Accueil"

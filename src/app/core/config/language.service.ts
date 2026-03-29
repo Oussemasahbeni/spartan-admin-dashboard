@@ -28,9 +28,9 @@ export class LanguageService {
   private readonly _calendarI18n = injectBrnCalendarI18n();
 
   private readonly _currentLang = signal<LanguageOptions>(this._translocoService.getActiveLang() as LanguageOptions);
-  readonly currentLang = this._currentLang.asReadonly();
+  public readonly currentLang = this._currentLang.asReadonly();
 
-  readonly _availableLanguages = signal<AvailableLanguage[]>([
+  private readonly _availableLanguages = signal<AvailableLanguage[]>([
     {
       code: 'en',
       label: 'English',
@@ -44,9 +44,9 @@ export class LanguageService {
       label: 'العربية',
     },
   ]);
-  readonly availableLanguages = this._availableLanguages.asReadonly();
+  public readonly availableLanguages = this._availableLanguages.asReadonly();
 
-  readonly brnCaalendarI18nMap: Record<LanguageOptions, Partial<BrnCalendarI18n>> = {
+  private readonly brnCaalendarI18nMap: Record<LanguageOptions, Partial<BrnCalendarI18n>> = {
     en: englishCalendarI18n,
     fr: frenchCalendarI18n,
     ar: arabicCalendarI18n,

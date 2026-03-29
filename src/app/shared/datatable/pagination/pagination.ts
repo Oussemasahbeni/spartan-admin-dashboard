@@ -62,20 +62,14 @@ export class DataTablePagination<T> {
 
   /**
    * Available options for the page size dropdown.
-   * @default [10, 25, 50, 100]
-   *
-   * @example
-   * ```html
-   * <adm-pagination [pageSizeOptions]="[5, 10, 20]" />
-   * ```
    */
-  readonly pageSizeOptions = input([10, 25, 50, 100]);
+  public readonly pageSizeOptions = input([10, 25, 50, 100]);
 
   /**
    * The TanStack Table instance to control.
    * Required for accessing pagination state and methods.
    */
-  readonly table = input.required<Table<T>>();
+  public readonly table = input.required<Table<T>>();
 
   // ==========================================
   // Public Methods

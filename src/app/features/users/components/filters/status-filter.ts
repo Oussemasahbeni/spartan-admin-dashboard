@@ -99,7 +99,7 @@ export class StatusFilter {
   // Outputs
   // ==========================================
 
-  readonly statusChanged = output<UserStatus[]>();
+  public readonly statusChanged = output<UserStatus[]>();
 
   // ==========================================
   // State

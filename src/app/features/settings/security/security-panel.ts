@@ -39,18 +39,18 @@ export class SettingsSecurity {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly showCurrentPassword = signal(false);
-  readonly showNewPassword = signal(false);
+  protected readonly isLoading = signal(false);
+  protected readonly showCurrentPassword = signal(false);
+  protected readonly showNewPassword = signal(false);
 
-  readonly securityModel = signal({
+  protected readonly securityModel = signal({
     currentPassword: '',
     newPassword: '',
     twoStepAuth: true,
     passwordChangeReminder: false,
   });
 
-  readonly securityForm = form(
+  protected readonly securityForm = form(
     this.securityModel,
     (schema) => {
       minLength(schema.newPassword, 8);

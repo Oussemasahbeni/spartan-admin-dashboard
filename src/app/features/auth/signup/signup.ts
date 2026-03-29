@@ -55,19 +55,19 @@ export default class Signup {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly showPassword = signal(false);
-  readonly showConfirmPassword = signal(false);
-  readonly passwordMinLength = 8;
+  protected readonly isLoading = signal(false);
+  protected readonly showPassword = signal(false);
+  protected readonly showConfirmPassword = signal(false);
+  protected readonly passwordMinLength = 8;
 
-  readonly signupModel = signal({
+  protected readonly signupModel = signal({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
 
-  readonly signupForm = form(
+  protected readonly signupForm = form(
     this.signupModel,
     (schema) => {
       required(schema.name);

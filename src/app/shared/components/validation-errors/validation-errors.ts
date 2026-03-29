@@ -23,6 +23,6 @@ export class ValidationErrors {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly fieldState = input.required<FieldState<unknown, string>>();
-  readonly errorParams = input<Record<string, unknown>>({});
+  public readonly fieldState = input.required<FieldState<unknown, string>>();
+  public readonly errorParams = input<Record<string, unknown>>({});
 }

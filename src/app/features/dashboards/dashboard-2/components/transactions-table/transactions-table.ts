@@ -47,7 +47,7 @@ export class TransactionsTableComponent {
   // Inputs
   // ==========================================
 
-  readonly transactions = input.required<Transaction[]>();
+  public readonly transactions = input.required<Transaction[]>();
 
   // ==========================================
   // View Children
@@ -56,10 +56,10 @@ export class TransactionsTableComponent {
   /**
    * Template references for custom cell rendering.
    */
-  readonly dataTable = viewChild.required(DataTable<Transaction>);
-  readonly userCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('userCell');
-  readonly statusCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('statusCell');
-  readonly amountCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('amountCell');
+  protected readonly dataTable = viewChild.required(DataTable<Transaction>);
+  protected readonly userCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('userCell');
+  protected readonly statusCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('statusCell');
+  protected readonly amountCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('amountCell');
 
   // ==========================================
   // State

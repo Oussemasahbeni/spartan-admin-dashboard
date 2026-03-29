@@ -81,7 +81,7 @@ export class UserForm implements OnInit {
     role: null,
   });
 
-  readonly userForm = form(
+  protected readonly userForm = form(
     this.userModel,
     (schema) => {
       required(schema.name);

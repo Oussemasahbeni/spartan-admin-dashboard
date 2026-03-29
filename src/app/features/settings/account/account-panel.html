@@ -93,7 +93,7 @@
               <div class="flex items-center gap-2">
                 <ng-icon hlm size="sm" name="lucideGlobe" />
                 <hlm-select-placeholder>{{ t('selectLanguage') }}</hlm-select-placeholder>
-                <ng-template hlmSelectValueTemplate let-value>
+                <ng-template let-value hlmSelectValueTemplate>
                   {{ t(`languages.${value}`) }}
                 </ng-template>
               </div>

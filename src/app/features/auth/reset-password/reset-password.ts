@@ -46,14 +46,14 @@ export default class ResetPassword {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly showAlert = signal(false);
+  protected readonly isLoading = signal(false);
+  protected readonly showAlert = signal(false);
 
-  readonly resetPasswordModel = signal({
+  protected readonly resetPasswordModel = signal({
     email: '',
   });
 
-  readonly resetPasswordForm = form(
+  protected readonly resetPasswordForm = form(
     this.resetPasswordModel,
     (schema) => {
       required(schema.email);

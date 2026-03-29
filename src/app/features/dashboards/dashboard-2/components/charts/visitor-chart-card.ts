@@ -68,9 +68,9 @@ export class VisitorChartCard {
 
   private readonly _visitorChart = translateObjectSignal('visitorChart', {}, SCOPE);
 
-  readonly visitorChart = computed(() => this._visitorChart() as Translation & VisitorChartTranslation);
+  protected readonly visitorChart = computed(() => this._visitorChart() as Translation & VisitorChartTranslation);
 
-  readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly chartOptions = computed<ApexOptions>(() => {
     const chart = this.visitorChart();
 
     return {

@@ -8,11 +8,11 @@ import { toCssVarToken } from '../utils/css-var-token';
   },
 })
 export class TableResizableHeader {
-  readonly cellId = input.required<string>({
+  public readonly cellId = input.required<string>({
     alias: 'tableResizableHeader',
   });
 
-  readonly width = computed(() => `calc(var(--header-${toCssVarToken(this.cellId())}-size) * 1px)`);
+  public readonly width = computed(() => `calc(var(--header-${toCssVarToken(this.cellId())}-size) * 1px)`);
 }
 
 @Directive({
@@ -23,9 +23,9 @@ export class TableResizableHeader {
   standalone: true,
 })
 export class TableResizableCell {
-  readonly cellId = input.required<string>({
+  public readonly cellId = input.required<string>({
     alias: 'tableResizableCell',
   });
 
-  readonly width = computed(() => `calc(var(--col-${toCssVarToken(this.cellId())}-size) * 1px)`);
+  public readonly width = computed(() => `calc(var(--col-${toCssVarToken(this.cellId())}-size) * 1px)`);
 }

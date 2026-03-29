@@ -19,10 +19,10 @@ export class CalendarStore {
   private readonly _events = signal<EventInput[]>(structuredClone(STATIC_EVENTS));
   private readonly _selectedTypes = signal<string[]>([]);
 
-  readonly events = this._events.asReadonly();
-  readonly selectedTypes = this._selectedTypes.asReadonly();
+  public readonly events = this._events.asReadonly();
+  public readonly selectedTypes = this._selectedTypes.asReadonly();
 
-  readonly filteredEvents = computed(() => {
+  public readonly filteredEvents = computed(() => {
     const activeFilters = this.selectedTypes();
     const allEvents = this._events();
 

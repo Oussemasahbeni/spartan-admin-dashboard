@@ -79,7 +79,7 @@ export class CalendarForm implements OnInit {
     endTime: '10:00',
   });
 
-  readonly eventForm = form(
+  protected readonly eventForm = form(
     this.eventModel,
     (schema) => {
       required(schema.title);

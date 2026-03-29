@@ -17,10 +17,10 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { Column, ColumnPinningPosition, Table } from '@tanstack/angular-table';
 
-type DataTableColumnMeta = {
+interface DataTableColumnMeta {
   translationKey?: string;
   columnLabel?: string;
-};
+}
 
 @Component({
   selector: 'adm-data-table-column-manager',
@@ -79,9 +79,9 @@ type DataTableColumnMeta = {
                 class="w-auto"
                 aria-label="Pin options"
                 title="Pin options"
-                [hlmDropdownMenuTrigger]="pinMenu"
                 side="right"
                 align="start"
+                [hlmDropdownMenuTrigger]="pinMenu"
               >
                 <ng-icon
                   hlmIcon
@@ -130,7 +130,7 @@ export class DataTableColumnsManager<T> {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly table = input.required<Table<T>>();
+  public readonly table = input.required<Table<T>>();
 
   // ==========================================
   // State

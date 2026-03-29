@@ -50,10 +50,10 @@ export class SettingsAccount {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly languages = ['english', 'french', 'arabic'];
+  protected readonly isLoading = signal(false);
+  protected readonly languages = ['english', 'french', 'arabic'];
 
-  readonly accountModel = signal({
+  protected readonly accountModel = signal({
     name: 'Oussema Sahbeni',
     username: '@spike',
     title: 'Software engineer',
@@ -66,7 +66,7 @@ export class SettingsAccount {
     language: 'english',
   });
 
-  readonly accountForm = form(
+  protected readonly accountForm = form(
     this.accountModel,
     (schema) => {
       required(schema.name);

@@ -17,9 +17,9 @@ export class SettingsNotifications {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
+  protected readonly isLoading = signal(false);
 
-  readonly notificationsModel = signal({
+  protected readonly notificationsModel = signal({
     communication: true,
     security: true,
     meetups: false,
@@ -29,7 +29,7 @@ export class SettingsNotifications {
     inquiry: true,
   });
 
-  readonly notificationsForm = form(this.notificationsModel, {
+  protected readonly notificationsForm = form(this.notificationsModel, {
     submission: {
       action: async () => this.saveNotifications(),
     },

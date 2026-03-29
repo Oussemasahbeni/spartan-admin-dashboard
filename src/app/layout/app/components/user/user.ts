@@ -61,7 +61,7 @@ export class NavUser {
   // Inputs
   // ==========================================
 
-  readonly _user = input.required<User>({ alias: 'user' });
+  public readonly _user = input.required<User>({ alias: 'user' });
 
   // ==========================================
   // State

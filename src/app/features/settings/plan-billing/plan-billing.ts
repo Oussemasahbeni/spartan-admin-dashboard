@@ -78,9 +78,9 @@ export class SettingsPlanBilling {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
+  protected readonly isLoading = signal(false);
 
-  readonly plans = signal<Plan[]>([
+  protected readonly plans = signal<Plan[]>([
     {
       value: 'basic',
       label: 'BASIC',
@@ -113,7 +113,7 @@ export class SettingsPlanBilling {
     '[&:has([data-checked=true])]:border-primary [&:has([data-checked=true])]:border-2'
   );
 
-  readonly planBillingModel = signal({
+  protected readonly planBillingModel = signal({
     plan: 'team',
     cardHolder: 'Oussema Sahbeni',
     cardNumber: '',
@@ -123,7 +123,7 @@ export class SettingsPlanBilling {
     zip: '',
   });
 
-  readonly planBillingForm = form(
+  protected readonly planBillingForm = form(
     this.planBillingModel,
     (schema) => {
       required(schema.cardHolder);

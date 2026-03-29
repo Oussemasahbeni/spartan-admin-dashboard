@@ -8,6 +8,7 @@ import { HlmKbdImports } from '@spartan-ng/helm/kbd';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
+import { FullScreen } from '../full-screen/full-screen';
 import { Notifications } from '../notifications/notifications';
 
 @Component({
@@ -22,6 +23,7 @@ import { Notifications } from '../notifications/notifications';
     BreadcrumbsHeader,
     ThemeSwitch,
     TranslocoDirective,
+    FullScreen,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -51,6 +53,7 @@ import { Notifications } from '../notifications/notifications';
         <adm-breadcrumbs-header />
       </div>
       <div class="flex items-center gap-4">
+        <adm-full-screen />
         <adm-theme-switch />
         <adm-notifications />
       </div>

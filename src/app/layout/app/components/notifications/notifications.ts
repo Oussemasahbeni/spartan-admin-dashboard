@@ -120,9 +120,9 @@ export class Notifications {
   // State
   // ==========================================
 
-  readonly notifications = signal<Notification[]>(structuredClone(STATIC_NOTIFICATIONS));
+  protected readonly notifications = signal<Notification[]>(structuredClone(STATIC_NOTIFICATIONS));
 
-  readonly unreadCount = computed(() => this.notifications().filter((notification) => notification.unread).length);
+  protected readonly unreadCount = computed(() => this.notifications().filter((notification) => notification.unread).length);
 
   // ==========================================
   // Public Methods

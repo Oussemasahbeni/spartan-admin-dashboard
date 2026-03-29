@@ -54,11 +54,11 @@ export class StatCardComponent {
   // Inputs
   // ==========================================
 
-  readonly data = input.required<StatCardData>();
+  public readonly data = input.required<StatCardData>();
 
   // ==========================================
   // Outputs
   // ==========================================
 
-  readonly menuClick = output<void>();
+  public readonly menuClick = output<void>();
 }

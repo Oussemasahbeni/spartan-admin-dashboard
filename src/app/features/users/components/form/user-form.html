@@ -37,7 +37,7 @@
       <hlm-select class="text-start" [formField]="userForm.role">
         <hlm-select-trigger id="role" class="w-full">
           <hlm-select-placeholder>{{ t('selectRolePlaceholder') }}</hlm-select-placeholder>
-          <ng-template *transloco="let t; prefix: 'users.role'" hlmSelectValueTemplate let-value>
+          <ng-template *transloco="let t; prefix: 'users.role'" let-value hlmSelectValueTemplate>
             {{ t(value) }}
           </ng-template>
         </hlm-select-trigger>

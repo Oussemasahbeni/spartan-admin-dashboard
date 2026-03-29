@@ -33,7 +33,7 @@ export class OverviewDashboard {
   // State
   // ==========================================
 
-  readonly cards = signal<OverviewMetric[]>([
+  protected readonly cards = signal<OverviewMetric[]>([
     {
       titleKey: 'overview.cards.newSubscriptions.title',
       tooltipKey: 'overview.cards.newSubscriptions.infoTooltip',
@@ -69,7 +69,7 @@ export class OverviewDashboard {
     },
   ]);
 
-  readonly payments = signal<Payment[]>(structuredClone(STATIC_PAYMENTS));
+  protected readonly payments = signal<Payment[]>(structuredClone(STATIC_PAYMENTS));
 
-  readonly teamMembers = signal<User[]>(structuredClone(STATIC_USERS.slice(0, 8)));
+  protected readonly teamMembers = signal<User[]>(structuredClone(STATIC_USERS.slice(0, 8)));
 }

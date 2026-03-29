@@ -37,8 +37,8 @@ export class CountryDisplay {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly country = input.required<string | Country | null | undefined>();
-  readonly showCountryCode = input<boolean>(false);
+  public readonly country = input.required<string | Country | null | undefined>();
+  public readonly showCountryCode = input<boolean>(false);
 
   // ==========================================
   // State

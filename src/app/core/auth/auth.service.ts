@@ -9,8 +9,8 @@ export class AuthService {
   private readonly _localStorage = inject(LOCAL_STORAGE);
 
   private readonly _currentUser = signal<User | null>(null);
-  readonly currentUser = this._currentUser.asReadonly();
-  readonly isAuthenticated = computed(() => !!this._currentUser());
+  public readonly currentUser = this._currentUser.asReadonly();
+  public readonly isAuthenticated = computed(() => !!this._currentUser());
 
   setUser(user: User): void {
     this._currentUser.set(user);

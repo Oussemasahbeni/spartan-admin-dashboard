@@ -34,7 +34,7 @@ export class CountryPicker implements FormValueControl<Country | null> {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly value = model<Country | null>(null);
+  public readonly value = model<Country | null>(null);
 
   // ==========================================
   // State

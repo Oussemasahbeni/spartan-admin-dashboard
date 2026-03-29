@@ -38,7 +38,7 @@ export class BackToTop {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly showAfter = input(300); // Pixels scrolled before showing
+  public readonly showAfter = input(300); // Pixels scrolled before showing
 
   // ==========================================
   // State

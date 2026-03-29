@@ -110,67 +110,67 @@ export class DataTable<T> {
    * Column definitions for the table.
    * Uses TanStack Table's ColumnDef format.
    */
-  readonly columns = input<ColumnDef<T>[]>([]);
+  public readonly columns = input<ColumnDef<T>[]>([]);
 
   /**
    * When true, displays a loading spinner overlay on the table.
    * Useful for indicating server-side data fetching.
    */
-  readonly isLoading = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+  public readonly isLoading = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * The data to display in the table.
    * - In **client mode**: Pass all data; table handles pagination internally.
    * - In **server mode**: Pass only the current page of data.
    */
-  readonly data = input<T[]>([]);
+  public readonly data = input<T[]>([]);
 
   /**
    * Total number of elements across all pages.
    * **Only required in server mode** for proper pagination display.
    * In client mode, this is calculated automatically.
    */
-  readonly totalElements = input<number, NumberInput>(0, { transform: numberAttribute });
+  public readonly totalElements = input<number, NumberInput>(0, { transform: numberAttribute });
 
   /**
    * Whether to show the pagination controls.
    */
-  readonly paginated = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
+  public readonly paginated = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
 
   /**
    * Enables column resizing via drag handles.
    */
-  readonly resizableColumns = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+  public readonly resizableColumns = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * Enables checkbox selection for rows.
 =   */
-  readonly enableRowSelection = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+  public readonly enableRowSelection = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * External pagination state for server-side mode.
    * Ignored in client mode.
    */
-  readonly paginationState = input<PaginationState>({ pageIndex: 0, pageSize: 10 });
+  public readonly paginationState = input<PaginationState>({ pageIndex: 0, pageSize: 10 });
 
-  readonly enableColumnPinning = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+  public readonly enableColumnPinning = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   /**
    * External sorting state for server-side mode.
    * Ignored in client mode.
    */
-  readonly sortingState = input<SortingState>([]);
+  public readonly sortingState = input<SortingState>([]);
 
   /**
    * External column filters state for server-side mode.
    * Ignored in client mode.
    */
-  readonly columnFiltersState = input<ColumnFiltersState>([]);
+  public readonly columnFiltersState = input<ColumnFiltersState>([]);
 
   /**
    * External column pinning state for server-side mode.
    */
-  readonly defaultColumnPinning = input<ColumnPinningState>({});
+  public readonly defaultColumnPinning = input<ColumnPinningState>({});
 
   /**
    * The operation mode of the table.
@@ -178,12 +178,12 @@ export class DataTable<T> {
    * - `'server'`: External API handles operations; table emits state changes.
    * @default 'client'
    */
-  readonly mode = input<'client' | 'server'>('client');
+  public readonly mode = input<'client' | 'server'>('client');
 
   /**
    * Available options for the page size dropdown.
    */
-  readonly pageSizeOptions = input([10, 25, 50, 100]);
+  public readonly pageSizeOptions = input([10, 25, 50, 100]);
 
   // ==========================================
   // Outputs
@@ -193,13 +193,13 @@ export class DataTable<T> {
    * Emitted when pagination or sorting state changes.
    * **Only used in server mode** to trigger API calls.
    */
-  readonly stateChange = output<DataTableStateChangeEvent>();
+  public readonly stateChange = output<DataTableStateChangeEvent>();
 
   /**
    * Emitted when row selection changes.
    * Contains both the TanStack selection state and resolved selected row items.
    */
-  readonly rowSelectionChange = output<DataTableRowSelectionChangeEvent<T>>();
+  public readonly rowSelectionChange = output<DataTableRowSelectionChangeEvent<T>>();
 
   // ==========================================
   // State
@@ -211,7 +211,7 @@ export class DataTable<T> {
    * The selection column is added as the first column when enableRowSelection is true.
    * It includes a header checkbox for "select all" and row checkboxes for individual selection.
    */
-  readonly _columns = computed(() => {
+  protected readonly _columns = computed(() => {
     const baseColumns = this.columns();
 
     if (this.enableRowSelection() && !baseColumns.some((column) => column.id === 'select')) {
@@ -257,22 +257,22 @@ export class DataTable<T> {
   private readonly activeSorting = computed(() => (this.isServerMode() ? this.sortingState() : this.internalSorting()));
 
   /** Column sizing info for resize feature. */
-  readonly _columnSizingInfo = computed(() => this.table.getState().columnSizingInfo);
+  protected readonly _columnSizingInfo = computed(() => this.table.getState().columnSizingInfo);
 
   /** Current column sizes. */
-  readonly _columnSizing = computed(() => this.table.getState().columnSizing);
+  protected readonly _columnSizing = computed(() => this.table.getState().columnSizing);
 
   /** Whether the table is in server mode. */
   private readonly isServerMode = computed(() => this.mode() === 'server');
 
   /** Number of visible columns, used for colspan in "no data" row. */
-  readonly visibleColumnCount = computed(() => Math.max(this.table.getVisibleLeafColumns().length, 1));
+  protected readonly visibleColumnCount = computed(() => Math.max(this.table.getVisibleLeafColumns().length, 1));
 
   /**
    * Computes CSS variables for column sizes.
    * Optimizes performance by calculating all sizes at once instead of per-cell.
    */
-  readonly columnSizeVars = computed(() => {
+  protected readonly columnSizeVars = computed(() => {
     this._columnSizing();
     this._columnSizingInfo();
 
@@ -289,7 +289,7 @@ export class DataTable<T> {
     return colSizes;
   });
 
-  readonly getCommonPinningStyles = (column: Column<T>): Record<string, any> => {
+  protected readonly getCommonPinningStyles = (column: Column<T>) => {
     if (!this.enableColumnPinning()) {
       return {};
     }
@@ -313,7 +313,7 @@ export class DataTable<T> {
    * The TanStack Table instance.
    * Exposes all table methods for advanced use cases.
    */
-  readonly table = createAngularTable<T>(() => ({
+  public readonly table = createAngularTable<T>(() => ({
     data: this.data(),
     columns: this._columns(),
     manualPagination: this.isServerMode(),

@@ -98,7 +98,7 @@ export class RoleFilter {
   // Outputs
   // ==========================================
 
-  readonly rolesChanged = output<UserRole[]>();
+  public readonly rolesChanged = output<UserRole[]>();
 
   // ==========================================
   // State

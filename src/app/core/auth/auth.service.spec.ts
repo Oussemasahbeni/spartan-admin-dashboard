@@ -5,7 +5,7 @@ import { LOCAL_STORAGE } from '@core/config/tokens';
 import { User } from '@shared/models/user';
 import { AuthService } from './auth.service';
 
-@Component({ selector: 'app-login', template: '<h1>Login Page</h1>' })
+@Component({ selector: 'adm-login', template: '<h1>Login Page</h1>' })
 class Login {}
 
 const mockUser: User = {

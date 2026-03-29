@@ -85,10 +85,10 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly value = model<string>('');
-  readonly touched = model<boolean>(false);
-  readonly invalid = input<boolean>(false);
-  readonly disabled = input<boolean>(false);
+  public readonly value = model<string>('');
+  public readonly touched = model<boolean>(false);
+  public readonly invalid = input<boolean>(false);
+  public readonly disabled = input<boolean>(false);
 
   // ==========================================
   // State
