@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core/index.js';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -111,10 +111,7 @@ export default class Calendar {
   ]);
   protected readonly currentView = signal(this.availableViews()[0]);
 
-  protected readonly activeLanguage = toSignal(this._translocoService.langChanges$, {
-    initialValue: this._translocoService.getActiveLang(),
-  });
-
+  protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
   protected readonly calendarOptions = computed<CalendarOptions>(() => ({
     initialView: this.currentView().value,
     headerToolbar: false,

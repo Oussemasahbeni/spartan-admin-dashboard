@@ -1,5 +1,5 @@
 import { isPlatformBrowser, registerLocaleData } from '@angular/common';
-import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { BrnCalendarI18n, injectBrnCalendarI18n } from '@spartan-ng/brain/calendar';
 import { arabicCalendarI18n, englishCalendarI18n, frenchCalendarI18n } from './date-I18n';
@@ -27,8 +27,7 @@ export class LanguageService {
   private readonly _localStorage = inject(LOCAL_STORAGE);
   private readonly _calendarI18n = injectBrnCalendarI18n();
 
-  private readonly _currentLang = signal<LanguageOptions>(this._translocoService.getActiveLang() as LanguageOptions);
-  public readonly currentLang = this._currentLang.asReadonly();
+  public readonly currentLang = computed(() => this._translocoService.activeLang() as LanguageOptions);
 
   private readonly _availableLanguages = signal<AvailableLanguage[]>([
     {
@@ -62,7 +61,6 @@ export class LanguageService {
   }
 
   async setLanguage(lang: LanguageOptions): Promise<void> {
-    this._currentLang.set(lang);
     this._calendarI18n.use(this.brnCaalendarI18nMap[lang]);
     this._localStorage?.setItem('lang', lang);
     await this._ensureLocaleRegistered(lang);

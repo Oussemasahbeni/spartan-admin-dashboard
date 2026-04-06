@@ -26,7 +26,7 @@ import {
 } from '@tanstack/angular-table';
 
 import { httpResource } from '@angular/common/http';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -158,9 +158,7 @@ export default class Users {
   protected readonly isLoading = this.usersResource.isLoading;
 
   /** Signal tracking the current active language for i18n updates */
-  protected readonly currentLang = toSignal(this._translocoService.langChanges$, {
-    initialValue: this._translocoService.getActiveLang(),
-  });
+  protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
 
   protected readonly searchForm = form(signal({ search: '' }), (schema) => debounce(schema.search, 300));
 

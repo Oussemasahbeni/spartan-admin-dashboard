@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, linkedSignal, model, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, model, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -74,7 +73,6 @@ import { CountryDisplay } from '../country-display/country-display';
       />
     </div>
   `,
-
 })
 export class PhoneNumberPicker implements FormValueControl<string> {
   // ==========================================
@@ -115,9 +113,7 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   });
   protected readonly _countriesList = signal(countries);
 
-  protected readonly activeLang = toSignal(this._translocoService.langChanges$, {
-    initialValue: this._translocoService.getActiveLang(),
-  });
+  protected readonly activeLang = computed(() => this._translocoService.activeLang());
 
   // ==========================================
   // Public Methods

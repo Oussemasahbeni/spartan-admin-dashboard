@@ -1,5 +1,4 @@
 import { computed, inject, Pipe, PipeTransform, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslocoService } from '@jsverse/transloco';
 
 const TIME_UNITS: { unit: Intl.RelativeTimeFormatUnit; seconds: number }[] = [
@@ -19,15 +18,13 @@ const TIME_UNITS: { unit: Intl.RelativeTimeFormatUnit; seconds: number }[] = [
 export class TimeAgoPipe implements PipeTransform {
   private readonly transloco = inject(TranslocoService);
 
-  private readonly lang = toSignal(this.transloco.langChanges$, {
-    initialValue: this.transloco.getActiveLang(),
-  });
+  protected readonly activeLang = computed(() => this.transloco.activeLang());
 
   private readonly formatter = computed(
-    () => new Intl.RelativeTimeFormat(this.lang(), { numeric: 'always', style: 'long' })
+    () => new Intl.RelativeTimeFormat(this.activeLang(), { numeric: 'always', style: 'long' })
   );
   private readonly justNowFormatter = computed(
-    () => new Intl.RelativeTimeFormat(this.lang(), { numeric: 'auto', style: 'long' })
+    () => new Intl.RelativeTimeFormat(this.activeLang(), { numeric: 'auto', style: 'long' })
   );
 
   private readonly now = signal(Date.now());

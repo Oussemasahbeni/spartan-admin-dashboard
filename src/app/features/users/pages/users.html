@@ -59,7 +59,7 @@
     >
       <!-- Date Cell -->
       <ng-template #dateCell let-context>
-        {{ context.getValue() | date: 'mediumDate' : '' : currentLang() }}
+        {{ context.getValue() | date: 'mediumDate' : '' : activeLanguage() }}
       </ng-template>
 
       <!-- Name Cell -->
