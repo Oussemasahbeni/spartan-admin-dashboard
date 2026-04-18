@@ -65,8 +65,8 @@
         </a>
       </div>
 
-      <button type="submit" hlmBtn [disabled]="isLoading()">
-        @if (isLoading()) {
+      <button type="submit" hlmBtn [disabled]="loginForm().submitting()">
+        @if (loginForm().submitting()) {
           <hlm-spinner />
         }
         {{ t('loginBtn') }}
@@ -81,11 +81,11 @@
       </div>
     </div>
     <div class="grid grid-cols-2 gap-2">
-      <button type="button" class="flex-1" hlmBtn variant="outline" [disabled]="isLoading()">
+      <button type="button" class="flex-1" hlmBtn variant="outline" [disabled]="loginForm().submitting()">
         <ng-icon hlmIcon size="sm" name="lucideGithub" />
         Github
       </button>
-      <button type="button" class="flex-1" hlmBtn variant="outline" [disabled]="isLoading()">
+      <button type="button" class="flex-1" hlmBtn variant="outline" [disabled]="loginForm().submitting()">
         <ng-icon hlmIcon size="sm" name="svglGoogle" />
         Google
       </button>

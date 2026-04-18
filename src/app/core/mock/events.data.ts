@@ -1,11 +1,39 @@
 import { EventInput } from '@fullcalendar/core/index.js';
 
+const clampDay = (year: number, month: number, day: number): number => {
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  return Math.min(Math.max(day, 1), daysInMonth);
+};
+
+const scheduledAt = (eventIndex: number, hour: number, minute: number, dayOffset = 0): Date => {
+  const baseDate = new Date();
+  baseDate.setHours(0, 0, 0, 0);
+
+  const monthOffset = eventIndex % 4;
+  const cycle = Math.floor(eventIndex / 4);
+  const dayOfMonth = ((cycle * 3 + monthOffset * 2) % 28) + 1;
+
+  const targetYear = baseDate.getFullYear();
+  const targetMonth = baseDate.getMonth() + monthOffset;
+  const normalizedBaseDate = new Date(targetYear, targetMonth, 1);
+  const safeDay = clampDay(normalizedBaseDate.getFullYear(), normalizedBaseDate.getMonth(), dayOfMonth);
+
+  normalizedBaseDate.setDate(safeDay);
+  normalizedBaseDate.setHours(hour, minute, 0, 0);
+
+  if (dayOffset !== 0) {
+    normalizedBaseDate.setDate(normalizedBaseDate.getDate() + dayOffset);
+  }
+
+  return normalizedBaseDate;
+};
+
 export const STATIC_EVENTS: EventInput[] = [
   {
     id: '32f3a187-650d-4d9a-abe4-81736fb6d1af',
     title: 'Morning Yoga Session',
-    start: new Date('2026-03-05T02:22:08.074Z'),
-    end: new Date('2026-03-05T05:22:08.074Z'),
+    start: scheduledAt(0, 2, 22),
+    end: scheduledAt(0, 5, 22),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'Daily stretching and meditation to start the day.',
@@ -15,8 +43,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'eed075f8-cfe4-4523-afad-b0a9f5a8854d',
     title: 'Email Inbox Clearing',
-    start: new Date('2026-02-15T06:31:52.047Z'),
-    end: new Date('2026-02-15T07:31:52.047Z'),
+    start: scheduledAt(1, 6, 31),
+    end: scheduledAt(1, 7, 31),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Process outstanding client requests and clear the backlog.',
@@ -26,8 +54,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '4c9fcb3c-a375-43dc-b818-6aade423a708',
     title: 'Product Sprint Planning',
-    start: new Date('2026-02-08T15:36:18.201Z'),
-    end: new Date('2026-02-08T18:36:18.201Z'),
+    start: scheduledAt(2, 15, 36),
+    end: scheduledAt(2, 18, 36),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Reviewing the roadmap for the upcoming development cycle.',
@@ -37,8 +65,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '7583e2de-17c9-4cef-85cb-1b03e12f4789',
     title: 'Grocery Shopping',
-    start: new Date('2026-03-02T10:24:37.153Z'),
-    end: new Date('2026-03-02T12:24:37.153Z'),
+    start: scheduledAt(3, 10, 24),
+    end: scheduledAt(3, 12, 24),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'Weekly grocery run—don’t forget the oat milk.',
@@ -48,8 +76,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '20476d67-0481-4d8b-a2d9-f9abf8f886c7',
     title: 'URGENT: Server Maintenance',
-    start: new Date('2026-02-08T23:50:31.896Z'),
-    end: new Date('2026-02-09T03:50:31.896Z'),
+    start: scheduledAt(4, 23, 50),
+    end: scheduledAt(4, 3, 50, 1),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Critical security patch deployment for main production servers.',
@@ -59,8 +87,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '2bb962bc-c222-48cc-a37c-22e9b70a12d8',
     title: 'Afternoon Gym',
-    start: new Date('2026-02-09T11:03:54.276Z'),
-    end: new Date('2026-02-09T13:03:54.276Z'),
+    start: scheduledAt(5, 11, 3),
+    end: scheduledAt(5, 13, 3),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'Leg day at the local fitness center.',
@@ -70,8 +98,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '89c5828e-bf0d-4e31-857a-4d84f504a638',
     title: 'Fix Production Bug #402',
-    start: new Date('2026-02-28T17:30:57.458Z'),
-    end: new Date('2026-02-28T19:30:57.458Z'),
+    start: scheduledAt(6, 17, 30),
+    end: scheduledAt(6, 19, 30),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Investigating payment gateway timeout issues reported by users.',
@@ -81,8 +109,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '3e817409-0032-426e-b3dc-691a6e2ae0ca',
     title: 'Client Onboarding Call',
-    start: new Date('2026-02-12T16:27:44.905Z'),
-    end: new Date('2026-02-12T17:27:44.905Z'),
+    start: scheduledAt(7, 16, 27),
+    end: scheduledAt(7, 17, 27),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Introductory call with the new Marketing team.',
@@ -92,8 +120,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'c5cc5587-bbfa-4bc6-bdb2-5f11000e0230',
     title: 'Code Review & Documentation',
-    start: new Date('2026-03-18T09:37:37.205Z'),
-    end: new Date('2026-03-18T12:37:37.205Z'),
+    start: scheduledAt(8, 9, 37),
+    end: scheduledAt(8, 12, 37),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Reviewing pull requests and updating API documentation.',
@@ -103,8 +131,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '51382918-b44c-4877-99c6-46e810e4be83',
     title: 'Submit Tax Returns',
-    start: new Date('2026-02-19T13:41:39.671Z'),
-    end: new Date('2026-02-19T15:41:39.671Z'),
+    start: scheduledAt(9, 13, 41),
+    end: scheduledAt(9, 15, 41),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Final deadline for quarterly tax filing.',
@@ -114,8 +142,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'bb27f603-83c0-4eb6-ae7e-b74f2abfa53e',
     title: 'Family Dinner',
-    start: new Date('2026-02-24T12:30:10.859Z'),
-    end: new Date('2026-02-24T15:30:10.859Z'),
+    start: scheduledAt(10, 12, 30),
+    end: scheduledAt(10, 15, 30),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'Catching up with family over dinner at the Italian place.',
@@ -125,8 +153,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'fa605f18-4ea4-4fe6-a387-9977527c7aac',
     title: 'Weekly Sync',
-    start: new Date('2026-02-18T13:45:40.508Z'),
-    end: new Date('2026-02-18T14:45:40.508Z'),
+    start: scheduledAt(11, 13, 45),
+    end: scheduledAt(11, 14, 45),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Standard team check-in on project status.',
@@ -136,8 +164,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'cee8fb53-7929-4b37-9849-6316b20bcce0',
     title: 'Design System Update',
-    start: new Date('2026-02-26T07:32:08.208Z'),
-    end: new Date('2026-02-26T10:32:08.208Z'),
+    start: scheduledAt(12, 7, 32),
+    end: scheduledAt(12, 10, 32),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Refactoring Figma components and updating the CSS variables.',
@@ -147,8 +175,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'fdb00013-aee3-452a-b853-cc326dc3be2c',
     title: 'Weekend Hike',
-    start: new Date('2026-02-22T19:30:15.405Z'),
-    end: new Date('2026-02-22T22:30:15.405Z'),
+    start: scheduledAt(13, 19, 30),
+    end: scheduledAt(13, 22, 30),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'Exploring the trails at the National Park.',
@@ -158,8 +186,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '1c2760aa-d953-4812-aa3b-23b658395e50',
     title: 'Brainstorming Session',
-    start: new Date('2026-03-15T00:13:35.434Z'),
-    end: new Date('2026-03-15T01:13:35.434Z'),
+    start: scheduledAt(14, 0, 13),
+    end: scheduledAt(14, 1, 13),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Ideation for the upcoming Q3 marketing campaign.',
@@ -169,8 +197,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'be91d44a-693e-44b3-b1a3-eb36e71f0de4',
     title: 'Deep Work: Feature A',
-    start: new Date('2026-03-20T20:21:39.092Z'),
-    end: new Date('2026-03-21T00:21:39.092Z'),
+    start: scheduledAt(15, 20, 21),
+    end: scheduledAt(15, 0, 21, 1),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Uninterrupted time for complex logic implementation.',
@@ -180,8 +208,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'fc694f5d-84fc-4536-8d64-748ebed16aa3',
     title: 'Quarterly Report Analysis',
-    start: new Date('2026-03-10T16:52:29.747Z'),
-    end: new Date('2026-03-10T20:52:29.747Z'),
+    start: scheduledAt(16, 16, 52),
+    end: scheduledAt(16, 20, 52),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Reviewing performance metrics and growth KPIs.',
@@ -191,8 +219,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'ed51942a-7b1c-4ad9-a926-328e05b918b8',
     title: 'Movie Night',
-    start: new Date('2026-02-19T23:38:31.948Z'),
-    end: new Date('2026-02-20T01:38:31.948Z'),
+    start: scheduledAt(17, 23, 38),
+    end: scheduledAt(17, 1, 38, 1),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'Watching the new Sci-Fi release with friends.',
@@ -202,8 +230,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '90b9a351-5c26-4b48-8a0e-ac288e71881d',
     title: 'URGENT: Lease Agreement Review',
-    start: new Date('2026-02-22T01:47:57.989Z'),
-    end: new Date('2026-02-22T05:47:57.989Z'),
+    start: scheduledAt(18, 1, 47),
+    end: scheduledAt(18, 5, 47),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Legal review of the new office lease required today.',
@@ -213,8 +241,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '10fa214d-2efa-47a9-91c5-ace24b599046',
     title: 'Partnership Strategy',
-    start: new Date('2026-03-12T16:18:52.525Z'),
-    end: new Date('2026-03-12T18:18:52.525Z'),
+    start: scheduledAt(19, 16, 18),
+    end: scheduledAt(19, 18, 18),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Evaluating potential B2B partnerships for the next year.',
@@ -224,8 +252,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '19e72e34-b866-4127-8ab2-114685dff177',
     title: 'Interview: Frontend Dev',
-    start: new Date('2026-03-07T21:02:50.485Z'),
-    end: new Date('2026-03-08T01:02:50.485Z'),
+    start: scheduledAt(20, 21, 2),
+    end: scheduledAt(20, 1, 2, 1),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Technical interview for the Senior Frontend Engineer position.',
@@ -235,8 +263,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '12a10c55-f7d8-4e91-a1a6-06cf731d78cc',
     title: '1-on-1 with Manager',
-    start: new Date('2026-03-21T12:47:16.650Z'),
-    end: new Date('2026-03-21T13:47:16.650Z'),
+    start: scheduledAt(21, 12, 47),
+    end: scheduledAt(21, 13, 47),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Bi-weekly career development and feedback sync.',
@@ -246,8 +274,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'aecaaac1-96b7-4692-b666-d409ade09d8f',
     title: 'Stakeholder Workshop',
-    start: new Date('2026-03-06T17:17:11.848Z'),
-    end: new Date('2026-03-06T21:17:11.848Z'),
+    start: scheduledAt(22, 17, 17),
+    end: scheduledAt(22, 21, 17),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Defining project requirements with the executive board.',
@@ -257,8 +285,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '37a50e1f-177c-4fd8-9871-72809ee15e1d',
     title: 'EMERGENCY: Database Outage',
-    start: new Date('2026-02-21T11:48:08.244Z'),
-    end: new Date('2026-02-21T15:48:08.244Z'),
+    start: scheduledAt(23, 11, 48),
+    end: scheduledAt(23, 15, 48),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Immediate investigation into DB connection pool exhaustion.',
@@ -268,8 +296,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'dfd5f665-1849-47f4-9520-879df354f219',
     title: 'Laptop Repair Appointment',
-    start: new Date('2026-03-09T09:33:06.213Z'),
-    end: new Date('2026-03-09T11:33:06.213Z'),
+    start: scheduledAt(24, 9, 33),
+    end: scheduledAt(24, 11, 33),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Battery replacement at the service center.',
@@ -279,8 +307,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '3f0cb021-a5be-4e9d-b478-02189ad3c8e5',
     title: 'Design Critique',
-    start: new Date('2026-02-15T15:00:58.390Z'),
-    end: new Date('2026-02-15T19:00:58.390Z'),
+    start: scheduledAt(25, 15, 0),
+    end: scheduledAt(25, 19, 0),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Reviewing the new mobile app onboarding flow.',
@@ -290,8 +318,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '9308d98a-1103-4e0a-be89-6d7cdcd71b75',
     title: 'Read: Industry Trends',
-    start: new Date('2026-03-11T22:26:30.076Z'),
-    end: new Date('2026-03-12T01:26:30.076Z'),
+    start: scheduledAt(26, 22, 26),
+    end: scheduledAt(26, 1, 26, 1),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'Catching up on AI research papers and tech blogs.',
@@ -301,8 +329,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'd1e04caf-e398-4669-843a-6e4325286f2f',
     title: 'Submit Expense Reports',
-    start: new Date('2026-02-19T21:15:12.850Z'),
-    end: new Date('2026-02-19T23:15:12.850Z'),
+    start: scheduledAt(27, 21, 15),
+    end: scheduledAt(27, 23, 15),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Process all travel receipts before the month-end cutoff.',
@@ -312,8 +340,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'f1f01ee8-52b5-483a-a27a-ad8a20a75aae',
     title: 'Security Audit Prep',
-    start: new Date('2026-03-04T01:59:37.017Z'),
-    end: new Date('2026-03-04T03:59:37.017Z'),
+    start: scheduledAt(28, 1, 59),
+    end: scheduledAt(28, 3, 59),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Preparing logs and access records for the annual audit.',
@@ -323,8 +351,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '0814852f-cea2-4ed4-98da-aa0e866e919a',
     title: 'Content Strategy Sync',
-    start: new Date('2026-03-04T17:50:21.052Z'),
-    end: new Date('2026-03-04T18:50:21.052Z'),
+    start: scheduledAt(29, 17, 50),
+    end: scheduledAt(29, 18, 50),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Discussing the editorial calendar for the company blog.',
@@ -334,8 +362,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '6789defd-2e7c-46c8-8b7e-1101dc9e6055',
     title: 'Ad Campaign Review',
-    start: new Date('2026-02-05T01:28:15.800Z'),
-    end: new Date('2026-02-05T05:28:15.800Z'),
+    start: scheduledAt(30, 1, 28),
+    end: scheduledAt(30, 5, 28),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Analyzing performance of social media ad spend.',
@@ -345,8 +373,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '8f503752-5d0f-475d-b3a7-5cebe394f17a',
     title: 'Urgent Bug: Login Page',
-    start: new Date('2026-03-05T17:53:26.187Z'),
-    end: new Date('2026-03-05T19:53:26.187Z'),
+    start: scheduledAt(31, 17, 53),
+    end: scheduledAt(31, 19, 53),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Users unable to login on iOS Safari—needs immediate fix.',
@@ -356,8 +384,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'b16a3084-59f4-4dae-bc9a-b63add9fe7bf',
     title: 'HR Policy Briefing',
-    start: new Date('2026-03-11T07:20:39.568Z'),
-    end: new Date('2026-03-11T09:20:39.568Z'),
+    start: scheduledAt(32, 7, 20),
+    end: scheduledAt(32, 9, 20),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Update on the new remote work and benefits package.',
@@ -367,8 +395,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'f01719ee-58b8-461c-bd58-0ed0f849e4ed',
     title: 'Refactor Core Library',
-    start: new Date('2026-03-07T15:25:03.986Z'),
-    end: new Date('2026-03-07T18:25:03.986Z'),
+    start: scheduledAt(33, 15, 25),
+    end: scheduledAt(33, 18, 25),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Cleaning up technical debt in the shared utility modules.',
@@ -378,8 +406,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '8a5514fa-7f49-4606-a2d2-d2757424e719',
     title: 'Update GitHub READMEs',
-    start: new Date('2026-03-05T07:24:16.284Z'),
-    end: new Date('2026-03-05T10:24:16.284Z'),
+    start: scheduledAt(34, 7, 24),
+    end: scheduledAt(34, 10, 24),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Improving documentation for internal developer onboarding.',
@@ -389,8 +417,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '02a24ccf-ff9f-44d7-9dd4-cdc936464c97',
     title: 'CRITICAL: Data Recovery',
-    start: new Date('2026-02-26T07:16:13.635Z'),
-    end: new Date('2026-02-26T08:16:13.635Z'),
+    start: scheduledAt(35, 7, 16),
+    end: scheduledAt(35, 8, 16),
     backgroundColor: 'var(--fc-red)',
     extendedProps: {
       description: 'Recovering deleted files from the dev environment backup.',
@@ -400,8 +428,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: '48a3d38a-422f-419a-a282-ae69f4b111d7',
     title: 'QA Testing Phase 2',
-    start: new Date('2026-03-25T06:41:11.913Z'),
-    end: new Date('2026-03-25T10:41:11.913Z'),
+    start: scheduledAt(36, 6, 41),
+    end: scheduledAt(36, 10, 41),
     backgroundColor: 'var(--fc-blue)',
     extendedProps: {
       description: 'Executing end-to-end test cases for the upcoming release.',
@@ -411,8 +439,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'eaa059db-03fc-40b5-b87a-967d6e1785d3',
     title: 'Pick up Dry Cleaning',
-    start: new Date('2026-02-20T03:58:47.104Z'),
-    end: new Date('2026-02-20T04:58:47.104Z'),
+    start: scheduledAt(37, 3, 58),
+    end: scheduledAt(37, 4, 58),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'The shop closes at 5:00 PM.',
@@ -422,8 +450,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'b265de40-00ee-4f4f-ad08-004b31133852',
     title: 'New Feature Kickoff',
-    start: new Date('2026-02-11T09:25:32.880Z'),
-    end: new Date('2026-02-11T10:25:32.880Z'),
+    start: scheduledAt(38, 9, 25),
+    end: scheduledAt(38, 10, 25),
     backgroundColor: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Alignment meeting for the new Dashboard widgets.',
@@ -433,8 +461,8 @@ export const STATIC_EVENTS: EventInput[] = [
   {
     id: 'cc119abd-9505-4bd5-b4d2-07c1babe52f9',
     title: 'Relax & Meditate',
-    start: new Date('2026-03-02T12:07:06.352Z'),
-    end: new Date('2026-03-02T16:07:06.352Z'),
+    start: scheduledAt(39, 12, 7),
+    end: scheduledAt(39, 16, 7),
     backgroundColor: 'var(--fc-green)',
     extendedProps: {
       description: 'Scheduled downtime to prevent burnout.',
@@ -442,3 +470,4 @@ export const STATIC_EVENTS: EventInput[] = [
     },
   },
 ];
+

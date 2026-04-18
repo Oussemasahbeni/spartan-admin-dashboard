@@ -61,7 +61,6 @@ export default class Login {
   // State
   // ==========================================
 
-  protected readonly isLoading = signal(false);
   protected readonly showPassword = signal(false);
 
   protected readonly loginModel = signal({
@@ -88,7 +87,6 @@ export default class Login {
   // ==========================================
 
   onLogin(): void {
-    this.isLoading.set(true);
     this._localStorage?.setItem('token', 'dummy-jwt-token');
     this._router.navigate(['/dashboard/dashboard-1']);
   }

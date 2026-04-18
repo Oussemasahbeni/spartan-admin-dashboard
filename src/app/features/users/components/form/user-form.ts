@@ -5,7 +5,7 @@ import { CountryPicker } from '@shared/components/country-picker/country-picker'
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries, Country } from '@shared/countries';
-import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
+import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 
 import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -31,7 +31,6 @@ export interface UserFormModel {
 @Component({
   selector: 'adm-user-form',
   imports: [
-    BrnDialogImports,
     HlmDialogImports,
     HlmLabelImports,
     HlmInputImports,

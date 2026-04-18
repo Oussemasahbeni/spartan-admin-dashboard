@@ -41,7 +41,7 @@ export const routes: Routes = [
           {
             path: 'dashboard-2',
             title: 'dashboard-2',
-            data: { breadcrumb: 'navigation.dashboard-2' },
+            data: { breadcrumb: 'navigation.dashboard-2', preload: true },
             loadChildren: () => import('./features/dashboards/dashboard-2/dashboards.routes'),
           },
         ],
@@ -50,25 +50,25 @@ export const routes: Routes = [
       {
         path: 'users',
         title: 'users',
-        data: { breadcrumb: 'navigation.users' },
+        data: { breadcrumb: 'navigation.users', preload: true },
         loadChildren: () => import('./features/users/routes'),
       },
       {
         path: 'calendar',
         title: 'calendar',
-        data: { breadcrumb: 'navigation.calendar' },
+        data: { breadcrumb: 'navigation.calendar', preload: true },
         loadChildren: () => import('./features/calendar/routes'),
       },
       {
         path: 'settings',
         title: 'settings',
-        data: { breadcrumb: 'navigation.settings' },
+        data: { breadcrumb: 'navigation.settings', preload: true },
         loadChildren: () => import('./features/settings/routes'),
       },
       {
         path: 'assistant',
         title: 'aiAssistant',
-        data: { breadcrumb: 'navigation.aiAssistant' },
+        data: { breadcrumb: 'navigation.aiAssistant', preload: true },
         loadChildren: () => import('./features/ai-assistant/routes'),
       },
     ],

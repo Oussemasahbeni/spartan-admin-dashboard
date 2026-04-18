@@ -3,7 +3,7 @@ import { form, FormField, FormRoot, required, validate } from '@angular/forms/si
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
-import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
+import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 
 import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -30,7 +30,6 @@ export interface CalendarEventModel {
 @Component({
   selector: 'adm-calendar-form',
   imports: [
-    BrnDialogImports,
     HlmDialogImports,
     HlmLabelImports,
     HlmInputImports,

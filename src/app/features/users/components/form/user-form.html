@@ -50,7 +50,7 @@
       <adm-validation-errors [fieldState]="userForm.role()" />
     </hlm-field>
     <hlm-dialog-footer *transloco="let t; prefix: 'buttons'">
-      <button type="button" hlmBtn variant="outline" brnDialogClose>{{ t('cancel') }}</button>
+      <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('cancel') }}</button>
       <button type="submit" hlmBtn [disabled]="isSubmitting()">
         @if (isSubmitting()) {
           <hlm-spinner />
