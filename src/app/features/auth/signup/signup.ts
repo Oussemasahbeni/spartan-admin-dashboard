@@ -4,7 +4,6 @@ import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
@@ -33,7 +32,6 @@ import { AuthLayout } from '../layout';
     HlmCard,
     RouterLink,
     AuthLayout,
-    ValidationErrors,
   ],
   providers: [
     provideIcons({
@@ -55,7 +53,6 @@ export default class Signup {
   // State
   // ==========================================
 
-  protected readonly isLoading = signal(false);
   protected readonly showPassword = signal(false);
   protected readonly showConfirmPassword = signal(false);
   protected readonly passwordMinLength = 8;
@@ -98,12 +95,10 @@ export default class Signup {
   // Private Methods
   // ==========================================
 
-  onSignup(): void {
-    this.isLoading.set(true);
+  async onSignup(): Promise<void> {
     // Simulate API call
-    setTimeout(() => {
-      this.isLoading.set(false);
-      this._router.navigate(['/login']);
-    }, 2000);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    this._router.navigate(['/login']);
   }
 }
+

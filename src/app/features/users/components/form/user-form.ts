@@ -3,7 +3,6 @@ import { email, form, FormField, FormRoot, required, validate } from '@angular/f
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries, Country } from '@shared/countries';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 
@@ -46,7 +45,6 @@ export interface UserFormModel {
     FormRoot,
     CountryPicker,
     PhoneNumberPicker,
-    ValidationErrors,
   ],
   host: {
     class: 'flex flex-col gap-4 sm:min-w-lg ',
@@ -189,3 +187,4 @@ export class UserForm implements OnInit {
     this._dialogRef.close();
   }
 }
+

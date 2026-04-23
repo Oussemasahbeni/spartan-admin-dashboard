@@ -17,8 +17,6 @@ export class SettingsNotifications {
   // State
   // ==========================================
 
-  protected readonly isLoading = signal(false);
-
   protected readonly notificationsModel = signal({
     communication: true,
     security: true,
@@ -39,12 +37,9 @@ export class SettingsNotifications {
   // Private Methods
   // ==========================================
 
-  private saveNotifications(): void {
-    this.isLoading.set(true);
+  private async saveNotifications(): Promise<void> {
     // Simulate API call
-    setTimeout(() => {
-      console.log('Notifications saved:', this.notificationsModel());
-      this.isLoading.set(false);
-    }, 1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    console.log('Notifications saved:', this.notificationsModel());
   }
 }

@@ -3,7 +3,6 @@ import { form, FormField, FormRoot, minLength } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideEye, lucideEyeOff, lucideKey, lucideLock, lucideShieldCheck } from '@ng-icons/lucide';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
@@ -29,7 +28,6 @@ import { HlmSpinner } from '@spartan-ng/helm/spinner';
     HlmSpinner,
     FormField,
     FormRoot,
-    ValidationErrors,
     TranslocoModule,
   ],
   providers: [provideIcons({ lucideKey, lucideLock, lucideShieldCheck, lucideEyeOff, lucideEye, lucideBell })],
@@ -39,7 +37,6 @@ export class SettingsSecurity {
   // State
   // ==========================================
 
-  protected readonly isLoading = signal(false);
   protected readonly showCurrentPassword = signal(false);
   protected readonly showNewPassword = signal(false);
 
@@ -66,12 +63,10 @@ export class SettingsSecurity {
   // Private Methods
   // ==========================================
 
-  private saveSecurity(): void {
-    this.isLoading.set(true);
+  private async saveSecurity(): Promise<void> {
     // Simulate API call
-    setTimeout(() => {
-      console.log('Security settings saved:', this.securityModel());
-      this.isLoading.set(false);
-    }, 1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    console.log('Security settings saved:', this.securityModel());
   }
 }
+

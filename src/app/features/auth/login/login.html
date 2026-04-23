@@ -14,7 +14,7 @@
 
     <form class="flex flex-col gap-4" [formRoot]="loginForm">
       <hlm-field>
-        <hlm-field-label for="email">{{ t('emailLabel') }}</hlm-field-label>
+        <hlm-field-label>{{ t('emailLabel') }}</hlm-field-label>
         <input
           hlmInput
           id="email"
@@ -23,10 +23,12 @@
           [placeholder]="t('emailPlaceholder')"
           [formField]="loginForm.email"
         />
-        <adm-validation-errors [fieldState]="loginForm.email()" />
+        @for (error of loginForm.email().errors(); track error.kind) {
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        }
       </hlm-field>
       <hlm-field>
-        <hlm-field-label for="password">{{ t('passwordLabel') }}</hlm-field-label>
+        <hlm-field-label>{{ t('passwordLabel') }}</hlm-field-label>
         <hlm-input-group>
           <input
             hlmInputGroupInput
@@ -46,7 +48,9 @@
           /></hlm-input-group-addon>
         </hlm-input-group>
 
-        <adm-validation-errors [fieldState]="loginForm.password()" />
+        @for (error of loginForm.password().errors(); track error.kind) {
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        }
       </hlm-field>
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -92,3 +96,4 @@
     </div>
   </div>
 </adm-auth-layout>
+

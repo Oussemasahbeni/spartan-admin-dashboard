@@ -1,6 +1,6 @@
 <div *transloco="let t; prefix: 'settings.team'">
   <!-- Add team member -->
-  <form class="flex items-start justify-between gap-4" novalidate (submit)="onAddMember($event)">
+  <form class="flex items-start justify-between gap-4" novalidate [formRoot]="addMemberForm">
     <div class="flex w-full gap-3">
       <hlm-field class="max-w-120">
         <hlm-input-group>
@@ -9,7 +9,9 @@
           </hlm-input-group-addon>
           <input hlmInputGroupInput type="email" [placeholder]="t('emailPlaceholder')" [formField]="addMemberForm.email" />
         </hlm-input-group>
-        <adm-validation-errors [fieldState]="addMemberForm.email()" />
+        @for (error of addMemberForm.email().errors(); track error.kind) {
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        }
       </hlm-field>
 
       <hlm-field class="max-w-24">
@@ -32,10 +34,10 @@
     </div>
 
     <div class="flex items-center justify-end gap-4">
-      @if (isLoading()) {
+      @if (addMemberForm().submitting()) {
         <hlm-spinner size="sm" />
       }
-      <button hlmBtn type="submit" [disabled]="isLoading()">
+      <button hlmBtn type="submit" [disabled]="addMemberForm().submitting()">
         {{ t('addMember') }}
       </button>
     </div>
@@ -84,3 +86,4 @@
     }
   </div>
 </div>
+

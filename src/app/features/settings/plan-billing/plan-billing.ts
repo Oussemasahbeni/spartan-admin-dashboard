@@ -14,7 +14,6 @@ import {
   lucideUser,
 } from '@ng-icons/lucide';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries } from '@shared/countries';
 
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
@@ -55,7 +54,6 @@ interface Plan {
     HlmSpinner,
     FormField,
     FormRoot,
-    ValidationErrors,
     TranslocoModule,
     CurrencyPipe,
     CountryPicker,
@@ -77,8 +75,6 @@ export class SettingsPlanBilling {
   // ==========================================
   // State
   // ==========================================
-
-  protected readonly isLoading = signal(false);
 
   protected readonly plans = signal<Plan[]>([
     {
@@ -150,12 +146,10 @@ export class SettingsPlanBilling {
   // Private Methods
   // ==========================================
 
-  private savePlanBilling(): void {
-    this.isLoading.set(true);
+  private async savePlanBilling(): Promise<void> {
     // Simulate API call
-    setTimeout(() => {
-      console.log('Plan & Billing saved:', this.planBillingModel());
-      this.isLoading.set(false);
-    }, 1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    console.log('Plan & Billing saved:', this.planBillingModel());
   }
 }
+

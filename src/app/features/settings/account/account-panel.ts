@@ -5,7 +5,6 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideGlobe } from '@ng-icons/lucide';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries } from '@shared/countries';
 
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -33,7 +32,6 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
     HlmTextareaImports,
     FormField,
     FormRoot,
-    ValidationErrors,
     CountryPicker,
     PhoneNumberPicker,
     HlmSpinner,
@@ -50,7 +48,6 @@ export class SettingsAccount {
   // State
   // ==========================================
 
-  protected readonly isLoading = signal(false);
   protected readonly languages = ['english', 'french', 'arabic'];
 
   protected readonly accountModel = signal({
@@ -84,12 +81,10 @@ export class SettingsAccount {
   // Private Methods
   // ==========================================
 
-  private saveAccount(): void {
-    this.isLoading.set(true);
+  private async saveAccount(): Promise<void> {
     // Simulate API call
-    setTimeout(() => {
-      console.log('Account saved:', this.accountModel());
-      this.isLoading.set(false);
-    }, 1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    console.log('Account saved:', this.accountModel());
   }
 }
+

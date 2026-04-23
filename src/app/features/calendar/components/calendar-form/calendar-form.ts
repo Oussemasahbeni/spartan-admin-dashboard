@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 
 import { toast } from '@spartan-ng/brain/sonner';
@@ -45,7 +44,6 @@ export interface CalendarEventModel {
     TranslocoModule,
     FormField,
     FormRoot,
-    ValidationErrors,
   ],
   templateUrl: './calendar-form.html',
   host: {
