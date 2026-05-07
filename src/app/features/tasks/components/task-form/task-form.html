@@ -32,7 +32,7 @@
           <hlm-select-trigger class="w-full">
             <hlm-select-value />
           </hlm-select-trigger>
-          <hlm-select-content>
+          <hlm-select-content *hlmSelectPortal>
             @for (status of taskStatuses; track status) {
               <hlm-select-item *transloco="let t; prefix: 'tasks.columns'" [value]="status">
                 {{ t(status) }}
