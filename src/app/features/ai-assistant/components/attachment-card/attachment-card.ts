@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, PLATFORM_ID, inject, input, output 
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideFile, lucideX } from '@ng-icons/lucide';
-import { BytesPipe } from '@shared/pipes/bytes.pipe';
+import { BytesPipe } from '@shared/pipes/bytes/bytes.pipe';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
@@ -29,13 +29,13 @@ export class AttachmentCard {
   // Inputs
   // ==========================================
 
-  readonly file = input.required<File>();
+  public readonly file = input.required<File>();
 
   // ==========================================
   // Outputs
   // ==========================================
 
-  readonly remove = output<void>();
+  public readonly remove = output<void>();
 
   // ==========================================
   // Public Methods

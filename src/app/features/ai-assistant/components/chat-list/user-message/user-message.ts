@@ -41,22 +41,22 @@ export class UserMessageCard {
   // ==========================================
 
   /** The user message to display */
-  readonly message = input.required<UserMessage>();
+  public readonly message = input.required<UserMessage>();
 
   // ==========================================
   // Outputs
   // ==========================================
 
   /** Emitted when message is edited and saved */
-  readonly edit = output<EditEvent>();
+  public readonly edit = output<EditEvent>();
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly isEditing = signal(false);
-  readonly editContent = signal('');
-  readonly copied = signal(false);
+  public readonly isEditing = signal(false);
+  public readonly editContent = signal('');
+  public readonly copied = signal(false);
 
   // ==========================================
   // Public Methods

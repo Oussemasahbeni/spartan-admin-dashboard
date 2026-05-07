@@ -8,15 +8,18 @@ import {
   lucideBadgeCheck,
   lucideCheck,
   lucideChevronsUpDown,
+  lucideCreditCard,
+  lucideGem,
   lucideGlobe,
+  lucideHelpCircle,
   lucideLogOut,
   lucideMonitor,
   lucideMoon,
   lucidePalette,
-  lucideSparkles,
   lucideSun,
 } from '@ng-icons/lucide';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
@@ -24,12 +27,12 @@ import { User } from '../../../../shared/models/user';
 
 @Component({
   selector: 'adm-user',
-  imports: [HlmSidebarImports, HlmAvatarImports, HlmIconImports, HlmDropdownMenuImports, TranslocoModule],
+  imports: [HlmSidebarImports, HlmAvatarImports, HlmIconImports, HlmDropdownMenuImports, HlmBadgeImports, TranslocoModule],
   templateUrl: './user.html',
   providers: [
     provideIcons({
       lucideChevronsUpDown,
-      lucideSparkles,
+      lucideGem,
       lucideBadgeCheck,
       lucideLogOut,
       lucideGlobe,
@@ -38,6 +41,8 @@ import { User } from '../../../../shared/models/user';
       lucideMoon,
       lucideSun,
       lucideMonitor,
+      lucideHelpCircle,
+      lucideCreditCard,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,15 +61,15 @@ export class NavUser {
   // Inputs
   // ==========================================
 
-  readonly user = input.required<User>();
+  public readonly _user = input.required<User>({ alias: 'user' });
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly currentTheme = this._themeService.theme;
-  readonly currentLang = this._languageService.currentLang;
-  readonly availableLanguages = this._languageService.availableLanguages;
+  protected readonly currentTheme = this._themeService.theme;
+  protected readonly currentLang = this._languageService.currentLang;
+  protected readonly availableLanguages = this._languageService.availableLanguages;
 
   protected readonly _menuSide = computed(() => (this._sidebarService.isMobile() ? 'top' : 'right'));
 
@@ -72,15 +77,15 @@ export class NavUser {
   // Public Methods
   // ==========================================
 
-  setLang(lang: LanguageOptions): void {
+  protected setLang(lang: LanguageOptions): void {
     if (lang === this.currentLang()) return;
     this._languageService.setLanguage(lang);
   }
-  setTheme(theme: 'light' | 'dark' | 'system'): void {
+  protected setTheme(theme: 'light' | 'dark' | 'system'): void {
     this._themeService.setTheme(theme);
   }
 
-  onLogout(): void {
+  protected onLogout(): void {
     this._authService.logout();
   }
 }

@@ -48,35 +48,39 @@
       <!-- Card Holder -->
       <div class="col-span-4">
         <hlm-field>
-          <hlm-field-label for="cardHolder">{{ t('cardHolder') }}</hlm-field-label>
+          <hlm-field-label>{{ t('cardHolder') }}</hlm-field-label>
           <hlm-input-group>
             <hlm-input-group-addon>
               <ng-icon name="lucideUser" />
             </hlm-input-group-addon>
             <input hlmInputGroupInput id="cardHolder" type="text" [formField]="planBillingForm.cardHolder" />
           </hlm-input-group>
-          <adm-validation-errors [fieldState]="planBillingForm.cardHolder()" />
+          @for (error of planBillingForm.cardHolder().errors(); track error.kind) {
+            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          }
         </hlm-field>
       </div>
 
       <!-- Card Number -->
       <div class="col-span-4 sm:col-span-2">
         <hlm-field>
-          <hlm-field-label for="cardNumber">{{ t('cardNumber') }}</hlm-field-label>
+          <hlm-field-label>{{ t('cardNumber') }}</hlm-field-label>
           <hlm-input-group>
             <hlm-input-group-addon>
               <ng-icon name="lucideCreditCard" />
             </hlm-input-group-addon>
             <input hlmInputGroupInput id="cardNumber" type="text" [formField]="planBillingForm.cardNumber" />
           </hlm-input-group>
-          <adm-validation-errors [fieldState]="planBillingForm.cardNumber()" />
+          @for (error of planBillingForm.cardNumber().errors(); track error.kind) {
+            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          }
         </hlm-field>
       </div>
 
       <!-- Card Expiration -->
       <div class="col-span-2 sm:col-span-1">
         <hlm-field>
-          <hlm-field-label for="cardExpiration">{{ t('expirationDate') }}</hlm-field-label>
+          <hlm-field-label>{{ t('expirationDate') }}</hlm-field-label>
           <hlm-input-group>
             <hlm-input-group-addon>
               <ng-icon name="lucideCalendar" />
@@ -89,28 +93,32 @@
               [formField]="planBillingForm.cardExpiration"
             />
           </hlm-input-group>
-          <adm-validation-errors [fieldState]="planBillingForm.cardExpiration()" />
+          @for (error of planBillingForm.cardExpiration().errors(); track error.kind) {
+            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          }
         </hlm-field>
       </div>
 
       <!-- Card CVC -->
       <div class="col-span-2 sm:col-span-1">
         <hlm-field>
-          <hlm-field-label for="cardCVC">{{ t('cvc') }}</hlm-field-label>
+          <hlm-field-label>{{ t('cvc') }}</hlm-field-label>
           <hlm-input-group>
             <hlm-input-group-addon>
               <ng-icon name="lucideLock" />
             </hlm-input-group-addon>
             <input hlmInputGroupInput id="cardCVC" type="text" [formField]="planBillingForm.cardCVC" />
           </hlm-input-group>
-          <adm-validation-errors [fieldState]="planBillingForm.cardCVC()" />
+          @for (error of planBillingForm.cardCVC().errors(); track error.kind) {
+            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          }
         </hlm-field>
       </div>
 
       <!-- Country -->
       <div class="col-span-4 sm:col-span-2">
         <hlm-field>
-          <hlm-field-label for="country">{{ t('country') }}</hlm-field-label>
+          <hlm-field-label>{{ t('country') }}</hlm-field-label>
           <adm-country-picker [formField]="planBillingForm.country" />
         </hlm-field>
       </div>
@@ -118,7 +126,7 @@
       <!-- ZIP -->
       <div class="col-span-4 sm:col-span-2">
         <hlm-field>
-          <hlm-field-label for="zip">{{ t('zipCode') }}</hlm-field-label>
+          <hlm-field-label>{{ t('zipCode') }}</hlm-field-label>
           <hlm-input-group>
             <hlm-input-group-addon>
               <ng-icon name="lucideHash" />
@@ -134,8 +142,8 @@
 
     <!-- Actions -->
     <div *transloco="let t; prefix: 'buttons'" class="flex items-center justify-end gap-4">
-      <button type="submit" hlmBtn [disabled]="isLoading()">
-        @if (isLoading()) {
+      <button type="submit" hlmBtn [disabled]="planBillingForm().submitting()">
+        @if (planBillingForm().submitting()) {
           <hlm-spinner />
         }
         {{ t('save') }}
@@ -143,3 +151,4 @@
     </div>
   </form>
 </div>
+

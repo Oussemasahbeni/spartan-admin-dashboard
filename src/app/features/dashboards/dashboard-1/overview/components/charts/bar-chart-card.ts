@@ -72,10 +72,10 @@ export class BarChartCard {
   private readonly _barChart = translateObjectSignal('barChart', {}, SCOPE);
   private readonly _months = translateObjectSignal('months', {}, SCOPE);
 
-  readonly barChart = computed(() => this._barChart() as Translation & BarChartTranslation);
-  readonly months = computed(() => this._months() as Translation & MonthsTranslation);
+  protected readonly barChart = computed(() => this._barChart() as Translation & BarChartTranslation);
+  protected readonly months = computed(() => this._months() as Translation & MonthsTranslation);
 
-  readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly chartOptions = computed<ApexOptions>(() => {
     const m = this.months();
     const isRtl = this.rtl();
     const data = [120, 140, 110, 180, 150, 170, 130, 200, 160, 140, 190, 150];

@@ -26,7 +26,12 @@
       <adm-data-table-column-manager [table]="table()" />
     </div>
 
-    <adm-data-table [columns]="columns" [data]="filteredTransactions()" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]">
+    <adm-data-table
+      [columns]="columns"
+      [data]="filteredTransactions()"
+      [paginationState]="{ pageIndex: 0, pageSize: 5 }"
+      [pageSizeOptions]="[5, 10, 25]"
+    >
       <!-- User Cell -->
       <ng-template #userCell let-context>
         <div class="flex items-center gap-3">

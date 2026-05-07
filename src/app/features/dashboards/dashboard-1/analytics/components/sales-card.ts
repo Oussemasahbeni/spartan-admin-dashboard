@@ -103,19 +103,20 @@ export class SalesCard {
   // ==========================================
 
   private readonly _dir = inject(DirectionalityService);
-  private readonly rtl = this._dir.isRtl;
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly selectedPeriod = signal<string>('month');
+  private readonly rtl = this._dir.isRtl;
+
+  protected readonly selectedPeriod = signal<string>('month');
 
   private readonly _months = translateObjectSignal('months', {});
 
-  readonly months = computed(() => this._months() as MonthsTranslation);
+  protected readonly months = computed(() => this._months() as MonthsTranslation);
 
-  readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly chartOptions = computed<ApexOptions>(() => {
     const m = this.months();
     const isRtl = this.rtl();
     const categories = [m.jan, m.feb, m.mar, m.apr, m.may, m.jun];

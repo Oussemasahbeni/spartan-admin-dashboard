@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { form, FormField, required, submit } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMail, lucideTrash2 } from '@ng-icons/lucide';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
@@ -32,12 +31,11 @@ interface TeamMember {
     HlmInputImports,
     HlmInputGroupImports,
     HlmSelectImports,
-    BrnSelectImports,
     HlmSpinner,
     FormField,
+    FormRoot,
     NgIcon,
     TranslocoModule,
-    ValidationErrors,
   ],
   providers: [provideIcons({ lucideMail, lucideTrash2 })],
 })
@@ -46,9 +44,7 @@ export class SettingsTeam {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-
-  readonly members = signal<TeamMember[]>([
+  protected readonly members = signal<TeamMember[]>([
     {
       id: 1,
       avatar: 'https://avatars.githubusercontent.com/u/12345678',
@@ -100,27 +96,28 @@ export class SettingsTeam {
     },
   ]);
 
-  readonly roles = ['read', 'write', 'admin'];
+  protected readonly roles = ['read', 'write', 'admin'];
 
-  readonly addMemberModel = signal({
+  protected readonly addMemberModel = signal({
     email: '',
     role: 'read' as 'read' | 'write' | 'admin',
   });
 
-  readonly addMemberForm = form(this.addMemberModel, (schema) => {
-    required(schema.email);
-  });
+  protected readonly addMemberForm = form(
+    this.addMemberModel,
+    (schema) => {
+      required(schema.email);
+    },
+    {
+      submission: {
+        action: async () => this.addMember(),
+      },
+    }
+  );
 
   // ==========================================
   // Public Methods
   // ==========================================
-
-  onAddMember(event: Event): void {
-    submit(this.addMemberForm, async () => {
-      event.preventDefault();
-      this.addMember();
-    });
-  }
 
   removeMember(memberId: number): void {
     this.members.update((members) => members.filter((member) => member.id !== memberId));
@@ -130,20 +127,18 @@ export class SettingsTeam {
   // Private Methods
   // ==========================================
 
-  private addMember(): void {
-    this.isLoading.set(true);
+  private async addMember(): Promise<void> {
     // Simulate API call
-    setTimeout(() => {
-      const newMember: TeamMember = {
-        id: this.members().length + 1,
-        avatar: `https://i.pravatar.cc/150?u=${encodeURIComponent(this.addMemberModel().email)}`,
-        name: this.addMemberModel().email.split('@')[0],
-        email: this.addMemberModel().email,
-        role: this.addMemberModel().role,
-      };
-      this.members.update((members) => [...members, newMember]);
-      this.addMemberModel.set({ email: '', role: 'read' });
-      this.isLoading.set(false);
-    }, 1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const newMember: TeamMember = {
+      id: this.members().length + 1,
+      avatar: `https://i.pravatar.cc/150?u=${encodeURIComponent(this.addMemberModel().email)}`,
+      name: this.addMemberModel().email.split('@')[0],
+      email: this.addMemberModel().email,
+      role: this.addMemberModel().role,
+    };
+    this.members.update((members) => [...members, newMember]);
+    this.addMemberModel.set({ email: '', role: 'read' });
   }
 }
+

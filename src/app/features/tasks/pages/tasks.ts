@@ -32,7 +32,7 @@ export default class TasksComponent {
   // ==========================================
 
   /** All tasks stored as a flat list; columns are derived via `taskGroups`. */
-  readonly tasks = signal<Task[]>([
+  public readonly tasks = signal<Task[]>([
     {
       id: '1',
       title: 'Finish user onboarding',
@@ -41,6 +41,7 @@ export default class TasksComponent {
       dueDate: '2026-10-03',
       commentsCount: 1,
       isCompleted: false,
+      imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80',
       tags: [{ name: 'Development', color: 'indigo' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=1',
     },
@@ -75,6 +76,7 @@ export default class TasksComponent {
       commentsCount: 2,
       attachmentsCount: 1,
       isCompleted: false,
+      imageUrl: 'https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?auto=format&fit=crop&w=1200&q=80',
       tags: [{ name: 'Design', color: 'violet' }],
       assigneeAvatar: 'https://i.pravatar.cc/150?u=4',
     },
@@ -120,9 +122,10 @@ export default class TasksComponent {
       title: 'Refactor auth module',
       description: 'Refactor authentication flows to improve testability and security.',
       status: 'inprogress',
-      dueDate: '2025-10-06',
+      dueDate: '2026-10-06',
       commentsCount: 1,
       isCompleted: false,
+      imageUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
       tags: [
         { name: 'Refactor', color: 'fuchsia' },
         { name: 'Auth', color: 'rose' },
@@ -143,7 +146,7 @@ export default class TasksComponent {
   ]);
 
   /** Static column definitions that drive the kanban board layout. */
-  readonly columns = [
+  protected readonly columns = [
     { id: 'todo' as TaskStatus, title: 'To Do', color: 'bg-slate-400' },
     { id: 'inprogress' as TaskStatus, title: 'In Progress', color: 'bg-blue-500' },
     { id: 'completed' as TaskStatus, title: 'Completed', color: 'bg-emerald-500' },
@@ -153,7 +156,7 @@ export default class TasksComponent {
    * Derived signal that groups tasks by status.
    * Also exposes the total count so the template avoids re-computing it.
    */
-  readonly taskGroups = computed(() => {
+  protected readonly taskGroups = computed(() => {
     const all = this.tasks();
     return {
       todo: all.filter((t) => t.status === 'todo'),
@@ -164,7 +167,7 @@ export default class TasksComponent {
   });
 
   /** Tracks which column the user is currently dragging over for visual feedback. */
-  readonly draggingOverColumn = signal<TaskStatus | null>(null);
+  protected readonly draggingOverColumn = signal<TaskStatus | null>(null);
 
   /**
    * Returns the full class string for a kanban drop zone.
@@ -178,7 +181,7 @@ export default class TasksComponent {
   }
 
   /** Unique tags derived from all tasks, deduplicated by name. */
-  readonly existingTags = computed(() => {
+  protected readonly existingTags = computed(() => {
     const tags = this.tasks().flatMap((t) => t.tags);
     return Array.from(new Map(tags.map((tag) => [tag.name, tag])).values());
   });
@@ -208,7 +211,7 @@ export default class TasksComponent {
       this.tasks.update((allTasks) => {
         const targetTasks = [...allTasks.filter((t) => t.status === newStatus)];
         const otherTasks = allTasks.filter((t) => t.status !== newStatus && t.id !== task.id);
-        targetTasks.splice(event.currentIndex, 0, { ...task, status: newStatus });
+        targetTasks.splice(event.currentIndex, 0, this.syncTaskStatusAndCompletion(task, { status: newStatus }));
         return [...otherTasks, ...targetTasks];
       });
     }
@@ -231,7 +234,30 @@ export default class TasksComponent {
   }
 
   protected toggleTaskComplete(task: Task): void {
-    this.tasks.update((all) => all.map((t) => (t.id === task.id ? { ...t, isCompleted: !t.isCompleted } : t)));
+    this.tasks.update((all) =>
+      all.map((t) => (t.id === task.id ? this.syncTaskStatusAndCompletion(t, { isCompleted: !t.isCompleted }) : t))
+    );
+  }
+
+  private syncTaskStatusAndCompletion(task: Task, changes: Partial<Pick<Task, 'status' | 'isCompleted'>>): Task {
+    const nextStatus = changes.status ?? task.status;
+    const nextIsCompleted = changes.isCompleted ?? task.isCompleted;
+
+    if (nextStatus === 'completed' || nextIsCompleted) {
+      return {
+        ...task,
+        ...changes,
+        status: 'completed',
+        isCompleted: true,
+      };
+    }
+
+    return {
+      ...task,
+      ...changes,
+      status: nextStatus,
+      isCompleted: false,
+    };
   }
 
   protected openTaskDetailsDialog(task: Task): void {

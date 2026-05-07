@@ -8,8 +8,11 @@ import { Navigation } from './components/navigation/navigation';
 @Component({
   selector: 'adm-main-layout',
   imports: [Navigation, SiteHeader, RouterOutlet, HlmSidebarImports, BackToTop],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <adm-back-to-top />
+    @defer (on idle) {
+      <adm-back-to-top />
+    }
     <adm-navigation>
       <main hlmSidebarInset>
         <adm-site-header />
@@ -19,6 +22,6 @@ import { Navigation } from './components/navigation/navigation';
       </main>
     </adm-navigation>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 export class MainLayout {}

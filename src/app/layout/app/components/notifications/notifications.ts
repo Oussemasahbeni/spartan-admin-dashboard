@@ -3,7 +3,7 @@ import { STATIC_NOTIFICATIONS } from '@core/mock/notifications.data';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideX } from '@ng-icons/lucide';
-import { TimeAgoPipe } from '@shared/pipes/time-ago.pipe';
+import { TimeAgoPipe } from '@shared/pipes/timeago/time-ago.pipe';
 
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadge } from '@spartan-ng/helm/badge';
@@ -30,7 +30,7 @@ import { Notification } from '../../model/notification';
     TimeAgoPipe,
   ],
   providers: [provideIcons({ lucideBell, lucideX })],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <hlm-popover *transloco="let t; prefix: 'notifications'" sideOffset="10" align="end">
       <button type="button" variant="outline" size="icon" class="relative size-9" hlmPopoverTrigger hlmBtn>
@@ -113,16 +113,15 @@ import { Notification } from '../../model/notification';
       </div>
     </hlm-popover>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Notifications {
   // ==========================================
   // State
   // ==========================================
 
-  readonly notifications = signal<Notification[]>(structuredClone(STATIC_NOTIFICATIONS));
+  protected readonly notifications = signal<Notification[]>(structuredClone(STATIC_NOTIFICATIONS));
 
-  readonly unreadCount = computed(() => this.notifications().filter((notification) => notification.unread).length);
+  protected readonly unreadCount = computed(() => this.notifications().filter((notification) => notification.unread).length);
 
   // ==========================================
   // Public Methods

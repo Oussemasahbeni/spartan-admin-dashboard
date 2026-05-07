@@ -67,24 +67,24 @@ export class AssistantInput {
   // Inputs
   // ==========================================
 
-  readonly isLoading = input<boolean>(false);
-  readonly isStreaming = input<boolean>(false);
-  readonly suggestions = input<string[]>([]);
+  public readonly isLoading = input<boolean>(false);
+  public readonly isStreaming = input<boolean>(false);
+  public readonly suggestions = input<string[]>([]);
 
   // ==========================================
   // Outputs
   // ==========================================
 
-  readonly messageSend = output<string>();
-  readonly inputCleared = output<void>();
-  readonly streamingStopped = output<void>();
+  public readonly messageSend = output<string>();
+  public readonly inputCleared = output<void>();
+  public readonly streamingStopped = output<void>();
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly attachments = signal<File[]>([]);
-  readonly models = signal<string[]>([
+  protected readonly attachments = signal<File[]>([]);
+  protected readonly models = signal<string[]>([
     'Claude Opus 4.5',
     'Claude Sonnet 4.5',
     'Claude Sonnet 4.0',
@@ -92,20 +92,20 @@ export class AssistantInput {
     'GPT-3.5 Turbo',
     'Gemini 3.0 Pro',
   ]);
-  readonly selectedModel = signal<string>(this.models()[0]);
-  readonly hasAttachments = computed(() => this.attachments().length > 0);
+  protected readonly selectedModel = signal<string>(this.models()[0]);
+  protected readonly hasAttachments = computed(() => this.attachments().length > 0);
 
-  readonly enableWebSearch = signal(false);
-  readonly enableReasoning = signal(false);
-  readonly enableThinking = signal(false);
+  protected readonly enableWebSearch = signal(false);
+  protected readonly enableReasoning = signal(false);
+  protected readonly enableThinking = signal(false);
 
-  readonly isRecording = signal(false);
+  protected readonly isRecording = signal(false);
 
-  readonly canSend = computed(() => this.promptForm.prompt().value().trim().length > 0 || this.hasAttachments());
+  protected readonly canSend = computed(() => this.promptForm.prompt().value().trim().length > 0 || this.hasAttachments());
 
-  readonly promptModel = signal({ prompt: '' });
+  protected readonly promptModel = signal({ prompt: '' });
 
-  readonly promptForm = form(this.promptModel);
+  protected readonly promptForm = form(this.promptModel);
 
   // ==========================================
   // Public Methods

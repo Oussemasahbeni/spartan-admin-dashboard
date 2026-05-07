@@ -3,10 +3,10 @@ import { email, form, FormField, FormRoot, required, validate } from '@angular/f
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries, Country } from '@shared/countries';
-import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
+
+import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
@@ -16,7 +16,6 @@ import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { parsePhoneNumberFromString } from 'libphonenumber-js/mobile';
-import { toast } from 'ngx-sonner';
 import { User, USER_ROLES, UserRole } from '../../../../shared/models/user';
 import { UserService } from '../../service/user.service';
 
@@ -25,13 +24,12 @@ export interface UserFormModel {
   email: string;
   phoneNumber: string;
   country: Country | null;
-  role: UserRole;
+  role: UserRole | null;
 }
 
 @Component({
   selector: 'adm-user-form',
   imports: [
-    BrnDialogImports,
     HlmDialogImports,
     HlmLabelImports,
     HlmInputImports,
@@ -40,7 +38,6 @@ export interface UserFormModel {
     HlmSpinnerImports,
     HlmIconImports,
     HlmButtonImports,
-    BrnSelectImports,
     HlmSelectImports,
     HlmIconImports,
     TranslocoModule,
@@ -48,7 +45,6 @@ export interface UserFormModel {
     FormRoot,
     CountryPicker,
     PhoneNumberPicker,
-    ValidationErrors,
   ],
   host: {
     class: 'flex flex-col gap-4 sm:min-w-lg ',
@@ -79,10 +75,10 @@ export class UserForm implements OnInit {
     email: '',
     phoneNumber: '',
     country: null,
-    role: 'user',
+    role: null,
   });
 
-  readonly userForm = form(
+  protected readonly userForm = form(
     this.userModel,
     (schema) => {
       required(schema.name);
@@ -164,7 +160,7 @@ export class UserForm implements OnInit {
       email: val.email().value(),
       phoneNumber: val.phoneNumber().value(),
       country: val.country().value()?.iso ?? null,
-      role: val.role().value(),
+      role: val.role().value() as UserRole,
       status: this._dialogContext.user?.status ?? 'active',
     };
   }
@@ -191,3 +187,4 @@ export class UserForm implements OnInit {
     this._dialogRef.close();
   }
 }
+

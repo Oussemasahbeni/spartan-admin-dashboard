@@ -22,8 +22,8 @@ export class ChatList {
   // Inputs
   // ==========================================
 
-  readonly messages = input<ChatMessage[]>([]);
-  readonly loading = input<boolean>(false);
+  public readonly messages = input<ChatMessage[]>([]);
+  public readonly loading = input<boolean>(false);
 
   // ==========================================
   // Public Methods

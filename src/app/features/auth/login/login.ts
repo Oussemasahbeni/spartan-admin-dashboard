@@ -6,7 +6,6 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff, lucideGithub } from '@ng-icons/lucide';
 import { svglGoogle } from '@ng-icons/svgl';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
@@ -36,7 +35,6 @@ import { AuthLayout } from '../layout';
     AuthLayout,
     FormField,
     FormRoot,
-    ValidationErrors,
   ],
   providers: [
     provideIcons({
@@ -61,15 +59,14 @@ export default class Login {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly showPassword = signal(false);
+  protected readonly showPassword = signal(false);
 
-  readonly loginModel = signal({
-    email: '',
-    password: '',
+  protected readonly loginModel = signal({
+    email: 'admin@gmail.com',
+    password: 'admin',
   });
 
-  readonly loginForm = form(
+  protected readonly loginForm = form(
     this.loginModel,
     (schema) => {
       required(schema.email);
@@ -88,8 +85,8 @@ export default class Login {
   // ==========================================
 
   onLogin(): void {
-    this.isLoading.set(true);
     this._localStorage?.setItem('token', 'dummy-jwt-token');
     this._router.navigate(['/dashboard/dashboard-1']);
   }
 }
+

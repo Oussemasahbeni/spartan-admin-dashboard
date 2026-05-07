@@ -6,9 +6,19 @@
     },
     "navUser": {
         "account": "الحساب",
+        "subscription": "الاشتراك",
+        "pro": "المميز",
         "theme": "المظهر",
+        "toggleTheme": "تبديل المظهر",
         "language": "اللغة",
+        "help": "المساعدة والدعم",
         "logout": "تسجيل الخروج"
+    },
+    "header": {
+        "toggleTheme": "تبديل المظهر",
+        "closeSidebar": "إغلاق الشريط الجانبي",
+        "openSidebar": "فتح الشريط الجانبي",
+        "toggleFullScreen": "تبديل الشاشة الكاملة"
     },
     "breadcrumbs": {
         "home": "الرئيسية"
@@ -29,7 +39,8 @@
         "settings": "الإعدادات",
         "aiAssistant": "مساعد الذكاء الاصطناعي",
         "dashboard-2": "لوحة التحكم 2",
-        "calendar": "التقويم"
+        "calendar": "التقويم",
+        "tasks": "المهام"
     },
     "navigation": {
         "application": "النظام",
@@ -89,7 +100,12 @@
         "import": "استيراد",
         "export": "تصدير",
         "clearFilter": "مسح الفلتر",
-        "addNew": "إضافة جديد"
+        "addNew": "إضافة جديد",
+        "pinStart": "تثبيت في البداية",
+        "pinEnd": "تثبيت في النهاية",
+        "pinLeft": "تثبيت إلى اليسار",
+        "pinRight": "تثبيت إلى اليمين",
+        "unpin": "إلغاء التثبيت"
     },
     "sort": {
         "asc": "تصاعدي",
@@ -138,26 +154,5 @@
             "aDocument": "مستند",
             "theReport": "التقرير"
         }
-    },
-    "timeAgo": {
-        "justNow": "الآن",
-        "prefix": "منذ",
-        "suffix": "",
-        "futurePrefix": "بعد",
-        "futureSuffix": "",
-        "second": "ثانية",
-        "seconds": "ثواني",
-        "minute": "دقيقة",
-        "minutes": "دقائق",
-        "hour": "ساعة",
-        "hours": "ساعات",
-        "day": "يوم",
-        "days": "أيام",
-        "week": "أسبوع",
-        "weeks": "أسابيع",
-        "month": "شهر",
-        "months": "أشهر",
-        "year": "سنة",
-        "years": "سنوات"
     }
 }

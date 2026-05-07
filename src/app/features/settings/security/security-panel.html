@@ -5,7 +5,7 @@
       <!-- Current Password -->
       <div class="sm:col-span-4">
         <hlm-field>
-          <hlm-field-label for="currentPassword">{{ t('currentPassword') }}</hlm-field-label>
+          <hlm-field-label>{{ t('currentPassword') }}</hlm-field-label>
           <hlm-input-group>
             <input
               hlmInputGroupInput
@@ -26,14 +26,16 @@
                 (click)="showCurrentPassword.set(!showCurrentPassword())"
             /></hlm-input-group-addon>
           </hlm-input-group>
-          <adm-validation-errors [fieldState]="securityForm.currentPassword()" />
+          @for (error of securityForm.currentPassword().errors(); track error.kind) {
+            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          }
         </hlm-field>
       </div>
 
       <!-- New Password -->
       <div class="sm:col-span-4">
         <hlm-field>
-          <hlm-field-label for="newPassword">{{ t('newPassword') }}</hlm-field-label>
+          <hlm-field-label>{{ t('newPassword') }}</hlm-field-label>
           <hlm-input-group>
             <input
               hlmInputGroupInput
@@ -54,7 +56,9 @@
             /></hlm-input-group-addon>
           </hlm-input-group>
           <hlm-field-description>{{ t('passwordRequirements') }}</hlm-field-description>
-          <adm-validation-errors [fieldState]="securityForm.newPassword()" />
+          @for (error of securityForm.newPassword().errors(); track error.kind) {
+            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          }
         </hlm-field>
       </div>
     </div>
@@ -105,8 +109,8 @@
 
     <!-- Actions -->
     <div *transloco="let t; prefix: 'buttons'" class="flex items-center justify-end gap-4">
-      <button type="submit" hlmBtn [disabled]="isLoading()">
-        @if (isLoading()) {
+      <button type="submit" hlmBtn [disabled]="securityForm().submitting()">
+        @if (securityForm().submitting()) {
           <hlm-spinner />
         }
         {{ t('save') }}
@@ -114,3 +118,4 @@
     </div>
   </form>
 </div>
+

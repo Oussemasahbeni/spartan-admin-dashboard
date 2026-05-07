@@ -3,9 +3,7 @@ import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronLeft, lucidePlus, lucideTag, lucideX } from '@ng-icons/lucide';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
@@ -19,24 +17,12 @@ import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 import { format } from 'date-fns';
 import { Tag, TAG_COLOR_CLASSES, TagColor } from '../../model/tag';
-import { Task, TaskStatus } from '../../model/task';
-
-export interface TaskFormContext {
-  existingTags: Tag[];
-}
-
-export interface TaskFormModel {
-  title: string;
-  description: string;
-  status: TaskStatus;
-  dueDate: Date | null;
-}
+import { Task, TaskFormContext, TaskFormModel, TaskStatus } from '../../model/task';
 
 @Component({
   selector: 'adm-task-form',
   imports: [
     BrnDialogImports,
-    BrnSelectImports,
     HlmDatePickerImports,
     HlmDialogImports,
     HlmFieldImports,
@@ -48,10 +34,9 @@ export interface TaskFormModel {
     HlmIconImports,
     HlmLabelImports,
     HlmPopoverImports,
-    TranslocoModule,
     FormField,
     FormRoot,
-    ValidationErrors,
+    TranslocoModule,
   ],
   providers: [provideIcons({ lucideTag, lucidePlus, lucideX, lucideChevronLeft })],
   host: {
@@ -96,7 +81,7 @@ export class TaskForm {
     dueDate: null,
   });
 
-  readonly taskForm = form(
+  protected readonly taskForm = form(
     this.taskModel,
     (schema) => {
       required(schema.title);
@@ -127,8 +112,12 @@ export class TaskForm {
   }
 
   protected addTag(): void {
+    const normalizedName = this.pendingTagName().trim().toLowerCase();
+    if (!normalizedName) return;
+
+    if (this.addedTags().some((tag) => tag.name.trim().toLowerCase() === normalizedName)) return;
+
     const name = this.pendingTagName().trim();
-    if (!name) return;
     this.addedTags.update((tags) => [...tags, { name, color: this.pendingTagColor() }]);
     this.pendingTagName.set('');
     this.pendingTagColor.set('indigo');
@@ -136,6 +125,9 @@ export class TaskForm {
   }
 
   protected pickExistingTag(tag: Tag): void {
+    const normalizedName = tag.name.trim().toLowerCase();
+    if (this.addedTags().some((existingTag) => existingTag.name.trim().toLowerCase() === normalizedName)) return;
+
     this.addedTags.update((tags) => [...tags, tag]);
   }
 
@@ -151,7 +143,7 @@ export class TaskForm {
       title: val.title().value(),
       description: val.description().value() || undefined,
       status: val.status().value(),
-      dueDate: val.dueDate().value() ? format(val.dueDate().value()!, 'MMM d, yyyy') : '',
+      dueDate: val.dueDate().value() ? format(val.dueDate().value()!, 'yyyy-MM-dd') : '',
       commentsCount: 0,
       isCompleted: false,
       tags: this.addedTags(),

@@ -38,24 +38,22 @@ export class BackToTop {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly showAfter = input(300); // Pixels scrolled before showing
-  readonly scrollToPosition = input(0); // Position to scroll to
-  readonly animationDuration = input(500); // Animation duration in ms
+  public readonly showAfter = input(300); // Pixels scrolled before showing
 
   // ==========================================
   // State
   // ==========================================
-  readonly isVisible = signal(false);
+  protected readonly isVisible = signal(false);
 
   // ==========================================
   // Public Methods
   // ==========================================
-  onWindowScroll(): void {
+  protected onWindowScroll(): void {
     const scrollPosition = this.document.documentElement.scrollTop || this.document.body.scrollTop;
     this.isVisible.set(scrollPosition > this.showAfter());
   }
 
-  scrollToTop(): void {
+  protected scrollToTop(): void {
     this.viewportScroller.scrollToPosition([0, 0], { behavior: 'smooth' });
   }
 }

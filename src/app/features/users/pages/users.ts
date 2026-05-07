@@ -16,17 +16,35 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
-import { CellContext, ColumnDef, flexRenderComponent, PaginationState, SortingState } from '@tanstack/angular-table';
+import {
+  CellContext,
+  ColumnDef,
+  ColumnPinningState,
+  flexRenderComponent,
+  PaginationState,
+  SortingState,
+} from '@tanstack/angular-table';
 
 import { httpResource } from '@angular/common/http';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
-import { lucideRefreshCcw, lucideSearch, lucideUserPlus, lucideX } from '@ng-icons/lucide';
-import { DataTableColumnManager } from '@shared/components/columns-manager/data-table-column-manager';
+import {
+  lucideBriefcase,
+  lucideCircleCheck,
+  lucideCircleX,
+  lucideLoader,
+  lucideRefreshCcw,
+  lucideSearch,
+  lucideShieldCheck,
+  lucideUser,
+  lucideUserPlus,
+  lucideX,
+} from '@ng-icons/lucide';
 import { CountryDisplay } from '@shared/components/country-display/country-display';
-import { DataTable } from '@shared/components/data-table/data-table';
+import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
+import { DataTable, DataTableStateChangeEvent } from '@shared/datatable/table/data-table';
 import { PaginatedResponse } from '@shared/models/page';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 
@@ -37,9 +55,6 @@ import { RoleFilter } from '../components/filters/role-filter';
 import { StatusFilter } from '../components/filters/status-filter';
 import { UserForm } from '../components/form/user-form';
 import { ActionDropdown } from '../components/table/action-dropdown';
-import { TableHeadSelection, TableRowSelection } from '../components/table/selection-column';
-import { provideUserRoleIcons, RoleIconPipe } from '../pipes/role-icon.pipe';
-import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
 
 @Component({
   selector: 'adm-users',
@@ -54,24 +69,26 @@ import { provideUserStatusIcons, StatusUIPipe } from '../pipes/status-ui.pipe';
     DatePipe,
     UsersCardSection,
     TranslocoModule,
-    RoleIconPipe,
-    StatusUIPipe,
     CountryDisplay,
     DataTable,
-    DataTableColumnManager,
+    DataTableColumnsManager,
     StatusFilter,
     RoleFilter,
     FormField,
   ],
   templateUrl: './users.html',
   providers: [
-    provideUserStatusIcons(),
-    provideUserRoleIcons(),
     provideIcons({
       lucideRefreshCcw,
       lucideUserPlus,
       lucideSearch,
       lucideX,
+      lucideCircleCheck,
+      lucideCircleX,
+      lucideLoader,
+      lucideBriefcase,
+      lucideShieldCheck,
+      lucideUser,
     }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -93,16 +110,18 @@ export default class Users {
    * Template references for custom cell rendering.
    * These are accessed via viewChild and passed to TanStack column definitions.
    */
-  readonly dataTable = viewChild.required(DataTable<User>);
-  readonly dateCell = viewChild.required<TemplateRef<CellContext<User, string>>>('dateCell');
-  readonly nameCell = viewChild.required<TemplateRef<CellContext<User, string>>>('nameCell');
-  readonly statusCell = viewChild.required<TemplateRef<CellContext<User, UserStatus>>>('statusCell');
-  readonly roleCell = viewChild.required<TemplateRef<CellContext<User, string>>>('roleCell');
-  readonly countryCell = viewChild.required<TemplateRef<CellContext<User, string>>>('countryCell');
+  protected readonly dataTable = viewChild.required(DataTable<User>);
+  protected readonly dateCell = viewChild.required<TemplateRef<CellContext<User, string>>>('dateCell');
+  protected readonly nameCell = viewChild.required<TemplateRef<CellContext<User, string>>>('nameCell');
+  protected readonly statusCell = viewChild.required<TemplateRef<CellContext<User, UserStatus>>>('statusCell');
+  protected readonly roleCell = viewChild.required<TemplateRef<CellContext<User, string>>>('roleCell');
+  protected readonly countryCell = viewChild.required<TemplateRef<CellContext<User, string>>>('countryCell');
 
   // ==========================================
   // State
   // ==========================================
+
+  // protected readonly
 
   protected readonly table = computed(() => this.dataTable().table);
 
@@ -110,8 +129,9 @@ export default class Users {
   protected readonly sorting = signal<SortingState>([]);
   protected readonly selectedRoles = signal<UserRole[]>([]);
   protected readonly selectedStatuses = signal<UserStatus[]>([]);
+  protected readonly defaultColumnPinning: ColumnPinningState = { left: ['select'], right: ['actions'] };
 
-  readonly usersResource = httpResource<PaginatedResponse<User>>(() => {
+  protected readonly usersResource = httpResource<PaginatedResponse<User>>(() => {
     const page = this.pagination().pageIndex;
     const size = this.pagination().pageSize;
     const search = this.searchForm.search().value();
@@ -133,14 +153,12 @@ export default class Users {
     };
   });
 
-  readonly users = computed(() => this.usersResource.value()?.content ?? []);
-  readonly totalElements = computed(() => this.usersResource.value()?.total ?? 0);
-  readonly isLoading = this.usersResource.isLoading;
+  protected readonly users = computed(() => this.usersResource.value()?.content ?? []);
+  protected readonly totalElements = computed(() => this.usersResource.value()?.total ?? 0);
+  protected readonly isLoading = this.usersResource.isLoading;
 
   /** Signal tracking the current active language for i18n updates */
-  protected readonly currentLang = toSignal(this._translocoService.langChanges$, {
-    initialValue: this._translocoService.getActiveLang(),
-  });
+  protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
 
   protected readonly searchForm = form(signal({ search: '' }), (schema) => debounce(schema.search, 300));
 
@@ -149,21 +167,6 @@ export default class Users {
    * Uses `translateSignal` for reactive header translations.
    */
   protected readonly columns: ColumnDef<User>[] = [
-    {
-      id: 'select',
-      header: () =>
-        flexRenderComponent(TableHeadSelection, {
-          inputs: { header: '' },
-        }),
-      cell: () =>
-        flexRenderComponent(TableRowSelection, {
-          inputs: { header: '' },
-        }),
-      enableSorting: false,
-      enableHiding: false,
-      enableResizing: false,
-      size: 30,
-    },
     {
       id: 'name',
       accessorKey: 'name',
@@ -226,6 +229,7 @@ export default class Users {
       id: 'actions',
       enableHiding: false,
       enableResizing: false,
+      enablePinning: true,
       size: 40,
       cell: () =>
         flexRenderComponent(ActionDropdown, {
@@ -251,7 +255,7 @@ export default class Users {
     });
   }
 
-  protected handleStateChange(state: { pagination: PaginationState; sorting: SortingState }) {
+  protected handleStateChange(state: DataTableStateChangeEvent) {
     this.pagination.set(state.pagination);
     this.sorting.set(state.sorting);
   }

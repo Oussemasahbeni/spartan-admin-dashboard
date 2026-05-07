@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
-import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
+
+import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
@@ -16,7 +16,6 @@ import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { format, isAfter, parse, set } from 'date-fns';
-import { toast } from 'ngx-sonner';
 
 export interface CalendarEventModel {
   title: string;
@@ -30,7 +29,6 @@ export interface CalendarEventModel {
 @Component({
   selector: 'adm-calendar-form',
   imports: [
-    BrnDialogImports,
     HlmDialogImports,
     HlmLabelImports,
     HlmInputImports,
@@ -39,7 +37,6 @@ export interface CalendarEventModel {
     HlmSpinnerImports,
     HlmIconImports,
     HlmButtonImports,
-    BrnSelectImports,
     HlmSelectImports,
     HlmIconImports,
     HlmDatePickerImports,
@@ -47,7 +44,6 @@ export interface CalendarEventModel {
     TranslocoModule,
     FormField,
     FormRoot,
-    ValidationErrors,
   ],
   templateUrl: './calendar-form.html',
   host: {
@@ -80,7 +76,7 @@ export class CalendarForm implements OnInit {
     endTime: '10:00',
   });
 
-  readonly eventForm = form(
+  protected readonly eventForm = form(
     this.eventModel,
     (schema) => {
       required(schema.title);

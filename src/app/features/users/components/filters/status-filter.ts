@@ -10,7 +10,6 @@ import { HlmCommandImports } from '@spartan-ng/helm/command';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { USER_STATUSES, UserStatus } from '../../../../shared/models/user';
-import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe';
 
 @Component({
   selector: 'adm-users-status-filter',
@@ -22,11 +21,9 @@ import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe
     HlmCommandImports,
     HlmCheckboxImports,
     TranslocoModule,
-    StatusUIPipe,
   ],
-  providers: [provideUserStatusIcons(), provideIcons({ lucideSearch, lucideListFilter })],
+  providers: [provideIcons({ lucideSearch, lucideListFilter })],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   template: `
     <hlm-popover
       *transloco="let t"
@@ -62,10 +59,19 @@ import { StatusUIPipe, provideUserStatusIcons } from '../../pipes/status-ui.pipe
         <hlm-command-list>
           <hlm-command-group>
             @for (status of _statusList(); track status) {
-              @let ui = status | statusUI;
               <button type="button" hlm-command-item [value]="status" (selected)="statusSelected(status)">
                 <hlm-checkbox class="mr-2" [checked]="isStatusSelected(status)" />
-                <ng-icon hlm size="sm" [class]="ui.class" [name]="ui.icon" />
+                @switch (status) {
+                  @case ('active') {
+                    <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
+                  }
+                  @case ('inactive') {
+                    <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
+                  }
+                  @case ('pending') {
+                    <ng-icon hlmIcon size="xs" class="text-yellow-600" name="lucideLoader" />
+                  }
+                }
                 <span *transloco="let t; prefix: 'users.status'"> {{ t(status) }} </span>
               </button>
             }
@@ -92,7 +98,7 @@ export class StatusFilter {
   // Outputs
   // ==========================================
 
-  readonly statusChanged = output<UserStatus[]>();
+  public readonly statusChanged = output<UserStatus[]>();
 
   // ==========================================
   // State

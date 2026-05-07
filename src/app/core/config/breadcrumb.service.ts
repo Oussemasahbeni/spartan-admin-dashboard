@@ -35,7 +35,7 @@ export class BreadcrumbService {
    * Signal containing the current breadcrumb trail.
    * Updates automatically on navigation.
    */
-  readonly breadcrumbs = toSignal(
+  public readonly breadcrumbs = toSignal(
     this._router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
       map(() => this._buildBreadcrumbs())

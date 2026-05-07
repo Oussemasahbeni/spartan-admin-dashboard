@@ -45,6 +45,7 @@
                         hlmCollapsibleTrigger
                         hlmSidebarMenuButton
                         class="flex w-full items-center justify-between"
+                        [closeMobileSidebarOnClick]="false"
                         [tooltip]="item.key ? t(item.key) : item.title"
                         [aria-label]="item.key ? t(item.key) : item.title"
                       >
@@ -55,9 +56,7 @@
                           hlmIcon
                         />
                       </button>
-                      <hlm-collapsible-content
-                        class="block overflow-hidden transition-all data-[state=closed]:h-0 data-[state=open]:h-(--brn-collapsible-content-height) in-data-[state=collapsed]:h-0!"
-                      >
+                      <hlm-collapsible-content class="data-[state=open]:animate-in data-[state=closed]:animate-out">
                         <ul hlmSidebarMenuSub>
                           @for (subItem of children; track subItem.key || subItem.title) {
                             <li hlmSidebarMenuSubItem>

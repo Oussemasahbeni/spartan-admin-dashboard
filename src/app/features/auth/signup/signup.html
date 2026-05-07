@@ -14,7 +14,7 @@
 
     <form class="flex flex-col gap-4" [formRoot]="signupForm">
       <hlm-field>
-        <hlm-field-label for="name">{{ t('nameLabel') }}</hlm-field-label>
+        <hlm-field-label>{{ t('nameLabel') }}</hlm-field-label>
         <input
           hlmInput
           id="name"
@@ -23,11 +23,13 @@
           [placeholder]="t('namePlaceholder')"
           [formField]="signupForm.name"
         />
-        <adm-validation-errors [fieldState]="signupForm.name()" />
+        @for (error of signupForm.name().errors(); track error.kind) {
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        }
       </hlm-field>
 
       <hlm-field>
-        <hlm-field-label for="email">{{ t('emailLabel') }}</hlm-field-label>
+        <hlm-field-label>{{ t('emailLabel') }}</hlm-field-label>
         <input
           hlmInput
           id="email"
@@ -36,28 +38,13 @@
           [placeholder]="t('emailPlaceholder')"
           [formField]="signupForm.email"
         />
-        <adm-validation-errors [fieldState]="signupForm.email()" />
+        @for (error of signupForm.email().errors(); track error.kind) {
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        }
       </hlm-field>
 
       <hlm-field>
-        <hlm-field-label for="password">{{ t('passwordLabel') }}</hlm-field-label>
-        <!-- <div class="relative">
-          <input
-            hlmInput
-            id="password"
-            autocomplete="new-password"
-            [type]="showPassword() ? 'text' : 'password'"
-            [placeholder]="t('passwordPlaceholder')"
-            [formField]="signupForm.password"
-          />
-          <ng-icon
-            hlmIcon
-            size="sm"
-            class="absolute inset-y-2.5 end-2 cursor-pointer"
-            [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
-            (click)="showPassword.set(!showPassword())"
-          />
-        </div> -->
+        <hlm-field-label>{{ t('passwordLabel') }}</hlm-field-label>
         <hlm-input-group>
           <input
             hlmInputGroupInput
@@ -77,11 +64,13 @@
           /></hlm-input-group-addon>
         </hlm-input-group>
 
-        <adm-validation-errors [fieldState]="signupForm.password()" [errorParams]="{ min: passwordMinLength }" />
+        @for (error of signupForm.password().errors(); track error.kind) {
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        }
       </hlm-field>
 
       <hlm-field>
-        <hlm-field-label for="confirmPassword">{{ t('confirmPasswordLabel') }}</hlm-field-label>
+        <hlm-field-label>{{ t('confirmPasswordLabel') }}</hlm-field-label>
         <hlm-input-group>
           <input
             hlmInputGroupInput
@@ -100,11 +89,13 @@
               (click)="showConfirmPassword.set(!showConfirmPassword())"
           /></hlm-input-group-addon>
         </hlm-input-group>
-        <adm-validation-errors [fieldState]="signupForm.confirmPassword()" />
+        @for (error of signupForm.confirmPassword().errors(); track error.kind) {
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        }
       </hlm-field>
 
-      <button type="submit" hlmBtn [disabled]="isLoading()">
-        @if (isLoading()) {
+      <button type="submit" hlmBtn [disabled]="signupForm().submitting()">
+        @if (signupForm().submitting()) {
           <hlm-spinner />
         }
         {{ t('signupButton') }}
@@ -120,3 +111,4 @@
     </p>
   </div>
 </adm-auth-layout>
+

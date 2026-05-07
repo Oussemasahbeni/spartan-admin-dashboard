@@ -16,6 +16,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       lucideHome,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *transloco="let t" class="bg-background block h-screen overflow-hidden">
       <div class="relative flex h-full flex-col md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -63,6 +64,5 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLayout {}

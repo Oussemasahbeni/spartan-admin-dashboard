@@ -15,3 +15,14 @@ export interface Task {
   status: TaskStatus;
   isCompleted: boolean;
 }
+
+export interface TaskFormContext {
+  existingTags: Tag[];
+}
+
+export interface TaskFormModel {
+  title: string;
+  description: string;
+  status: TaskStatus;
+  dueDate: Date | null;
+}

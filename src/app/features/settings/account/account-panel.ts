@@ -5,9 +5,8 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideGlobe } from '@ng-icons/lucide';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { countries } from '@shared/countries';
-import { BrnSelectImports } from '@spartan-ng/brain/select';
+
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -31,10 +30,8 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
     HlmSelectImports,
     HlmSeparatorImports,
     HlmTextareaImports,
-    BrnSelectImports,
     FormField,
     FormRoot,
-    ValidationErrors,
     CountryPicker,
     PhoneNumberPicker,
     HlmSpinner,
@@ -51,14 +48,13 @@ export class SettingsAccount {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly languages = ['english', 'french', 'arabic'];
+  protected readonly languages = ['english', 'french', 'arabic'];
 
-  readonly accountModel = signal({
+  protected readonly accountModel = signal({
     name: 'Oussema Sahbeni',
     username: '@spike',
     title: 'Software engineer',
-    company: 'Oddo Bhf',
+    company: 'Oddo BHF',
     about:
       'Hey! This is oussema; a software engineer based in Tunisia. I love building web applications and exploring new technologies. In my free time, I enjoy gaming and gym 💪.',
     email: 'oussemasahbeni300@gmail.com',
@@ -67,7 +63,7 @@ export class SettingsAccount {
     language: 'english',
   });
 
-  readonly accountForm = form(
+  protected readonly accountForm = form(
     this.accountModel,
     (schema) => {
       required(schema.name);
@@ -85,12 +81,10 @@ export class SettingsAccount {
   // Private Methods
   // ==========================================
 
-  private saveAccount(): void {
-    this.isLoading.set(true);
+  private async saveAccount(): Promise<void> {
     // Simulate API call
-    setTimeout(() => {
-      console.log('Account saved:', this.accountModel());
-      this.isLoading.set(false);
-    }, 1500);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    console.log('Account saved:', this.accountModel());
   }
 }
+

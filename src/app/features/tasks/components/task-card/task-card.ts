@@ -15,6 +15,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
+import { parseISO, startOfDay } from 'date-fns';
 import { TAG_COLOR_CLASSES } from '../../model/tag';
 import { Task } from '../../model/task';
 import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-status-ui.pipe';
@@ -45,6 +46,8 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
       tabindex="0"
       class="focus-visible:ring-ring cursor-pointer gap-0 py-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       [attr.aria-label]="task().title"
+      (focusin)="groupFocused = true"
+      (focusout)="onFocusOut($event)"
       (click)="taskClick.emit(task())"
       (keydown.enter)="taskClick.emit(task())"
       (keydown.space)="taskClick.emit(task()); $event.preventDefault()"
@@ -55,7 +58,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
           <img
             class="h-36 w-full object-cover transition-transform duration-500 group-hover:scale-105"
             alt="Task preview"
-            [src]="task().imageUrl"
+            [src]="task().imageUrl!"
           />
         </div>
       }
@@ -68,6 +71,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
             <div
               [class]="
                 (task().isCompleted ? 'w-9 pr-2' : 'w-0 group-hover:w-9 group-hover:pr-2') +
+                ' group-focus-within:w-9 group-focus-within:pr-2 focus-visible:w-9 focus-visible:pr-2' +
                 ' overflow-hidden transition-all duration-200 ease-in-out'
               "
             >
@@ -77,6 +81,8 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
                 variant="ghost"
                 size="icon"
                 class="mt-0.5 h-7 w-7 shrink-0 rounded-full p-0"
+                aria-label="Toggle task completion"
+                [attr.tabindex]="task().isCompleted || groupFocused ? '0' : '-1'"
                 [class.text-emerald-500]="task().isCompleted"
                 [class.text-muted-foreground]="!task().isCompleted"
                 (click)="toggleComplete.emit(task()); $event.stopPropagation()"
@@ -102,7 +108,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
                 {{ t(task().status) }}
               </span>
               <h4
-                class="text-card-foreground group-hover:text-primary line-clamp-2 text-sm leading-snug font-semibold transition-colors"
+                class="text-card-foreground group-hover:text-primary line-clamp-2 text-base leading-snug font-semibold transition-colors"
                 [class.line-through]="task().isCompleted"
                 [class.text-muted-foreground]="task().isCompleted"
               >
@@ -122,7 +128,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
       <!-- Card Content -->
       <div hlmCardContent class="flex flex-col px-4 py-3">
         @if (task().description) {
-          <p class="text-muted-foreground mb-3 line-clamp-2 text-xs leading-relaxed">
+          <p class="text-muted-foreground mb-3 line-clamp-2 text-sm leading-relaxed">
             {{ task().description }}
           </p>
         }
@@ -135,8 +141,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
                 hlmBadge
                 variant="outline"
                 [class]="
-                  'h-auto cursor-default rounded-full px-2 py-0 text-[10px] font-normal lowercase ' +
-                  tagColorClasses[tag.color]
+                  'h-auto cursor-default rounded-full px-2 py-0 text-xs font-normal lowercase ' + tagColorClasses[tag.color]
                 "
               >
                 {{ tag.name }}
@@ -151,7 +156,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
 
       <!-- Card Footer -->
       <div hlmCardFooter class="flex items-center justify-between px-4 py-2.5">
-        <div class="text-muted-foreground flex items-center gap-3 text-xs">
+        <div class="text-muted-foreground flex items-center gap-3 text-sm">
           <!-- Due date -->
           <div
             class="flex items-center gap-1 rounded-full border px-1.5 py-0.5 transition-colors"
@@ -193,7 +198,9 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
           type="button"
           variant="ghost"
           size="icon"
-          class="text-muted-foreground hover:text-foreground h-6 w-6 rounded-full opacity-0 transition-opacity group-hover:opacity-100"
+          class="text-muted-foreground hover:text-foreground h-6 w-6 rounded-full opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
+          aria-label="Open task actions menu"
+          [attr.tabindex]="task().isCompleted || groupFocused ? '0' : '-1'"
           (click)="optionsClick.emit($event); $event.stopPropagation()"
         >
           <ng-icon hlmIcon name="lucideMoreVertical" size="xs" />
@@ -208,15 +215,17 @@ export class TaskCardComponent {
   // Inputs
   // ==========================================
 
-  readonly task = input.required<Task>();
+  public readonly task = input.required<Task>();
+
+  protected groupFocused = false;
 
   // ==========================================
   // Outputs
   // ==========================================
 
-  readonly optionsClick = output<MouseEvent>();
-  readonly taskClick = output<Task>();
-  readonly toggleComplete = output<Task>();
+  protected readonly optionsClick = output<MouseEvent>();
+  protected readonly taskClick = output<Task>();
+  protected readonly toggleComplete = output<Task>();
 
   // ==========================================
   // Derived state
@@ -225,8 +234,12 @@ export class TaskCardComponent {
   protected readonly tagColorClasses = TAG_COLOR_CLASSES;
 
   protected readonly isOverdue = computed(() => {
-    if (this.task().isCompleted) return false;
-    return new Date(this.task().dueDate) < new Date();
+    if (this.task().isCompleted || !this.task().dueDate) return false;
+
+    const dueDate = startOfDay(parseISO(this.task().dueDate));
+    const today = startOfDay(new Date());
+
+    return dueDate < today;
   });
 
   protected readonly avatarInitials = computed(() =>
@@ -237,4 +250,15 @@ export class TaskCardComponent {
       .join('')
       .toUpperCase()
   );
+
+  protected onFocusOut(event: FocusEvent): void {
+    const currentTarget = event.currentTarget;
+    const relatedTarget = event.relatedTarget;
+
+    if (currentTarget instanceof HTMLElement && relatedTarget instanceof Node && currentTarget.contains(relatedTarget)) {
+      return;
+    }
+
+    this.groupFocused = false;
+  }
 }

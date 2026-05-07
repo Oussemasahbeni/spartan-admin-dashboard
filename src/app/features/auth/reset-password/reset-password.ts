@@ -4,7 +4,6 @@ import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCircleCheck } from '@ng-icons/lucide';
-import { ValidationErrors } from '@shared/components/validation-errors/validation-errors';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
@@ -29,7 +28,6 @@ import { AuthLayout } from '../layout';
     HlmCard,
     RouterLink,
     AuthLayout,
-    ValidationErrors,
   ],
   providers: [provideIcons({ lucideCircleCheck })],
   templateUrl: './reset-password.html',
@@ -46,14 +44,13 @@ export default class ResetPassword {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly showAlert = signal(false);
+  protected readonly showAlert = signal(false);
 
-  readonly resetPasswordModel = signal({
+  protected readonly resetPasswordModel = signal({
     email: '',
   });
 
-  readonly resetPasswordForm = form(
+  protected readonly resetPasswordForm = form(
     this.resetPasswordModel,
     (schema) => {
       required(schema.email);
@@ -70,13 +67,11 @@ export default class ResetPassword {
   // Public Methods
   // ==========================================
 
-  onSubmit(): void {
-    this.isLoading.set(true);
+  async onSubmit(): Promise<void> {
     // Simulate API call
-    setTimeout(() => {
-      this.isLoading.set(false);
-      this.resetPasswordForm().reset({ email: '' });
-      this.showAlert.set(true);
-    }, 2000);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    this.resetPasswordForm().reset({ email: '' });
+    this.showAlert.set(true);
   }
 }
+

@@ -3,8 +3,8 @@ import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideX } from '@ng-icons/lucide';
-import { DataTableColumnManager } from '@shared/components/columns-manager/data-table-column-manager';
-import { DataTable } from '@shared/components/data-table/data-table';
+import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
+import { DataTable } from '@shared/datatable/table/data-table';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -29,7 +29,7 @@ import { provideTransactionStatusIcons, TransactionStatusUIPipe } from '../../pi
     TransactionStatusUIPipe,
     TranslocoModule,
     DataTable,
-    DataTableColumnManager,
+    DataTableColumnsManager,
     FormField,
   ],
   providers: [
@@ -47,7 +47,7 @@ export class TransactionsTableComponent {
   // Inputs
   // ==========================================
 
-  readonly transactions = input.required<Transaction[]>();
+  public readonly transactions = input.required<Transaction[]>();
 
   // ==========================================
   // View Children
@@ -56,10 +56,10 @@ export class TransactionsTableComponent {
   /**
    * Template references for custom cell rendering.
    */
-  readonly dataTable = viewChild.required(DataTable<Transaction>);
-  readonly userCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('userCell');
-  readonly statusCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('statusCell');
-  readonly amountCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('amountCell');
+  protected readonly dataTable = viewChild.required(DataTable<Transaction>);
+  protected readonly userCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('userCell');
+  protected readonly statusCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('statusCell');
+  protected readonly amountCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('amountCell');
 
   // ==========================================
   // State

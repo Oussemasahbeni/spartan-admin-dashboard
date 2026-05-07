@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, linkedSignal, model, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, model, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -32,8 +31,48 @@ import { CountryDisplay } from '../country-display/country-display';
       lucideGlobe,
     }),
   ],
-  templateUrl: './phone-number-picker.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <div *transloco="let t; prefix: 'phoneNumberPicker'" class="flex">
+      <hlm-combobox [value]="selectedCountry()" (valueChange)="selectedCountry.set($event)">
+        <hlm-combobox-trigger class="flex gap-1 rounded-e-none border-e-0 focus-visible:ring-0">
+          @if (selectedCountry()) {
+            <adm-country-display [country]="selectedCountry()" [showCountryCode]="true" />
+          } @else {
+            <ng-icon hlm name="lucideGlobe" size="sm" />
+          }
+        </hlm-combobox-trigger>
+
+        <hlm-combobox-content *hlmComboboxPortal class="w-64">
+          <hlm-combobox-input showTrigger="false" mode="popup" [placeholder]="t('searchCountryPlaceholder')">
+            <hlm-input-group-addon>
+              <ng-icon name="lucideSearch" />
+            </hlm-input-group-addon>
+          </hlm-combobox-input>
+          <hlm-combobox-empty *transloco="let t">{{ t('common.noData') }}</hlm-combobox-empty>
+          <div hlmComboboxList>
+            @for (country of _countriesList(); track country.id) {
+              <hlm-combobox-item [value]="country">
+                <adm-country-display [country]="country" />
+                <span class="text-muted-foreground text-xs">{{ country.code }}</span>
+              </hlm-combobox-item>
+            }
+          </div>
+        </hlm-combobox-content>
+      </hlm-combobox>
+
+      <!-- Phone Number Input -->
+      <input
+        hlmInput
+        class="flex-1 rounded-s-none"
+        [placeholder]="t('enterPhoneNumberPlaceholder')"
+        [error]="invalid() && touched() ? true : 'auto'"
+        [value]="rawPhoneNumber()"
+        (input)="onPhoneInput($event)"
+        (blur)="touched.set(true)"
+      />
+    </div>
+  `,
 })
 export class PhoneNumberPicker implements FormValueControl<string> {
   // ==========================================
@@ -44,10 +83,10 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly value = model<string>('');
-  readonly touched = model<boolean>(false);
-  readonly invalid = input<boolean>(false);
-  readonly disabled = input<boolean>(false);
+  public readonly value = model<string>('');
+  public readonly touched = model<boolean>(false);
+  public readonly invalid = input<boolean>(false);
+  public readonly disabled = input<boolean>(false);
 
   // ==========================================
   // State
@@ -74,20 +113,18 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   });
   protected readonly _countriesList = signal(countries);
 
-  protected readonly activeLang = toSignal(this._translocoService.langChanges$, {
-    initialValue: this._translocoService.getActiveLang(),
-  });
+  protected readonly activeLang = computed(() => this._translocoService.activeLang());
 
   // ==========================================
   // Public Methods
   // ==========================================
-  countrySelected(country: Country) {
+  protected countrySelected(country: Country) {
     this.selectedCountry.set(country);
     this.updateValue();
     this.touched.set(true);
   }
 
-  onPhoneInput(event: Event) {
+  protected onPhoneInput(event: Event) {
     const input = event.target as HTMLInputElement;
     this.rawPhoneNumber.set(input.value);
     this.updateValue();

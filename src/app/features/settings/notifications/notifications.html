@@ -98,8 +98,8 @@
 
   <!-- Actions -->
   <div class="mt-11 flex items-center justify-end gap-4">
-    <button hlmBtn type="submit" [disabled]="isLoading()">
-      @if (isLoading()) {
+    <button hlmBtn type="submit" [disabled]="notificationsForm().submitting()">
+      @if (notificationsForm().submitting()) {
         <hlm-spinner size="sm" />
       }
       {{ t('save') }}

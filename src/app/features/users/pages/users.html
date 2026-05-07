@@ -46,6 +46,7 @@
     <adm-data-table
       mode="server"
       [columns]="columns"
+      [defaultColumnPinning]="defaultColumnPinning"
       [isLoading]="isLoading()"
       [data]="users()"
       [totalElements]="totalElements()"
@@ -53,11 +54,12 @@
       [sortingState]="sorting()"
       [resizableColumns]="true"
       [enableRowSelection]="true"
+      [enableColumnPinning]="true"
       (stateChange)="handleStateChange($event)"
     >
       <!-- Date Cell -->
       <ng-template #dateCell let-context>
-        {{ context.getValue() | date: 'mediumDate' : '' : currentLang() }}
+        {{ context.getValue() | date: 'mediumDate' : '' : activeLanguage() }}
       </ng-template>
 
       <!-- Name Cell -->
@@ -83,9 +85,18 @@
       <ng-template #statusCell let-context>
         <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
           @let status = context.getValue();
-          @let ui = status | statusUI;
-          <ng-icon hlmIcon size="xs" [class]="ui.class" [name]="ui.icon" />
-          <span *transloco="let t; prefix: 'users.status'"> {{ t(status) }} </span>
+          @switch (status) {
+            @case ('active') {
+              <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
+            }
+            @case ('inactive') {
+              <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
+            }
+            @case ('pending') {
+              <ng-icon hlmIcon size="xs" class="animate-spin text-yellow-600" name="lucideLoader" />
+            }
+          }
+          <span *transloco="let t; prefix: 'users.status'">{{ t(status) }}</span>
         </span>
       </ng-template>
 
@@ -97,8 +108,17 @@
           class="flex w-fit items-center gap-1.5 border-transparent px-2 py-0.5"
           [id]="context.row.original.id + '-role'"
         >
-          <ng-icon hlmIcon size="sm" [name]="role | roleIcon" />
-
+          @switch (role) {
+            @case ('admin') {
+              <ng-icon hlmIcon size="sm" name="lucideShieldCheck" />
+            }
+            @case ('user') {
+              <ng-icon hlmIcon size="sm" name="lucideUser" />
+            }
+            @case ('manager') {
+              <ng-icon hlmIcon size="sm" name="lucideBriefcase" />
+            }
+          }
           <span *transloco="let t; prefix: 'users.role'">{{ t(role) }}</span>
         </span>
       </ng-template>

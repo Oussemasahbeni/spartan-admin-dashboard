@@ -19,27 +19,27 @@ export class AssistantService {
   private readonly isLoadingSignal = signal(false);
   private streamAbortController: AbortController | null = null;
 
-  readonly conversation = this.conversationSignal.asReadonly();
-  readonly isLoading = this.isLoadingSignal.asReadonly();
+  public readonly conversation = this.conversationSignal.asReadonly();
+  public readonly isLoading = this.isLoadingSignal.asReadonly();
 
   /**
    * Get messages for the active conversation
    */
-  readonly messages = computed(() => {
+  public readonly messages = computed(() => {
     return this.conversation()?.messages ?? [];
   });
 
   /**
    * Check if current conversation is empty (no messages)
    */
-  readonly isEmptyConversation = computed(() => {
+  public readonly isEmptyConversation = computed(() => {
     return this.messages().length === 0;
   });
 
   /**
    * Check if the last message is currently streaming
    */
-  readonly isStreaming = computed(() => {
+  public readonly isStreaming = computed(() => {
     const msgs = this.messages();
     if (msgs.length === 0) return false;
     const lastMsg = msgs[msgs.length - 1];
@@ -71,13 +71,6 @@ export class AssistantService {
    */
   async sendMessage(content: string): Promise<void> {
     if (!content.trim()) return;
-
-    let conversationId = this.conversationSignal()?.id ?? null;
-
-    // Create new conversation if none active
-    if (!conversationId) {
-      conversationId = this.createConversation();
-    }
 
     const now = new Date();
 

@@ -6,9 +6,18 @@
     },
     "navUser": {
         "account": "Compte",
+        "subscription": "Abonnement",
+        "pro": "Pro",
         "theme": "Thème",
         "language": "Langue",
+        "help": "Aide & Support",
         "logout": "Déconnexion"
+    },
+    "header": {
+        "toggleTheme": "Changer de thème",
+        "closeSidebar": "Fermer la barre latérale",
+        "openSidebar": "Ouvrir la barre latérale",
+        "toggleFullScreen": "Basculer en plein écran"
     },
     "breadcrumbs": {
         "home": "Accueil"
@@ -29,7 +38,8 @@
         "settings": "Paramètres",
         "aiAssistant": "Assistant IA",
         "dashboard-2": "Tableau de bord 2",
-        "calendar": "Calendrier"
+        "calendar": "Calendrier",
+        "tasks": "Tâches"
     },
     "navigation": {
         "application": "Application",
@@ -89,7 +99,12 @@
         "import": "Importer",
         "export": "Exporter",
         "clearFilter": "Effacer le filtre",
-        "addNew": "Ajouter"
+        "addNew": "Ajouter",
+        "pinStart": "Épingler au début",
+        "pinEnd": "Épingler à la fin",
+        "pinLeft": "Épingler à gauche",
+        "pinRight": "Épingler à droite",
+        "unpin": "Désépingler"
     },
     "sort": {
         "asc": "Ascendant",
@@ -138,26 +153,5 @@
             "aDocument": "un document",
             "theReport": "le rapport"
         }
-    },
-    "timeAgo": {
-        "justNow": "à l'instant",
-        "prefix": "il y a",
-        "suffix": "",
-        "futurePrefix": "dans",
-        "futureSuffix": "",
-        "second": "seconde",
-        "seconds": "secondes",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "heure",
-        "hours": "heures",
-        "day": "jour",
-        "days": "jours",
-        "week": "semaine",
-        "weeks": "semaines",
-        "month": "mois",
-        "months": "mois",
-        "year": "an",
-        "years": "ans"
     }
 }

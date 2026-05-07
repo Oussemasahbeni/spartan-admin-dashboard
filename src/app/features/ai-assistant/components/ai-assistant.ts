@@ -24,15 +24,15 @@ export default class AiAssistant {
   // State
   // ==========================================
 
-  readonly conversation = this._assistantService.conversation;
+  protected readonly conversation = this._assistantService.conversation;
 
-  readonly messages = this._assistantService.messages;
+  protected readonly messages = this._assistantService.messages;
 
-  readonly isEmpty = computed(() => this.messages().length === 0);
-  readonly isLoading = this._assistantService.isLoading;
-  readonly isStreaming = this._assistantService.isStreaming;
+  protected readonly isEmpty = computed(() => this.messages().length === 0);
+  protected readonly isLoading = this._assistantService.isLoading;
+  protected readonly isStreaming = this._assistantService.isStreaming;
 
-  readonly activeSuggestions = computed(() => {
+  protected readonly activeSuggestions = computed(() => {
     if (this.isLoading()) {
       return [];
     }

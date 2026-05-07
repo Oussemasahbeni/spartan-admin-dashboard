@@ -25,10 +25,6 @@
                 "title": "Avg Order Revenue",
                 "infoTooltip": "Average revenue per order in the last week",
                 "description": "Since last week"
-            },
-            "totalRevenue": {
-                "title": "Total Revenue",
-                "description": "+20.1% from last month"
             }
         }
     },
@@ -85,14 +81,12 @@
             "description": "Visualize sales performance trends",
             "netSales": "Net Sales",
             "orders": "Orders"
-           
         },
         "visitorsCard": {
             "title": "Visitors",
             "description": "Key visitor information at a glance",
             "newVisitors": "New Visitors",
             "returning": "Returning"
-            
         },
         "trafficSourceCard": {
             "title": "Traffic Source",

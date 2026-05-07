@@ -5,13 +5,16 @@ import {
   lucideArrowUpDown,
   lucideCheck,
   lucideChevronDown,
+  lucideCircleCheck,
+  lucideCircleX,
   lucideCopy,
+  lucideLoader,
   lucideMoreHorizontal,
   lucideSearch,
   lucideX,
 } from '@ng-icons/lucide';
-import { DataTableColumnManager } from '@shared/components/columns-manager/data-table-column-manager';
-import { DataTable } from '@shared/components/data-table/data-table';
+import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
+import { DataTable } from '@shared/datatable/table/data-table';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
@@ -22,7 +25,6 @@ import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmTableImports } from '@spartan-ng/helm/table';
 import { ColumnDef, flexRenderComponent } from '@tanstack/angular-table';
 import { Payment } from '../../model/payment';
-import { PaymentStatusUIPipe, providePaymentStatusIcons } from '../../pipes/status-ui.pipe';
 import { PaymentsActionDropdown } from './action-dropdown';
 
 @Component({
@@ -38,8 +40,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
     HlmBadgeImports,
     DataTable,
     TranslocoModule,
-    DataTableColumnManager,
-    PaymentStatusUIPipe,
+    DataTableColumnsManager,
   ],
   providers: [
     provideIcons({
@@ -50,10 +51,13 @@ import { PaymentsActionDropdown } from './action-dropdown';
       lucideMoreHorizontal,
       lucideSearch,
       lucideX,
+      lucideCircleCheck,
+      lucideCircleX,
+      lucideLoader,
     }),
-    providePaymentStatusIcons(),
     provideTranslocoScope({ scope: 'dashboard/dashboard1', alias: 'dashboard1' }),
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *transloco="let t; prefix: 'dashboard1.paymentsTable'" hlmCard class="h-full">
       <header hlmCardHeader>
@@ -83,13 +87,27 @@ import { PaymentsActionDropdown } from './action-dropdown';
 
           <adm-data-table-column-manager [table]="table()" />
         </div>
-        <adm-data-table [columns]="columns" [data]="payments()" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 50, 100]">
+        <adm-data-table
+          [columns]="columns"
+          [data]="payments()"
+          [paginationState]="{ pageIndex: 0, pageSize: 5 }"
+          [pageSizeOptions]="[5, 10, 25, 50, 100]"
+        >
           <!-- Status Cell -->
           <ng-template #statusCell let-context>
             <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
               @let status = context.getValue();
-              @let ui = status | statusUI;
-              <ng-icon size="xs" hlmIcon [class]="ui.class" [name]="ui.icon" />
+              @switch (status) {
+                @case ('success') {
+                  <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
+                }
+                @case ('failed') {
+                  <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
+                }
+                @case ('processing') {
+                  <ng-icon hlmIcon size="xs" class="animate-spin text-yellow-600" name="lucideLoader" />
+                }
+              }
               <span *transloco="let t; prefix: 'dashboard1.paymentsTable.status'"> {{ t(status) }} </span>
             </span>
           </ng-template>
@@ -97,21 +115,20 @@ import { PaymentsActionDropdown } from './action-dropdown';
       </main>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentsTable {
   // ==========================================
   // Inputs
   // ==========================================
 
-  readonly payments = input<Payment[]>([]);
+  public readonly payments = input<Payment[]>([]);
 
   // ==========================================
   // View Children
   // ==========================================
 
-  readonly statusCell = viewChild.required('statusCell');
-  readonly dataTable = viewChild.required(DataTable<Payment>);
+  protected readonly statusCell = viewChild.required('statusCell');
+  protected readonly dataTable = viewChild.required(DataTable<Payment>);
 
   // ==========================================
   // State
@@ -119,6 +136,12 @@ export class PaymentsTable {
 
   protected readonly table = computed(() => this.dataTable().table);
   protected readonly searchValue = signal('');
+
+  private readonly usdFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
   protected readonly columns: ColumnDef<Payment>[] = [
     {
       accessorKey: 'email',
@@ -141,13 +164,8 @@ export class PaymentsTable {
       enableSorting: false,
       meta: { translationKey: 'dashboard1.paymentsTable.columns.amount' },
       cell: (info) => {
-        const amount = parseFloat(info.getValue<string>());
-        const formatted = new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'USD',
-        }).format(amount);
-
-        return `<div class="text-start">${formatted}</div>`;
+        const amount = Number(info.getValue<string>());
+        return Number.isFinite(amount) ? this.usdFormatter.format(amount) : '-';
       },
     },
     {

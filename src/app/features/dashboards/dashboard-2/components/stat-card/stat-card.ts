@@ -16,6 +16,7 @@ export interface StatCardData {
 @Component({
   selector: 'adm-stat-card',
   imports: [HlmButtonImports, HlmCardImports, HlmIconImports, TranslocoModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section *transloco="let t; prefix: 'dashboard2.stats'" hlmCard class="h-full w-full">
       <div hlmCardContent class="flex h-full flex-col justify-between">
@@ -47,18 +48,17 @@ export interface StatCardData {
       </div>
     </section>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatCardComponent {
   // ==========================================
   // Inputs
   // ==========================================
 
-  readonly data = input.required<StatCardData>();
+  public readonly data = input.required<StatCardData>();
 
   // ==========================================
   // Outputs
   // ==========================================
 
-  readonly menuClick = output<void>();
+  public readonly menuClick = output<void>();
 }

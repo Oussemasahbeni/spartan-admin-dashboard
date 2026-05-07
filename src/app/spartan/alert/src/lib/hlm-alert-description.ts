@@ -1,16 +1,17 @@
-import { Directive, computed, input } from '@angular/core';
-import { hlm } from '@spartan-ng/helm/utils';
-import type { ClassValue } from 'clsx';
+import { Directive } from '@angular/core';
+import { classes } from '@spartan-ng/helm/utils';
 
 @Directive({
-  selector: '[hlmAlertDesc],[hlmAlertDescription]',
+  selector: '[hlmAlertDescription]',
   host: {
-    '[class]': '_computedClass()',
+    'data-slot': 'alert-description',
   },
 })
 export class HlmAlertDescription {
-  public readonly userClass = input<ClassValue>('', { alias: 'class' });
-  protected readonly _computedClass = computed(() =>
-    hlm('text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed', this.userClass())
-  );
+  constructor() {
+    classes(
+      () =>
+        'text-muted-foreground text-sm text-balance md:text-pretty [&_p:not(:last-child)]:mb-4 [&_a]:hover:text-foreground [&_a]:underline [&_a]:underline-offset-3'
+    );
+  }
 }

@@ -20,13 +20,23 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmDropdownMenuCheckbox {
   private readonly _cdkMenuItem = inject(CdkMenuItemCheckbox);
+  private readonly _originalTrigger = this._cdkMenuItem.trigger.bind(this._cdkMenuItem);
+
   public readonly checked = input<boolean, BooleanInput>(this._cdkMenuItem.checked, { transform: booleanAttribute });
   public readonly disabled = input<boolean, BooleanInput>(this._cdkMenuItem.disabled, { transform: booleanAttribute });
+  public readonly keepOpen = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
 
   constructor() {
     classes(
       () =>
         'hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground group relative flex w-full cursor-default items-center rounded-sm py-1.5 pr-2 pl-8 text-sm transition-colors outline-none select-none has-[>hlm-dropdown-menu-checkbox-indicator:last-child]:ps-2 has-[>hlm-dropdown-menu-checkbox-indicator:last-child]:pe-8 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 has-[>hlm-dropdown-menu-checkbox-indicator:last-child]:[&>hlm-dropdown-menu-checkbox-indicator]:start-auto has-[>hlm-dropdown-menu-checkbox-indicator:last-child]:[&>hlm-dropdown-menu-checkbox-indicator]:end-2'
     );
+
+    this._cdkMenuItem.trigger = (options?: { keepOpen: boolean }) => {
+      if (this.keepOpen() && !this.disabled()) {
+        return this._originalTrigger({ ...(options ?? {}), keepOpen: true });
+      }
+      return this._originalTrigger(options);
+    };
   }
 }

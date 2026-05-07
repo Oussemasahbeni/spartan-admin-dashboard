@@ -69,13 +69,13 @@ export default class Settings {
   // Inputs (from route query params)
   // ==========================================
 
-  readonly panel = input<string>(); // Automatically bound from ?panel=xxx
+  public readonly panel = input<string>(); // Automatically bound from ?panel=xxx
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly panels = signal<Panel[]>([
+  public readonly panels = signal<Panel[]>([
     {
       id: 'account',
       icon: 'lucideUserCircle',
@@ -98,7 +98,7 @@ export default class Settings {
       id: 'notifications',
       icon: 'lucideBell',
       title: 'Notifications',
-      description: "Manage when you'll be notified on which channels",
+      description: 'Manage when you\'ll be notified on which channels',
     },
     {
       id: 'team',
@@ -108,9 +108,9 @@ export default class Settings {
     },
   ]);
 
-  readonly dir = this._dir.isRtl;
+  protected readonly dir = this._dir.isRtl;
 
-  readonly selectedPanel = linkedSignal<Panel>(() => {
+  protected readonly selectedPanel = linkedSignal<Panel>(() => {
     const panelId = this.panel();
 
     if (panelId) {

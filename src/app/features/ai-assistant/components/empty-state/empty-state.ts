@@ -35,13 +35,13 @@ export class AssistantEmptyState {
   // Outputs
   // ==========================================
 
-  readonly promptSelect = output<string>();
+  public readonly promptSelect = output<string>();
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly suggestedPrompts = signal<SuggestedPrompt[]>([
+  public readonly suggestedPrompts = signal<SuggestedPrompt[]>([
     {
       icon: 'lucideBookOpen',
       titleKey: 'suggestions.explainComponents.title',

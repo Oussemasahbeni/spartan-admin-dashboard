@@ -7,6 +7,7 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 @Component({
   selector: 'adm-breadcrumbs-header',
   imports: [HlmBreadCrumbImports, RouterLink, TranslocoModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <nav *transloco="let t" hlmBreadcrumb>
     <ol hlmBreadcrumbList>
       <!-- Home link - always visible -->
@@ -16,7 +17,7 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 
       <!-- Dynamic breadcrumbs -->
       @for (crumb of breadcrumbs(); track crumb.url; let isLast = $last) {
-        <li hlmBreadcrumbSeparator class="hidden sm:block"></li>
+        <li hlmBreadcrumbSeparator class="hidden sm:block rtl:rotate-180"></li>
         <li hlmBreadcrumbItem>
           @if (isLast) {
             <span hlmBreadcrumbPage>{{ t(crumb.label) }}</span>
@@ -27,7 +28,6 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
       }
     </ol>
   </nav>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsHeader {
   // ==========================================
@@ -38,5 +38,5 @@ export class BreadcrumbsHeader {
   // ==========================================
   // State
   // ==========================================
-  readonly breadcrumbs = this._breadcrumbService.breadcrumbs;
+  protected readonly breadcrumbs = this._breadcrumbService.breadcrumbs;
 }

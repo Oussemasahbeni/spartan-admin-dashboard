@@ -46,11 +46,11 @@ export default class TwoStepVerification {
   // State
   // ==========================================
 
-  readonly isLoading = signal(false);
-  readonly showError = signal(false);
-  readonly countdown = signal(60);
-  readonly maxLength = 6;
-  readonly email = signal('user@example.com');
+  protected readonly isLoading = signal(false);
+  protected readonly showError = signal(false);
+  protected readonly countdown = signal(60);
+  protected readonly maxLength = 6;
+  protected readonly email = signal('user@example.com');
 
   private _intervalId?: ReturnType<typeof setInterval>;
 
@@ -70,12 +70,12 @@ export default class TwoStepVerification {
   // Public Methods
   // ==========================================
 
-  readonly isResendDisabled = () => this.countdown() > 0;
+  protected readonly isResendDisabled = () => this.countdown() > 0;
 
   /** Handles paste by removing dashes */
-  public transformPaste = (pastedText: string) => pastedText.replaceAll('-', '');
+  protected transformPaste = (pastedText: string) => pastedText.replaceAll('-', '');
 
-  onOtpComplete(): void {
+  protected onOtpComplete(): void {
     if (this.otpForm.valid) {
       this.onSubmit();
     }

@@ -64,9 +64,9 @@ export default class Dashboard2 implements OnInit {
   // State
   // ==========================================
 
-  readonly transactions = signal<Transaction[]>([]);
-  readonly statCards = signal<StatCardData[]>([]);
-  readonly activeFilters = signal<FilterOptions | null>(null);
+  protected readonly transactions = signal<Transaction[]>([]);
+  protected readonly statCards = signal<StatCardData[]>([]);
+  protected readonly activeFilters = signal<FilterOptions | null>(null);
 
   // ==========================================
   // Public Methods

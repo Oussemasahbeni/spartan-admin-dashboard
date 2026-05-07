@@ -56,19 +56,19 @@ export class TrafficSourceCard {
   // ==========================================
 
   private readonly _dir = inject(DirectionalityService);
-  readonly rtl = this._dir.isRtl;
 
   // ==========================================
   // State
   // ==========================================
 
-  readonly selectedPeriod = signal<string>('month');
+  protected readonly rtl = this._dir.isRtl;
+  protected readonly selectedPeriod = signal<string>('month');
 
   private readonly _trafficCard = translateObjectSignal('analytics.trafficSourceCard.sources');
 
-  readonly trafficCard = computed(() => this._trafficCard() as TrafficSourceCardTranslation);
+  protected readonly trafficCard = computed(() => this._trafficCard() as TrafficSourceCardTranslation);
 
-  readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly chartOptions = computed<ApexOptions>(() => {
     const t = this.trafficCard();
     const isRtl = this.rtl();
 

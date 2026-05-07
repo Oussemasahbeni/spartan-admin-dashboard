@@ -49,10 +49,10 @@
     "assignee": "Assignee",
     "dueDate": "Due Date",
     "comments": "Comments",
-    "commentsCount": "comment(s)",
+    "commentsCount": "comments",
     "noComments": "No comments yet.",
     "attachments": "Attachments",
-    "files": "file(s)",
+    "files": "files",
     "tags": "Tags",
     "noDescription": "No description provided.",
     "close": "Close"

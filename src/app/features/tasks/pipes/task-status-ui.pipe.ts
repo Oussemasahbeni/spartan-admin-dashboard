@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { lucideCheckCircle2, lucideLoader, lucideSquare } from '@ng-icons/lucide';
+import { lucideCheckCircle2, lucideCircleDashed, lucideLoader, lucideSquare } from '@ng-icons/lucide';
 import { TaskStatus } from '../model/task';
 
-@Pipe({ name: 'taskStatusUI' })
+@Pipe({ name: 'taskStatusUI', standalone: true })
 export class TaskStatusUIPipe implements PipeTransform {
   transform(value: TaskStatus) {
     const configs: Record<TaskStatus, { icon: string; class: string }> = {
@@ -20,5 +20,6 @@ export function provideTaskStatusIcons() {
     lucideSquare,
     lucideLoader,
     lucideCheckCircle2,
+    lucideCircleDashed,
   });
 }

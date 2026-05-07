@@ -10,6 +10,7 @@ import {
   TitleStrategy,
   withComponentInputBinding,
   withInMemoryScrolling,
+  withPreloading,
   withViewTransitions,
 } from '@angular/router';
 
@@ -17,16 +18,14 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
-import { LanguageOptions, LanguageService } from './core/config/language.service';
+import { availableLangs, LanguageOptions, LanguageService } from './core/config/language.service';
+import { FlagBasedPreloadingStrategy } from './core/config/flag-based-preloading.strategy';
 import { ThemeService } from './core/config/theme.service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
 
 import { mockApiInterceptor } from '@core/interceptor/mock-api.interceptor';
-import { provideHlmDatePickerConfig } from '@spartan-ng/helm/date-picker';
-import { format } from 'date-fns/format';
-
-const availableLangs = ['en', 'fr', 'ar'];
+import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
 
 function getDefaultLanguage(): string {
   const storedLang = localStorage.getItem('lang');
@@ -48,6 +47,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withViewTransitions(),
+      withPreloading(FlagBasedPreloadingStrategy),
       withComponentInputBinding(),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
     ),
@@ -74,10 +74,9 @@ export const appConfig: ApplicationConfig = {
       }
       themeService.init();
     }),
-    provideHlmDatePickerConfig({
-      formatDate: (date: Date) => format(date, 'dd-MM-yyyy'),
+    provideHlmSidebarConfig({
+      closeMobileSidebarOnMenuButtonClick: true,
     }),
-
     {
       provide: TitleStrategy,
       useClass: TranslateTitleStrategy,

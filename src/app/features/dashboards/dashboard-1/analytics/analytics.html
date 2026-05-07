@@ -1,14 +1,29 @@
 <div class="@container/main flex flex-col gap-4">
-  <!-- Top Row: Sales & Visitors -->
-  <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
-    <adm-sales-card />
-    <adm-visitors-card />
-  </div>
+  @defer (on immediate) {
+    <!-- Top Row: Sales & Visitors -->
+    <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <adm-sales-card />
+      <adm-visitors-card />
+    </div>
+  } @placeholder {
+    <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <div class="bg-card h-96 animate-pulse rounded-xl border"></div>
+      <div class="bg-card h-96 animate-pulse rounded-xl border"></div>
+    </div>
+  }
 
-  <!-- Bottom Row: Traffic Source, Customers, Buyers Profile -->
-  <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-    <adm-traffic-source-card />
-    <adm-customers-card />
-    <adm-buyers-profile-card />
-  </div>
+  @defer (on viewport) {
+    <!-- Bottom Row: Traffic Source, Customers, Buyers Profile -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <adm-traffic-source-card />
+      <adm-customers-card />
+      <adm-buyers-profile-card />
+    </div>
+  } @placeholder {
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div class="bg-card h-80 animate-pulse rounded-xl border"></div>
+      <div class="bg-card h-80 animate-pulse rounded-xl border"></div>
+      <div class="bg-card h-80 animate-pulse rounded-xl border"></div>
+    </div>
+  }
 </div>

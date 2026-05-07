@@ -105,10 +105,10 @@ export class RevenueChartCard {
   private readonly _revenueChart = translateObjectSignal('revenueChart', {}, SCOPE);
   private readonly _months = translateObjectSignal('months', {}, SCOPE);
 
-  readonly revenueChart = computed(() => this._revenueChart() as Translation & RevenueChartTranslation);
-  readonly months = computed(() => this._months() as Translation & MonthsTranslation);
+  protected readonly revenueChart = computed(() => this._revenueChart() as Translation & RevenueChartTranslation);
+  protected readonly months = computed(() => this._months() as Translation & MonthsTranslation);
 
-  readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly chartOptions = computed<ApexOptions>(() => {
     const m = this.months();
     const chart = this.revenueChart();
     const isRtl = this.rtl();

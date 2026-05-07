@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core/index.js';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -78,44 +78,41 @@ export default class Calendar {
   // ==========================================
   // ViewChild
   // ==========================================
-  readonly calendar = viewChild<FullCalendarComponent>('calendar');
+  protected readonly calendar = viewChild<FullCalendarComponent>('calendar');
   // ==========================================
   // State
   // ==========================================
 
-  readonly currentTitle = signal('');
-  readonly currentStart = signal<Date | null>(null);
-  readonly currentEnd = signal<Date | null>(null);
-  readonly currentDate = signal<Date>(new Date());
+  protected readonly currentTitle = signal('');
+  protected readonly currentStart = signal<Date | null>(null);
+  protected readonly currentEnd = signal<Date | null>(null);
+  protected readonly currentDate = signal<Date>(new Date());
 
-  readonly eventTypes = EVENT_TYPES;
+  protected readonly eventTypes = EVENT_TYPES;
 
-  readonly selectedTypes = this._calendarStore.selectedTypes;
+  protected readonly selectedTypes = this._calendarStore.selectedTypes;
 
-  readonly showDatePicker = computed(() => this.currentView().value === 'timeGridDay');
-  readonly calendarApi = computed(() => this.calendar()?.getApi());
+  protected readonly showDatePicker = computed(() => this.currentView().value === 'timeGridDay');
+  protected readonly calendarApi = computed(() => this.calendar()?.getApi());
 
-  readonly selectedDate = signal<Date>(new Date());
+  protected readonly selectedDate = signal<Date>(new Date());
 
-  readonly visibleEventCount = signal(0);
+  protected readonly visibleEventCount = signal(0);
 
-  readonly use24HourFormat = signal(true);
+  protected readonly use24HourFormat = signal(true);
 
-  readonly eventDisplayMode = signal<'block' | 'list-item'>('block');
+  protected readonly eventDisplayMode = signal<'block' | 'list-item'>('block');
 
-  readonly availableViews = signal([
+  protected readonly availableViews = signal([
     { value: 'dayGridMonth', label: 'month', icon: 'lucideGrid2x2' },
     { value: 'timeGridWeek', label: 'week', icon: 'lucideColumns3' },
     { value: 'timeGridDay', label: 'day', icon: 'lucideSquare' },
     { value: 'listWeek', label: 'list', icon: 'lucideList' },
   ]);
-  readonly currentView = signal(this.availableViews()[0]);
+  protected readonly currentView = signal(this.availableViews()[0]);
 
-  readonly activeLanguage = toSignal(this._translocoService.langChanges$, {
-    initialValue: this._translocoService.getActiveLang(),
-  });
-
-  readonly calendarOptions = computed<CalendarOptions>(() => ({
+  protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
+  protected readonly calendarOptions = computed<CalendarOptions>(() => ({
     initialView: this.currentView().value,
     headerToolbar: false,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],

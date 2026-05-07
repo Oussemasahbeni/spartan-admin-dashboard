@@ -5,6 +5,7 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideEllipsisVertical } from '@ng-icons/lucide';
 import { ConfirmationDialogService } from '@shared/components/confirmation-dialog/confirmation-dialog.service';
 import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
+import { toast } from '@spartan-ng/brain/sonner';
 import { HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
@@ -12,7 +13,6 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
-import { toast } from 'ngx-sonner';
 import { exhaustMap, filter } from 'rxjs';
 import { User } from '../../../../shared/models/user';
 import { UserService } from '../../service/user.service';
@@ -31,7 +31,6 @@ import { UserForm } from '../form/user-form';
   ],
   providers: [provideIcons({ lucideEllipsisVertical })],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
   template: `
     <button
       type="button"
@@ -85,7 +84,7 @@ export class ActionDropdown {
   // Inputs
   // ==========================================
 
-  readonly onSuccess = input<() => void>();
+  public readonly onSuccess = input<() => void>();
 
   // ==========================================
   // Public Methods

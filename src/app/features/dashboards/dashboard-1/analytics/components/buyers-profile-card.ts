@@ -52,7 +52,7 @@ export class BuyersProfileCard {
   // State
   // ==========================================
 
-  readonly chartOptions = signal<ApexOptions>({
+  protected readonly chartOptions = signal<ApexOptions>({
     series: [75], // 75% completion
     chart: {
       type: 'radialBar',

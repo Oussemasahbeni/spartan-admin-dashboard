@@ -6,7 +6,7 @@
     <div class="flex items-center justify-between">
       <div class="space-y-1">
         <div class="flex items-center gap-2">
-          <h2 class="text-2xl font-bold tracking-tight">{{ t('header.title') }}</h2>
+          <h2 class="text-3xl font-bold tracking-tight">{{ t('header.title') }}</h2>
           <span class="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums">
             {{ taskGroups().count }}
           </span>
@@ -15,7 +15,7 @@
       </div>
 
       <div class="flex items-center gap-2">
-        <button hlmBtn variant="outline" type="button" size="sm">
+        <button hlmBtn variant="outline" type="button" size="sm" disabled aria-disabled="true">
           <ng-icon hlmIcon name="lucideFilter" size="xs" class="mr-1.5" />
           {{ t('filter') }}
         </button>
@@ -33,7 +33,7 @@
         <div class="mb-3 flex items-center justify-between">
           <div class="flex items-center gap-2">
             <span [class]="'h-2.5 w-2.5 rounded-full ' + col.color"></span>
-            <h3 class="text-foreground text-sm font-semibold">{{ t('columns.' + col.id) }}</h3>
+            <h3 class="text-foreground text-md font-semibold">{{ t('columns.' + col.id) }}</h3>
             <span
               class="bg-muted text-muted-foreground flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold"
             >

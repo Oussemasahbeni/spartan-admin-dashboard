@@ -74,8 +74,8 @@ export class Navigation {
   // State
   // ==========================================
 
-  readonly side = computed<'left' | 'right'>(() => (this._dir.isRtl() ? 'right' : 'left'));
-  readonly sideBarCollapsed = computed(() => this._sidebarService.state() === 'collapsed');
+  protected readonly side = computed<'left' | 'right'>(() => (this._dir.isRtl() ? 'right' : 'left'));
+  protected readonly sideBarCollapsed = computed(() => this._sidebarService.state() === 'collapsed');
 
   protected readonly _navigationGroups: NavGroup[] = [
     {

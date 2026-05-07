@@ -25,10 +25,6 @@
                 "title": "Revenu moyen par commande",
                 "infoTooltip": "Revenu moyen par commande la semaine dernière",
                 "description": "Depuis la semaine dernière"
-            },
-            "totalRevenue": {
-                "title": "Revenu total",
-                "description": "+20,1% par rapport au mois dernier"
             }
         }
     },

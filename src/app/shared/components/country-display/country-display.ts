@@ -1,6 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslocoService } from '@jsverse/transloco';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { Country, countries } from '../../countries';
@@ -37,13 +36,13 @@ export class CountryDisplay {
   // ==========================================
   // Inputs
   // ==========================================
-  readonly country = input.required<string | Country | null | undefined>();
-  readonly showCountryCode = input<boolean>(false);
+  public readonly country = input.required<string | Country | null | undefined>();
+  public readonly showCountryCode = input<boolean>(false);
 
   // ==========================================
   // State
   // ==========================================
-  protected readonly activeLang = toSignal(this._transloco.langChanges$, { initialValue: this._transloco.getActiveLang() });
+  protected readonly activeLang = computed(() => this._transloco.activeLang());
 
   protected readonly resolvedCountry = computed(() => {
     const val = this.country();

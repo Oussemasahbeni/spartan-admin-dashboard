@@ -68,10 +68,10 @@ export class AreaChartCard {
   private readonly _areaChart = translateObjectSignal('areaChart', {}, SCOPE);
   private readonly _months = translateObjectSignal('months', {}, SCOPE);
 
-  readonly areaChart = computed(() => this._areaChart() as Translation & AreaChartTranslation);
-  readonly months = computed(() => this._months() as Translation & MonthsTranslation);
+  protected readonly areaChart = computed(() => this._areaChart() as Translation & AreaChartTranslation);
+  protected readonly months = computed(() => this._months() as Translation & MonthsTranslation);
 
-  readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly chartOptions = computed<ApexOptions>(() => {
     const m = this.months();
     const chart = this.areaChart();
     const isRtl = this.rtl();

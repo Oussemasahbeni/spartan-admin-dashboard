@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
@@ -6,21 +5,20 @@ import { User } from '../../shared/models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly _http = inject(HttpClient);
   private readonly _router = inject(Router);
   private readonly _localStorage = inject(LOCAL_STORAGE);
 
   private readonly _currentUser = signal<User | null>(null);
-  readonly currentUser = this._currentUser.asReadonly();
-  readonly isAuthenticated = computed(() => !!this._currentUser());
+  public readonly currentUser = this._currentUser.asReadonly();
+  public readonly isAuthenticated = computed(() => !!this._currentUser());
 
   setUser(user: User): void {
     this._currentUser.set(user);
   }
 
-  logout(): void {
+  logout(): Promise<boolean> {
     this._currentUser.set(null);
     this._localStorage?.removeItem('token');
-    this._router.navigate(['/login']);
+    return this._router.navigate(['/login']);
   }
 }
