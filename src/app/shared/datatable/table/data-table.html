@@ -61,7 +61,7 @@
           <!-- Table Body -->
           <tbody hlmTBody class="w-full">
             @for (row of table.getRowModel().rows; track row.id) {
-              <tr hlmTr [attr.data-state]="row.getIsSelected() && 'selected'" [attr.aria-selected]="row.getIsSelected()">
+              <tr hlmTr [attr.data-state]="row.getIsSelected() && 'selected'" [aria-selected]="row.getIsSelected()">
                 @for (cell of row.getVisibleCells(); track cell.id) {
                   <td
                     hlmTd

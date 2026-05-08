@@ -35,8 +35,8 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
     provideIcons({ lucideSparkle, lucideRefreshCcw, lucideCheck, lucideCopy, lucideThumbsDown, lucideThumbsUp }),
   ],
   host: {
-    '[attr.aria-live]': '"polite"',
-    '[attr.aria-busy]': 'isStreaming()',
+    '[aria-live]': '"polite"',
+    '[aria-busy]': 'isStreaming()',
   },
 })
 export class AiResponseCard {

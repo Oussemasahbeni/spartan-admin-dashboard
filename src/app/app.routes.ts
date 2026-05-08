@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { MainLayout } from './layout/app/layout';
 import { EmptyLayout } from './layout/empty/empty';
+import { provideTranslocoScope } from '@jsverse/transloco';
 
 export const routes: Routes = [
   {
@@ -58,6 +59,13 @@ export const routes: Routes = [
         title: 'calendar',
         data: { breadcrumb: 'navigation.calendar', preload: true },
         loadChildren: () => import('./features/calendar/routes'),
+      },
+      {
+        path: 'tasks',
+        title: 'tasks',
+        data: { breadcrumb: 'navigation.tasks' },
+        providers: [provideTranslocoScope('tasks')],
+        loadChildren: () => import('./features/tasks/routes'),
       },
       {
         path: 'settings',

@@ -122,3 +122,26 @@
   --color-chart-amber: var(--chart-amber);
   --color-chart-orange: var(--chart-orange);
 }
+
+/* CDK Drag & Drop animations */
+.cdk-drag-preview {
+  border-radius: 0.75rem;
+  box-shadow:
+    0 5px 5px -3px rgba(0, 0, 0, 0.15),
+    0 8px 10px 1px rgba(0, 0, 0, 0.1),
+    0 3px 14px 2px rgba(0, 0, 0, 0.08);
+  opacity: 0.95;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
