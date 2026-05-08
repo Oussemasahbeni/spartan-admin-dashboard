@@ -113,8 +113,7 @@
                   hlmInput
                   class="h-10 w-full text-sm"
                   [placeholder]="t('placeholder.tagName')"
-                  [value]="pendingTagName()"
-                  (input)="pendingTagName.set($any($event.target).value)"
+                  [formField]="tagForm.name"
                   (keydown.enter)="$event.preventDefault(); addTag()"
                 />
 
@@ -123,10 +122,10 @@
                     <button
                       type="button"
                       [title]="color"
-                      [attr.aria-label]="'Select color ' + color"
-                      [attr.aria-pressed]="pendingTagColor() === color"
+                      [aria-label]="'Select color ' + color"
+                      [aria-pressed]="pendingTagColor() === color"
                       [class]="
-                        'h-6 w-6 rounded-full border-2 transition-all ' +
+                        'size-6 rounded-full border-2 transition-all ' +
                         tagColorClasses[color] +
                         (pendingTagColor() === color ? ' scale-110 border-current' : ' border-transparent')
                       "
@@ -155,7 +154,7 @@
             <button
               type="button"
               class="ml-0.5 flex items-center justify-center rounded-full opacity-60 hover:opacity-100"
-              [attr.aria-label]="'Remove tag ' + tag.name"
+              [aria-label]="'Remove tag ' + tag.name"
               (click)="removeTag($index)"
             >
               <ng-icon hlmIcon name="lucideX" size="xs" />

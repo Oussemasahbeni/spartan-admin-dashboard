@@ -45,7 +45,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
       role="button"
       tabindex="0"
       class="focus-visible:ring-ring cursor-pointer gap-0 py-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-      [attr.aria-label]="task().title"
+      [aria-label]="task().title"
       (focusin)="groupFocused = true"
       (focusout)="onFocusOut($event)"
       (click)="taskClick.emit(task())"
@@ -82,7 +82,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
                 size="icon"
                 class="mt-0.5 h-7 w-7 shrink-0 rounded-full p-0"
                 aria-label="Toggle task completion"
-                [attr.tabindex]="task().isCompleted || groupFocused ? '0' : '-1'"
+                [tabindex]="task().isCompleted || groupFocused ? '0' : '-1'"
                 [class.text-emerald-500]="task().isCompleted"
                 [class.text-muted-foreground]="!task().isCompleted"
                 (click)="toggleComplete.emit(task()); $event.stopPropagation()"
@@ -200,7 +200,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
           size="icon"
           class="text-muted-foreground hover:text-foreground h-6 w-6 rounded-full opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
           aria-label="Open task actions menu"
-          [attr.tabindex]="task().isCompleted || groupFocused ? '0' : '-1'"
+          [tabindex]="task().isCompleted || groupFocused ? '0' : '-1'"
           (click)="optionsClick.emit($event); $event.stopPropagation()"
         >
           <ng-icon hlmIcon name="lucideMoreVertical" size="xs" />

@@ -40,7 +40,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
   `,
   host: {
     '[attr.role]': '"status"',
-    '[attr.aria-label]': '"AI is typing"',
+    '[aria-label]': '"AI is typing"',
   },
 })
 export class TypingIndicator {

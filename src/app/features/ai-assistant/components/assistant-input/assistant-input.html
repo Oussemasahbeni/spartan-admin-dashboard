@@ -30,7 +30,7 @@
         hlmInputGroupTextarea
         class="max-h-96"
         aria-describedby="keyboard-hint"
-        [attr.aria-label]="t('input.placeholder')"
+        [aria-label]="t('input.placeholder')"
         [placeholder]="t('input.placeholder')"
         [formField]="promptForm.prompt"
         (keydown)="handleKeydown($event)"
@@ -49,12 +49,7 @@
             <hlm-dropdown-menu class="w-56">
               <!-- Attachments -->
               <hlm-dropdown-menu-group>
-                <button
-                  type="button"
-                  hlmDropdownMenuItem
-                  [attr.aria-label]="t('input.attachFile')"
-                  (click)="triggerFileInput()"
-                >
+                <button type="button" hlmDropdownMenuItem [aria-label]="t('input.attachFile')" (click)="triggerFileInput()">
                   <ng-icon hlm name="lucidePaperclip" size="sm" />
                   {{ t('input.addPhotosFiles') }}
                 </button>
@@ -166,10 +161,10 @@
             hlmInputGroupButton
             class="rounded-full"
             size="icon-sm"
-            [attr.aria-label]="t('input.voiceInput')"
+            [aria-label]="t('input.voiceInput')"
             [class.animate-pulse]="isRecording()"
             [class.text-red-500]="isRecording()"
-            [attr.aria-pressed]="isRecording()"
+            [aria-pressed]="isRecording()"
             (click)="toggleMic()"
           >
             <ng-icon hlm name="lucideMic" size="sm" />
@@ -183,7 +178,7 @@
               hlmInputGroupButton
               class="rounded-full"
               size="icon-sm"
-              [attr.aria-label]="t('input.stopStreaming')"
+              [aria-label]="t('input.stopStreaming')"
               [variant]="'secondary'"
               (click)="handleStopStreaming()"
             >
@@ -195,7 +190,7 @@
               hlmInputGroupButton
               class="rounded-full"
               size="icon-sm"
-              [attr.aria-label]="t('input.sendMessage')"
+              [aria-label]="t('input.sendMessage')"
               [variant]="'default'"
               [disabled]="!canSend()"
               (click)="handleSend()"

@@ -63,9 +63,10 @@ export class TaskForm {
   protected readonly tagColorClasses = TAG_COLOR_CLASSES;
 
   // Tag management (outside Signal Form — dynamic list)
-  protected readonly pendingTagName = signal('');
   protected readonly pendingTagColor = signal<TagColor>('indigo');
   protected readonly addedTags = signal<Tag[]>([]);
+  private readonly tagModel = signal({ name: '' });
+  protected readonly tagForm = form(this.tagModel);
   protected readonly existingTags = computed(() =>
     this._dialogContext.existingTags.filter((et) => !this.addedTags().some((at) => at.name === et.name))
   );
@@ -106,20 +107,21 @@ export class TaskForm {
     this.tagPopoverState.set(state as 'open' | 'closed');
     if (state === 'closed') {
       this.tagPopoverView.set('list');
-      this.pendingTagName.set('');
+      this.tagForm.name().value.set('');
       this.pendingTagColor.set('indigo');
     }
   }
 
   protected addTag(): void {
-    const normalizedName = this.pendingTagName().trim().toLowerCase();
+    const raw = this.tagForm.name().value().trim();
+    const normalizedName = raw.toLowerCase();
     if (!normalizedName) return;
 
     if (this.addedTags().some((tag) => tag.name.trim().toLowerCase() === normalizedName)) return;
 
-    const name = this.pendingTagName().trim();
+    const name = raw;
     this.addedTags.update((tags) => [...tags, { name, color: this.pendingTagColor() }]);
-    this.pendingTagName.set('');
+    this.tagForm.name().value.set('');
     this.pendingTagColor.set('indigo');
     this.tagPopoverView.set('list');
   }

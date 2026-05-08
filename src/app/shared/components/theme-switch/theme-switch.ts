@@ -32,7 +32,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       hlmBtn
       size="icon"
       [hlmDropdownMenuTrigger]="menu"
-      [attr.aria-label]="'header.toggleTheme' | transloco"
+      [aria-label]="'header.toggleTheme' | transloco"
       [hlmTooltip]="tooltip"
       [position]="'bottom'"
     >
@@ -76,7 +76,6 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       </hlm-dropdown-menu>
     </ng-template>
   `,
-  
 })
 export class ThemeSwitch {
   // ==========================================
