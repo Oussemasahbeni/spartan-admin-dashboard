@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 
 @Component({
@@ -48,7 +48,7 @@ export class TypingIndicator {
   // Inputs
   // ==========================================
 
-  public readonly dotCount = input<number>(3);
+  public readonly dotCount = input(3, { transform: numberAttribute });
   public readonly animation = input<'shimmer' | 'wave'>('shimmer');
 
   // ==========================================

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, model, signal } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, model, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -85,8 +85,8 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   // ==========================================
   public readonly value = model<string>('');
   public readonly touched = model<boolean>(false);
-  public readonly invalid = input<boolean>(false);
-  public readonly disabled = input<boolean>(false);
+  public readonly invalid = input(false, { transform: booleanAttribute });
+  public readonly disabled = input(false, { transform: booleanAttribute } );
 
   // ==========================================
   // State

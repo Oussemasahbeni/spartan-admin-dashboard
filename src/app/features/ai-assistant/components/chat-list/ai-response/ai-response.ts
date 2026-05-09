@@ -6,6 +6,7 @@ import {
   Component,
   PLATFORM_ID,
   ViewEncapsulation,
+  booleanAttribute,
   inject,
   input,
   output,
@@ -53,7 +54,7 @@ export class AiResponseCard {
 
   public readonly content = input.required<string>();
 
-  public readonly isStreaming = input<boolean>(false);
+  public readonly isStreaming = input(false, {transform: booleanAttribute});
 
   // ==========================================
   // Outputs

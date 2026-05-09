@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -67,8 +67,8 @@ export class AssistantInput {
   // Inputs
   // ==========================================
 
-  public readonly isLoading = input<boolean>(false);
-  public readonly isStreaming = input<boolean>(false);
+  public readonly isLoading = input(false, {transform: booleanAttribute});
+  public readonly isStreaming = input(false,{transform: booleanAttribute});
   public readonly suggestions = input<string[]>([]);
 
   // ==========================================

@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { Country, countries } from '../../countries';
@@ -37,7 +37,7 @@ export class CountryDisplay {
   // Inputs
   // ==========================================
   public readonly country = input.required<string | Country | null | undefined>();
-  public readonly showCountryCode = input<boolean>(false);
+  public readonly showCountryCode = input(false, { transform: booleanAttribute });
 
   // ==========================================
   // State

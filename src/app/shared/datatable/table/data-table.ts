@@ -116,7 +116,7 @@ export class DataTable<T> {
    * When true, displays a loading spinner overlay on the table.
    * Useful for indicating server-side data fetching.
    */
-  public readonly isLoading = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+  public readonly isLoading = input(false, { transform: booleanAttribute });
 
   /**
    * The data to display in the table.
@@ -130,22 +130,22 @@ export class DataTable<T> {
    * **Only required in server mode** for proper pagination display.
    * In client mode, this is calculated automatically.
    */
-  public readonly totalElements = input<number, NumberInput>(0, { transform: numberAttribute });
+  public readonly totalElements = input(0, { transform: numberAttribute });
 
   /**
    * Whether to show the pagination controls.
    */
-  public readonly paginated = input<boolean, BooleanInput>(true, { transform: booleanAttribute });
+  public readonly paginated = input(true, { transform: booleanAttribute });
 
   /**
    * Enables column resizing via drag handles.
    */
-  public readonly resizableColumns = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+  public readonly resizableColumns = input(false, { transform: booleanAttribute });
 
   /**
    * Enables checkbox selection for rows.
 =   */
-  public readonly enableRowSelection = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+  public readonly enableRowSelection = input(false, { transform: booleanAttribute });
 
   /**
    * External pagination state for server-side mode.
@@ -153,7 +153,7 @@ export class DataTable<T> {
    */
   public readonly paginationState = input<PaginationState>({ pageIndex: 0, pageSize: 10 });
 
-  public readonly enableColumnPinning = input<boolean, BooleanInput>(false, { transform: booleanAttribute });
+  public readonly enableColumnPinning = input(false, { transform: booleanAttribute });
 
   /**
    * External sorting state for server-side mode.

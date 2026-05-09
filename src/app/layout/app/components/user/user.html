@@ -12,6 +12,7 @@
       </div>
       <ng-icon name="lucideChevronsUpDown" class="ml-auto text-base" />
     </button>
+    <ng-icon name="lucide" />
   </li>
 </ul>
 
@@ -90,21 +91,19 @@
       <!-- Language Selector -->
       <button type="button" hlmDropdownMenuItem side="right" align="start" [hlmDropdownMenuTrigger]="languageTpl">
         <ng-icon name="lucideGlobe" />
-        <span *transloco="let t; prefix: 'navUser'">
-          {{ t('language') }}
-        </span>
+        <span *transloco="let t; prefix: 'navUser'"> {{ t('language') }} </span>
         <hlm-dropdown-menu-item-sub-indicator class="rtl:rotate-180" />
       </button>
 
       <ng-template #languageTpl>
         <hlm-dropdown-menu-sub>
           @for (lang of availableLanguages(); track lang.code) {
-            <button type="button" hlmDropdownMenuItem (click)="setLang(lang.code)">
-              <span>{{ lang.label }}</span>
-              @if (currentLang() === lang.code) {
-                <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
-              }
-            </button>
+          <button type="button" hlmDropdownMenuItem (click)="setLang(lang.code)">
+            <span>{{ lang.label }}</span>
+            @if (currentLang() === lang.code) {
+            <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+            }
+          </button>
           }
         </hlm-dropdown-menu-sub>
       </ng-template>

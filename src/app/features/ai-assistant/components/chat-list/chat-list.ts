@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ChatMessage, UserMessage } from '../../model/assistant';
 import { AssistantService } from '../../service/chat.service';
 import { AiResponseCard } from './ai-response/ai-response';
@@ -23,7 +23,7 @@ export class ChatList {
   // ==========================================
 
   public readonly messages = input<ChatMessage[]>([]);
-  public readonly loading = input<boolean>(false);
+  public readonly loading = input(false, {transform: booleanAttribute});
 
   // ==========================================
   // Public Methods

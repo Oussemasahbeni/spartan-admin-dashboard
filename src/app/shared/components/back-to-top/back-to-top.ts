@@ -1,5 +1,14 @@
 import { ViewportScroller } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DOCUMENT, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DOCUMENT,
+  inject,
+  input,
+  numberAttribute,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -9,19 +18,21 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   selector: 'adm-back-to-top',
   imports: [HlmButtonImports, HlmIconImports],
   providers: [provideIcons({ lucideArrowUp })],
-  template: `@if (isVisible()) {
-    <button
-      type="button"
-      hlmBtn
-      class="fixed end-6 bottom-6 z-50 hidden md:inline-flex"
-      title="Back to top"
-      size="icon"
-      aria-label="Scroll back to top"
-      (click)="scrollToTop()"
-    >
-      <ng-icon size="sm" name="lucideArrowUp" hlm />
-    </button>
-  } `,
+  template: `
+    @if (isVisible()) {
+      <button
+        type="button"
+        hlmBtn
+        class="fixed inset-e-6 bottom-6 z-50 hidden md:inline-flex"
+        title="Back to top"
+        size="icon"
+        aria-label="Scroll back to top"
+        (click)="scrollToTop()"
+      >
+        <ng-icon size="sm" name="lucideArrowUp" hlm />
+      </button>
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   host: {
     '(window:scroll)': 'onWindowScroll()',
@@ -38,7 +49,7 @@ export class BackToTop {
   // ==========================================
   // Inputs
   // ==========================================
-  public readonly showAfter = input(300); // Pixels scrolled before showing
+  public readonly showAfter = input(300, { transform: numberAttribute }); // Pixels scrolled before showing
 
   // ==========================================
   // State
