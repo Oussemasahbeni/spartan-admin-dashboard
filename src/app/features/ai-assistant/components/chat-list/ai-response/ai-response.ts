@@ -54,7 +54,7 @@ export class AiResponseCard {
 
   public readonly content = input.required<string>();
 
-  public readonly isStreaming = input(false, {transform: booleanAttribute});
+  public readonly isStreaming = input(false, { transform: booleanAttribute });
 
   // ==========================================
   // Outputs

@@ -4,19 +4,19 @@
     <div class="grid w-full gap-6 sm:grid-cols-3">
       <!-- Plan Alert -->
       <div class="sm:col-span-3">
-        <div hlmAlert variant="default">
-          <ng-icon hlm hlmAlertIcon name="lucideInfo" />
+        <hlm-alert variant="default">
+          <ng-icon hlm hlmAlertIcon size="sm" name="lucideInfo" />
           <p hlmAlertDesc>
             {{ t('planAlert') }}
           </p>
-        </div>
+        </hlm-alert>
       </div>
 
       <!-- Plans -->
       <hlm-radio-group class="col-span-full grid grid-cols-1 gap-4 sm:grid-cols-3" [formField]="planBillingForm.plan">
         @for (plan of plans(); track plan.value) {
           <label hlmLabel [class]="cardClass" [for]="plan.value">
-            <hlm-radio class="sr-only" [value]="plan.value" [id]="plan.value">
+            <hlm-radio class="sr-only" [value]="plan.value" [inputId]="plan.value">
               <hlm-radio-indicator />
             </hlm-radio>
             <ng-icon hlm name="lucideCreditCard" class="mb-3" />
@@ -151,4 +151,3 @@
     </div>
   </form>
 </div>
-

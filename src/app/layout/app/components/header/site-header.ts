@@ -49,7 +49,7 @@ import { Notifications } from '../notifications/notifications';
             </kbd>
           </div>
         </ng-template>
-        <hlm-separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
+        <hlm-separator orientation="vertical" class="me-2" />
         <adm-breadcrumbs-header />
       </div>
       <div class="flex items-center gap-4">

@@ -8,7 +8,7 @@
       </div>
     } @else {
       <div class="mx-auto w-full max-w-3xl">
-        <adm-chat-list [loading]="isLoading()" [messages]="messages()" />
+        <adm-chat-list [loading]="isLoading()" [messages]="messages()" (regenerateLastMessage)="handleMessageRegenerate()" />
       </div>
     }
   </ng-scrollbar>

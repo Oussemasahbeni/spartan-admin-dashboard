@@ -40,7 +40,7 @@ import { Task, TaskFormContext, TaskFormModel, TaskStatus } from '../../model/ta
   ],
   providers: [provideIcons({ lucideTag, lucidePlus, lucideX, lucideChevronLeft })],
   host: {
-    class: 'flex flex-col gap-4 sm:min-w-lg',
+    class: 'flex flex-col gap-4 sm:max-w-lg',
   },
   templateUrl: './task-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

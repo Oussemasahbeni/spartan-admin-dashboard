@@ -12,6 +12,5 @@ import { RouterOutlet } from '@angular/router';
       </div>
     </div>
   `,
-  
 })
 export class EmptyLayout {}

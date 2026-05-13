@@ -152,4 +152,3 @@ export class SettingsPlanBilling {
     console.log('Plan & Billing saved:', this.planBillingModel());
   }
 }
-

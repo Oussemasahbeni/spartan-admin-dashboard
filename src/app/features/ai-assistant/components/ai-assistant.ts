@@ -24,10 +24,7 @@ export default class AiAssistant {
   // State
   // ==========================================
 
-  protected readonly conversation = this._assistantService.conversation;
-
   protected readonly messages = this._assistantService.messages;
-
   protected readonly isEmpty = computed(() => this.messages().length === 0);
   protected readonly isLoading = this._assistantService.isLoading;
   protected readonly isStreaming = this._assistantService.isStreaming;
@@ -49,5 +46,9 @@ export default class AiAssistant {
 
   handleStopStreaming() {
     this._assistantService.stopStreaming();
+  }
+
+  handleMessageRegenerate() {
+    this._assistantService.regenerateLastMessage();
   }
 }

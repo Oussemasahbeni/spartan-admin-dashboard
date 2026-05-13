@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
+import { provideTranslocoScope } from '@jsverse/transloco';
 import { authGuard } from './core/guards/auth.guard';
 import { MainLayout } from './layout/app/layout';
 import { EmptyLayout } from './layout/empty/empty';
-import { provideTranslocoScope } from '@jsverse/transloco';
 
 export const routes: Routes = [
   {

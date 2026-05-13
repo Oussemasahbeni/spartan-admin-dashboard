@@ -54,7 +54,6 @@ interface DataTableColumnMeta {
               type="button"
               hlmDropdownMenuCheckbox
               class="flex-1"
-              [keepOpen]="true"
               [checked]="column.getIsVisible()"
               (triggered)="column.toggleVisibility()"
             >

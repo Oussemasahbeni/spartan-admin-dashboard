@@ -10,7 +10,6 @@ import {
   untracked,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { createPageArray, outOfBoundCorrection } from './hlm-numbered-pagination';
 import { HlmPagination } from './hlm-pagination';
@@ -32,7 +31,6 @@ import { HlmPaginationPrevious } from './hlm-pagination-previous';
     HlmPaginationNext,
     HlmPaginationLink,
     HlmPaginationEllipsis,
-
     HlmSelectImports,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -86,12 +84,12 @@ import { HlmPaginationPrevious } from './hlm-pagination-previous';
       <!-- Show Page Size selector -->
       <hlm-select [(ngModel)]="itemsPerPage" class="ml-auto">
         <hlm-select-trigger class="w-fit">
-          <hlm-select-value placeholder="Page size" />
+          <hlm-select-value />
         </hlm-select-trigger>
         <hlm-select-content *hlmSelectPortal>
           <hlm-select-group>
             @for (pageSize of _pageSizesWithCurrent(); track pageSize) {
-              <hlm-select-item [value]="pageSize">{{ pageSize }} / page</hlm-select-item>
+              <hlm-select-item [value]="pageSize">{{ pageSize }}</hlm-select-item>
             }
           </hlm-select-group>
         </hlm-select-content>

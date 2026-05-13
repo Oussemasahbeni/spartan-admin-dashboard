@@ -1,10 +1,24 @@
-import { afterNextRender, computed, DestroyRef, DOCUMENT, inject, Injectable, type Signal, signal } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import {
+  afterNextRender,
+  computed,
+  DestroyRef,
+  DOCUMENT,
+  inject,
+  Injectable,
+  PLATFORM_ID,
+  REQUEST,
+  type Signal,
+  signal,
+} from '@angular/core';
 import { injectHlmSidebarConfig } from './hlm-sidebar.token';
 
 export type SidebarVariant = 'sidebar' | 'floating' | 'inset';
 
 @Injectable({ providedIn: 'root' })
 export class HlmSidebarService {
+  private readonly _platformId = inject(PLATFORM_ID);
+  private readonly _request = inject(REQUEST, { optional: true });
   private readonly _config = injectHlmSidebarConfig();
   private readonly _document = inject(DOCUMENT);
   private readonly _window = this._document.defaultView;
@@ -23,15 +37,10 @@ export class HlmSidebarService {
 
   constructor() {
     const destroyRef = inject(DestroyRef);
+    this.restoreStateFromCookie();
+
     afterNextRender(() => {
       if (!this._window) return;
-      // Initialize from cookie
-      const cookie = this._document.cookie.split('; ').find((row) => row.startsWith(`${this._config.sidebarCookieName}=`));
-
-      if (cookie) {
-        const value = cookie.split('=')[1];
-        this._open.set(value === 'true');
-      }
 
       // Initialize MediaQueryList
       this._mediaQuery = this._window.matchMedia(`(max-width: ${this._config.mobileBreakpoint})`);
@@ -98,6 +107,23 @@ export class HlmSidebarService {
       this._openMobile.update((value) => !value);
     } else {
       this.setOpen(!this._open());
+    }
+  }
+
+  private restoreStateFromCookie(): void {
+    const cookieString = isPlatformServer(this._platformId) ? this._request?.headers.get('cookie') : this._document.cookie;
+
+    if (!cookieString) return;
+
+    const prefix = `${this._config.sidebarCookieName}=`;
+    const cookieValue = cookieString
+      .split(';')
+      .map((c) => c.trim())
+      .find((c) => c.startsWith(prefix))
+      ?.slice(prefix.length);
+
+    if (cookieValue !== undefined) {
+      this._open.set(cookieValue === 'true');
     }
   }
 }

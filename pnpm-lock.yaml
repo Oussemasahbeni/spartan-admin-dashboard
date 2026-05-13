@@ -66,11 +66,11 @@ importers:
         specifier: ^33.0.0
         version: 33.0.0
       '@spartan-ng/brain':
-        specifier: 0.0.1-alpha.669
-        version: 0.0.1-alpha.669(3643e4d46e763f54ebee5f882f953bd9)
+        specifier: 0.0.1-alpha.691
+        version: 0.0.1-alpha.691(3643e4d46e763f54ebee5f882f953bd9)
       '@tanstack/angular-table':
-        specifier: ^8.21.3
-        version: 8.21.3(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))
+        specifier: ^8.21.4
+        version: 8.21.4(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))
       apexcharts:
         specifier: ^5.3.6
         version: 5.3.6
@@ -133,8 +133,8 @@ importers:
         specifier: ^8.2.0
         version: 8.2.0
       '@spartan-ng/cli':
-        specifier: 0.0.1-alpha.669
-        version: 0.0.1-alpha.669(e05b3586e6effc8618e30bbbfc49ef02)
+        specifier: 0.0.1-alpha.691
+        version: 0.0.1-alpha.691(e05b3586e6effc8618e30bbbfc49ef02)
       '@tailwindcss/postcss':
         specifier: ^4.2.2
         version: 4.2.2
@@ -2426,8 +2426,8 @@ packages:
   '@sinclair/typebox@0.34.41':
     resolution: {integrity: sha512-6gS8pZzSXdyRHTIqoqSVknxolr1kzfy4/CeDnrzsVz8TTIWUbOBr6gnzOmTYJ3eXQNh4IYHIGi5aIL7sOZ2G/g==}
 
-  '@spartan-ng/brain@0.0.1-alpha.669':
-    resolution: {integrity: sha512-J8XMqElTF42yHc2t4Trobrj5UQUEt4Zq5yZJWd+FS8OSwmfA9ANKQh/mrNbeAdsttnJfkqw9iCTZFdwtq/olBQ==}
+  '@spartan-ng/brain@0.0.1-alpha.691':
+    resolution: {integrity: sha512-IcNs9lWVB56dYiCx1Rpzf+ndRwkdq0D3hhKmf6luOffdJd/8ZIyyuT3y4oYXN6wRExUj5Qe0h6mmO7+WEsDtng==}
     peerDependencies:
       '@angular/cdk': '>=20.0.0 <22.0.0'
       '@angular/common': '>=20.0.0 <22.0.0'
@@ -2441,8 +2441,8 @@ packages:
       luxon:
         optional: true
 
-  '@spartan-ng/cli@0.0.1-alpha.669':
-    resolution: {integrity: sha512-SK1sP65UiTpZ/yPK3NIBenSUJj1i7BdeXCedyEVH+hAYQI70ISL88guAa4LA4sTW0ME+R7WnUaHfHfUqnUyKOw==}
+  '@spartan-ng/cli@0.0.1-alpha.691':
+    resolution: {integrity: sha512-T+yAQA2/AjSIKQttRqUQvh5P4ntXA7s2kAo6CI3qpakfPXCPSYYJmNpXImJjWuECYjhLivWXjTFqll5HxHVEMA==}
     peerDependencies:
       tslib: ^2.3.0
 
@@ -2567,8 +2567,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1'
 
-  '@tanstack/angular-table@8.21.3':
-    resolution: {integrity: sha512-8VqEGObnTBNJm3qQSPy+WEGqjXDLesEPSnBTEHdbHFh1rMP1pQsgI85Dwy8OX4kB82wIDvJuw4LceGIXZEbotA==}
+  '@tanstack/angular-table@8.21.4':
+    resolution: {integrity: sha512-djyuJFvIB/pBuBIqny8b7+5ozeXJSElaxYRZyyKLpYrXn4xQSysBT//X51eDT/mi3kS0spcjIHhoObjk3iCjcQ==}
     engines: {node: '>=12'}
     peerDependencies:
       '@angular/core': '>=17'
@@ -6571,6 +6571,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   validate-npm-package-license@3.0.4:
@@ -9551,7 +9552,7 @@ snapshots:
 
   '@sinclair/typebox@0.34.41': {}
 
-  '@spartan-ng/brain@0.0.1-alpha.669(3643e4d46e763f54ebee5f882f953bd9)':
+  '@spartan-ng/brain@0.0.1-alpha.691(3643e4d46e763f54ebee5f882f953bd9)':
     dependencies:
       '@angular/cdk': 21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(@angular/platform-browser@21.2.0(@angular/common@21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2))(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)))(rxjs@7.8.2)
       '@angular/common': 21.2.0(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))(rxjs@7.8.2)
@@ -9564,7 +9565,7 @@ snapshots:
     optionalDependencies:
       luxon: 3.7.2
 
-  '@spartan-ng/cli@0.0.1-alpha.669(e05b3586e6effc8618e30bbbfc49ef02)':
+  '@spartan-ng/cli@0.0.1-alpha.691(e05b3586e6effc8618e30bbbfc49ef02)':
     dependencies:
       '@angular/core': 21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)
       '@nx/angular': 22.3.3(1db7d9dc2b9348e004665b8919e04210)
@@ -9725,7 +9726,7 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.2.2
 
-  '@tanstack/angular-table@8.21.3(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))':
+  '@tanstack/angular-table@8.21.4(@angular/core@21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0))':
     dependencies:
       '@angular/core': 21.2.0(@angular/compiler@21.2.0)(rxjs@7.8.2)(zone.js@0.16.0)
       '@tanstack/table-core': 8.21.3

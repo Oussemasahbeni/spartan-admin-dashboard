@@ -19,7 +19,7 @@ const defaultConfig: HlmSidebarConfig = {
   sidebarCookieMaxAge: 60 * 60 * 24 * 7, // 7 days in seconds
   sidebarKeyboardShortcut: 'b',
   mobileBreakpoint: '768px',
-  closeMobileSidebarOnMenuButtonClick: true,
+  closeMobileSidebarOnMenuButtonClick: false,
 };
 
 const HlmSidebarConfigToken = new InjectionToken<HlmSidebarConfig>('HlmSidebarConfig');

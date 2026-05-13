@@ -69,4 +69,3 @@ export class SettingsSecurity {
     console.log('Security settings saved:', this.securityModel());
   }
 }
-

@@ -470,4 +470,3 @@ export const STATIC_EVENTS: EventInput[] = [
     },
   },
 ];
-

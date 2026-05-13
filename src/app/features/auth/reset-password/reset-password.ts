@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCircleCheck } from '@ng-icons/lucide';
@@ -35,18 +35,12 @@ import { AuthLayout } from '../layout';
 })
 export default class ResetPassword {
   // ==========================================
-  // Services
-  // ==========================================
-
-  private readonly _router = inject(Router);
-
-  // ==========================================
   // State
   // ==========================================
 
   protected readonly showAlert = signal(false);
 
-  protected readonly resetPasswordModel = signal({
+  private readonly resetPasswordModel = signal({
     email: '',
   });
 
@@ -74,4 +68,3 @@ export default class ResetPassword {
     this.showAlert.set(true);
   }
 }
-

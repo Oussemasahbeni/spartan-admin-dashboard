@@ -22,6 +22,5 @@ import { Navigation } from './components/navigation/navigation';
       </main>
     </adm-navigation>
   `,
-  
 })
 export class MainLayout {}

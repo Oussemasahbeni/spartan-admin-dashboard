@@ -40,8 +40,7 @@
                 type="button"
                 hlmBtn
                 variant="outline"
-                size="icon"
-                class="h-5 w-5"
+                size="icon-xs"
                 aria-label="Previous month"
                 (click)="previousMonth()"
               >
@@ -54,15 +53,7 @@
                   {{ currentStart() | date: 'mediumDate' }} - {{ currentEnd() | date: 'mediumDate' }}
                 }
               </span>
-              <button
-                type="button"
-                hlmBtn
-                variant="outline"
-                size="icon"
-                class="h-5 w-5"
-                aria-label="Next month"
-                (click)="nextMonth()"
-              >
+              <button type="button" hlmBtn variant="outline" size="icon-xs" aria-label="Next month" (click)="nextMonth()">
                 <ng-icon hlmIcon name="lucideChevronRight" class="rtl:rotate-180" size="xs" />
               </button>
             </div>

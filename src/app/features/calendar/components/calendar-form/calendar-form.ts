@@ -47,7 +47,7 @@ export interface CalendarEventModel {
   ],
   templateUrl: './calendar-form.html',
   host: {
-    class: 'flex flex-col gap-4 sm:min-w-lg ',
+    class: 'flex flex-col gap-4 sm:max-w-lg ',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

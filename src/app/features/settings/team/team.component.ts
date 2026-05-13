@@ -141,4 +141,3 @@ export class SettingsTeam {
     this.addMemberModel.set({ email: '', role: 'read' });
   }
 }
-

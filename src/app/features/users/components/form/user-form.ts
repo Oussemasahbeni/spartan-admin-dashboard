@@ -47,7 +47,7 @@ export interface UserFormModel {
     PhoneNumberPicker,
   ],
   host: {
-    class: 'flex flex-col gap-4 sm:min-w-lg ',
+    class: 'flex flex-col gap-4 sm:max-w-lg ',
   },
   templateUrl: './user-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -187,4 +187,3 @@ export class UserForm implements OnInit {
     this._dialogRef.close();
   }
 }
-

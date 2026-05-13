@@ -101,4 +101,3 @@ export default class Signup {
     this._router.navigate(['/login']);
   }
 }
-

@@ -389,7 +389,7 @@ export const STATIC_USERS: User[] = [
   },
   {
     id: 'c492b54b-d26f-46d0-9285-710a15bfe1bc',
-    name: 'Ms. Katie O\'Reilly MD',
+    name: "Ms. Katie O'Reilly MD",
     avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/36.jpg',
     phoneNumber: '+963944567890',
     country: 'sy',
@@ -840,7 +840,7 @@ export const STATIC_USERS: User[] = [
   },
   {
     id: '1b3a96cd-ca47-42fc-b9ba-54ca71aabef2',
-    name: 'Kerry O\'Reilly',
+    name: "Kerry O'Reilly",
     avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/18.jpg',
     phoneNumber: '+264811234567',
     country: 'na',
@@ -2127,7 +2127,7 @@ export const STATIC_USERS: User[] = [
   },
   {
     id: 'dadcbc5b-bc53-43b5-8b8b-cb6d13299638',
-    name: 'Mark D\'Amore',
+    name: "Mark D'Amore",
     avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/40.jpg',
     phoneNumber: '+240222123456',
     country: 'gq',

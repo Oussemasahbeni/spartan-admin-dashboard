@@ -24,18 +24,20 @@ export interface FilterOptions {
         <ng-icon hlmIcon name="lucideFilter" size="sm" />
         {{ 'dashboard2.header.filterBy' | transloco }}
       </button>
-      <hlm-dialog-content *transloco="let t; prefix: 'dashboard2.filter'" class="sm:max-w-md">
-        <hlm-dialog-header>
-          <h3 hlmDialogTitle>{{ t('title') }}</h3>
-          <p hlmDialogDescription>{{ t('description') }}</p>
-        </hlm-dialog-header>
-        <div class="space-y-4 py-4">
-          <p class="text-muted-foreground text-sm">{{ t('description') }}</p>
+      <hlm-dialog-content *hlmDialogPortal="let ctx" class="sm:max-w-md">
+        <div *transloco="let t; prefix: 'dashboard2.filter'">
+          <hlm-dialog-header>
+            <h3 hlmDialogTitle>{{ t('title') }}</h3>
+            <p hlmDialogDescription>{{ t('description') }}</p>
+          </hlm-dialog-header>
+          <div class="space-y-4 py-4">
+            <p class="text-muted-foreground text-sm">{{ t('description') }}</p>
+          </div>
+          <hlm-dialog-footer>
+            <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('reset') }}</button>
+            <button type="button" hlmBtn hlmDialogClose (click)="onApply()">{{ t('apply') }}</button>
+          </hlm-dialog-footer>
         </div>
-        <hlm-dialog-footer>
-          <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('reset') }}</button>
-          <button type="button" hlmBtn hlmDialogClose (click)="onApply()">{{ t('apply') }}</button>
-        </hlm-dialog-footer>
       </hlm-dialog-content>
     </hlm-dialog>
   `,

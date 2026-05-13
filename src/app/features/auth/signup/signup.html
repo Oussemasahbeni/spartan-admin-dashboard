@@ -1,9 +1,7 @@
 <adm-auth-layout>
   <div *transloco="let t; prefix: 'auth.signup'" hlmCard class="mx-auto w-full max-w-xl justify-center p-4">
     <div class="space-y-2 text-center">
-      <h1 class="text-2xl font-semibold tracking-tight">
-        {{ t('title') }}
-      </h1>
+      <h1 class="text-2xl font-semibold tracking-tight">{{ t('title') }}</h1>
       <p class="text-muted-foreground text-center text-sm">
         {{ t('haveAccount') }}
         <a routerLink="/login" class="text-primary font-semibold underline-offset-4 hover:cursor-pointer hover:underline">
@@ -24,7 +22,7 @@
           [formField]="signupForm.name"
         />
         @for (error of signupForm.name().errors(); track error.kind) {
-          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
 
@@ -39,7 +37,7 @@
           [formField]="signupForm.email"
         />
         @for (error of signupForm.email().errors(); track error.kind) {
-          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
 
@@ -65,7 +63,7 @@
         </hlm-input-group>
 
         @for (error of signupForm.password().errors(); track error.kind) {
-          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
 
@@ -90,15 +88,14 @@
           /></hlm-input-group-addon>
         </hlm-input-group>
         @for (error of signupForm.confirmPassword().errors(); track error.kind) {
-          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
 
       <button type="submit" hlmBtn [disabled]="signupForm().submitting()">
         @if (signupForm().submitting()) {
-          <hlm-spinner />
-        }
-        {{ t('signupButton') }}
+        <hlm-spinner />
+        } {{ t('signupButton') }}
       </button>
     </form>
 
@@ -111,4 +108,3 @@
     </p>
   </div>
 </adm-auth-layout>
-

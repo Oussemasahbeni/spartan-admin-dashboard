@@ -101,7 +101,7 @@ export class OverviewMetricCard {
   public readonly chartData = input.required<number[]>();
   public readonly chartColor = input.required<string>();
   public readonly trendValue = input.required<string>();
-  public readonly trendUp = input.required({transform: booleanAttribute});
+  public readonly trendUp = input.required({ transform: booleanAttribute });
 
   // ==========================================
   // State

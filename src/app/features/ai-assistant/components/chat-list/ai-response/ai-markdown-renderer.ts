@@ -99,9 +99,9 @@ export class AiMarkdownRenderer {
       return `<div class="not-prose group/code my-4 overflow-hidden rounded-lg ">
         <div class="flex items-center justify-between bg-zinc-800 px-4 py-2">
           <span class="text-xs text-zinc-300">${language}</span>
-         <button 
-          class="ai-code-block-copy flex h-7 w-7 items-center justify-center rounded-md text-zinc-400 transition-all hover:bg-zinc-700 hover:text-zinc-100 active:scale-95" 
-          data-code="${encodedCode}" 
+         <button
+          class="ai-code-block-copy flex h-7 w-7 items-center justify-center rounded-md text-zinc-400 transition-all hover:bg-zinc-700 hover:text-zinc-100 active:scale-95"
+          data-code="${encodedCode}"
           title="Copy code"
         >
          ${this.COPY_ICON_SVG}

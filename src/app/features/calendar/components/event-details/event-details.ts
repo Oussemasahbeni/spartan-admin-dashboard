@@ -35,7 +35,7 @@ import { CalendarForm } from '../calendar-form/calendar-form';
     }),
   ],
   host: {
-    class: 'flex flex-col gap-4 sm:min-w-lg ',
+    class: 'flex flex-col gap-4 sm:max-w-lg ',
   },
   templateUrl: './event-details.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -19,7 +19,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *transloco="let t" class="bg-background block h-screen overflow-hidden">
-      <div class="relative flex h-full flex-col md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div class="relative flex h-full flex-col md:grid lg:max-w-none lg:px-0 xl:grid-cols-2">
         <div class="absolute top-6 left-6 flex space-x-2">
           <a routerLink="/" hlmBtn variant="outline" size="icon" [aria-label]="t('breadcrumbs.home')">
             <ng-icon hlmIcon size="sm" name="lucideHome" />
@@ -35,7 +35,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 
         <!-- Illustration Section -->
         <div
-          class="dark:bg-card text-primary relative hidden h-full flex-col border-r bg-slate-950 p-10 lg:flex dark:border-r-zinc-800"
+          class="dark:bg-card text-primary relative hidden h-full flex-col border-r bg-slate-950 p-10 xl:flex dark:border-r-zinc-800"
         >
           <div class="z-1 flex h-full items-center justify-center pt-20">
             <div class="absolute top-0 right-0 w-full max-w-62.5 xl:max-w-112.5">

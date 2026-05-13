@@ -87,4 +87,3 @@ export class SettingsAccount {
     console.log('Account saved:', this.accountModel());
   }
 }
-

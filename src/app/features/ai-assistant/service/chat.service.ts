@@ -72,6 +72,10 @@ export class AssistantService {
   async sendMessage(content: string): Promise<void> {
     if (!content.trim()) return;
 
+    if (!this.conversationSignal()) {
+      this.createConversation();
+    }
+
     const now = new Date();
 
     // Add user message

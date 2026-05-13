@@ -2,7 +2,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { Country, countries } from '../../countries';
+import { countries, Country } from '../../countries';
 
 @Component({
   selector: 'adm-country-display',

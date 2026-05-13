@@ -89,4 +89,3 @@ export default class Login {
     this._router.navigate(['/dashboard/dashboard-1']);
   }
 }
-
