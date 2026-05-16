@@ -16,9 +16,9 @@ import { Navigation } from './components/navigation/navigation';
     <adm-navigation>
       <main hlmSidebarInset>
         <adm-site-header />
-        <section class="flex-1 p-4 sm:p-6">
+        <div class="flex-1 p-4 sm:p-6">
           <router-outlet />
-        </section>
+        </div>
       </main>
     </adm-navigation>
   `,

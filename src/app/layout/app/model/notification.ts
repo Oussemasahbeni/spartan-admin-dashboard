@@ -1,4 +1,5 @@
 export interface Notification {
+  id: string;
   user: string;
   action: string;
   subject: string;

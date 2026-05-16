@@ -1,52 +1,44 @@
-import { isPlatformBrowser } from '@angular/common';
-import { DOCUMENT, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { computed, DOCUMENT, effect, inject, Injectable, signal } from '@angular/core';
 import { LOCAL_STORAGE, WINDOW } from '@core/config/tokens';
+export const THEMES = ['light', 'dark', 'system'] as const;
+export type Theme = (typeof THEMES)[number];
 
-export type Theme = 'light' | 'dark' | 'system';
-export const THEMES: Theme[] = ['light', 'dark', 'system'] as const;
+const STORAGE_KEY = 'theme-preference';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
   private readonly document = inject(DOCUMENT);
-  private readonly _platformId = inject(PLATFORM_ID);
   private readonly _localStorage = inject(LOCAL_STORAGE);
-  private readonly _window = inject(WINDOW);
-  private readonly _localStorageKey = 'theme-preference';
+  private readonly _mediaQuery = inject(WINDOW)?.matchMedia('(prefers-color-scheme: dark)');
+  private readonly _systemPrefersDark = signal(this._mediaQuery?.matches ?? false);
 
-  private readonly _theme = signal<Theme>('system');
-  public readonly theme = this._theme.asReadonly();
+  private readonly _selectedTheme = signal<Theme>('system');
+  public readonly theme = this._selectedTheme.asReadonly();
 
-  private readonly _darkMediaQuery = this._window?.matchMedia('(prefers-color-scheme: dark)');
+  public readonly resolvedTheme = computed(() => {
+    if (this._selectedTheme() === 'system') {
+      return this._systemPrefersDark() ? 'dark' : 'light';
+    }
+    return this._selectedTheme();
+  });
 
-  init(): void {
-    if (!isPlatformBrowser(this._platformId)) return;
+  constructor() {
+    const savedTheme = this._localStorage?.getItem(STORAGE_KEY) as Theme;
 
-    const savedTheme = this._localStorage?.getItem(this._localStorageKey) as Theme;
+    this._selectedTheme.set(THEMES.includes(savedTheme) ? savedTheme : 'system');
+    this._mediaQuery?.addEventListener('change', (e) => {
+      this._systemPrefersDark.set(e.matches);
+    });
 
-    const validThemes: Theme[] = ['light', 'dark', 'system'];
-
-    const initialTheme = validThemes.includes(savedTheme) ? savedTheme : 'system';
-    this.setTheme(initialTheme);
+    effect(() => {
+      this.document.documentElement.classList.toggle('dark', this.resolvedTheme() === 'dark');
+    });
   }
 
   setTheme(theme: Theme): void {
-    this._theme.set(theme);
-
-    if (isPlatformBrowser(this._platformId)) {
-      this._localStorage?.setItem(this._localStorageKey, theme);
-      this._applyDomChanges(theme);
-    }
-  }
-
-  private _applyDomChanges(theme: Theme): void {
-    const isDark = theme === 'dark' || (theme === 'system' && this._darkMediaQuery?.matches);
-
-    if (isDark) {
-      this.document.documentElement.classList.add('dark');
-    } else {
-      this.document.documentElement.classList.remove('dark');
-    }
+    this._selectedTheme.set(theme);
+    this._localStorage?.setItem(STORAGE_KEY, theme);
   }
 }

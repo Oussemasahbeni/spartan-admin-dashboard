@@ -24,7 +24,6 @@ import { EditEvent } from '../../../model/user-message.types';
   selector: 'adm-user-message',
   templateUrl: './user-message.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
   imports: [HlmCardImports, HlmTextareaImports, HlmInputGroupImports, HlmButtonImports, HlmIconImports],
   viewProviders: [provideIcons({ lucideUser, lucideCopy, lucideCheck, lucidePencil })],
 })

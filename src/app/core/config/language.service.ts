@@ -6,12 +6,11 @@ import { arabicCalendarI18n, englishCalendarI18n, frenchCalendarI18n } from './d
 import { DirectionalityService } from './directionality.service';
 import { LOCAL_STORAGE } from './tokens';
 
-export type LanguageOptions = 'en' | 'fr' | 'ar';
-
-export const availableLangs: string[] = ['en', 'fr', 'ar'];
+export const LANGUAGES = ['en', 'fr', 'ar'] as const;
+export type Language = (typeof LANGUAGES)[number];
 
 export interface AvailableLanguage {
-  code: LanguageOptions;
+  code: Language;
   label: string;
 }
 
@@ -27,7 +26,7 @@ export class LanguageService {
   private readonly _localStorage = inject(LOCAL_STORAGE);
   private readonly _calendarI18n = injectBrnCalendarI18n();
 
-  public readonly currentLang = computed(() => this._translocoService.activeLang() as LanguageOptions);
+  public readonly currentLang = computed(() => this._translocoService.activeLang() as Language);
 
   private readonly _availableLanguages = signal<AvailableLanguage[]>([
     {
@@ -45,7 +44,7 @@ export class LanguageService {
   ]);
   public readonly availableLanguages = this._availableLanguages.asReadonly();
 
-  private readonly brnCaalendarI18nMap: Record<LanguageOptions, Partial<BrnCalendarI18n>> = {
+  private readonly brnCaalendarI18nMap: Record<Language, Partial<BrnCalendarI18n>> = {
     en: englishCalendarI18n,
     fr: frenchCalendarI18n,
     ar: arabicCalendarI18n,
@@ -60,7 +59,7 @@ export class LanguageService {
     }
   }
 
-  async setLanguage(lang: LanguageOptions): Promise<void> {
+  async setLanguage(lang: Language): Promise<void> {
     this._calendarI18n.use(this.brnCaalendarI18nMap[lang]);
     this._localStorage?.setItem('lang', lang);
     await this._ensureLocaleRegistered(lang);
@@ -69,7 +68,7 @@ export class LanguageService {
     this._dir.updateDirection(direction);
   }
 
-  private async _ensureLocaleRegistered(lang: LanguageOptions): Promise<void> {
+  private async _ensureLocaleRegistered(lang: Language): Promise<void> {
     if (registeredLocales.has(lang)) return;
 
     if (lang === 'fr') {

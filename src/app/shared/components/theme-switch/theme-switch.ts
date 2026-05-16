@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Theme, THEMES, ThemeService } from '@core/config/theme.service';
-import { WINDOW } from '@core/config/tokens';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideMonitor, lucideMoon, lucideSun } from '@ng-icons/lucide';
@@ -82,20 +81,13 @@ export class ThemeSwitch {
   // Services
   // ==========================================
   private readonly _themeService = inject(ThemeService);
-  private readonly window = inject(WINDOW);
 
   // ==========================================
   // State
   // ==========================================
   protected readonly currentTheme = this._themeService.theme;
 
-  protected readonly iconName = computed(() => {
-    const theme = this.currentTheme();
-    const isDarkSystem = this.window?.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = theme === 'dark' || (theme === 'system' && isDarkSystem);
-
-    return isDark ? 'lucideSun' : 'lucideMoon';
-  });
+  protected readonly iconName = computed(() => (this._themeService.resolvedTheme() === 'dark' ? 'lucideSun' : 'lucideMoon'));
 
   // ==========================================
   // Public Methods
@@ -108,12 +100,12 @@ export class ThemeSwitch {
     const target = event.target as HTMLElement;
     if (target.closest('input, textarea, select, [contenteditable]')) return;
 
-    const themes: Theme[] = THEMES;
-    const current = themes.indexOf(this.currentTheme());
+    const current = THEMES.indexOf(this.currentTheme());
+    if (current === -1) return;
 
     if (event.key.toLowerCase() === 'd' && !event.ctrlKey && !event.metaKey && !event.altKey) {
       event.preventDefault();
-      this.setTheme(themes[(current + 1) % themes.length]);
+      this.setTheme(THEMES[(current + 1) % THEMES.length]);
     }
   }
 }

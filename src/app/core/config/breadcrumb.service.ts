@@ -40,7 +40,7 @@ export class BreadcrumbService {
       filter((event) => event instanceof NavigationEnd),
       map(() => this._buildBreadcrumbs())
     ),
-    { initialValue: [] as Breadcrumb[] }
+    { initialValue: []}
   );
 
   /**

@@ -210,7 +210,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskCardComponent {
+export class TaskCard {
   // ==========================================
   // Inputs
   // ==========================================

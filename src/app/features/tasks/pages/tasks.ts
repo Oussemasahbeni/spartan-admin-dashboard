@@ -7,19 +7,19 @@ import { lucideChevronRight, lucideFilter, lucideMoreVertical, lucidePlus } from
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { TaskCardComponent } from '../components/task-card/task-card';
+import { TaskCard } from '../components/task-card/task-card';
 import { TaskDetails } from '../components/task-details/task-details';
 import { TaskForm } from '../components/task-form/task-form';
 import { Task, TaskStatus } from '../model/task';
 
 @Component({
   selector: 'adm-tasks',
-  imports: [TranslocoModule, DragDropModule, HlmButtonImports, HlmIconImports, TaskCardComponent],
+  imports: [TranslocoModule, DragDropModule, HlmButtonImports, HlmIconImports, TaskCard],
   providers: [provideIcons({ lucidePlus, lucideMoreVertical, lucideFilter, lucideChevronRight })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tasks.html',
 })
-export default class TasksComponent {
+export default class Tasks {
   // ==========================================
   // Services
   // ==========================================

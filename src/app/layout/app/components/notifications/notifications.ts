@@ -56,38 +56,44 @@ import { Notification } from '../../model/notification';
         <hr class="border-muted -mx-1" />
         <ng-scrollbar class="max-h-96 overflow-y-auto" hlm appearance="native">
           <ul>
-            @for (notification of notifications(); track $index) {
-              <button
-                type="button"
-                class="hover:bg-muted flex w-full items-start justify-between gap-2 rounded-md px-3 py-2 text-start transition-colors select-none"
-                (click)="markAsRead($index)"
-              >
-                <hlm-avatar class="border-border/50 size-10 border">
-                  <img hlmAvatarImage [src]="notification.avatar" [alt]="notification.user" />
-                  <span hlmAvatarFallback>
-                    {{ notification.user.charAt(0) }}
-                  </span>
-                </hlm-avatar>
+            @for (notification of notifications(); track notification.id) {
+              <li>
+                <button
+                  type="button"
+                  class="hover:bg-muted flex w-full items-start justify-between gap-2 rounded-md px-3 py-2 text-start transition-colors select-none"
+                  (click)="markAsRead($index)"
+                >
+                  <hlm-avatar class="border-border/50 size-10 border">
+                    <img hlmAvatarImage [src]="notification.avatar" [alt]="notification.user" />
+                    <span hlmAvatarFallback>
+                      {{ notification.user.charAt(0) }}
+                    </span>
+                  </hlm-avatar>
 
-                <div class="flex flex-1 justify-between">
-                  <div>
-                    <div class="text-sm">
-                      <span class="font-medium">{{ notification.user }}</span>
-                      {{ t('actions.' + notification.action) }}
-                      <span class="font-medium">{{ t('subjects.' + notification.subject) }}.</span>
+                  <div class="flex flex-1 justify-between">
+                    <div>
+                      <div class="text-sm">
+                        <span class="font-medium">{{ notification.user }}</span>
+                        {{ t('actions.' + notification.action) }}
+                        <span class="font-medium">{{ t('subjects.' + notification.subject) }}.</span>
+                      </div>
+                      <div class="text-muted-foreground text-xs">{{ notification.date | timeAgo }}</div>
                     </div>
-                    <div class="text-muted-foreground text-xs">{{ notification.date | timeAgo }}</div>
+                    <div class="flex flex-col items-center gap-3 self-center">
+                      @if (notification.unread) {
+                        <div class="bg-primary size-1.5 rounded-full"></div>
+                      }
+                      <button
+                        type="button"
+                        class="z-20 text-xs hover:underline focus:outline-none"
+                        (click)="onClear($index)"
+                      >
+                        <ng-icon hlmIcon name="lucideX" size="xs" />
+                      </button>
+                    </div>
                   </div>
-                  <div class="flex flex-col items-center gap-3 self-center">
-                    @if (notification.unread) {
-                      <div class="bg-primary size-1.5 rounded-full"></div>
-                    }
-                    <button type="button" class="z-20 text-xs hover:underline focus:outline-none" (click)="onClear($index)">
-                      <ng-icon hlmIcon name="lucideX" size="xs" />
-                    </button>
-                  </div>
-                </div>
-              </button>
+                </button>
+              </li>
             } @empty {
               <li>
                 <div hlmEmpty>

@@ -30,7 +30,6 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
   selector: 'adm-ai-response',
   templateUrl: './ai-response.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
   imports: [HlmIconImports, HlmButtonImports, AiMarkdownRenderer],
   viewProviders: [
     provideIcons({ lucideSparkle, lucideRefreshCcw, lucideCheck, lucideCopy, lucideThumbsDown, lucideThumbsUp }),

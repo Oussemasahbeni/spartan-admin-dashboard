@@ -112,7 +112,6 @@ export const mockApiInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>,
         return of(new HttpResponse({ status: 200, body: updatedUser }));
       }
 
-      console.log('MockApiInterceptor: Received request', { method, url, userId });
       // --- 4. DELETE (Delete) ---
       if (method === 'DELETE' && userId) {
         console.log('Deleting user with ID:', userId);

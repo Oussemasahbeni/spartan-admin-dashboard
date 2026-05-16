@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { AuthService } from '@core/auth/auth.service';
-import { LanguageOptions, LanguageService } from '@core/config/language.service';
+import { Language, LanguageService } from '@core/config/language.service';
 import { ThemeService } from '@core/config/theme.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -77,7 +77,7 @@ export class NavUser {
   // Public Methods
   // ==========================================
 
-  protected setLang(lang: LanguageOptions): void {
+  protected setLang(lang: Language): void {
     if (lang === this.currentLang()) return;
     this._languageService.setLanguage(lang);
   }

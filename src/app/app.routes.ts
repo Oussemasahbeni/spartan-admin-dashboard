@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { provideTranslocoScope } from '@jsverse/transloco';
 import { authGuard } from './core/guards/auth.guard';
 import { MainLayout } from './layout/app/layout';
 import { EmptyLayout } from './layout/empty/empty';
@@ -43,11 +42,10 @@ export const routes: Routes = [
             path: 'dashboard-2',
             title: 'dashboard-2',
             data: { breadcrumb: 'navigation.dashboard-2', preload: true },
-            loadChildren: () => import('./features/dashboards/dashboard-2/dashboards.routes'),
+            loadChildren: () => import('./features/dashboards/dashboard-2/routes'),
           },
         ],
       },
-
       {
         path: 'users',
         title: 'users',
@@ -64,7 +62,6 @@ export const routes: Routes = [
         path: 'tasks',
         title: 'tasks',
         data: { breadcrumb: 'navigation.tasks' },
-        providers: [provideTranslocoScope('tasks')],
         loadChildren: () => import('./features/tasks/routes'),
       },
       {

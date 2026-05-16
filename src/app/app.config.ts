@@ -19,7 +19,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
 import { FlagBasedPreloadingStrategy } from './core/config/flag-based-preloading.strategy';
-import { availableLangs, LanguageOptions, LanguageService } from './core/config/language.service';
+import { Language, LANGUAGES, LanguageService } from './core/config/language.service';
 import { ThemeService } from './core/config/theme.service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
@@ -27,14 +27,18 @@ import { TranslocoHttpLoader } from './transloco-loader';
 import { mockApiInterceptor } from '@core/interceptor/mock-api.interceptor';
 import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
 
-function getDefaultLanguage(): string {
+function isLanguage(value: string): value is Language {
+  return (LANGUAGES as readonly string[]).includes(value);
+}
+
+function getInitialLanguage(): Language {
   const storedLang = localStorage.getItem('lang');
-  if (storedLang && availableLangs.includes(storedLang)) {
+  if (storedLang && isLanguage(storedLang)) {
     return storedLang;
   }
 
   const browserLang = navigator.language?.split('-')[0];
-  if (browserLang && availableLangs.includes(browserLang)) {
+  if (browserLang && isLanguage(browserLang)) {
     return browserLang;
   }
 
@@ -55,7 +59,7 @@ export const appConfig: ApplicationConfig = {
     provideTransloco({
       config: {
         availableLangs: ['en', 'fr', 'ar'],
-        defaultLang: getDefaultLanguage(),
+        defaultLang: getInitialLanguage(),
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
         flatten: {
@@ -66,14 +70,17 @@ export const appConfig: ApplicationConfig = {
     }),
     provideNgIconsConfig({}, withExceptionLogger()),
     provideAppInitializer(async () => {
-      const themeService = inject(ThemeService);
+      // Eagerly instantiate ThemeService so it applies the `dark` class
+      // before the first paint (prevents theme flicker on startup).
+      inject(ThemeService);
+
+      // `defaultLang` only initializes Transloco's active language.
+      // We still call LanguageService to apply app-level side effects:
+      // direction (rtl/ltr), calendar i18n, and locale registration.
       const languageService = inject(LanguageService);
-      const savedLang = localStorage.getItem('lang') as LanguageOptions | null;
-      if (savedLang) {
-        await languageService.setLanguage(savedLang);
-      }
-      themeService.init();
+      await languageService.setLanguage(getInitialLanguage());
     }),
+
     provideHlmSidebarConfig({
       closeMobileSidebarOnMenuButtonClick: true,
     }),

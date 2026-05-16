@@ -17,7 +17,6 @@ import { Marked, Renderer } from 'marked';
 @Component({
   selector: 'adm-ai-markdown-renderer',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'block',
     '(click)': 'onHostClick($event)',

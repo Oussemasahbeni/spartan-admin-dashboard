@@ -2,6 +2,7 @@ import { Notification } from '../../layout/app/model/notification';
 
 export const STATIC_NOTIFICATIONS: Notification[] = [
   {
+    id: crypto.randomUUID(),
     user: 'Jim Doyle',
     action: 'commentedOn',
     subject: 'anIssue',
@@ -10,6 +11,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/6.jpg',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Randal Hermann',
     action: 'assignedYouTo',
     subject: 'aDocument',
@@ -18,6 +20,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/64.jpg',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Philip Mayert MD',
     action: 'repliedTo',
     subject: 'aTask',
@@ -26,6 +29,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/98.jpg',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Allan Roob',
     action: 'assignedYouTo',
     subject: 'aDocument',
@@ -34,6 +38,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://avatars.githubusercontent.com/u/99378771',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Jason Muller',
     action: 'assignedYouTo',
     subject: 'aDocument',
@@ -42,6 +47,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://avatars.githubusercontent.com/u/69346486',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Mr. Christopher Legros',
     action: 'assignedYouTo',
     subject: 'theProject',
@@ -50,6 +56,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/20.jpg',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Delbert Conroy',
     action: 'shared',
     subject: 'yourPost',
@@ -58,6 +65,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/88.jpg',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Phil Crona',
     action: 'assignedYouTo',
     subject: 'yourPost',
@@ -66,6 +74,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://avatars.githubusercontent.com/u/35068532',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Sheryl Stoltenberg',
     action: 'mentionedYouIn',
     subject: 'aDocument',
@@ -74,6 +83,7 @@ export const STATIC_NOTIFICATIONS: Notification[] = [
     avatar: 'https://avatars.githubusercontent.com/u/88215098',
   },
   {
+    id: crypto.randomUUID(),
     user: 'Dr. Clifton Willms',
     action: 'liked',
     subject: 'aTask',
