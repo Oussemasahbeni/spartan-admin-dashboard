@@ -2,9 +2,10 @@
   "version": 1,
   "skills": {
     "angular-developer": {
-      "source": "angular/angular",
+      "source": "angular/skills",
       "sourceType": "github",
-      "computedHash": "be336579233f71cc9a40c22986b68475d2e040a6a7b0bc9dbbc68a62b5de6995"
+      "skillPath": "angular-developer/SKILL.md",
+      "computedHash": "d3335311700c3c7ca9e522b0e1e439213f196938517a072fd9e731a7cfe1a069"
     },
     "animate": {
       "source": "pbakaus/impeccable",
