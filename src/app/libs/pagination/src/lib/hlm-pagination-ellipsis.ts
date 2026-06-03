@@ -7,7 +7,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-pagination-ellipsis',
   imports: [NgIcon],
   providers: [provideIcons({ lucideEllipsis })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: { 'data-slot': 'pagination-ellipsis' },
   template: `
     <ng-icon name="lucideEllipsis" />

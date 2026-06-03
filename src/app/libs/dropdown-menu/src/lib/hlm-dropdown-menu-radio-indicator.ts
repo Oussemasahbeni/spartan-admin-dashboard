@@ -7,7 +7,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-dropdown-menu-radio-indicator',
   imports: [NgIcon],
   providers: [provideIcons({ lucideCircle })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: ` <ng-icon name="lucideCircle" class="text-[0.5rem] *:[svg]:fill-current" /> `,
 })
 export class HlmDropdownMenuRadioIndicator {

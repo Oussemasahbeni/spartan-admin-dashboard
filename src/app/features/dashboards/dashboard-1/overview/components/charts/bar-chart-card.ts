@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { provideTranslocoScope, translateObjectSignal, Translation } from '@jsverse/transloco';
 import { HlmCardImports } from '@spartan-ng/helm/card';
@@ -32,7 +32,6 @@ interface MonthsTranslation {
   selector: 'adm-bar-chart-card',
   imports: [HlmCardImports, NgApexchartsModule],
   providers: [provideTranslocoScope(SCOPE)],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section hlmCard class="h-full w-full">
       <header hlmCardHeader>

@@ -11,7 +11,7 @@ import type { ClassValue } from 'clsx';
   selector: 'hlm-combobox-trigger',
   imports: [NgIcon, HlmButton, BrnComboboxAnchor, BrnComboboxTrigger, BrnComboboxPopoverTrigger, BrnFieldControlDescribedBy],
   providers: [provideIcons({ lucideChevronDown })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <button
       brnComboboxTrigger

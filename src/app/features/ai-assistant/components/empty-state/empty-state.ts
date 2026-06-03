@@ -19,7 +19,6 @@ interface SuggestedPrompt {
 @Component({
   selector: 'adm-assistant-empty-state',
   templateUrl: './empty-state.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     provideIcons({
       lucideBookOpen,

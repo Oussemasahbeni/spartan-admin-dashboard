@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -22,7 +22,6 @@ interface MonthsTranslation {
   selector: 'adm-sales-card',
   imports: [HlmCardImports, HlmIconImports, HlmTabsImports, HlmTooltipImports, NgApexchartsModule, TranslocoModule],
   providers: [provideIcons({ lucideInfo, lucideTrendingUp, lucideTrendingDown })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.salesCard'" hlmCard class="h-full w-full">
       <hlm-tabs [tab]="selectedPeriod()" (tabActivated)="selectedPeriod.set($event)">

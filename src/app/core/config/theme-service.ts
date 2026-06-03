@@ -1,13 +1,11 @@
-import { computed, DOCUMENT, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, DOCUMENT, effect, inject, Service, signal } from '@angular/core';
 import { LOCAL_STORAGE, WINDOW } from '@core/config/tokens';
 export const THEMES = ['light', 'dark', 'system'] as const;
 export type Theme = (typeof THEMES)[number];
 
 const STORAGE_KEY = 'theme-preference';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ThemeService {
   private readonly document = inject(DOCUMENT);
   private readonly _localStorage = inject(LOCAL_STORAGE);

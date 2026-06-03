@@ -8,7 +8,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-select-scroll-up',
   imports: [NgIcon],
   providers: [provideIcons({ lucideChevronUp })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [BrnSelectScrollUp],
   template: ` <ng-icon name="lucideChevronUp" /> `,
 })

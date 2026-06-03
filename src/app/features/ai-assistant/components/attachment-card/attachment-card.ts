@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, Component, PLATFORM_ID, inject, input, output } from '@angular/core';
+import { Component, PLATFORM_ID, inject, input, output } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideFile, lucideX } from '@ng-icons/lucide';
@@ -9,7 +9,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 @Component({
   selector: 'adm-attachment-card',
   templateUrl: './attachment-card.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmIconImports, BytesPipe, TranslocoModule],
   providers: [
     provideIcons({

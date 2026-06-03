@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal, TemplateRef, viewChild } from '@angular/core';
+import { Component, computed, input, signal, TemplateRef, viewChild } from '@angular/core';
 import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -40,7 +40,6 @@ import { provideTransactionStatusIcons, TransactionStatusUIPipe } from '../../pi
     }),
   ],
   templateUrl: './transactions-table.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsTableComponent {
   // ==========================================

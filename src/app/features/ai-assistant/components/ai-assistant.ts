@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -10,8 +10,7 @@ import { AssistantEmptyState } from './empty-state/empty-state';
 @Component({
   selector: 'adm-ai-assistant',
   imports: [AssistantEmptyState, AssistantInput, TranslocoModule, ChatList, HlmScrollAreaImports, NgScrollbarModule],
-  templateUrl: './ai-assistant.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './ai-assistant.html'
 })
 export default class AiAssistant {
   // ==========================================

@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, Service, computed, signal } from '@angular/core';
 import { ChatMessage, MessageStatus } from '../model/assistant';
 import { AI_RESPONSES } from './data';
 
@@ -13,7 +13,7 @@ export interface Conversation {
   updatedAt: Date;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class AssistantService {
   private readonly conversationSignal = signal<Conversation | null>(null);
   private readonly isLoadingSignal = signal(false);

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideLifeBuoy, lucideSend } from '@ng-icons/lucide';
@@ -8,7 +8,7 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
   selector: 'adm-nav-secondary',
   imports: [HlmSidebarImports, NgIcon, RouterLink],
   providers: [provideIcons({ lucideLifeBuoy, lucideSend })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <hlm-sidebar-group>
       <div hlmSidebarGroupContent>

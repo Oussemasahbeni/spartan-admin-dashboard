@@ -8,7 +8,6 @@ import { UserMessageCard } from './user-message/user-message';
   selector: 'adm-chat-list',
   imports: [TypingIndicator, UserMessageCard, AiResponseCard],
   templateUrl: './chat-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatList {
   public readonly regenerateLastMessage = output<void>();

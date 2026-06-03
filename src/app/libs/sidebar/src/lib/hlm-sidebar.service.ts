@@ -5,9 +5,9 @@ import {
   DestroyRef,
   DOCUMENT,
   inject,
-  Injectable,
   PLATFORM_ID,
   REQUEST,
+  Service,
   type Signal,
   signal,
 } from '@angular/core';
@@ -15,7 +15,7 @@ import { injectHlmSidebarConfig } from './hlm-sidebar.token';
 
 export type SidebarVariant = 'sidebar' | 'floating' | 'inset';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class HlmSidebarService {
   private readonly _platformId = inject(PLATFORM_ID);
   private readonly _request = inject(REQUEST, { optional: true });

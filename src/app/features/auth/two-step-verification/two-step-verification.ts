@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
@@ -30,7 +30,6 @@ import { AuthLayout } from '../layout';
   ],
   providers: [provideIcons({ lucideMail })],
   templateUrl: './two-step-verification.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class TwoStepVerification {
   // ==========================================

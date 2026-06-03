@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { STATIC_NOTIFICATIONS } from '@core/mock/notifications.data';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -30,7 +30,7 @@ import { Notification } from '../../model/notification';
     TimeAgoPipe,
   ],
   providers: [provideIcons({ lucideBell, lucideX })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <hlm-popover *transloco="let t; prefix: 'notifications'" sideOffset="10" align="end">
       <button type="button" variant="outline" size="icon" class="relative size-9" hlmPopoverTrigger hlmBtn>

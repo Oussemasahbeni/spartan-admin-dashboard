@@ -9,7 +9,7 @@ import { injectHlmSidebarConfig } from './hlm-sidebar.token';
 @Component({
   selector: 'hlm-sidebar',
   imports: [NgTemplateOutlet, HlmSheetImports],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     '[attr.data-slot]': '_dataSlot()',
     '[attr.data-state]': '_dataState()',

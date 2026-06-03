@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { STATIC_PAYMENTS } from '@core/mock/payments.data';
 import { STATIC_USERS } from '@core/mock/users.data';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -26,7 +26,6 @@ export interface OverviewMetric {
   selector: 'adm-dashboard1-overview',
   imports: [OverviewMetricCard, AreaChartCard, BarChartCard, PaymentsTable, TeamMembersCard, TranslocoModule],
   templateUrl: './overview.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OverviewDashboard {
   // ==========================================

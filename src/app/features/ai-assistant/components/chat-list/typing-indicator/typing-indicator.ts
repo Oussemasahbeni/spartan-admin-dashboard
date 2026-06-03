@@ -4,7 +4,6 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 @Component({
   selector: 'adm-typing-indicator',
   templateUrl: './typing-indicator.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmAvatarImports],
   styles: `
     .typing-dot-wave {

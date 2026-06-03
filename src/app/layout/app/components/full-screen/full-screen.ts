@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DOCUMENT, inject } from '@angular/core';
+import { Component, DOCUMENT, inject } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideMaximize } from '@ng-icons/lucide';
@@ -14,7 +14,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       lucideMaximize,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <button
       type="button"

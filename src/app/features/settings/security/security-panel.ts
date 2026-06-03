@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { form, FormField, FormRoot, minLength } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -15,7 +15,7 @@ import { HlmSpinner } from '@spartan-ng/helm/spinner';
 @Component({
   selector: 'adm-settings-security',
   templateUrl: './security-panel.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [
     HlmButtonImports,
     HlmIconImports,

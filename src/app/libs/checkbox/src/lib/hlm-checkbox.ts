@@ -1,16 +1,5 @@
 import type { BooleanInput } from '@angular/cdk/coercion';
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  forwardRef,
-  input,
-  linkedSignal,
-  model,
-  output,
-  viewChild,
-} from '@angular/core';
+import { booleanAttribute, Component, computed, forwardRef, input, linkedSignal, model, viewChild } from '@angular/core';
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck } from '@ng-icons/lucide';
@@ -32,7 +21,7 @@ export const HLM_CHECKBOX_VALUE_ACCESSOR = {
   imports: [BrnCheckbox, NgIcon, HlmIcon],
   providers: [HLM_CHECKBOX_VALUE_ACCESSOR],
   viewProviders: [provideIcons({ lucideCheck })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [BrnFieldControlDescribedBy],
   host: {
     class: 'contents peer',
@@ -89,11 +78,8 @@ export class HlmCheckbox implements ControlValueAccessor {
   /** Used to set the aria-describedby attribute on the underlying brn element. */
   public readonly ariaDescribedby = input<string | null>(null, { alias: 'aria-describedby' });
 
-  /** The checked state of the checkbox. */
+  /** The checked state of the checkbox. Two-way bindable; emits `checkedChange` automatically. */
   public readonly checked = model<boolean>(false);
-
-  /** Emits when checked state changes. */
-  public readonly checkedChange = output<boolean>();
 
   /**
    * The indeterminate state of the checkbox.
@@ -130,7 +116,6 @@ export class HlmCheckbox implements ControlValueAccessor {
   protected _handleChange(value: boolean): void {
     if (this._disabled()) return;
     this.checked.set(value);
-    this.checkedChange.emit(value);
     this._onChange?.(value);
   }
 

@@ -1,11 +1,9 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { isPlatformBrowser } from '@angular/common';
 
-import { computed, DOCUMENT, inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { computed, DOCUMENT, inject, PLATFORM_ID, Service } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class DirectionalityService {
   private readonly _document = inject(DOCUMENT);
   private readonly _platformId = inject(PLATFORM_ID);

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
@@ -17,7 +17,7 @@ import { User } from '../../../../../shared/models/user';
       lucideChevronDown,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <section *transloco="let t; prefix: 'dashboard1.teamMembersCard'" hlmCard class="h-full">
       <header hlmCardHeader>

@@ -36,7 +36,7 @@ let nextId = 0;
   selector: 'hlm-date-picker',
   imports: [NgIcon, HlmIcon, BrnFieldControlDescribedBy, HlmPopoverImports, HlmCalendar],
   providers: [HLM_DATE_PICKER_VALUE_ACCESSOR, provideIcons({ lucideChevronDown }), provideBrnLabelable(HlmDatePicker)],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [BrnFieldControl],
   host: {
     class: 'block',

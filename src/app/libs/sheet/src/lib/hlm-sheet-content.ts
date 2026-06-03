@@ -42,7 +42,7 @@ export const sheetVariants = cva(
   selector: 'hlm-sheet-content',
   imports: [HlmIconImports, HlmButton, HlmSheetClose],
   providers: [provideIcons({ lucideX })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     'data-slot': 'sheet-content',
     '[attr.data-state]': 'state()',

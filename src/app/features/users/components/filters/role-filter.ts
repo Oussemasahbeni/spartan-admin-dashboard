@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBriefcase, lucideListFilter, lucideSearch, lucideShieldCheck, lucideUser } from '@ng-icons/lucide';
@@ -23,7 +23,7 @@ import { USER_ROLES, UserRole } from '../../../../shared/models/user';
     TranslocoModule,
   ],
   providers: [provideIcons({ lucideSearch, lucideListFilter, lucideUser, lucideBriefcase, lucideShieldCheck })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <hlm-popover
       *transloco="let t"

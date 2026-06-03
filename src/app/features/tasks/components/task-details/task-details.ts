@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -54,7 +54,7 @@ export interface TaskDetailsContext {
   host: {
     class: 'block w-full',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     @let task = _task;
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEllipsisVertical } from '@ng-icons/lucide';
@@ -19,7 +19,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     TranslocoModule,
   ],
   providers: [provideIcons({ lucideEllipsisVertical })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <button
       type="button"

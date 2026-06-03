@@ -9,6 +9,7 @@ import {
   provideRouter,
   TitleStrategy,
   withComponentInputBinding,
+  withExperimentalAutoCleanupInjectors,
   withInMemoryScrolling,
   withPreloading,
   withViewTransitions,
@@ -50,6 +51,8 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(
       routes,
+      // withExperimentalPlatformNavigation(),
+      withExperimentalAutoCleanupInjectors(),
       withViewTransitions(),
       withPreloading(FlagBasedPreloadingStrategy),
       withComponentInputBinding(),

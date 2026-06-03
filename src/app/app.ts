@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { ToasterProps } from '@spartan-ng/brain/sonner';
@@ -11,7 +11,6 @@ import { HlmToasterImports } from '@spartan-ng/helm/sonner';
     <hlm-toaster [position]="position()" />
     <router-outlet />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
   private readonly _dir = inject(DirectionalityService);

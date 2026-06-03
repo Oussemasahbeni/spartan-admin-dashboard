@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
@@ -10,7 +10,6 @@ import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
   selector: 'adm-buyers-profile-card',
   imports: [HlmCardImports, HlmIconImports, NgApexchartsModule, TranslocoModule],
   providers: [provideIcons({ lucideTrendingUp })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section
       *transloco="let t; prefix: 'dashboard1.analytics.buyersProfileCard'"

@@ -41,7 +41,7 @@ let nextId = 0;
     provideIcons({ lucideChevronDown }),
     provideBrnLabelable(HlmDateRangePicker),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [BrnFieldControl],
   host: {
     class: 'block',

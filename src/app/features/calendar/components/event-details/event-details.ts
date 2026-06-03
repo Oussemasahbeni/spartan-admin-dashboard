@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -38,7 +38,6 @@ import { CalendarForm } from '../calendar-form/calendar-form';
     class: 'flex flex-col gap-4 sm:max-w-lg ',
   },
   templateUrl: './event-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventDetails {
   // ==========================================

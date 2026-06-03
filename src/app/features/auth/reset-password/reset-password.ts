@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -31,7 +31,6 @@ import { AuthLayout } from '../layout';
   ],
   providers: [provideIcons({ lucideCircleCheck })],
   templateUrl: './reset-password.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ResetPassword {
   // ==========================================

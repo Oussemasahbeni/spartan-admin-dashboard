@@ -16,7 +16,7 @@ import { ClassValue } from 'clsx';
 
 @Component({
   selector: 'hlm-field-error',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     role: 'alert',
     'data-slot': 'field-error',

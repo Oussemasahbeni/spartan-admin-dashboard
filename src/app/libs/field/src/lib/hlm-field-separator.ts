@@ -5,7 +5,7 @@ import { classes } from '@spartan-ng/helm/utils';
 @Component({
   selector: 'hlm-field-separator',
   imports: [HlmSeparator],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     'data-slot': 'field-separator',
   },

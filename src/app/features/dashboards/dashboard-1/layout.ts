@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideActivity, lucideBarChart2, lucideDownload, lucideFileText, lucideFilter, lucideHome } from '@ng-icons/lucide';
@@ -31,7 +31,6 @@ import { OverviewDashboard } from './overview/overview';
       lucideActivity,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Dashboard1Layout {
   // ==========================================

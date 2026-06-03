@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { provideTranslocoScope, translateObjectSignal, Translation } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
@@ -30,7 +30,7 @@ interface VisitorChartTranslation {
       lucideTrendingUp,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <section hlmCard class="h-full w-full">
       <div hlmCardHeader class="text-center">

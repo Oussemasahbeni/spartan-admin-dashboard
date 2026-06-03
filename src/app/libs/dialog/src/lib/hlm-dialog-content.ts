@@ -13,7 +13,7 @@ import { HlmDialogClose } from './hlm-dialog-close';
   selector: 'hlm-dialog-content',
   imports: [NgComponentOutlet, HlmIconImports, HlmButton, HlmDialogClose],
   providers: [provideIcons({ lucideX })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     'data-slot': 'dialog-content',
     '[attr.data-state]': 'state()',

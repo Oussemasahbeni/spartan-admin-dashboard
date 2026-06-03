@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DOCUMENT, inject, input, numberAttribute, signal } from '@angular/core';
+import { Component, DOCUMENT, inject, input, numberAttribute, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -27,7 +27,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   host: {
     '(window:scroll)': 'onWindowScroll()',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackToTop {
   // ==========================================

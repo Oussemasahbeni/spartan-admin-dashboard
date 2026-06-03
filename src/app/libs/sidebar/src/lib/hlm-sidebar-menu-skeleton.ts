@@ -6,7 +6,7 @@ import { classes } from '@spartan-ng/helm/utils';
 @Component({
   selector: 'hlm-sidebar-menu-skeleton,div[hlmSidebarMenuSkeleton]',
   imports: [HlmSkeletonImports],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     'data-slot': 'sidebar-menu-skeleton',
     'data-sidebar': 'menu-skeleton',

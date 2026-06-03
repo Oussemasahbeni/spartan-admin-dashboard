@@ -1,9 +1,9 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Service, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
 import { User } from '../../shared/models/user';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class AuthService {
   private readonly _router = inject(Router);
   private readonly _localStorage = inject(LOCAL_STORAGE);

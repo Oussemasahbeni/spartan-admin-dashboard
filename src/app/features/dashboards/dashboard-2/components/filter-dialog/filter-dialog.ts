@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCalendar, lucideFilter } from '@ng-icons/lucide';
@@ -17,7 +17,7 @@ export interface FilterOptions {
   selector: 'adm-filter-dialog',
   imports: [HlmDialogImports, HlmButtonImports, HlmIconImports, TranslocoModule],
   providers: [provideIcons({ lucideFilter, lucideCalendar })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <hlm-dialog>
       <button type="button" hlmBtn variant="outline" hlmDialogTrigger>

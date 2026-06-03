@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
-
 import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
@@ -49,7 +48,6 @@ export interface CalendarEventModel {
   host: {
     class: 'flex flex-col gap-4 sm:max-w-lg ',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarForm implements OnInit {
   // ==========================================

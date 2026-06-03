@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Theme, THEMES, ThemeService } from '@core/config/theme-service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -20,7 +20,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       lucideMonitor,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     '(window:keydown)': 'onKeydown($event)',
   },

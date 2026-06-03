@@ -1,14 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  output,
-  PLATFORM_ID,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, computed, inject, input, output, PLATFORM_ID } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import type { DOMPurify as DOMPurifyType } from 'dompurify';
 import hljs from 'highlight.js';
@@ -16,7 +7,6 @@ import { Marked, Renderer } from 'marked';
 
 @Component({
   selector: 'adm-ai-markdown-renderer',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'block',
     '(click)': 'onHostClick($event)',

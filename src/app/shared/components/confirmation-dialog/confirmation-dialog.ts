@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
@@ -11,7 +11,7 @@ import { ConfirmDialogData } from './confirmation-dialog-service';
   host: {
     class: 'sm:max-w-lg',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <div *transloco="let t; prefix: 'users.confirmationDialog'">
       <hlm-alert-dialog-header>

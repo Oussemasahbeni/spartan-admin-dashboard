@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -57,7 +57,6 @@ import { provideTransactionStatusIcons } from './pipes/status-ui.pipe';
     provideTransactionStatusIcons(),
   ],
   templateUrl: './dashboard-2.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Dashboard2 implements OnInit {
   // ==========================================

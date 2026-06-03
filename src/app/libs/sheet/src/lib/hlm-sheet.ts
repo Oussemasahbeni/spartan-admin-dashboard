@@ -20,7 +20,7 @@ import { HlmSheetOverlay } from './hlm-sheet-overlay';
       // add custom options here
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <hlm-sheet-overlay />
     <ng-content />

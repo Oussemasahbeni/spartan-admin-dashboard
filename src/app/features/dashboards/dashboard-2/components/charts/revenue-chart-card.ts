@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { provideTranslocoScope, translateObjectSignal, Translation } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -42,7 +42,7 @@ interface MonthsTranslation {
       lucideTrendingUp,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <section hlmCard class="h-full w-full">
       <div hlmCardHeader class="flex flex-row items-center justify-between space-y-0">

@@ -23,7 +23,6 @@ import { EditEvent } from '../../../model/user-message';
 @Component({
   selector: 'adm-user-message',
   templateUrl: './user-message.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmCardImports, HlmTextareaImports, HlmInputGroupImports, HlmButtonImports, HlmIconImports],
   viewProviders: [provideIcons({ lucideUser, lucideCopy, lucideCheck, lucidePencil })],
 })

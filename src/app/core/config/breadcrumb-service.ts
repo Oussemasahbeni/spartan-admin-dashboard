@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Breadcrumb } from '@shared/components/breadcrumbs-header/breadcrumb';
@@ -26,7 +26,7 @@ import { filter, map } from 'rxjs';
  * }
  * ```
  */
-@Injectable({ providedIn: 'root' })
+@Service()
 export class BreadcrumbService {
   private readonly _router = inject(Router);
   private readonly _activatedRoute = inject(ActivatedRoute);
@@ -40,7 +40,7 @@ export class BreadcrumbService {
       filter((event) => event instanceof NavigationEnd),
       map(() => this._buildBreadcrumbs())
     ),
-    { initialValue: []}
+    { initialValue: [] }
   );
 
   /**

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BreadcrumbService } from '@core/config/breadcrumb-service';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -7,7 +7,7 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 @Component({
   selector: 'adm-breadcrumbs-header',
   imports: [HlmBreadCrumbImports, RouterLink, TranslocoModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: ` <nav *transloco="let t" hlmBreadcrumb>
     <ol hlmBreadcrumbList>
       <!-- Home link - always visible -->

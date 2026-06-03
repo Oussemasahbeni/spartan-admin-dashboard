@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, minLength, required, validate } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -40,7 +40,6 @@ import { AuthLayout } from '../layout';
     }),
   ],
   templateUrl: './signup.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Signup {
   // ==========================================

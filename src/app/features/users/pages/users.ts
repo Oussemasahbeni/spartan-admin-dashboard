@@ -1,14 +1,5 @@
 import { DatePipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  signal,
-  TemplateRef,
-  viewChild,
-} from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal, TemplateRef, viewChild } from '@angular/core';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
@@ -91,7 +82,6 @@ import { ActionDropdown } from '../components/table/action-dropdown';
       lucideUser,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Users {
   // ==========================================

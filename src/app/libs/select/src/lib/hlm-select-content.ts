@@ -8,7 +8,7 @@ import { HlmSelectScrollUp } from './hlm-select-scroll-up';
 @Component({
   selector: 'hlm-select-content',
   imports: [HlmSelectScrollUp, HlmSelectScrollDown],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [BrnSelectContent],
   template: `
     @if (showScroll()) {

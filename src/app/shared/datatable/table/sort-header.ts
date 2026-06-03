@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideArrowUpDown, lucideSortAsc, lucideSortDesc, lucideX } from '@ng-icons/lucide';
@@ -21,7 +21,7 @@ import { Column, Header, SortDirection } from '@tanstack/angular-table';
       lucideX,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <button type="button" class="flex items-center gap-2 capitalize" [hlmDropdownMenuTrigger]="menu">
       {{ headerCell() }}

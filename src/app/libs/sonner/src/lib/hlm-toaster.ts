@@ -10,7 +10,7 @@ import type { ClassValue } from 'clsx';
   selector: 'hlm-toaster',
   imports: [BrnSonnerImports, NgIcon],
   providers: [provideIcons({ lucideCircleCheck, lucideInfo, lucideTriangleAlert, lucideOctagonX, lucideLoader2 })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <brn-sonner-toaster
       [class]="_computedClass()"

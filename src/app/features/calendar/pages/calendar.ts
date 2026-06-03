@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core/index.js';
@@ -63,7 +63,6 @@ import { CalendarStore, EVENT_TYPES } from '../state/calendar-store';
     }),
   ],
   templateUrl: './calendar.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Calendar {
   // ==========================================

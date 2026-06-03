@@ -8,7 +8,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-combobox-item',
   imports: [NgIcon],
   providers: [provideIcons({ lucideCheck })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [{ directive: BrnComboboxItem, inputs: ['id', 'disabled', 'value'] }],
   host: {
     'data-slot': 'combobox-item',

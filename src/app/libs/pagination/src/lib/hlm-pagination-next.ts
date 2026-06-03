@@ -12,7 +12,7 @@ import { HlmPaginationLink } from './hlm-pagination-link';
   selector: 'hlm-pagination-next',
   imports: [HlmPaginationLink, NgIcon],
   providers: [provideIcons({ lucideChevronRight })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <a
       hlmPaginationLink

@@ -21,7 +21,7 @@ import type { ClassValue } from 'clsx';
 @Component({
   selector: 'hlm-radio',
   imports: [BrnRadio],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     '[attr.aria-label]': 'null',
     '[attr.aria-labelledby]': 'null',

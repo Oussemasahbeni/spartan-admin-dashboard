@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -23,7 +23,7 @@ interface TeamMember {
 @Component({
   selector: 'adm-settings-team',
   templateUrl: './team.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [
     HlmAvatarImports,
     HlmButtonImports,

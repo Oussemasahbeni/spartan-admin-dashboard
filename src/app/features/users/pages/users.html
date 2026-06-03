@@ -15,7 +15,7 @@
           </div>
           <hlm-input-group-addon align="inline-end">
             @if (this.searchForm.search().value()) {
-              <ng-icon name="lucideX" (click)="searchForm.search().value.set('')" />
+            <ng-icon name="lucideX" (click)="searchForm.search().value.set('')" />
             }
           </hlm-input-group-addon>
         </hlm-input-group>
@@ -84,18 +84,13 @@
       <!-- Status Cell -->
       <ng-template #statusCell let-context>
         <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
-          @let status = context.getValue();
-          @switch (status) {
-            @case ('active') {
-              <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
-            }
-            @case ('inactive') {
-              <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
-            }
-            @case ('pending') {
-              <ng-icon hlmIcon size="xs" class="animate-spin text-yellow-600" name="lucideLoader" />
-            }
-          }
+          @let status = context.getValue(); @switch (status) { @case ('active') {
+          <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
+          } @case ('inactive') {
+          <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
+          } @case ('pending') {
+          <ng-icon hlmIcon size="xs" class="animate-spin text-yellow-600" name="lucideLoader" />
+          } }
           <span *transloco="let t; prefix: 'users.status'">{{ t(status) }}</span>
         </span>
       </ng-template>
@@ -108,17 +103,13 @@
           class="flex w-fit items-center gap-1.5 border-transparent px-2 py-0.5"
           [id]="context.row.original.id + '-role'"
         >
-          @switch (role) {
-            @case ('admin') {
-              <ng-icon hlmIcon size="sm" name="lucideShieldCheck" />
-            }
-            @case ('user') {
-              <ng-icon hlmIcon size="sm" name="lucideUser" />
-            }
-            @case ('manager') {
-              <ng-icon hlmIcon size="sm" name="lucideBriefcase" />
-            }
-          }
+          @switch (role) { @case ('admin') {
+          <ng-icon hlmIcon size="sm" name="lucideShieldCheck" />
+          } @case ('user') {
+          <ng-icon hlmIcon size="sm" name="lucideUser" />
+          } @case ('manager') {
+          <ng-icon hlmIcon size="sm" name="lucideBriefcase" />
+          } }
           <span *transloco="let t; prefix: 'users.role'">{{ t(role) }}</span>
         </span>
       </ng-template>

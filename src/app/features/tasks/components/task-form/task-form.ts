@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -43,7 +43,6 @@ import { Task, TaskFormContext, TaskFormModel, TaskStatus } from '../../model/ta
     class: 'flex flex-col gap-4 sm:max-w-lg',
   },
   templateUrl: './task-form.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskForm {
   // ==========================================

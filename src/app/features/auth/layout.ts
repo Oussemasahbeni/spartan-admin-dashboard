@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -16,7 +16,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       lucideHome,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *transloco="let t" class="bg-background block h-screen overflow-hidden">
       <div class="relative flex h-full flex-col md:grid lg:max-w-none lg:px-0 xl:grid-cols-2">

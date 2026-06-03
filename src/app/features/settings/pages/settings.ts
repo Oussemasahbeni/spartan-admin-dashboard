@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, linkedSignal, signal, viewChild } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -39,7 +39,6 @@ interface Panel {
   ],
   templateUrl: './settings.html',
   providers: [provideIcons({ lucideUserCircle, lucideLock, lucideCreditCard, lucideBell, lucideUsers, lucideMenu })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Settings {
   // ==========================================

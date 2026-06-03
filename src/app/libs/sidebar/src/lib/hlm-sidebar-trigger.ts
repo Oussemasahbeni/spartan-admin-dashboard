@@ -10,7 +10,7 @@ import { HlmSidebarService } from './hlm-sidebar.service';
   selector: 'button[hlmSidebarTrigger]',
   imports: [HlmIconImports],
   providers: [provideIcons({ lucidePanelLeft }), provideBrnButtonConfig({ variant: 'ghost', size: 'icon' })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [
     {
       directive: HlmButton,

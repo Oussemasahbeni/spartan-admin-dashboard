@@ -1,17 +1,7 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 
 import { isPlatformBrowser } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  PLATFORM_ID,
-  ViewEncapsulation,
-  booleanAttribute,
-  inject,
-  input,
-  output,
-  signal,
-} from '@angular/core';
+import { Component, PLATFORM_ID, booleanAttribute, inject, input, output, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
@@ -29,7 +19,6 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
 @Component({
   selector: 'adm-ai-response',
   templateUrl: './ai-response.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmIconImports, HlmButtonImports, AiMarkdownRenderer],
   viewProviders: [
     provideIcons({ lucideSparkle, lucideRefreshCcw, lucideCheck, lucideCopy, lucideThumbsDown, lucideThumbsUp }),

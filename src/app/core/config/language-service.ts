@@ -1,5 +1,5 @@
 import { isPlatformBrowser, registerLocaleData } from '@angular/common';
-import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { computed, inject, PLATFORM_ID, Service, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { BrnCalendarI18n, injectBrnCalendarI18n } from '@spartan-ng/brain/calendar';
 import { arabicCalendarI18n, englishCalendarI18n, frenchCalendarI18n } from './date-I18n';
@@ -16,9 +16,7 @@ export interface AvailableLanguage {
 
 const registeredLocales = new Set<string>(['en']);
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class LanguageService {
   private readonly _translocoService = inject(TranslocoService);
   private readonly _dir = inject(DirectionalityService);

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, input } from '@angular/core';
+import { Component, DestroyRef, inject, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -30,7 +30,7 @@ import { UserForm } from '../form/user-form';
     TranslocoModule,
   ],
   providers: [provideIcons({ lucideEllipsisVertical })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <button
       type="button"

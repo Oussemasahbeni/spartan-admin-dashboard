@@ -24,7 +24,7 @@ import type { ClassValue } from 'clsx';
   selector: 'hlm-calendar-multi',
   imports: [BrnCalendarImports, NgIcon, HlmIcon, NgTemplateOutlet, HlmSelectImports],
   viewProviders: [provideIcons({ lucideChevronLeft, lucideChevronRight })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <div
       brnCalendarMulti

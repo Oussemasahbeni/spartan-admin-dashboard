@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { ButtonVariants } from '@spartan-ng/helm/button';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { ConfirmationDialog } from './confirmation-dialog';
@@ -11,7 +11,7 @@ export interface ConfirmDialogData {
   variant?: ButtonVariants['variant'];
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ConfirmationDialogService {
   private readonly _hlmDialogService = inject(HlmDialogService);
 

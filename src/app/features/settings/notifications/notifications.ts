@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -9,7 +9,6 @@ import { HlmSpinner } from '@spartan-ng/helm/spinner';
 @Component({
   selector: 'adm-settings-notifications',
   templateUrl: './notifications.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmButtonImports, HlmCheckboxImports, HlmSeparatorImports, HlmSpinner, FormField, FormRoot, TranslocoModule],
 })
 export class SettingsNotifications {

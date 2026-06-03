@@ -39,7 +39,7 @@ interface Plan {
 @Component({
   selector: 'adm-settings-plan-billing',
   templateUrl: './plan-billing.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [
     HlmButtonImports,
     HlmIconImports,

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
@@ -45,7 +45,6 @@ import { AuthLayout } from '../layout';
     }),
   ],
   templateUrl: './login.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Login {
   // ==========================================

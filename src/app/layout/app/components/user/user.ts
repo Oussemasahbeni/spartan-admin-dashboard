@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { AuthService } from '@core/auth/auth-service';
 import { Language, LanguageService } from '@core/config/language-service';
 import { ThemeService } from '@core/config/theme-service';
@@ -45,7 +45,6 @@ import { User } from '../../../../shared/models/user';
       lucideCreditCard,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavUser {
   // ==========================================

@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
+import { User } from '@shared/models/user';
 import { Observable } from 'rxjs';
-import { User } from '../../../shared/models/user';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class UserService {
   private readonly _http = inject(HttpClient);
   private readonly API_URL = '/api/users';

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -20,7 +20,7 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 @Component({
   selector: 'adm-settings-account',
   templateUrl: './account-panel.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   imports: [
     HlmButtonImports,
     HlmIconImports,

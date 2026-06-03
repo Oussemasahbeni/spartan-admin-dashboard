@@ -1,6 +1,5 @@
 import {
   booleanAttribute,
-  ChangeDetectionStrategy,
   Component,
   computed,
   input,
@@ -97,8 +96,6 @@ export interface DataTableRowSelectionChangeEvent<T> {
   ],
   templateUrl: './data-table.html',
   styleUrl: './data-table.css',
-
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTable<T> {
   // ==========================================

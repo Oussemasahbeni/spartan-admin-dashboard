@@ -10,7 +10,7 @@ import type { ClassValue } from 'clsx';
   selector: 'hlm-select-trigger',
   imports: [NgIcon, BrnSelectTrigger, BrnFieldControlDescribedBy],
   providers: [provideIcons({ lucideChevronDown })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <button
       brnSelectTrigger

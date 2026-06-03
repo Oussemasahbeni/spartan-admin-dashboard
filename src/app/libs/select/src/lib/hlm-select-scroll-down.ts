@@ -8,7 +8,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-select-scroll-down',
   imports: [NgIcon],
   providers: [provideIcons({ lucideChevronDown })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [BrnSelectScrollDown],
   template: ` <ng-icon name="lucideChevronDown" /> `,
 })

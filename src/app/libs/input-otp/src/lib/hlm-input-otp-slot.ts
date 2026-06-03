@@ -7,7 +7,7 @@ import { HlmInputOtpFakeCaret } from './hlm-input-otp-fake-caret';
 @Component({
   selector: 'hlm-input-otp-slot',
   imports: [BrnInputOtpSlot, HlmInputOtpFakeCaret],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: { 'data-slot': 'input-otp-slot' },
   template: `
     <brn-input-otp-slot [index]="index()">

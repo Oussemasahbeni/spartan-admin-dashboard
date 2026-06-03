@@ -5,7 +5,7 @@ import { classes } from '@spartan-ng/helm/utils';
 @Component({
   selector: 'hlm-resizable-handle',
   exportAs: 'hlmResizableHandle',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [{ directive: BrnResizableHandle, inputs: ['withHandle', 'disabled'] }],
   host: {
     'data-slot': 'resizable-handle',

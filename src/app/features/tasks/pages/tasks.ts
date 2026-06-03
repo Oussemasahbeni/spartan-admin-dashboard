@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -16,7 +16,7 @@ import { Task, TaskStatus } from '../model/task';
   selector: 'adm-tasks',
   imports: [TranslocoModule, DragDropModule, HlmButtonImports, HlmIconImports, TaskCard],
   providers: [provideIcons({ lucidePlus, lucideMoreVertical, lucideFilter, lucideChevronRight })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   templateUrl: './tasks.html',
 })
 export default class Tasks {

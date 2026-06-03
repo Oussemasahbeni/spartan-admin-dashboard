@@ -1,14 +1,4 @@
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  ElementRef,
-  input,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { booleanAttribute, Component, computed, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -64,7 +54,6 @@ import { AttachmentCard } from '../attachment-card/attachment-card';
       lucideSquareStop,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssistantInput {
   // ==========================================

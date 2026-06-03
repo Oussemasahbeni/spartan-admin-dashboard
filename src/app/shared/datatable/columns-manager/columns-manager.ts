@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -37,7 +37,7 @@ interface DataTableColumnMeta {
       lucideX,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   styleUrl: 'columns-manager.css',
   template: `
     <button type="button" class="hidden sm:flex" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">

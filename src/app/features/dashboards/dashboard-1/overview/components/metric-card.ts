@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -29,7 +29,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
     }),
     provideTranslocoScope({ scope: 'dashboard/dashboard1', alias: 'dashboard1' }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <section *transloco="let t; prefix: 'dashboard1.metricCard'" hlmCard class="h-full w-full py-4">
       <!-- Header -->

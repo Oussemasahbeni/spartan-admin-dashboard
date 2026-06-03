@@ -9,7 +9,7 @@ import type { ClassValue } from 'clsx';
   selector: 'hlm-breadcrumb-ellipsis',
   imports: [NgIcon, HlmIcon],
   providers: [provideIcons({ lucideEllipsis })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <span data-slot="breadcrumb-ellipsis" role="presentation" aria-hidden="true" [class]="_computedClass()">
       <ng-icon hlm size="sm" name="lucideEllipsis" />

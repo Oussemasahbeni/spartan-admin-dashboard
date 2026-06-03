@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { BackToTop } from '../../shared/components/back-to-top/back-to-top';
@@ -8,7 +8,7 @@ import { Navigation } from './components/navigation/navigation';
 @Component({
   selector: 'adm-main-layout',
   imports: [Navigation, SiteHeader, RouterOutlet, HlmSidebarImports, BackToTop],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     @defer (on idle) {
       <adm-back-to-top />

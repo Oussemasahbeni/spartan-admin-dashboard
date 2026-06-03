@@ -8,7 +8,7 @@ import { ClassValue } from 'clsx';
 @Component({
   selector: 'hlm-command-dialog',
   imports: [HlmDialogImports, BrnDialogContent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <hlm-dialog [state]="_state()" (stateChanged)="stateChanged($event)">
       <hlm-dialog-content

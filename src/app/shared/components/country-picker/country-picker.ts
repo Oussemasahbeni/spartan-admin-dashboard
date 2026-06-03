@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, model, signal } from '@angular/core';
+import { Component, model, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -28,7 +28,6 @@ import { CountryDisplay } from '../country-display/country-display';
     }),
   ],
   templateUrl: './country-picker.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountryPicker implements FormValueControl<Country | null> {
   // ==========================================

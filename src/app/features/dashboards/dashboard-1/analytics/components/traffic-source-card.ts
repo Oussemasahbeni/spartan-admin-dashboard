@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
 import { HlmCardImports } from '@spartan-ng/helm/card';
@@ -14,7 +14,6 @@ interface TrafficSourceCardTranslation {
 @Component({
   selector: 'adm-traffic-source-card',
   imports: [HlmCardImports, HlmTabsImports, NgApexchartsModule, TranslocoModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.trafficSourceCard'" hlmCard class="h-full w-full">
       <hlm-tabs class="w-auto" [tab]="selectedPeriod()" (tabActivated)="selectedPeriod.set($event)">

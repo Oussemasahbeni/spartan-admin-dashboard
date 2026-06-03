@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
@@ -14,7 +14,7 @@ import { filter, take } from 'rxjs';
  * }
  */
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class TranslateTitleStrategy extends TitleStrategy {
   private readonly title = inject(Title);
   private readonly transloco = inject(TranslocoService);

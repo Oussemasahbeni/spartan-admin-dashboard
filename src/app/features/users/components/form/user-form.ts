@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
@@ -50,7 +50,6 @@ export interface UserFormModel {
     class: 'flex flex-col gap-4 sm:max-w-lg ',
   },
   templateUrl: './user-form.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserForm implements OnInit {
   // ==========================================

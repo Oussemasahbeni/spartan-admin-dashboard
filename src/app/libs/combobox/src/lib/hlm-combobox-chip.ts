@@ -10,7 +10,7 @@ import { HlmComboboxChipRemove } from './hlm-combobox-chip-remove';
   selector: 'hlm-combobox-chip',
   imports: [NgIcon, HlmComboboxChipRemove],
   providers: [provideIcons({ lucideX })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   hostDirectives: [{ directive: BrnComboboxChip, inputs: ['value'] }],
   host: {
     'data-slot': 'combobox-chip',

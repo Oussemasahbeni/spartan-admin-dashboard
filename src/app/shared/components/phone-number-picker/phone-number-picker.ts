@@ -1,14 +1,4 @@
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  linkedSignal,
-  model,
-  signal,
-} from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, linkedSignal, model, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -41,7 +31,7 @@ import { CountryDisplay } from '../country-display/country-display';
       lucideGlobe,
     }),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   template: `
     <div *transloco="let t; prefix: 'phoneNumberPicker'" class="flex">
       <hlm-combobox [value]="selectedCountry()" (valueChange)="selectedCountry.set($event)">

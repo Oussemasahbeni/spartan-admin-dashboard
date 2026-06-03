@@ -8,7 +8,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: '[hlmBreadcrumbSeparator]',
   imports: [NgIcon],
   providers: [provideIcons({ lucideChevronRight })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     'data-slot': 'breadcrumb-separator',
     role: 'presentation',

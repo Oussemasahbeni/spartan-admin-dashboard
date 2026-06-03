@@ -8,7 +8,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-input-otp-separator',
   imports: [HlmIcon, NgIcon],
   providers: [provideIcons({ lucideMinus })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
   host: {
     role: 'separator',
     'data-slot': 'input-otp-separator',
