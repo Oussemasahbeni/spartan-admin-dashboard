@@ -15,7 +15,6 @@
     "lint": "ng lint"
   },
   "private": true,
-  "packageManager": "pnpm@11.0.0",
   "dependencies": {
     "@angular/cdk": "21.2.0",
     "@angular/common": "^21.2.0",
