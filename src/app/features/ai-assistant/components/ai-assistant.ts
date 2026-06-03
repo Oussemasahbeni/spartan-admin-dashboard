@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { TranslocoModule } from '@jsverse/transloco';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { AssistantService } from '../service/chat.service';
+import { AssistantService } from '../service/chat-service';
 import { AssistantInput } from './assistant-input/assistant-input';
 import { ChatList } from './chat-list/chat-list';
 import { AssistantEmptyState } from './empty-state/empty-state';

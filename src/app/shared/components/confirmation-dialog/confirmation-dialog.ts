@@ -3,7 +3,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
-import { ConfirmDialogData } from './confirmation-dialog.service';
+import { ConfirmDialogData } from './confirmation-dialog-service';
 
 @Component({
   selector: 'adm-confirmation-dialog',

@@ -17,7 +17,7 @@ import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { parsePhoneNumberFromString } from 'libphonenumber-js/mobile';
 import { User, USER_ROLES, UserRole } from '../../../../shared/models/user';
-import { UserService } from '../../service/user.service';
+import { UserService } from '../../service/user-service';
 
 export interface UserFormModel {
   name: string;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { DirectionalityService } from '@core/config/directionality.service';
+import { DirectionalityService } from '@core/config/directionality-service';
 import { provideTranslocoScope, translateObjectSignal, Translation } from '@jsverse/transloco';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';

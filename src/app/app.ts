@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DirectionalityService } from '@core/config/directionality.service';
+import { DirectionalityService } from '@core/config/directionality-service';
 import { ToasterProps } from '@spartan-ng/brain/sonner';
 import { HlmToasterImports } from '@spartan-ng/helm/sonner';
 

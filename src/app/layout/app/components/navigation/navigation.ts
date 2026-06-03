@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/auth/auth-service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -22,7 +22,7 @@ import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
 
-import { DirectionalityService } from '@core/config/directionality.service';
+import { DirectionalityService } from '@core/config/directionality-service';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { NavGroup } from '../../model/navigation';
 import { NavSecondary } from '../secondary/nav-secondary';

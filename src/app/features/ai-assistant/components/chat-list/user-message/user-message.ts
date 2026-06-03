@@ -18,7 +18,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 import { UserMessage } from '../../../model/assistant';
-import { EditEvent } from '../../../model/user-message.types';
+import { EditEvent } from '../../../model/user-message';
 
 @Component({
   selector: 'adm-user-message',

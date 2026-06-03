@@ -11,7 +11,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports, HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
-import { CalendarStore } from '../../state/calendar.store';
+import { CalendarStore } from '../../state/calendar-store';
 import { CalendarForm } from '../calendar-form/calendar-form';
 
 @Component({

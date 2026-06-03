@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BreadcrumbService } from '@core/config/breadcrumb.service';
+import { BreadcrumbService } from '@core/config/breadcrumb-service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { DirectionalityService } from '@core/config/directionality.service';
+import { DirectionalityService } from '@core/config/directionality-service';
 import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';

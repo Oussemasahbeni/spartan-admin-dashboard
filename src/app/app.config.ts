@@ -19,12 +19,12 @@ import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
 import { FlagBasedPreloadingStrategy } from './core/config/flag-based-preloading.strategy';
-import { Language, LANGUAGES, LanguageService } from './core/config/language.service';
-import { ThemeService } from './core/config/theme.service';
+import { Language, LANGUAGES, LanguageService } from './core/config/language-service';
+import { ThemeService } from './core/config/theme-service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
 
-import { mockApiInterceptor } from '@core/interceptor/mock-api.interceptor';
+import { mockApiInterceptor } from '@core/interceptor/mock-api-interceptor';
 import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
 
 function isLanguage(value: string): value is Language {

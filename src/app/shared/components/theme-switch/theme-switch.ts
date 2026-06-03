@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { Theme, THEMES, ThemeService } from '@core/config/theme.service';
+import { Theme, THEMES, ThemeService } from '@core/config/theme-service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideMonitor, lucideMoon, lucideSun } from '@ng-icons/lucide';

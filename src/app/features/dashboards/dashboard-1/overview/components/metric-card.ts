@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { DirectionalityService } from '@core/config/directionality.service';
+import { DirectionalityService } from '@core/config/directionality-service';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import {

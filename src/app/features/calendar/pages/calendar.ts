@@ -33,7 +33,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { isBefore, subDays } from 'date-fns';
 import { CalendarForm } from '../components/calendar-form/calendar-form';
 import { EventDetails } from '../components/event-details/event-details';
-import { CalendarStore, EVENT_TYPES } from '../state/calendar.store';
+import { CalendarStore, EVENT_TYPES } from '../state/calendar-store';
 
 @Component({
   selector: 'adm-calendar',

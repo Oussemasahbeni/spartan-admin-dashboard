@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, linkedSignal, signal, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DirectionalityService } from '@core/config/directionality.service';
+import { DirectionalityService } from '@core/config/directionality-service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideCreditCard, lucideLock, lucideMenu, lucideUserCircle, lucideUsers } from '@ng-icons/lucide';

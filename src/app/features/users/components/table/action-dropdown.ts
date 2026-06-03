@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideEllipsisVertical } from '@ng-icons/lucide';
-import { ConfirmationDialogService } from '@shared/components/confirmation-dialog/confirmation-dialog.service';
+import { ConfirmationDialogService } from '@shared/components/confirmation-dialog/confirmation-dialog-service';
 import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
 import { toast } from '@spartan-ng/brain/sonner';
 import { HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
@@ -15,7 +15,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
 import { exhaustMap, filter } from 'rxjs';
 import { User } from '../../../../shared/models/user';
-import { UserService } from '../../service/user.service';
+import { UserService } from '../../service/user-service';
 import { UserForm } from '../form/user-form';
 
 @Component({
