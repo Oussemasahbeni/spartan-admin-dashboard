@@ -15,10 +15,22 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
+import { cva } from 'class-variance-authority';
 import { parseISO, startOfDay } from 'date-fns';
 import { TAG_COLOR_CLASSES } from '../../model/tag';
 import { Task } from '../../model/task';
 import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-status-ui.pipe';
+
+const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 py-0.5 transition-colors', {
+  variants: {
+    state: {
+      overdue: 'border-red-400 bg-red-50 text-red-500 dark:bg-red-950',
+      completed: 'border-emerald-400 bg-emerald-50 text-emerald-600 dark:bg-emerald-950',
+      default: 'border-transparent text-muted-foreground',
+    },
+  },
+  defaultVariants: { state: 'default' },
+});
 
 @Component({
   selector: 'adm-task-card',
@@ -67,7 +79,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
       <div hlmCardHeader class="px-4 pt-4 pb-0 [.border-b]:pb-0">
         <div class="flex items-start justify-between gap-3">
           <div class="flex items-start">
-            <!-- Complete toggle (radio-style circle) — width-animates in on hover -->
+            <!-- Complete toggle -->
             <div
               [class]="
                 (task().isCompleted ? 'w-9 pr-2' : 'w-0 group-hover:w-9 group-hover:pr-2') +
@@ -80,11 +92,8 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
                 type="button"
                 variant="ghost"
                 size="icon"
-                class="mt-0.5 h-7 w-7 shrink-0 rounded-full p-0"
                 aria-label="Toggle task completion"
-                [tabindex]="task().isCompleted || groupFocused ? '0' : '-1'"
-                [class.text-emerald-500]="task().isCompleted"
-                [class.text-muted-foreground]="!task().isCompleted"
+                [class]="task().isCompleted ? 'text-emerald-500' : 'text-muted-foreground'"
                 (click)="toggleComplete.emit(task()); $event.stopPropagation()"
               >
                 @if (task().isCompleted) {
@@ -95,7 +104,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
               </button>
             </div>
 
-            <div class="min-w-0 flex-1 space-y-1.5">
+            <div class="flex min-w-0 flex-1 flex-col gap-1.5">
               <!-- Status badge -->
               @let ui = task().status | taskStatusUI;
               <span
@@ -158,19 +167,7 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
       <div hlmCardFooter class="flex items-center justify-between px-4 py-2.5">
         <div class="text-muted-foreground flex items-center gap-3 text-sm">
           <!-- Due date -->
-          <div
-            class="flex items-center gap-1 rounded-full border px-1.5 py-0.5 transition-colors"
-            [class.border-red-400]="isOverdue()"
-            [class.bg-red-50]="isOverdue()"
-            [class.text-red-500]="isOverdue()"
-            [class.dark:bg-red-950]="isOverdue()"
-            [class.border-emerald-400]="task().isCompleted"
-            [class.bg-emerald-50]="task().isCompleted"
-            [class.text-emerald-600]="task().isCompleted"
-            [class.dark:bg-emerald-950]="task().isCompleted"
-            [class.border-transparent]="!isOverdue() && !task().isCompleted"
-            [class.text-muted-foreground]="!isOverdue() && !task().isCompleted"
-          >
+          <div [class]="dueDateClass()">
             <ng-icon hlmIcon size="xs" [name]="isOverdue() ? 'lucideClock' : 'lucideCalendar'" />
             <span>{{ task().dueDate }}</span>
           </div>
@@ -197,10 +194,8 @@ import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-statu
           hlmBtn
           type="button"
           variant="ghost"
-          size="icon"
-          class="text-muted-foreground hover:text-foreground h-6 w-6 rounded-full opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
+          size="icon-xs"
           aria-label="Open task actions menu"
-          [tabindex]="task().isCompleted || groupFocused ? '0' : '-1'"
           (click)="optionsClick.emit($event); $event.stopPropagation()"
         >
           <ng-icon hlmIcon name="lucideMoreVertical" size="xs" />
@@ -230,6 +225,11 @@ export class TaskCard {
   // Derived state
   // ==========================================
 
+  protected readonly dueDateClass = computed(() =>
+    dueDateVariants({
+      state: this.isOverdue() ? 'overdue' : this.task().isCompleted ? 'completed' : 'default',
+    })
+  );
   protected readonly tagColorClasses = TAG_COLOR_CLASSES;
 
   protected readonly isOverdue = computed(() => {

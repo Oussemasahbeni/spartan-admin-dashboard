@@ -19,7 +19,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   template: `
     <div *transloco="let t" class="bg-background block h-screen overflow-hidden">
       <div class="relative flex h-full flex-col md:grid lg:max-w-none lg:px-0 xl:grid-cols-2">
-        <div class="absolute top-6 left-6 flex space-x-2">
+        <div class="absolute top-6 left-6 flex gap-2">
           <a routerLink="/" hlmBtn variant="outline" size="icon" [aria-label]="t('breadcrumbs.home')">
             <ng-icon hlmIcon size="sm" name="lucideHome" />
           </a>

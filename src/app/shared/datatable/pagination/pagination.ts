@@ -76,7 +76,7 @@ import { Table } from '@tanstack/angular-table';
         {{ t('page', { page: table().getState().pagination.pageIndex + 1, totalPages: table().getPageCount() }) }}
       </span>
 
-      <div class="flex space-x-1">
+      <div class="flex gap-1">
         <button
           type="button"
           size="icon-sm"

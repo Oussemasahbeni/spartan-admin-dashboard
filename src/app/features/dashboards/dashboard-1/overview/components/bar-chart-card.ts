@@ -40,7 +40,7 @@ interface MonthsTranslation {
         <p class="text-muted-foreground mt-1 text-sm">{{ barChart().description }}</p>
       </header>
 
-      <main hlmCardContent class="space-y-4">
+      <main hlmCardContent class="flex flex-col gap-4">
         <apx-chart
           [grid]="chartOptions().grid!"
           [series]="chartOptions().series!"

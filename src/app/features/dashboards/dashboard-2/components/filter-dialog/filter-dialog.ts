@@ -30,9 +30,6 @@ export interface FilterOptions {
             <h3 hlmDialogTitle>{{ t('title') }}</h3>
             <p hlmDialogDescription>{{ t('description') }}</p>
           </hlm-dialog-header>
-          <div class="space-y-4 py-4">
-            <p class="text-muted-foreground text-sm">{{ t('description') }}</p>
-          </div>
           <hlm-dialog-footer>
             <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('reset') }}</button>
             <button type="button" hlmBtn hlmDialogClose (click)="onApply()">{{ t('apply') }}</button>

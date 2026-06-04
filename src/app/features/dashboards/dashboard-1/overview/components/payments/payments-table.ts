@@ -64,7 +64,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
         <h1 hlmCardTitle class="text-base font-semibold">{{ t('title') }}</h1>
         <p hlmCardDescription>{{ t('description') }}</p>
       </header>
-      <main hlmCardContent class="space-y-4">
+      <main hlmCardContent class="flex flex-col gap-4">
         <div class="flex items-center justify-between gap-4">
           <hlm-input-group>
             <input

@@ -190,7 +190,6 @@ export default class Calendar {
 
   protected addEvent(): void {
     const dialogRef = this._hlmDialogService.open(CalendarForm, {
-      contentClass: 'max-w-3xl',
     });
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
@@ -243,7 +242,6 @@ export default class Calendar {
 
   private handleEventClick(info: EventClickArg): void {
     const dialogRef = this._hlmDialogService.open(EventDetails, {
-      contentClass: 'max-w-3xl',
       context: {
         event: info.event,
       },
@@ -258,7 +256,6 @@ export default class Calendar {
 
   private handleDateClick(info: DateClickArg): void {
     const dialogRef = this._hlmDialogService.open(CalendarForm, {
-      contentClass: 'max-w-3xl min-w-xl',
       context: {
         date: info.date,
       },

@@ -24,7 +24,7 @@ import { User } from '../../../../../shared/models/user';
         <h1 hlmCardTitle class="text-base font-semibold">{{ t('title') }}</h1>
         <p hlmCardDescription>{{ t('description') }}</p>
       </header>
-      <main hlmCardContent class="space-y-4">
+      <main hlmCardContent class="flex flex-col gap-4">
         @for (member of members(); track member.email) {
           <div class="flex min-w-0 items-center justify-between gap-4">
             <div class="flex min-w-0 flex-1 items-center gap-3">

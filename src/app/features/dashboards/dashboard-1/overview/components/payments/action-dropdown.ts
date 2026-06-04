@@ -19,7 +19,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
     TranslocoModule,
   ],
   providers: [provideIcons({ lucideEllipsisVertical })],
-
   template: `
     <button
       type="button"

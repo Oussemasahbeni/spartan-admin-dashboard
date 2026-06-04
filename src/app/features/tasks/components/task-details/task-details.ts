@@ -97,7 +97,7 @@ export interface TaskDetailsContext {
     <!-- Two-column body -->
     <div *transloco="let t; prefix: 'tasks.details'" class="flex gap-6">
       <!-- LEFT: main content -->
-      <div class="min-w-0 flex-1 space-y-6">
+      <div class="min-w-0 flex-1 flex flex-col gap-6">
         <!-- Description -->
         <section>
           <h3 class="text-muted-foreground mb-2 flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase">
@@ -140,7 +140,7 @@ export interface TaskDetailsContext {
       </div>
 
       <!-- RIGHT: sidebar -->
-      <aside class="w-[30%] shrink-0 space-y-4">
+      <aside class="w-[30%] shrink-0 flex flex-col gap-4">
         <!-- Members -->
         <div>
           <h3 class="text-muted-foreground mb-2 text-[10px] font-semibold tracking-widest uppercase">{{ t('members') }}</h3>

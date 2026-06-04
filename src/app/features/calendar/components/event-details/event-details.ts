@@ -59,7 +59,6 @@ export class EventDetails {
   // ==========================================
   onEditEvent() {
     const dialogRef = this._hlmDialogService.open(CalendarForm, {
-      contentClass: 'max-w-3xl',
       context: {
         event: this.event(),
         date: this.event().start,

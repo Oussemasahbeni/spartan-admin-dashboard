@@ -2,19 +2,23 @@ import { Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideListFilter, lucideSearch } from '@ng-icons/lucide';
+import { USER_STATUSES, UserStatus } from '@shared/models/user';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
+import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
-import { USER_STATUSES, UserStatus } from '../../../../shared/models/user';
+import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 
 @Component({
   selector: 'adm-users-status-filter',
   imports: [
     HlmButtonImports,
+    HlmBadgeImports,
+    HlmSeparatorImports,
     HlmIconImports,
     HlmPopoverImports,
     BrnCommandImports,
@@ -37,11 +41,11 @@ import { USER_STATUSES, UserStatus } from '../../../../shared/models/user';
         <ng-icon hlm name="lucideListFilter" size="sm" />
         {{ t('users.list.columns.status') }}
         @if (_statusFilter().length) {
-          <div data-orientation="vertical" role="none" class="bg-border mx-2 h-4 w-px shrink-0"></div>
+          <hlm-separator class="mx-2" orientation="vertical" />
 
           <div class="flex gap-1">
             @for (status of _statusFilter(); track status) {
-              <span *transloco="let t" class="bg-secondary text-secondary-foreground rounded px-1 py-0.5 text-xs">
+              <span *transloco="let t" hlmBadge>
                 {{ t('users.status.' + status) }}
               </span>
             }

@@ -34,17 +34,17 @@
 
     <div hlmTabsContent="overview">
       @defer (when selectedTab() === 'overview') {
-        <adm-dashboard1-overview />
+      <adm-dashboard1-overview />
       } @placeholder {
-        <hlm-spinner />
+      <hlm-spinner />
       }
     </div>
 
     <div hlmTabsContent="analytics">
       @defer (when selectedTab() === 'analytics') {
-        <adm-dashboard1-analytics />
+      <adm-dashboard1-analytics />
       } @placeholder {
-        <hlm-spinner />
+      <hlm-spinner />
       }
     </div>
   </hlm-tabs>

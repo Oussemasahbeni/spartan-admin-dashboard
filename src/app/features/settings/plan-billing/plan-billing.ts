@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -98,7 +98,7 @@ export class SettingsPlanBilling {
   ]);
 
   public readonly cardClass = hlm(
-    'relative block space-x-0 flex items-center',
+    'relative block flex items-center',
     // base card styles
     'border-border flex flex-col items-center justify-center rounded-lg border-2 px-4 py-8',
     // hover and background styles

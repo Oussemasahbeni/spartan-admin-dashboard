@@ -45,7 +45,7 @@ interface MonthsTranslation {
 
   template: `
     <section hlmCard class="h-full w-full">
-      <div hlmCardHeader class="flex flex-row items-center justify-between space-y-0">
+      <div hlmCardHeader class="flex flex-row items-center justify-between">
         <div>
           <h3 hlmCardTitle class="text-base font-semibold">{{ revenueChart().title }}</h3>
           <div class="mt-1 flex items-center gap-2">

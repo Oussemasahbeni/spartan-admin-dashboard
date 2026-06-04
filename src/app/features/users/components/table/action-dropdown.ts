@@ -14,9 +14,9 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
 import { exhaustMap, filter } from 'rxjs';
-import { User } from '../../../../shared/models/user';
-import { UserService } from '../../service/user-service';
 import { UserForm } from '../form/user-form';
+import { User } from '@shared/models/user';
+import { UserService } from '../../service/user-service';
 
 @Component({
   selector: 'adm-action-dropdown',
@@ -122,7 +122,6 @@ export class ActionDropdown {
     const user = this._context.row.original;
     const dialogRef = this._hlmDialogService.open(UserForm, {
       context: { user },
-      contentClass: 'max-w-3xl',
       autoFocus: 'dialog',
     });
 

@@ -47,7 +47,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
       @for (i of dots(); track i) {
         <span
           aria-hidden="true"
-          class="bg-accent-foreground h-2 w-2 rounded-full"
+          class="bg-accent-foreground size-2 rounded-full"
           [class.typing-dot-wave]="animation() === 'wave'"
           [class.typing-dot]="animation() === 'shimmer'"
           [style.animation-delay]="getDotDelay(i)"

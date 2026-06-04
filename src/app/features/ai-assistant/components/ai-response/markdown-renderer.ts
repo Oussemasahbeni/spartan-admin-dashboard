@@ -13,12 +13,12 @@ import { Marked, Renderer } from 'marked';
 export default class MarkdownRendererService {
   private marked: Marked;
 
-  private readonly COPY_ICON_SVG = `<svg class="copy-icon h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  private readonly COPY_ICON_SVG = `<svg class="copy-icon size-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
 </svg>`;
 
-  private readonly CHECK_ICON_SVG = `<svg class="check-icon hidden h-3.5 w-3.5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  private readonly CHECK_ICON_SVG = `<svg class="check-icon hidden size-3.5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <polyline points="20 6 9 17 4 12"></polyline>
 </svg>`;
 

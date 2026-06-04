@@ -12,21 +12,21 @@
           <p hlmSheetDescription>{{ t('description') }}</p>
         </hlm-sheet-header>
         @for (panel of panels(); track panel.id) {
-          <button
-            type="button"
-            class="justify-start text-left"
-            hlmBtn
-            size="sm"
-            [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
-            (click)="goToPanel(panel)"
-          >
-            <ng-icon hlm size="sm" [name]="panel.icon" />
-            {{ t('panels.' + panel.id + '.title') }}
-          </button>
+        <button
+          type="button"
+          class="justify-start text-left"
+          hlmBtn
+          size="sm"
+          [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
+          (click)="goToPanel(panel)"
+        >
+          <ng-icon hlm size="sm" [name]="panel.icon" />
+          {{ t('panels.' + panel.id + '.title') }}
+        </button>
         }
       </hlm-sheet-content>
     </hlm-sheet>
-    <div class="space-y-2">
+    <div class="flex flex-col gap-2">
       <h1 class="text-2xl leading-none font-extrabold tracking-tight">{{ t('title') }}</h1>
       <p class="text-muted-foreground text-sm">{{ t('description') }}</p>
     </div>
@@ -37,17 +37,17 @@
       <!-- Panel links -->
       <div class="flex flex-col gap-2">
         @for (panel of panels(); track panel.id) {
-          <button
-            type="button"
-            class="justify-start text-left"
-            hlmBtn
-            size="sm"
-            [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
-            (click)="goToPanel(panel)"
-          >
-            <ng-icon hlm size="sm" [name]="panel.icon" />
-            {{ t('panels.' + panel.id + '.title') }}
-          </button>
+        <button
+          type="button"
+          class="justify-start text-left"
+          hlmBtn
+          size="sm"
+          [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
+          (click)="goToPanel(panel)"
+        >
+          <ng-icon hlm size="sm" [name]="panel.icon" />
+          {{ t('panels.' + panel.id + '.title') }}
+        </button>
         }
       </div>
     </nav>
@@ -60,36 +60,33 @@
         <h1 class="text-xl leading-none font-bold tracking-tight lg:ml-0">
           {{ t('panels.' + selectedPanel().id + '.title') }}
         </h1>
-        <p class="text-muted-foreground text-sm">
-          {{ t('panels.' + selectedPanel().id + '.description') }}
-        </p>
+        <p class="text-muted-foreground text-sm">{{ t('panels.' + selectedPanel().id + '.description') }}</p>
       </header>
       <hlm-separator class="my-4" />
 
       <!-- Load settings panel -->
       <section>
         @switch (selectedPanel().id) {
-          <!-- Account -->
-          @case ('account') {
-            <adm-settings-account />
-          }
-          <!-- Security -->
-          @case ('security') {
-            <adm-settings-security />
-          }
-          <!-- Plan & Billing -->
-          @case ('planBilling') {
-            <adm-settings-plan-billing />
-          }
-          <!-- Notifications -->
-          @case ('notifications') {
-            <adm-settings-notifications />
-          }
-          <!-- Team -->
-          @case ('team') {
-            <adm-settings-team />
-          }
+        <!-- Account -->
+        @case ('account') {
+        <adm-settings-account />
         }
+        <!-- Security -->
+        @case ('security') {
+        <adm-settings-security />
+        }
+        <!-- Plan & Billing -->
+        @case ('planBilling') {
+        <adm-settings-plan-billing />
+        }
+        <!-- Notifications -->
+        @case ('notifications') {
+        <adm-settings-notifications />
+        }
+        <!-- Team -->
+        @case ('team') {
+        <adm-settings-team />
+        } }
       </section>
     </main>
   </div>

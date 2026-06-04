@@ -224,7 +224,6 @@ export default class Tasks {
   protected openAddTaskDialog(): void {
     this._hlmDialogService
       .open(TaskForm, {
-        contentClass: 'w-2xl',
         context: { existingTags: this.existingTags() },
       })
       .closed$.pipe(takeUntilDestroyed(this._destroyRef))
@@ -262,7 +261,6 @@ export default class Tasks {
 
   protected openTaskDetailsDialog(task: Task): void {
     this._hlmDialogService.open(TaskDetails, {
-      contentClass: 'w-4xl',
       context: { task },
     });
   }

@@ -3,10 +3,10 @@ import { STATIC_PAYMENTS } from '@core/mock/payments.data';
 import { STATIC_USERS } from '@core/mock/users.data';
 import { TranslocoModule } from '@jsverse/transloco';
 import { User } from '../../../../shared/models/user';
-import { BarChartCard } from './components/charts/bar-chart-card';
-import { AreaChartCard } from './components/charts/subscriptions-card';
+import { BarChartCard } from './components/bar-chart-card';
+import { AreaChartCard } from './components/subscriptions-card';
 import { OverviewMetricCard } from './components/metric-card';
-import { PaymentsTable } from './components/table/payments-table';
+import { PaymentsTable } from './components/payments/payments-table';
 import { TeamMembersCard } from './components/team-members-card';
 import { Payment } from './model/payment';
 
