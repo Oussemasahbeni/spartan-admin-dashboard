@@ -1,59 +1,92 @@
-# SpartanAdminDashboard
+<div align="center">
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
 
-## Development server
+# Spartan Admin Dashboard
 
-To start a local development server, run:
+A production-ready, Angular admin dashboard template built with [Spartan UI](https://spartan.ng) components and [Tailwind CSS](https://tailwindcss.com). Clone it and ship.
 
-```bash
-ng serve
-```
+[![Angular](https://img.shields.io/badge/Angular-22-DD0031?logo=angular&logoColor=white)](https://angular.dev)
+[![Spartan UI](https://img.shields.io/badge/Spartan%20UI-helm-000000)](https://spartan.ng)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+</div>
 
-## Code scaffolding
+<img src="./poster.png" alt="Spartan Admin Dashboard — the shadcn experience, now for Angular" width="640" />
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
+## Features
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Two dashboards** — overview metrics, charts (ApexCharts), payments tables, and team widgets.
+- **User management** — server-style data table with sorting, filtering, pagination, and row actions (backed by a mock API).
+- **Task board** — Kanban-style cards with tags, due dates, comments, and completion state.
+- **Calendar** — full scheduling UI powered by FullCalendar, with event details and locale-aware rendering.
+- **AI assistant** — chat experience with markdown rendering and a typing indicator.
+- **Settings** — profile, security, and plan & billing panels.
+- **Auth flows** — login, signup, password reset, and two-step verification screens.
+- **Light / dark / system theme** and **i18n** for English, French, and Arabic (with full RTL support).
+- **Accessibility-first** — built to meet WCAG AA and pass AXE checks.
 
-```bash
-ng generate --help
-```
+## Tech stack
 
-## Building
+| Area | Choice |
+|---|---|
+| Framework | Angular 22 (standalone, signals, zoneless-ready, OnPush) |
+| UI components | Spartan UI (HLM) — vendored locally under `src/app/libs` |
+| Styling | Tailwind CSS 4 + `class-variance-authority` + `tailwind-merge` |
+| Tables | TanStack Angular Table |
+| Charts | ApexCharts (`ng-apexcharts`) |
+| Calendar | FullCalendar |
+| i18n | Transloco (`en`, `fr`, `ar`) |
 
-To build the project run:
+## Getting started
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+> Requires **Node 20+** and **pnpm** (`npm install -g pnpm`).
 
 ```bash
-ng e2e
+# Install dependencies
+pnpm install
+
+# Start the dev server at http://localhost:4200
+pnpm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Project structure
 
-## Additional Resources
+```
+src/app/
+├── core/          # interceptors, guards, services, mock data
+├── shared/        # reusable pieces (e.g. the TanStack DataTable wrapper)
+├── libs/          # vendored Spartan UI (HLM) components
+└── features/      # lazy-loaded feature areas, each owning its own routes
+    ├── ai-assistant/
+    ├── auth/
+    ├── calendar/
+    ├── dashboards/
+    ├── errors/
+    ├── settings/
+    ├── tasks/
+    └── users/
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Each feature in `features/<name>/` is lazy-loaded via its own `routes.ts` and owns its components, services, pipes, and models. The two shells are `MainLayout` (authenticated sidebar) and `EmptyLayout` (auth and error pages).
+
+## Internationalization
+
+Translation files live in `public/i18n/{en,fr,ar}.json`. Use the `TranslocoDirective` or the `transloco` pipe in templates. After adding new strings, run `pnpm i18n:extract` to keep the translation files in sync.
+
+## Contributing
+
+Issues and pull requests are welcome. Please run `pnpm lint` and `pnpm test` before opening a PR.
+
+## License
+
+Open source — see the [repository](https://github.com/Oussemasahbeni/spartan-admin-dashboard) for license details.
+
+---
+
+<div align="center">
+
+Built with [Angular](https://angular.dev) · [Spartan UI](https://spartan.ng) · [Tailwind CSS](https://tailwindcss.com)
+
+</div>
