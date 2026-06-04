@@ -9,6 +9,9 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
   selector: 'adm-back-to-top',
   imports: [HlmButtonImports, HlmIconImports],
   providers: [provideIcons({ lucideArrowUp })],
+  host: {
+    '(window:scroll)': 'onWindowScroll()',
+  },
   template: `
     @if (isVisible()) {
       <button
@@ -24,9 +27,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       </button>
     }
   `,
-  host: {
-    '(window:scroll)': 'onWindowScroll()',
-  },
 })
 export class BackToTop {
   // ==========================================

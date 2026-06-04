@@ -18,12 +18,12 @@ import {
   lucidePalette,
   lucideSun,
 } from '@ng-icons/lucide';
+import { User } from '@shared/models/user';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
-import { User } from '../../../../shared/models/user';
 
 @Component({
   selector: 'adm-user',

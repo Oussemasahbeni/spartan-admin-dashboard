@@ -7,7 +7,6 @@ import { countries, Country } from '../../countries';
 @Component({
   selector: 'adm-country-display',
   imports: [HlmIconImports, NgOptimizedImage],
-
   template: `
     @if (resolvedCountry(); as country) {
       <div class="flex items-center gap-2">

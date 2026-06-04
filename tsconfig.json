@@ -54,22 +54,21 @@
       "@spartan-ng/helm/tabs": ["./src/app/libs/tabs/src/index.ts"],
       "@spartan-ng/helm/textarea": ["./src/app/libs/textarea/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./src/app/libs/tooltip/src/index.ts"],
-      "@spartan-ng/helm/utils": ["./src/app/libs/utils/src/index.ts"]
-    }
+      "@spartan-ng/helm/utils": ["./src/app/libs/utils/src/index.ts"],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
   },
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.app.json",
     },
     {
-      "path": "./tsconfig.spec.json"
-    }
-  ]
+      "path": "./tsconfig.spec.json",
+    },
+  ],
 }

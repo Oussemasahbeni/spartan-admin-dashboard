@@ -7,7 +7,6 @@ import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
 @Component({
   selector: 'adm-breadcrumbs-header',
   imports: [HlmBreadCrumbImports, RouterLink, TranslocoModule],
-
   template: ` <nav *transloco="let t" hlmBreadcrumb>
     <ol hlmBreadcrumbList>
       <!-- Home link - always visible -->

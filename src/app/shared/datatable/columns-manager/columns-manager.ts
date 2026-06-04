@@ -37,7 +37,6 @@ interface DataTableColumnMeta {
       lucideX,
     }),
   ],
-
   styleUrl: 'columns-manager.css',
   template: `
     <button type="button" class="hidden sm:flex" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">

@@ -20,7 +20,6 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       lucideMonitor,
     }),
   ],
-
   host: {
     '(window:keydown)': 'onKeydown($event)',
   },

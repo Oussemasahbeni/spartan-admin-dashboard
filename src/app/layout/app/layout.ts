@@ -8,7 +8,6 @@ import { Navigation } from './components/navigation/navigation';
 @Component({
   selector: 'adm-main-layout',
   imports: [Navigation, SiteHeader, RouterOutlet, HlmSidebarImports, BackToTop],
-
   template: `
     @defer (on idle) {
       <adm-back-to-top />

@@ -4,7 +4,6 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideX } from '@ng-icons/lucide';
 import { TimeAgoPipe } from '@shared/pipes/timeago/time-ago.pipe';
-
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmButton } from '@spartan-ng/helm/button';
@@ -30,7 +29,6 @@ import { Notification } from '../../model/notification';
     TimeAgoPipe,
   ],
   providers: [provideIcons({ lucideBell, lucideX })],
-
   template: `
     <hlm-popover *transloco="let t; prefix: 'notifications'" sideOffset="10" align="end">
       <button type="button" variant="outline" size="icon" class="relative size-9" hlmPopoverTrigger hlmBtn>

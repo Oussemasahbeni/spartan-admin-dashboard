@@ -21,7 +21,6 @@ import { Column, Header, SortDirection } from '@tanstack/angular-table';
       lucideX,
     }),
   ],
-
   template: `
     <button type="button" class="flex items-center gap-2 capitalize" [hlmDropdownMenuTrigger]="menu">
       {{ headerCell() }}

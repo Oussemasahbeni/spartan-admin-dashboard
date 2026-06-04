@@ -5,6 +5,6 @@ export default [
   {
     path: '',
     providers: [provideTranslocoScope({ scope: 'ai-assistant', alias: 'aiAssistant' })],
-    loadComponent: () => import('./components/ai-assistant'),
+    loadComponent: () => import('./pages/ai-assistant'),
   },
 ] as Routes;

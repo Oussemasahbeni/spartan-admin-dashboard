@@ -71,6 +71,7 @@ import { USER_STATUSES, UserStatus } from '../../../../shared/models/user';
                   @case ('pending') {
                     <ng-icon hlmIcon size="xs" class="text-yellow-600" name="lucideLoader" />
                   }
+                  @default never;
                 }
                 <span *transloco="let t; prefix: 'users.status'"> {{ t(status) }} </span>
               </button>

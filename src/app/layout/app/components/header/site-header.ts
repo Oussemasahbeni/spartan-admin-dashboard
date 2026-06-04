@@ -25,7 +25,6 @@ import { Notifications } from '../notifications/notifications';
     TranslocoDirective,
     FullScreen,
   ],
-
   template: `
     <header
       class="bg-background/95 sticky top-0 z-30 flex h-14 w-full shrink-0 items-center justify-between gap-2 border-b px-6 backdrop-blur"

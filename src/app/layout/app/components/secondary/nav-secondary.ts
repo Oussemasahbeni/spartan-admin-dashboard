@@ -8,7 +8,6 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
   selector: 'adm-nav-secondary',
   imports: [HlmSidebarImports, NgIcon, RouterLink],
   providers: [provideIcons({ lucideLifeBuoy, lucideSend })],
-
   template: `
     <hlm-sidebar-group>
       <div hlmSidebarGroupContent>

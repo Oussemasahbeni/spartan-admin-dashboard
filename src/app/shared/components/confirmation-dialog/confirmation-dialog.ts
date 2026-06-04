@@ -11,7 +11,6 @@ import { ConfirmDialogData } from './confirmation-dialog-service';
   host: {
     class: 'sm:max-w-lg',
   },
-
   template: `
     <div *transloco="let t; prefix: 'users.confirmationDialog'">
       <hlm-alert-dialog-header>

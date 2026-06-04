@@ -31,7 +31,6 @@ import { CountryDisplay } from '../country-display/country-display';
       lucideGlobe,
     }),
   ],
-
   template: `
     <div *transloco="let t; prefix: 'phoneNumberPicker'" class="flex">
       <hlm-combobox [value]="selectedCountry()" (valueChange)="selectedCountry.set($event)">

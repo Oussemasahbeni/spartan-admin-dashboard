@@ -8,7 +8,6 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'adm-attachment-card',
-  templateUrl: './attachment-card.html',
   imports: [HlmIconImports, BytesPipe, TranslocoModule],
   providers: [
     provideIcons({
@@ -16,6 +15,45 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       lucideX,
     }),
   ],
+  template: `
+    <ng-container *transloco="let t; prefix: 'aiAssistant'">
+      <div
+        class="group border-border bg-card hover:border-border-hover relative flex max-w-55 items-center gap-2 rounded-lg border p-2 transition-all hover:shadow-sm"
+      >
+        @if (isImageFile()) {
+          <!-- Image Preview -->
+          <div class="bg-muted relative h-12 w-12 shrink-0 overflow-hidden rounded">
+            <img class="h-full w-full object-cover" [src]="getFilePreviewUrl()" [alt]="file().name" />
+          </div>
+        } @else {
+          <!-- File Icon -->
+          <div class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center rounded">
+            <ng-icon hlm name="lucideFile" size="base" class="text-muted-foreground" />
+          </div>
+        }
+
+        <!-- File Info -->
+        <div class="min-w-0 flex-1 pr-6">
+          <p class="text-foreground truncate text-xs font-medium" [title]="file().name">
+            {{ file().name }}
+          </p>
+          <p class="text-muted-foreground text-xs">
+            {{ file().size | bytes }}
+          </p>
+        </div>
+
+        <!-- Remove Button -->
+        <button
+          type="button"
+          class="border-border bg-muted hover:bg-accent hover:text-accent-foreground absolute -top-1.75 -right-1.75 z-10 flex size-4 items-center justify-center rounded-full border opacity-0 shadow-sm transition-all group-hover:opacity-100"
+          [aria-label]="t('input.remove') + ' ' + file().name"
+          (click)="handleRemove()"
+        >
+          <ng-icon hlm name="lucideX" size="xs" class="text-foreground/70" />
+        </button>
+      </div>
+    </ng-container>
+  `,
 })
 export class AttachmentCard {
   // ==========================================

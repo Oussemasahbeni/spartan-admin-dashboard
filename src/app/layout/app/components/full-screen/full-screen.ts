@@ -14,7 +14,6 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       lucideMaximize,
     }),
   ],
-
   template: `
     <button
       type="button"

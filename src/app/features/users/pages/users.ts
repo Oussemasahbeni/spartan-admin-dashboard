@@ -111,10 +111,7 @@ export default class Users {
   // State
   // ==========================================
 
-  // protected readonly
-
   protected readonly table = computed(() => this.dataTable().table);
-
   protected readonly pagination = signal<PaginationState>({ pageIndex: 0, pageSize: 10 });
   protected readonly sorting = signal<SortingState>([]);
   protected readonly selectedRoles = signal<UserRole[]>([]);
@@ -143,19 +140,8 @@ export default class Users {
     };
   });
 
-  protected readonly users = computed(() => this.usersResource.value()?.content ?? []);
-  protected readonly totalElements = computed(() => this.usersResource.value()?.total ?? 0);
-  protected readonly isLoading = this.usersResource.isLoading;
-
-  /** Signal tracking the current active language for i18n updates */
   protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
-
   protected readonly searchForm = form(signal({ search: '' }), (schema) => debounce(schema.search, 300));
-
-  /**
-   * TanStack Table Column Definitions.
-   * Uses `translateSignal` for reactive header translations.
-   */
   protected readonly columns: ColumnDef<User>[] = [
     {
       id: 'name',
@@ -235,9 +221,7 @@ export default class Users {
   // ==========================================
 
   protected addUser() {
-    const dialogRef = this._hlmDialogService.open(UserForm, {
-      autoFocus: 'dialog',
-    });
+    const dialogRef = this._hlmDialogService.open(UserForm);
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
       if (result) this.refreshTable();

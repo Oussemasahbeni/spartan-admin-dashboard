@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
+import { Component, computed, input, numberAttribute } from '@angular/core';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 
 @Component({
   selector: 'adm-typing-indicator',
-  templateUrl: './typing-indicator.html',
+
   imports: [HlmAvatarImports],
   styles: `
     .typing-dot-wave {
@@ -41,6 +41,20 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
     '[attr.role]': '"status"',
     '[aria-label]': '"AI is typing"',
   },
+  template: `
+    <div class="flex items-center gap-1.5 py-3 shadow-sm">
+      <!-- Animated dots -->
+      @for (i of dots(); track i) {
+        <span
+          aria-hidden="true"
+          class="bg-accent-foreground h-2 w-2 rounded-full"
+          [class.typing-dot-wave]="animation() === 'wave'"
+          [class.typing-dot]="animation() === 'shimmer'"
+          [style.animation-delay]="getDotDelay(i)"
+        ></span>
+      }
+    </div>
+  `,
 })
 export class TypingIndicator {
   // ==========================================

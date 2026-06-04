@@ -47,9 +47,9 @@
       mode="server"
       [columns]="columns"
       [defaultColumnPinning]="defaultColumnPinning"
-      [isLoading]="isLoading()"
-      [data]="users()"
-      [totalElements]="totalElements()"
+      [isLoading]="usersResource.isLoading()"
+      [data]="this.usersResource.value()?.content || []"
+      [totalElements]="this.usersResource.value()?.total"
       [paginationState]="pagination()"
       [sortingState]="sorting()"
       [resizableColumns]="true"
@@ -91,6 +91,7 @@
           } @case ('pending') {
           <ng-icon hlmIcon size="xs" class="animate-spin text-yellow-600" name="lucideLoader" />
           } }
+
           <span *transloco="let t; prefix: 'users.status'">{{ t(status) }}</span>
         </span>
       </ng-template>

@@ -18,7 +18,6 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
 
 @Component({
   selector: 'adm-ai-response',
-  templateUrl: './ai-response.html',
   imports: [HlmIconImports, HlmButtonImports, AiMarkdownRenderer],
   viewProviders: [
     provideIcons({ lucideSparkle, lucideRefreshCcw, lucideCheck, lucideCopy, lucideThumbsDown, lucideThumbsUp }),
@@ -27,6 +26,46 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
     '[aria-live]': '"polite"',
     '[aria-busy]': 'isStreaming()',
   },
+  template: `
+    <!-- Content Wrapper -->
+    <div class="group min-w-0 flex-1">
+      <!-- Content Area with Markdown Rendering -->
+      <div class="text-foreground text-sm leading-relaxed">
+        <adm-ai-markdown-renderer [content]="content()" />
+        @if (isStreaming()) {
+          <span class="text-foreground ml-0.5 inline-block animate-pulse">▊</span>
+        }
+      </div>
+
+      <!-- Action Bar -->
+      @if (!isStreaming()) {
+        <div class="mt-2 flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
+              @if (copied()) {
+                <ng-icon hlmIcon name="lucideCheck" size="sm" />
+              } @else {
+                <ng-icon hlmIcon name="lucideCopy" size="sm" />
+              }
+            </button>
+
+            <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleRegenerate()">
+              <ng-icon hlm size="sm" name="lucideRefreshCcw" />
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleThumbsDown()">
+              <ng-icon hlm size="sm" name="lucideThumbsDown" />
+            </button>
+            <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleThumbsUp()">
+              <ng-icon hlm size="sm" name="lucideThumbsUp" />
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  `,
 })
 export class AiResponseCard {
   // ==========================================

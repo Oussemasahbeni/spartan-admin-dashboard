@@ -7,20 +7,20 @@ export default [
     title: 'notFound',
     pathMatch: 'full',
     providers: [provideTranslocoScope('system')],
-    loadComponent: () => import('./not-found/not-found'),
+    loadComponent: () => import('./not-found'),
   },
   {
     path: '401-unauthorized',
     title: 'unauthorized',
     pathMatch: 'full',
     providers: [provideTranslocoScope('system')],
-    loadComponent: () => import('./unauthorized/unauthorized'),
+    loadComponent: () => import('./unauthorized'),
   },
   {
     path: '503-service-unavailable',
     title: 'serviceUnavailable',
     pathMatch: 'full',
     providers: [provideTranslocoScope('system')],
-    loadComponent: () => import('./service-unavailable/service-unavailable'),
+    loadComponent: () => import('./service-unavailable'),
   },
 ] as Routes;

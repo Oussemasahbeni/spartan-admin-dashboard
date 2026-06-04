@@ -30,7 +30,6 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
     }),
     provideTranslocoScope('users'),
   ],
-
   template: `
     <div class="grid grid-cols-1 gap-4 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       <div *transloco="let t; prefix: 'users.cards.totalUsers'" class="border-border bg-card rounded-lg border p-6">

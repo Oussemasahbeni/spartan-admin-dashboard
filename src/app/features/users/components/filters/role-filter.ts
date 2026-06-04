@@ -71,6 +71,7 @@ import { USER_ROLES, UserRole } from '../../../../shared/models/user';
                   @case ('manager') {
                     <ng-icon hlmIcon size="sm" name="lucideBriefcase" />
                   }
+                  @default never;
                 }
                 <span *transloco="let t; prefix: 'users.role'"> {{ t(role) }} </span>
               </button>
