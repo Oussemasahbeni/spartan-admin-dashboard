@@ -8,7 +8,6 @@ A production-ready, Angular admin dashboard template built with [Spartan UI](htt
 [![Angular](https://img.shields.io/badge/Angular-22-DD0031?logo=angular&logoColor=white)](https://angular.dev)
 [![Spartan UI](https://img.shields.io/badge/Spartan%20UI-helm-000000)](https://spartan.ng)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
 </div>
 
@@ -41,7 +40,7 @@ A production-ready, Angular admin dashboard template built with [Spartan UI](htt
 
 ## Getting started
 
-> Requires **Node 20+** and **pnpm** (`npm install -g pnpm`).
+> Requires **Node 22+** and **pnpm** (`npm install -g pnpm`).
 
 ```bash
 # Install dependencies
@@ -71,17 +70,10 @@ src/app/
 
 Each feature in `features/<name>/` is lazy-loaded via its own `routes.ts` and owns its components, services, pipes, and models. The two shells are `MainLayout` (authenticated sidebar) and `EmptyLayout` (auth and error pages).
 
-## Internationalization
-
-Translation files live in `public/i18n/{en,fr,ar}.json`. Use the `TranslocoDirective` or the `transloco` pipe in templates. After adding new strings, run `pnpm i18n:extract` to keep the translation files in sync.
-
 ## Contributing
 
 Issues and pull requests are welcome. Please run `pnpm lint` and `pnpm test` before opening a PR.
 
-## License
-
-Open source — see the [repository](https://github.com/Oussemasahbeni/spartan-admin-dashboard) for license details.
 
 ---
 
