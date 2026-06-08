@@ -16,8 +16,7 @@ import {
   SortingState,
 } from '@tanstack/angular-table';
 
-import { httpResource } from '@angular/common/http';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
@@ -36,7 +35,6 @@ import {
 import { CountryDisplay } from '@shared/components/country-display/country-display';
 import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
 import { DataTable, DataTableStateChangeEvent } from '@shared/datatable/table/data-table';
-import { PaginatedResponse } from '@shared/models/page';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
@@ -46,6 +44,7 @@ import { RoleFilter } from '../components/filters/role-filter';
 import { StatusFilter } from '../components/filters/status-filter';
 import { UserForm } from '../components/form/user-form';
 import { ActionDropdown } from '../components/table/action-dropdown';
+import { UserService } from '../service/user-service';
 
 @Component({
   selector: 'adm-users',
@@ -91,6 +90,7 @@ export default class Users {
   private readonly _translocoService = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _userService = inject(UserService);
 
   // ==========================================
   // View Children
@@ -118,26 +118,20 @@ export default class Users {
   protected readonly selectedStatuses = signal<UserStatus[]>([]);
   protected readonly defaultColumnPinning: ColumnPinningState = { left: ['select'], right: ['actions'] };
 
-  protected readonly usersResource = httpResource<PaginatedResponse<User>>(() => {
-    const page = this.pagination().pageIndex;
-    const size = this.pagination().pageSize;
-    const search = this.searchForm.search().value();
-    const sort = this.sorting()[0];
-    const roles = this.selectedRoles();
-    const statuses = this.selectedStatuses();
-
-    return {
-      url: '/api/users',
-      params: {
-        page: page.toString(),
-        pageSize: size.toString(),
-        search,
-        sortField: sort?.id ?? '',
-        sortOrder: sort?.desc ? 'desc' : 'asc',
-        roles,
-        statuses,
-      },
-    };
+  protected readonly usersResource = rxResource({
+    params: () => {
+      const sort = this.sorting()[0];
+      return {
+        page: this.pagination().pageIndex,
+        pageSize: this.pagination().pageSize,
+        search: this.searchForm.search().value(),
+        sortField: (sort?.id ?? '') as keyof User | '',
+        sortOrder: (sort?.desc ? 'desc' : 'asc') as 'asc' | 'desc',
+        roles: this.selectedRoles(),
+        statuses: this.selectedStatuses(),
+      };
+    },
+    stream: ({ params }) => this._userService.getUsers(params),
   });
 
   protected readonly activeLanguage = computed(() => this._translocoService.activeLang());

@@ -15,7 +15,7 @@ import {
   withViewTransitions,
 } from '@angular/router';
 
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
@@ -25,7 +25,6 @@ import { ThemeService } from './core/config/theme-service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
 
-import { mockApiInterceptor } from '@core/interceptor/mock-api-interceptor';
 import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
 
 function isLanguage(value: string): value is Language {
@@ -58,7 +57,7 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
     ),
-    provideHttpClient(withInterceptors([mockApiInterceptor])),
+    provideHttpClient(),
     provideTransloco({
       config: {
         availableLangs: ['en', 'fr', 'ar'],
