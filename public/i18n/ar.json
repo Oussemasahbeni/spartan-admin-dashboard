@@ -1,158 +1,168 @@
 {
-    "theme": {
-        "light": "فاتح",
-        "dark": "داكن",
-        "system": "النظام"
+  "theme": {
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "النظام"
+  },
+  "commandPalette": {
+    "search": "بحث",
+    "placeholder": "اكتب أمراً أو ابحث...",
+    "noResults": "لا توجد نتائج.",
+    "navigation": "التنقل",
+    "quickActions": "إجراءات سريعة",
+    "language": "اللغة",
+    "theme": "المظهر",
+    "collapseSidebar": "طي الشريط الجانبي",
+    "expandSidebar": "توسيع الشريط الجانبي"
+  },
+  "navUser": {
+    "account": "الحساب",
+    "subscription": "الاشتراك",
+    "pro": "المميز",
+    "theme": "المظهر",
+    "toggleTheme": "تبديل المظهر",
+    "language": "اللغة",
+    "help": "المساعدة والدعم",
+    "logout": "تسجيل الخروج"
+  },
+  "header": {
+    "toggleTheme": "تبديل المظهر",
+    "closeSidebar": "إغلاق الشريط الجانبي",
+    "openSidebar": "فتح الشريط الجانبي"
+  },
+  "breadcrumbs": {
+    "home": "الرئيسية"
+  },
+  "titles": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "resetPassword": "نسيت كلمة المرور",
+    "twoStepVerification": "التحقق بخطوتين",
+    "dashboard": "لوحة التحكم",
+    "dashboard-1": "لوحة التحكم 1",
+    "users": "المستخدمون",
+    "notFound": "الصفحة غير موجودة",
+    "unauthorized": "غير مصرح",
+    "serviceUnavailable": "الخدمة غير متوفرة",
+    "overview": "نظرة عامة",
+    "analytics": "التحليلات",
+    "settings": "الإعدادات",
+    "aiAssistant": "مساعد الذكاء الاصطناعي",
+    "dashboard-2": "لوحة التحكم 2",
+    "calendar": "التقويم",
+    "tasks": "المهام"
+  },
+  "navigation": {
+    "application": "النظام",
+    "pages": "الصفحات العامة",
+    "authentication": "بوابة الدخول",
+    "errors": "حالات الخطأ",
+    "login": "تسجيل الدخول",
+    "signup": "فتح حساب جديد",
+    "resetPassword": "استعادة كلمة المرور",
+    "twoStepVerification": "التحقق بخطوتين",
+    "dashboard": "لوحة البيانات",
+    "dashboard-1": "لوحة التحكم 1",
+    "dashboard-2": "لوحة التحكم 2",
+    "tasks": "إدارة المهام",
+    "calendar": "الجدول الزمني",
+    "users": "شؤون المستخدمين",
+    "settings": "الإعدادات",
+    "other": "أخرى",
+    "aiAssistant": "مساعد الذكاء الاصطناعي",
+    "notFound": "الصفحة غير متوفرة",
+    "unauthorized": "صلاحيات محدودة",
+    "serviceUnavailable": "الخدمة قيد الصيانة"
+  },
+  "pagination": {
+    "itemsPerPage": "عدد العناصر في الصفحة",
+    "nextPage": "الصفحة التالية",
+    "previousPage": "الصفحة السابقة",
+    "firstPage": "الصفحة الأولى",
+    "lastPage": "الصفحة الأخيرة",
+    "rowSelected": "تم تحديد {{selected}} من أصل {{total}} صف",
+    "page": "الصفحة {{page}} من {{totalPages}}"
+  },
+  "common": {
+    "noData": "لا توجد بيانات متاحة.",
+    "clearFilter": "مسح الفلتر",
+    "searchPlaceholder": "بحث...",
+    "unsavedChangesWarning": "لديك تغييرات غير محفوظة. هل أنت متأكد أنك تريد المغادرة دون حفظ؟"
+  },
+  "actionDropdown": {
+    "edit": "تعديل",
+    "makeCopy": "إنشاء نسخة",
+    "favorite": "مفضل",
+    "delete": "حذف"
+  },
+  "buttons": {
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "confirm": "تأكيد",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "update": "تحديث",
+    "columns": "الأعمدة",
+    "refresh": "تحديث",
+    "clear": "مسح",
+    "import": "استيراد",
+    "export": "تصدير",
+    "clearFilter": "مسح الفلتر",
+    "addNew": "إضافة جديد",
+    "pinStart": "تثبيت في البداية",
+    "pinEnd": "تثبيت في النهاية",
+    "pinLeft": "تثبيت إلى اليسار",
+    "pinRight": "تثبيت إلى اليمين",
+    "unpin": "إلغاء التثبيت"
+  },
+  "sort": {
+    "asc": "تصاعدي",
+    "desc": "تنازلي"
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب.",
+    "minLength": "يجب أن يحتوي هذا الحقل على {{ min }} أحرف على الأقل.",
+    "maxLength": "يجب ألا يتجاوز هذا الحقل {{ max }} أحرف.",
+    "email": "يرجى إدخال عنوان بريد إلكتروني صالح.",
+    "invalid": "هذا الحقل غير صالح.",
+    "min": "يجب أن تكون القيمة {{ min }} على الأقل.",
+    "max": "يجب ألا تتجاوز القيمة {{ max }}.",
+    "pattern": "يجب أن يتبع هذا الحقل النمط {{ pattern }}.",
+    "passwordMismatch": "كلمات المرور غير متطابقة.",
+    "endBeforeStart": "يجب أن تكون تاريخ النهاية بعد تاريخ البداية."
+  },
+  "countryPicker": {
+    "selectCountryPlaceholder": "اختر دولة...",
+    "searchCountryPlaceholder": "ابحث عن دولة..."
+  },
+  "phoneNumberPicker": {
+    "selectCountryPlaceholder": "اختر رمز الدولة...",
+    "searchCountryPlaceholder": "ابحث عن دولة...",
+    "enterPhoneNumberPlaceholder": "أدخل رقم الهاتف..."
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "markAllAsRead": "تحديد الكل كمقروء",
+    "clearAll": "مسح الكل",
+    "noNotifications": "لا توجد إشعارات",
+    "noNotificationsDescription": "أنت على اطلاع بكل شيء. ستظهر الإشعارات الجديدة هنا.",
+    "actions": {
+      "commentedOn": "علّق على",
+      "liked": "أعجب بـ",
+      "shared": "شارك",
+      "mentionedYouIn": "أشار إليك في",
+      "repliedTo": "رد على",
+      "assignedYouTo": "أسند إليك"
     },
-    "navUser": {
-        "account": "الحساب",
-        "subscription": "الاشتراك",
-        "pro": "المميز",
-        "theme": "المظهر",
-        "toggleTheme": "تبديل المظهر",
-        "language": "اللغة",
-        "help": "المساعدة والدعم",
-        "logout": "تسجيل الخروج"
-    },
-    "header": {
-        "toggleTheme": "تبديل المظهر",
-        "closeSidebar": "إغلاق الشريط الجانبي",
-        "openSidebar": "فتح الشريط الجانبي",
-        "toggleFullScreen": "تبديل الشاشة الكاملة"
-    },
-    "breadcrumbs": {
-        "home": "الرئيسية"
-    },
-    "titles": {
-        "login": "تسجيل الدخول",
-        "signup": "إنشاء حساب",
-        "resetPassword": "نسيت كلمة المرور",
-        "twoStepVerification": "التحقق بخطوتين",
-        "dashboard": "لوحة التحكم",
-        "dashboard-1": "لوحة التحكم 1",
-        "users": "المستخدمون",
-        "notFound": "الصفحة غير موجودة",
-        "unauthorized": "غير مصرح",
-        "serviceUnavailable": "الخدمة غير متوفرة",
-        "overview": "نظرة عامة",
-        "analytics": "التحليلات",
-        "settings": "الإعدادات",
-        "aiAssistant": "مساعد الذكاء الاصطناعي",
-        "dashboard-2": "لوحة التحكم 2",
-        "calendar": "التقويم",
-        "tasks": "المهام"
-    },
-    "navigation": {
-        "application": "النظام",
-        "pages": "الصفحات العامة",
-        "authentication": "بوابة الدخول",
-        "errors": "حالات الخطأ",
-        "login": "تسجيل الدخول",
-        "signup": "فتح حساب جديد",
-        "resetPassword": "استعادة كلمة المرور",
-        "twoStepVerification": "التحقق بخطوتين",
-        "dashboard": "لوحة البيانات",
-        "dashboard-1": "لوحة التحكم 1",
-        "dashboard-2": "لوحة التحكم 2",
-        "tasks": "إدارة المهام",
-        "calendar": "الجدول الزمني",
-        "users": "شؤون المستخدمين",
-        "settings": "الإعدادات",
-        "other": "أخرى",
-        "aiAssistant": "مساعد الذكاء الاصطناعي",
-        "notFound": "الصفحة غير متوفرة",
-        "unauthorized": "صلاحيات محدودة",
-        "serviceUnavailable": "الخدمة قيد الصيانة"
-    },
-    "pagination": {
-        "itemsPerPage": "عدد العناصر في الصفحة",
-        "nextPage": "الصفحة التالية",
-        "previousPage": "الصفحة السابقة",
-        "firstPage": "الصفحة الأولى",
-        "lastPage": "الصفحة الأخيرة",
-        "rowSelected": "تم تحديد {{selected}} من أصل {{total}} صف",
-        "page": "الصفحة {{page}} من {{totalPages}}"
-    },
-    "common": {
-        "noData": "لا توجد بيانات متاحة.",
-        "clearFilter": "مسح الفلتر",
-        "searchPlaceholder": "بحث...",
-        "unsavedChangesWarning": "لديك تغييرات غير محفوظة. هل أنت متأكد أنك تريد المغادرة دون حفظ؟"
-    },
-    "actionDropdown": {
-        "edit": "تعديل",
-        "makeCopy": "إنشاء نسخة",
-        "favorite": "مفضل",
-        "delete": "حذف"
-    },
-    "buttons": {
-        "submit": "إرسال",
-        "cancel": "إلغاء",
-        "close": "إغلاق",
-        "confirm": "تأكيد",
-        "edit": "تعديل",
-        "delete": "حذف",
-        "save": "حفظ",
-        "update": "تحديث",
-        "columns": "الأعمدة",
-        "refresh": "تحديث",
-        "clear": "مسح",
-        "import": "استيراد",
-        "export": "تصدير",
-        "clearFilter": "مسح الفلتر",
-        "addNew": "إضافة جديد",
-        "pinStart": "تثبيت في البداية",
-        "pinEnd": "تثبيت في النهاية",
-        "pinLeft": "تثبيت إلى اليسار",
-        "pinRight": "تثبيت إلى اليمين",
-        "unpin": "إلغاء التثبيت"
-    },
-    "sort": {
-        "asc": "تصاعدي",
-        "desc": "تنازلي"
-    },
-    "validation": {
-        "required": "هذا الحقل مطلوب.",
-        "minLength": "يجب أن يحتوي هذا الحقل على {{ min }} أحرف على الأقل.",
-        "maxLength": "يجب ألا يتجاوز هذا الحقل {{ max }} أحرف.",
-        "email": "يرجى إدخال عنوان بريد إلكتروني صالح.",
-        "invalid": "هذا الحقل غير صالح.",
-        "min": "يجب أن تكون القيمة {{ min }} على الأقل.",
-        "max": "يجب ألا تتجاوز القيمة {{ max }}.",
-        "pattern": "يجب أن يتبع هذا الحقل النمط {{ pattern }}.",
-        "passwordMismatch": "كلمات المرور غير متطابقة.",
-        "endBeforeStart": "يجب أن تكون تاريخ النهاية بعد تاريخ البداية."
-    },
-    "countryPicker": {
-        "selectCountryPlaceholder": "اختر دولة...",
-        "searchCountryPlaceholder": "ابحث عن دولة..."
-    },
-    "phoneNumberPicker": {
-        "selectCountryPlaceholder": "اختر رمز الدولة...",
-        "searchCountryPlaceholder": "ابحث عن دولة...",
-        "enterPhoneNumberPlaceholder": "أدخل رقم الهاتف..."
-    },
-    "notifications": {
-        "title": "الإشعارات",
-        "markAllAsRead": "تحديد الكل كمقروء",
-        "clearAll": "مسح الكل",
-        "noNotifications": "لا توجد إشعارات",
-        "noNotificationsDescription": "أنت على اطلاع بكل شيء. ستظهر الإشعارات الجديدة هنا.",
-        "actions": {
-            "commentedOn": "علّق على",
-            "liked": "أعجب بـ",
-            "shared": "شارك",
-            "mentionedYouIn": "أشار إليك في",
-            "repliedTo": "رد على",
-            "assignedYouTo": "أسند إليك"
-        },
-        "subjects": {
-            "yourPost": "منشورك",
-            "theProject": "المشروع",
-            "aTask": "مهمة",
-            "anIssue": "مشكلة",
-            "aDocument": "مستند",
-            "theReport": "التقرير"
-        }
+    "subjects": {
+      "yourPost": "منشورك",
+      "theProject": "المشروع",
+      "aTask": "مهمة",
+      "anIssue": "مشكلة",
+      "aDocument": "مستند",
+      "theReport": "التقرير"
     }
+  }
 }

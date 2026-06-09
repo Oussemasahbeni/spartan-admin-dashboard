@@ -3,12 +3,12 @@ import { Component, computed, inject, PLATFORM_ID } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { BreadcrumbsHeader } from '@shared/components/breadcrumbs-header/breadcrumbs-header';
 import { ThemeSwitch } from '@shared/components/theme-switch/theme-switch';
-import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
+import { HlmBreadcrumbImports } from '@spartan-ng/helm/breadcrumb';
 import { HlmKbdImports } from '@spartan-ng/helm/kbd';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
-import { FullScreen } from '../full-screen/full-screen';
+import { CommandPalette } from '../command-palette/command-palette';
 import { Notifications } from '../notifications/notifications';
 
 @Component({
@@ -16,14 +16,14 @@ import { Notifications } from '../notifications/notifications';
   imports: [
     HlmSidebarImports,
     HlmSeparatorImports,
-    HlmBreadCrumbImports,
+    HlmBreadcrumbImports,
     HlmTooltipImports,
     HlmKbdImports,
     Notifications,
     BreadcrumbsHeader,
     ThemeSwitch,
     TranslocoDirective,
-    FullScreen,
+    CommandPalette,
   ],
   template: `
     <header
@@ -44,7 +44,7 @@ import { Notifications } from '../notifications/notifications';
           <div *transloco="let t; prefix: 'header'" class="flex items-center justify-center gap-2">
             <span> {{ isSidebarOpen() ? t('closeSidebar') : t('openSidebar') }} </span>
             <kbd hlmKbdGroup>
-              <kbd hlmKbd class="bg-primary-foreground/20 text-primary-foreground">Ctrl + B</kbd>
+              <kbd hlmKbd class="bg-primary-foreground/20 text-primary-foreground">⌘ + B</kbd>
             </kbd>
           </div>
         </ng-template>
@@ -52,7 +52,7 @@ import { Notifications } from '../notifications/notifications';
         <adm-breadcrumbs-header />
       </div>
       <div class="flex items-center gap-4">
-        <adm-full-screen />
+        <adm-command-palette />
         <adm-theme-switch />
         <adm-notifications />
       </div>

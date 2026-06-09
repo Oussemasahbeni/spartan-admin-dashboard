@@ -8,7 +8,7 @@ const { configs: jsConfigs } = eslintJs;
 export default defineConfig([
   {
     files: ['**/*.ts'],
-    ignores: ['**/src/app/spartan/**'],
+    ignores: ['**/src/app/libs/**'],
     plugins: {
       'unused-imports': unusedImports,
     },
@@ -16,7 +16,6 @@ export default defineConfig([
     processor: processInlineTemplates,
     rules: {
       complexity: ['warn', 16],
-      quotes: ['warn', 'single', { allowTemplateLiterals: true }],
       semi: ['warn', 'always'],
       'max-statements-per-line': ['warn', { max: 1 }],
       'max-params': ['warn', 4],

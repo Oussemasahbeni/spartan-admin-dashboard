@@ -1,157 +1,167 @@
 {
-    "theme": {
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System"
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "commandPalette": {
+    "search": "Search",
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found.",
+    "navigation": "Navigation",
+    "quickActions": "Quick Actions",
+    "language": "Language",
+    "theme": "Theme",
+    "collapseSidebar": "Collapse sidebar",
+    "expandSidebar": "Expand sidebar"
+  },
+  "navUser": {
+    "account": "Account",
+    "subscription": "Subscription",
+    "pro": "Pro",
+    "theme": "Theme",
+    "language": "Language",
+    "help": "Help & Support",
+    "logout": "Logout"
+  },
+  "header": {
+    "toggleTheme": "Toggle theme",
+    "closeSidebar": "Close sidebar",
+    "openSidebar": "Open sidebar"
+  },
+  "breadcrumbs": {
+    "home": "Home"
+  },
+  "titles": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "resetPassword": "Forgot Password",
+    "twoStepVerification": "Two Step Verification",
+    "dashboard": "Dashboard",
+    "dashboard-1": "Dashboard 1",
+    "users": "Users",
+    "notFound": "Page Not Found",
+    "unauthorized": "Unauthorized",
+    "serviceUnavailable": "Service Unavailable",
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "settings": "Settings",
+    "aiAssistant": "AI Assistant",
+    "dashboard-2": "Dashboard 2",
+    "calendar": "Calendar",
+    "tasks": "Tasks"
+  },
+  "navigation": {
+    "application": "Application",
+    "pages": "Pages",
+    "authentication": "Authentication",
+    "errors": "Errors",
+    "login": "Login",
+    "signup": "Sign Up",
+    "resetPassword": "Forgot Password",
+    "twoStepVerification": "Two Step Verification",
+    "dashboard": "Dashboard",
+    "dashboard-1": "Dashboard 1",
+    "dashboard-2": "Dashboard 2",
+    "tasks": "Tasks",
+    "calendar": "Calendar",
+    "users": "Users",
+    "settings": "Settings",
+    "other": "Other",
+    "aiAssistant": "AI Assistant",
+    "notFound": "Page Not Found",
+    "unauthorized": "Unauthorized",
+    "serviceUnavailable": "Service Unavailable"
+  },
+  "pagination": {
+    "itemsPerPage": "Items per page",
+    "nextPage": "Next page",
+    "previousPage": "Previous page",
+    "firstPage": "First page",
+    "lastPage": "Last page",
+    "rowSelected": "{{selected}} of {{total}} rows selected",
+    "page": "Page {{page}} of {{totalPages}}"
+  },
+  "common": {
+    "noData": "No data available.",
+    "clearFilter": "Clear filter",
+    "searchPlaceholder": "Search...",
+    "unsavedChangesWarning": "You have unsaved changes. Are you sure you want to leave without saving?"
+  },
+  "actionDropdown": {
+    "edit": "Edit",
+    "makeCopy": "Make a copy",
+    "favorite": "Favorite",
+    "delete": "Delete"
+  },
+  "buttons": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "update": "Update",
+    "columns": "Columns",
+    "refresh": "Refresh",
+    "clear": "Clear",
+    "import": "Import",
+    "export": "Export",
+    "clearFilter": "Clear Filter",
+    "addNew": "Add New",
+    "pinStart": "Pin to Start",
+    "pinEnd": "Pin to End",
+    "pinLeft": "Pin Left",
+    "pinRight": "Pin Right",
+    "unpin": "Unpin"
+  },
+  "sort": {
+    "asc": "Asc",
+    "desc": "Desc"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "minLength": "This field is required to be at least {{ min }} characters.",
+    "maxLength": "This field cannot be longer than {{ max }} characters.",
+    "email": "Please enter a valid email address.",
+    "invalid": "This field is invalid.",
+    "min": "This field should be at least {{ min }}.",
+    "max": "This field cannot be more than {{ max }}.",
+    "pattern": "This field should follow pattern for {{ pattern }}.",
+    "passwordMismatch": "Passwords do not match.",
+    "endBeforeStart": "End date must be after start date."
+  },
+  "countryPicker": {
+    "selectCountryPlaceholder": "Select country...",
+    "searchCountryPlaceholder": "Search a country..."
+  },
+  "phoneNumberPicker": {
+    "selectCountryPlaceholder": "Select country code...",
+    "searchCountryPlaceholder": "Search a country...",
+    "enterPhoneNumberPlaceholder": "Enter phone number..."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllAsRead": "Mark all as read",
+    "clearAll": "Clear All",
+    "noNotifications": "No notifications",
+    "noNotificationsDescription": "You're all caught up. New notifications will appear here.",
+    "actions": {
+      "commentedOn": "commented on",
+      "liked": "liked",
+      "shared": "shared",
+      "mentionedYouIn": "mentioned you in",
+      "repliedTo": "replied to",
+      "assignedYouTo": "assigned you to"
     },
-    "navUser": {
-        "account": "Account",
-        "subscription": "Subscription",
-        "pro": "Pro",
-        "theme": "Theme",
-        "language": "Language",
-        "help": "Help & Support",
-        "logout": "Logout"
-    },
-    "header": {
-        "toggleTheme": "Toggle theme",
-        "closeSidebar": "Close sidebar",
-        "openSidebar": "Open sidebar",
-        "toggleFullScreen": "Toggle full screen"
-    },
-    "breadcrumbs": {
-        "home": "Home"
-    },
-    "titles": {
-        "login": "Login",
-        "signup": "Sign Up",
-        "resetPassword": "Forgot Password",
-        "twoStepVerification": "Two Step Verification",
-        "dashboard": "Dashboard",
-        "dashboard-1": "Dashboard 1",
-        "users": "Users",
-        "notFound": "Page Not Found",
-        "unauthorized": "Unauthorized",
-        "serviceUnavailable": "Service Unavailable",
-        "overview": "Overview",
-        "analytics": "Analytics",
-        "settings": "Settings",
-        "aiAssistant": "AI Assistant",
-        "dashboard-2": "Dashboard 2",
-        "calendar": "Calendar",
-        "tasks": "Tasks"
-    },
-    "navigation": {
-        "application": "Application",
-        "pages": "Pages",
-        "authentication": "Authentication",
-        "errors": "Errors",
-        "login": "Login",
-        "signup": "Sign Up",
-        "resetPassword": "Forgot Password",
-        "twoStepVerification": "Two Step Verification",
-        "dashboard": "Dashboard",
-        "dashboard-1": "Dashboard 1",
-        "dashboard-2": "Dashboard 2",
-        "tasks": "Tasks",
-        "calendar": "Calendar",
-        "users": "Users",
-        "settings": "Settings",
-        "other": "Other",
-        "aiAssistant": "AI Assistant",
-        "notFound": "Page Not Found",
-        "unauthorized": "Unauthorized",
-        "serviceUnavailable": "Service Unavailable"
-    },
-    "pagination": {
-        "itemsPerPage": "Items per page",
-        "nextPage": "Next page",
-        "previousPage": "Previous page",
-        "firstPage": "First page",
-        "lastPage": "Last page",
-        "rowSelected": "{{selected}} of {{total}} rows selected",
-        "page": "Page {{page}} of {{totalPages}}"
-    },
-    "common": {
-        "noData": "No data available.",
-        "clearFilter": "Clear filter",
-        "searchPlaceholder": "Search...",
-        "unsavedChangesWarning": "You have unsaved changes. Are you sure you want to leave without saving?"
-    },
-    "actionDropdown": {
-        "edit": "Edit",
-        "makeCopy": "Make a copy",
-        "favorite": "Favorite",
-        "delete": "Delete"
-    },
-    "buttons": {
-        "submit": "Submit",
-        "cancel": "Cancel",
-        "close": "Close",
-        "confirm": "Confirm",
-        "edit": "Edit",
-        "delete": "Delete",
-        "save": "Save",
-        "update": "Update",
-        "columns": "Columns",
-        "refresh": "Refresh",
-        "clear": "Clear",
-        "import": "Import",
-        "export": "Export",
-        "clearFilter": "Clear Filter",
-        "addNew": "Add New",
-        "pinStart": "Pin to Start",
-        "pinEnd": "Pin to End",
-        "pinLeft": "Pin Left",
-        "pinRight": "Pin Right",
-        "unpin": "Unpin"
-    },
-    "sort": {
-        "asc": "Asc",
-        "desc": "Desc"
-    },
-    "validation": {
-        "required": "This field is required.",
-        "minLength": "This field is required to be at least {{ min }} characters.",
-        "maxLength": "This field cannot be longer than {{ max }} characters.",
-        "email": "Please enter a valid email address.",
-        "invalid": "This field is invalid.",
-        "min": "This field should be at least {{ min }}.",
-        "max": "This field cannot be more than {{ max }}.",
-        "pattern": "This field should follow pattern for {{ pattern }}.",
-        "passwordMismatch": "Passwords do not match.",
-        "endBeforeStart": "End date must be after start date."
-    },
-    "countryPicker": {
-        "selectCountryPlaceholder": "Select country...",
-        "searchCountryPlaceholder": "Search a country..."
-    },
-    "phoneNumberPicker": {
-        "selectCountryPlaceholder": "Select country code...",
-        "searchCountryPlaceholder": "Search a country...",
-        "enterPhoneNumberPlaceholder": "Enter phone number..."
-    },
-    "notifications": {
-        "title": "Notifications",
-        "markAllAsRead": "Mark all as read",
-        "clearAll": "Clear All",
-        "noNotifications": "No notifications",
-        "noNotificationsDescription": "You're all caught up. New notifications will appear here.",
-        "actions": {
-            "commentedOn": "commented on",
-            "liked": "liked",
-            "shared": "shared",
-            "mentionedYouIn": "mentioned you in",
-            "repliedTo": "replied to",
-            "assignedYouTo": "assigned you to"
-        },
-        "subjects": {
-            "yourPost": "your post",
-            "theProject": "the project",
-            "aTask": "a task",
-            "anIssue": "an issue",
-            "aDocument": "a document",
-            "theReport": "the report"
-        }
+    "subjects": {
+      "yourPost": "your post",
+      "theProject": "the project",
+      "aTask": "a task",
+      "anIssue": "an issue",
+      "aDocument": "a document",
+      "theReport": "the report"
     }
+  }
 }

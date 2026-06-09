@@ -1,157 +1,167 @@
 {
-    "theme": {
-        "light": "Clair",
-        "dark": "Sombre",
-        "system": "Système"
+  "theme": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "commandPalette": {
+    "search": "Rechercher",
+    "placeholder": "Tapez une commande ou recherchez...",
+    "noResults": "Aucun résultat trouvé.",
+    "navigation": "Navigation",
+    "quickActions": "Actions rapides",
+    "language": "Langue",
+    "theme": "Thème",
+    "collapseSidebar": "Réduire la barre latérale",
+    "expandSidebar": "Développer la barre latérale"
+  },
+  "navUser": {
+    "account": "Compte",
+    "subscription": "Abonnement",
+    "pro": "Pro",
+    "theme": "Thème",
+    "language": "Langue",
+    "help": "Aide & Support",
+    "logout": "Déconnexion"
+  },
+  "header": {
+    "toggleTheme": "Changer de thème",
+    "closeSidebar": "Fermer la barre latérale",
+    "openSidebar": "Ouvrir la barre latérale"
+  },
+  "breadcrumbs": {
+    "home": "Accueil"
+  },
+  "titles": {
+    "login": "Connexion",
+    "signup": "Inscription",
+    "resetPassword": "Mot de passe oublié",
+    "twoStepVerification": "Vérification en deux étapes",
+    "dashboard": "Tableau de bord",
+    "dashboard-1": "Tableau de bord 1",
+    "users": "Utilisateurs",
+    "notFound": "Page introuvable",
+    "unauthorized": "Non autorisé",
+    "serviceUnavailable": "Service indisponible",
+    "overview": "Vue d'ensemble",
+    "analytics": "Analyses",
+    "settings": "Paramètres",
+    "aiAssistant": "Assistant IA",
+    "dashboard-2": "Tableau de bord 2",
+    "calendar": "Calendrier",
+    "tasks": "Tâches"
+  },
+  "navigation": {
+    "application": "Application",
+    "pages": "Pages",
+    "authentication": "Accès & Sécurité",
+    "errors": "Pages d'erreur",
+    "login": "Connexion",
+    "signup": "Inscription",
+    "resetPassword": "Mot de passe oublié",
+    "twoStepVerification": "Vérification en deux étapes",
+    "dashboard": "Tableau de bord",
+    "dashboard-1": "Tableau de bord 1",
+    "dashboard-2": "Tableau de bord 2",
+    "tasks": "Gestion des tâches",
+    "calendar": "Calendrier",
+    "users": "Utilisateurs",
+    "notFound": "Page introuvable",
+    "unauthorized": "Accès refusé",
+    "other": "Autre",
+    "settings": "Paramètres",
+    "aiAssistant": "Assistant IA",
+    "serviceUnavailable": "Service indisponible"
+  },
+  "pagination": {
+    "itemsPerPage": "Éléments par page",
+    "nextPage": "Page suivante",
+    "previousPage": "Page précédente",
+    "firstPage": "Première page",
+    "lastPage": "Dernière page",
+    "rowSelected": "{{selected}} sur {{total}} lignes sélectionnées",
+    "page": "Page {{page}} sur {{totalPages}}"
+  },
+  "common": {
+    "noData": "Aucune donnée disponible.",
+    "clearFilter": "Effacer le filtre",
+    "searchPlaceholder": "Rechercher...",
+    "unsavedChangesWarning": "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter sans enregistrer ?"
+  },
+  "actionDropdown": {
+    "edit": "Modifier",
+    "makeCopy": "Faire une copie",
+    "favorite": "Favori",
+    "delete": "Supprimer"
+  },
+  "buttons": {
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "update": "Mettre à jour",
+    "columns": "Colonnes",
+    "refresh": "Actualiser",
+    "clear": "Effacer",
+    "import": "Importer",
+    "export": "Exporter",
+    "clearFilter": "Effacer le filtre",
+    "addNew": "Ajouter",
+    "pinStart": "Épingler au début",
+    "pinEnd": "Épingler à la fin",
+    "pinLeft": "Épingler à gauche",
+    "pinRight": "Épingler à droite",
+    "unpin": "Désépingler"
+  },
+  "sort": {
+    "asc": "Ascendant",
+    "desc": "Descendant"
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire.",
+    "minLength": "Ce champ doit contenir au moins {{ min }} caractères.",
+    "maxLength": "Ce champ ne peut pas dépasser {{ max }} caractères.",
+    "email": "Veuillez entrer une adresse e-mail valide.",
+    "invalid": "Ce champ est invalide.",
+    "min": "Ce champ doit être au minimum {{ min }}.",
+    "max": "Ce champ ne peut pas dépasser {{ max }}.",
+    "pattern": "Ce champ doit respecter le format {{ pattern }}.",
+    "passwordMismatch": "Les mots de passe ne correspondent pas.",
+    "endBeforeStart": "La date de fin doit être après la date de début."
+  },
+  "countryPicker": {
+    "selectCountryPlaceholder": "Sélectionner un pays...",
+    "searchCountryPlaceholder": "Rechercher un pays..."
+  },
+  "phoneNumberPicker": {
+    "selectCountryPlaceholder": "Sélectionner l'indicatif du pays...",
+    "searchCountryPlaceholder": "Rechercher un pays...",
+    "enterPhoneNumberPlaceholder": "Saisir le numéro de téléphone..."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllAsRead": "Tout marquer comme lu",
+    "clearAll": "Tout effacer",
+    "noNotifications": "Aucune notification",
+    "noNotificationsDescription": "Vous êtes à jour. Les nouvelles notifications apparaîtront ici.",
+    "actions": {
+      "commentedOn": "a commenté",
+      "liked": "a aimé",
+      "shared": "a partagé",
+      "mentionedYouIn": "vous a mentionné dans",
+      "repliedTo": "a répondu à",
+      "assignedYouTo": "vous a assigné à"
     },
-    "navUser": {
-        "account": "Compte",
-        "subscription": "Abonnement",
-        "pro": "Pro",
-        "theme": "Thème",
-        "language": "Langue",
-        "help": "Aide & Support",
-        "logout": "Déconnexion"
-    },
-    "header": {
-        "toggleTheme": "Changer de thème",
-        "closeSidebar": "Fermer la barre latérale",
-        "openSidebar": "Ouvrir la barre latérale",
-        "toggleFullScreen": "Basculer en plein écran"
-    },
-    "breadcrumbs": {
-        "home": "Accueil"
-    },
-    "titles": {
-        "login": "Connexion",
-        "signup": "Inscription",
-        "resetPassword": "Mot de passe oublié",
-        "twoStepVerification": "Vérification en deux étapes",
-        "dashboard": "Tableau de bord",
-        "dashboard-1": "Tableau de bord 1",
-        "users": "Utilisateurs",
-        "notFound": "Page introuvable",
-        "unauthorized": "Non autorisé",
-        "serviceUnavailable": "Service indisponible",
-        "overview": "Vue d'ensemble",
-        "analytics": "Analyses",
-        "settings": "Paramètres",
-        "aiAssistant": "Assistant IA",
-        "dashboard-2": "Tableau de bord 2",
-        "calendar": "Calendrier",
-        "tasks": "Tâches"
-    },
-    "navigation": {
-        "application": "Application",
-        "pages": "Pages",
-        "authentication": "Accès & Sécurité",
-        "errors": "Pages d'erreur",
-        "login": "Connexion",
-        "signup": "Inscription",
-        "resetPassword": "Mot de passe oublié",
-        "twoStepVerification": "Vérification en deux étapes",
-        "dashboard": "Tableau de bord",
-        "dashboard-1": "Tableau de bord 1",
-        "dashboard-2": "Tableau de bord 2",
-        "tasks": "Gestion des tâches",
-        "calendar": "Calendrier",
-        "users": "Utilisateurs",
-        "notFound": "Page introuvable",
-        "unauthorized": "Accès refusé",
-        "other": "Autre",
-        "settings": "Paramètres",
-        "aiAssistant": "Assistant IA",
-        "serviceUnavailable": "Service indisponible"
-    },
-    "pagination": {
-        "itemsPerPage": "Éléments par page",
-        "nextPage": "Page suivante",
-        "previousPage": "Page précédente",
-        "firstPage": "Première page",
-        "lastPage": "Dernière page",
-        "rowSelected": "{{selected}} sur {{total}} lignes sélectionnées",
-        "page": "Page {{page}} sur {{totalPages}}"
-    },
-    "common": {
-        "noData": "Aucune donnée disponible.",
-        "clearFilter": "Effacer le filtre",
-        "searchPlaceholder": "Rechercher...",
-        "unsavedChangesWarning": "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter sans enregistrer ?"
-    },
-    "actionDropdown": {
-        "edit": "Modifier",
-        "makeCopy": "Faire une copie",
-        "favorite": "Favori",
-        "delete": "Supprimer"
-    },
-    "buttons": {
-        "submit": "Soumettre",
-        "cancel": "Annuler",
-        "close": "Fermer",
-        "confirm": "Confirmer",
-        "edit": "Modifier",
-        "delete": "Supprimer",
-        "save": "Enregistrer",
-        "update": "Mettre à jour",
-        "columns": "Colonnes",
-        "refresh": "Actualiser",
-        "clear": "Effacer",
-        "import": "Importer",
-        "export": "Exporter",
-        "clearFilter": "Effacer le filtre",
-        "addNew": "Ajouter",
-        "pinStart": "Épingler au début",
-        "pinEnd": "Épingler à la fin",
-        "pinLeft": "Épingler à gauche",
-        "pinRight": "Épingler à droite",
-        "unpin": "Désépingler"
-    },
-    "sort": {
-        "asc": "Ascendant",
-        "desc": "Descendant"
-    },
-    "validation": {
-        "required": "Ce champ est obligatoire.",
-        "minLength": "Ce champ doit contenir au moins {{ min }} caractères.",
-        "maxLength": "Ce champ ne peut pas dépasser {{ max }} caractères.",
-        "email": "Veuillez entrer une adresse e-mail valide.",
-        "invalid": "Ce champ est invalide.",
-        "min": "Ce champ doit être au minimum {{ min }}.",
-        "max": "Ce champ ne peut pas dépasser {{ max }}.",
-        "pattern": "Ce champ doit respecter le format {{ pattern }}.",
-        "passwordMismatch": "Les mots de passe ne correspondent pas.",
-        "endBeforeStart": "La date de fin doit être après la date de début."
-    },
-    "countryPicker": {
-        "selectCountryPlaceholder": "Sélectionner un pays...",
-        "searchCountryPlaceholder": "Rechercher un pays..."
-    },
-    "phoneNumberPicker": {
-        "selectCountryPlaceholder": "Sélectionner l'indicatif du pays...",
-        "searchCountryPlaceholder": "Rechercher un pays...",
-        "enterPhoneNumberPlaceholder": "Saisir le numéro de téléphone..."
-    },
-    "notifications": {
-        "title": "Notifications",
-        "markAllAsRead": "Tout marquer comme lu",
-        "clearAll": "Tout effacer",
-        "noNotifications": "Aucune notification",
-        "noNotificationsDescription": "Vous êtes à jour. Les nouvelles notifications apparaîtront ici.",
-        "actions": {
-            "commentedOn": "a commenté",
-            "liked": "a aimé",
-            "shared": "a partagé",
-            "mentionedYouIn": "vous a mentionné dans",
-            "repliedTo": "a répondu à",
-            "assignedYouTo": "vous a assigné à"
-        },
-        "subjects": {
-            "yourPost": "votre publication",
-            "theProject": "le projet",
-            "aTask": "une tâche",
-            "anIssue": "un problème",
-            "aDocument": "un document",
-            "theReport": "le rapport"
-        }
+    "subjects": {
+      "yourPost": "votre publication",
+      "theProject": "le projet",
+      "aTask": "une tâche",
+      "anIssue": "un problème",
+      "aDocument": "un document",
+      "theReport": "le rapport"
     }
+  }
 }

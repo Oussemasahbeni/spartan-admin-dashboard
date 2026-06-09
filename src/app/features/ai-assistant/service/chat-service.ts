@@ -1,4 +1,4 @@
-import { Injectable, Service, computed, signal } from '@angular/core';
+import { Service, computed, signal } from '@angular/core';
 import { ChatMessage, MessageStatus } from '../model/assistant';
 import { AI_RESPONSES } from './data';
 
