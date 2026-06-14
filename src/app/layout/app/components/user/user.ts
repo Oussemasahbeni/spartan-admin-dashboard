@@ -13,7 +13,6 @@ import {
   lucideGlobe,
   lucideHelpCircle,
   lucideLogOut,
-  lucideMonitor,
   lucideMoon,
   lucidePalette,
   lucideSun,
@@ -40,7 +39,6 @@ import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
       lucidePalette,
       lucideMoon,
       lucideSun,
-      lucideMonitor,
       lucideHelpCircle,
       lucideCreditCard,
     }),
@@ -80,7 +78,7 @@ export class NavUser {
     if (lang === this.currentLang()) return;
     this._languageService.setLanguage(lang);
   }
-  protected setTheme(theme: 'light' | 'dark' | 'system'): void {
+  protected setTheme(theme: 'light' | 'dark'): void {
     this._themeService.setTheme(theme);
   }
 

@@ -15,6 +15,7 @@ import {
 } from '@ng-icons/lucide';
 import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
 import { DataTable } from '@shared/datatable/table/data-table';
+import { DataTableFeatures } from '@shared/datatable/table/table-features';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
@@ -142,7 +143,7 @@ export class PaymentsTable {
     currency: 'USD',
   });
 
-  protected readonly columns: ColumnDef<Payment>[] = [
+  protected readonly columns: ColumnDef<DataTableFeatures, Payment>[] = [
     {
       accessorKey: 'email',
       id: 'email',

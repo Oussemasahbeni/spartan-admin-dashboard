@@ -15,7 +15,8 @@ import {
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { Column, ColumnPinningPosition, Table } from '@tanstack/angular-table';
+import { Column, ColumnPinningPosition, RowData, Table } from '@tanstack/angular-table';
+import { DataTableFeatures } from '../table/table-features';
 
 interface DataTableColumnMeta {
   translationKey?: string;
@@ -124,11 +125,11 @@ interface DataTableColumnMeta {
     </ng-template>
   `,
 })
-export class DataTableColumnsManager<T> {
+export class DataTableColumnsManager<T extends RowData> {
   // ==========================================
   // Inputs
   // ==========================================
-  public readonly table = input.required<Table<T>>();
+  public readonly table = input.required<Table<DataTableFeatures, T>>();
 
   // ==========================================
   // State
@@ -154,11 +155,11 @@ export class DataTableColumnsManager<T> {
     table.setColumnOrder(newOrder);
   }
 
-  protected pinColumn(column: Column<T, unknown>, position: ColumnPinningPosition | false) {
+  protected pinColumn(column: Column<DataTableFeatures, T>, position: ColumnPinningPosition | false) {
     column.pin(position);
   }
 
-  protected getMeta(column: Column<T, unknown>): DataTableColumnMeta {
+  protected getMeta(column: Column<DataTableFeatures, T>): DataTableColumnMeta {
     return (column.columnDef.meta as DataTableColumnMeta | undefined) ?? {};
   }
 

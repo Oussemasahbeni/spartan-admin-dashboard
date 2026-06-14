@@ -36,6 +36,7 @@ export class ConfirmationDialog {
   // ==========================================
   // Public Methods
   // ==========================================
+  // TODO: to be removed and replace by directives on the buttons
   protected close() {
     this._dialogRef.close();
   }

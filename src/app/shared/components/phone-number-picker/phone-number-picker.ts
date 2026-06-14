@@ -89,7 +89,7 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   // ==========================================
   // State
   // ==========================================
-  protected readonly selectedCountry = linkedSignal<string, Country | null>({
+  protected readonly selectedCountry = linkedSignal<string, Country | null | undefined>({
     source: this.value,
     computation: (fullValue) => {
       if (!fullValue) return null;

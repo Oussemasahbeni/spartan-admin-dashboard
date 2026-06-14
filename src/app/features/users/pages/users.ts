@@ -35,6 +35,7 @@ import {
 import { CountryDisplay } from '@shared/components/country-display/country-display';
 import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
 import { DataTable, DataTableStateChangeEvent } from '@shared/datatable/table/data-table';
+import { DataTableFeatures } from '@shared/datatable/table/table-features';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
@@ -101,11 +102,13 @@ export default class Users {
    * These are accessed via viewChild and passed to TanStack column definitions.
    */
   protected readonly dataTable = viewChild.required(DataTable<User>);
-  protected readonly dateCell = viewChild.required<TemplateRef<CellContext<User, string>>>('dateCell');
-  protected readonly nameCell = viewChild.required<TemplateRef<CellContext<User, string>>>('nameCell');
-  protected readonly statusCell = viewChild.required<TemplateRef<CellContext<User, UserStatus>>>('statusCell');
-  protected readonly roleCell = viewChild.required<TemplateRef<CellContext<User, string>>>('roleCell');
-  protected readonly countryCell = viewChild.required<TemplateRef<CellContext<User, string>>>('countryCell');
+  protected readonly dateCell = viewChild.required<TemplateRef<CellContext<DataTableFeatures, User, string>>>('dateCell');
+  protected readonly nameCell = viewChild.required<TemplateRef<CellContext<DataTableFeatures, User, string>>>('nameCell');
+  protected readonly statusCell =
+    viewChild.required<TemplateRef<CellContext<DataTableFeatures, User, UserStatus>>>('statusCell');
+  protected readonly roleCell = viewChild.required<TemplateRef<CellContext<DataTableFeatures, User, string>>>('roleCell');
+  protected readonly countryCell =
+    viewChild.required<TemplateRef<CellContext<DataTableFeatures, User, string>>>('countryCell');
 
   // ==========================================
   // State
@@ -136,7 +139,7 @@ export default class Users {
 
   protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
   protected readonly searchForm = form(signal({ search: '' }), (schema) => debounce(schema.search, 300));
-  protected readonly columns: ColumnDef<User>[] = [
+  protected readonly columns: ColumnDef<DataTableFeatures, User>[] = [
     {
       id: 'name',
       accessorKey: 'name',

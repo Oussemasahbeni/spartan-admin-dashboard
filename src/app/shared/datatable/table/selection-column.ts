@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
-import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@tanstack/angular-table';
+import {
+  type CellContext,
+  type HeaderContext,
+  injectFlexRenderContext,
+  type RowData,
+} from '@tanstack/angular-table';
+import { DataTableFeatures } from './table-features';
 
 @Component({
   imports: [HlmCheckboxImports],
@@ -15,12 +21,12 @@ import { type CellContext, type HeaderContext, injectFlexRenderContext } from '@
     />
   `,
 })
-export class TableHeadSelection<T> {
+export class TableHeadSelection<T extends RowData> {
   // ==========================================
   // State
   // ==========================================
 
-  protected readonly _context = injectFlexRenderContext<HeaderContext<T, unknown>>();
+  protected readonly _context = injectFlexRenderContext<HeaderContext<DataTableFeatures, T, unknown>>();
 }
 
 @Component({
@@ -36,10 +42,10 @@ export class TableHeadSelection<T> {
     />
   `,
 })
-export class TableRowSelection<T> {
+export class TableRowSelection<T extends RowData> {
   // ==========================================
   // State
   // ==========================================
 
-  protected readonly _context = injectFlexRenderContext<CellContext<T, unknown>>();
+  protected readonly _context = injectFlexRenderContext<CellContext<DataTableFeatures, T, unknown>>();
 }

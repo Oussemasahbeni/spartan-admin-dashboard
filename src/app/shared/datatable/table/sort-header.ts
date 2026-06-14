@@ -5,7 +5,8 @@ import { lucideArrowUpDown, lucideSortAsc, lucideSortDesc, lucideX } from '@ng-i
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { Column, Header, SortDirection } from '@tanstack/angular-table';
+import { Column, Header, RowData, SortDirection } from '@tanstack/angular-table';
+import { DataTableFeatures } from './table-features';
 
 @Component({
   selector: 'adm-table-sort-header',
@@ -73,8 +74,8 @@ import { Column, Header, SortDirection } from '@tanstack/angular-table';
     </ng-template>
   `,
 })
-export class TableSortHeader<T> {
-  public readonly header = input.required<Header<T, unknown>>();
+export class TableSortHeader<T extends RowData> {
+  public readonly header = input.required<Header<DataTableFeatures, T, unknown>>();
 
   public readonly headerCell = input.required<string>();
 
@@ -82,11 +83,11 @@ export class TableSortHeader<T> {
    * Toggles sorting on a column.
    * Cycles through: none → asc → desc → none
    */
-  protected onSort(column: Column<T>, direction: SortDirection) {
+  protected onSort(column: Column<DataTableFeatures, T>, direction: SortDirection) {
     column.toggleSorting(direction === 'desc', false);
   }
 
-  protected onClearSorting(column: Column<T>) {
+  protected onClearSorting(column: Column<DataTableFeatures, T>) {
     column.clearSorting();
   }
 }

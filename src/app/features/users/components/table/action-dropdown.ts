@@ -13,6 +13,7 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
+import { DataTableFeatures } from '@shared/datatable/table/table-features';
 import { exhaustMap, filter } from 'rxjs';
 import { UserForm } from '../form/user-form';
 import { User } from '@shared/models/user';
@@ -76,7 +77,7 @@ export class ActionDropdown {
   private readonly _userService = inject(UserService);
   private readonly _transloco = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
-  private readonly _context = injectFlexRenderContext<CellContext<User, unknown>>();
+  private readonly _context = injectFlexRenderContext<CellContext<DataTableFeatures, User, unknown>>();
   private readonly _confirmationDialogService = inject(ConfirmationDialogService);
   private readonly _destroyRef = inject(DestroyRef);
 

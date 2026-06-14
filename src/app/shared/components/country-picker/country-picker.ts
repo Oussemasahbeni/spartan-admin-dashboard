@@ -57,11 +57,11 @@ import { CountryDisplay } from '../country-display/country-display';
     </hlm-combobox>
   `,
 })
-export class CountryPicker implements FormValueControl<Country | null> {
+export class CountryPicker implements FormValueControl<Country | null | undefined> {
   // ==========================================
   // Inputs
   // ==========================================
-  public readonly value = model<Country | null>(null);
+  public readonly value = model<Country | null | undefined>(null);
 
   // ==========================================
   // State

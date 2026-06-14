@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   input,
+  isDevMode,
   linkedSignal,
   numberAttribute,
   output,
@@ -18,24 +19,27 @@ import {
   ColumnDef,
   ColumnFiltersState,
   ColumnPinningState,
-  createAngularTable,
+  ColumnVisibilityState,
+  createFilteredRowModel,
+  createPaginatedRowModel,
+  createSortedRowModel,
+  filterFns,
   flexRenderComponent,
   FlexRenderDirective,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
+  injectTable,
   PaginationState,
+  RowData,
   RowSelectionState,
   SortDirection,
+  sortFns,
   SortingState,
-  VisibilityState,
 } from '@tanstack/angular-table';
 import { TableResizableCell, TableResizableHeader } from '../directives/resizable-cell';
 import { DataTablePagination } from '../pagination/pagination';
 import { toCssVarToken } from '../utils/css-var-token';
 import { TableHeadSelection, TableRowSelection } from './selection-column';
 import { TableSortHeader } from './sort-header';
+import { dataTableFeatures, DataTableFeatures } from './table-features';
 
 /**
  * A flexible data table component built on TanStack Table (Angular Table).
@@ -97,7 +101,7 @@ export interface DataTableRowSelectionChangeEvent<T> {
   templateUrl: './data-table.html',
   styleUrl: './data-table.css',
 })
-export class DataTable<T> {
+export class DataTable<T extends RowData> {
   // ==========================================
   // Inputs
   // ==========================================
@@ -106,7 +110,7 @@ export class DataTable<T> {
    * Column definitions for the table.
    * Uses TanStack Table's ColumnDef format.
    */
-  public readonly columns = input<ColumnDef<T>[]>([]);
+  public readonly columns = input<ColumnDef<DataTableFeatures, T>[]>([]);
 
   /**
    * When true, displays a loading spinner overlay on the table.
@@ -131,25 +135,24 @@ export class DataTable<T> {
   /**
    * Whether to show the pagination controls.
    */
-  public readonly paginated = input(true, { transform: booleanAttribute });
+  public readonly enablePagination = input(true, { transform: booleanAttribute });
 
   /**
    * Enables column resizing via drag handles.
    */
-  public readonly resizableColumns = input(false, { transform: booleanAttribute });
+  public readonly enableColumnResizing = input(false, { transform: booleanAttribute });
 
   /**
    * Enables checkbox selection for rows.
 =   */
   public readonly enableRowSelection = input(false, { transform: booleanAttribute });
+  public readonly enableColumnPinning = input(false, { transform: booleanAttribute });
 
   /**
    * External pagination state for server-side mode.
    * Ignored in client mode.
    */
   public readonly paginationState = input<PaginationState>({ pageIndex: 0, pageSize: 10 });
-
-  public readonly enableColumnPinning = input(false, { transform: booleanAttribute });
 
   /**
    * External sorting state for server-side mode.
@@ -166,7 +169,7 @@ export class DataTable<T> {
   /**
    * External column pinning state for server-side mode.
    */
-  public readonly defaultColumnPinning = input<ColumnPinningState>({});
+  public readonly defaultColumnPinning = input<ColumnPinningState>({ left: [], right: [] });
 
   /**
    * The operation mode of the table.
@@ -211,7 +214,7 @@ export class DataTable<T> {
     const baseColumns = this.columns();
 
     if (this.enableRowSelection() && !baseColumns.some((column) => column.id === 'select')) {
-      const selectionColumn: ColumnDef<T> = {
+      const selectionColumn: ColumnDef<DataTableFeatures, T> = {
         id: 'select',
         header: () => flexRenderComponent(TableHeadSelection),
         cell: () => flexRenderComponent(TableRowSelection),
@@ -228,7 +231,7 @@ export class DataTable<T> {
 
   private readonly columnOrder = signal<string[]>([]);
   private readonly rowSelection = signal<RowSelectionState>({});
-  private readonly columnVisibility = signal<VisibilityState>({});
+  private readonly columnVisibility = signal<ColumnVisibilityState>({});
 
   private readonly columnPinning = linkedSignal<ColumnPinningState>(() =>
     this.cloneColumnPinningState(this.defaultColumnPinning())
@@ -252,11 +255,11 @@ export class DataTable<T> {
   /** Selects the appropriate sorting state based on mode. */
   private readonly activeSorting = computed(() => (this.isServerMode() ? this.sortingState() : this.internalSorting()));
 
-  /** Column sizing info for resize feature. */
-  protected readonly _columnSizingInfo = computed(() => this.table.getState().columnSizingInfo);
+  /** Column resizing interaction state (v8's `columnSizingInfo`). */
+  protected readonly _columnResizing = computed(() => this.table.atoms.columnResizing.get());
 
-  /** Current column sizes. */
-  protected readonly _columnSizing = computed(() => this.table.getState().columnSizing);
+  /** Current column sizes (widths). */
+  protected readonly _columnSizing = computed(() => this.table.atoms.columnSizing.get());
 
   /** Whether the table is in server mode. */
   private readonly isServerMode = computed(() => this.mode() === 'server');
@@ -270,7 +273,7 @@ export class DataTable<T> {
    */
   protected readonly columnSizeVars = computed(() => {
     this._columnSizing();
-    this._columnSizingInfo();
+    this._columnResizing();
 
     const headers = untracked(() => this.table.getFlatHeaders());
     const colSizes: Record<string, number> = {};
@@ -285,7 +288,7 @@ export class DataTable<T> {
     return colSizes;
   });
 
-  protected readonly getCommonPinningStyles = (column: Column<T>) => {
+  protected readonly getCommonPinningStyles = (column: Column<DataTableFeatures, T>) => {
     if (!this.enableColumnPinning()) {
       return {};
     }
@@ -306,10 +309,30 @@ export class DataTable<T> {
   // ==========================================
 
   /**
+   * Stable row-model factory instances.
+   * Created once (not inside the `injectTable` initializer) so the table's
+   * memoization survives initializer re-evaluation on every data change.
+   */
+  private readonly _paginatedRowModel = createPaginatedRowModel<DataTableFeatures, T>();
+  private readonly _filteredRowModel = createFilteredRowModel<DataTableFeatures, T>(filterFns);
+  private readonly _sortedRowModel = createSortedRowModel<DataTableFeatures, T>(sortFns);
+
+  /**
    * The TanStack Table instance.
    * Exposes all table methods for advanced use cases.
    */
-  public readonly table = createAngularTable<T>(() => ({
+  public readonly table = injectTable(() => ({
+    features: dataTableFeatures,
+    debugTable: isDevMode(),
+    rowModels: {
+      ...(this.enablePagination() ? { paginatedRowModel: this._paginatedRowModel } : {}),
+      ...(this.isServerMode()
+        ? {}
+        : {
+            filteredRowModel: this._filteredRowModel,
+            sortedRowModel: this._sortedRowModel,
+          }),
+    },
     data: this.data(),
     columns: this._columns(),
     manualPagination: this.isServerMode(),
@@ -330,13 +353,13 @@ export class DataTable<T> {
 
     columnResizeMode: 'onChange',
     onSortingChange: (updater) => {
-      const current = this.table.getState().sorting;
+      const current = this.table.atoms.sorting.get();
       const next = typeof updater === 'function' ? updater(current) : updater;
 
       if (this.isServerMode()) {
         this.emitServerState('sorting', {
           sorting: next,
-          pagination: { ...this.table.getState().pagination, pageIndex: 0 },
+          pagination: { ...this.table.atoms.pagination.get(), pageIndex: 0 },
         });
         return;
       }
@@ -345,13 +368,13 @@ export class DataTable<T> {
     },
 
     onColumnFiltersChange: (updater) => {
-      const current = this.table.getState().columnFilters;
+      const current = this.table.atoms.columnFilters.get();
       const next = typeof updater === 'function' ? updater(current) : updater;
 
       if (this.isServerMode()) {
         this.emitServerState('filtering', {
           filters: next,
-          pagination: { ...this.table.getState().pagination, pageIndex: 0 },
+          pagination: { ...this.table.atoms.pagination.get(), pageIndex: 0 },
         });
         return;
       }
@@ -359,7 +382,7 @@ export class DataTable<T> {
       this.internalColumnFilters.set(next);
     },
     onPaginationChange: (updaterOrValue) => {
-      const current = this.table.getState().pagination;
+      const current = this.table.atoms.pagination.get();
       const next = typeof updaterOrValue === 'function' ? updaterOrValue(current) : updaterOrValue;
 
       if (this.isServerMode()) {
@@ -369,15 +392,6 @@ export class DataTable<T> {
 
       this.internalPagination.set(next);
     },
-
-    getCoreRowModel: getCoreRowModel(),
-    ...(this.paginated() ? { getPaginationRowModel: getPaginationRowModel() } : {}),
-    ...(this.isServerMode()
-      ? {}
-      : {
-          getFilteredRowModel: getFilteredRowModel(),
-          getSortedRowModel: getSortedRowModel(),
-        }),
 
     onColumnVisibilityChange: (updater) => {
       updater instanceof Function ? this.columnVisibility.update(updater) : this.columnVisibility.set(updater);
@@ -405,11 +419,11 @@ export class DataTable<T> {
    * Toggles sorting on a column.
    * Cycles through: none → asc → desc → none
    */
-  protected onSort(column: Column<T, unknown>, direction: SortDirection) {
+  protected onSort(column: Column<DataTableFeatures, T>, direction: SortDirection) {
     column.toggleSorting(direction === 'desc', false);
   }
 
-  protected onClearSorting(column: Column<T, unknown>) {
+  protected onClearSorting(column: Column<DataTableFeatures, T>) {
     column.clearSorting();
   }
 
@@ -424,13 +438,11 @@ export class DataTable<T> {
     reason: DataTableStateChangeReason,
     overrides: Partial<Omit<DataTableStateChangeEvent, 'reason'>> = {}
   ) {
-    const state = this.table.getState();
-
     this.stateChange.emit({
       reason,
-      pagination: overrides.pagination ?? state.pagination,
-      sorting: overrides.sorting ?? state.sorting,
-      filters: overrides.filters ?? state.columnFilters,
+      pagination: overrides.pagination ?? this.table.atoms.pagination.get(),
+      sorting: overrides.sorting ?? this.table.atoms.sorting.get(),
+      filters: overrides.filters ?? this.table.atoms.columnFilters.get(),
     });
   }
 

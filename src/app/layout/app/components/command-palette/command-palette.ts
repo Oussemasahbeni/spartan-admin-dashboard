@@ -15,7 +15,6 @@ import {
   lucideLayoutDashboard,
   lucideLogOut,
   lucideMaximize,
-  lucideMonitor,
   lucideMoon,
   lucidePanelLeft,
   lucideSearch,
@@ -53,7 +52,6 @@ interface NavCommand {
       lucideLayoutDashboard,
       lucideLogOut,
       lucideMaximize,
-      lucideMonitor,
       lucideMoon,
       lucidePanelLeft,
       lucideSearch,
@@ -135,13 +133,6 @@ interface NavCommand {
                 <ng-icon hlmIcon name="lucideMoon" size="sm" />
                 {{ t('theme.dark') }}
                 @if (currentTheme() === 'dark') {
-                  <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
-                }
-              </button>
-              <button type="button" hlm-command-item [value]="t('theme.system')" (selected)="setTheme('system')">
-                <ng-icon hlmIcon name="lucideMonitor" size="sm" />
-                {{ t('theme.system') }}
-                @if (currentTheme() === 'system') {
                   <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
                 }
               </button>

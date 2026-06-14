@@ -16,7 +16,8 @@ import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 
-import { Table } from '@tanstack/angular-table';
+import { RowData, Table } from '@tanstack/angular-table';
+import { DataTableFeatures } from '../table/table-features';
 
 /**
  * Pagination controls for the DataTable component.
@@ -58,7 +59,7 @@ import { Table } from '@tanstack/angular-table';
         <span class="hidden sm:flex" hlmLabel>{{ t('itemsPerPage') }}</span>
         <hlm-select
           class="inline-block"
-          [ngModel]="table().getState().pagination.pageSize"
+          [ngModel]="table().atoms.pagination.get().pageSize"
           (ngModelChange)="handlePageSizeChange($event)"
         >
           <hlm-select-trigger size="sm" class="mr-1 inline-flex h-8 w-fit">
@@ -73,7 +74,7 @@ import { Table } from '@tanstack/angular-table';
       </div>
 
       <span hlmLabel>
-        {{ t('page', { page: table().getState().pagination.pageIndex + 1, totalPages: table().getPageCount() }) }}
+        {{ t('page', { page: table().atoms.pagination.get().pageIndex + 1, totalPages: table().getPageCount() }) }}
       </span>
 
       <div class="flex gap-1">
@@ -129,7 +130,7 @@ import { Table } from '@tanstack/angular-table';
     </div>
   `,
 })
-export class DataTablePagination<T> {
+export class DataTablePagination<T extends RowData> {
   // ==========================================
   // Inputs
   // ==========================================
@@ -143,7 +144,7 @@ export class DataTablePagination<T> {
    * The TanStack Table instance to control.
    * Required for accessing pagination state and methods.
    */
-  public readonly table = input.required<Table<T>>();
+  public readonly table = input.required<Table<DataTableFeatures, T>>();
 
   // ==========================================
   // Public Methods

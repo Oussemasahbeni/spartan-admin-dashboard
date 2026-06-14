@@ -5,6 +5,7 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideX } from '@ng-icons/lucide';
 import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
 import { DataTable } from '@shared/datatable/table/data-table';
+import { DataTableFeatures } from '@shared/datatable/table/table-features';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -56,9 +57,12 @@ export class TransactionsTableComponent {
    * Template references for custom cell rendering.
    */
   protected readonly dataTable = viewChild.required(DataTable<Transaction>);
-  protected readonly userCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('userCell');
-  protected readonly statusCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('statusCell');
-  protected readonly amountCell = viewChild.required<TemplateRef<CellContext<Transaction, string>>>('amountCell');
+  protected readonly userCell =
+    viewChild.required<TemplateRef<CellContext<DataTableFeatures, Transaction, string>>>('userCell');
+  protected readonly statusCell =
+    viewChild.required<TemplateRef<CellContext<DataTableFeatures, Transaction, string>>>('statusCell');
+  protected readonly amountCell =
+    viewChild.required<TemplateRef<CellContext<DataTableFeatures, Transaction, string>>>('amountCell');
 
   // ==========================================
   // State
@@ -91,7 +95,7 @@ export class TransactionsTableComponent {
    * TanStack Table Column Definitions.
    * Uses `translateSignal` for reactive header translations.
    */
-  protected readonly columns: ColumnDef<Transaction>[] = [
+  protected readonly columns: ColumnDef<DataTableFeatures, Transaction>[] = [
     {
       id: 'user',
       accessorKey: 'user.name',
