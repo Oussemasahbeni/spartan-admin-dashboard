@@ -114,8 +114,7 @@ export class VisitorChartCard {
                 formatter(w) {
                   return (
                     w.globals.seriesTotals
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      .reduce((a: any, b: any) => {
+                      .reduce((a: number, b: number) => {
                         return a + b;
                       }, 0)
                       .toLocaleString()
