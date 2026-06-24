@@ -36,7 +36,6 @@ export interface UserFormModel {
     HlmFieldImports,
     HlmButtonImports,
     HlmSpinnerImports,
-    HlmButtonImports,
     HlmSelectImports,
     TranslocoModule,
     FormField,
@@ -65,7 +64,6 @@ export class UserForm implements OnInit {
 
   protected readonly rolesList = signal([...USER_ROLES]);
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.user);
-  protected readonly countriesList = signal(countries);
 
   private readonly userModel = signal<UserFormModel>({
     name: '',

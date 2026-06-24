@@ -86,7 +86,7 @@ import { Notification } from '../../model/notification';
                         class="z-20 text-xs hover:underline focus:outline-none"
                         (click)="onClear($index)"
                       >
-                        <ng-icon name="lucideX" s />
+                        <ng-icon name="lucideX" />
                       </button>
                     </div>
                   </div>
