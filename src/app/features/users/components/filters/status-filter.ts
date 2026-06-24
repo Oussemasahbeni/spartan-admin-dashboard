@@ -54,7 +54,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
       </button>
       <hlm-command *hlmPopoverPortal="let ctx" hlmPopoverContent class="w-50 p-0">
         <hlm-command-input>
-          <ng-icon hlm name="lucideSearch" class="text-muted-foreground" />
+          <ng-icon name="lucideSearch" class="text-muted-foreground" />
           <input hlm-command-search-input [placeholder]="t('users.list.columns.status')" />
         </hlm-command-input>
         <div *brnCommandEmpty hlmCommandEmpty>

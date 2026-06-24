@@ -45,7 +45,7 @@ import { CountryDisplay } from '../country-display/country-display';
           @if (selectedCountry()) {
             <adm-country-display [country]="selectedCountry()" [showCountryCode]="true" />
           } @else {
-            <ng-icon hlm name="lucideGlobe" />
+            <ng-icon name="lucideGlobe" />
           }
         </hlm-combobox-trigger>
 

@@ -48,7 +48,7 @@ interface MonthsTranslation {
             <div class="bg-muted/50 rounded-lg border p-4">
               <div class="mb-1 flex items-center justify-between">
                 <span class="text-muted-foreground text-sm font-medium">{{ t('netSales') }}</span>
-                <ng-icon name="lucideInfo" size="sm" class="text-muted-foreground" hlmTooltip="Net sales information" />
+                <ng-icon name="lucideInfo" class="text-muted-foreground" hlmTooltip="Net sales information" />
               </div>
               <div class="text-2xl font-bold">$4,567,820</div>
               <div class="text-success mt-1 flex items-center gap-1 text-xs">

@@ -39,7 +39,7 @@
         </hlm-select-trigger>
         <hlm-select-content *hlmSelectPortal>
           @for (status of taskStatuses; track status) {
-            <hlm-select-item *transloco="let t; prefix: 'tasks.columns'" [value]="status"> {{ t(status) }} </hlm-select-item>
+          <hlm-select-item *transloco="let t; prefix: 'tasks.columns'" [value]="status"> {{ t(status) }} </hlm-select-item>
           }
         </hlm-select-content>
       </hlm-select>
@@ -49,9 +49,9 @@
     <hlm-field>
       <hlm-field-label for="task-due-date">{{ t('label.dueDate') }}</hlm-field-label>
       <hlm-date-picker [min]="today" [formField]="taskForm.dueDate" [autoCloseOnSelect]="true">
-        <hlm-date-picker-trigger class="w-full" buttonId="task-due-date">{{
-          t('placeholder.dueDate')
-        }}</hlm-date-picker-trigger>
+        <hlm-date-picker-trigger class="w-full" buttonId="task-due-date"
+          >{{ t('placeholder.dueDate') }}</hlm-date-picker-trigger
+        >
       </hlm-date-picker>
       <hlm-field-error *transloco="let t"> {{ t('validation.required') }} </hlm-field-error>
     </hlm-field>
@@ -69,95 +69,95 @@
 
         <div *hlmPopoverPortal hlmPopoverContent class="w-80 p-4">
           @if (tagPopoverView() === 'list') {
-            <!-- List view: pick from existing tags -->
-            <p class="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase">
-              {{ t('placeholder.selectTag') }}
-            </p>
+          <!-- List view: pick from existing tags -->
+          <p class="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase">
+            {{ t('placeholder.selectTag') }}
+          </p>
 
-            @if (existingTags().length > 0) {
-              <div class="mb-3 flex flex-wrap gap-1.5">
-                @for (tag of existingTags(); track tag.name) {
-                  <button
-                    type="button"
-                    [class]="
+          @if (existingTags().length > 0) {
+          <div class="mb-3 flex flex-wrap gap-1.5">
+            @for (tag of existingTags(); track tag.name) {
+            <button
+              type="button"
+              [class]="
                       'inline-flex cursor-pointer items-center rounded-full border px-2 py-0.5 text-[10px] font-medium transition-opacity hover:opacity-100 ' +
                       tagColorClasses[tag.color]
                     "
-                    (click)="pickExistingTag(tag)"
-                  >
-                    + {{ tag.name }}
-                  </button>
-                }
-              </div>
-            } @else {
-              <p class="text-muted-foreground mb-3 text-xs">{{ t('placeholder.noTags') }}</p>
-            }
-
-            <button type="button" hlmBtn variant="outline" size="sm" class="w-full" (click)="tagPopoverView.set('create')">
-              <ng-icon name="lucidePlus" size="xs" />
-              {{ t('placeholder.createTag') }}
-            </button>
-          } @else {
-            <!-- Create view: new tag name + color picker -->
-            <button
-              type="button"
-              class="text-muted-foreground mb-3 flex items-center gap-1 text-xs hover:text-current"
-              (click)="tagPopoverView.set('list')"
+              (click)="pickExistingTag(tag)"
             >
-              <ng-icon name="lucideChevronLeft" size="xs" />
-              {{ t('placeholder.backToTags') }}
+              + {{ tag.name }}
             </button>
+            }
+          </div>
+          } @else {
+          <p class="text-muted-foreground mb-3 text-xs">{{ t('placeholder.noTags') }}</p>
+          }
 
-            <div class="flex flex-col gap-3">
-              <input
-                hlmInput
-                class="h-10 w-full text-sm"
-                [placeholder]="t('placeholder.tagName')"
-                [formField]="tagForm.name"
-                (keydown.enter)="$event.preventDefault(); addTag()"
-              />
+          <button type="button" hlmBtn variant="outline" size="sm" class="w-full" (click)="tagPopoverView.set('create')">
+            <ng-icon name="lucidePlus" />
+            {{ t('placeholder.createTag') }}
+          </button>
+          } @else {
+          <!-- Create view: new tag name + color picker -->
+          <button
+            type="button"
+            class="text-muted-foreground mb-3 flex items-center gap-1 text-xs hover:text-current"
+            (click)="tagPopoverView.set('list')"
+          >
+            <ng-icon name="lucideChevronLeft" />
+            {{ t('placeholder.backToTags') }}
+          </button>
 
-              <div class="flex flex-wrap gap-2">
-                @for (color of tagColors; track color) {
-                  <button
-                    type="button"
-                    [title]="color"
-                    [aria-label]="'Select color ' + color"
-                    [aria-pressed]="pendingTagColor() === color"
-                    [class]="
+          <div class="flex flex-col gap-3">
+            <input
+              hlmInput
+              class="h-10 w-full text-sm"
+              [placeholder]="t('placeholder.tagName')"
+              [formField]="tagForm.name"
+              (keydown.enter)="$event.preventDefault(); addTag()"
+            />
+
+            <div class="flex flex-wrap gap-2">
+              @for (color of tagColors; track color) {
+              <button
+                type="button"
+                [title]="color"
+                [aria-label]="'Select color ' + color"
+                [aria-pressed]="pendingTagColor() === color"
+                [class]="
                       'size-6 rounded-full border-2 transition-all ' +
                       tagColorClasses[color] +
                       (pendingTagColor() === color ? ' scale-110 border-current' : ' border-transparent')
                     "
-                    (click)="pendingTagColor.set(color)"
-                  ></button>
-                }
-              </div>
-
-              <button type="button" hlmBtn size="sm" class="w-full" (click)="addTag()">{{ t('save') }}</button>
+                (click)="pendingTagColor.set(color)"
+              ></button>
+              }
             </div>
+
+            <button type="button" hlmBtn size="sm" class="w-full" (click)="addTag()">{{ t('save') }}</button>
+          </div>
           }
         </div>
       </hlm-popover>
 
       <!-- Added tag chips -->
       @for (tag of addedTags(); track $index) {
-        <span
-          [class]="
+      <span
+        [class]="
             'inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ' +
             tagColorClasses[tag.color]
           "
+      >
+        {{ tag.name }}
+        <button
+          type="button"
+          class="ml-0.5 flex items-center justify-center rounded-full opacity-60 hover:opacity-100"
+          [aria-label]="'Remove tag ' + tag.name"
+          (click)="removeTag($index)"
         >
-          {{ tag.name }}
-          <button
-            type="button"
-            class="ml-0.5 flex items-center justify-center rounded-full opacity-60 hover:opacity-100"
-            [aria-label]="'Remove tag ' + tag.name"
-            (click)="removeTag($index)"
-          >
-            <ng-icon name="lucideX" />
-          </button>
-        </span>
+          <ng-icon name="lucideX" />
+        </button>
+      </span>
       }
     </div>
   </div>
@@ -166,8 +166,7 @@
   <button type="button" hlmBtn variant="outline" (click)="cancel()">{{ t('cancel') }}</button>
   <button type="button" form="task-form" hlmBtn [disabled]="taskForm().submitting()" (click)="onSubmit()">
     @if (taskForm().submitting()) {
-      <hlm-spinner />
-    }
-    {{ t('save') }}
+    <hlm-spinner />
+    } {{ t('save') }}
   </button>
 </hlm-dialog-footer>

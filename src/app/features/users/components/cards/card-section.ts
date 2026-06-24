@@ -35,20 +35,20 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       <div *transloco="let t; prefix: 'users.cards.totalUsers'" class="border-border bg-card rounded-lg border p-6">
         <div class="flex items-start justify-between">
           <div class="flex gap-4">
-            <ng-icon hlm name="lucideUsers" class="text-muted-foreground" />
+            <ng-icon name="lucideUsers" class="text-muted-foreground" />
             <div>
               <p class="text-muted-foreground text-sm">{{ t('label') }}</p>
               <h3 class="text-3xl font-bold tabular-nums">{{ t('value') }}</h3>
               <p class="text-muted-foreground text-xs">{{ t('subtitle') }}</p>
             </div>
           </div>
-          <ng-icon hlm name="lucideInfo" class="text-muted-foreground" [hlmTooltip]="t('infoTooltip')" />
+          <ng-icon name="lucideInfo" class="text-muted-foreground" [hlmTooltip]="t('infoTooltip')" />
         </div>
       </div>
       <div *transloco="let t; prefix: 'users.cards.newUsers'" class="border-border bg-card rounded-lg border p-6">
         <div class="flex items-start justify-between">
           <div class="flex gap-4">
-            <ng-icon hlm name="lucideUserPlus" class="text-muted-foreground" />
+            <ng-icon name="lucideUserPlus" class="text-muted-foreground" />
             <div>
               <p class="text-muted-foreground text-sm">{{ t('label') }}</p>
               <h3 class="text-3xl font-bold tabular-nums">{{ t('value') }}</h3>
@@ -69,7 +69,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       >
         <div class="flex items-start justify-between">
           <div class="flex gap-4">
-            <ng-icon hlm name="lucideAlertCircle" class="text-muted-foreground" />
+            <ng-icon name="lucideAlertCircle" class="text-muted-foreground" />
             <div>
               <p class="text-muted-foreground text-sm">{{ t('label') }}</p>
               <h3 class="text-3xl font-bold tabular-nums">{{ t('value') }}</h3>
@@ -88,7 +88,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       <div *transloco="let t; prefix: 'users.cards.activeUsers'" class="border-border bg-card rounded-lg border p-6">
         <div class="flex items-start justify-between">
           <div class="flex gap-4">
-            <ng-icon hlm name="lucideUserCheck2" class="text-muted-foreground" />
+            <ng-icon name="lucideUserCheck2" class="text-muted-foreground" />
             <div>
               <p class="text-muted-foreground text-sm">{{ t('label') }}</p>
               <h3 class="text-3xl font-bold tabular-nums">{{ t('value') }}</h3>
