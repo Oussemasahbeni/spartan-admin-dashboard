@@ -10,7 +10,7 @@ import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCalendar,
   lucideChevronLeft,
@@ -29,7 +29,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { isBefore, subDays } from 'date-fns';
 import { CalendarForm } from '../components/calendar-form/calendar-form';
 import { EventDetails } from '../components/event-details/event-details';
@@ -39,7 +39,7 @@ import { CalendarStore, EVENT_TYPES } from '../state/calendar-store';
   selector: 'adm-calendar',
   imports: [
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     BrnHoverCardImports,
     HlmDropdownMenuImports,
     HlmBadgeImports,
@@ -190,9 +190,11 @@ export default class Calendar {
 
   protected addEvent(): void {
     const dialogRef = this._hlmDialogService.open(CalendarForm, {
+      contentClass: 'sm:min-w-lg',
+      autoFocus: false,
     });
 
-    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
+    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
       if (result) {
         this._calendarStore.addEvent(result);
       }
@@ -245,9 +247,10 @@ export default class Calendar {
       context: {
         event: info.event,
       },
+      contentClass: 'sm:min-w-lg',
     });
 
-    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
+    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
       if (result) {
         this._calendarStore.updateEvent(result);
       }
@@ -259,9 +262,10 @@ export default class Calendar {
       context: {
         date: info.date,
       },
+      contentClass: 'sm:min-w-lg',
     });
 
-    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
+    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
       if (result) {
         this._calendarStore.addEvent(result);
       }

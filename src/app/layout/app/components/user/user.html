@@ -62,7 +62,7 @@
 
             <button type="button" hlmDropdownMenuCheckbox [checked]="theme === 'light'" (click)="setTheme('light')">
               <div class="flex items-center gap-2">
-                <ng-icon hlmIcon name="lucideSun" size="sm" />
+                <ng-icon name="lucideSun" />
                 <span> {{ t('theme.light') }} </span>
               </div>
               <hlm-dropdown-menu-checkbox-indicator />
@@ -70,7 +70,7 @@
 
             <button type="button" hlmDropdownMenuCheckbox [checked]="theme === 'dark'" (click)="setTheme('dark')">
               <div class="flex items-center gap-2">
-                <ng-icon hlmIcon name="lucideMoon" size="sm" />
+                <ng-icon name="lucideMoon" />
                 <span> {{ t('theme.dark') }} </span>
               </div>
               <hlm-dropdown-menu-checkbox-indicator />
@@ -92,7 +92,7 @@
           <button type="button" hlmDropdownMenuItem (click)="setLang(lang.code)">
             <span>{{ lang.label }}</span>
             @if (currentLang() === lang.code) {
-            <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+            <ng-icon name="lucideCheck" class="ms-auto" />
             }
           </button>
           }

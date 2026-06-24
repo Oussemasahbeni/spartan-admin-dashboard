@@ -1,14 +1,14 @@
 import { Component, computed, signal } from '@angular/core';
 import { STATIC_NOTIFICATIONS } from '@core/mock/notifications.data';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideX } from '@ng-icons/lucide';
 import { TimeAgoPipe } from '@shared/pipes/timeago/time-ago.pipe';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmEmptyImports } from '@spartan-ng/helm/empty';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -23,7 +23,7 @@ import { Notification } from '../../model/notification';
     HlmEmptyImports,
     HlmScrollAreaImports,
     NgScrollbarModule,
-    HlmIconImports,
+    NgIcon,
     HlmPopoverImports,
     TranslocoModule,
     TimeAgoPipe,
@@ -32,7 +32,7 @@ import { Notification } from '../../model/notification';
   template: `
     <hlm-popover *transloco="let t; prefix: 'notifications'" sideOffset="10" align="end">
       <button type="button" variant="outline" size="icon" class="relative size-9" hlmPopoverTrigger hlmBtn>
-        <ng-icon hlm name="lucideBell" size="sm" />
+        <ng-icon hlm name="lucideBell"  />
         @if (unreadCount() > 0) {
           <span
             hlmBadge
@@ -86,7 +86,7 @@ import { Notification } from '../../model/notification';
                         class="z-20 text-xs hover:underline focus:outline-none"
                         (click)="onClear($index)"
                       >
-                        <ng-icon hlmIcon name="lucideX" size="xs" />
+                        <ng-icon  name="lucideX" s />
                       </button>
                     </div>
                   </div>

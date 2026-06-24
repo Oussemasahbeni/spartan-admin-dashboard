@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required, submit, validate } from '@angular/forms/signals';
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
@@ -9,7 +9,7 @@ import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
@@ -34,10 +34,8 @@ export interface CalendarEventModel {
     HlmFieldImports,
     HlmButtonImports,
     HlmSpinnerImports,
-    HlmIconImports,
     HlmButtonImports,
     HlmSelectImports,
-    HlmIconImports,
     HlmDatePickerImports,
     HlmCheckboxImports,
     TranslocoModule,
@@ -46,7 +44,7 @@ export interface CalendarEventModel {
   ],
   templateUrl: './calendar-form.html',
   host: {
-    class: 'flex flex-col gap-4 sm:max-w-lg ',
+    class: 'flex flex-col gap-4',
   },
 })
 export class CalendarForm implements OnInit {
@@ -63,7 +61,6 @@ export class CalendarForm implements OnInit {
   // ==========================================
 
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.event);
-  protected readonly isSubmitting = signal(false);
 
   private readonly eventModel = signal<CalendarEventModel>({
     title: '',
@@ -74,32 +71,23 @@ export class CalendarForm implements OnInit {
     endTime: '10:00',
   });
 
-  protected readonly eventForm = form(
-    this.eventModel,
-    (schema) => {
-      required(schema.title);
-      required(schema.description);
-      required(schema.startDate);
-      required(schema.endDate);
-      validate(schema.endDate, ({ value }) => {
-        const endBase = value();
-        const model = this.eventModel();
+  protected readonly eventForm = form(this.eventModel, (schema) => {
+    required(schema.title);
+    required(schema.description);
+    required(schema.startDate);
+    required(schema.endDate);
+    validate(schema.endDate, ({ value }) => {
+      const endBase = value();
+      const model = this.eventModel();
 
-        if (!endBase || !model.startDate) return null;
+      if (!endBase || !model.startDate) return null;
 
-        const startCombined = mergeTime(model.startDate, model.startTime);
-        const endCombined = mergeTime(endBase, model.endTime);
+      const startCombined = mergeTime(model.startDate, model.startTime);
+      const endCombined = mergeTime(endBase, model.endTime);
 
-        return isAfter(endCombined, startCombined) ? null : { kind: 'endBeforeStart' };
-      });
-    },
-
-    {
-      submission: {
-        action: async () => this.onSubmit(),
-      },
-    }
-  );
+      return isAfter(endCombined, startCombined) ? null : { kind: 'endBeforeStart' };
+    });
+  });
 
   // ==========================================
   // Public Methods
@@ -128,11 +116,13 @@ export class CalendarForm implements OnInit {
   }
 
   onSubmit() {
-    if (!this.eventForm().dirty()) {
-      this._dialogRef.close(false);
-      return;
-    }
-    this.onSaveEvent();
+    submit(this.eventForm, async () => {
+      if (!this.eventForm().dirty()) {
+        this._dialogRef.close(false);
+        return;
+      }
+      this.onSaveEvent();
+    });
   }
 
   // ==========================================

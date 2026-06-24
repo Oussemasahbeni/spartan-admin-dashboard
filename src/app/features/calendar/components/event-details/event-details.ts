@@ -3,28 +3,20 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideAlignLeft, lucideCalendar, lucideClock, lucideMapPin, lucideTag } from '@ng-icons/lucide';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports, HlmDialogService } from '@spartan-ng/helm/dialog';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { CalendarStore } from '../../state/calendar-store';
 import { CalendarForm } from '../calendar-form/calendar-form';
 
 @Component({
   selector: 'adm-event-details',
-  imports: [
-    HlmDialogImports,
-    HlmButtonImports,
-    HlmBadgeImports,
-    HlmIconImports,
-    HlmSeparatorImports,
-    TranslocoModule,
-    DatePipe,
-  ],
+  imports: [HlmDialogImports, HlmButtonImports, HlmBadgeImports, NgIcon, HlmSeparatorImports, TranslocoModule, DatePipe],
   providers: [
     provideIcons({
       lucideCalendar,
@@ -35,7 +27,7 @@ import { CalendarForm } from '../calendar-form/calendar-form';
     }),
   ],
   host: {
-    class: 'flex flex-col gap-4 sm:max-w-lg ',
+    class: 'flex flex-col gap-4',
   },
   templateUrl: './event-details.html',
 })
@@ -58,14 +50,14 @@ export class EventDetails {
   // Public Methods
   // ==========================================
   onEditEvent() {
-    const dialogRef = this._hlmDialogService.open(CalendarForm, {
+    const dialogRef = this._hlmDialogService.open<EventInput>(CalendarForm, {
       context: {
         event: this.event(),
         date: this.event().start,
       },
     });
 
-    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result: EventInput) => {
+    dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
       if (!result) return;
 
       this._calendarStore.updateEvent(result);

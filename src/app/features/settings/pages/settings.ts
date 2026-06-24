@@ -2,11 +2,11 @@ import { Component, inject, input, linkedSignal, signal, viewChild } from '@angu
 import { Router } from '@angular/router';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideCreditCard, lucideLock, lucideMenu, lucideUserCircle, lucideUsers } from '@ng-icons/lucide';
 import { BrnSheet, BrnSheetImports } from '@spartan-ng/brain/sheet';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { HlmSheetImports } from '@spartan-ng/helm/sheet';
 import { SettingsAccount } from '../account/account-panel';
@@ -25,7 +25,7 @@ interface Panel {
 @Component({
   selector: 'adm-settings',
   imports: [
-    HlmIconImports,
+    NgIcon,
     HlmButtonImports,
     HlmSeparatorImports,
     HlmSheetImports,

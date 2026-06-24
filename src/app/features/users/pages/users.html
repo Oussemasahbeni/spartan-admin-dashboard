@@ -33,12 +33,12 @@
         <adm-data-table-column-manager [table]="table()" />
         <!--  Actions -->
         <button type="button" hlmBtn variant="secondary" (click)="refreshTable()">
-          <ng-icon hlmIcon name="lucideRefreshCcw" size="sm" />
+          <ng-icon name="lucideRefreshCcw" />
           {{ t('buttons.refresh') }}
         </button>
 
         <button type="button" hlmBtn variant="default" (click)="addUser()">
-          <ng-icon hlmIcon name="lucideUserPlus" size="sm" />
+          <ng-icon name="lucideUserPlus" />
           {{ t('buttons.addNew') }}
         </button>
       </div>
@@ -85,11 +85,11 @@
       <ng-template #statusCell let-context>
         <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
           @let status = context.getValue(); @switch (status) { @case ('active') {
-          <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
+          <ng-icon class="text-green-600" name="lucideCircleCheck" />
           } @case ('inactive') {
-          <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
+          <ng-icon class="text-destructive" name="lucideCircleX" />
           } @case ('pending') {
-          <ng-icon hlmIcon size="xs" class="animate-spin text-yellow-600" name="lucideLoader" />
+          <ng-icon class="animate-spin text-yellow-600" name="lucideLoader" />
           } }
 
           <span *transloco="let t; prefix: 'users.status'">{{ t(status) }}</span>
@@ -105,11 +105,11 @@
           [id]="context.row.original.id + '-role'"
         >
           @switch (role) { @case ('admin') {
-          <ng-icon hlmIcon size="sm" name="lucideShieldCheck" />
+          <ng-icon name="lucideShieldCheck" />
           } @case ('user') {
-          <ng-icon hlmIcon size="sm" name="lucideUser" />
+          <ng-icon name="lucideUser" />
           } @case ('manager') {
-          <ng-icon hlmIcon size="sm" name="lucideBriefcase" />
+          <ng-icon name="lucideBriefcase" />
           } }
           <span *transloco="let t; prefix: 'users.role'">{{ t(role) }}</span>
         </span>

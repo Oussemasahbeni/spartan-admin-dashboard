@@ -16,7 +16,6 @@
       "@core/*": ["./src/app/core/*"],
       "@shared/*": ["./src/app/shared/*"],
       "@spartan-ng/helm/alert": ["./src/app/libs/alert/src/index.ts"],
-      "@spartan-ng/helm/alert-dialog": ["./src/app/libs/alert-dialog/src/index.ts"],
       "@spartan-ng/helm/avatar": ["./src/app/libs/avatar/src/index.ts"],
       "@spartan-ng/helm/badge": ["./src/app/libs/badge/src/index.ts"],
       "@spartan-ng/helm/breadcrumb": ["./src/app/libs/breadcrumb/src/index.ts"],
@@ -54,20 +53,21 @@
       "@spartan-ng/helm/textarea": ["./src/app/libs/textarea/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./src/app/libs/tooltip/src/index.ts"],
       "@spartan-ng/helm/utils": ["./src/app/libs/utils/src/index.ts"],
-    },
+      "@spartan-ng/helm/alert-dialog": ["./src/app/libs/alert-dialog/src/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
+    "strictInputAccessModifiers": true
   },
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.app.json",
+      "path": "./tsconfig.app.json"
     },
     {
-      "path": "./tsconfig.spec.json",
-    },
-  ],
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

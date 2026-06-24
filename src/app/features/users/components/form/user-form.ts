@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { email, form, FormField, FormRoot, required, validate } from '@angular/forms/signals';
+import { email, form, FormField, FormRoot, required, submit, validate } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
@@ -10,7 +10,7 @@ import { toast } from '@spartan-ng/brain/sonner';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
@@ -36,10 +36,8 @@ export interface UserFormModel {
     HlmFieldImports,
     HlmButtonImports,
     HlmSpinnerImports,
-    HlmIconImports,
     HlmButtonImports,
     HlmSelectImports,
-    HlmIconImports,
     TranslocoModule,
     FormField,
     FormRoot,
@@ -47,7 +45,7 @@ export interface UserFormModel {
     PhoneNumberPicker,
   ],
   host: {
-    class: 'flex flex-col gap-4 sm:max-w-lg ',
+    class: 'flex flex-col gap-4',
   },
   templateUrl: './user-form.html',
 })
@@ -67,7 +65,7 @@ export class UserForm implements OnInit {
 
   protected readonly rolesList = signal([...USER_ROLES]);
   protected readonly isEditMode = signal<boolean>(!!this._dialogContext.user);
-  protected readonly isSubmitting = signal(false);
+  protected readonly countriesList = signal(countries);
 
   private readonly userModel = signal<UserFormModel>({
     name: '',
@@ -77,33 +75,26 @@ export class UserForm implements OnInit {
     role: null,
   });
 
-  protected readonly userForm = form(
-    this.userModel,
-    (schema) => {
-      required(schema.name);
-      required(schema.email);
-      email(schema.email);
-      required(schema.phoneNumber);
-      required(schema.role);
-      validate(schema.phoneNumber, ({ value }) => {
-        if (!value()) {
-          return null;
-        }
-        const phoneNumber = parsePhoneNumberFromString(value());
+  protected readonly userForm = form(this.userModel, (schema) => {
+    required(schema.name);
+    required(schema.email);
+    email(schema.email);
+    required(schema.phoneNumber);
+    required(schema.role);
+    required(schema.country);
+    validate(schema.phoneNumber, ({ value }) => {
+      if (!value()) {
+        return null;
+      }
+      const phoneNumber = parsePhoneNumberFromString(value());
 
-        return phoneNumber && phoneNumber.isValid()
-          ? null
-          : {
-              kind: 'invalid',
-            };
-      });
-    },
-    {
-      submission: {
-        action: async () => this.onSubmit(),
-      },
-    }
-  );
+      return phoneNumber && phoneNumber.isValid()
+        ? null
+        : {
+            kind: 'invalid',
+          };
+    });
+  });
 
   // ==========================================
   // Public Methods
@@ -119,12 +110,14 @@ export class UserForm implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (!this.userForm().dirty()) {
-      this._dialogRef.close(false);
-      return;
-    }
-    this.onSaveUser();
+  async onSubmit() {
+    submit(this.userForm, async () => {
+      if (!this.userForm().dirty()) {
+        this._dialogRef.close(false);
+        return;
+      }
+      this.onSaveUser();
+    });
   }
 
   // ==========================================
@@ -132,7 +125,6 @@ export class UserForm implements OnInit {
   // ==========================================
 
   onSaveUser() {
-    this.isSubmitting.set(true);
     const payload = this._mapFormToUser();
     const userId = this._dialogContext.user?.id;
 
@@ -147,7 +139,6 @@ export class UserForm implements OnInit {
       error: (err) => {
         console.error(err);
         toast.error('Save failed');
-        this.isSubmitting.set(false);
       },
     });
   }

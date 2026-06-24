@@ -1,17 +1,17 @@
 import { Component, input } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { User } from '../../../../../shared/models/user';
 
 @Component({
   selector: 'adm-team-members-card',
-  imports: [HlmCardImports, HlmAvatarImports, HlmButtonImports, HlmIconImports, HlmDropdownMenuImports, TranslocoModule],
+  imports: [HlmCardImports, HlmAvatarImports, HlmButtonImports, NgIcon, HlmDropdownMenuImports, TranslocoModule],
   providers: [
     provideIcons({
       lucideChevronDown,
@@ -41,7 +41,7 @@ import { User } from '../../../../../shared/models/user';
             </div>
             <button type="button" hlmBtn variant="outline" size="sm" [hlmDropdownMenuTrigger]="roleMenu">
               {{ t('roles.' + member.role) }}
-              <ng-icon hlmIcon name="lucideChevronDown" size="sm" />
+              <ng-icon name="lucideChevronDown" />
             </button>
 
             <!-- Role Dropdown Menu -->

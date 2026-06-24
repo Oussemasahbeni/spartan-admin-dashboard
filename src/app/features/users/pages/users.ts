@@ -4,7 +4,7 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import {
@@ -19,7 +19,7 @@ import {
 import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideBriefcase,
   lucideCircleCheck,
@@ -51,7 +51,7 @@ import { UserService } from '../service/user-service';
   selector: 'adm-users',
   imports: [
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     HlmInputImports,
     HlmLabelImports,
     HlmInputGroupImports,
@@ -218,7 +218,10 @@ export default class Users {
   // ==========================================
 
   protected addUser() {
-    const dialogRef = this._hlmDialogService.open(UserForm);
+    const dialogRef = this._hlmDialogService.open(UserForm, {
+      autoFocus: false,
+      contentClass: 'sm:min-w-lg',
+    });
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
       if (result) this.refreshTable();

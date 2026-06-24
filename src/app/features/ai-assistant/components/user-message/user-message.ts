@@ -1,11 +1,11 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { isPlatformBrowser } from '@angular/common';
 import { Component, PLATFORM_ID, inject, input, output, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideCopy, lucidePencil, lucideUser } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 import { UserMessage } from '../../model/assistant';
@@ -13,7 +13,7 @@ import { EditEvent } from '../../model/user-message';
 
 @Component({
   selector: 'adm-user-message',
-  imports: [HlmCardImports, HlmTextareaImports, HlmInputGroupImports, HlmButtonImports, HlmIconImports],
+  imports: [HlmCardImports, HlmTextareaImports, HlmInputGroupImports, HlmButtonImports, NgIcon],
   viewProviders: [provideIcons({ lucideUser, lucideCopy, lucideCheck, lucidePencil })],
   template: `
     <article class="group flex min-w-0 flex-1 flex-col items-end" role="article">
@@ -51,14 +51,14 @@ import { EditEvent } from '../../model/user-message';
         >
           <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
             @if (copied()) {
-              <ng-icon hlmIcon name="lucideCheck" size="sm" />
+              <ng-icon name="lucideCheck" />
             } @else {
-              <ng-icon hlmIcon name="lucideCopy" size="sm" />
+              <ng-icon name="lucideCopy" />
             }
           </button>
 
           <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="startEdit()">
-            <ng-icon hlm size="sm" name="lucidePencil" />
+            <ng-icon name="lucidePencil" />
           </button>
         </div>
       }

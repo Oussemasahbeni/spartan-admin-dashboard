@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideGlobe } from '@ng-icons/lucide';
 import { CountryPicker } from '@shared/components/country-picker/country-picker';
 import { PhoneNumberPicker } from '@shared/components/phone-number-picker/phone-number-picker';
@@ -9,7 +9,7 @@ import { countries } from '@shared/countries';
 
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
@@ -23,7 +23,7 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 
   imports: [
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     HlmFieldImports,
     HlmInputImports,
     HlmLabelImports,

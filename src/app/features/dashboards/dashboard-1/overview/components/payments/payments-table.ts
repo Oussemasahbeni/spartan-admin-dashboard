@@ -1,6 +1,6 @@
 import { Component, computed, input, signal, viewChild } from '@angular/core';
 import { provideTranslocoScope, translateSignal, TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUpDown,
   lucideCheck,
@@ -20,7 +20,7 @@ import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmTableImports } from '@spartan-ng/helm/table';
@@ -36,7 +36,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
     HlmInputImports,
     HlmInputGroupImports,
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     HlmDropdownMenuImports,
     HlmBadgeImports,
     DataTable,
@@ -81,7 +81,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
             </div>
             <hlm-input-group-addon align="inline-end">
               @if (searchValue()) {
-                <ng-icon name="lucideX" size="sm" (click)="_clearSearch()" />
+                <ng-icon name="lucideX" (click)="_clearSearch()" />
               }
             </hlm-input-group-addon>
           </hlm-input-group>
@@ -100,13 +100,13 @@ import { PaymentsActionDropdown } from './action-dropdown';
               @let status = context.getValue();
               @switch (status) {
                 @case ('success') {
-                  <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
+                  <ng-icon class="text-green-600" name="lucideCircleCheck" />
                 }
                 @case ('failed') {
-                  <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
+                  <ng-icon class="text-destructive" name="lucideCircleX" />
                 }
                 @case ('processing') {
-                  <ng-icon hlmIcon size="xs" class="animate-spin text-yellow-600" name="lucideLoader" />
+                  <ng-icon class="animate-spin text-yellow-600" name="lucideLoader" />
                 }
               }
               <span *transloco="let t; prefix: 'dashboard1.paymentsTable.status'"> {{ t(status) }} </span>

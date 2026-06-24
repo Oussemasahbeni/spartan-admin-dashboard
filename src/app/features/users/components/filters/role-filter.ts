@@ -1,6 +1,6 @@
 import { Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBriefcase, lucideListFilter, lucideSearch, lucideShieldCheck, lucideUser } from '@ng-icons/lucide';
 import { USER_ROLES, UserRole } from '@shared/models/user';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
@@ -9,7 +9,7 @@ import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 
@@ -19,7 +19,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
     HlmButtonImports,
     HlmBadgeImports,
     HlmSeparatorImports,
-    HlmIconImports,
+    NgIcon,
     HlmPopoverImports,
     BrnCommandImports,
     HlmCommandImports,
@@ -37,8 +37,8 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
       [state]="_rolesState()"
       (stateChanged)="rolesStateChanged($event)"
     >
-      <button type="button" hlmBtn hlmPopoverTrigger variant="outline" size="sm" class="border-dashed">
-        <ng-icon hlm name="lucideListFilter" size="sm" />
+      <button type="button" hlmBtn hlmPopoverTrigger variant="outline" class="border-dashed">
+        <ng-icon hlm name="lucideListFilter" />
         {{ t('users.list.columns.role') }}
         @if (_rolesFilter().length) {
           <hlm-separator class="mx-2" orientation="vertical" />
@@ -66,13 +66,13 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
                 <hlm-checkbox class="mr-2" [checked]="isRoleSelected(role)" />
                 @switch (role) {
                   @case ('admin') {
-                    <ng-icon hlmIcon size="sm" name="lucideShieldCheck" />
+                    <ng-icon name="lucideShieldCheck" />
                   }
                   @case ('user') {
-                    <ng-icon hlmIcon size="sm" name="lucideUser" />
+                    <ng-icon name="lucideUser" />
                   }
                   @case ('manager') {
-                    <ng-icon hlmIcon size="sm" name="lucideBriefcase" />
+                    <ng-icon name="lucideBriefcase" />
                   }
                   @default never;
                 }

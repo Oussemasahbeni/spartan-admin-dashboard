@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideChevronDown,
   lucideChevronFirst,
@@ -11,7 +11,7 @@ import {
 } from '@ng-icons/lucide';
 
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
@@ -35,15 +35,7 @@ import { DataTableFeatures } from '../table/table-features';
  */
 @Component({
   selector: 'adm-pagination',
-  imports: [
-    HlmSelectImports,
-    HlmLabelImports,
-    HlmButtonImports,
-    HlmIconImports,
-    HlmTooltipImports,
-    FormsModule,
-    TranslocoModule,
-  ],
+  imports: [HlmSelectImports, HlmLabelImports, HlmButtonImports, NgIcon, HlmTooltipImports, FormsModule, TranslocoModule],
   providers: [
     provideIcons({
       lucideChevronDown,
@@ -88,7 +80,7 @@ import { DataTableFeatures } from '../table/table-features';
           [aria-label]="t('firstPage')"
           (click)="table().firstPage()"
         >
-          <ng-icon hlmIcon class="rtl:rotate-180" name="lucideChevronFirst" size="sm" />
+          <ng-icon class="rtl:rotate-180" name="lucideChevronFirst"  />
         </button>
         <button
           type="button"
@@ -100,7 +92,7 @@ import { DataTableFeatures } from '../table/table-features';
           [aria-label]="t('previousPage')"
           (click)="table().previousPage()"
         >
-          <ng-icon hlmIcon class="rtl:rotate-180" name="lucideChevronLeft" size="sm" />
+          <ng-icon class="rtl:rotate-180" name="lucideChevronLeft"  />
         </button>
         <button
           type="button"
@@ -112,7 +104,7 @@ import { DataTableFeatures } from '../table/table-features';
           [aria-label]="t('nextPage')"
           (click)="table().nextPage()"
         >
-          <ng-icon hlmIcon class="rtl:rotate-180" name="lucideChevronRight" size="sm" />
+          <ng-icon class="rtl:rotate-180" name="lucideChevronRight" />
         </button>
         <button
           type="button"
@@ -124,7 +116,7 @@ import { DataTableFeatures } from '../table/table-features';
           [aria-label]="t('lastPage')"
           (click)="table().lastPage()"
         >
-          <ng-icon hlmIcon class="rtl:rotate-180" name="lucideChevronLast" size="sm" />
+          <ng-icon class="rtl:rotate-180" name="lucideChevronLast" />
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideListFilter, lucideSearch } from '@ng-icons/lucide';
 import { USER_STATUSES, UserStatus } from '@shared/models/user';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
@@ -9,7 +9,7 @@ import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 
@@ -19,7 +19,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
     HlmButtonImports,
     HlmBadgeImports,
     HlmSeparatorImports,
-    HlmIconImports,
+    NgIcon,
     HlmPopoverImports,
     BrnCommandImports,
     HlmCommandImports,
@@ -38,7 +38,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
       (stateChanged)="statusStateChanged($event)"
     >
       <button type="button" hlmBtn hlmPopoverTrigger variant="outline" size="sm" class="border-dashed">
-        <ng-icon hlm name="lucideListFilter" size="sm" />
+        <ng-icon name="lucideListFilter" />
         {{ t('users.list.columns.status') }}
         @if (_statusFilter().length) {
           <hlm-separator class="mx-2" orientation="vertical" />
@@ -67,13 +67,13 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
                 <hlm-checkbox class="mr-2" [checked]="isStatusSelected(status)" />
                 @switch (status) {
                   @case ('active') {
-                    <ng-icon hlmIcon size="xs" class="text-green-600" name="lucideCircleCheck" />
+                    <ng-icon class="text-green-600" name="lucideCircleCheck" />
                   }
                   @case ('inactive') {
-                    <ng-icon hlmIcon size="xs" class="text-destructive" name="lucideCircleX" />
+                    <ng-icon class="text-destructive" name="lucideCircleX" />
                   }
                   @case ('pending') {
-                    <ng-icon hlmIcon size="xs" class="text-yellow-600" name="lucideLoader" />
+                    <ng-icon class="text-yellow-600" name="lucideLoader" />
                   }
                   @default never;
                 }

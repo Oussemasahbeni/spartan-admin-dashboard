@@ -5,11 +5,11 @@
 
       <div class="flex gap-3">
         <button type="button" hlmBtn variant="outline">
-          <ng-icon hlmIcon name="lucideFilter" size="sm" />
+          <ng-icon  name="lucideFilter" />
           {{ t('filterBy') }}
         </button>
         <button type="button" hlmBtn variant="default">
-          <ng-icon hlmIcon name="lucideDownload" size="sm" />
+          <ng-icon  name="lucideDownload"  />
           {{ t('export') }}
         </button>
       </div>
@@ -19,15 +19,15 @@
   <hlm-tabs class="space-y-2" [tab]="selectedTab()" (tabActivated)="onTabChange($event)">
     <hlm-tabs-list>
       <button type="button" hlmTabsTrigger="overview">
-        <ng-icon hlmIcon name="lucideHome" size="sm" />
+        <ng-icon  name="lucideHome"  />
         {{ t('tabs.overview') }}
       </button>
       <button type="button" hlmTabsTrigger="analytics">
-        <ng-icon hlmIcon name="lucideBarChart2" size="sm" />
+        <ng-icon  name="lucideBarChart2" />
         {{ t('tabs.analytics') }}
       </button>
       <button type="button" disabled hlmTabsTrigger="reports">
-        <ng-icon hlmIcon name="lucideFileText" size="sm" />
+        <ng-icon  name="lucideFileText"  />
         {{ t('tabs.reports') }}
       </button>
     </hlm-tabs-list>

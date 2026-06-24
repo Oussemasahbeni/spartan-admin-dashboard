@@ -2,11 +2,11 @@ import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight, lucideFilter, lucideMoreVertical, lucidePlus } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { TaskCard } from '../components/task-card/task-card';
 import { TaskDetails } from '../components/task-details/task-details';
 import { TaskForm } from '../components/task-form/task-form';
@@ -14,7 +14,7 @@ import { Task, TaskStatus } from '../model/task';
 
 @Component({
   selector: 'adm-tasks',
-  imports: [TranslocoModule, DragDropModule, HlmButtonImports, HlmIconImports, TaskCard],
+  imports: [TranslocoModule, DragDropModule, HlmButtonImports, NgIcon, TaskCard],
   providers: [provideIcons({ lucidePlus, lucideMoreVertical, lucideFilter, lucideChevronRight })],
 
   templateUrl: './tasks.html',
@@ -225,6 +225,8 @@ export default class Tasks {
     this._hlmDialogService
       .open(TaskForm, {
         context: { existingTags: this.existingTags() },
+        contentClass: 'sm:min-w-lg',
+        autoFocus: false,
       })
       .closed$.pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((newTask) => {
@@ -262,6 +264,7 @@ export default class Tasks {
   protected openTaskDetailsDialog(task: Task): void {
     this._hlmDialogService.open(TaskDetails, {
       context: { task },
+      contentClass: 'sm:min-w-lg',
     });
   }
 }

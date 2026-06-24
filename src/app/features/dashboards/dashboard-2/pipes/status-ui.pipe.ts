@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideAlertCircle, lucideCheckCircle, lucideTrash2 } from '@ng-icons/lucide';
 
 export type TransactionStatus = 'Suspended' | 'New' | 'Delete';

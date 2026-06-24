@@ -48,14 +48,15 @@
                   [tooltip]="item.key ? t(item.key) : item.title"
                   [aria-label]="item.key ? t(item.key) : item.title"
                 >
-                  <ng-icon hlmIcon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
+                  <ng-icon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
                   <ng-icon
                     name="lucideChevronRight"
                     class="ms-auto transition-transform group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180"
-                    hlmIcon
                   />
                 </button>
-                <hlm-collapsible-content class="data-[state=open]:animate-in data-[state=closed]:animate-out">
+                <hlm-collapsible-content
+                  class="block overflow-hidden transition-all data-[state=closed]:block data-[state=closed]:h-0 data-[state=open]:h-(--brn-collapsible-content-height)"
+                >
                   <ul hlmSidebarMenuSub>
                     @for (subItem of children; track subItem.key || subItem.title) {
                     <li hlmSidebarMenuSubItem>
@@ -86,7 +87,7 @@
                 [routerLink]="item.url"
                 [aria-label]="item.key ? t(item.key) : item.title"
               >
-                <ng-icon hlmIcon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
+                <ng-icon [name]="item.icon" /> <span>{{ item.key ? t(item.key) : item.title }}</span>
               </a>
             </li>
             } }

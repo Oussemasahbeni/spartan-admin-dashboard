@@ -5,30 +5,26 @@
       <!-- Plan Alert -->
       <div class="sm:col-span-3">
         <hlm-alert variant="default">
-          <ng-icon hlm hlmAlertIcon size="sm" name="lucideInfo" />
-          <p hlmAlertDesc>
-            {{ t('planAlert') }}
-          </p>
+          <ng-icon name="lucideInfo" />
+          <p hlmAlertDesc>{{ t('planAlert') }}</p>
         </hlm-alert>
       </div>
 
       <!-- Plans -->
       <hlm-radio-group class="col-span-full grid grid-cols-1 gap-4 sm:grid-cols-3" [formField]="planBillingForm.plan">
         @for (plan of plans(); track plan.value) {
-          <label hlmLabel [class]="cardClass" [for]="plan.value">
-            <hlm-radio class="sr-only" [value]="plan.value" [inputId]="plan.value">
-              <hlm-radio-indicator />
-            </hlm-radio>
-            <ng-icon hlm name="lucideCreditCard" class="mb-3" />
-            <div class="font-semibold">{{ t('plans.' + plan.value + '.label') }}</div>
-            <p class="text-muted-foreground mt-1 text-center text-sm">
-              {{ t('plans.' + plan.value + '.details') }}
-            </p>
-            <div class="mt-4 text-lg font-semibold">
-              <span>{{ plan.price | currency: 'USD' : 'symbol' : '1.0' }}</span>
-              <span class="text-muted-foreground text-sm font-normal"> {{ t('perMonth') }}</span>
-            </div>
-          </label>
+        <label hlmLabel [class]="cardClass" [for]="plan.value">
+          <hlm-radio class="sr-only" [value]="plan.value" [inputId]="plan.value">
+            <hlm-radio-indicator />
+          </hlm-radio>
+          <ng-icon hlm name="lucideCreditCard" class="mb-3" />
+          <div class="font-semibold">{{ t('plans.' + plan.value + '.label') }}</div>
+          <p class="text-muted-foreground mt-1 text-center text-sm">{{ t('plans.' + plan.value + '.details') }}</p>
+          <div class="mt-4 text-lg font-semibold">
+            <span>{{ plan.price | currency: 'USD' : 'symbol' : '1.0' }}</span>
+            <span class="text-muted-foreground text-sm font-normal"> {{ t('perMonth') }}</span>
+          </div>
+        </label>
         }
       </hlm-radio-group>
     </div>
@@ -39,9 +35,7 @@
     <!-- Payment Details Section -->
     <div class="w-full">
       <h2 class="text-xl font-semibold">{{ t('paymentDetails.title') }}</h2>
-      <p class="text-muted-foreground text-sm">
-        {{ t('paymentDetails.description') }}
-      </p>
+      <p class="text-muted-foreground text-sm">{{ t('paymentDetails.description') }}</p>
     </div>
 
     <div class="mt-8 grid w-full grid-cols-4 gap-6">
@@ -56,7 +50,7 @@
             <input hlmInputGroupInput id="cardHolder" type="text" [formField]="planBillingForm.cardHolder" />
           </hlm-input-group>
           @for (error of planBillingForm.cardHolder().errors(); track error.kind) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         </hlm-field>
       </div>
@@ -72,7 +66,7 @@
             <input hlmInputGroupInput id="cardNumber" type="text" [formField]="planBillingForm.cardNumber" />
           </hlm-input-group>
           @for (error of planBillingForm.cardNumber().errors(); track error.kind) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         </hlm-field>
       </div>
@@ -94,7 +88,7 @@
             />
           </hlm-input-group>
           @for (error of planBillingForm.cardExpiration().errors(); track error.kind) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         </hlm-field>
       </div>
@@ -110,7 +104,7 @@
             <input hlmInputGroupInput id="cardCVC" type="text" [formField]="planBillingForm.cardCVC" />
           </hlm-input-group>
           @for (error of planBillingForm.cardCVC().errors(); track error.kind) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         </hlm-field>
       </div>
@@ -144,9 +138,8 @@
     <div *transloco="let t; prefix: 'buttons'" class="flex items-center justify-end gap-4">
       <button type="submit" hlmBtn [disabled]="planBillingForm().submitting()">
         @if (planBillingForm().submitting()) {
-          <hlm-spinner />
-        }
-        {{ t('save') }}
+        <hlm-spinner />
+        } {{ t('save') }}
       </button>
     </div>
   </form>

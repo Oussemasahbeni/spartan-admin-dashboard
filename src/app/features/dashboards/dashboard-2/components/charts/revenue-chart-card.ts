@@ -1,13 +1,13 @@
 import { Component, computed, inject } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { provideTranslocoScope, translateObjectSignal, Translation } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMoreHorizontal, lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
 
 const SCOPE = { scope: 'dashboard/dashboard2', alias: 'dashboard2' };
@@ -34,7 +34,7 @@ interface MonthsTranslation {
 
 @Component({
   selector: 'adm-revenue-chart-card',
-  imports: [NgApexchartsModule, HlmBadgeImports, HlmButtonImports, HlmCardImports, HlmDropdownMenuImports, HlmIconImports],
+  imports: [NgApexchartsModule, HlmBadgeImports, HlmButtonImports, HlmCardImports, HlmDropdownMenuImports, NgIcon],
   providers: [
     provideTranslocoScope(SCOPE),
     provideIcons({
@@ -51,7 +51,7 @@ interface MonthsTranslation {
           <div class="mt-1 flex items-center gap-2">
             <span class="text-2xl font-bold">{{ revenueChart().value }}</span>
             <span class="text-success flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-xs">
-              <ng-icon hlmIcon class="text-success" name="lucideTrendingUp" size="xs" />
+              <ng-icon class="text-success" name="lucideTrendingUp" />
               <span>{{ revenueChart().change }}</span>
             </span>
           </div>

@@ -3,96 +3,85 @@
   <p hlmDialogDescription>{{ isEditMode() ? t('editDescription') : t('addDescription') }}</p>
 </hlm-dialog-header>
 
-<div class="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-0 overflow-y-auto sm:max-h-[min(640px,80vh)]">
-  <form *transloco="let t; prefix: 'calendar.form'" class="flex w-full flex-col gap-4 p-2" [formRoot]="eventForm">
-    <!-- Title -->
+<form
+  *transloco="let t; prefix: 'calendar.form'"
+  class="flex max-h-[calc(100vh-2rem)] w-full flex-col gap-4 overflow-y-auto p-2 sm:max-h-[min(640px,80vh)]"
+  [formRoot]="eventForm"
+>
+  <!-- Title -->
+  <hlm-field>
+    <hlm-field-label>{{ t('label.title') }}</hlm-field-label>
+    <input hlmInput id="title" [formField]="eventForm.title" />
+    @for (error of eventForm.title().errors(); track error.kind) {
+    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+    }
+  </hlm-field>
+  <!-- Description -->
+  <hlm-field>
+    <hlm-field-label>{{ t('label.description') }}</hlm-field-label>
+    <input hlmInput id="description" [formField]="eventForm.description" />
+    @for (error of eventForm.description().errors(); track error.kind) {
+    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+    }
+  </hlm-field>
+  <!-- Start Date -->
+  <div class="flex gap-4">
     <hlm-field>
-      <hlm-field-label>{{ t('label.title') }}</hlm-field-label>
-      <input hlmInput id="title" [formField]="eventForm.title" />
-      @for (error of eventForm.title().errors(); track error.kind) {
-        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-label>{{ t('label.startDate') }}</hlm-field-label>
+      <hlm-date-picker captionLayout="dropdown" [formField]="eventForm.startDate" [autoCloseOnSelect]="true">
+        <hlm-date-picker-trigger class="w-full" buttonId="startDate"
+          >>{{ t('placeholder.selectDate') }}</hlm-date-picker-trigger
+        >
+      </hlm-date-picker>
+      @for (error of eventForm.startDate().errors(); track error.kind) {
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     </hlm-field>
-    <!-- Description -->
+    <div class="flex flex-col gap-3">
+      <label for="time-picker" hlmLabel class="px-1"> {{ t('label.startTime') }} </label>
+      <input
+        hlmInput
+        id="time-picker"
+        type="time"
+        step="1"
+        class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+        [formField]="eventForm.startTime"
+      />
+    </div>
+  </div>
+
+  <!-- End Date -->
+  <div class="flex gap-4">
     <hlm-field>
-      <hlm-field-label>{{ t('label.description') }}</hlm-field-label>
-      <input hlmInput id="description" [formField]="eventForm.description" />
-      @for (error of eventForm.description().errors(); track error.kind) {
-        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-label>{{ t('label.endDate') }}</hlm-field-label>
+      <hlm-date-picker captionLayout="dropdown" [formField]="eventForm.endDate" [autoCloseOnSelect]="true">
+        <hlm-date-picker-trigger class="w-full" buttonId="endDate"
+          >{{ t('placeholder.selectDate') }}</hlm-date-picker-trigger
+        >
+      </hlm-date-picker>
+      @for (error of eventForm.endDate().errors(); track error.kind) {
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     </hlm-field>
-    <!-- Start Date -->
-    <div class="flex gap-4">
-      <hlm-field>
-        <hlm-field-label>{{ t('label.startDate') }}</hlm-field-label>
-        <hlm-date-picker
-          class="w-full"
-          buttonId="startDate"
-          captionLayout="dropdown"
-          [formField]="eventForm.startDate"
-          [autoCloseOnSelect]="true"
-        >
-          <span>{{ t('placeholder.selectDate') }}</span>
-        </hlm-date-picker>
-        @for (error of eventForm.startDate().errors(); track error.kind) {
-          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
-        }
-      </hlm-field>
-      <div class="flex flex-col gap-3">
-        <label for="time-picker" hlmLabel class="px-1">
-          {{ t('label.startTime') }}
-        </label>
-        <input
-          hlmInput
-          id="time-picker"
-          type="time"
-          step="1"
-          class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
-          [formField]="eventForm.startTime"
-        />
-      </div>
+    <div class="flex flex-col gap-3">
+      <label for="time-picker" hlmLabel class="px-1"> {{ t('label.endTime') }} </label>
+      <input
+        hlmInput
+        id="time-picker"
+        type="time"
+        step="1"
+        class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+        [formField]="eventForm.endTime"
+      />
     </div>
+  </div>
+</form>
 
-    <!-- End Date -->
-    <div class="flex gap-4">
-      <hlm-field>
-        <hlm-field-label>{{ t('label.endDate') }}</hlm-field-label>
-        <hlm-date-picker
-          class="w-full"
-          buttonId="endDate"
-          captionLayout="dropdown"
-          [formField]="eventForm.endDate"
-          [autoCloseOnSelect]="true"
-        >
-          <span>{{ t('placeholder.selectDate') }}</span>
-        </hlm-date-picker>
-        @for (error of eventForm.endDate().errors(); track error.kind) {
-          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
-        }
-      </hlm-field>
-      <div class="flex flex-col gap-3">
-        <label for="time-picker" hlmLabel class="px-1">
-          {{ t('label.endTime') }}
-        </label>
-        <input
-          hlmInput
-          id="time-picker"
-          type="time"
-          step="1"
-          class="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
-          [formField]="eventForm.endTime"
-        />
-      </div>
-    </div>
-
-    <hlm-dialog-footer *transloco="let t; prefix: 'buttons'">
-      <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('cancel') }}</button>
-      <button type="submit" hlmBtn [disabled]="isSubmitting()">
-        @if (isSubmitting()) {
-          <hlm-spinner />
-        }
-        {{ t('save') }}
-      </button>
-    </hlm-dialog-footer>
-  </form>
-</div>
+<hlm-dialog-footer *transloco="let t; prefix: 'buttons'">
+  <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('cancel') }}</button>
+  <button type="button" hlmBtn [disabled]="eventForm().submitting()" (click)="onSubmit()">
+    @if (eventForm().submitting()) {
+    <hlm-spinner />
+    } {{ t('save') }}
+  </button>
+</hlm-dialog-footer>

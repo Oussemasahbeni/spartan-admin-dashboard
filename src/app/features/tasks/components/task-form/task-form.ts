@@ -1,14 +1,14 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required, submit } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronLeft, lucidePlus, lucideTag, lucideX } from '@ng-icons/lucide';
 import { BrnDialogImports, BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmPopoverImports } from '@spartan-ng/helm/popover';
@@ -31,7 +31,7 @@ import { Task, TaskFormContext, TaskFormModel, TaskStatus } from '../../model/ta
     HlmSelectImports,
     HlmButtonImports,
     HlmSpinnerImports,
-    HlmIconImports,
+    NgIcon,
     HlmLabelImports,
     HlmPopoverImports,
     FormField,
@@ -40,7 +40,7 @@ import { Task, TaskFormContext, TaskFormModel, TaskStatus } from '../../model/ta
   ],
   providers: [provideIcons({ lucideTag, lucidePlus, lucideX, lucideChevronLeft })],
   host: {
-    class: 'flex flex-col gap-4 sm:max-w-lg',
+    class: 'flex flex-col gap-4',
   },
   templateUrl: './task-form.html',
 })
@@ -56,7 +56,6 @@ export class TaskForm {
   // State
   // ==========================================
 
-  protected readonly isSubmitting = signal(false);
   protected readonly taskStatuses: TaskStatus[] = ['todo', 'inprogress', 'completed'];
   protected readonly tagColors = Object.keys(TAG_COLOR_CLASSES) as TagColor[];
   protected readonly tagColorClasses = TAG_COLOR_CLASSES;
@@ -81,20 +80,11 @@ export class TaskForm {
     dueDate: null,
   });
 
-  protected readonly taskForm = form(
-    this.taskModel,
-    (schema) => {
-      required(schema.title);
-      required(schema.status);
-      required(schema.dueDate);
-    },
-
-    {
-      submission: {
-        action: async () => this._submit(),
-      },
-    }
-  );
+  protected readonly taskForm = form(this.taskModel, (schema) => {
+    required(schema.title);
+    required(schema.status);
+    required(schema.dueDate);
+  });
 
   protected readonly today = new Date();
 
@@ -136,22 +126,24 @@ export class TaskForm {
     this.addedTags.update((tags) => tags.filter((_, i) => i !== index));
   }
 
-  private _submit(): void {
-    const val = this.taskForm;
+  protected onSubmit(): void {
+    submit(this.taskForm, async () => {
+      const val = this.taskForm;
 
-    const newTask: Task = {
-      id: crypto.randomUUID(),
-      title: val.title().value(),
-      description: val.description().value() || undefined,
-      status: val.status().value(),
-      dueDate: val.dueDate().value() ? format(val.dueDate().value()!, 'yyyy-MM-dd') : '',
-      commentsCount: 0,
-      isCompleted: false,
-      tags: this.addedTags(),
-      assigneeAvatar: `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`,
-    };
+      const newTask: Task = {
+        id: crypto.randomUUID(),
+        title: val.title().value(),
+        description: val.description().value() || undefined,
+        status: val.status().value(),
+        dueDate: val.dueDate().value() ? format(val.dueDate().value()!, 'yyyy-MM-dd') : '',
+        commentsCount: 0,
+        isCompleted: false,
+        tags: this.addedTags(),
+        assigneeAvatar: `https://i.pravatar.cc/150?u=${crypto.randomUUID()}`,
+      };
 
-    this._dialogRef.close(newTask);
+      this._dialogRef.close(newTask);
+    });
   }
 
   protected cancel(): void {

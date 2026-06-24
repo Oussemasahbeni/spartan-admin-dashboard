@@ -1,10 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { translateObjectSignal, Translation, TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTrendingDown, lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
 
@@ -19,7 +19,7 @@ interface MonthsTranslation {
 
 @Component({
   selector: 'adm-visitors-card',
-  imports: [HlmCardImports, HlmIconImports, HlmTabsImports, NgApexchartsModule, TranslocoModule],
+  imports: [HlmCardImports, NgIcon, HlmTabsImports, NgApexchartsModule, TranslocoModule],
   providers: [provideIcons({ lucideTrendingUp, lucideTrendingDown })],
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.visitorsCard'" hlmCard class="h-full w-full">
@@ -48,7 +48,7 @@ interface MonthsTranslation {
               <span class="text-muted-foreground text-sm font-medium">{{ t('newVisitors') }}</span>
               <div class="mt-1 text-2xl font-bold">36,786</div>
               <div class="text-success mt-1 flex items-center gap-1 text-xs">
-                <ng-icon hlmIcon name="lucideTrendingUp" size="xs" />
+                <ng-icon  name="lucideTrendingUp"  />
                 <span>88.7% (+10)</span>
               </div>
             </div>
@@ -58,7 +58,7 @@ interface MonthsTranslation {
               <span class="text-muted-foreground text-sm font-medium">{{ t('returning') }}</span>
               <div class="mt-1 text-2xl font-bold">467</div>
               <div class="text-destructive mt-1 flex items-center gap-1 text-xs">
-                <ng-icon hlmIcon name="lucideTrendingDown" size="xs" />
+                <ng-icon  name="lucideTrendingDown"  />
                 <span>8.5% (-6)</span>
               </div>
             </div>

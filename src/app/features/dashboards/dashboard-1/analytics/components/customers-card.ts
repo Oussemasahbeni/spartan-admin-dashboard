@@ -1,11 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
 
 interface MonthsTranslation {
@@ -19,7 +19,7 @@ interface MonthsTranslation {
 
 @Component({
   selector: 'adm-customers-card',
-  imports: [HlmCardImports, HlmButtonImports, HlmIconImports, NgApexchartsModule, TranslocoModule],
+  imports: [HlmCardImports, HlmButtonImports, NgIcon, NgApexchartsModule, TranslocoModule],
   providers: [provideIcons({ lucideTrendingUp })],
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.customersCard'" hlmCard class="h-full w-full">
@@ -44,7 +44,7 @@ interface MonthsTranslation {
       </main>
 
       <footer hlmCardFooter class="flex items-center gap-2 text-sm">
-        <ng-icon hlmIcon name="lucideTrendingUp" size="sm" class="text-success" />
+        <ng-icon name="lucideTrendingUp" class="text-success" />
         <span class="text-success font-medium">{{ t('trendingText') }}</span>
       </footer>
     </section>

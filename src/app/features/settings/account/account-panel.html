@@ -8,7 +8,7 @@
           <hlm-field-label>{{ t('name') }}</hlm-field-label>
           <input hlmInput id="name" type="text" [formField]="accountForm.name" />
           @for (error of accountForm.name().errors(); track error.kind) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         </hlm-field>
       </div>
@@ -53,9 +53,7 @@
     <!-- Section -->
     <div class="w-full">
       <h2 class="text-xl font-semibold">{{ t('personalInfo.title') }}</h2>
-      <p class="text-muted-foreground text-sm">
-        {{ t('personalInfo.description') }}
-      </p>
+      <p class="text-muted-foreground text-sm">{{ t('personalInfo.description') }}</p>
     </div>
 
     <div class="mt-8 grid w-full gap-6 sm:grid-cols-4">
@@ -65,7 +63,7 @@
           <hlm-field-label>{{ t('email') }}</hlm-field-label>
           <input hlmInput id="email" type="email" [formField]="accountForm.email" />
           @for (error of accountForm.email().errors(); track error.kind) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         </hlm-field>
       </div>
@@ -76,7 +74,7 @@
           <hlm-field-label>{{ t('phone') }}</hlm-field-label>
           <adm-phone-number-picker [formField]="accountForm.phone" />
           @for (error of accountForm.phone().errors(); track error.kind) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         </hlm-field>
       </div>
@@ -87,7 +85,7 @@
           <hlm-field-label>{{ t('country') }}</hlm-field-label>
           <adm-country-picker [formField]="accountForm.country" />
           @for (error of accountForm.country().errors(); track error.kind) {
-            <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
           }
         </hlm-field>
       </div>
@@ -99,16 +97,14 @@
           <hlm-select [formField]="accountForm.language">
             <hlm-select-trigger class="w-full">
               <div class="flex items-center gap-2">
-                <ng-icon hlm size="sm" name="lucideGlobe" />
+                <ng-icon name="lucideGlobe" />
                 <hlm-select-placeholder>{{ t('selectLanguage') }}</hlm-select-placeholder>
-                <ng-template let-value hlmSelectValueTemplate>
-                  {{ t(`languages.${value}`) }}
-                </ng-template>
+                <ng-template let-value hlmSelectValueTemplate> {{ t(`languages.${value}`) }} </ng-template>
               </div>
             </hlm-select-trigger>
             <hlm-select-content *hlmSelectPortal>
               @for (language of languages; track language) {
-                <hlm-select-item [value]="language">{{ t(`languages.${language}`) }}</hlm-select-item>
+              <hlm-select-item [value]="language">{{ t(`languages.${language}`) }}</hlm-select-item>
               }
             </hlm-select-content>
           </hlm-select>
@@ -123,9 +119,8 @@
     <div *transloco="let t; prefix: 'buttons'" class="flex items-center justify-end gap-4">
       <button type="submit" hlmBtn [disabled]="accountForm().submitting()">
         @if (accountForm().submitting()) {
-          <hlm-spinner />
-        }
-        {{ t('save') }}
+        <hlm-spinner />
+        } {{ t('save') }}
       </button>
     </div>
   </form>

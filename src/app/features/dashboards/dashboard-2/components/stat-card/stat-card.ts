@@ -1,8 +1,8 @@
 import { Component, input, output } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
+import { NgIcon } from '@ng-icons/core';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 export interface StatCardData {
   icon: string;
@@ -15,15 +15,15 @@ export interface StatCardData {
 
 @Component({
   selector: 'adm-stat-card',
-  imports: [HlmButtonImports, HlmCardImports, HlmIconImports, TranslocoModule],
+  imports: [HlmButtonImports, HlmCardImports, NgIcon, TranslocoModule],
 
   template: `
     <section *transloco="let t; prefix: 'dashboard2.stats'" hlmCard class="h-full w-full">
       <div hlmCardContent class="flex h-full flex-col justify-between">
         <div class="mb-4 flex items-start justify-between">
-          <ng-icon hlmIcon [name]="data().icon" />
+          <ng-icon [name]="data().icon" />
           <button type="button" hlmBtn variant="ghost" size="icon" (click)="menuClick.emit()">
-            <ng-icon hlmIcon name="lucideMoreHorizontal" size="sm" />
+            <ng-icon name="lucideMoreHorizontal" />
           </button>
         </div>
         <div>
@@ -36,8 +36,6 @@ export interface StatCardData {
           >
             <span>{{ data().changePercent }}</span>
             <ng-icon
-              hlmIcon
-              size="xs"
               [class.text-success]="data().isPositive"
               [class.text-destructive]="!data().isPositive"
               [name]="data().isPositive ? 'lucideTrendingUp' : 'lucideTrendingDown'"

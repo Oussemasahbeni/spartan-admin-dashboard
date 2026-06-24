@@ -3,7 +3,7 @@ import { AuthService } from '@core/auth/auth-service';
 import { Language, LanguageService } from '@core/config/language-service';
 import { ThemeService } from '@core/config/theme-service';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideBadgeCheck,
   lucideCheck,
@@ -21,12 +21,12 @@ import { User } from '@shared/models/user';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
 
 @Component({
   selector: 'adm-user',
-  imports: [HlmSidebarImports, HlmAvatarImports, HlmIconImports, HlmDropdownMenuImports, HlmBadgeImports, TranslocoModule],
+  imports: [HlmSidebarImports, HlmAvatarImports, NgIcon, HlmDropdownMenuImports, HlmBadgeImports, TranslocoModule],
   templateUrl: './user.html',
   providers: [
     provideIcons({

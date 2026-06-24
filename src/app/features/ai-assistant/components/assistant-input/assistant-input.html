@@ -42,7 +42,7 @@
       <div hlmInputGroupAddon align="block-end" class="flex justify-between gap-2">
         <div class="flex items-center gap-1">
           <button type="button" class="rounded-full" hlmInputGroupButton size="icon-sm" [hlmDropdownMenuTrigger]="plusMenu">
-            <ng-icon hlm name="lucidePlus" size="sm" />
+            <ng-icon name="lucidePlus" />
           </button>
 
           <ng-template #plusMenu>
@@ -50,7 +50,7 @@
               <!-- Attachments -->
               <hlm-dropdown-menu-group>
                 <button type="button" hlmDropdownMenuItem [aria-label]="t('input.attachFile')" (click)="triggerFileInput()">
-                  <ng-icon hlm name="lucidePaperclip" size="sm" />
+                  <ng-icon name="lucidePaperclip" />
                   {{ t('input.addPhotosFiles') }}
                 </button>
               </hlm-dropdown-menu-group>
@@ -68,7 +68,7 @@
                   (click)="enableWebSearch.set(!enableWebSearch())"
                 >
                   <div class="flex items-center gap-2">
-                    <ng-icon hlm name="lucideGlobe" size="sm" class="text-muted-foreground" />
+                    <ng-icon name="lucideGlobe" class="text-muted-foreground" />
                     <span>{{ t('capabilities.webSearch') }}</span>
                   </div>
                   <hlm-dropdown-menu-checkbox-indicator />
@@ -82,7 +82,7 @@
                   (click)="enableThinking.set(!enableThinking())"
                 >
                   <div class="flex items-center gap-2">
-                    <ng-icon hlm name="lucideLightbulb" size="sm" class="text-muted-foreground" />
+                    <ng-icon name="lucideLightbulb" class="text-muted-foreground" />
                     <span>{{ t('capabilities.thinking') }}</span>
                   </div>
                   <hlm-dropdown-menu-checkbox-indicator />
@@ -97,14 +97,14 @@
                   (click)="enableReasoning.set(!enableReasoning())"
                 >
                   <div class="flex items-center gap-2">
-                    <ng-icon hlm name="lucideBrainCircuit" size="sm" class="text-muted-foreground" />
+                    <ng-icon name="lucideBrainCircuit" class="text-muted-foreground" />
                     <span>{{ t('capabilities.deepReasoning') }}</span>
                   </div>
                   <hlm-dropdown-menu-checkbox-indicator />
                 </button>
 
                 <button type="button" hlmDropdownMenuItem side="right" align="start" [hlmDropdownMenuTrigger]="moreFeatures">
-                  <ng-icon hlm name="lucideMoreHorizontal" size="sm" class="text-muted-foreground" />
+                  <ng-icon name="lucideMoreHorizontal" class="text-muted-foreground" />
                   <span>{{ t('capabilities.more') }}</span>
                   <hlm-dropdown-menu-item-sub-indicator class="rtl:rotate-180" />
                 </button>
@@ -112,15 +112,15 @@
                 <ng-template #moreFeatures>
                   <hlm-dropdown-menu-sub>
                     <button type="button" hlmDropdownMenuItem>
-                      <ng-icon hlm name="lucideAppWindow" size="sm" class="text-muted-foreground" />
+                      <ng-icon name="lucideAppWindow" class="text-muted-foreground" />
                       {{ t('capabilities.exploreApps') }}
                     </button>
                     <button type="button" hlmDropdownMenuItem>
-                      <ng-icon hlm name="lucideGraduationCap" size="sm" class="text-muted-foreground" />
+                      <ng-icon name="lucideGraduationCap" class="text-muted-foreground" />
                       {{ t('capabilities.studyAndLearn') }}
                     </button>
                     <button type="button" hlmDropdownMenuItem>
-                      <ng-icon hlm name="lucidePencilRuler" size="sm" class="text-muted-foreground" />
+                      <ng-icon name="lucidePencilRuler" class="text-muted-foreground" />
                       {{ t('capabilities.canvas') }}
                     </button>
                   </hlm-dropdown-menu-sub>
@@ -134,7 +134,7 @@
           <!-- Model selector dropdown -->
           <button type="button" hlmBtn variant="ghost" [hlmDropdownMenuTrigger]="modelMenu">
             {{ selectedModel() }}
-            <ng-icon hlm name="lucideChevronDown" size="xs" />
+            <ng-icon name="lucideChevronDown" />
           </button>
           <ng-template #modelMenu>
             <hlm-dropdown-menu class="w-56">
@@ -167,7 +167,7 @@
             [aria-pressed]="isRecording()"
             (click)="toggleMic()"
           >
-            <ng-icon hlm name="lucideMic" size="sm" />
+            <ng-icon name="lucideMic" />
           </button>
 
           <!-- Send button -->
@@ -182,7 +182,7 @@
             [variant]="'secondary'"
             (click)="handleStopStreaming()"
           >
-            <ng-icon hlm name="lucideSquareStop" class="text-white" size="sm" />
+            <ng-icon name="lucideSquareStop" class="text-white" />
           </button>
           } @else {
           <button
@@ -195,7 +195,7 @@
             [disabled]="!canSend()"
             (click)="handleSend()"
           >
-            <ng-icon hlm name="lucideArrowUp" size="sm" />
+            <ng-icon name="lucideArrowUp" />
           </button>
           }
         </div>

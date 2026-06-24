@@ -38,8 +38,8 @@
           />
           <hlm-input-group-addon align="inline-end">
             <ng-icon
-              hlmIcon
-              size="sm"
+              
+
               class="cursor-pointer"
               [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
               (click)="showPassword.set(!showPassword())"
@@ -80,11 +80,11 @@
     </div>
     <div class="grid grid-cols-2 gap-2">
       <button type="button" class="flex-1" hlmBtn variant="outline" [disabled]="loginForm().submitting()">
-        <ng-icon hlmIcon size="sm" name="lucideGithub" />
+        <ng-icon name="lucideGithub" />
         Github
       </button>
       <button type="button" class="flex-1" hlmBtn variant="outline" [disabled]="loginForm().submitting()">
-        <ng-icon hlmIcon size="sm" name="svglGoogle" />
+        <ng-icon name="svglGoogle" />
         Google
       </button>
     </div>

@@ -2,7 +2,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 
 import { isPlatformBrowser } from '@angular/common';
 import { Component, PLATFORM_ID, booleanAttribute, inject, input, output, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
   lucideCopy,
@@ -12,13 +12,12 @@ import {
   lucideThumbsUp,
 } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 import { AiMarkdownRenderer } from './ai-markdown-renderer';
 
 @Component({
   selector: 'adm-ai-response',
-  imports: [HlmIconImports, HlmButtonImports, AiMarkdownRenderer],
+  imports: [NgIcon, HlmButtonImports, AiMarkdownRenderer],
   viewProviders: [
     provideIcons({ lucideSparkle, lucideRefreshCcw, lucideCheck, lucideCopy, lucideThumbsDown, lucideThumbsUp }),
   ],
@@ -43,23 +42,23 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
           <div class="flex items-center gap-2">
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
               @if (copied()) {
-                <ng-icon hlmIcon name="lucideCheck" size="sm" />
+                <ng-icon name="lucideCheck" />
               } @else {
-                <ng-icon hlmIcon name="lucideCopy" size="sm" />
+                <ng-icon name="lucideCopy" />
               }
             </button>
 
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleRegenerate()">
-              <ng-icon hlm size="sm" name="lucideRefreshCcw" />
+              <ng-icon name="lucideRefreshCcw" />
             </button>
           </div>
 
           <div class="flex items-center gap-2">
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleThumbsDown()">
-              <ng-icon hlm size="sm" name="lucideThumbsDown" />
+              <ng-icon name="lucideThumbsDown" />
             </button>
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleThumbsUp()">
-              <ng-icon hlm size="sm" name="lucideThumbsUp" />
+              <ng-icon name="lucideThumbsUp" />
             </button>
           </div>
         </div>
