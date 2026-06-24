@@ -66,7 +66,7 @@ interface NavCommand {
         hlmBtn
         type="button"
         variant="secondary"
-        class="text-muted-foreground hidden gap-2 sm:block"
+        class="text-muted-foreground hidden gap-2 sm:flex"
         (click)="state.set('open')"
       >
         <ng-icon name="lucideSearch" />
