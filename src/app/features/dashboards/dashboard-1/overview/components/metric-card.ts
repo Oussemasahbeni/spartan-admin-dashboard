@@ -1,7 +1,7 @@
 import { booleanAttribute, Component, computed, inject, input } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { provideTranslocoScope, TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUpDown,
   lucideGift,
@@ -11,13 +11,13 @@ import {
   lucideTrendingUp,
 } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 
 @Component({
   selector: 'adm-metric-card',
-  imports: [HlmIconImports, HlmLabelImports, HlmCardImports, HlmTooltipImports, TranslocoModule],
+  imports: [NgIcon, HlmLabelImports, HlmCardImports, HlmTooltipImports, TranslocoModule],
   providers: [
     provideIcons({
       lucideInfo,
@@ -35,12 +35,12 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
       <!-- Header -->
       <header hlmCardHeader class="flex flex-row items-center justify-between">
         <div class="flex items-center gap-2">
-          <ng-icon hlm size="sm" [name]="icon()" />
+          <ng-icon [name]="icon()" />
           <h1 hlmCardTitle class="text-muted-foreground text-sm font-medium">{{ title() }}</h1>
         </div>
 
         <div hlmCardAction>
-          <ng-icon hlm name="lucideInfo" size="sm" [hlmTooltip]="tooltip() ?? ''" />
+          <ng-icon name="lucideInfo" [hlmTooltip]="tooltip() ?? ''" />
         </div>
       </header>
 
@@ -75,7 +75,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
           [class.text-destructive]="!trendUp()"
         >
           <span>{{ trendValue() }}</span>
-          <ng-icon hlm class="fill-current" size="xs" [name]="trendUp() ? 'lucideTrendingUp' : 'lucideTrendingDown'" />
+          <ng-icon class="fill-current" [name]="trendUp() ? 'lucideTrendingUp' : 'lucideTrendingDown'" />
         </div>
       </footer>
     </section>

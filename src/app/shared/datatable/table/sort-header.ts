@@ -1,16 +1,16 @@
 import { Component, input } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUpDown, lucideSortAsc, lucideSortDesc, lucideX } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { Column, Header, RowData, SortDirection } from '@tanstack/angular-table';
 import { DataTableFeatures } from './table-features';
 
 @Component({
   selector: 'adm-table-sort-header',
-  imports: [HlmDropdownMenuImports, HlmIconImports, HlmButtonImports, TranslocoDirective],
+  imports: [HlmDropdownMenuImports, NgIcon, HlmButtonImports, TranslocoDirective],
   host: {
     class: 'flex',
   },
@@ -26,11 +26,11 @@ import { DataTableFeatures } from './table-features';
     <button type="button" class="flex items-center gap-2 capitalize" [hlmDropdownMenuTrigger]="menu">
       {{ headerCell() }}
       @if (header().column.getIsSorted() === 'asc') {
-        <ng-icon hlm size="sm" name="lucideSortAsc" />
+        <ng-icon name="lucideSortAsc" />
       } @else if (header().column.getIsSorted() === 'desc') {
-        <ng-icon hlm size="sm" name="lucideSortDesc" />
+        <ng-icon name="lucideSortDesc" />
       } @else {
-        <ng-icon hlm size="sm" name="lucideArrowUpDown" />
+        <ng-icon name="lucideArrowUpDown" />
       }
     </button>
 
@@ -44,7 +44,7 @@ import { DataTableFeatures } from './table-features';
             (click)="onSort(header().column, 'asc')"
           >
             <div class="flex items-center gap-2">
-              <ng-icon hlm size="sm" name="lucideSortAsc" />
+              <ng-icon name="lucideSortAsc" />
               <span>{{ t('sort.asc') }}</span>
             </div>
 
@@ -58,14 +58,14 @@ import { DataTableFeatures } from './table-features';
             (click)="onSort(header().column, 'desc')"
           >
             <div class="flex items-center gap-2">
-              <ng-icon hlm size="sm" name="lucideSortDesc" />
+              <ng-icon name="lucideSortDesc" />
               <span>{{ t('sort.desc') }}</span>
             </div>
             <hlm-dropdown-menu-checkbox-indicator />
           </button>
           @if (header().column.getIsSorted()) {
             <button type="button" hlmDropdownMenuItem (click)="onClearSorting(header().column)">
-              <ng-icon hlm size="sm" name="lucideX" />
+              <ng-icon name="lucideX" />
               {{ t('buttons.clear') }}
             </button>
           }

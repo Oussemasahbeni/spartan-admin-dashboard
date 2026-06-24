@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideEllipsisVertical } from '@ng-icons/lucide';
 import { BrnAlertDialogImports } from '@spartan-ng/brain/alert-dialog';
 import { HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'adm-action-dropdown',
-  imports: [
-    HlmButtonImports,
-    HlmIconImports,
-    HlmDropdownMenuImports,
-    BrnAlertDialogImports,
-    HlmAlertDialogImports,
-    TranslocoModule,
-  ],
+  imports: [HlmButtonImports, NgIcon, HlmDropdownMenuImports, BrnAlertDialogImports, HlmAlertDialogImports, TranslocoModule],
   providers: [provideIcons({ lucideEllipsisVertical })],
   template: `
     <button
@@ -29,7 +21,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
       aria-label="Open actions"
       [hlmDropdownMenuTrigger]="menu"
     >
-      <ng-icon hlmIcon size="sm" name="lucideEllipsisVertical" />
+      <ng-icon name="lucideEllipsisVertical" />
     </button>
     <ng-template #menu>
       <ng-container *transloco="let t; prefix: 'actionDropdown'">

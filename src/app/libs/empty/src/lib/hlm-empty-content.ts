@@ -7,6 +7,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmEmptyContent {
   constructor() {
-    classes(() => 'gap-4 text-sm flex w-full max-w-sm min-w-0 flex-col items-center text-balance');
+    classes(() => 'flex w-full max-w-sm min-w-0 flex-col items-center gap-2.5 text-sm text-balance');
   }
 }

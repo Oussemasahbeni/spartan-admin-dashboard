@@ -1,10 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideInfo, lucideTrendingDown, lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
@@ -20,7 +20,7 @@ interface MonthsTranslation {
 
 @Component({
   selector: 'adm-sales-card',
-  imports: [HlmCardImports, HlmIconImports, HlmTabsImports, HlmTooltipImports, NgApexchartsModule, TranslocoModule],
+  imports: [HlmCardImports, NgIcon, HlmTabsImports, HlmTooltipImports, NgApexchartsModule, TranslocoModule],
   providers: [provideIcons({ lucideInfo, lucideTrendingUp, lucideTrendingDown })],
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.salesCard'" hlmCard class="h-full w-full">
@@ -48,17 +48,11 @@ interface MonthsTranslation {
             <div class="bg-muted/50 rounded-lg border p-4">
               <div class="mb-1 flex items-center justify-between">
                 <span class="text-muted-foreground text-sm font-medium">{{ t('netSales') }}</span>
-                <ng-icon
-                  hlmIcon
-                  name="lucideInfo"
-                  size="sm"
-                  class="text-muted-foreground"
-                  hlmTooltip="Net sales information"
-                />
+                <ng-icon name="lucideInfo" class="text-muted-foreground" hlmTooltip="Net sales information" />
               </div>
               <div class="text-2xl font-bold">$4,567,820</div>
               <div class="text-success mt-1 flex items-center gap-1 text-xs">
-                <ng-icon hlmIcon name="lucideTrendingUp" size="xs" />
+                <ng-icon name="lucideTrendingUp" />
                 <span>24.5% (+10)</span>
               </div>
             </div>
@@ -67,11 +61,11 @@ interface MonthsTranslation {
             <div class="bg-muted/50 rounded-lg border p-4">
               <div class="mb-1 flex items-center justify-between">
                 <span class="text-muted-foreground text-sm font-medium">{{ t('orders') }}</span>
-                <ng-icon hlmIcon name="lucideInfo" size="sm" class="text-muted-foreground" hlmTooltip="Orders information" />
+                <ng-icon name="lucideInfo" class="text-muted-foreground" hlmTooltip="Orders information" />
               </div>
               <div class="text-2xl font-bold">1,246</div>
               <div class="text-destructive mt-1 flex items-center gap-1 text-xs">
-                <ng-icon hlmIcon name="lucideTrendingDown" size="xs" />
+                <ng-icon name="lucideTrendingDown" />
                 <span>8.5% (-15)</span>
               </div>
             </div>

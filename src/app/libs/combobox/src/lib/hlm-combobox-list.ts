@@ -5,9 +5,7 @@ import { classes } from '@spartan-ng/helm/utils';
 @Directive({
   selector: '[hlmComboboxList]',
   hostDirectives: [{ directive: BrnComboboxList, inputs: ['id'] }],
-  host: {
-    'data-slot': 'combobox-list',
-  },
+  host: { 'data-slot': 'combobox-list' },
 })
 export class HlmComboboxList {
   constructor() {

@@ -11,6 +11,11 @@
         "prettier-plugin-organize-imports",
         "prettier-plugin-tailwindcss"
     ],
+    "tailwindFunctions": [
+        "hlm",
+        "cva",
+        "classes"
+    ],
     "overrides": [
         {
             "files": "*.html",

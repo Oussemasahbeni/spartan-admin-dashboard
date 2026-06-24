@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { form, FormField, FormRoot, minLength } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideEye, lucideEyeOff, lucideKey, lucideLock, lucideShieldCheck } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
@@ -18,7 +18,7 @@ import { HlmSpinner } from '@spartan-ng/helm/spinner';
 
   imports: [
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     HlmFieldImports,
     HlmInputImports,
     HlmSeparatorImports,

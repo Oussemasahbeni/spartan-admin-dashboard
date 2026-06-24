@@ -1,4 +1,5 @@
 {
   "componentsPath": "src/app/libs",
-  "importAlias": "@spartan-ng/helm"
+  "importAlias": "@spartan-ng/helm",
+  "style": "nova"
 }

@@ -1,12 +1,12 @@
 import { NgOptimizedImage } from '@angular/common';
 import { booleanAttribute, Component, computed, inject, input } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { countries, Country } from '../../countries';
 
 @Component({
   selector: 'adm-country-display',
-  imports: [HlmIconImports, NgOptimizedImage],
+  imports: [NgOptimizedImage],
   template: `
     @if (resolvedCountry(); as country) {
       <div class="flex items-center gap-2">

@@ -4,7 +4,7 @@ import { AuthService } from '@core/auth/auth-service';
 import { Language, LanguageService } from '@core/config/language-service';
 import { Theme, ThemeService } from '@core/config/theme-service';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideBot,
   lucideCalendarDays,
@@ -25,7 +25,7 @@ import {
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCommandImports } from '@spartan-ng/helm/command';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmKbdImports } from '@spartan-ng/helm/kbd';
 import { HlmSidebarService } from '@spartan-ng/helm/sidebar';
 
@@ -37,7 +37,7 @@ interface NavCommand {
 
 @Component({
   selector: 'adm-command-palette',
-  imports: [HlmKbdImports, HlmCommandImports, HlmIconImports, HlmDialogImports, HlmButtonImports, TranslocoDirective],
+  imports: [HlmKbdImports, HlmCommandImports, NgIcon, HlmDialogImports, HlmButtonImports, TranslocoDirective],
   host: {
     '(window:keydown)': 'onKeyDown($event)',
   },
@@ -63,7 +63,7 @@ interface NavCommand {
   template: `
     <ng-container *transloco="let t">
       <button hlmBtn type="button" variant="secondary" class="text-muted-foreground gap-2" (click)="state.set('open')">
-        <ng-icon hlmIcon name="lucideSearch" size="sm" />
+        <ng-icon name="lucideSearch" />
         {{ t('commandPalette.search') }}
         <kbd hlmKbd class="ms-2">⌘ + K</kbd>
       </button>
@@ -77,7 +77,7 @@ interface NavCommand {
               <hlm-command-group-label>{{ t('commandPalette.navigation') }}</hlm-command-group-label>
               @for (item of navCommands; track item.key) {
                 <button type="button" hlm-command-item [value]="t('navigation.' + item.key)" (selected)="navigate(item.url)">
-                  <ng-icon hlmIcon size="sm" [name]="item.icon" />
+                  <ng-icon [name]="item.icon" />
                   {{ t('navigation.' + item.key) }}
                 </button>
               }
@@ -93,12 +93,12 @@ interface NavCommand {
                 [value]="t('commandPalette.collapseSidebar')"
                 (selected)="toggleSidebar()"
               >
-                <ng-icon hlmIcon name="lucidePanelLeft" size="sm" />
+                <ng-icon name="lucidePanelLeft" />
                 {{ isSidebarOpen() ? t('commandPalette.collapseSidebar') : t('commandPalette.expandSidebar') }}
                 <hlm-command-shortcut>⌘B</hlm-command-shortcut>
               </button>
               <button type="button" hlm-command-item [value]="t('navUser.logout')" (selected)="logout()">
-                <ng-icon hlmIcon name="lucideLogOut" size="sm" />
+                <ng-icon name="lucideLogOut" />
                 {{ t('navUser.logout') }}
               </button>
             </hlm-command-group>
@@ -109,10 +109,10 @@ interface NavCommand {
               <hlm-command-group-label>{{ t('commandPalette.language') }}</hlm-command-group-label>
               @for (lang of availableLanguages(); track lang.code) {
                 <button type="button" hlm-command-item [value]="lang.label" (selected)="setLanguage(lang.code)">
-                  <ng-icon hlmIcon name="lucideLanguages" size="sm" />
+                  <ng-icon name="lucideLanguages" />
                   {{ lang.label }}
                   @if (currentLang() === lang.code) {
-                    <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+                    <ng-icon name="lucideCheck" class="ms-auto" />
                   }
                 </button>
               }
@@ -123,17 +123,17 @@ interface NavCommand {
             <hlm-command-group>
               <hlm-command-group-label>{{ t('commandPalette.theme') }}</hlm-command-group-label>
               <button type="button" hlm-command-item [value]="t('theme.light')" (selected)="setTheme('light')">
-                <ng-icon hlmIcon name="lucideSun" size="sm" />
+                <ng-icon name="lucideSun" />
                 {{ t('theme.light') }}
                 @if (currentTheme() === 'light') {
-                  <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+                  <ng-icon name="lucideCheck" class="ms-auto" />
                 }
               </button>
               <button type="button" hlm-command-item [value]="t('theme.dark')" (selected)="setTheme('dark')">
-                <ng-icon hlmIcon name="lucideMoon" size="sm" />
+                <ng-icon name="lucideMoon" />
                 {{ t('theme.dark') }}
                 @if (currentTheme() === 'dark') {
-                  <ng-icon hlmIcon name="lucideCheck" size="sm" class="ms-auto" />
+                  <ng-icon name="lucideCheck" class="ms-auto" />
                 }
               </button>
             </hlm-command-group>

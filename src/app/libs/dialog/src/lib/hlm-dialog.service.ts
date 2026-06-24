@@ -16,7 +16,10 @@ export type HlmDialogOptions<DialogContext = unknown> = BrnDialogOptions & {
 export class HlmDialogService {
   private readonly _brnDialogService = inject(BrnDialogService);
 
-  public open(component: ComponentType<unknown> | TemplateRef<unknown>, options?: Partial<HlmDialogOptions>) {
+  public open<DialogResult = unknown>(
+    component: ComponentType<unknown> | TemplateRef<unknown>,
+    options?: Partial<HlmDialogOptions>
+  ) {
     const mergedOptions = {
       ...(options ?? {}),
       backdropClass: cssClassesToArray(`${hlmDialogOverlayClass} ${options?.backdropClass ?? ''}`),
@@ -28,6 +31,11 @@ export class HlmDialogService {
       },
     };
 
-    return this._brnDialogService.open(HlmDialogContent, undefined, mergedOptions.context, mergedOptions);
+    return this._brnDialogService.open<typeof mergedOptions.context, DialogResult>(
+      HlmDialogContent,
+      undefined,
+      mergedOptions.context,
+      mergedOptions
+    );
   }
 }

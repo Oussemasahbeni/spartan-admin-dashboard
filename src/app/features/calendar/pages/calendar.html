@@ -18,9 +18,7 @@
             <span class="bg-primary text-primary-foreground w-full px-3 py-0.5 text-center text-xs font-bold uppercase">
               {{ currentDate() | date: 'MMM' }}
             </span>
-            <span class="px-3 py-1 text-lg font-bold">
-              {{ currentDate() | date: 'd' }}
-            </span>
+            <span class="px-3 py-1 text-lg font-bold"> {{ currentDate() | date: 'd' }} </span>
           </button>
 
           <!-- Title and Date Range -->
@@ -44,7 +42,7 @@
                 aria-label="Previous month"
                 (click)="previousMonth()"
               >
-                <ng-icon hlmIcon name="lucideChevronLeft" class="rtl:rotate-180" size="xs" />
+                <ng-icon name="lucideChevronLeft" class="rtl:rotate-180" />
               </button>
               <span>
                 @if (currentView().value === 'timeGridDay') {
@@ -54,7 +52,7 @@
                 }
               </span>
               <button type="button" hlmBtn variant="outline" size="icon-xs" aria-label="Next month" (click)="nextMonth()">
-                <ng-icon hlmIcon name="lucideChevronRight" class="rtl:rotate-180" size="xs" />
+                <ng-icon name="lucideChevronRight" class="rtl:rotate-180" />
               </button>
             </div>
           </div>
@@ -71,7 +69,7 @@
             aria-label="Filter events by type"
             [hlmDropdownMenuTrigger]="typesMenu"
           >
-            <ng-icon hlmIcon name="lucideFilter" size="sm" />
+            <ng-icon name="lucideFilter" />
           </button>
 
           <ng-template #typesMenu>
@@ -96,9 +94,7 @@
                 }
               </hlm-dropdown-menu-group>
               <hlm-dropdown-menu-separator />
-              <button type="button" hlmDropdownMenuItem (click)="clearFilters()">
-                {{ t('filter-menu.clear') }}
-              </button>
+              <button type="button" hlmDropdownMenuItem (click)="clearFilters()">{{ t('filter-menu.clear') }}</button>
             </hlm-dropdown-menu>
           </ng-template>
 
@@ -111,7 +107,7 @@
             aria-label="Calendar settings"
             [hlmDropdownMenuTrigger]="settingsMenu"
           >
-            <ng-icon hlmIcon name="lucideSettings" size="sm" />
+            <ng-icon name="lucideSettings" />
           </button>
           <ng-template #settingsMenu>
             <hlm-dropdown-menu>
@@ -144,7 +140,7 @@
             variant="outline"
             [hlmDropdownMenuTrigger]="menu"
           >
-            <ng-icon hlmIcon size="sm" [name]="currentView().icon" />
+            <ng-icon [name]="currentView().icon" />
             {{ t(`labels.${currentView().label}`) }}
           </button>
 
@@ -159,7 +155,7 @@
                     (click)="changeView(view)"
                   >
                     <span class="flex items-center gap-2">
-                      <ng-icon hlmIcon size="sm" [name]="view.icon" />
+                      <ng-icon [name]="view.icon" />
                       {{ t(`labels.${view.label}`) }}
                     </span>
 
@@ -171,18 +167,14 @@
           </ng-template>
 
           @if (showDatePicker()) {
-            <hlm-date-picker
-              buttonId="date"
-              class="w-fit"
-              [date]="selectedDate()"
-              [autoCloseOnSelect]="true"
-              (dateChange)="onDatePickerChange($event)"
-            />
+            <hlm-date-picker [date]="selectedDate()" [autoCloseOnSelect]="true" (dateChange)="onDatePickerChange($event)">
+              <hlm-date-picker-trigger class="w-fit" buttonId="date" />
+            </hlm-date-picker>
           }
 
           <!-- Add new event -->
           <button type="button" hlmBtn (click)="addEvent()">
-            <ng-icon hlmIcon name="lucidePlus" size="sm" />
+            <ng-icon name="lucidePlus" />
             {{ t('addEvent') }}
           </button>
         </div>

@@ -5,7 +5,7 @@
       <hlm-field class="max-w-120">
         <hlm-input-group>
           <hlm-input-group-addon>
-            <ng-icon name="lucideMail" size="16" />
+            <ng-icon name="lucideMail" />
           </hlm-input-group-addon>
           <input hlmInputGroupInput type="email" [placeholder]="t('emailPlaceholder')" [formField]="addMemberForm.email" />
         </hlm-input-group>
@@ -79,7 +79,7 @@
 
           <!-- Delete button -->
           <button hlmBtn variant="ghost" size="icon" type="button" (click)="removeMember(member.id)">
-            <ng-icon name="lucideTrash2" size="16" />
+            <ng-icon name="lucideTrash2" />
           </button>
         </div>
       </div>

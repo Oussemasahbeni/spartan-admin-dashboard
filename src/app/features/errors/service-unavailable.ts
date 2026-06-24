@@ -13,7 +13,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
   },
   template: `
     <main *transloco="let t; prefix: 'system.serviceUnavailable'" class="flex h-screen items-center justify-center">
-      <div class="max-w-md flex flex-col gap-6 px-4 text-center">
+      <div class="flex max-w-md flex-col gap-6 px-4 text-center">
         <div class="flex flex-col gap-2">
           <h1 class="text-primary text-9xl font-bold">503</h1>
           <h2 class="text-3xl font-semibold tracking-tight">{{ t('heading') }}</h2>

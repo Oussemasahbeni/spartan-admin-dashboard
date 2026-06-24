@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowDownRight,
   lucideArrowUpRight,
@@ -18,7 +18,7 @@ import {
 import { STATIC_TRANSACTIONS } from '@core/mock/transactions.data';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { RevenueChartCard } from './components/charts/revenue-chart-card';
 import { VisitorChartCard } from './components/charts/visitor-chart-card';
 import { FilterDialogComponent, FilterOptions } from './components/filter-dialog/filter-dialog';
@@ -31,7 +31,7 @@ import { provideTransactionStatusIcons } from './pipes/status-ui.pipe';
   selector: 'adm-dashboard-2',
   imports: [
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     HlmBadgeImports,
     TransactionsTableComponent,
     RevenueChartCard,

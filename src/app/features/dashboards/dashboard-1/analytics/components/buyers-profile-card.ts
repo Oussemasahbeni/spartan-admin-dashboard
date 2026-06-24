@@ -1,14 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
 
 @Component({
   selector: 'adm-buyers-profile-card',
-  imports: [HlmCardImports, HlmIconImports, NgApexchartsModule, TranslocoModule],
+  imports: [HlmCardImports, NgIcon, NgApexchartsModule, TranslocoModule],
   providers: [provideIcons({ lucideTrendingUp })],
   template: `
     <section
@@ -40,7 +40,7 @@ import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
       </main>
 
       <footer hlmCardFooter class="flex items-center gap-2 text-sm">
-        <ng-icon hlmIcon name="lucideTrendingUp" size="sm" class="text-success" />
+        <ng-icon name="lucideTrendingUp" class="text-success" />
         <span class="text-success font-medium">{{ t('trendingText') }}</span>
       </footer>
     </section>

@@ -1,14 +1,13 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, PLATFORM_ID, inject, input, output } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideFile, lucideX } from '@ng-icons/lucide';
 import { BytesPipe } from '@shared/pipes/bytes/bytes.pipe';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'adm-attachment-card',
-  imports: [HlmIconImports, BytesPipe, TranslocoModule],
+  imports: [NgIcon, BytesPipe, TranslocoModule],
   providers: [
     provideIcons({
       lucideFile,
@@ -28,7 +27,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
         } @else {
           <!-- File Icon -->
           <div class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center rounded">
-            <ng-icon hlm name="lucideFile" size="base" class="text-muted-foreground" />
+            <ng-icon name="lucideFile" class="text-muted-foreground" />
           </div>
         }
 
@@ -49,7 +48,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
           [aria-label]="t('input.remove') + ' ' + file().name"
           (click)="handleRemove()"
         >
-          <ng-icon hlm name="lucideX" size="xs" class="text-foreground/70" />
+          <ng-icon name="lucideX" class="text-foreground/70" />
         </button>
       </div>
     </ng-container>

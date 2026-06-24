@@ -1,7 +1,7 @@
 import { Component, computed, input, signal, TemplateRef, viewChild } from '@angular/core';
 import { debounce, form, FormField } from '@angular/forms/signals';
 import { translateSignal, TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideX } from '@ng-icons/lucide';
 import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
 import { DataTable } from '@shared/datatable/table/data-table';
@@ -10,7 +10,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { CellContext, ColumnDef } from '@tanstack/angular-table';
@@ -24,7 +24,7 @@ import { provideTransactionStatusIcons, TransactionStatusUIPipe } from '../../pi
     HlmBadgeImports,
     HlmButtonImports,
     HlmCardImports,
-    HlmIconImports,
+    NgIcon,
     HlmInputImports,
     HlmInputGroupImports,
     TransactionStatusUIPipe,

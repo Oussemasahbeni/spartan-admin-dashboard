@@ -3,9 +3,7 @@ import { classes } from '@spartan-ng/helm/utils';
 
 @Directive({
   selector: '[hlmFieldTitle],hlm-field-title',
-  host: {
-    'data-slot': 'field-label',
-  },
+  host: { 'data-slot': 'field-label' },
 })
 export class HlmFieldTitle {
   constructor() {

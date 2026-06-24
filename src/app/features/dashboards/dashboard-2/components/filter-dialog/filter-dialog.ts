@@ -1,10 +1,9 @@
 import { Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCalendar, lucideFilter } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 export interface FilterOptions {
   dateRange: string;
@@ -15,13 +14,13 @@ export interface FilterOptions {
 
 @Component({
   selector: 'adm-filter-dialog',
-  imports: [HlmDialogImports, HlmButtonImports, HlmIconImports, TranslocoModule],
+  imports: [HlmDialogImports, HlmButtonImports, NgIcon, TranslocoModule],
   providers: [provideIcons({ lucideFilter, lucideCalendar })],
 
   template: `
     <hlm-dialog>
       <button type="button" hlmBtn variant="outline" hlmDialogTrigger>
-        <ng-icon hlmIcon name="lucideFilter" size="sm" />
+        <ng-icon name="lucideFilter" />
         {{ 'dashboard2.header.filterBy' | transloco }}
       </button>
       <hlm-dialog-content *hlmDialogPortal="let ctx" class="sm:max-w-md">

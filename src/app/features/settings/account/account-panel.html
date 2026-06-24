@@ -53,9 +53,7 @@
     <!-- Section -->
     <div class="w-full">
       <h2 class="text-xl font-semibold">{{ t('personalInfo.title') }}</h2>
-      <p class="text-muted-foreground text-sm">
-        {{ t('personalInfo.description') }}
-      </p>
+      <p class="text-muted-foreground text-sm">{{ t('personalInfo.description') }}</p>
     </div>
 
     <div class="mt-8 grid w-full gap-6 sm:grid-cols-4">
@@ -99,11 +97,9 @@
           <hlm-select [formField]="accountForm.language">
             <hlm-select-trigger class="w-full">
               <div class="flex items-center gap-2">
-                <ng-icon hlm size="sm" name="lucideGlobe" />
+                <ng-icon name="lucideGlobe" />
                 <hlm-select-placeholder>{{ t('selectLanguage') }}</hlm-select-placeholder>
-                <ng-template let-value hlmSelectValueTemplate>
-                  {{ t(`languages.${value}`) }}
-                </ng-template>
+                <ng-template let-value hlmSelectValueTemplate> {{ t(`languages.${value}`) }} </ng-template>
               </div>
             </hlm-select-trigger>
             <hlm-select-content *hlmSelectPortal>

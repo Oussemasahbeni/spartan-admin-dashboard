@@ -1,13 +1,12 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, DOCUMENT, inject, input, numberAttribute, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'adm-back-to-top',
-  imports: [HlmButtonImports, HlmIconImports],
+  imports: [HlmButtonImports, NgIcon],
   providers: [provideIcons({ lucideArrowUp })],
   host: {
     '(window:scroll)': 'onWindowScroll()',
@@ -23,7 +22,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
         aria-label="Scroll back to top"
         (click)="scrollToTop()"
       >
-        <ng-icon size="sm" name="lucideArrowUp" hlm />
+        <ng-icon name="lucideArrowUp" />
       </button>
     }
   `,

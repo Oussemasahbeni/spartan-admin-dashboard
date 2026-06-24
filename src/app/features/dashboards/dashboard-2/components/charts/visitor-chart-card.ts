@@ -1,9 +1,9 @@
 import { Component, computed } from '@angular/core';
 import { provideTranslocoScope, translateObjectSignal, Translation } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
 
 const SCOPE = { scope: 'dashboard/dashboard2', alias: 'dashboard2' };
@@ -23,7 +23,7 @@ interface VisitorChartTranslation {
 
 @Component({
   selector: 'adm-visitor-chart-card',
-  imports: [NgApexchartsModule, HlmCardImports, HlmIconImports],
+  imports: [NgApexchartsModule, HlmCardImports, NgIcon],
   providers: [
     provideTranslocoScope(SCOPE),
     provideIcons({
@@ -54,7 +54,7 @@ interface VisitorChartTranslation {
       <div hlmCardFooter class="flex flex-col items-center text-center">
         <div class="flex items-center justify-center gap-2 text-sm font-medium text-emerald-400">
           {{ visitorChart().trendingText }}
-          <ng-icon hlmIcon name="lucideTrendingUp" size="sm" />
+          <ng-icon name="lucideTrendingUp" />
         </div>
         <p class="text-muted-foreground mt-1 text-sm">{{ visitorChart().description }}</p>
       </div>
@@ -114,8 +114,7 @@ export class VisitorChartCard {
                 formatter(w) {
                   return (
                     w.globals.seriesTotals
-                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      .reduce((a: any, b: any) => {
+                      .reduce((a: number, b: number) => {
                         return a + b;
                       }, 0)
                       .toLocaleString()

@@ -26,6 +26,7 @@ import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
 
 import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
+import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 
 function isLanguage(value: string): value is Language {
   return (LANGUAGES as readonly string[]).includes(value);
@@ -71,6 +72,7 @@ export const appConfig: ApplicationConfig = {
       loader: TranslocoHttpLoader,
     }),
     provideNgIconsConfig({}, withExceptionLogger()),
+    provideSpartanHlm(),
     provideAppInitializer(async () => {
       // Eagerly instantiate ThemeService so it applies the `dark` class
       // before the first paint (prevents theme flicker on startup).

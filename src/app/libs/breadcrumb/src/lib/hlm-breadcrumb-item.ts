@@ -9,6 +9,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmBreadcrumbItem {
   constructor() {
-    classes(() => 'gap-1.5 inline-flex items-center');
+    classes(() => 'inline-flex items-center gap-1');
   }
 }

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideAlignLeft,
   lucideCalendar,
@@ -16,7 +16,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { TAG_COLOR_CLASSES } from '../../model/tag';
 import { Task } from '../../model/task';
@@ -32,7 +32,7 @@ export interface TaskDetailsContext {
     TranslocoModule,
     TaskStatusUIPipe,
     HlmDialogImports,
-    HlmIconImports,
+    NgIcon,
     HlmBadgeImports,
     HlmButtonImports,
     HlmAvatarImports,
@@ -70,13 +70,13 @@ export interface TaskDetailsContext {
 
     <!-- Title row -->
     <div *transloco="let t; prefix: 'tasks'" class="mb-5 flex items-start gap-3">
-      <ng-icon hlmIcon name="lucideLayout" size="sm" class="text-muted-foreground mt-0.5 shrink-0" />
+      <ng-icon name="lucideLayout" class="text-muted-foreground mt-0.5 shrink-0" />
       <div class="min-w-0 flex-1">
         <h2 class="text-foreground text-xl leading-snug font-semibold">{{ task.title }}</h2>
         <div class="mt-1.5 flex flex-wrap items-center gap-1.5">
           @let ui = task.status | taskStatusUI;
           <span hlmBadge variant="outline" class="text-muted-foreground h-auto gap-1 rounded-full px-2 py-0.5 text-[11px]">
-            <ng-icon hlmIcon size="xs" [name]="ui.icon" [class]="ui.class" />
+            <ng-icon [name]="ui.icon" [class]="ui.class" />
             {{ t('columns.' + task.status) }}
           </span>
           @for (tag of task.tags; track tag.name) {
@@ -97,11 +97,11 @@ export interface TaskDetailsContext {
     <!-- Two-column body -->
     <div *transloco="let t; prefix: 'tasks.details'" class="flex gap-6">
       <!-- LEFT: main content -->
-      <div class="min-w-0 flex-1 flex flex-col gap-6">
+      <div class="flex min-w-0 flex-1 flex-col gap-6">
         <!-- Description -->
         <section>
           <h3 class="text-muted-foreground mb-2 flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase">
-            <ng-icon hlmIcon name="lucideAlignLeft" size="xs" />
+            <ng-icon name="lucideAlignLeft" />
             {{ t('description') }}
           </h3>
           @if (task.description) {
@@ -118,7 +118,7 @@ export interface TaskDetailsContext {
         <!-- Activity -->
         <section>
           <h3 class="text-muted-foreground mb-3 flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase">
-            <ng-icon hlmIcon name="lucideMessageSquare" size="xs" />
+            <ng-icon name="lucideMessageSquare" />
             {{ t('activity') }}
           </h3>
           <div class="flex items-center gap-3">
@@ -140,7 +140,7 @@ export interface TaskDetailsContext {
       </div>
 
       <!-- RIGHT: sidebar -->
-      <aside class="w-[30%] shrink-0 flex flex-col gap-4">
+      <aside class="flex w-[30%] shrink-0 flex-col gap-4">
         <!-- Members -->
         <div>
           <h3 class="text-muted-foreground mb-2 text-[10px] font-semibold tracking-widest uppercase">{{ t('members') }}</h3>
@@ -158,7 +158,7 @@ export interface TaskDetailsContext {
         @if (task.tags.length > 0) {
           <div>
             <h3 class="text-muted-foreground mb-2 text-[10px] font-semibold tracking-widest uppercase">
-              <ng-icon hlmIcon name="lucideTag" size="xs" class="mr-0.5" />
+              <ng-icon name="lucideTag" class="mr-0.5" />
               {{ t('labels') }}
             </h3>
             <div class="flex flex-col gap-1.5">
@@ -176,11 +176,11 @@ export interface TaskDetailsContext {
         <!-- Due date -->
         <div>
           <h3 class="text-muted-foreground mb-2 text-[10px] font-semibold tracking-widest uppercase">
-            <ng-icon hlmIcon name="lucideCalendar" size="xs" class="mr-0.5" />
+            <ng-icon name="lucideCalendar" class="mr-0.5" />
             {{ t('dueDate') }}
           </h3>
           <div class="bg-muted/50 flex items-center gap-1.5 rounded-md px-2.5 py-1.5">
-            <ng-icon hlmIcon name="lucideCalendar" size="xs" class="text-muted-foreground shrink-0" />
+            <ng-icon name="lucideCalendar" class="text-muted-foreground shrink-0" />
             <span class="text-foreground text-xs font-medium">{{ task.dueDate }}</span>
           </div>
         </div>
@@ -190,11 +190,11 @@ export interface TaskDetailsContext {
           <div hlmSeparator></div>
           <div>
             <h3 class="text-muted-foreground mb-2 text-[10px] font-semibold tracking-widest uppercase">
-              <ng-icon hlmIcon name="lucidePaperclip" size="xs" class="mr-0.5" />
+              <ng-icon name="lucidePaperclip" class="mr-0.5" />
               {{ t('attachments') }}
             </h3>
             <div class="bg-muted/50 flex items-center gap-1.5 rounded-md px-2.5 py-1.5">
-              <ng-icon hlmIcon name="lucidePaperclip" size="xs" class="text-muted-foreground shrink-0" />
+              <ng-icon name="lucidePaperclip" class="text-muted-foreground shrink-0" />
               <span class="text-foreground text-xs font-medium">{{ task.attachmentsCount }} {{ t('files') }}</span>
             </div>
           </div>

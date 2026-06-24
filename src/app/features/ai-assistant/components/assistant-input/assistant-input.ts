@@ -1,7 +1,7 @@
 import { booleanAttribute, Component, computed, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideAppWindow,
   lucideArrowUp,
@@ -19,7 +19,7 @@ import {
 } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { AttachmentCard } from '../attachment-card/attachment-card';
@@ -28,7 +28,7 @@ import { AttachmentCard } from '../attachment-card/attachment-card';
   selector: 'adm-assistant-input',
   imports: [
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     HlmDropdownMenuImports,
     HlmInputImports,
     HlmInputGroupImports,

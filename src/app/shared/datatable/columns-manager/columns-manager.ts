@@ -1,7 +1,7 @@
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, computed, input } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
   lucideChevronDown,
@@ -14,7 +14,7 @@ import {
 } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { Column, ColumnPinningPosition, RowData, Table } from '@tanstack/angular-table';
 import { DataTableFeatures } from '../table/table-features';
 
@@ -25,7 +25,7 @@ interface DataTableColumnMeta {
 
 @Component({
   selector: 'adm-data-table-column-manager',
-  imports: [DragDropModule, TranslocoModule, HlmDropdownMenuImports, HlmIconImports, HlmButtonImports],
+  imports: [DragDropModule, TranslocoModule, HlmDropdownMenuImports, NgIcon, HlmButtonImports],
   providers: [
     provideIcons({
       lucideCheck,
@@ -41,9 +41,9 @@ interface DataTableColumnMeta {
   styleUrl: 'columns-manager.css',
   template: `
     <button type="button" class="hidden sm:flex" hlmBtn variant="outline" align="end" [hlmDropdownMenuTrigger]="columnMenu">
-      <ng-icon hlmIcon name="lucideSettings2" size="sm" />
+      <ng-icon name="lucideSettings2" />
       <span>{{ 'buttons.columns' | transloco }}</span>
-      <ng-icon hlmIcon name="lucideChevronDown" size="sm" />
+      <ng-icon name="lucideChevronDown" />
     </button>
 
     <ng-template #columnMenu>
@@ -68,7 +68,7 @@ interface DataTableColumnMeta {
               }
             </button>
             <span class="inline-flex items-center justify-center p-2">
-              <ng-icon hlmIcon class="text-muted-foreground cursor-grab active:cursor-grabbing" name="lucideGripVertical" />
+              <ng-icon class="text-muted-foreground cursor-grab active:cursor-grabbing" name="lucideGripVertical" />
             </span>
 
             @if (column.getCanPin()) {
@@ -83,8 +83,6 @@ interface DataTableColumnMeta {
                 [hlmDropdownMenuTrigger]="pinMenu"
               >
                 <ng-icon
-                  hlmIcon
-                  size="sm"
                   name="lucidePin"
                   [class.text-primary]="!!column.getIsPinned()"
                   [class.text-muted-foreground]="!column.getIsPinned()"
@@ -94,26 +92,26 @@ interface DataTableColumnMeta {
               <ng-template #pinMenu>
                 <hlm-dropdown-menu-sub>
                   <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, 'left')">
-                    <ng-icon hlmIcon size="sm" name="lucideChevronLeft" class="rtl:rotate-180" />
+                    <ng-icon name="lucideChevronLeft" class="rtl:rotate-180" />
                     <span>{{ 'buttons.pinStart' | transloco }}</span>
                     @if (column.getIsPinned() === 'left') {
-                      <ng-icon hlmIcon size="sm" class="ms-auto" name="lucideCheck" />
+                      <ng-icon class="ms-auto" name="lucideCheck" />
                     }
                   </button>
 
                   <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, 'right')">
-                    <ng-icon hlmIcon size="sm" name="lucideChevronRight" class="rtl:rotate-180" />
+                    <ng-icon name="lucideChevronRight" class="rtl:rotate-180" />
                     <span>{{ 'buttons.pinEnd' | transloco }}</span>
                     @if (column.getIsPinned() === 'right') {
-                      <ng-icon hlmIcon size="sm" class="ms-auto" name="lucideCheck" />
+                      <ng-icon class="ms-auto" name="lucideCheck" />
                     }
                   </button>
 
                   <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, false)">
-                    <ng-icon hlmIcon size="sm" name="lucideX" />
+                    <ng-icon name="lucideX" />
                     <span>{{ 'buttons.unpin' | transloco }}</span>
                     @if (!column.getIsPinned()) {
-                      <ng-icon hlmIcon size="sm" class="ms-auto" name="lucideCheck" />
+                      <ng-icon class="ms-auto" name="lucideCheck" />
                     }
                   </button>
                 </hlm-dropdown-menu-sub>

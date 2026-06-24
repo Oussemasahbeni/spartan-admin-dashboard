@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
-import {
-  type CellContext,
-  type HeaderContext,
-  injectFlexRenderContext,
-  type RowData,
-} from '@tanstack/angular-table';
+import { type CellContext, type HeaderContext, injectFlexRenderContext, type RowData } from '@tanstack/angular-table';
 import { DataTableFeatures } from './table-features';
 
 @Component({

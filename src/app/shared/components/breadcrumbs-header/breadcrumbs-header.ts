@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BreadcrumbService } from '@core/config/breadcrumb-service';
 import { TranslocoModule } from '@jsverse/transloco';
-import { HlmBreadCrumbImports } from '@spartan-ng/helm/breadcrumb';
+import { HlmBreadcrumbImports } from '@spartan-ng/helm/breadcrumb';
 
 @Component({
   selector: 'adm-breadcrumbs-header',
-  imports: [HlmBreadCrumbImports, RouterLink, TranslocoModule],
+  imports: [HlmBreadcrumbImports, RouterLink, TranslocoModule],
   template: ` <nav *transloco="let t" hlmBreadcrumb>
     <ol hlmBreadcrumbList>
       <!-- Home link - always visible -->

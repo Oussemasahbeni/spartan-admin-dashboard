@@ -8,7 +8,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: '[hlmBreadcrumbSeparator]',
   imports: [NgIcon],
   providers: [provideIcons({ lucideChevronRight })],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'breadcrumb-separator',
     role: 'presentation',
@@ -22,6 +22,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmBreadcrumbSeparator {
   constructor() {
-    classes(() => '[&>ng-icon]:text-[calc(var(--spacing)*3.5)] [&>ng-icon]:flex');
+    classes(() => '[&>ng-icon]:flex [&>ng-icon]:text-[length:--spacing(3.5)]');
   }
 }

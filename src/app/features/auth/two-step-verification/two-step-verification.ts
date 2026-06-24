@@ -9,7 +9,6 @@ import { BrnInputOtp } from '@spartan-ng/brain/input-otp';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputOtpImports } from '@spartan-ng/helm/input-otp';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { AuthLayout } from '../layout';
@@ -18,7 +17,6 @@ import { AuthLayout } from '../layout';
   selector: 'adm-two-step-verification',
   imports: [
     HlmButtonImports,
-    HlmIconImports,
     HlmInputOtpImports,
     HlmSpinnerImports,
     HlmAlertImports,

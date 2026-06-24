@@ -15,7 +15,7 @@
     @let startDate = event().start;
     @if (startDate) {
       <div class="flex items-center gap-3">
-        <ng-icon hlmIcon name="lucideCalendar" size="sm" class="text-muted-foreground" />
+        <ng-icon name="lucideCalendar" class="text-muted-foreground" />
         <div class="flex-1">
           <p class="text-sm font-medium">{{ t('startDate') }}</p>
           <p class="text-muted-foreground text-sm">
@@ -32,7 +32,7 @@
     @let endDate = event().end;
     @if (endDate) {
       <div class="flex items-center gap-3">
-        <ng-icon hlmIcon name="lucideClock" size="sm" class="text-muted-foreground" />
+        <ng-icon name="lucideClock" class="text-muted-foreground" />
         <div class="flex-1">
           <p class="text-sm font-medium">{{ t('endDate') }}</p>
           <p class="text-muted-foreground text-sm">
@@ -45,7 +45,7 @@
     @let description = event().extendedProps['description'];
     @if (description) {
       <div class="flex items-center gap-3">
-        <ng-icon hlmIcon name="lucideAlignLeft" size="sm" class="text-muted-foreground" />
+        <ng-icon name="lucideAlignLeft" class="text-muted-foreground" />
         <div class="flex-1">
           <p class="text-sm font-medium">{{ t('description') }}</p>
           <p class="text-muted-foreground text-sm whitespace-pre-wrap">

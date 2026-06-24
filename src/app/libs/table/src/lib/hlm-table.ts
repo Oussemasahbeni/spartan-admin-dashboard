@@ -77,7 +77,7 @@ export class HlmTFoot {
 export class HlmTr {
   constructor() {
     classes(
-      () => 'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors has-aria-expanded:bg-muted/50'
+      () => 'hover:bg-muted/50 data-[state=selected]:bg-muted has-aria-expanded:bg-muted/50 border-b transition-colors'
     );
   }
 }

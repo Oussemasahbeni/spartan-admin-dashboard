@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCalendar,
   lucideCheck,
@@ -20,7 +20,7 @@ import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmRadioGroupImports } from '@spartan-ng/helm/radio-group';
@@ -42,7 +42,7 @@ interface Plan {
 
   imports: [
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     HlmFieldImports,
     HlmInputImports,
     HlmInputGroupImports,

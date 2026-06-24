@@ -3,14 +3,13 @@ import { email, form, FormField, FormRoot, required } from '@angular/forms/signa
 import { Router, RouterLink } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideEye, lucideEyeOff, lucideGithub } from '@ng-icons/lucide';
 import { svglGoogle } from '@ng-icons/svgl';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
@@ -21,7 +20,7 @@ import { AuthLayout } from '../layout';
   selector: 'adm-login',
   imports: [
     HlmButtonImports,
-    HlmIconImports,
+    NgIcon,
     HlmFieldImports,
     HlmInputImports,
     HlmCheckboxImports,

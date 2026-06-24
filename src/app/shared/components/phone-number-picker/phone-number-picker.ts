@@ -1,11 +1,12 @@
-import { booleanAttribute, Component, computed, inject, input, linkedSignal, model, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, linkedSignal, model, output, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideChevronDown, lucideChevronsUpDown, lucideGlobe, lucideSearch } from '@ng-icons/lucide';
+import { BrnFieldControl } from '@spartan-ng/brain/field';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmComboboxImports } from '@spartan-ng/helm/combobox';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupAddon } from '@spartan-ng/helm/input-group';
 import { countries, Country } from '../../countries';
@@ -17,7 +18,7 @@ import { CountryDisplay } from '../country-display/country-display';
     HlmButtonImports,
     HlmInputImports,
     HlmComboboxImports,
-    HlmIconImports,
+    NgIcon,
     HlmInputGroupAddon,
     TranslocoModule,
     CountryDisplay,
@@ -31,14 +32,20 @@ import { CountryDisplay } from '../country-display/country-display';
       lucideGlobe,
     }),
   ],
+  hostDirectives: [BrnFieldControl],
   template: `
     <div *transloco="let t; prefix: 'phoneNumberPicker'" class="flex">
-      <hlm-combobox [value]="selectedCountry()" (valueChange)="selectedCountry.set($event)">
+      <hlm-combobox
+        [value]="selectedCountry()"
+        [disabled]="disabled()"
+        (valueChange)="countrySelected($event)"
+        (closed)="touch.emit()"
+      >
         <hlm-combobox-trigger class="flex gap-1 rounded-e-none border-e-0 focus-visible:ring-0">
           @if (selectedCountry()) {
             <adm-country-display [country]="selectedCountry()" [showCountryCode]="true" />
           } @else {
-            <ng-icon hlm name="lucideGlobe" size="sm" />
+            <ng-icon name="lucideGlobe" />
           }
         </hlm-combobox-trigger>
 
@@ -66,8 +73,10 @@ import { CountryDisplay } from '../country-display/country-display';
         class="flex-1 rounded-s-none"
         [placeholder]="t('enterPhoneNumberPlaceholder')"
         [value]="rawPhoneNumber()"
+        [disabled]="disabled()"
+        [forceInvalid]="showInvalid()"
         (input)="onPhoneInput($event)"
-        (blur)="touched.set(true)"
+        (blur)="touch.emit()"
       />
     </div>
   `,
@@ -82,7 +91,10 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   // Inputs
   // ==========================================
   public readonly value = model<string>('');
-  public readonly touched = model<boolean>(false);
+  /** Signal Forms WRITES the touched status here (for display). */
+  public readonly touched = input<boolean>(false);
+  /** Signal Forms tracks touched via this OUTPUT — a `touched` model set does NOT propagate. */
+  public readonly touch = output<void>();
   public readonly invalid = input(false, { transform: booleanAttribute });
   public readonly disabled = input(false, { transform: booleanAttribute });
 
@@ -113,13 +125,16 @@ export class PhoneNumberPicker implements FormValueControl<string> {
 
   protected readonly activeLang = computed(() => this._translocoService.activeLang());
 
+  /** Reflects the field's invalid state (after it's been touched/submitted) for the red error styling. */
+  protected readonly showInvalid = computed(() => this.invalid() && this.touched());
+
   // ==========================================
   // Public Methods
   // ==========================================
-  protected countrySelected(country: Country) {
+  protected countrySelected(country: Country | null | undefined) {
     this.selectedCountry.set(country);
     this.updateValue();
-    this.touched.set(true);
+    this.touch.emit();
   }
 
   protected onPhoneInput(event: Event) {

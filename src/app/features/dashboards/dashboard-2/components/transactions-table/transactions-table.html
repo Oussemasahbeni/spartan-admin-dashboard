@@ -51,9 +51,8 @@
       <!-- Status Cell -->
       <ng-template #statusCell let-context>
         <span hlmBadge variant="outline" class="text-muted-foreground">
-          @let status = context.getValue();
-          @let ui = status | transactionStatusUI;
-          <ng-icon size="xs" hlmIcon [class]="ui.class" [name]="ui.icon" />
+          @let status = context.getValue(); @let ui = status | transactionStatusUI;
+          <ng-icon [class]="ui.class" [name]="ui.icon" />
           <span *transloco="let t; prefix: 'dashboard2.recentActivity.status'">{{ t(status) }}</span>
         </span>
       </ng-template>

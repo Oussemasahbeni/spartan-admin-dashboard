@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideActivity, lucideBarChart2, lucideDownload, lucideFileText, lucideFilter, lucideHome } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
+
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { AnalyticsDashboard } from './analytics/analytics';
@@ -12,7 +12,7 @@ import { OverviewDashboard } from './overview/overview';
 @Component({
   selector: 'adm-dashboard1-layout',
   imports: [
-    HlmIconImports,
+    NgIcon,
     HlmButtonImports,
     HlmTabsImports,
     HlmSpinnerImports,

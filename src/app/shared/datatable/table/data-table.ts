@@ -23,7 +23,6 @@ import {
   createFilteredRowModel,
   createPaginatedRowModel,
   createSortedRowModel,
-  filterFns,
   flexRenderComponent,
   FlexRenderDirective,
   injectTable,
@@ -31,7 +30,6 @@ import {
   RowData,
   RowSelectionState,
   SortDirection,
-  sortFns,
   SortingState,
 } from '@tanstack/angular-table';
 import { TableResizableCell, TableResizableHeader } from '../directives/resizable-cell';
@@ -314,17 +312,16 @@ export class DataTable<T extends RowData> {
    * memoization survives initializer re-evaluation on every data change.
    */
   private readonly _paginatedRowModel = createPaginatedRowModel<DataTableFeatures, T>();
-  private readonly _filteredRowModel = createFilteredRowModel<DataTableFeatures, T>(filterFns);
-  private readonly _sortedRowModel = createSortedRowModel<DataTableFeatures, T>(sortFns);
+  private readonly _filteredRowModel = createFilteredRowModel<DataTableFeatures, T>();
+  private readonly _sortedRowModel = createSortedRowModel<DataTableFeatures, T>();
 
   /**
    * The TanStack Table instance.
    * Exposes all table methods for advanced use cases.
    */
   public readonly table = injectTable(() => ({
-    features: dataTableFeatures,
-    debugTable: isDevMode(),
-    rowModels: {
+    features: {
+      ...dataTableFeatures,
       ...(this.enablePagination() ? { paginatedRowModel: this._paginatedRowModel } : {}),
       ...(this.isServerMode()
         ? {}
@@ -333,6 +330,7 @@ export class DataTable<T extends RowData> {
             sortedRowModel: this._sortedRowModel,
           }),
     },
+    debugTable: isDevMode(),
     data: this.data(),
     columns: this._columns(),
     manualPagination: this.isServerMode(),

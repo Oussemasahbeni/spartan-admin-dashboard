@@ -1,11 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBookOpen, lucidePalette, lucidePlug, lucideZap } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmEmptyImports } from '@spartan-ng/helm/empty';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 /**
  * Suggested prompt interface
@@ -26,7 +25,7 @@ interface SuggestedPrompt {
       lucidePlug,
     }),
   ],
-  imports: [HlmEmptyImports, HlmCardImports, HlmIconImports, NgOptimizedImage, TranslocoModule],
+  imports: [HlmEmptyImports, HlmCardImports, NgIcon, NgOptimizedImage, TranslocoModule],
   template: `
     <div *transloco="let t; prefix: 'aiAssistant.emptyState'" hlmEmpty>
       <div hlmEmptyHeader>
@@ -62,7 +61,7 @@ interface SuggestedPrompt {
             >
               <div class="flex flex-col items-start gap-1 text-left">
                 <span hlmCardTitle class="flex items-center gap-2">
-                  <ng-icon hlmIcon size="sm" [name]="prompt.icon" />
+                  <ng-icon [name]="prompt.icon" />
                   {{ t(prompt.titleKey) }}
                 </span>
                 <span hlmCardDescription class="text-start">
