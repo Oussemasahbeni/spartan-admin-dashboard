@@ -7,7 +7,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-pagination-ellipsis',
   imports: [NgIcon],
   providers: [provideIcons({ lucideEllipsis })],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'data-slot': 'pagination-ellipsis' },
   template: `
     <ng-icon name="lucideEllipsis" />
@@ -19,6 +19,6 @@ export class HlmPaginationEllipsis {
   public readonly srOnlyText = input<string>('More pages');
 
   constructor() {
-    classes(() => "size-9 [&_ng-icon:not([class*='text-'])]:text-[calc(var(--spacing)*4)] flex items-center justify-center");
+    classes(() => "flex size-8 items-center justify-center [&_ng-icon:not([class*='text-'])]:text-[length:--spacing(4)]");
   }
 }

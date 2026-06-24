@@ -7,7 +7,7 @@ import { HlmInputOtpFakeCaret } from './hlm-input-otp-fake-caret';
 @Component({
   selector: 'hlm-input-otp-slot',
   imports: [BrnInputOtpSlot, HlmInputOtpFakeCaret],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'data-slot': 'input-otp-slot' },
   template: `
     <brn-input-otp-slot [index]="index()">
@@ -22,7 +22,7 @@ export class HlmInputOtpSlot {
   constructor() {
     classes(
       () =>
-        'dark:bg-input/30 border-input has-[brn-input-otp-slot[data-active="true"]]:border-ring has-[brn-input-otp-slot[data-active="true"]]:ring-ring/50 has-[brn-input-otp-slot[data-active="true"]]:data-[matches-spartan-invalid=true]:ring-destructive/20 dark:has-[brn-input-otp-slot[data-active="true"]]:data-[matches-spartan-invalid=true]:ring-destructive/40 data-[matches-spartan-invalid=true]:border-destructive has-[brn-input-otp-slot[data-active="true"]]:data-[matches-spartan-invalid=true]:border-destructive size-9 border-y border-e text-sm shadow-xs transition-all outline-none first:rounded-s-md first:border-s last:rounded-e-md has-[brn-input-otp-slot[data-active="true"]]:ring-3 relative flex items-center justify-center has-[brn-input-otp-slot[data-active="true"]]:z-10'
+        'dark:bg-input/30 border-input has-[brn-input-otp-slot[data-active="true"]]:border-ring has-[brn-input-otp-slot[data-active="true"]]:ring-ring/50 has-[brn-input-otp-slot[data-active="true"]]:data-[matches-spartan-invalid=true]:ring-destructive/20 dark:has-[brn-input-otp-slot[data-active="true"]]:data-[matches-spartan-invalid=true]:ring-destructive/40 data-[matches-spartan-invalid=true]:border-destructive has-[brn-input-otp-slot[data-active="true"]]:data-[matches-spartan-invalid=true]:border-destructive relative flex size-8 items-center justify-center border-y border-e text-sm transition-all outline-none first:rounded-s-lg first:border-s last:rounded-e-lg has-[brn-input-otp-slot[data-active="true"]]:z-10 has-[brn-input-otp-slot[data-active="true"]]:ring-3'
     );
   }
 }

@@ -12,7 +12,7 @@ import { HlmPaginationLink } from './hlm-pagination-link';
   selector: 'hlm-pagination-next',
   imports: [HlmPaginationLink, NgIcon],
   providers: [provideIcons({ lucideChevronRight })],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a
       hlmPaginationLink
@@ -24,7 +24,7 @@ import { HlmPaginationLink } from './hlm-pagination-link';
       [attr.aria-label]="ariaLabel()"
     >
       <span [class]="_labelClass()">{{ text() }}</span>
-      <ng-icon name="lucideChevronRight" class="spartan-rtl-flip rtl:rotate-180" />
+      <ng-icon name="lucideChevronRight" class="rtl:rotate-180" />
     </a>
   `,
 })
@@ -49,5 +49,5 @@ export class HlmPaginationNext {
 
   protected readonly _size = computed<ButtonVariants['size']>(() => (this.iconOnly() ? 'icon' : 'default'));
 
-  protected readonly _computedClass = computed(() => hlm(!this.iconOnly() && 'pe-2!', this.userClass()));
+  protected readonly _computedClass = computed(() => hlm(!this.iconOnly() && 'pe-1.5!', this.userClass()));
 }

@@ -11,7 +11,7 @@ import type { ClassValue } from 'clsx';
   selector: 'hlm-combobox-trigger',
   imports: [NgIcon, HlmButton, BrnComboboxAnchor, BrnComboboxTrigger, BrnComboboxPopoverTrigger, BrnFieldControlDescribedBy],
   providers: [provideIcons({ lucideChevronDown })],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button
       brnComboboxTrigger
@@ -25,7 +25,7 @@ import type { ClassValue } from 'clsx';
       [variant]="variant()"
     >
       <ng-content />
-      <ng-icon name="lucideChevronDown" />
+      <ng-icon name="lucideChevronDown" class="text-muted-foreground text-[length:--spacing(4)]" />
     </button>
   `,
 })

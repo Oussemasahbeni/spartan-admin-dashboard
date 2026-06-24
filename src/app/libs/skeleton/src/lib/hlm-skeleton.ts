@@ -9,6 +9,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmSkeleton {
   constructor() {
-    classes(() => 'bg-muted rounded-md block motion-safe:animate-pulse');
+    classes(() => 'bg-muted block rounded-md motion-safe:animate-pulse');
   }
 }

@@ -3,9 +3,7 @@ import { classes } from '@spartan-ng/helm/utils';
 
 @Directive({
   selector: '[hlmSheetFooter],hlm-sheet-footer',
-  host: {
-    'data-slot': 'sheet-footer',
-  },
+  host: { 'data-slot': 'sheet-footer' },
 })
 export class HlmSheetFooter {
   constructor() {

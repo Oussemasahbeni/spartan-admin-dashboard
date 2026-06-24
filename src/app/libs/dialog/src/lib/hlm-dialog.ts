@@ -15,7 +15,7 @@ import { HlmDialogOverlay } from './hlm-dialog-overlay';
       // add custom options here
     }),
   ],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <hlm-dialog-overlay />
     <ng-content />

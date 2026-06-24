@@ -7,6 +7,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmInputOtp {
   constructor() {
-    classes(() => 'gap-2 flex items-center has-disabled:opacity-50');
+    classes(() => 'flex items-center gap-2 has-disabled:opacity-50');
   }
 }

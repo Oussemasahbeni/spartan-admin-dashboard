@@ -16,7 +16,7 @@ import { HlmAlertDialogOverlay } from './hlm-alert-dialog-overlay';
       ...BRN_ALERT_DIALOG_DEFAULT_OPTIONS,
     }),
   ],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <hlm-alert-dialog-overlay />
     <ng-content />

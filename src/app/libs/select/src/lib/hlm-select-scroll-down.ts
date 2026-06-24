@@ -8,7 +8,7 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-select-scroll-down',
   imports: [NgIcon],
   providers: [provideIcons({ lucideChevronDown })],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [BrnSelectScrollDown],
   template: ` <ng-icon name="lucideChevronDown" /> `,
 })
@@ -16,7 +16,7 @@ export class HlmSelectScrollDown {
   constructor() {
     classes(
       () =>
-        "bg-popover sticky bottom-0 z-10 flex w-full cursor-default items-center justify-center py-1 data-hidden:hidden [&_ng-icon:not([class*='text-'])]:text-base"
+        "bg-popover sticky bottom-0 z-10 flex w-full cursor-default items-center justify-center py-1 data-hidden:hidden [&_ng-icon:not([class*='text-'])]:text-[length:--spacing(4)]"
     );
   }
 }

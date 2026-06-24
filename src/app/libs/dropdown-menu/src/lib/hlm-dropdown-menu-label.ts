@@ -10,11 +10,11 @@ import { classes } from '@spartan-ng/helm/utils';
   },
 })
 export class HlmDropdownMenuLabel {
-  constructor() {
-    classes(() => 'block px-2 py-1.5 text-sm font-medium data-[inset]:pl-8');
-  }
-
   public readonly inset = input<boolean, BooleanInput>(false, {
     transform: booleanAttribute,
   });
+
+  constructor() {
+    classes(() => 'text-muted-foreground block px-1.5 py-1 text-xs font-medium data-inset:ps-7');
+  }
 }

@@ -32,7 +32,6 @@
       "@spartan-ng/helm/dropdown-menu": ["./src/app/libs/dropdown-menu/src/index.ts"],
       "@spartan-ng/helm/empty": ["./src/app/libs/empty/src/index.ts"],
       "@spartan-ng/helm/field": ["./src/app/libs/field/src/index.ts"],
-      "@spartan-ng/helm/icon": ["./src/app/libs/icon/src/index.ts"],
       "@spartan-ng/helm/input": ["./src/app/libs/input/src/index.ts"],
       "@spartan-ng/helm/input-group": ["./src/app/libs/input-group/src/index.ts"],
       "@spartan-ng/helm/input-otp": ["./src/app/libs/input-otp/src/index.ts"],

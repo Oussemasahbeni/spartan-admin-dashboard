@@ -9,6 +9,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmKbdGroup {
   constructor() {
-    classes(() => 'gap-1 inline-flex items-center');
+    classes(() => 'inline-flex items-center gap-1');
   }
 }

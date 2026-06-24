@@ -9,6 +9,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmAlertAction {
   constructor() {
-    classes(() => 'absolute end-3 top-2.5');
+    classes(() => 'absolute end-2 top-2');
   }
 }

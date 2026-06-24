@@ -8,17 +8,15 @@ import { classes } from '@spartan-ng/helm/utils';
   selector: 'hlm-combobox-item',
   imports: [NgIcon],
   providers: [provideIcons({ lucideCheck })],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [{ directive: BrnComboboxItem, inputs: ['id', 'disabled', 'value'] }],
-  host: {
-    'data-slot': 'combobox-item',
-  },
+  host: { 'data-slot': 'combobox-item' },
   template: `
     <ng-content />
     @if (_active()) {
       <ng-icon
         name="lucideCheck"
-        class="pointer-events-none absolute right-2 flex size-4 items-center justify-center"
+        class="pointer-events-none absolute end-2 flex items-center justify-center text-[length:--spacing(4)]"
         aria-hidden="true"
       />
     }
@@ -32,7 +30,7 @@ export class HlmComboboxItem {
   constructor() {
     classes(
       () =>
-        `data-highlighted:bg-accent data-highlighted:text-accent-foreground not-data-[variant=destructive]:data-highlighted:**:text-accent-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-hidden:hidden data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_ng-icon]:pointer-events-none [&_ng-icon]:shrink-0 [&_ng-icon:not([class*='text-'])]:text-base`
+        'data-highlighted:bg-accent data-highlighted:text-accent-foreground not-data-[variant=destructive]:data-highlighted:**:text-accent-foreground relative flex w-full cursor-default items-center gap-2 rounded-md py-1 ps-1.5 pe-8 text-sm outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-hidden:hidden [&_ng-icon]:pointer-events-none [&_ng-icon]:shrink-0'
     );
   }
 }

@@ -5,9 +5,9 @@ import {
   DestroyRef,
   DOCUMENT,
   inject,
+  Injectable,
   PLATFORM_ID,
   REQUEST,
-  Service,
   type Signal,
   signal,
 } from '@angular/core';
@@ -15,7 +15,7 @@ import { injectHlmSidebarConfig } from './hlm-sidebar.token';
 
 export type SidebarVariant = 'sidebar' | 'floating' | 'inset';
 
-@Service()
+@Injectable({ providedIn: 'root' })
 export class HlmSidebarService {
   private readonly _platformId = inject(PLATFORM_ID);
   private readonly _request = inject(REQUEST, { optional: true });
@@ -40,7 +40,7 @@ export class HlmSidebarService {
     this.restoreStateFromCookie();
 
     afterNextRender(() => {
-      if (!this._window) return;
+      if (!this._window || typeof this._window.matchMedia !== 'function') return;
 
       // Initialize MediaQueryList
       this._mediaQuery = this._window.matchMedia(`(max-width: ${this._config.mobileBreakpoint})`);
