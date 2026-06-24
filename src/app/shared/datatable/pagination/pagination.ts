@@ -80,7 +80,7 @@ import { DataTableFeatures } from '../table/table-features';
           [aria-label]="t('firstPage')"
           (click)="table().firstPage()"
         >
-          <ng-icon class="rtl:rotate-180" name="lucideChevronFirst"  />
+          <ng-icon class="rtl:rotate-180" name="lucideChevronFirst" />
         </button>
         <button
           type="button"
@@ -92,7 +92,7 @@ import { DataTableFeatures } from '../table/table-features';
           [aria-label]="t('previousPage')"
           (click)="table().previousPage()"
         >
-          <ng-icon class="rtl:rotate-180" name="lucideChevronLeft"  />
+          <ng-icon class="rtl:rotate-180" name="lucideChevronLeft" />
         </button>
         <button
           type="button"

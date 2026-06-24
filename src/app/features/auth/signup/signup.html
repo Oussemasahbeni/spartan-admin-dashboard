@@ -22,7 +22,7 @@
           [formField]="signupForm.name"
         />
         @for (error of signupForm.name().errors(); track error.kind) {
-        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
 
@@ -37,7 +37,7 @@
           [formField]="signupForm.email"
         />
         @for (error of signupForm.email().errors(); track error.kind) {
-        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
 
@@ -54,8 +54,6 @@
           />
           <hlm-input-group-addon align="inline-end">
             <ng-icon
-              
-
               class="cursor-pointer"
               [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
               (click)="showPassword.set(!showPassword())"
@@ -63,7 +61,7 @@
         </hlm-input-group>
 
         @for (error of signupForm.password().errors(); track error.kind) {
-        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
 
@@ -80,22 +78,21 @@
           />
           <hlm-input-group-addon align="inline-end">
             <ng-icon
-              
-
               class="cursor-pointer"
               [name]="showConfirmPassword() ? 'lucideEye' : 'lucideEyeOff'"
               (click)="showConfirmPassword.set(!showConfirmPassword())"
           /></hlm-input-group-addon>
         </hlm-input-group>
         @for (error of signupForm.confirmPassword().errors(); track error.kind) {
-        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
 
       <button type="submit" hlmBtn [disabled]="signupForm().submitting()">
         @if (signupForm().submitting()) {
-        <hlm-spinner />
-        } {{ t('signupButton') }}
+          <hlm-spinner />
+        }
+        {{ t('signupButton') }}
       </button>
     </form>
 

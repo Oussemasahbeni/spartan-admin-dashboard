@@ -40,7 +40,7 @@ import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
       </main>
 
       <footer hlmCardFooter class="flex items-center gap-2 text-sm">
-        <ng-icon  name="lucideTrendingUp"  class="text-success" />
+        <ng-icon name="lucideTrendingUp" class="text-success" />
         <span class="text-success font-medium">{{ t('trendingText') }}</span>
       </footer>
     </section>

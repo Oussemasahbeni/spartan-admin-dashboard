@@ -5,7 +5,6 @@ import { lucideCalendar, lucideFilter } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 
-
 export interface FilterOptions {
   dateRange: string;
   status: string;
@@ -21,7 +20,7 @@ export interface FilterOptions {
   template: `
     <hlm-dialog>
       <button type="button" hlmBtn variant="outline" hlmDialogTrigger>
-        <ng-icon  name="lucideFilter"  />
+        <ng-icon name="lucideFilter" />
         {{ 'dashboard2.header.filterBy' | transloco }}
       </button>
       <hlm-dialog-content *hlmDialogPortal="let ctx" class="sm:max-w-md">

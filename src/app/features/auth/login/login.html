@@ -22,7 +22,7 @@
           [formField]="loginForm.email"
         />
         @for (error of loginForm.email().errors(); track error.kind) {
-        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
       <hlm-field>
@@ -38,8 +38,6 @@
           />
           <hlm-input-group-addon align="inline-end">
             <ng-icon
-              
-
               class="cursor-pointer"
               [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
               (click)="showPassword.set(!showPassword())"
@@ -47,7 +45,7 @@
         </hlm-input-group>
 
         @for (error of loginForm.password().errors(); track error.kind) {
-        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+          <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
         }
       </hlm-field>
       <div class="flex items-center justify-between">
@@ -66,8 +64,9 @@
 
       <button type="submit" hlmBtn [disabled]="loginForm().submitting()">
         @if (loginForm().submitting()) {
-        <hlm-spinner />
-        } {{ t('loginBtn') }}
+          <hlm-spinner />
+        }
+        {{ t('loginBtn') }}
       </button>
     </form>
     <div class="relative mb-1">

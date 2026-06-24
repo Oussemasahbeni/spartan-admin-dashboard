@@ -6,10 +6,10 @@
     </div>
 
     @if (showError()) {
-    <hlm-alert variant="destructive" class="mt-4">
-      <h4 hlmAlertTitle>{{ t('errors.invalidCode') }}</h4>
-      <div hlmAlertDescription>{{ t('errors.invalidCodeDescription') }}</div>
-    </hlm-alert>
+      <hlm-alert variant="destructive" class="mt-4">
+        <h4 hlmAlertTitle>{{ t('errors.invalidCode') }}</h4>
+        <div hlmAlertDescription>{{ t('errors.invalidCodeDescription') }}</div>
+      </hlm-alert>
     }
 
     <form class="mt-4 flex flex-col gap-4" [formGroup]="otpForm" (ngSubmit)="onSubmit()">
@@ -40,8 +40,9 @@
       <div class="flex flex-col gap-4">
         <button type="submit" hlmBtn [disabled]="isLoading() || otpForm.invalid">
           @if (isLoading()) {
-          <hlm-spinner />
-          } {{ t('verifyBtn') }}
+            <hlm-spinner />
+          }
+          {{ t('verifyBtn') }}
         </button>
 
         <p class="text-muted-foreground text-center text-sm">
@@ -52,7 +53,11 @@
             [disabled]="isResendDisabled() || isLoading()"
             (click)="resendOtp()"
           >
-            @if (isResendDisabled()) { {{ t('resendIn', { seconds: countdown() }) }} } @else { {{ t('resend') }} }
+            @if (isResendDisabled()) {
+              {{ t('resendIn', { seconds: countdown() }) }}
+            } @else {
+              {{ t('resend') }}
+            }
           </button>
         </p>
       </div>

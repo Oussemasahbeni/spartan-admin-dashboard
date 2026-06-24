@@ -26,7 +26,7 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
     state: {
       overdue: 'border-red-400 bg-red-50 text-red-500 dark:bg-red-950',
       completed: 'border-emerald-400 bg-emerald-50 text-emerald-600 dark:bg-emerald-950',
-      default: 'border-transparent text-muted-foreground',
+      default: 'text-muted-foreground border-transparent',
     },
   },
   defaultVariants: { state: 'default' },
@@ -97,9 +97,9 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
                 (click)="toggleComplete.emit(task()); $event.stopPropagation()"
               >
                 @if (task().isCompleted) {
-                  <ng-icon  name="lucideCheckCircle2"  />
+                  <ng-icon name="lucideCheckCircle2" />
                 } @else {
-                  <ng-icon  name="lucideCircle"  />
+                  <ng-icon name="lucideCircle" />
                 }
               </button>
             </div>
@@ -113,7 +113,7 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
                 variant="outline"
                 class="text-muted-foreground w-fit"
               >
-                <ng-icon   [class]="ui.class" [name]="ui.icon" />
+                <ng-icon [class]="ui.class" [name]="ui.icon" />
                 {{ t(task().status) }}
               </span>
               <h4
@@ -168,14 +168,14 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
         <div class="text-muted-foreground flex items-center gap-3 text-sm">
           <!-- Due date -->
           <div [class]="dueDateClass()">
-            <ng-icon   [name]="isOverdue() ? 'lucideClock' : 'lucideCalendar'" />
+            <ng-icon [name]="isOverdue() ? 'lucideClock' : 'lucideCalendar'" />
             <span>{{ task().dueDate }}</span>
           </div>
 
           <!-- Comments -->
           @if (task().commentsCount > 0) {
             <div class="flex items-center gap-1">
-              <ng-icon  name="lucideMessageSquare"  />
+              <ng-icon name="lucideMessageSquare" />
               <span>{{ task().commentsCount }}</span>
             </div>
           }
@@ -183,7 +183,7 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
           <!-- Attachments -->
           @if (task().attachmentsCount && task().attachmentsCount! > 0) {
             <div class="flex items-center gap-1">
-              <ng-icon  name="lucidePaperclip"  />
+              <ng-icon name="lucidePaperclip" />
               <span>{{ task().attachmentsCount }}</span>
             </div>
           }
@@ -198,7 +198,7 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
           aria-label="Open task actions menu"
           (click)="optionsClick.emit($event); $event.stopPropagation()"
         >
-          <ng-icon  name="lucideMoreVertical" />
+          <ng-icon name="lucideMoreVertical" />
         </button>
       </div>
     </div>

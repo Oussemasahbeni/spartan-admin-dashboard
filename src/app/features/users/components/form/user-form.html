@@ -13,7 +13,7 @@
     <hlm-field-label>{{ t('label.name') }}</hlm-field-label>
     <input hlmInput id="name" [formField]="userForm.name" />
     @for (error of userForm.name().errors(); track error.kind) {
-    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
     }
   </hlm-field>
   <!-- Email -->
@@ -21,7 +21,7 @@
     <hlm-field-label>{{ t('label.email') }}</hlm-field-label>
     <input hlmInput id="email" [formField]="userForm.email" />
     @for (error of userForm.email().errors(); track error.kind) {
-    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
     }
   </hlm-field>
   <!-- Country -->
@@ -29,7 +29,7 @@
     <hlm-field-label>{{ t('label.country') }}</hlm-field-label>
     <adm-country-picker id="country" [formField]="userForm.country" />
     @for (error of userForm.country().errors(); track error.kind) {
-    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
     }
   </hlm-field>
 
@@ -38,7 +38,7 @@
     <hlm-field-label>{{ t('label.phoneNumber') }}</hlm-field-label>
     <adm-phone-number-picker id="phoneNumber" [formField]="userForm.phoneNumber" />
     @for (error of userForm.phoneNumber().errors(); track error.kind) {
-    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
     }
   </hlm-field>
 
@@ -52,12 +52,12 @@
       </hlm-select-trigger>
       <hlm-select-content *hlmSelectPortal>
         @for (role of rolesList(); track role) {
-        <hlm-select-item *transloco="let t; prefix: 'users.role'" [value]="role">{{ t(role) }}</hlm-select-item>
+          <hlm-select-item *transloco="let t; prefix: 'users.role'" [value]="role">{{ t(role) }}</hlm-select-item>
         }
       </hlm-select-content>
     </hlm-select>
     @for (error of userForm.role().errors(); track error.kind) {
-    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
     }
   </hlm-field>
 </form>
@@ -66,7 +66,8 @@
   <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('cancel') }}</button>
   <button type="button" (click)="onSubmit()" hlmBtn [disabled]="userForm().submitting()">
     @if (userForm().submitting()) {
-    <hlm-spinner />
-    } {{ t('save') }}
+      <hlm-spinner />
+    }
+    {{ t('save') }}
   </button>
 </hlm-dialog-footer>

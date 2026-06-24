@@ -89,12 +89,12 @@
       <ng-template #languageTpl>
         <hlm-dropdown-menu-sub>
           @for (lang of availableLanguages(); track lang.code) {
-          <button type="button" hlmDropdownMenuItem (click)="setLang(lang.code)">
-            <span>{{ lang.label }}</span>
-            @if (currentLang() === lang.code) {
-            <ng-icon name="lucideCheck" class="ms-auto" />
-            }
-          </button>
+            <button type="button" hlmDropdownMenuItem (click)="setLang(lang.code)">
+              <span>{{ lang.label }}</span>
+              @if (currentLang() === lang.code) {
+                <ng-icon name="lucideCheck" class="ms-auto" />
+              }
+            </button>
           }
         </hlm-dropdown-menu-sub>
       </ng-template>

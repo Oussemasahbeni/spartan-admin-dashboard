@@ -32,7 +32,7 @@ import { Notification } from '../../model/notification';
   template: `
     <hlm-popover *transloco="let t; prefix: 'notifications'" sideOffset="10" align="end">
       <button type="button" variant="outline" size="icon" class="relative size-9" hlmPopoverTrigger hlmBtn>
-        <ng-icon hlm name="lucideBell"  />
+        <ng-icon hlm name="lucideBell" />
         @if (unreadCount() > 0) {
           <span
             hlmBadge
@@ -86,7 +86,7 @@ import { Notification } from '../../model/notification';
                         class="z-20 text-xs hover:underline focus:outline-none"
                         (click)="onClear($index)"
                       >
-                        <ng-icon  name="lucideX" s />
+                        <ng-icon name="lucideX" s />
                       </button>
                     </div>
                   </div>

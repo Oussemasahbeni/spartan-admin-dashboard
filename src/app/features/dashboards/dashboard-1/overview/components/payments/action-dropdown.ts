@@ -7,17 +7,9 @@ import { HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 
-
 @Component({
   selector: 'adm-action-dropdown',
-  imports: [
-    HlmButtonImports,
-    NgIcon,
-    HlmDropdownMenuImports,
-    BrnAlertDialogImports,
-    HlmAlertDialogImports,
-    TranslocoModule,
-  ],
+  imports: [HlmButtonImports, NgIcon, HlmDropdownMenuImports, BrnAlertDialogImports, HlmAlertDialogImports, TranslocoModule],
   providers: [provideIcons({ lucideEllipsisVertical })],
   template: `
     <button

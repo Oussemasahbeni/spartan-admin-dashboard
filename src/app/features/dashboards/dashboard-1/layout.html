@@ -5,11 +5,11 @@
 
       <div class="flex gap-3">
         <button type="button" hlmBtn variant="outline">
-          <ng-icon  name="lucideFilter" />
+          <ng-icon name="lucideFilter" />
           {{ t('filterBy') }}
         </button>
         <button type="button" hlmBtn variant="default">
-          <ng-icon  name="lucideDownload"  />
+          <ng-icon name="lucideDownload" />
           {{ t('export') }}
         </button>
       </div>
@@ -19,32 +19,32 @@
   <hlm-tabs class="space-y-2" [tab]="selectedTab()" (tabActivated)="onTabChange($event)">
     <hlm-tabs-list>
       <button type="button" hlmTabsTrigger="overview">
-        <ng-icon  name="lucideHome"  />
+        <ng-icon name="lucideHome" />
         {{ t('tabs.overview') }}
       </button>
       <button type="button" hlmTabsTrigger="analytics">
-        <ng-icon  name="lucideBarChart2" />
+        <ng-icon name="lucideBarChart2" />
         {{ t('tabs.analytics') }}
       </button>
       <button type="button" disabled hlmTabsTrigger="reports">
-        <ng-icon  name="lucideFileText"  />
+        <ng-icon name="lucideFileText" />
         {{ t('tabs.reports') }}
       </button>
     </hlm-tabs-list>
 
     <div hlmTabsContent="overview">
       @defer (when selectedTab() === 'overview') {
-      <adm-dashboard1-overview />
+        <adm-dashboard1-overview />
       } @placeholder {
-      <hlm-spinner />
+        <hlm-spinner />
       }
     </div>
 
     <div hlmTabsContent="analytics">
       @defer (when selectedTab() === 'analytics') {
-      <adm-dashboard1-analytics />
+        <adm-dashboard1-analytics />
       } @placeholder {
-      <hlm-spinner />
+        <hlm-spinner />
       }
     </div>
   </hlm-tabs>

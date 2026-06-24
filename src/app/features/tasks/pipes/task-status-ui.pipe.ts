@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@ng-icons/core';
 import { lucideCheckCircle2, lucideCircleDashed, lucideLoader, lucideSquare } from '@ng-icons/lucide';
 import { TaskStatus } from '../model/task';
 

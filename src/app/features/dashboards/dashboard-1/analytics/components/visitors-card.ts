@@ -48,7 +48,7 @@ interface MonthsTranslation {
               <span class="text-muted-foreground text-sm font-medium">{{ t('newVisitors') }}</span>
               <div class="mt-1 text-2xl font-bold">36,786</div>
               <div class="text-success mt-1 flex items-center gap-1 text-xs">
-                <ng-icon  name="lucideTrendingUp"  />
+                <ng-icon name="lucideTrendingUp" />
                 <span>88.7% (+10)</span>
               </div>
             </div>
@@ -58,7 +58,7 @@ interface MonthsTranslation {
               <span class="text-muted-foreground text-sm font-medium">{{ t('returning') }}</span>
               <div class="mt-1 text-2xl font-bold">467</div>
               <div class="text-destructive mt-1 flex items-center gap-1 text-xs">
-                <ng-icon  name="lucideTrendingDown"  />
+                <ng-icon name="lucideTrendingDown" />
                 <span>8.5% (-6)</span>
               </div>
             </div>

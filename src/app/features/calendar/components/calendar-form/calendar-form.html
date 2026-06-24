@@ -13,7 +13,7 @@
     <hlm-field-label>{{ t('label.title') }}</hlm-field-label>
     <input hlmInput id="title" [formField]="eventForm.title" />
     @for (error of eventForm.title().errors(); track error.kind) {
-    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
     }
   </hlm-field>
   <!-- Description -->
@@ -21,7 +21,7 @@
     <hlm-field-label>{{ t('label.description') }}</hlm-field-label>
     <input hlmInput id="description" [formField]="eventForm.description" />
     @for (error of eventForm.description().errors(); track error.kind) {
-    <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
     }
   </hlm-field>
   <!-- Start Date -->
@@ -34,7 +34,7 @@
         >
       </hlm-date-picker>
       @for (error of eventForm.startDate().errors(); track error.kind) {
-      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     </hlm-field>
     <div class="flex flex-col gap-3">
@@ -55,12 +55,12 @@
     <hlm-field>
       <hlm-field-label>{{ t('label.endDate') }}</hlm-field-label>
       <hlm-date-picker captionLayout="dropdown" [formField]="eventForm.endDate" [autoCloseOnSelect]="true">
-        <hlm-date-picker-trigger class="w-full" buttonId="endDate"
-          >{{ t('placeholder.selectDate') }}</hlm-date-picker-trigger
-        >
+        <hlm-date-picker-trigger class="w-full" buttonId="endDate">{{
+          t('placeholder.selectDate')
+        }}</hlm-date-picker-trigger>
       </hlm-date-picker>
       @for (error of eventForm.endDate().errors(); track error.kind) {
-      <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
+        <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
       }
     </hlm-field>
     <div class="flex flex-col gap-3">
@@ -81,7 +81,8 @@
   <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('cancel') }}</button>
   <button type="button" hlmBtn [disabled]="eventForm().submitting()" (click)="onSubmit()">
     @if (eventForm().submitting()) {
-    <hlm-spinner />
-    } {{ t('save') }}
+      <hlm-spinner />
+    }
+    {{ t('save') }}
   </button>
 </hlm-dialog-footer>

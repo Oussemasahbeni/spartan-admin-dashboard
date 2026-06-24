@@ -7,7 +7,6 @@ import { lucideHome } from '@ng-icons/lucide';
 import { ThemeSwitch } from '@shared/components/theme-switch/theme-switch';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
-
 @Component({
   selector: 'adm-auth-layout',
   imports: [HlmButtonImports, NgIcon, RouterLink, NgOptimizedImage, TranslocoModule, ThemeSwitch],
@@ -21,7 +20,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
       <div class="relative flex h-full flex-col md:grid lg:max-w-none lg:px-0 xl:grid-cols-2">
         <div class="absolute top-6 left-6 flex gap-2">
           <a routerLink="/" hlmBtn variant="outline" size="icon" [aria-label]="t('breadcrumbs.home')">
-            <ng-icon   name="lucideHome" />
+            <ng-icon name="lucideHome" />
           </a>
 
           <adm-theme-switch />
