@@ -62,7 +62,13 @@ interface NavCommand {
   ],
   template: `
     <ng-container *transloco="let t">
-      <button hlmBtn type="button" variant="secondary" class="text-muted-foreground gap-2" (click)="state.set('open')">
+      <button
+        hlmBtn
+        type="button"
+        variant="secondary"
+        class="text-muted-foreground hidden gap-2 sm:block"
+        (click)="state.set('open')"
+      >
         <ng-icon name="lucideSearch" />
         {{ t('commandPalette.search') }}
         <kbd hlmKbd class="ms-2">⌘ + K</kbd>

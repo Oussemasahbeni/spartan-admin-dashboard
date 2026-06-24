@@ -1,17 +1,28 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideLifeBuoy, lucideSend } from '@ng-icons/lucide';
+import { lucideGithub, lucideLifeBuoy, lucideSend } from '@ng-icons/lucide';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 
 @Component({
   selector: 'adm-nav-secondary',
   imports: [HlmSidebarImports, NgIcon, RouterLink],
-  providers: [provideIcons({ lucideLifeBuoy, lucideSend })],
+  providers: [provideIcons({ lucideLifeBuoy, lucideSend, lucideGithub })],
   template: `
     <hlm-sidebar-group>
       <div hlmSidebarGroupContent>
         <ul hlmSidebarMenu>
+          <li>
+            <a
+              href="https://github.com/Oussemasahbeni/spartan-admin-dashboard"
+              target="_blank"
+              hlmSidebarMenuButton
+              size="sm"
+            >
+              <ng-icon name="lucideGithub" />
+              GitHub Repository
+            </a>
+          </li>
           @for (item of items(); track $index) {
             <li hlmSidebarMenuItem>
               <a hlmSidebarMenuButton size="sm" [routerLink]="item.url">
