@@ -60,7 +60,13 @@
           <hlm-dropdown-menu-sub *transloco="let t">
             @let theme = currentTheme();
 
-            <button type="button" hlmDropdownMenuCheckbox [checked]="theme === 'light'" (click)="setTheme('light')">
+            <button
+              type="button"
+              hlmDropdownMenuCheckbox
+              [checked]="theme === 'light'"
+              [keepOpen]="false"
+              (click)="setTheme('light')"
+            >
               <div class="flex items-center gap-2">
                 <ng-icon name="lucideSun" />
                 <span> {{ t('theme.light') }} </span>
@@ -68,7 +74,13 @@
               <hlm-dropdown-menu-checkbox-indicator />
             </button>
 
-            <button type="button" hlmDropdownMenuCheckbox [checked]="theme === 'dark'" (click)="setTheme('dark')">
+            <button
+              type="button"
+              hlmDropdownMenuCheckbox
+              [checked]="theme === 'dark'"
+              [keepOpen]="false"
+              (click)="setTheme('dark')"
+            >
               <div class="flex items-center gap-2">
                 <ng-icon name="lucideMoon" />
                 <span> {{ t('theme.dark') }} </span>
@@ -89,12 +101,16 @@
       <ng-template #languageTpl>
         <hlm-dropdown-menu-sub>
           @for (lang of availableLanguages(); track lang.code) {
-            <button type="button" hlmDropdownMenuItem (click)="setLang(lang.code)">
-              <span>{{ lang.label }}</span>
-              @if (currentLang() === lang.code) {
-                <ng-icon name="lucideCheck" class="ms-auto" />
-              }
-            </button>
+          <button
+            type="button"
+            hlmDropdownMenuCheckbox
+            [checked]="currentLang() === lang.code"
+            [keepOpen]="false"
+            (click)="setLang(lang.code)"
+          >
+            <span>{{ lang.label }}</span>
+            <hlm-dropdown-menu-checkbox-indicator />
+          </button>
           }
         </hlm-dropdown-menu-sub>
       </ng-template>

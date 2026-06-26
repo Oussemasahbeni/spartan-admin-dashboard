@@ -3,7 +3,6 @@ import { Component, computed, input } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
-  lucideCheck,
   lucideChevronDown,
   lucideChevronLeft,
   lucideChevronRight,
@@ -28,7 +27,6 @@ interface DataTableColumnMeta {
   imports: [DragDropModule, TranslocoModule, HlmDropdownMenuImports, NgIcon, HlmButtonImports],
   providers: [
     provideIcons({
-      lucideCheck,
       lucideChevronDown,
       lucideChevronLeft,
       lucideChevronRight,
@@ -91,28 +89,31 @@ interface DataTableColumnMeta {
 
               <ng-template #pinMenu>
                 <hlm-dropdown-menu-sub>
-                  <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, 'left')">
+                  <button
+                    type="button"
+                    hlmDropdownMenuCheckbox
+                    [checked]="column.getIsPinned() === 'left'"
+                    (triggered)="pinColumn(column, 'left')"
+                  >
                     <ng-icon name="lucideChevronLeft" class="rtl:rotate-180" />
                     <span>{{ 'buttons.pinStart' | transloco }}</span>
-                    @if (column.getIsPinned() === 'left') {
-                      <ng-icon class="ms-auto" name="lucideCheck" />
-                    }
+                    <hlm-dropdown-menu-checkbox-indicator />
                   </button>
 
-                  <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, 'right')">
+                  <button
+                    type="button"
+                    hlmDropdownMenuCheckbox
+                    [checked]="column.getIsPinned() === 'right'"
+                    (triggered)="pinColumn(column, 'right')"
+                  >
                     <ng-icon name="lucideChevronRight" class="rtl:rotate-180" />
                     <span>{{ 'buttons.pinEnd' | transloco }}</span>
-                    @if (column.getIsPinned() === 'right') {
-                      <ng-icon class="ms-auto" name="lucideCheck" />
-                    }
+                    <hlm-dropdown-menu-checkbox-indicator />
                   </button>
 
                   <button type="button" hlmDropdownMenuItem (triggered)="pinColumn(column, false)">
                     <ng-icon name="lucideX" />
                     <span>{{ 'buttons.unpin' | transloco }}</span>
-                    @if (!column.getIsPinned()) {
-                      <ng-icon class="ms-auto" name="lucideCheck" />
-                    }
                   </button>
                 </hlm-dropdown-menu-sub>
               </ng-template>

@@ -6,7 +6,6 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideBadgeCheck,
-  lucideCheck,
   lucideChevronsUpDown,
   lucideCreditCard,
   lucideGem,
@@ -35,7 +34,6 @@ import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
       lucideBadgeCheck,
       lucideLogOut,
       lucideGlobe,
-      lucideCheck,
       lucidePalette,
       lucideMoon,
       lucideSun,
