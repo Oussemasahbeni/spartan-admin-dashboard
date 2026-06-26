@@ -53,7 +53,7 @@
         <button type="button" hlmDropdownMenuItem side="right" align="start" [hlmDropdownMenuTrigger]="themeTpl">
           <ng-icon name="lucidePalette" />
           <span> {{ t('theme') }} </span>
-          <hlm-dropdown-menu-item-sub-indicator class="rtl:rotate-180" />
+          <hlm-dropdown-menu-item-sub-indicator />
         </button>
 
         <ng-template #themeTpl>
@@ -95,7 +95,7 @@
       <button type="button" hlmDropdownMenuItem side="right" align="start" [hlmDropdownMenuTrigger]="languageTpl">
         <ng-icon name="lucideGlobe" />
         <span *transloco="let t; prefix: 'navUser'"> {{ t('language') }} </span>
-        <hlm-dropdown-menu-item-sub-indicator class="rtl:rotate-180" />
+        <hlm-dropdown-menu-item-sub-indicator />
       </button>
 
       <ng-template #languageTpl>
