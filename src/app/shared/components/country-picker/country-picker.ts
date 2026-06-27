@@ -21,13 +21,6 @@ import { CountryDisplay } from '../country-display/country-display';
       (valueChange)="value.set($event)"
       (closed)="touch.emit()"
     >
-      <!-- <hlm-combobox-trigger>
-        <hlm-combobox-placeholder>{{ t('selectCountryPlaceholder') }}</hlm-combobox-placeholder>
-        <ng-template let-country hlmComboboxValueTemplate>
-          <adm-country-display [country]="country" />
-        </ng-template>
-      </hlm-combobox-trigger> -->
-
       <hlm-combobox-input
         inputId="country"
         showClear="true"
@@ -36,8 +29,6 @@ import { CountryDisplay } from '../country-display/country-display';
       />
 
       <hlm-combobox-content *hlmComboboxPortal>
-        <!-- <hlm-combobox-input showClear [placeholder]="t('searchCountryPlaceholder')" /> -->
-
         <hlm-combobox-empty *transloco="let t">{{ t('common.noData') }}</hlm-combobox-empty>
 
         <div hlmComboboxList>
@@ -56,7 +47,6 @@ export class CountryPicker implements FormValueControl<Country | null | undefine
   // Inputs
   // ==========================================
   public readonly value = model<Country | null | undefined>(null);
-  /** Signal Forms WRITES the touched status here (for display). */
   public readonly touched = input<boolean>(false);
   /** Signal Forms tracks touched via this OUTPUT — a `touched` model set does NOT propagate. */
   public readonly touch = output<void>();
@@ -76,15 +66,4 @@ export class CountryPicker implements FormValueControl<Country | null | undefine
 
   /** Resolves the selected `Country` to its localized name so the input shows the name, not the JSON. */
   public readonly itemToString = (country: Country): string => country.name[this.activeLang()] ?? country.name['en'] ?? '';
-
-  // /**
-  //  * The trigger has no `forceInvalid` input, and its `data-matches-spartan-invalid` styling is driven
-  //  * by the combobox's own (here unused) form control. So we forward the destructive utilities through
-  //  * the trigger's `class` input, mirroring the `buttonVariants` invalid state.
-  //  */
-  // protected readonly _triggerClass = computed(() =>
-  //   this.showInvalid()
-  //     ? 'w-full justify-between font-normal border-destructive ring-3 ring-destructive/20 dark:border-destructive/50 dark:ring-destructive/40'
-  //     : 'w-full justify-between font-normal',
-  // );
 }
