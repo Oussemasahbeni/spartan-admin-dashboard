@@ -1,10 +1,10 @@
-import { Component, inject, input, linkedSignal, signal, viewChild } from '@angular/core';
+import { Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideCreditCard, lucideLock, lucideMenu, lucideUserCircle, lucideUsers } from '@ng-icons/lucide';
-import { BrnSheet, BrnSheetImports } from '@spartan-ng/brain/sheet';
+import { BrnSheetImports } from '@spartan-ng/brain/sheet';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
@@ -47,12 +47,6 @@ export default class Settings {
 
   private readonly _router = inject(Router);
   private readonly _dir = inject(DirectionalityService);
-
-  // ==========================================
-  // ViewChild
-  // ==========================================
-
-  public readonly viewchildSheetRef = viewChild(BrnSheet);
 
   // ==========================================
   // Inputs (from route query params)
@@ -117,7 +111,6 @@ export default class Settings {
 
   goToPanel(panel: Panel): void {
     this.selectedPanel.set(panel);
-    this.viewchildSheetRef()?.close({});
     this._router.navigate([], {
       queryParams: { panel: panel.id },
       queryParamsHandling: 'merge',

@@ -1,7 +1,15 @@
 @let user = _user();
 <ul hlmSidebarMenu>
   <li hlmSidebarMenuItem>
-    <button type="button" hlmSidebarMenuButton size="lg" align="end" [hlmDropdownMenuTrigger]="menu" [side]="_menuSide()">
+    <button
+      type="button"
+      hlmSidebarMenuButton
+      size="lg"
+      align="end"
+      [closeMobileSidebarOnClick]="false"
+      [hlmDropdownMenuTrigger]="menu"
+      [side]="_menuSide()"
+    >
       <hlm-avatar class="rounded-lg">
         <img hlmAvatarImage [src]="user.avatar" [alt]="user.name" />
         <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback>RG</span>

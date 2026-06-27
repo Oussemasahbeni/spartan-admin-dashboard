@@ -3,7 +3,7 @@
   <header class="flex items-start gap-4 md:flex-col">
     <!-- Mobile Navigation -->
     <hlm-sheet [side]="dir() ? 'right' : 'left'">
-      <button type="button" class="md:hidden" id="edit-profile" hlmSheetTrigger hlmBtn size="sm" variant="outline">
+      <button type="button" class="md:hidden" id="edit-profile" hlmSheetTrigger hlmBtn size="icon-sm" variant="outline">
         <ng-icon name="lucideMenu" />
       </button>
       <hlm-sheet-content *hlmSheetPortal="let ctx" class="px-3">
@@ -12,17 +12,17 @@
           <p hlmSheetDescription>{{ t('description') }}</p>
         </hlm-sheet-header>
         @for (panel of panels(); track panel.id) {
-          <button
-            type="button"
-            class="justify-start text-left"
-            hlmBtn
-            size="sm"
-            [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
-            (click)="goToPanel(panel)"
-          >
-            <ng-icon [name]="panel.icon" />
-            {{ t('panels.' + panel.id + '.title') }}
-          </button>
+        <button
+          type="button"
+          class="justify-start"
+          hlmBtn
+          [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
+          hlmSheetClose
+          (click)="goToPanel(panel)"
+        >
+          <ng-icon [name]="panel.icon" />
+          {{ t('panels.' + panel.id + '.title') }}
+        </button>
         }
       </hlm-sheet-content>
     </hlm-sheet>
@@ -37,22 +37,20 @@
       <!-- Panel links -->
       <div class="flex flex-col gap-2">
         @for (panel of panels(); track panel.id) {
-          <button
-            type="button"
-            class="justify-start text-left"
-            hlmBtn
-            size="sm"
-            [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
-            (click)="goToPanel(panel)"
-          >
-            <ng-icon [name]="panel.icon" />
-            {{ t('panels.' + panel.id + '.title') }}
-          </button>
+        <button
+          type="button"
+          class="justify-start"
+          hlmBtn
+          [variant]="selectedPanel().id === panel.id ? 'outline' : 'ghost'"
+          (click)="goToPanel(panel)"
+        >
+          <ng-icon [name]="panel.icon" />
+          {{ t('panels.' + panel.id + '.title') }}
+        </button>
         }
       </div>
     </nav>
 
-    <!-- Drawer content -->
     <main class="flex-auto pb-12 md:px-10 md:pb-12">
       <!-- Panel header -->
       <header class="flex flex-col gap-2">
@@ -64,30 +62,28 @@
       </header>
       <hlm-separator class="my-4" />
 
-      <!-- Load settings panel -->
       <section>
         @switch (selectedPanel().id) {
-          <!-- Account -->
-          @case ('account') {
-            <adm-settings-account />
-          }
-          <!-- Security -->
-          @case ('security') {
-            <adm-settings-security />
-          }
-          <!-- Plan & Billing -->
-          @case ('planBilling') {
-            <adm-settings-plan-billing />
-          }
-          <!-- Notifications -->
-          @case ('notifications') {
-            <adm-settings-notifications />
-          }
-          <!-- Team -->
-          @case ('team') {
-            <adm-settings-team />
-          }
+        <!-- Account -->
+        @case ('account') {
+        <adm-settings-account />
         }
+        <!-- Security -->
+        @case ('security') {
+        <adm-settings-security />
+        }
+        <!-- Plan & Billing -->
+        @case ('planBilling') {
+        <adm-settings-plan-billing />
+        }
+        <!-- Notifications -->
+        @case ('notifications') {
+        <adm-settings-notifications />
+        }
+        <!-- Team -->
+        @case ('team') {
+        <adm-settings-team />
+        } }
       </section>
     </main>
   </div>
