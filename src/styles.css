@@ -102,7 +102,7 @@
   }
   html,
   body {
-    @apply bg-background text-foreground rtl:font-arabic h-full font-sans;
+    @apply bg-background text-foreground rtl:font-arabic h-full scrollbar-gutter-stable font-sans;
   }
   button:not([disabled]),
   [role='button']:not([disabled]) {
@@ -144,4 +144,3 @@
 .cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-
