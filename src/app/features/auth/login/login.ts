@@ -4,8 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideEye, lucideEyeOff, lucideGithub } from '@ng-icons/lucide';
-import { svglGoogle } from '@ng-icons/svgl';
+import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
+import { svglGithubDark, svglGoogle } from '@ng-icons/svgl';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
@@ -37,7 +37,7 @@ import { AuthLayout } from '../layout';
   ],
   providers: [
     provideIcons({
-      lucideGithub,
+      svglGithubDark,
       lucideEye,
       lucideEyeOff,
       svglGoogle,

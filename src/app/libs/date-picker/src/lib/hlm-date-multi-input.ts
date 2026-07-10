@@ -3,12 +3,12 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCalendar, lucideX } from '@ng-icons/lucide';
 import { BrnDateInput, type BrnDatePickerTriggerBase, provideBrnDatePickerTrigger } from '@spartan-ng/brain/date-picker';
 import { HlmInputGroup, HlmInputGroupImports } from '@spartan-ng/helm/input-group';
-import { injectHlmDatePickerConfig } from './hlm-date-picker.token';
+import { injectHlmDatePickerMultiConfig } from './hlm-date-picker-multi.token';
 
 @Component({
-  selector: 'hlm-date-picker-input',
+  selector: 'hlm-date-multi-input',
   imports: [HlmInputGroupImports, NgIcon],
-  providers: [provideIcons({ lucideCalendar, lucideX }), provideBrnDatePickerTrigger(HlmDatePickerInput)],
+  providers: [provideIcons({ lucideCalendar, lucideX }), provideBrnDatePickerTrigger(HlmDateMultiInput)],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [HlmInputGroup],
   template: `
@@ -52,31 +52,30 @@ import { injectHlmDatePickerConfig } from './hlm-date-picker.token';
     </hlm-input-group-addon>
   `,
 })
-export class HlmDatePickerInput<T> extends BrnDateInput<T> implements BrnDatePickerTriggerBase {
-  private readonly _config = injectHlmDatePickerConfig<T>();
-
+export class HlmDateMultiInput<T> extends BrnDateInput<T[]> implements BrnDatePickerTriggerBase {
+  private readonly _config = injectHlmDatePickerMultiConfig<T>();
   /**
-   * Parses input text into a date value. Return `null` for invalid
-   * input - the picker's date is cleared while the text is preserved so
-   * the user can fix it.
+   * Parses input text into dates. Return `null` for invalid input - the
+   * picker's dates are cleared while the text is preserved so the user can
+   * fix it.
    *
-   * Defaults to `parseDate` from `HlmDatePickerConfig`.
+   * Defaults to `parseDate` from `HlmDatePickerMultiConfig`.
    */
-  public readonly parseDate = input<(value: string) => T | null>(this._config.parseDate);
+  public readonly parseDate = input<(value: string) => T[] | null>(this._config.parseDate);
 
   /**
-   * Formats the current date into the input/edit format shown while the
+   * Formats the current dates into the input/edit format shown while the
    * input is focused. On blur the picker's display format is restored.
    *
-   * Defaults to `formatInputDate` from `HlmDatePickerConfig`.
+   * Defaults to `formatInputDates` from `HlmDatePickerMultiConfig`.
    */
-  public readonly formatInputDate = input<(date: T) => string>(this._config.formatInputDate);
+  public readonly formatInputDates = input<(dates: T[]) => string>(this._config.formatInputDates);
 
-  protected parseValue(value: string): T | null {
+  protected override parseValue(value: string): T[] | null {
     return this.parseDate()(value);
   }
 
-  protected formatInputValue(value: T): string {
-    return this.formatInputDate()(value);
+  protected override formatInputValue(value: T[]): string {
+    return this.formatInputDates()(value);
   }
 }
