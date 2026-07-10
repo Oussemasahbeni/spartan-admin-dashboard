@@ -1,13 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideGithub, lucideLifeBuoy, lucideSend } from '@ng-icons/lucide';
+import { lucideLifeBuoy, lucideSend } from '@ng-icons/lucide';
+import { svglGithubDark } from '@ng-icons/svgl';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 
 @Component({
   selector: 'adm-nav-secondary',
   imports: [HlmSidebarImports, NgIcon, RouterLink],
-  providers: [provideIcons({ lucideLifeBuoy, lucideSend, lucideGithub })],
+  providers: [provideIcons({ lucideLifeBuoy, lucideSend, svglGithubDark })],
   template: `
     <hlm-sidebar-group>
       <div hlmSidebarGroupContent>
@@ -19,7 +20,7 @@ import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
               hlmSidebarMenuButton
               size="sm"
             >
-              <ng-icon name="lucideGithub" />
+              <ng-icon name="svglGithubDark" />
               GitHub Repository
             </a>
           </li>
