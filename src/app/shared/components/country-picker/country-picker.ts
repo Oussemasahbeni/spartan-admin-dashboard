@@ -43,9 +43,14 @@ import { CountryDisplay } from '../country-display/country-display';
   `,
 })
 export class CountryPicker implements FormValueControl<Country | null | undefined> {
+  private static _id = 0;
+
+  private readonly _transloco = inject(TranslocoService);
+
   // ==========================================
   // Inputs
   // ==========================================
+  public readonly inputId = input<string>(`country-picker-${CountryPicker._id++}`);
   public readonly value = model<Country | null | undefined>(null);
   public readonly touched = input<boolean>(false);
   /** Signal Forms tracks touched via this OUTPUT — a `touched` model set does NOT propagate. */
@@ -57,7 +62,7 @@ export class CountryPicker implements FormValueControl<Country | null | undefine
   // ==========================================
   // State
   // ==========================================
-  private readonly _transloco = inject(TranslocoService);
+
   protected readonly countriesList = signal(countries);
   protected readonly activeLang = computed(() => this._transloco.activeLang());
 

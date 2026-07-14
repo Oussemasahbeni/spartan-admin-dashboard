@@ -87,13 +87,14 @@ export class PhoneNumberPicker implements FormValueControl<string> {
   // ==========================================
   private readonly _translocoService = inject(TranslocoService);
 
+  private static _id = 0;
+
   // ==========================================
   // Inputs
   // ==========================================
+  public readonly inputId = input<string>(`phone-number-picker-${PhoneNumberPicker._id++}`);
   public readonly value = model<string>('');
-  /** Signal Forms WRITES the touched status here (for display). */
   public readonly touched = input<boolean>(false);
-  /** Signal Forms tracks touched via this OUTPUT — a `touched` model set does NOT propagate. */
   public readonly touch = output<void>();
   public readonly invalid = input(false, { transform: booleanAttribute });
   public readonly disabled = input(false, { transform: booleanAttribute });
