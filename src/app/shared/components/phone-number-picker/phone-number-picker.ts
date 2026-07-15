@@ -2,8 +2,7 @@ import { booleanAttribute, Component, computed, inject, input, linkedSignal, mod
 import { FormValueControl } from '@angular/forms/signals';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideCheck, lucideChevronDown, lucideChevronsUpDown, lucideGlobe, lucideSearch } from '@ng-icons/lucide';
-import { BrnFieldControl } from '@spartan-ng/brain/field';
+import { lucideGlobe, lucideSearch } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmComboboxImports } from '@spartan-ng/helm/combobox';
 
@@ -25,14 +24,10 @@ import { CountryDisplay } from '../country-display/country-display';
   ],
   providers: [
     provideIcons({
-      lucideCheck,
       lucideSearch,
-      lucideChevronDown,
-      lucideChevronsUpDown,
       lucideGlobe,
     }),
   ],
-  hostDirectives: [BrnFieldControl],
   template: `
     <div *transloco="let t; prefix: 'phoneNumberPicker'" class="flex">
       <hlm-combobox

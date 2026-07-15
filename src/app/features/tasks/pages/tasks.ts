@@ -16,7 +16,6 @@ import { Task, TaskStatus } from '../model/task';
   selector: 'adm-tasks',
   imports: [TranslocoModule, DragDropModule, HlmButtonImports, NgIcon, TaskCard],
   providers: [provideIcons({ lucidePlus, lucideMoreVertical, lucideFilter, lucideChevronRight })],
-
   templateUrl: './tasks.html',
 })
 export default class Tasks {
