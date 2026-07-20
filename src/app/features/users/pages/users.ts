@@ -119,7 +119,7 @@ export default class Users {
   protected readonly sorting = signal<SortingState>([]);
   protected readonly selectedRoles = signal<UserRole[]>([]);
   protected readonly selectedStatuses = signal<UserStatus[]>([]);
-  protected readonly defaultColumnPinning: ColumnPinningState = { left: ['select'], right: ['actions'] };
+  protected readonly defaultColumnPinning: ColumnPinningState = { start: ['select'], end: ['actions'] };
 
   protected readonly usersResource = rxResource({
     params: () => {

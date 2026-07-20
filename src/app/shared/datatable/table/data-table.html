@@ -16,10 +16,10 @@
                   [style]="getCommonPinningStyles(header.column)"
                   [class.pinned-col]="!!header.column.getIsPinned()"
                   [class.pinned-boundary-left]="
-                    header.column.getIsPinned() === 'left' && header.column.getIsLastColumn('left')
+                    header.column.getIsPinned() === 'start' && header.column.getIsLastColumn('start')
                   "
                   [class.pinned-boundary-right]="
-                    header.column.getIsPinned() === 'right' && header.column.getIsFirstColumn('right')
+                    header.column.getIsPinned() === 'end' && header.column.getIsFirstColumn('end')
                   "
                 >
                   @if (!header.isPlaceholder) {
@@ -69,10 +69,10 @@
                     [style]="getCommonPinningStyles(cell.column)"
                     [class.pinned-col]="!!cell.column.getIsPinned()"
                     [class.pinned-boundary-left]="
-                      cell.column.getIsPinned() === 'left' && cell.column.getIsLastColumn('left')
+                      cell.column.getIsPinned() === 'start' && cell.column.getIsLastColumn('start')
                     "
                     [class.pinned-boundary-right]="
-                      cell.column.getIsPinned() === 'right' && cell.column.getIsFirstColumn('right')
+                      cell.column.getIsPinned() === 'end' && cell.column.getIsFirstColumn('end')
                     "
                   >
                     <ng-container *flexRender="cell.column.columnDef.cell; props: cell.getContext(); let cell">

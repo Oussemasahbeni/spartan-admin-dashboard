@@ -92,8 +92,8 @@ interface DataTableColumnMeta {
                   <button
                     type="button"
                     hlmDropdownMenuCheckbox
-                    [checked]="column.getIsPinned() === 'left'"
-                    (triggered)="pinColumn(column, 'left')"
+                    [checked]="column.getIsPinned() === 'start'"
+                    (triggered)="pinColumn(column, 'start')"
                   >
                     <ng-icon name="lucideChevronLeft" class="rtl:rotate-180" />
                     <span>{{ 'buttons.pinStart' | transloco }}</span>
@@ -103,8 +103,8 @@ interface DataTableColumnMeta {
                   <button
                     type="button"
                     hlmDropdownMenuCheckbox
-                    [checked]="column.getIsPinned() === 'right'"
-                    (triggered)="pinColumn(column, 'right')"
+                    [checked]="column.getIsPinned() === 'end'"
+                    (triggered)="pinColumn(column, 'end')"
                   >
                     <ng-icon name="lucideChevronRight" class="rtl:rotate-180" />
                     <span>{{ 'buttons.pinEnd' | transloco }}</span>

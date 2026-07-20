@@ -167,7 +167,7 @@ export class DataTable<T extends RowData> {
   /**
    * External column pinning state for server-side mode.
    */
-  public readonly defaultColumnPinning = input<ColumnPinningState>({ left: [], right: [] });
+  public readonly defaultColumnPinning = input<ColumnPinningState>({ start: [], end: [] });
 
   /**
    * The operation mode of the table.
@@ -291,12 +291,12 @@ export class DataTable<T extends RowData> {
       return {};
     }
     const isPinned = column.getIsPinned();
-    const isPinnedLeft = isPinned === 'left';
-    const isPinnedRight = isPinned === 'right';
+    const isPinnedStart = isPinned === 'start';
+    const isPinnedEnd = isPinned === 'end';
 
     return {
-      insetInlineStart: isPinnedLeft ? `${column.getStart('left')}px` : undefined,
-      insetInlineEnd: isPinnedRight ? `${column.getAfter('right')}px` : undefined,
+      insetInlineStart: isPinnedStart ? `${column.getStart('start')}px` : undefined,
+      insetInlineEnd: isPinnedEnd ? `${column.getAfter('end')}px` : undefined,
       position: isPinned ? 'sticky' : 'relative',
       width: `${column.getSize()}px`,
     };
@@ -446,8 +446,8 @@ export class DataTable<T extends RowData> {
 
   private cloneColumnPinningState(state: ColumnPinningState): ColumnPinningState {
     return {
-      left: state.left ? [...state.left] : [],
-      right: state.right ? [...state.right] : [],
+      start: state.start ? [...state.start] : [],
+      end: state.end ? [...state.end] : [],
     };
   }
 }
