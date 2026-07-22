@@ -54,6 +54,7 @@
     },
     "toast": {
         "eventCreated": "تم إنشاء الحدث بنجاح!",
-        "eventUpdated": "تم تحديث الحدث بنجاح!"
+        "eventUpdated": "{{eventTitle}} تم تحديثه.",
+        "eventDeleted": "{{eventTitle}} تم حذفه."
     }
 }

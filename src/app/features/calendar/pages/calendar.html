@@ -83,10 +83,10 @@
                     type="button"
                     hlmDropdownMenuCheckbox
                     [checked]="selectedTypes().includes(type.value)"
-                    (click)="toggleFilter(type.value)"
+                    (triggered)="toggleFilter(type.value)"
                   >
                     <span class="flex items-center gap-2">
-                      <span class="bg- mr-1 size-3 rounded-full" [style.backgroundColor]="type.color"></span>
+                      <span class="mr-1 size-3 rounded-full" [style.backgroundColor]="type.color"></span>
                       {{ t(`filter-menu.labels.${type.value}`) }}
                     </span>
                     <hlm-dropdown-menu-checkbox-indicator />

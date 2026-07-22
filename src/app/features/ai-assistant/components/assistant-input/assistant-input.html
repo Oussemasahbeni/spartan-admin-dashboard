@@ -46,7 +46,7 @@
           </button>
 
           <ng-template #plusMenu>
-            <hlm-dropdown-menu class="w-56">
+            <hlm-dropdown-menu class="w-64">
               <!-- Attachments -->
               <hlm-dropdown-menu-group>
                 <button type="button" hlmDropdownMenuItem [aria-label]="t('input.attachFile')" (click)="triggerFileInput()">
@@ -63,8 +63,8 @@
                 <button
                   type="button"
                   hlmDropdownMenuCheckbox
-                  checkBoxAlign="end"
                   [checked]="enableWebSearch()"
+                  [keepOpen]="false"
                   (click)="enableWebSearch.set(!enableWebSearch())"
                 >
                   <div class="flex items-center gap-2">
@@ -77,8 +77,8 @@
                 <button
                   type="button"
                   hlmDropdownMenuCheckbox
-                  checkBoxAlign="end"
                   [checked]="enableThinking()"
+                  [keepOpen]="false"
                   (click)="enableThinking.set(!enableThinking())"
                 >
                   <div class="flex items-center gap-2">
@@ -92,8 +92,8 @@
                 <button
                   type="button"
                   hlmDropdownMenuCheckbox
-                  checkBoxAlign="end"
                   [checked]="enableReasoning()"
+                  [keepOpen]="false"
                   (click)="enableReasoning.set(!enableReasoning())"
                 >
                   <div class="flex items-center gap-2">
@@ -145,6 +145,7 @@
                     hlmDropdownMenuCheckbox
                     checkBoxAlign="end"
                     [checked]="selectedModel() === model"
+                    [keepOpen]="false"
                     (click)="selectModel(model)"
                   >
                     <hlm-dropdown-menu-checkbox-indicator />

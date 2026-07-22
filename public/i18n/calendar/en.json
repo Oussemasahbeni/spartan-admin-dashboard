@@ -54,6 +54,7 @@
     },
     "toast": {
         "eventCreated": "Event created successfully!",
-        "eventUpdated": "Event updated successfully!"
+        "eventUpdated": "{{eventTitle}} has been updated.",
+        "eventDeleted": "{{eventTitle}} has been deleted."
     }
 }

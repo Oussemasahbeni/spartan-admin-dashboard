@@ -30,6 +30,7 @@ import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 
+import { toast } from '@spartan-ng/brain/sonner';
 import { isBefore, subDays } from 'date-fns';
 import { CalendarForm } from '../components/calendar-form/calendar-form';
 import { EventDetails } from '../components/event-details/event-details';
@@ -39,11 +40,11 @@ import { CalendarStore, EVENT_TYPES } from '../state/calendar-store';
   selector: 'adm-calendar',
   imports: [
     HlmButtonImports,
-    NgIcon,
     BrnHoverCardImports,
     HlmDropdownMenuImports,
     HlmBadgeImports,
     HlmDatePickerImports,
+    NgIcon,
     FullCalendarModule,
     TranslocoModule,
     DatePipe,
@@ -240,6 +241,7 @@ export default class Calendar {
     };
 
     this._calendarStore.updateEvent(updatedEvent);
+    toast.success(this._translocoService.translate('calendar.toast.eventUpdated', { eventTitle: event.title }));
   }
 
   private handleEventClick(info: EventClickArg): void {

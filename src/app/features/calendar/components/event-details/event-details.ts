@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EventApi, EventInput } from '@fullcalendar/core/index.js';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideAlignLeft, lucideCalendar, lucideClock, lucideMapPin, lucideTag } from '@ng-icons/lucide';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
@@ -10,13 +10,14 @@ import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports, HlmDialogService } from '@spartan-ng/helm/dialog';
 
+import { toast } from '@spartan-ng/brain/sonner';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { CalendarStore } from '../../state/calendar-store';
 import { CalendarForm } from '../calendar-form/calendar-form';
 
 @Component({
   selector: 'adm-event-details',
-  imports: [HlmDialogImports, HlmButtonImports, HlmBadgeImports, NgIcon, HlmSeparatorImports, TranslocoModule, DatePipe],
+  imports: [HlmDialogImports, HlmButtonImports, HlmBadgeImports, HlmSeparatorImports, NgIcon, TranslocoModule, DatePipe],
   providers: [
     provideIcons({
       lucideCalendar,
@@ -37,6 +38,7 @@ export class EventDetails {
   // ==========================================
   private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _dialogRef = inject<BrnDialogRef>(BrnDialogRef);
+  private readonly _transloco = inject(TranslocoService);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _calendarStore = inject(CalendarStore);
   private readonly _dialogContext = injectBrnDialogContext<{ event: EventApi }>();
@@ -80,6 +82,7 @@ export class EventDetails {
     const id = this.event().id;
     if (id) {
       this._calendarStore.deleteEvent(id);
+      toast.success(this._transloco.translate('calendar.toast.eventDeleted', { eventTitle: this.event().title }));
       this._dialogRef.close();
     }
   }

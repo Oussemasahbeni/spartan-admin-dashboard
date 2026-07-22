@@ -149,12 +149,13 @@ export class CalendarForm implements OnInit {
       },
     };
 
+    this._showToast();
     this._dialogRef.close(event);
   }
 
-  showToast() {
+  private _showToast() {
     const message = this.isEditMode()
-      ? this._transloco.translate('calendar.toast.eventUpdated')
+      ? this._transloco.translate('calendar.toast.eventUpdated', { eventTitle: this.eventForm().value().title })
       : this._transloco.translate('calendar.toast.eventCreated');
     toast.success(message);
   }
