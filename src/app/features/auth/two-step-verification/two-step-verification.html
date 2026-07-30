@@ -18,21 +18,21 @@
           id="otp-input"
           hlmInputOtp
           formControlName="otp"
-          [maxLength]="maxLength"
+          [length]="maxLength"
           [transformPaste]="transformPaste"
           (completed)="onOtpComplete()"
         >
-          <div hlmInputOtpGroup>
+          <hlm-input-otp-group>
             <hlm-input-otp-slot [index]="0" />
             <hlm-input-otp-slot [index]="1" />
             <hlm-input-otp-slot [index]="2" />
-          </div>
+          </hlm-input-otp-group>
           <hlm-input-otp-separator />
-          <div hlmInputOtpGroup>
+          <hlm-input-otp-group>
             <hlm-input-otp-slot [index]="3" />
             <hlm-input-otp-slot [index]="4" />
-            <hlm-input-otp-slot [index]="5" />
-          </div>
+            <hlm-input-otp-slot [index]="5" /> </hlm-input-otp-group
+          >
         </brn-input-otp>
         <p class="text-muted-foreground text-center text-sm">{{ t('helperText') }}</p>
       </div>

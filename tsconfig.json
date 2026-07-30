@@ -53,7 +53,10 @@
       "@spartan-ng/helm/dialog": ["./src/app/libs/dialog/src/index.ts"],
       "@spartan-ng/helm/sidebar": ["./src/app/libs/sidebar/src/index.ts"],
       "@spartan-ng/helm/tabs": ["./src/app/libs/tabs/src/index.ts"],
-      "@spartan-ng/helm/tooltip": ["./src/app/libs/tooltip/src/index.ts"]
+      "@spartan-ng/helm/tooltip": ["./src/app/libs/tooltip/src/index.ts"],
+      "@spartan-ng/helm/attachment": ["./src/app/libs/attachment/src/index.ts"],
+      "@spartan-ng/helm/message": ["./src/app/libs/message/src/index.ts"],
+      "@spartan-ng/helm/bubble": ["./src/app/libs/bubble/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

@@ -64,7 +64,7 @@
 
 <hlm-dialog-footer *transloco="let t; prefix: 'buttons'">
   <button type="button" hlmBtn variant="outline" hlmDialogClose>{{ t('cancel') }}</button>
-  <button type="button" (click)="onSubmit()" hlmBtn [disabled]="userForm().submitting()">
+  <button type="button" hlmBtn [disabled]="userForm().submitting()" (click)="onSubmit()">
     @if (userForm().submitting()) {
       <hlm-spinner />
     }

@@ -15,13 +15,37 @@
     <div hlmInputGroup class="rounded-2xl">
       <!-- Attachments Display -->
       @if (hasAttachments()) {
-        <div hlmInputGroupAddon align="block-start">
-          <div class="no-scrollbar -m-2 flex gap-3 overflow-y-auto px-2 pt-2 pb-4">
+        <hlm-input-group-addon align="block-start">
+          <hlm-attachment-group>
             @for (file of attachments(); track file.name + file.size) {
-              <adm-attachment-card [file]="file" (remove)="removeAttachment(file)" />
+              <hlm-attachment>
+                @if (isImageFile(file)) {
+                  <hlm-attachment-media variant="image">
+                    <img [src]="getFilePreviewUrl(file)" [alt]="file.name" />
+                  </hlm-attachment-media>
+                } @else {
+                  <hlm-attachment-media variant="icon">
+                    <ng-icon name="lucideFile" />
+                  </hlm-attachment-media>
+                }
+                <hlm-attachment-content>
+                  <hlm-attachment-title>{{ file.name }}</hlm-attachment-title>
+                  <hlm-attachment-description> {{ file.size | bytes }} </hlm-attachment-description>
+                </hlm-attachment-content>
+                <hlm-attachment-actions>
+                  <button
+                    type="button"
+                    hlmAttachmentAction
+                    [aria-label]="t('input.removeAttachment', { filename: file.name })"
+                    (click)="removeAttachment(file)"
+                  >
+                    <ng-icon name="lucideX" />
+                  </button>
+                </hlm-attachment-actions>
+              </hlm-attachment>
             }
-          </div>
-        </div>
+          </hlm-attachment-group>
+        </hlm-input-group-addon>
       }
 
       <!-- Textarea -->

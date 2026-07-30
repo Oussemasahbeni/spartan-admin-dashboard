@@ -34,7 +34,10 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "@fullcalendar/angular/skeleton.css",
+              "@fullcalendar/angular/themes/classic/theme.css",
+              "@fullcalendar/angular/themes/classic/palette.css"
             ]
           },
           "configurations": {

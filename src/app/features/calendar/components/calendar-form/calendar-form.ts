@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { form, FormField, FormRoot, required, submit, validate } from '@angular/forms/signals';
-import { EventApi, EventInput } from '@fullcalendar/core/index.js';
+import { EventApi, EventInput } from '@fullcalendar/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { toast } from '@spartan-ng/brain/sonner';

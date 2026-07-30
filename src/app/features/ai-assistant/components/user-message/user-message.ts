@@ -3,17 +3,26 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, PLATFORM_ID, inject, input, output, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideCopy, lucidePencil, lucideUser } from '@ng-icons/lucide';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmCardImports } from '@spartan-ng/helm/card';
-
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 import { UserMessage } from '../../model/assistant';
 import { EditEvent } from '../../model/user-message';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'adm-user-message',
-  imports: [HlmCardImports, HlmTextareaImports, HlmInputGroupImports, HlmButtonImports, NgIcon],
+  imports: [
+    HlmTextareaImports,
+    HlmInputGroupImports,
+    HlmButtonImports,
+    HlmMessageImports,
+    HlmBubbleImports,
+    TranslocoDirective,
+    NgIcon,
+  ],
   viewProviders: [provideIcons({ lucideUser, lucideCopy, lucideCheck, lucidePencil })],
   template: `
     <article class="group flex min-w-0 flex-1 flex-col items-end" role="article">
@@ -27,40 +36,39 @@ import { EditEvent } from '../../model/user-message';
             (keydown)="handleEditKeydown($event)"
           ></textarea>
           <div hlmInputGroupAddon align="block-end">
-            <div class="ms-auto flex items-center gap-4">
+            <div *transloco="let t; prefix:'buttons'" class="ms-auto flex items-center gap-4">
               <button type="button" hlmInputGroupButton size="sm" variant="secondary" (click)="cancelEdit()">
-                <span>Cancel</span>
+                <span>{{ t('cancel') }}</span>
               </button>
               <button type="button" hlmInputGroupButton size="sm" variant="default" (click)="saveEdit()">
-                <span>Save</span>
+                <span>{{ t('save') }}</span>
               </button>
             </div>
           </div>
         </div>
       } @else {
-        <!-- Display Mode -->
-        <div hlmCard class="py-3">
-          <p hlmCardContent class="w-fit text-sm leading-relaxed">{{ message().content }}</p>
-        </div>
-      }
+        <hlm-message align="end">
+          <hlm-message-content>
+            <hlm-bubble variant="muted">
+              <hlm-bubble-content>{{ message().content }}.</hlm-bubble-content>
+            </hlm-bubble>
+            <hlm-message-footer
+              class="opacity-0 transition-opacity duration-200 ease-in-out group-focus-within:opacity-100 group-hover:opacity-100"
+            >
+              <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
+                @if (copied()) {
+                  <ng-icon name="lucideCheck" />
+                } @else {
+                  <ng-icon name="lucideCopy" />
+                }
+              </button>
 
-      <!-- Action Buttons -->
-      @if (!isEditing()) {
-        <div
-          class="mt-2 flex items-center gap-2 opacity-0 transition-opacity duration-200 ease-in-out group-focus-within:opacity-100 group-hover:opacity-100"
-        >
-          <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
-            @if (copied()) {
-              <ng-icon name="lucideCheck" />
-            } @else {
-              <ng-icon name="lucideCopy" />
-            }
-          </button>
-
-          <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="startEdit()">
-            <ng-icon name="lucidePencil" />
-          </button>
-        </div>
+              <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="startEdit()">
+                <ng-icon name="lucidePencil" />
+              </button>
+            </hlm-message-footer>
+          </hlm-message-content>
+        </hlm-message>
       }
     </article>
   `,

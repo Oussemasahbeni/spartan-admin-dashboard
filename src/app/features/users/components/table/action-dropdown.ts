@@ -81,8 +81,8 @@ export class ActionDropdown {
   private readonly _userService = inject(UserService);
   private readonly _transloco = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
-  private readonly _context = injectFlexRenderContext<CellContext<DataTableFeatures, User, unknown>>();
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly _context = injectFlexRenderContext<CellContext<DataTableFeatures, User, unknown>>();
 
   // ==========================================
   // Inputs

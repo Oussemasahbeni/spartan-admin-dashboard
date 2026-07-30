@@ -2,13 +2,20 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
 import { Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, EventClickArg, EventDropArg, EventInput } from '@fullcalendar/core/index.js';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
-import listPlugin from '@fullcalendar/list';
-import timeGridPlugin from '@fullcalendar/timegrid';
-
+import {
+  CalendarOptions,
+  DateClickInfo,
+  EventClickInfo,
+  EventDropInfo,
+  EventInput,
+  FullCalendarComponent,
+  FullCalendarModule,
+} from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/angular/daygrid';
+import interactionPlugin from '@fullcalendar/angular/interaction';
+import listPlugin from '@fullcalendar/angular/list';
+import themePlugin from '@fullcalendar/angular/themes/classic';
+import timeGridPlugin from '@fullcalendar/angular/timegrid';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -24,13 +31,12 @@ import {
   lucideSquare,
 } from '@ng-icons/lucide';
 import { BrnHoverCardImports } from '@spartan-ng/brain/hover-card';
+import { toast } from '@spartan-ng/brain/sonner';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-
-import { toast } from '@spartan-ng/brain/sonner';
 import { isBefore, subDays } from 'date-fns';
 import { CalendarForm } from '../components/calendar-form/calendar-form';
 import { EventDetails } from '../components/event-details/event-details';
@@ -78,7 +84,7 @@ export default class Calendar {
   // ==========================================
   // ViewChild
   // ==========================================
-  protected readonly calendar = viewChild<FullCalendarComponent>('calendar');
+  protected readonly calendar = viewChild.required<FullCalendarComponent>('calendar');
   // ==========================================
   // State
   // ==========================================
@@ -93,7 +99,7 @@ export default class Calendar {
   protected readonly selectedTypes = this._calendarStore.selectedTypes;
 
   protected readonly showDatePicker = computed(() => this.currentView().value === 'timeGridDay');
-  protected readonly calendarApi = computed(() => this.calendar()?.getApi());
+  protected readonly calendarApi = computed(() => this.calendar().getApi());
 
   protected readonly selectedDate = signal<Date>(new Date());
 
@@ -114,19 +120,18 @@ export default class Calendar {
   protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
   protected readonly calendarOptions = computed<CalendarOptions>(() => ({
     initialView: this.currentView().value,
-    headerToolbar: false,
-    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+    plugins: [themePlugin, dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
     events: this._calendarStore.filteredEvents(),
     contentHeight: 'auto',
     eventDisplay: this.eventDisplayMode(),
     eventTimeFormat: this.use24HourFormat()
       ? { hour: '2-digit', minute: '2-digit', hour12: false } // 14:30
       : { hour: 'numeric', minute: '2-digit', meridiem: 'short' }, // 2:30 PM
+    eventClass: 'rounded-md p-1',
     aspectRatio: 2,
     locale: this.activeLanguage(),
     editable: true,
     droppable: true,
-    showNonCurrentDates: false,
     fixedWeekCount: false,
     eventDrop: (info) => this.handleEventDrop(info),
     eventClick: (info) => this.handleEventClick(info),
@@ -170,29 +175,24 @@ export default class Calendar {
   // Methods
   // ==========================================
   protected nextMonth(): void {
-    this.calendarApi()?.next();
-    this.calendarApi()?.updateSize();
+    this.calendarApi().next();
   }
 
   protected previousMonth(): void {
-    this.calendarApi()?.prev();
-    this.calendarApi()?.updateSize();
+    this.calendarApi().prev();
   }
 
   protected goToToday(): void {
-    this.calendarApi()?.today();
-    this.calendarApi()?.updateSize();
+    this.calendarApi().today();
   }
   protected changeView(viewName: { value: string; label: string; icon: string }): void {
-    this.calendarApi()?.changeView(viewName.value);
-    this.calendarApi()?.updateSize();
+    this.calendarApi().changeView(viewName.value);
     this.currentView.set(viewName);
   }
 
   protected addEvent(): void {
     const dialogRef = this._hlmDialogService.open(CalendarForm, {
       contentClass: 'sm:min-w-lg',
-      autoFocus: false,
     });
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
@@ -206,7 +206,6 @@ export default class Calendar {
     const api = this.calendarApi();
     if (api) {
       api.gotoDate(dateStr);
-      api.updateSize();
     }
   }
 
@@ -228,7 +227,7 @@ export default class Calendar {
   // ==========================================
   // Event Handlers
   // ==========================================
-  private handleEventDrop(info: EventDropArg): void {
+  private handleEventDrop(info: EventDropInfo): void {
     const { event } = info;
     const updatedEvent: EventInput = {
       id: event.id,
@@ -236,7 +235,7 @@ export default class Calendar {
       start: event.startStr,
       end: event.endStr,
       allDay: event.allDay,
-      backgroundColor: event.backgroundColor,
+      color: event.color,
       extendedProps: { ...event.extendedProps },
     };
 
@@ -244,7 +243,7 @@ export default class Calendar {
     toast.success(this._translocoService.translate('calendar.toast.eventUpdated', { eventTitle: event.title }));
   }
 
-  private handleEventClick(info: EventClickArg): void {
+  private handleEventClick(info: EventClickInfo): void {
     const dialogRef = this._hlmDialogService.open(EventDetails, {
       context: {
         event: info.event,
@@ -259,7 +258,7 @@ export default class Calendar {
     });
   }
 
-  private handleDateClick(info: DateClickArg): void {
+  private handleDateClick(info: DateClickInfo): void {
     const dialogRef = this._hlmDialogService.open(CalendarForm, {
       context: {
         date: info.date,

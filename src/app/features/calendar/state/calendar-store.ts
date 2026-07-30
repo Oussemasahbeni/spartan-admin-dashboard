@@ -1,6 +1,7 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, Service, signal } from '@angular/core';
 import { STATIC_EVENTS } from '@core/mock/events.data';
-import { EventInput } from '@fullcalendar/core/index.js';
+import { EventInput } from '@fullcalendar/angular';
+
 
 export interface EventType {
   color: string;
@@ -14,7 +15,7 @@ export const EVENT_TYPES: EventType[] = [
   { color: 'var(--fc-yellow)', value: 'meeting' },
 ];
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class CalendarStore {
   private readonly _events = signal<EventInput[]>(structuredClone(STATIC_EVENTS));
   private readonly _selectedTypes = signal<string[]>([]);

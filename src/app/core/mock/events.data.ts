@@ -1,4 +1,4 @@
-import { EventInput } from '@fullcalendar/core/index.js';
+import { EventInput } from '@fullcalendar/angular';
 
 const clampDay = (year: number, month: number, day: number): number => {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -34,7 +34,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Morning Yoga Session',
     start: scheduledAt(0, 2, 22),
     end: scheduledAt(0, 5, 22),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'Daily stretching and meditation to start the day.',
       type: 'personal',
@@ -45,7 +45,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Email Inbox Clearing',
     start: scheduledAt(1, 6, 31),
     end: scheduledAt(1, 7, 31),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Process outstanding client requests and clear the backlog.',
       type: 'work',
@@ -56,7 +56,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Product Sprint Planning',
     start: scheduledAt(2, 15, 36),
     end: scheduledAt(2, 18, 36),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Reviewing the roadmap for the upcoming development cycle.',
       type: 'meeting',
@@ -67,7 +67,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Grocery Shopping',
     start: scheduledAt(3, 10, 24),
     end: scheduledAt(3, 12, 24),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'Weekly grocery run—don’t forget the oat milk.',
       type: 'personal',
@@ -78,7 +78,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'URGENT: Server Maintenance',
     start: scheduledAt(4, 23, 50),
     end: scheduledAt(4, 3, 50, 1),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Critical security patch deployment for main production servers.',
       type: 'urgent',
@@ -89,7 +89,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Afternoon Gym',
     start: scheduledAt(5, 11, 3),
     end: scheduledAt(5, 13, 3),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'Leg day at the local fitness center.',
       type: 'personal',
@@ -100,7 +100,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Fix Production Bug #402',
     start: scheduledAt(6, 17, 30),
     end: scheduledAt(6, 19, 30),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Investigating payment gateway timeout issues reported by users.',
       type: 'urgent',
@@ -111,7 +111,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Client Onboarding Call',
     start: scheduledAt(7, 16, 27),
     end: scheduledAt(7, 17, 27),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Introductory call with the new Marketing team.',
       type: 'meeting',
@@ -122,7 +122,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Code Review & Documentation',
     start: scheduledAt(8, 9, 37),
     end: scheduledAt(8, 12, 37),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Reviewing pull requests and updating API documentation.',
       type: 'work',
@@ -133,7 +133,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Submit Tax Returns',
     start: scheduledAt(9, 13, 41),
     end: scheduledAt(9, 15, 41),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Final deadline for quarterly tax filing.',
       type: 'urgent',
@@ -144,7 +144,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Family Dinner',
     start: scheduledAt(10, 12, 30),
     end: scheduledAt(10, 15, 30),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'Catching up with family over dinner at the Italian place.',
       type: 'personal',
@@ -155,7 +155,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Weekly Sync',
     start: scheduledAt(11, 13, 45),
     end: scheduledAt(11, 14, 45),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Standard team check-in on project status.',
       type: 'meeting',
@@ -166,7 +166,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Design System Update',
     start: scheduledAt(12, 7, 32),
     end: scheduledAt(12, 10, 32),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Refactoring Figma components and updating the CSS variables.',
       type: 'work',
@@ -177,7 +177,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Weekend Hike',
     start: scheduledAt(13, 19, 30),
     end: scheduledAt(13, 22, 30),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'Exploring the trails at the National Park.',
       type: 'personal',
@@ -188,7 +188,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Brainstorming Session',
     start: scheduledAt(14, 0, 13),
     end: scheduledAt(14, 1, 13),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Ideation for the upcoming Q3 marketing campaign.',
       type: 'meeting',
@@ -199,7 +199,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Deep Work: Feature A',
     start: scheduledAt(15, 20, 21),
     end: scheduledAt(15, 0, 21, 1),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Uninterrupted time for complex logic implementation.',
       type: 'work',
@@ -210,7 +210,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Quarterly Report Analysis',
     start: scheduledAt(16, 16, 52),
     end: scheduledAt(16, 20, 52),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Reviewing performance metrics and growth KPIs.',
       type: 'work',
@@ -221,7 +221,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Movie Night',
     start: scheduledAt(17, 23, 38),
     end: scheduledAt(17, 1, 38, 1),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'Watching the new Sci-Fi release with friends.',
       type: 'personal',
@@ -232,7 +232,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'URGENT: Lease Agreement Review',
     start: scheduledAt(18, 1, 47),
     end: scheduledAt(18, 5, 47),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Legal review of the new office lease required today.',
       type: 'urgent',
@@ -243,7 +243,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Partnership Strategy',
     start: scheduledAt(19, 16, 18),
     end: scheduledAt(19, 18, 18),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Evaluating potential B2B partnerships for the next year.',
       type: 'work',
@@ -254,7 +254,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Interview: Frontend Dev',
     start: scheduledAt(20, 21, 2),
     end: scheduledAt(20, 1, 2, 1),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Technical interview for the Senior Frontend Engineer position.',
       type: 'meeting',
@@ -265,7 +265,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: '1-on-1 with Manager',
     start: scheduledAt(21, 12, 47),
     end: scheduledAt(21, 13, 47),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Bi-weekly career development and feedback sync.',
       type: 'meeting',
@@ -276,7 +276,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Stakeholder Workshop',
     start: scheduledAt(22, 17, 17),
     end: scheduledAt(22, 21, 17),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Defining project requirements with the executive board.',
       type: 'meeting',
@@ -287,7 +287,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'EMERGENCY: Database Outage',
     start: scheduledAt(23, 11, 48),
     end: scheduledAt(23, 15, 48),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Immediate investigation into DB connection pool exhaustion.',
       type: 'urgent',
@@ -298,7 +298,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Laptop Repair Appointment',
     start: scheduledAt(24, 9, 33),
     end: scheduledAt(24, 11, 33),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Battery replacement at the service center.',
       type: 'urgent',
@@ -309,7 +309,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Design Critique',
     start: scheduledAt(25, 15, 0),
     end: scheduledAt(25, 19, 0),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Reviewing the new mobile app onboarding flow.',
       type: 'meeting',
@@ -320,7 +320,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Read: Industry Trends',
     start: scheduledAt(26, 22, 26),
     end: scheduledAt(26, 1, 26, 1),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'Catching up on AI research papers and tech blogs.',
       type: 'personal',
@@ -331,7 +331,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Submit Expense Reports',
     start: scheduledAt(27, 21, 15),
     end: scheduledAt(27, 23, 15),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Process all travel receipts before the month-end cutoff.',
       type: 'urgent',
@@ -342,7 +342,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Security Audit Prep',
     start: scheduledAt(28, 1, 59),
     end: scheduledAt(28, 3, 59),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Preparing logs and access records for the annual audit.',
       type: 'urgent',
@@ -353,7 +353,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Content Strategy Sync',
     start: scheduledAt(29, 17, 50),
     end: scheduledAt(29, 18, 50),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Discussing the editorial calendar for the company blog.',
       type: 'meeting',
@@ -364,7 +364,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Ad Campaign Review',
     start: scheduledAt(30, 1, 28),
     end: scheduledAt(30, 5, 28),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Analyzing performance of social media ad spend.',
       type: 'meeting',
@@ -375,7 +375,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Urgent Bug: Login Page',
     start: scheduledAt(31, 17, 53),
     end: scheduledAt(31, 19, 53),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Users unable to login on iOS Safari—needs immediate fix.',
       type: 'urgent',
@@ -386,7 +386,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'HR Policy Briefing',
     start: scheduledAt(32, 7, 20),
     end: scheduledAt(32, 9, 20),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Update on the new remote work and benefits package.',
       type: 'meeting',
@@ -397,7 +397,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Refactor Core Library',
     start: scheduledAt(33, 15, 25),
     end: scheduledAt(33, 18, 25),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Cleaning up technical debt in the shared utility modules.',
       type: 'work',
@@ -408,7 +408,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Update GitHub READMEs',
     start: scheduledAt(34, 7, 24),
     end: scheduledAt(34, 10, 24),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Improving documentation for internal developer onboarding.',
       type: 'work',
@@ -419,7 +419,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'CRITICAL: Data Recovery',
     start: scheduledAt(35, 7, 16),
     end: scheduledAt(35, 8, 16),
-    backgroundColor: 'var(--fc-red)',
+    color: 'var(--fc-red)',
     extendedProps: {
       description: 'Recovering deleted files from the dev environment backup.',
       type: 'urgent',
@@ -430,7 +430,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'QA Testing Phase 2',
     start: scheduledAt(36, 6, 41),
     end: scheduledAt(36, 10, 41),
-    backgroundColor: 'var(--fc-blue)',
+    color: 'var(--fc-blue)',
     extendedProps: {
       description: 'Executing end-to-end test cases for the upcoming release.',
       type: 'work',
@@ -441,7 +441,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Pick up Dry Cleaning',
     start: scheduledAt(37, 3, 58),
     end: scheduledAt(37, 4, 58),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'The shop closes at 5:00 PM.',
       type: 'personal',
@@ -452,7 +452,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'New Feature Kickoff',
     start: scheduledAt(38, 9, 25),
     end: scheduledAt(38, 10, 25),
-    backgroundColor: 'var(--fc-yellow)',
+    color: 'var(--fc-yellow)',
     extendedProps: {
       description: 'Alignment meeting for the new Dashboard widgets.',
       type: 'meeting',
@@ -463,7 +463,7 @@ export const STATIC_EVENTS: EventInput[] = [
     title: 'Relax & Meditate',
     start: scheduledAt(39, 12, 7),
     end: scheduledAt(39, 16, 7),
-    backgroundColor: 'var(--fc-green)',
+    color: 'var(--fc-green)',
     extendedProps: {
       description: 'Scheduled downtime to prevent burnout.',
       type: 'personal',

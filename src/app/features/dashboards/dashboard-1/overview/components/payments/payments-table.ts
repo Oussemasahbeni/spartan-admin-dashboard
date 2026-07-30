@@ -108,6 +108,9 @@ import { PaymentsActionDropdown } from './action-dropdown';
                 @case ('processing') {
                   <ng-icon class="animate-spin text-yellow-600" name="lucideLoader" />
                 }
+                @default {
+                  <ng-icon class="animate-spin text-yellow-600" name="lucideLoader" />
+                }
               }
               <span *transloco="let t; prefix: 'dashboard1.paymentsTable.status'"> {{ t(status) }} </span>
             </span>

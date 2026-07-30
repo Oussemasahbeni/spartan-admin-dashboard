@@ -1,4 +1,5 @@
-import { booleanAttribute, Component, computed, ElementRef, input, output, signal, viewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { booleanAttribute, Component, computed, ElementRef, inject, input, output, PLATFORM_ID, signal, viewChild } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -7,6 +8,7 @@ import {
   lucideArrowUp,
   lucideBrainCircuit,
   lucideChevronDown,
+  lucideFile,
   lucideGlobe,
   lucideGraduationCap,
   lucideLightbulb,
@@ -16,25 +18,27 @@ import {
   lucidePencilRuler,
   lucidePlus,
   lucideSquareStop,
+  lucideX,
 } from '@ng-icons/lucide';
+import { BytesPipe } from '@shared/pipes/bytes/bytes.pipe';
+import { HlmAttachmentImports } from '@spartan-ng/helm/attachment';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
-import { AttachmentCard } from '../attachment-card/attachment-card';
 
 @Component({
   selector: 'adm-assistant-input',
   imports: [
     HlmButtonImports,
-    NgIcon,
     HlmDropdownMenuImports,
     HlmInputImports,
     HlmInputGroupImports,
-    AttachmentCard,
+    HlmAttachmentImports,
+    NgIcon,
     TranslocoModule,
     FormField,
+    BytesPipe,
   ],
   templateUrl: './assistant-input.html',
   providers: [
@@ -52,10 +56,14 @@ import { AttachmentCard } from '../attachment-card/attachment-card';
       lucideGraduationCap,
       lucidePencilRuler,
       lucideSquareStop,
+      lucideX,
+      lucideFile
     }),
   ],
 })
 export class AssistantInput {
+
+    private readonly platformId = inject(PLATFORM_ID);
   // ==========================================
   // View Children
   // ==========================================
@@ -159,6 +167,18 @@ export class AssistantInput {
 
   selectModel(model: string): void {
     this.selectedModel.set(model);
+  }
+
+  isImageFile(file: File): boolean {
+    return file.type.startsWith('image/');
+  }
+
+  /** Get file preview URL for images */
+  getFilePreviewUrl(file: File): string {
+    if (isPlatformBrowser(this.platformId) && this.isImageFile(file)) {
+      return URL.createObjectURL(file);
+    }
+    return '';
   }
 
   // ==========================================

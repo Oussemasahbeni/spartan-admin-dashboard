@@ -1,12 +1,12 @@
 import { booleanAttribute, Component, input, output } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { ChatMessage, UserMessage } from '../../model/assistant';
 import { AiResponseCard } from '../ai-response/ai-response';
-import { TypingIndicator } from '../typing-indicator/typing-indicator';
 import { UserMessageCard } from '../user-message/user-message';
 
 @Component({
   selector: 'adm-chat-list',
-  imports: [TypingIndicator, UserMessageCard, AiResponseCard],
+  imports: [UserMessageCard, AiResponseCard, TranslocoDirective],
   template: `
     <div role="log" aria-live="polite" aria-atomic="false" aria-label="Chat messages">
       @if (messages().length > 0) {
@@ -26,7 +26,9 @@ import { UserMessageCard } from '../user-message/user-message';
 
           <!-- Loading indicator -->
           @if (loading()) {
-            <adm-typing-indicator />
+            <p *transloco="let t" class="text-muted-foreground shimmer text-sm">
+              {{ t('aiAssistant.thinking') }}
+            </p>
           }
         </div>
       }

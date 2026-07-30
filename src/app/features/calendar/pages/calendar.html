@@ -182,11 +182,6 @@
     </div>
 
     <!-- Calendar -->
-    <full-calendar
-      #calendar
-      class="bg-card flex rounded-lg p-4"
-      [class.overflow-y-auto]="currentView().value === 'listWeek'"
-      [options]="calendarOptions()"
-    />
+    <full-calendar #calendar [options]="calendarOptions()" />
   </div>
 </div>

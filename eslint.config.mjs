@@ -36,6 +36,8 @@ export default defineConfig([
       '@angular-eslint/use-injectable-provided-in': ['error'],
       '@angular-eslint/no-lifecycle-call': ['error'],
       '@angular-eslint/prefer-signals': 'error',
+      '@angular-eslint/prefer-service-decorator': 'error',
+      '@angular-eslint/inject-at-top': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -108,6 +110,7 @@ export default defineConfig([
     extends: [angularConfigs.templateRecommended, angularConfigs.templateAccessibility],
     rules: {
       '@angular-eslint/template/prefer-self-closing-tags': ['warn'],
+      '@angular-eslint/template/require-switch-default': 'error',
       '@angular-eslint/template/prefer-class-binding': 'error',
       '@angular-eslint/template/prefer-ngsrc': ['warn'],
       '@angular-eslint/template/attributes-order': ['error'],

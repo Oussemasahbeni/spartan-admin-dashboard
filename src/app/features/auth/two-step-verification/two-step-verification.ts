@@ -1,11 +1,11 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideMail } from '@ng-icons/lucide';
-import { BrnInputOtp } from '@spartan-ng/brain/input-otp';
+import { BrnInputOtpImports } from '@spartan-ng/brain/input-otp';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
@@ -20,11 +20,11 @@ import { AuthLayout } from '../layout';
     HlmInputOtpImports,
     HlmSpinnerImports,
     HlmAlertImports,
+    BrnInputOtpImports,
     HlmCard,
     ReactiveFormsModule,
     TranslocoModule,
     AuthLayout,
-    BrnInputOtp,
   ],
   providers: [provideIcons({ lucideMail })],
   templateUrl: './two-step-verification.html',
@@ -46,9 +46,8 @@ export default class TwoStepVerification {
   protected readonly isLoading = signal(false);
   protected readonly showError = signal(false);
   protected readonly countdown = signal(60);
+  protected readonly isResendDisabled = computed(() => this.countdown() > 0 || this.isLoading());
   protected readonly maxLength = 6;
-  protected readonly email = signal('user@example.com');
-
   private _intervalId?: ReturnType<typeof setInterval>;
 
   public readonly otpForm = this._formBuilder.group({
@@ -66,8 +65,6 @@ export default class TwoStepVerification {
   // ==========================================
   // Public Methods
   // ==========================================
-
-  protected readonly isResendDisabled = () => this.countdown() > 0;
 
   /** Handles paste by removing dashes */
   protected transformPaste = (pastedText: string) => pastedText.replaceAll('-', '');

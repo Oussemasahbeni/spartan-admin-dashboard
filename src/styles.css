@@ -7,11 +7,18 @@
 @import '@spartan-ng/brain/hlm-tailwind-preset.css';
 
 @import 'highlight.js/styles/github-dark.css' layer(base);
-@import './styles/full-calendar.css' layer(base);
 @import './styles/apex-charts.css' layer(base);
 
 @import '@fontsource/geist';
 @import '@fontsource-variable/noto-sans-arabic';
+
+full-calendar [class*='fc-classic-'] {
+  --fc-classic-border: var(--border);
+  --fc-classic-background: var(--muted);
+  --fc-classic-muted: var(--muted);
+  --fc-classic-today: var(--muted);
+  --fc-classic-foreground: var(--foreground);
+}
 
 :root {
   --scrollbar-track-color: transparent;

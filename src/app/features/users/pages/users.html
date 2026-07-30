@@ -95,6 +95,9 @@
             @case ('pending') {
               <ng-icon class="animate-spin text-yellow-600" name="lucideLoader" />
             }
+            @default {
+              <ng-icon class="animate-spin text-yellow-600" name="lucideLoader" />
+            }
           }
 
           <span *transloco="let t; prefix: 'users.status'">{{ t(status) }}</span>
@@ -118,6 +121,9 @@
             }
             @case ('manager') {
               <ng-icon name="lucideBriefcase" />
+            }
+            @default {
+              <ng-icon name="lucideUser" />
             }
           }
           <span *transloco="let t; prefix: 'users.role'">{{ t(role) }}</span>
