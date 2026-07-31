@@ -24,11 +24,6 @@
     "help": "المساعدة والدعم",
     "logout": "تسجيل الخروج"
   },
-  "header": {
-    "toggleTheme": "تبديل المظهر",
-    "closeSidebar": "إغلاق الشريط الجانبي",
-    "openSidebar": "فتح الشريط الجانبي"
-  },
   "breadcrumbs": {
     "home": "الرئيسية"
   },
