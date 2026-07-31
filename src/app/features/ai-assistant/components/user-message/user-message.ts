@@ -53,7 +53,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
               <hlm-bubble-content>{{ message().content }}.</hlm-bubble-content>
             </hlm-bubble>
             <hlm-message-footer
-              class="opacity-0 transition-opacity duration-200 ease-in-out group-focus-within:opacity-100 group-hover:opacity-100"
+              class="md:opacity-0 md:transition-opacity md:duration-200 md:ease-in-out md:group-focus-within:opacity-100 md:group-hover:opacity-100"
             >
               <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
                 @if (copied()) {
