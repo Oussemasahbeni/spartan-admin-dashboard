@@ -151,14 +151,14 @@ export class PaymentsTable {
       accessorKey: 'email',
       id: 'email',
       header: translateSignal('paymentsTable.columns.email'),
-      meta: { translationKey: 'dashboard1.paymentsTable.columns.email' },
+      meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.email' }),
     },
     {
       accessorKey: 'status',
       id: 'status',
       header: translateSignal('paymentsTable.columns.status'),
       enableSorting: false,
-      meta: { translationKey: 'dashboard1.paymentsTable.columns.status' },
+      meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.status' }),
       cell: () => this.statusCell(),
     },
     {
@@ -166,7 +166,7 @@ export class PaymentsTable {
       id: 'amount',
       header: translateSignal('paymentsTable.columns.amount'),
       enableSorting: false,
-      meta: { translationKey: 'dashboard1.paymentsTable.columns.amount' },
+      meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.amount' }),
       cell: (info) => {
         const amount = Number(info.getValue<string>());
         return Number.isFinite(amount) ? this.usdFormatter.format(amount) : '-';

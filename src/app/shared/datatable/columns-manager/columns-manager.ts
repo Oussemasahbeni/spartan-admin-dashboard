@@ -17,11 +17,6 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { Column, ColumnPinningPosition, RowData, Table } from '@tanstack/angular-table';
 import { DataTableFeatures } from '../table/table-features';
 
-interface DataTableColumnMeta {
-  translationKey?: string;
-  columnLabel?: string;
-}
-
 @Component({
   selector: 'adm-data-table-column-manager',
   imports: [DragDropModule, TranslocoModule, HlmDropdownMenuImports, NgIcon, HlmButtonImports],
@@ -55,12 +50,10 @@ interface DataTableColumnMeta {
               [checked]="column.getIsVisible()"
               (triggered)="column.toggleVisibility()"
             >
-              @let meta = getMeta(column);
+              @let meta = column.columnDef.meta?.();
               <hlm-dropdown-menu-checkbox-indicator />
-              @if (meta.translationKey) {
+              @if (meta?.translationKey) {
                 {{ meta.translationKey | transloco }}
-              } @else if (meta.columnLabel) {
-                {{ meta.columnLabel }}
               } @else {
                 {{ humanizeColumnId(column.id) }}
               }
@@ -156,10 +149,6 @@ export class DataTableColumnsManager<T extends RowData> {
 
   protected pinColumn(column: Column<DataTableFeatures, T>, position: ColumnPinningPosition | false) {
     column.pin(position);
-  }
-
-  protected getMeta(column: Column<DataTableFeatures, T>): DataTableColumnMeta {
-    return (column.columnDef.meta as DataTableColumnMeta | undefined) ?? {};
   }
 
   protected humanizeColumnId(id: string): string {

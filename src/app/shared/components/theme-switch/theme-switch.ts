@@ -1,3 +1,4 @@
+import { hasModifierKey } from '@angular/cdk/keycodes';
 import { Component, inject } from '@angular/core';
 import { ThemeService } from '@core/config/theme-service';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -50,7 +51,7 @@ export class ThemeSwitch {
     const target = event.target as HTMLElement;
     if (target.closest('input, textarea, select, [contenteditable]')) return;
 
-    if (event.key.toLowerCase() === 'd' && !event.ctrlKey && !event.metaKey && !event.altKey) {
+    if (event.key.toLowerCase() === 'd' && !hasModifierKey(event)) {
       event.preventDefault();
       this.toggleTheme();
     }

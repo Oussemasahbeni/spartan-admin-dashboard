@@ -1,5 +1,5 @@
-import { isPlatformBrowser, registerLocaleData } from '@angular/common';
-import { computed, inject, PLATFORM_ID, Service, signal } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { afterNextRender, computed, inject, Service, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { BrnCalendarI18n, injectBrnCalendarI18n } from '@spartan-ng/brain/calendar';
 import { arabicCalendarI18n, englishCalendarI18n, frenchCalendarI18n } from './date-I18n';
@@ -20,7 +20,6 @@ const registeredLocales = new Set<string>(['en']);
 export class LanguageService {
   private readonly _translocoService = inject(TranslocoService);
   private readonly _dir = inject(DirectionalityService);
-  private readonly _platformId = inject(PLATFORM_ID);
   private readonly _localStorage = inject(LOCAL_STORAGE);
   private readonly _calendarI18n = injectBrnCalendarI18n();
 
@@ -49,12 +48,12 @@ export class LanguageService {
   };
 
   constructor() {
-    if (isPlatformBrowser(this._platformId)) {
+    afterNextRender(() => {
       const browserLang = navigator.language?.split('-')[0];
       if (browserLang && browserLang === 'ar') {
         this._dir.updateDirection('rtl');
       }
-    }
+    });
   }
 
   async setLanguage(lang: Language): Promise<void> {

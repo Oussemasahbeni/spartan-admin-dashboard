@@ -5,11 +5,16 @@ import {
   columnResizingFeature,
   columnSizingFeature,
   columnVisibilityFeature,
+  metaHelper,
   rowPaginationFeature,
   rowSelectionFeature,
   rowSortingFeature,
   tableFeatures,
 } from '@tanstack/angular-table';
+
+export interface ColumnMeta {
+  translationKey?: string;
+}
 
 /**
  * The curated set of TanStack Table v9 features used across the shared DataTable.
@@ -31,6 +36,7 @@ export const dataTableFeatures = tableFeatures({
   columnOrderingFeature,
   columnSizingFeature,
   columnResizingFeature,
+  columnMeta: metaHelper<ColumnMeta>
 });
 
 /** The `TFeatures` type argument for all DataTable column/table type annotations. */
