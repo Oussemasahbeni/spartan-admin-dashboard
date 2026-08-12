@@ -1,8 +1,4 @@
 {
-    "header": {
-        "title": "التقويم",
-        "subtitle": "مكوّن تقويم مبني باستخدام FullCalendar و Angular."
-    },
     "addEvent": "إضافة حدث",
     "labels": {
         "month": "شهر",

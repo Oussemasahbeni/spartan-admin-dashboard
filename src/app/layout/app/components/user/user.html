@@ -1,4 +1,3 @@
-@let user = _user();
 <ul hlmSidebarMenu>
   <li hlmSidebarMenuItem>
     <button
@@ -11,12 +10,12 @@
       [side]="_menuSide()"
     >
       <hlm-avatar class="rounded-lg">
-        <img hlmAvatarImage [src]="user.avatar" [alt]="user.name" />
-        <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback>RG</span>
+        <img hlmAvatarImage [src]="user().avatar" [alt]="user().name" />
+        <span class="bg-primary rounded-lg text-white" hlmAvatarFallback>RG</span>
       </hlm-avatar>
       <div class="grid flex-1 text-left text-sm leading-tight">
-        <span class="truncate font-medium">{{ user.name }}</span>
-        <span class="truncate text-xs">{{ user.email }}</span>
+        <span class="truncate font-medium">{{ user().name }}</span>
+        <span class="truncate text-xs">{{ user().email }}</span>
       </div>
       <ng-icon name="lucideChevronsUpDown" class="ml-auto text-base" />
     </button>
@@ -28,12 +27,12 @@
     <hlm-dropdown-menu-label>
       <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
         <hlm-avatar class="rounded-lg">
-          <img hlmAvatarImage [src]="user.avatar" [alt]="user.name" />
-          <span class="rounded-lg bg-[#FD005B] text-white" hlmAvatarFallback>RG</span>
+          <img hlmAvatarImage [src]="user().avatar" [alt]="user().name" />
+          <span class="bg-primary rounded-lg text-white" hlmAvatarFallback>RG</span>
         </hlm-avatar>
         <div class="grid flex-1 text-left text-sm leading-tight">
-          <span class="truncate font-medium">{{ user.name }}</span>
-          <span class="truncate text-xs">{{ user.email }}</span>
+          <span class="truncate font-medium">{{ user().name }}</span>
+          <span class="truncate text-xs">{{ user().email }}</span>
         </div>
       </div>
     </hlm-dropdown-menu-label>
@@ -109,16 +108,16 @@
       <ng-template #languageTpl>
         <hlm-dropdown-menu-sub>
           @for (lang of availableLanguages(); track lang.code) {
-          <button
-            type="button"
-            hlmDropdownMenuCheckbox
-            [checked]="currentLang() === lang.code"
-            [keepOpen]="false"
-            (click)="setLang(lang.code)"
-          >
-            <span>{{ lang.label }}</span>
-            <hlm-dropdown-menu-checkbox-indicator />
-          </button>
+            <button
+              type="button"
+              hlmDropdownMenuCheckbox
+              [checked]="currentLang() === lang.code"
+              [keepOpen]="false"
+              (click)="setLang(lang.code)"
+            >
+              <span>{{ lang.label }}</span>
+              <hlm-dropdown-menu-checkbox-indicator />
+            </button>
           }
         </hlm-dropdown-menu-sub>
       </ng-template>

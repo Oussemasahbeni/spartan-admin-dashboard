@@ -1,4 +1,4 @@
-import { Component, computed, input, signal, viewChild } from '@angular/core';
+import { Component, computed, input, signal, TemplateRef, viewChild } from '@angular/core';
 import { provideTranslocoScope, translateSignal, TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -24,8 +24,8 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmTableImports } from '@spartan-ng/helm/table';
-import { ColumnDef, flexRenderComponent } from '@tanstack/angular-table';
-import { Payment } from '../../model/payment';
+import { CellContext, createColumnHelper, flexRenderComponent } from '@tanstack/angular-table';
+import { Payment, PaymentStatus } from '../../model/payment';
 import { PaymentsActionDropdown } from './action-dropdown';
 
 @Component({
@@ -131,7 +131,8 @@ export class PaymentsTable {
   // View Children
   // ==========================================
 
-  protected readonly statusCell = viewChild.required('statusCell');
+  protected readonly statusCell =
+    viewChild.required<TemplateRef<CellContext<DataTableFeatures, Payment, PaymentStatus>>>('statusCell');
   protected readonly dataTable = viewChild.required(DataTable<Payment>);
 
   // ==========================================
@@ -146,39 +147,35 @@ export class PaymentsTable {
     currency: 'USD',
   });
 
-  protected readonly columns: ColumnDef<DataTableFeatures, Payment>[] = [
-    {
-      accessorKey: 'email',
-      id: 'email',
+  private readonly columnHelper = createColumnHelper<DataTableFeatures, Payment>();
+
+  protected readonly columns = this.columnHelper.columns([
+    this.columnHelper.accessor('email', {
       header: translateSignal('paymentsTable.columns.email'),
       meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.email' }),
-    },
-    {
-      accessorKey: 'status',
-      id: 'status',
+    }),
+    this.columnHelper.accessor('status', {
       header: translateSignal('paymentsTable.columns.status'),
       enableSorting: false,
       meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.status' }),
       cell: () => this.statusCell(),
-    },
-    {
-      accessorKey: 'amount',
-      id: 'amount',
+    }),
+    this.columnHelper.accessor('amount', {
       header: translateSignal('paymentsTable.columns.amount'),
       enableSorting: false,
       meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.amount' }),
       cell: (info) => {
-        const amount = Number(info.getValue<string>());
+        const amount = info.getValue();
         return Number.isFinite(amount) ? this.usdFormatter.format(amount) : '-';
       },
-    },
-    {
+    }),
+    this.columnHelper.display({
       id: 'actions',
       enableHiding: false,
       size: 40,
       cell: () => flexRenderComponent(PaymentsActionDropdown),
-    },
-  ];
+    }),
+  ]);
 
   // ==========================================
   // Public Methods

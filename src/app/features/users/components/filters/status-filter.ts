@@ -64,7 +64,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
           <hlm-command-group>
             @for (status of _statusList(); track status) {
               <button type="button" hlm-command-item [value]="status" (selected)="statusSelected(status)">
-                <hlm-checkbox class="mr-2" [checked]="isStatusSelected(status)" />
+                <hlm-checkbox [checked]="isStatusSelected(status)" />
                 @switch (status) {
                   @case ('active') {
                     <ng-icon class="text-green-600" name="lucideCircleCheck" />

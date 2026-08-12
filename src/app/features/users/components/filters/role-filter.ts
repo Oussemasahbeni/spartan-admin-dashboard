@@ -63,7 +63,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
           <hlm-command-group>
             @for (role of _rolesList(); track role) {
               <button type="button" hlm-command-item [value]="role" (selected)="roleSelected(role)">
-                <hlm-checkbox class="mr-2" [checked]="isRoleSelected(role)" />
+                <hlm-checkbox [checked]="isRoleSelected(role)" />
                 @switch (role) {
                   @case ('admin') {
                     <ng-icon name="lucideShieldCheck" />

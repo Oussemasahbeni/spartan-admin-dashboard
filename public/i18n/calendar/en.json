@@ -1,8 +1,4 @@
 {
-    "header": {
-        "title": "Calendar",
-        "subtitle": "A calendar component built with FullCalendar and Angular."
-    },
     "addEvent": "Add Event",
     "labels": {
         "month": "Month",

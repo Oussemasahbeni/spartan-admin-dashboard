@@ -1,8 +1,4 @@
 {
-    "header": {
-        "title": "Calendrier",
-        "subtitle": "Un composant calendrier construit avec FullCalendar et Angular."
-    },
     "addEvent": "Ajouter un événement",
     "labels": {
         "month": "Mois",

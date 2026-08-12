@@ -100,8 +100,6 @@ export default defineConfig([
       '@angular-eslint/prefer-host-metadata-property': ['error'],
       '@angular-eslint/prefer-output-readonly': ['error'],
       '@angular-eslint/prefer-output-emitter-ref': ['error'],
-      // Needed to be off because spartan uses input renaming frequently
-      '@angular-eslint/no-input-rename': ['off'],
     },
   },
   {

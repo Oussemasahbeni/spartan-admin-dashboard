@@ -13,7 +13,7 @@ import { HlmCardImports } from '@spartan-ng/helm/card';
 
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
-import { CellContext, ColumnDef } from '@tanstack/angular-table';
+import { CellContext, createColumnHelper } from '@tanstack/angular-table';
 import { Transaction } from '../../model/dashboard-2';
 import { provideTransactionStatusIcons, TransactionStatusUIPipe } from '../../pipes/status-ui.pipe';
 
@@ -60,7 +60,7 @@ export class TransactionsTableComponent {
   protected readonly userCell =
     viewChild.required<TemplateRef<CellContext<DataTableFeatures, Transaction, string>>>('userCell');
   protected readonly statusCell =
-    viewChild.required<TemplateRef<CellContext<DataTableFeatures, Transaction, string>>>('statusCell');
+    viewChild.required<TemplateRef<CellContext<DataTableFeatures, Transaction, Transaction['status']>>>('statusCell');
   protected readonly amountCell =
     viewChild.required<TemplateRef<CellContext<DataTableFeatures, Transaction, string>>>('amountCell');
 
@@ -95,45 +95,38 @@ export class TransactionsTableComponent {
    * TanStack Table Column Definitions.
    * Uses `translateSignal` for reactive header translations.
    */
-  protected readonly columns: ColumnDef<DataTableFeatures, Transaction>[] = [
-    {
+  private readonly columnHelper = createColumnHelper<DataTableFeatures, Transaction>();
+
+  protected readonly columns = this.columnHelper.columns([
+    this.columnHelper.accessor('user.name', {
       id: 'user',
-      accessorKey: 'user.name',
       header: translateSignal('recentActivity.columns.user'),
-      meta: ()=> ( { translationKey: 'dashboard2.recentActivity.columns.user' }),
+      meta: () => ({ translationKey: 'dashboard2.recentActivity.columns.user' }),
       enableSorting: false,
       cell: () => this.userCell(),
-    },
-    {
-      id: 'status',
-      accessorKey: 'status',
+    }),
+    this.columnHelper.accessor('status', {
       header: translateSignal('recentActivity.columns.status'),
       meta: () => ({ translationKey: 'dashboard2.recentActivity.columns.status' }),
       enableSorting: false,
       cell: () => this.statusCell(),
-    },
-    {
-      id: 'id',
-      accessorKey: 'id',
+    }),
+    this.columnHelper.accessor('id', {
       header: translateSignal('recentActivity.columns.id'),
       meta: () => ({ translationKey: 'dashboard2.recentActivity.columns.id' }),
       enableSorting: false,
       cell: (info) => `#${info.getValue()}`,
-    },
-    {
-      id: 'date',
-      accessorKey: 'date',
+    }),
+    this.columnHelper.accessor('date', {
       header: translateSignal('recentActivity.columns.date'),
       meta: () => ({ translationKey: 'dashboard2.recentActivity.columns.date' }),
       enableSorting: false,
-    },
-    {
-      id: 'amount',
-      accessorKey: 'amount',
+    }),
+    this.columnHelper.accessor('amount', {
       header: translateSignal('recentActivity.columns.amount'),
       meta: () => ({ translationKey: 'dashboard2.recentActivity.columns.amount' }),
       enableSorting: false,
       cell: () => this.amountCell(),
-    },
-  ];
+    }),
+  ]);
 }

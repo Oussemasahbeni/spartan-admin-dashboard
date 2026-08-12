@@ -9,8 +9,8 @@ import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import {
   CellContext,
-  ColumnDef,
   ColumnPinningState,
+  createColumnHelper,
   flexRenderComponent,
   PaginationState,
   SortingState,
@@ -139,66 +139,48 @@ export default class Users {
 
   protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
   protected readonly searchForm = form(signal({ search: '' }), (schema) => debounce(schema.search, 300));
-  protected readonly columns: ColumnDef<DataTableFeatures, User>[] = [
-    {
-      id: 'name',
-      accessorKey: 'name',
+
+  private readonly columnHelper = createColumnHelper<DataTableFeatures, User>();
+
+  protected readonly columns = this.columnHelper.columns([
+    this.columnHelper.accessor('name', {
       header: translateSignal(`list.columns.name`),
       meta: () => ({ translationKey: 'users.list.columns.name' }),
       cell: () => this.nameCell(),
-    },
-    {
-      id: 'email',
-      accessorKey: 'email',
-      meta: () => ({ translationKey: 'users.list.columns.email' }),
+    }),
+    this.columnHelper.accessor('email', {
       header: translateSignal(`list.columns.email`),
-    },
-    {
-      id: 'country',
-      accessorKey: 'country',
+      meta: () => ({ translationKey: 'users.list.columns.email' }),
+    }),
+    this.columnHelper.accessor('country', {
       header: translateSignal('list.columns.country'),
       meta: () => ({ translationKey: 'users.list.columns.country' }),
       enableSorting: false,
       cell: () => this.countryCell(),
-    },
-    {
-      id: 'phoneNumber',
-      accessorKey: 'phoneNumber',
+    }),
+    this.columnHelper.accessor('phoneNumber', {
       header: translateSignal('list.columns.phoneNumber'),
-      meta: () => ({ translationKey: 'users.list.columns.phoneNumber' })  ,
+      meta: () => ({ translationKey: 'users.list.columns.phoneNumber' }),
       enableSorting: false,
-    },
-    {
-      id: 'createdAt',
-      accessorKey: 'createdAt',
+    }),
+    this.columnHelper.accessor('createdAt', {
       header: translateSignal('list.columns.createdAt'),
       meta: () => ({ translationKey: 'users.list.columns.createdAt' }),
       cell: () => this.dateCell(),
-    },
-    {
-      id: 'role',
-      accessorKey: 'role',
+    }),
+
+    this.columnHelper.accessor('role', {
       header: translateSignal('list.columns.role'),
       meta: () => ({ translationKey: 'users.list.columns.role' }),
       cell: () => this.roleCell(),
-    },
-    {
-      id: 'status',
-      accessorKey: 'status',
+    }),
+    this.columnHelper.accessor('status', {
       header: translateSignal('list.columns.status'),
       meta: () => ({ translationKey: 'users.list.columns.status' }),
       cell: () => this.statusCell(),
-      filterFn: (row, columnId, filterValue: UserStatus[]) => {
-        // If no filter is selected, show all rows
-        if (!filterValue || filterValue.length === 0) {
-          return true;
-        }
-        const rowValue = row.getValue(columnId) as UserStatus;
-        return filterValue.includes(rowValue);
-      },
-    },
+    }),
 
-    {
+    this.columnHelper.display({
       id: 'actions',
       enableHiding: false,
       enableResizing: false,
@@ -210,8 +192,8 @@ export default class Users {
             onSuccess: () => this.refreshTable(),
           },
         }),
-    },
-  ];
+    }),
+  ]);
 
   // ==========================================
   // Public Methods

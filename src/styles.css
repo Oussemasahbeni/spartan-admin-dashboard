@@ -14,7 +14,7 @@
 
 full-calendar [class*='fc-classic-'] {
   --fc-classic-border: var(--border);
-  --fc-classic-background: var(--muted);
+  --fc-classic-background: var(--card);
   --fc-classic-muted: var(--muted);
   --fc-classic-today: var(--muted);
   --fc-classic-foreground: var(--foreground);

@@ -32,11 +32,13 @@ import {
 } from '@ng-icons/lucide';
 import { BrnHoverCardImports } from '@spartan-ng/brain/hover-card';
 import { toast } from '@spartan-ng/brain/sonner';
+import type { ToggleValue } from '@spartan-ng/brain/toggle-group';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
+import { HlmToggleGroupImports } from '@spartan-ng/helm/toggle-group';
 import { isBefore, subDays } from 'date-fns';
 import { CalendarForm } from '../components/calendar-form/calendar-form';
 import { EventDetails } from '../components/event-details/event-details';
@@ -50,6 +52,7 @@ import { CalendarStore, EVENT_TYPES } from '../state/calendar-store';
     HlmDropdownMenuImports,
     HlmBadgeImports,
     HlmDatePickerImports,
+    HlmToggleGroupImports,
     NgIcon,
     FullCalendarModule,
     TranslocoModule,
@@ -98,7 +101,7 @@ export default class Calendar {
 
   protected readonly selectedTypes = this._calendarStore.selectedTypes;
 
-  protected readonly showDatePicker = computed(() => this.currentView().value === 'timeGridDay');
+  protected readonly showDatePicker = computed(() => this.currentView() === 'timeGridDay');
   protected readonly calendarApi = computed(() => this.calendar().getApi());
 
   protected readonly selectedDate = signal<Date>(new Date());
@@ -115,11 +118,11 @@ export default class Calendar {
     { value: 'timeGridDay', label: 'day', icon: 'lucideSquare' },
     { value: 'listWeek', label: 'list', icon: 'lucideList' },
   ]);
-  protected readonly currentView = signal(this.availableViews()[0]);
+  protected readonly currentView = signal(this.availableViews()[0].value);
 
   protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
   protected readonly calendarOptions = computed<CalendarOptions>(() => ({
-    initialView: this.currentView().value,
+    initialView: this.currentView(),
     plugins: [themePlugin, dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
     events: this._calendarStore.filteredEvents(),
     contentHeight: 'auto',
@@ -161,12 +164,12 @@ export default class Calendar {
   constructor() {
     this._breakpointObserver
       .observe([Breakpoints.Handset])
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed())
       .subscribe((result) => {
         if (result.matches) {
-          this.changeView({ value: 'listWeek', label: 'list', icon: 'lucideList' });
+          this.changeView('listWeek');
         } else {
-          this.changeView(this.availableViews()[0]);
+          this.changeView(this.availableViews()[0].value);
         }
       });
   }
@@ -185,9 +188,10 @@ export default class Calendar {
   protected goToToday(): void {
     this.calendarApi().today();
   }
-  protected changeView(viewName: { value: string; label: string; icon: string }): void {
-    this.calendarApi().changeView(viewName.value);
-    this.currentView.set(viewName);
+  protected changeView(view: ToggleValue<string>): void {
+    if (typeof view !== 'string') return;
+    this.calendarApi().changeView(view);
+    this.currentView.set(view);
   }
 
   protected addEvent(): void {
