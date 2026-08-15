@@ -1,12 +1,13 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, DOCUMENT, inject, input, numberAttribute, signal } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 @Component({
   selector: 'adm-back-to-top',
-  imports: [HlmButtonImports, NgIcon],
+  imports: [HlmButtonImports, NgIcon, TranslocoDirective],
   providers: [provideIcons({ lucideArrowUp })],
   host: {
     '(window:scroll)': 'onWindowScroll()',
@@ -14,14 +15,14 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
   template: `
     @if (isVisible()) {
       <button
+        *transloco="let t"
         type="button"
         hlmBtn
         class="fixed inset-e-6 bottom-6 z-50 hidden md:inline-flex"
-        title="Back to top"
         size="icon"
-        aria-label="Scroll back to top"
         (click)="scrollToTop()"
       >
+      <span class="sr-only">{{ t('common.backToTop') }}</span>
         <ng-icon name="lucideArrowUp" />
       </button>
     }

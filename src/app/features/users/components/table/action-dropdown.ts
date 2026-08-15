@@ -22,15 +22,8 @@ import { UserForm } from '../form/user-form';
   providers: [provideIcons({ lucideEllipsisVertical })],
 
   template: `
-    <button
-      type="button"
-      hlmBtn
-      variant="ghost"
-      size="icon"
-      align="end"
-      aria-label="Open row actions"
-      [hlmDropdownMenuTrigger]="menu"
-    >
+    <button type="button" hlmBtn variant="ghost" size="icon" align="end" [hlmDropdownMenuTrigger]="menu">
+      <span *transloco="let t" class="sr-only">{{ t('common.openRowActions') }}</span>
       <ng-icon name="lucideEllipsisVertical" />
     </button>
     <ng-template #menu>
@@ -39,12 +32,6 @@ import { UserForm } from '../form/user-form';
           <hlm-dropdown-menu-group>
             <button type="button" hlmDropdownMenuItem (click)="onEditUser()">
               {{ t('edit') }}
-            </button>
-            <button type="button" hlmDropdownMenuItem>
-              {{ t('makeCopy') }}
-            </button>
-            <button type="button" hlmDropdownMenuItem>
-              {{ t('favorite') }}
             </button>
           </hlm-dropdown-menu-group>
           <hlm-dropdown-menu-separator />
@@ -122,7 +109,6 @@ export class ActionDropdown {
     });
 
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
-      console.log(result);
       if (result) {
         const refresh = this.onSuccess();
         if (refresh) refresh();

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { form, FormField, FormRoot, required, submit, validate } from '@angular/forms/signals';
-import { EventApi, EventInput } from '@fullcalendar/angular';
+import { EventInput } from '@fullcalendar/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { toast } from '@spartan-ng/brain/sonner';
@@ -23,6 +23,18 @@ export interface CalendarEventModel {
   startTime: string;
   endDate: Date | null;
   endTime: string;
+}
+
+/**
+ * The event shape the form needs to prefill itself. Structurally satisfied by
+ * both FullCalendar's live EventApi and the details dialog's plain snapshot.
+ */
+export interface CalendarFormEvent {
+  id?: string;
+  title: string;
+  start: Date | null;
+  end: Date | null;
+  extendedProps: { description?: string; [key: string]: unknown };
 }
 
 @Component({
@@ -54,7 +66,7 @@ export class CalendarForm implements OnInit {
 
   private readonly _transloco = inject(TranslocoService);
   private readonly _dialogRef = inject<BrnDialogRef>(BrnDialogRef);
-  private readonly _dialogContext = injectBrnDialogContext<{ event?: EventApi; date?: Date }>();
+  private readonly _dialogContext = injectBrnDialogContext<{ event?: CalendarFormEvent; date?: Date }>();
 
   // ==========================================
   // State

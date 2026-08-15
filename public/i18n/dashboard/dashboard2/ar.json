@@ -21,7 +21,8 @@
         "refunded": {
             "label": "المبالغ المستردة",
             "changeDescription": "من الشهر الماضي"
-        }
+        },
+        "menu": "فتح قائمة البطاقة"
     },
     "recentActivity": {
         "title": "النشاط الأخير",
@@ -36,32 +37,10 @@
         "footer": "قائمة بنشاطك الأخير.",
         "description": "عرض سجل المعاملات الخاصة بك",
         "status": {
-            "New": "جديد",
-            "Suspended": "معلق",
-            "Delete": "حذف"
-        }
-    },
-    "filter": {
-        "title": "خيارات التصفية",
-        "description": "تخصيص عرض لوحة التحكم الخاصة بك",
-        "dateRange": "نطاق التاريخ",
-        "status": "الحالة",
-        "minAmount": "الحد الأدنى للمبلغ",
-        "maxAmount": "الحد الأقصى للمبلغ",
-        "dateOptions": {
-            "all": "كل الوقت",
-            "today": "اليوم",
-            "week": "هذا الأسبوع",
-            "month": "هذا الشهر",
-            "year": "هذه السنة"
-        },
-        "statusOptions": {
             "success": "ناجح",
             "processing": "قيد المعالجة",
             "failed": "فشل"
-        },
-        "reset": "إعادة تعيين",
-        "apply": "تطبيق التصفية"
+        }
     },
     "revenueChart": {
         "title": "الإيرادات",

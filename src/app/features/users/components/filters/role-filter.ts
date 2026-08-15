@@ -73,7 +73,6 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
                   @case ('manager') {
                     <ng-icon name="lucideBriefcase" />
                   }
-                  @default never;
                 }
                 <span *transloco="let t; prefix: 'users.role'"> {{ t(role) }} </span>
               </button>

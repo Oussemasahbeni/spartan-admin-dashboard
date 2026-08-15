@@ -22,7 +22,7 @@ interface TeamMember {
 
 @Component({
   selector: 'adm-settings-team',
-  templateUrl: './team.component.html',
+  templateUrl: './team.html',
 
   imports: [
     HlmAvatarImports,

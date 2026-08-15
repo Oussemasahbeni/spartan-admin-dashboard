@@ -53,12 +53,6 @@
             "email": "Email",
             "amount": "Amount"
         },
-        "actions": {
-            "label": "Actions",
-            "copyPaymentId": "Copy payment ID",
-            "viewCustomer": "View customer",
-            "viewPaymentDetails": "View payment details"
-        },
         "status": {
             "success": "Success",
             "processing": "Processing",

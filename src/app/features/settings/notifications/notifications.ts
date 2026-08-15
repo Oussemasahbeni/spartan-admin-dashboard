@@ -39,6 +39,5 @@ export class SettingsNotifications {
   private async saveNotifications(): Promise<void> {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log('Notifications saved:', this.notificationsModel());
   }
 }

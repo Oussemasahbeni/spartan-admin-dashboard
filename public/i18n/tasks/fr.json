@@ -1,60 +1,65 @@
 {
-  "header": {
-    "title": "Tâches",
-    "subtitle": "Glissez-déposez les tâches pour mettre à jour leur statut",
-    "home": "Accueil",
-    "kanban": "Tâches"
-  },
-  "addTask": "Ajouter une tâche",
-  "filter": "Filtrer",
-  "allTasks": "Toutes les tâches",
-  "emptyColumn": "Déposez des tâches ici",
-  "columns": {
-    "todo": "À faire",
-    "inprogress": "En cours",
-    "completed": "Terminées"
-  },
-  "form": {
-    "title": "Nouvelle tâche",
-    "description": "Remplissez les détails ci-dessous pour créer une nouvelle tâche.",
-    "label": {
-      "title": "Titre",
-      "description": "Description",
-      "status": "Statut",
-      "dueDate": "Échéance",
-      "tag": "Étiquette",
-      "tagName": "Nom de l'étiquette",
-      "tagColor": "Couleur"
+    "header": {
+        "title": "Tâches",
+        "subtitle": "Glissez-déposez les tâches pour mettre à jour leur statut",
+        "home": "Accueil",
+        "kanban": "Tâches"
     },
-    "placeholder": {
-      "title": "ex. Corriger le bug de connexion",
-      "description": "Facultatif — ajoutez plus de contexte sur cette tâche",
-      "status": "Choisir un statut",
-      "dueDate": "Choisir une date",
-      "tagName": "ex. Frontend",
-      "selectTag": "Sélectionner une étiquette",
-      "noTags": "Aucune étiquette existante.",
-      "createTag": "Créer une nouvelle étiquette",
-      "backToTags": "Retour aux étiquettes"
+    "addTask": "Ajouter une tâche",
+    "filter": "Filtrer",
+    "allTasks": "Toutes les tâches",
+    "emptyColumn": "Déposez des tâches ici",
+    "columns": {
+        "todo": "À faire",
+        "inprogress": "En cours",
+        "completed": "Terminées"
     },
-    "tagPreview": "Aperçu",
-    "cancel": "Annuler",
-    "save": "Ajouter"
-  },
-  "details": {
-    "description": "Description",
-    "activity": "Activité",
-    "members": "Membres",
-    "labels": "Étiquettes",
-    "assignee": "Assigné à",
-    "dueDate": "Échéance",
-    "comments": "Commentaires",
-    "commentsCount": "commentaire(s)",
-    "noComments": "Aucun commentaire pour l'instant.",
-    "attachments": "Pièces jointes",
-    "files": "fichier(s)",
-    "tags": "Étiquettes",
-    "noDescription": "Aucune description fournie.",
-    "close": "Fermer"
-  }
+    "form": {
+        "title": "Nouvelle tâche",
+        "description": "Remplissez les détails ci-dessous pour créer une nouvelle tâche.",
+        "label": {
+            "title": "Titre",
+            "description": "Description",
+            "status": "Statut",
+            "dueDate": "Échéance",
+            "tag": "Étiquette",
+            "tagName": "Nom de l'étiquette",
+            "tagColor": "Couleur"
+        },
+        "placeholder": {
+            "title": "ex. Corriger le bug de connexion",
+            "description": "Facultatif — ajoutez plus de contexte sur cette tâche",
+            "status": "Choisir un statut",
+            "dueDate": "Choisir une date",
+            "tagName": "ex. Frontend",
+            "selectTag": "Sélectionner une étiquette",
+            "noTags": "Aucune étiquette existante.",
+            "createTag": "Créer une nouvelle étiquette",
+            "backToTags": "Retour aux étiquettes"
+        },
+        "tagPreview": "Aperçu",
+        "cancel": "Annuler",
+        "save": "Ajouter",
+        "selectColor": "Choisir la couleur"
+    },
+    "details": {
+        "description": "Description",
+        "activity": "Activité",
+        "members": "Membres",
+        "labels": "Étiquettes",
+        "assignee": "Assigné à",
+        "dueDate": "Échéance",
+        "comments": "Commentaires",
+        "commentsCount": "commentaire(s)",
+        "noComments": "Aucun commentaire pour l'instant.",
+        "attachments": "Pièces jointes",
+        "files": "fichier(s)",
+        "tags": "Étiquettes",
+        "noDescription": "Aucune description fournie.",
+        "close": "Fermer"
+    },
+    "card": {
+        "toggleComplete": "Basculer l'achèvement de la tâche",
+        "openMenu": "Ouvrir le menu des actions de la tâche"
+    }
 }

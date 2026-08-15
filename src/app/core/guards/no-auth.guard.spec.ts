@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { AuthService } from '@core/auth/auth-service';
 import { LOCAL_STORAGE } from '@core/config/tokens';
 import { Mocked } from 'vitest';
-import { AuthService } from '../auth/auth.service';
-import { noAuthGuard } from './no-auth.guard';
+import { noAuthGuard } from './no-auth-guard';
 
 @Component({ template: '<h1>Home Page</h1>' })
 class Home {}

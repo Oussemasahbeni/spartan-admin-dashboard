@@ -23,6 +23,7 @@ export interface StatCardData {
         <div class="mb-4 flex items-start justify-between">
           <ng-icon [name]="data().icon" />
           <button type="button" hlmBtn variant="ghost" size="icon" (click)="menuClick.emit()">
+            <span class="sr-only">{{ t('menu') }} — {{ t(data().labelKey) }}</span>
             <ng-icon name="lucideMoreHorizontal" />
           </button>
         </div>
@@ -47,7 +48,7 @@ export interface StatCardData {
     </section>
   `,
 })
-export class StatCardComponent {
+export class StatCard {
   // ==========================================
   // Inputs
   // ==========================================

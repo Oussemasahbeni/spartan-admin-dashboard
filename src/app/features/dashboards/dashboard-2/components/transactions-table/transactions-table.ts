@@ -81,7 +81,7 @@ import { Transaction } from '../../model/dashboard-2';
           <ng-template #userCell let-context>
             <div class="flex items-center gap-3">
               <hlm-avatar>
-                <img hlmAvatarImage [src]="context.row.original.user.avatar" [alt]="context.row.original.user.name" />
+                <img hlmAvatarImage loading="lazy" [src]="context.row.original.user.avatar" [alt]="context.row.original.user.name" />
                 <span class="bg-destructive text-white" hlmAvatarFallback>
                   {{ context.row.original.user.name.charAt(0) + context.row.original.user.name.charAt(1).toUpperCase() }}
                 </span>
@@ -124,7 +124,7 @@ import { Transaction } from '../../model/dashboard-2';
     </section>
   `,
 })
-export class TransactionsTableComponent {
+export class TransactionsTable {
   // ==========================================
   // Inputs
   // ==========================================
@@ -161,6 +161,12 @@ export class TransactionsTableComponent {
       header: translateSignal('recentActivity.columns.user'),
       meta: () => ({ translationKey: 'dashboard2.recentActivity.columns.user' }),
       enableSorting: true,
+      // The cell renders both name and email, so the search matches either.
+      filterFn: (row, _columnId, filterValue: string) => {
+        const search = filterValue.toLowerCase();
+        const { name, email } = row.original.user;
+        return name.toLowerCase().includes(search) || email.toLowerCase().includes(search);
+      },
       cell: () => this.userCell(),
     }),
     this.columnHelper.accessor('status', {
@@ -195,10 +201,10 @@ export class TransactionsTableComponent {
   protected _filterChanged(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchValue.set(value);
-    this.table().getColumn('email')?.setFilterValue(value);
+    this.table().getColumn('user')?.setFilterValue(value);
   }
   protected _clearSearch() {
     this.searchValue.set('');
-    this.table().getColumn('email')?.setFilterValue('');
+    this.table().getColumn('user')?.setFilterValue('');
   }
 }

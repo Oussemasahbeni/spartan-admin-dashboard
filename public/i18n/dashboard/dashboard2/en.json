@@ -21,7 +21,8 @@
         "refunded": {
             "label": "Refunded",
             "changeDescription": "from last month"
-        }
+        },
+        "menu": "Open card menu"
     },
     "recentActivity": {
         "title": "Recent Activity",
@@ -40,29 +41,6 @@
             "processing": "Processing",
             "failed": "Failed"
         }
-    },
-    "filter": {
-        "title": "Filter Options",
-        "description": "Customize your dashboard view",
-        "dateRange": "Date Range",
-        "status": "Status",
-        "minAmount": "Min Amount",
-        "maxAmount": "Max Amount",
-        "dateOptions": {
-            "all": "All Time",
-            "today": "Today",
-            "week": "This Week",
-            "month": "This Month",
-            "year": "This Year"
-        },
-        "statusOptions": {
-            "all": "All Status",
-            "new": "New",
-            "suspended": "Suspended",
-            "delete": "Delete"
-        },
-        "reset": "Reset",
-        "apply": "Apply Filters"
     },
     "revenueChart": {
         "title": "Revenue",

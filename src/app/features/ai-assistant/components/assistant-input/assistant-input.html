@@ -63,9 +63,10 @@
       <span id="keyboard-hint" class="sr-only"> {{ t('input.keyboardHint') }} </span>
 
       <!--  Toolbar -->
-      <div hlmInputGroupAddon align="block-end" class="flex justify-between gap-2">
+      <div hlmInputGroupAddon class="flex justify-between gap-2" [align]="'block-end'">
         <div class="flex items-center gap-1">
           <button type="button" class="rounded-full" hlmInputGroupButton size="icon-sm" [hlmDropdownMenuTrigger]="plusMenu">
+            <span class="sr-only">{{ t('ariaLabels.moreOptions') }}</span>
             <ng-icon name="lucidePlus" />
           </button>
 

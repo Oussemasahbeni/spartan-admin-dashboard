@@ -10,13 +10,7 @@
         "rememberMe": "Se souvenir de moi",
         "noAccount": "Vous n'avez pas de compte ?",
         "signUp": "Créer un compte",
-        "loginBtn": "Se connecter",
-        "errors": {
-            "emailRequired": "L'adresse e-mail est obligatoire",
-            "emailInvalid": "L'adresse e-mail n'est pas valide",
-            "passwordRequired": "Le mot de passe est obligatoire",
-            "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères"
-        }
+        "loginBtn": "Se connecter"
     },
     "signup": {
         "title": "Créer un compte",
@@ -36,16 +30,7 @@
         "termsText": "En continuant, vous acceptez nos",
         "termsOfService": "conditions d'utilisation",
         "and": "et",
-        "privacyPolicy": "politique de confidentialité",
-        "errors": {
-            "nameRequired": "Le nom est obligatoire",
-            "emailRequired": "L'adresse e-mail est obligatoire",
-            "emailInvalid": "L'adresse e-mail n'est pas valide",
-            "passwordRequired": "Le mot de passe est obligatoire",
-            "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
-            "passwordMismatch": "Les mots de passe ne correspondent pas",
-            "confirmPasswordRequired": "La confirmation du mot de passe est obligatoire"
-        }
+        "privacyPolicy": "politique de confidentialité"
     },
     "resetPassword": {
         "title": "Mot de passe oublié ?",
@@ -54,7 +39,6 @@
         "emailPlaceholder": "nom@exemple.com",
         "submitBtn": "Envoyer le lien",
         "backToLogin": "Retour à la connexion",
-        "testimonial": "Une expérience simple et efficace pour gérer les accès utilisateurs.",
         "alert": {
             "successTitle": "Succès",
             "resetLinkSent": "Si un compte existe, les instructions de réinitialisation ont été envoyées par e-mail."

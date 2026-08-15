@@ -155,7 +155,6 @@ export class CommandPalette {
   // ==========================================
   // Services
   // ==========================================
-  private readonly _document = inject(DOCUMENT);
   private readonly _router = inject(Router);
   private readonly _authService = inject(AuthService);
   private readonly _themeService = inject(ThemeService);

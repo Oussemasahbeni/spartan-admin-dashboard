@@ -33,14 +33,28 @@
         <div class="flex flex-wrap items-center gap-2 sm:gap-4">
           <!-- Navigation Buttons -->
           <div class="flex gap-2">
-            <button type="button" hlmBtn variant="outline" size="icon" aria-label="Previous month" (click)="previousMonth()">
+            <button
+              type="button"
+              hlmBtn
+              variant="outline"
+              size="icon"
+              [attr.aria-label]="t('ariaLabels.previousPeriod')"
+              (click)="previousMonth()"
+            >
               <ng-icon name="lucideChevronLeft" class="rtl:rotate-180" />
             </button>
             <!-- Today Button -->
             <button type="button" hlmBtn variant="outline" (click)="goToToday()">
               {{ t('today') }}
             </button>
-            <button type="button" hlmBtn variant="outline" size="icon" aria-label="Next month" (click)="nextMonth()">
+            <button
+              type="button"
+              hlmBtn
+              variant="outline"
+              size="icon"
+              [attr.aria-label]="t('ariaLabels.nextPeriod')"
+              (click)="nextMonth()"
+            >
               <ng-icon name="lucideChevronRight" class="rtl:rotate-180" />
             </button>
           </div>
@@ -51,7 +65,7 @@
             hlmBtn
             variant="outline"
             size="icon"
-            aria-label="Filter events by type"
+            [attr.aria-label]="t('ariaLabels.filterEvents')"
             [hlmDropdownMenuTrigger]="typesMenu"
           >
             <ng-icon name="lucideFilter" />
@@ -89,7 +103,7 @@
             hlmBtn
             variant="outline"
             size="icon"
-            aria-label="Calendar settings"
+            [attr.aria-label]="t('ariaLabels.settings')"
             [hlmDropdownMenuTrigger]="settingsMenu"
           >
             <ng-icon name="lucideSettings" />

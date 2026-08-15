@@ -1,25 +1,13 @@
 import { Component, computed, input, signal, TemplateRef, viewChild } from '@angular/core';
 import { provideTranslocoScope, translateSignal, TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import {
-  lucideArrowUpDown,
-  lucideCheck,
-  lucideChevronDown,
-  lucideCircleCheck,
-  lucideCircleX,
-  lucideCopy,
-  lucideLoader,
-  lucideMoreHorizontal,
-  lucideSearch,
-  lucideX,
-} from '@ng-icons/lucide';
+import { lucideCircleCheck, lucideCircleX, lucideLoader, lucideSearch, lucideX } from '@ng-icons/lucide';
 import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
 import { DataTable } from '@shared/datatable/table/data-table';
 import { DataTableFeatures } from '@shared/datatable/table/table-features';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmTableImports } from '@spartan-ng/helm/table';
@@ -36,7 +24,6 @@ import { PaymentsActionDropdown } from './action-dropdown';
     HlmInputGroupImports,
     HlmButtonImports,
     NgIcon,
-    HlmDropdownMenuImports,
     HlmBadgeImports,
     DataTable,
     TranslocoModule,
@@ -44,11 +31,6 @@ import { PaymentsActionDropdown } from './action-dropdown';
   ],
   providers: [
     provideIcons({
-      lucideArrowUpDown,
-      lucideCheck,
-      lucideCopy,
-      lucideChevronDown,
-      lucideMoreHorizontal,
       lucideSearch,
       lucideX,
       lucideCircleCheck,
@@ -57,7 +39,6 @@ import { PaymentsActionDropdown } from './action-dropdown';
     }),
     provideTranslocoScope({ scope: 'dashboard/dashboard1', alias: 'dashboard1' }),
   ],
-
   template: `
     <div *transloco="let t; prefix: 'dashboard1.paymentsTable'" hlmCard class="h-full">
       <header hlmCardHeader>

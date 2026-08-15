@@ -122,7 +122,7 @@
                   <button
                     type="button"
                     [title]="color"
-                    [aria-label]="'Select color ' + color"
+                    [attr.aria-label]="t('selectColor') + ' ' + color"
                     [aria-pressed]="pendingTagColor() === color"
                     [class]="
                       'size-6 rounded-full border-2 transition-all ' +
@@ -141,7 +141,7 @@
       </hlm-popover>
 
       <!-- Added tag chips -->
-      @for (tag of addedTags(); track $index) {
+      @for (tag of addedTags(); track tag.name) {
         <span
           [class]="
             'inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ' +

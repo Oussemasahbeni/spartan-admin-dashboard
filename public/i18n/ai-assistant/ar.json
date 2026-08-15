@@ -43,6 +43,16 @@
     },
     "ariaLabels": {
         "suggestedPrompts": "الاقتراحات المقترحة",
-        "useSuggestion": "استخدم الاقتراح:"
-    }
+        "useSuggestion": "استخدم الاقتراح:",
+        "copyResponse": "نسخ الرد",
+        "regenerate": "إعادة توليد الرد",
+        "goodResponse": "رد جيد",
+        "badResponse": "رد سيئ",
+        "copyMessage": "نسخ الرسالة",
+        "editMessage": "تعديل الرسالة",
+        "moreOptions": "المزيد من خيارات الإدخال",
+        "chatMessages": "رسائل المحادثة",
+        "copied": "تم النسخ"
+    },
+    "newConversation": "محادثة جديدة"
 }

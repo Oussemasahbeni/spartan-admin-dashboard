@@ -147,6 +147,9 @@
             "read": "Lire",
             "write": "Écrire",
             "admin": "Admin"
-        }
-    }
+        },
+        "removeMember": "Retirer le membre de l'équipe"
+    },
+    "openNavigation": "Ouvrir la navigation des paramètres",
+    "navigationLabel": "Navigation des paramètres"
 }

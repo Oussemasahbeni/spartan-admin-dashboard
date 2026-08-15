@@ -12,15 +12,8 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
   imports: [HlmButtonImports, NgIcon, HlmDropdownMenuImports, BrnAlertDialogImports, HlmAlertDialogImports, TranslocoModule],
   providers: [provideIcons({ lucideEllipsisVertical })],
   template: `
-    <button
-      type="button"
-      hlmBtn
-      variant="ghost"
-      size="icon"
-      align="end"
-      aria-label="Open actions"
-      [hlmDropdownMenuTrigger]="menu"
-    >
+    <button type="button" hlmBtn variant="ghost" size="icon" align="end" [hlmDropdownMenuTrigger]="menu">
+      <span *transloco="let t" class="sr-only">{{ t('common.openRowActions') }}</span>
       <ng-icon name="lucideEllipsisVertical" />
     </button>
     <ng-template #menu>

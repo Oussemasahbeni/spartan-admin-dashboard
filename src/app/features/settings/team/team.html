@@ -50,7 +50,7 @@
         <!-- Member info -->
         <div class="flex items-center gap-4">
           <hlm-avatar>
-            <img hlmAvatarImage [src]="member.avatar" [alt]="member.name" />
+            <img hlmAvatarImage loading="lazy" [src]="member.avatar" [alt]="member.name" />
             <span hlmAvatarFallback>{{ member.name.charAt(0) }}</span>
           </hlm-avatar>
           <div>
@@ -79,6 +79,7 @@
 
           <!-- Delete button -->
           <button hlmBtn variant="ghost" size="icon" type="button" (click)="removeMember(member.id)">
+            <span class="sr-only">{{ t('removeMember') }} — {{ member.name }}</span>
             <ng-icon name="lucideTrash2" />
           </button>
         </div>

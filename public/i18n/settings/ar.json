@@ -147,6 +147,9 @@
             "read": "قراءة",
             "write": "كتابة",
             "admin": "مشرف"
-        }
-    }
+        },
+        "removeMember": "إزالة عضو الفريق"
+    },
+    "openNavigation": "فتح قائمة الإعدادات",
+    "navigationLabel": "تنقل الإعدادات"
 }

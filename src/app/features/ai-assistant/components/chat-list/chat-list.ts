@@ -8,7 +8,13 @@ import { UserMessageCard } from '../user-message/user-message';
   selector: 'adm-chat-list',
   imports: [UserMessageCard, AiResponseCard, TranslocoDirective],
   template: `
-    <div role="log" aria-live="polite" aria-atomic="false" aria-label="Chat messages">
+    <div
+      *transloco="let t"
+      role="log"
+      aria-live="polite"
+      aria-atomic="false"
+      [attr.aria-label]="t('aiAssistant.ariaLabels.chatMessages')"
+    >
       @if (messages().length > 0) {
         <!-- Messages -->
         <div class="flex flex-col gap-4 px-4 py-8 sm:py-12">

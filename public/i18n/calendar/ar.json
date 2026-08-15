@@ -52,5 +52,11 @@
         "eventCreated": "تم إنشاء الحدث بنجاح!",
         "eventUpdated": "{{eventTitle}} تم تحديثه.",
         "eventDeleted": "{{eventTitle}} تم حذفه."
+    },
+    "ariaLabels": {
+        "previousPeriod": "الفترة السابقة",
+        "nextPeriod": "الفترة التالية",
+        "filterEvents": "تصفية الأحداث حسب النوع",
+        "settings": "إعدادات التقويم"
     }
 }

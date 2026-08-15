@@ -14,7 +14,7 @@
             <ng-icon name="lucideSearch" />
           </div>
           <hlm-input-group-addon align="inline-end">
-            @if (this.searchForm.search().value()) {
+            @if (searchForm.search().value()) {
               <button type="button" hlmBtn variant="ghost" size="icon-sm" (click)="searchForm.search().value.set('')">
                 <span class="sr-only">{{ t('common.clearSearch') }}</span>
                 <ng-icon name="lucideX" />
@@ -51,8 +51,9 @@
       [columns]="columns"
       [defaultColumnPinning]="defaultColumnPinning"
       [isLoading]="usersResource.isLoading()"
-      [data]="this.usersResource.value()?.content || []"
-      [totalElements]="this.usersResource.value()?.total"
+      [data]="usersResource.value()?.content || []"
+      [totalElements]="usersResource.value()?.total ?? 0"
+      [getRowId]="userRowId"
       [enableColumnResizing]="true"
       [enableRowSelection]="true"
       [enableColumnPinning]="true"
@@ -68,7 +69,7 @@
       <ng-template #nameCell let-context>
         <div class="flex items-center gap-2">
           <hlm-avatar>
-            <img hlmAvatarImage [src]="context.row.original.avatar" [alt]="context.row.original.name" />
+            <img hlmAvatarImage loading="lazy" [src]="context.row.original.avatar" [alt]="context.row.original.name" />
             <span class="bg-destructive text-white" hlmAvatarFallback>
               {{ context.row.original.name.charAt(0) + context.row.original.name.charAt(1).toUpperCase() }}
             </span>

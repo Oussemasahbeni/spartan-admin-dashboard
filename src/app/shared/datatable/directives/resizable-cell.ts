@@ -20,7 +20,6 @@ export class TableResizableHeader {
   host: {
     '[style.width]': 'width()',
   },
-  standalone: true,
 })
 export class TableResizableCell {
   public readonly cellId = input.required<string>({

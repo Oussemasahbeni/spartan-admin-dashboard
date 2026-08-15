@@ -1,8 +1,8 @@
-import { registerLocaleData } from '@angular/common';
-import { afterNextRender, computed, inject, Service, signal } from '@angular/core';
+import { isPlatformBrowser, registerLocaleData } from '@angular/common';
+import { afterNextRender, computed, DOCUMENT, effect, inject, PLATFORM_ID, Service, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { BrnCalendarI18n, injectBrnCalendarI18n } from '@spartan-ng/brain/calendar';
-import { arabicCalendarI18n, englishCalendarI18n, frenchCalendarI18n } from './date-I18n';
+import { arabicCalendarI18n, englishCalendarI18n, frenchCalendarI18n } from './date-i18n';
 import { DirectionalityService } from './directionality-service';
 import { LOCAL_STORAGE } from './tokens';
 
@@ -21,6 +21,8 @@ export class LanguageService {
   private readonly _translocoService = inject(TranslocoService);
   private readonly _dir = inject(DirectionalityService);
   private readonly _localStorage = inject(LOCAL_STORAGE);
+  private readonly _document = inject(DOCUMENT);
+  private readonly _platformId = inject(PLATFORM_ID);
   private readonly _calendarI18n = injectBrnCalendarI18n();
 
   public readonly currentLang = computed(() => this._translocoService.activeLang() as Language);
@@ -41,13 +43,22 @@ export class LanguageService {
   ]);
   public readonly availableLanguages = this._availableLanguages.asReadonly();
 
-  private readonly brnCaalendarI18nMap: Record<Language, Partial<BrnCalendarI18n>> = {
+  private readonly brnCalendarI18nMap: Record<Language, Partial<BrnCalendarI18n>> = {
     en: englishCalendarI18n,
     fr: frenchCalendarI18n,
     ar: arabicCalendarI18n,
   };
 
   constructor() {
+    // Keep <html lang> in sync with the active language (index.html hardcodes
+    // "en") so screen readers pick the right speech synthesis for fr/ar.
+    effect(() => {
+      const lang = this.currentLang();
+      if (isPlatformBrowser(this._platformId)) {
+        this._document.documentElement.lang = lang;
+      }
+    });
+
     afterNextRender(() => {
       const browserLang = navigator.language?.split('-')[0];
       if (browserLang && browserLang === 'ar') {
@@ -57,7 +68,7 @@ export class LanguageService {
   }
 
   async setLanguage(lang: Language): Promise<void> {
-    this._calendarI18n.use(this.brnCaalendarI18nMap[lang]);
+    this._calendarI18n.use(this.brnCalendarI18nMap[lang]);
     this._localStorage?.setItem('lang', lang);
     await this._ensureLocaleRegistered(lang);
     this._translocoService.setActiveLang(lang);

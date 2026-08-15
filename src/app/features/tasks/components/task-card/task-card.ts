@@ -3,11 +3,14 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCalendar,
+  lucideCheckCircle2,
   lucideCircle,
   lucideClock,
+  lucideLoader,
   lucideMessageSquare,
   lucideMoreVertical,
   lucidePaperclip,
+  lucideSquare,
 } from '@ng-icons/lucide';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
@@ -19,7 +22,6 @@ import { cva } from 'class-variance-authority';
 import { parseISO, startOfDay } from 'date-fns';
 import { TAG_COLOR_CLASSES } from '../../model/tag';
 import { Task } from '../../model/task';
-import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-status-ui.pipe';
 
 const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 py-0.5 transition-colors', {
   variants: {
@@ -36,7 +38,6 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
   selector: 'adm-task-card',
   imports: [
     TranslocoModule,
-    TaskStatusUIPipe,
     NgIcon,
     HlmBadgeImports,
     HlmCardImports,
@@ -45,24 +46,32 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
     HlmSeparatorImports,
   ],
   providers: [
-    provideIcons({ lucideCalendar, lucideClock, lucideCircle, lucideMessageSquare, lucidePaperclip, lucideMoreVertical }),
-    provideTaskStatusIcons(),
+    provideIcons({
+      lucideCalendar,
+      lucideCheckCircle2,
+      lucideCircle,
+      lucideClock,
+      lucideLoader,
+      lucideMessageSquare,
+      lucideMoreVertical,
+      lucidePaperclip,
+      lucideSquare,
+    }),
   ],
   host: {
     class: 'block group',
   },
   template: `
-    <div
+    <article
       hlmCard
       role="button"
       tabindex="0"
       class="focus-visible:ring-ring cursor-pointer gap-0 py-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-      [aria-label]="task().title"
       (focusin)="groupFocused = true"
       (focusout)="onFocusOut($event)"
       (click)="taskClick.emit(task())"
       (keydown.enter)="taskClick.emit(task())"
-      (keydown.space)="taskClick.emit(task()); $event.preventDefault()"
+      (keydown.space)="$event.preventDefault(); taskClick.emit(task())"
     >
       <!-- Optional cover image -->
       @if (task().imageUrl) {
@@ -92,7 +101,8 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
                 type="button"
                 variant="ghost"
                 size="icon"
-                aria-label="Toggle task completion"
+                [attr.aria-label]="'tasks.card.toggleComplete' | transloco"
+                [attr.aria-pressed]="task().isCompleted"
                 [class]="task().isCompleted ? 'text-emerald-500' : 'text-muted-foreground'"
                 (click)="toggleComplete.emit(task()); $event.stopPropagation()"
               >
@@ -106,14 +116,26 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
 
             <div class="flex min-w-0 flex-1 flex-col gap-1.5">
               <!-- Status badge -->
-              @let ui = task().status | taskStatusUI;
               <span
                 *transloco="let t; prefix: 'tasks.columns'"
                 hlmBadge
                 variant="outline"
                 class="text-muted-foreground w-fit"
               >
-                <ng-icon [class]="ui.class" [name]="ui.icon" />
+                @switch (task().status) {
+                  @case ('todo') {
+                    <ng-icon class="text-slate-500 dark:text-slate-400" name="lucideSquare" />
+                  }
+                  @case ('inprogress') {
+                    <ng-icon class="text-blue-500 dark:text-blue-400" name="lucideLoader" />
+                  }
+                  @case ('completed') {
+                    <ng-icon class="text-emerald-500 dark:text-emerald-400" name="lucideCheckCircle2" />
+                  }
+                  @default {
+                    <ng-icon class="text-muted-foreground" name="lucideSquare" />
+                  }
+                }
                 {{ t(task().status) }}
               </span>
               <h4
@@ -121,14 +143,20 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
                 [class.line-through]="task().isCompleted"
                 [class.text-muted-foreground]="task().isCompleted"
               >
-                {{ task().title }}
+                <button
+                  type="button"
+                  class="focus-visible:ring-ring cursor-pointer rounded-xs text-start focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                  (click)="taskClick.emit(task()); $event.stopPropagation()"
+                >
+                  {{ task().title }}
+                </button>
               </h4>
             </div>
           </div>
 
           <!-- Assignee avatar -->
           <hlm-avatar size="sm" class="ring-background shrink-0 ring-2">
-            <img hlmAvatarImage [src]="task().assigneeAvatar" [alt]="task().title" />
+            <img hlmAvatarImage loading="lazy" alt="" [src]="task().assigneeAvatar" />
             <span hlmAvatarFallback class="text-xs">{{ avatarInitials() }}</span>
           </hlm-avatar>
         </div>
@@ -195,13 +223,13 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
           type="button"
           variant="ghost"
           size="icon-xs"
-          aria-label="Open task actions menu"
+          [attr.aria-label]="'tasks.card.openMenu' | transloco"
           (click)="optionsClick.emit($event); $event.stopPropagation()"
         >
           <ng-icon name="lucideMoreVertical" />
         </button>
       </div>
-    </div>
+    </article>
   `,
 })
 export class TaskCard {

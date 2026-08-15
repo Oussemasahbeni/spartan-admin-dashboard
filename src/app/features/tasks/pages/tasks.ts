@@ -144,11 +144,10 @@ export default class Tasks {
     },
   ]);
 
-  /** Static column definitions that drive the kanban board layout. */
   protected readonly columns = [
-    { id: 'todo' as TaskStatus, title: 'To Do', color: 'bg-slate-400' },
-    { id: 'inprogress' as TaskStatus, title: 'In Progress', color: 'bg-blue-500' },
-    { id: 'completed' as TaskStatus, title: 'Completed', color: 'bg-emerald-500' },
+    { id: 'todo' as TaskStatus, color: 'bg-slate-400' },
+    { id: 'inprogress' as TaskStatus, color: 'bg-blue-500' },
+    { id: 'completed' as TaskStatus, color: 'bg-emerald-500' },
   ];
 
   /**

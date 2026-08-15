@@ -1,4 +1,4 @@
-import { computed, DOCUMENT, effect, inject, Service, signal } from '@angular/core';
+import { computed, DestroyRef, DOCUMENT, effect, inject, Service, signal } from '@angular/core';
 import { LOCAL_STORAGE, WINDOW } from '@core/config/tokens';
 export const THEMES = ['light', 'dark', 'system'] as const;
 export type Theme = (typeof THEMES)[number];
@@ -23,12 +23,13 @@ export class ThemeService {
   });
 
   constructor() {
-    const savedTheme = this._localStorage?.getItem(STORAGE_KEY) as Theme;
+    const savedTheme = this._localStorage?.getItem(STORAGE_KEY) as Theme | null;
 
-    this._selectedTheme.set(THEMES.includes(savedTheme) ? savedTheme : 'system');
-    this._mediaQuery?.addEventListener('change', (e) => {
-      this._systemPrefersDark.set(e.matches);
-    });
+    this._selectedTheme.set(savedTheme && THEMES.includes(savedTheme) ? savedTheme : 'system');
+
+    const onSystemThemeChange = (e: MediaQueryListEvent) => this._systemPrefersDark.set(e.matches);
+    this._mediaQuery?.addEventListener('change', onSystemThemeChange);
+    inject(DestroyRef).onDestroy(() => this._mediaQuery?.removeEventListener('change', onSystemThemeChange));
 
     effect(() => {
       this.document.documentElement.classList.toggle('dark', this.resolvedTheme() === 'dark');

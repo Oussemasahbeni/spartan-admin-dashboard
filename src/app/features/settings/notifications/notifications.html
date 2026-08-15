@@ -11,34 +11,34 @@
     <!-- Communication -->
     <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm leading-none font-medium">{{ t('alerts.communication.title') }}</span>
+        <label for="toggle-communication" class="text-sm leading-none font-medium">{{ t('alerts.communication.title') }}</label>
         <p class="text-muted-foreground text-sm">
           {{ t('alerts.communication.description') }}
         </p>
       </div>
-      <hlm-checkbox [formField]="notificationsForm.communication" />
+      <hlm-checkbox inputId="toggle-communication" [formField]="notificationsForm.communication" />
     </div>
 
     <!-- Security -->
     <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm leading-none font-medium">{{ t('alerts.security.title') }}</span>
+        <label for="toggle-security" class="text-sm leading-none font-medium">{{ t('alerts.security.title') }}</label>
         <p class="text-muted-foreground text-sm">
           {{ t('alerts.security.description') }}
         </p>
       </div>
-      <hlm-checkbox [formField]="notificationsForm.security" />
+      <hlm-checkbox inputId="toggle-security" [formField]="notificationsForm.security" />
     </div>
 
     <!-- Meetups -->
     <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm leading-none font-medium">{{ t('alerts.meetups.title') }}</span>
+        <label for="toggle-meetups" class="text-sm leading-none font-medium">{{ t('alerts.meetups.title') }}</label>
         <p class="text-muted-foreground text-sm">
           {{ t('alerts.meetups.description') }}
         </p>
       </div>
-      <hlm-checkbox [formField]="notificationsForm.meetups" />
+      <hlm-checkbox inputId="toggle-meetups" [formField]="notificationsForm.meetups" />
     </div>
 
     <hlm-separator class="col-span-full" />
@@ -54,45 +54,45 @@
     <!-- Comments -->
     <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm leading-none font-medium">{{ t('accountActivity.comments.title') }}</span>
+        <label for="toggle-comments" class="text-sm leading-none font-medium">{{ t('accountActivity.comments.title') }}</label>
         <p class="text-muted-foreground text-sm">
           {{ t('accountActivity.comments.description') }}
         </p>
       </div>
-      <hlm-checkbox [formField]="notificationsForm.comments" />
+      <hlm-checkbox inputId="toggle-comments" [formField]="notificationsForm.comments" />
     </div>
 
     <!-- Mention -->
     <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm leading-none font-medium">{{ t('accountActivity.mention.title') }}</span>
+        <label for="toggle-mention" class="text-sm leading-none font-medium">{{ t('accountActivity.mention.title') }}</label>
         <p class="text-muted-foreground text-sm">
           {{ t('accountActivity.mention.description') }}
         </p>
       </div>
-      <hlm-checkbox [formField]="notificationsForm.mention" />
+      <hlm-checkbox inputId="toggle-mention" [formField]="notificationsForm.mention" />
     </div>
 
     <!-- Follow -->
     <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm leading-none font-medium">{{ t('accountActivity.follow.title') }}</span>
+        <label for="toggle-follow" class="text-sm leading-none font-medium">{{ t('accountActivity.follow.title') }}</label>
         <p class="text-muted-foreground text-sm">
           {{ t('accountActivity.follow.description') }}
         </p>
       </div>
-      <hlm-checkbox [formField]="notificationsForm.follow" />
+      <hlm-checkbox inputId="toggle-follow" [formField]="notificationsForm.follow" />
     </div>
 
     <!-- Inquiry -->
     <div class="flex items-start justify-between">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm leading-none font-medium">{{ t('accountActivity.inquiry.title') }}</span>
+        <label for="toggle-inquiry" class="text-sm leading-none font-medium">{{ t('accountActivity.inquiry.title') }}</label>
         <p class="text-muted-foreground text-sm">
           {{ t('accountActivity.inquiry.description') }}
         </p>
       </div>
-      <hlm-checkbox [formField]="notificationsForm.inquiry" />
+      <hlm-checkbox inputId="toggle-inquiry" [formField]="notificationsForm.inquiry" />
     </div>
   </div>
 

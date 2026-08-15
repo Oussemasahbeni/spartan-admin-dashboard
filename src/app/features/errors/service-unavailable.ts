@@ -29,10 +29,10 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
         </div>
       </div>
       <div class="absolute top-0 right-0 w-full max-w-62.5 xl:max-w-112.5">
-        <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="grid" />
+        <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="" />
       </div>
       <div class="absolute bottom-0 left-0 w-full max-w-62.5 rotate-180 xl:max-w-112.5">
-        <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="grid" />
+        <img ngSrc="/images/auth/shape.svg" width="450" height="254" priority alt="" />
       </div>
     </main>
   `,

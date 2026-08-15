@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -21,9 +21,8 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 import { RevenueChartCard } from './components/charts/revenue-chart-card';
 import { VisitorChartCard } from './components/charts/visitor-chart-card';
-import { FilterDialogComponent, FilterOptions } from './components/filter-dialog/filter-dialog';
-import { StatCardComponent, StatCardData } from './components/stat-card/stat-card';
-import { TransactionsTableComponent } from './components/transactions-table/transactions-table';
+import { StatCard, StatCardData } from './components/stat-card/stat-card';
+import { TransactionsTable } from './components/transactions-table/transactions-table';
 import { Transaction } from './model/dashboard-2';
 
 @Component({
@@ -32,12 +31,11 @@ import { Transaction } from './model/dashboard-2';
     HlmButtonImports,
     NgIcon,
     HlmBadgeImports,
-    TransactionsTableComponent,
+    TransactionsTable,
     RevenueChartCard,
     VisitorChartCard,
-    StatCardComponent,
+    StatCard,
     TranslocoModule,
-    FilterDialogComponent,
   ],
   providers: [
     provideIcons({
@@ -56,26 +54,14 @@ import { Transaction } from './model/dashboard-2';
   ],
   templateUrl: './dashboard-2.html',
 })
-export default class Dashboard2 implements OnInit {
+export default class Dashboard2 {
   // ==========================================
   // State
   // ==========================================
 
-  protected readonly transactions = signal<Transaction[]>([]);
-  protected readonly statCards = signal<StatCardData[]>([]);
-  protected readonly activeFilters = signal<FilterOptions | null>(null);
+  protected readonly transactions = signal<Transaction[]>(structuredClone(STATIC_TRANSACTIONS));
 
-  // ==========================================
-  // Public Methods
-  // ==========================================
-
-  ngOnInit() {
-    this.transactions.set(structuredClone(STATIC_TRANSACTIONS));
-    this.generateStatCards();
-  }
-
-  generateStatCards() {
-    this.statCards.set([
+  protected readonly statCards = signal<StatCardData[]>([
       {
         icon: 'lucideShoppingBag',
         labelKey: 'totalSales.label',
@@ -108,33 +94,5 @@ export default class Dashboard2 implements OnInit {
         changeDescriptionKey: 'refunded.changeDescription',
         isPositive: true,
       },
-    ]);
-  }
-
-  // ==========================================
-  // Private Methods
-  // ==========================================
-
-  onFilterApplied(filters: FilterOptions) {
-    this.activeFilters.set(filters);
-    // In a real application, you would filter the data here
-    console.log('Filters applied:', filters);
-  }
-
-  onStatCardMenuClick(cardLabel: string) {
-    // Add interactivity - could open a menu, navigate, or show details
-    console.log('Menu clicked for:', cardLabel);
-  }
-
-  onExportData() {
-    // Export functionality - could export as CSV, PDF, etc.
-    console.log('Exporting dashboard data...');
-    const data = {
-      transactions: this.transactions(),
-      stats: this.statCards(),
-      timestamp: new Date().toISOString(),
-    };
-    // In a real app, you would generate and download a file
-    console.log('Data to export:', data);
-  }
+  ]);
 }

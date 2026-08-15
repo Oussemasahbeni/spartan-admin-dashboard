@@ -67,12 +67,11 @@ import { DataTableFeatures } from '../table/table-features';
                 type="button"
                 hlmDropdownMenuItem
                 class="w-auto"
-                aria-label="Pin options"
-                title="Pin options"
                 side="right"
                 align="start"
                 [hlmDropdownMenuTrigger]="pinMenu"
               >
+                <span class="sr-only">{{ 'common.pinOptions' | transloco }}</span>
                 <ng-icon
                   name="lucidePin"
                   [class.text-primary]="!!column.getIsPinned()"

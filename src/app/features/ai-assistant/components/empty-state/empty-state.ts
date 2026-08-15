@@ -36,7 +36,7 @@ interface SuggestedPrompt {
             width="64"
             height="64"
             priority
-            alt="logo"
+            alt=""
           />
           <img
             class="me-2 hidden aspect-square size-16 dark:inline-block"
@@ -44,7 +44,7 @@ interface SuggestedPrompt {
             width="64"
             height="64"
             priority
-            alt="logo"
+            alt=""
           />
         </div>
         <div hlmEmptyTitle>{{ t('title') }}</div>

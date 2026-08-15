@@ -19,7 +19,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
 import { routes } from './app.routes';
-import { FlagBasedPreloadingStrategy } from './core/config/flag-based-preloading.strategy';
+import { FlagBasedPreloadingStrategy } from './core/config/flag-based-preloading-strategy';
 import { Language, LANGUAGES, LanguageService } from './core/config/language-service';
 import { ThemeService } from './core/config/theme-service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
@@ -32,13 +32,13 @@ function isLanguage(value: string): value is Language {
   return (LANGUAGES as readonly string[]).includes(value);
 }
 
-function getInitialLanguage(): Language {
-  const storedLang = localStorage.getItem('lang');
+function initialLanguage(): Language {
+  const storedLang = typeof localStorage !== 'undefined' ? localStorage.getItem('lang') : null;
   if (storedLang && isLanguage(storedLang)) {
     return storedLang;
   }
 
-  const browserLang = navigator.language?.split('-')[0];
+  const browserLang = typeof navigator !== 'undefined' ? navigator.language?.split('-')[0] : undefined;
   if (browserLang && isLanguage(browserLang)) {
     return browserLang;
   }
@@ -51,7 +51,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(
       routes,
-      // withExperimentalPlatformNavigation(),
       withExperimentalAutoCleanupInjectors(),
       withViewTransitions(),
       withPreloading(FlagBasedPreloadingStrategy),
@@ -62,7 +61,7 @@ export const appConfig: ApplicationConfig = {
     provideTransloco({
       config: {
         availableLangs: ['en', 'fr', 'ar'],
-        defaultLang: getInitialLanguage(),
+        defaultLang: initialLanguage(),
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
         flatten: {
@@ -82,15 +81,16 @@ export const appConfig: ApplicationConfig = {
       // We still call LanguageService to apply app-level side effects:
       // direction (rtl/ltr), calendar i18n, and locale registration.
       const languageService = inject(LanguageService);
-      await languageService.setLanguage(getInitialLanguage());
+      await languageService.setLanguage(initialLanguage());
     }),
 
     provideHlmSidebarConfig({
       closeMobileSidebarOnMenuButtonClick: true,
     }),
     {
+      // useExisting: TranslateTitleStrategy is already root-provided via @Service()
       provide: TitleStrategy,
-      useClass: TranslateTitleStrategy,
+      useExisting: TranslateTitleStrategy,
     },
   ],
 };

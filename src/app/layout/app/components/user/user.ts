@@ -58,6 +58,15 @@ export class NavUser {
 
   public readonly user = input.required<User>();
 
+  protected readonly userInitials = computed(() =>
+    this.user()
+      .name.split(' ')
+      .map((part) => part.charAt(0))
+      .slice(0, 2)
+      .join('')
+      .toUpperCase()
+  );
+
   // ==========================================
   // State
   // ==========================================

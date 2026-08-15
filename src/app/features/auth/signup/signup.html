@@ -53,11 +53,18 @@
             [formField]="signupForm.password"
           />
           <hlm-input-group-addon align="inline-end">
-            <ng-icon
-              class="cursor-pointer"
-              [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'"
+            <button
+              type="button"
+              hlmBtn
+              variant="ghost"
+              size="icon-sm"
+              [attr.aria-pressed]="showPassword()"
               (click)="showPassword.set(!showPassword())"
-          /></hlm-input-group-addon>
+            >
+              <span *transloco="let t" class="sr-only">{{ t('common.showPassword') }}</span>
+              <ng-icon [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'" />
+            </button>
+          </hlm-input-group-addon>
         </hlm-input-group>
 
         @for (error of signupForm.password().errors(); track error.kind) {
@@ -77,11 +84,18 @@
             [formField]="signupForm.confirmPassword"
           />
           <hlm-input-group-addon align="inline-end">
-            <ng-icon
-              class="cursor-pointer"
-              [name]="showConfirmPassword() ? 'lucideEye' : 'lucideEyeOff'"
+            <button
+              type="button"
+              hlmBtn
+              variant="ghost"
+              size="icon-sm"
+              [attr.aria-pressed]="showConfirmPassword()"
               (click)="showConfirmPassword.set(!showConfirmPassword())"
-          /></hlm-input-group-addon>
+            >
+              <span *transloco="let t" class="sr-only">{{ t('common.showPassword') }}</span>
+              <ng-icon [name]="showConfirmPassword() ? 'lucideEye' : 'lucideEyeOff'" />
+            </button>
+          </hlm-input-group-addon>
         </hlm-input-group>
         @for (error of signupForm.confirmPassword().errors(); track error.kind) {
           <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>

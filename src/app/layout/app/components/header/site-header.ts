@@ -1,10 +1,11 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, computed, inject, PLATFORM_ID } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { BreadcrumbsHeader } from '@shared/components/breadcrumbs-header/breadcrumbs-header';
 import { ThemeSwitch } from '@shared/components/theme-switch/theme-switch';
 import { HlmBreadcrumbImports } from '@spartan-ng/helm/breadcrumb';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
-import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
+import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import { CommandPalette } from '../command-palette/command-palette';
 import { Notifications } from '../notifications/notifications';
@@ -20,14 +21,15 @@ import { Notifications } from '../notifications/notifications';
     BreadcrumbsHeader,
     ThemeSwitch,
     CommandPalette,
+    TranslocoDirective,
   ],
   template: `
     <header
       class="bg-background/95 sticky top-0 z-30 flex h-14 w-full shrink-0 items-center justify-between gap-2 border-b px-6 backdrop-blur"
     >
       <div class="flex items-center gap-2">
-        <button type="button" hlmSidebarTrigger [aria-label]="'Toggle sidebar'" (click)="onResize()">
-          <span class="sr-only">Toggle sidebar</span>
+        <button type="button" hlmSidebarTrigger (click)="onResize()">
+          <span *transloco="let t" class="sr-only">{{ t('common.toggleSidebar') }}</span>
         </button>
         <hlm-separator orientation="vertical" class="me-2" />
         <adm-breadcrumbs-header />
@@ -46,12 +48,6 @@ export class SiteHeader {
   // ==========================================
 
   private readonly _platformId = inject(PLATFORM_ID);
-  private readonly _sideBarService = inject(HlmSidebarService);
-
-  // ==========================================
-  // State
-  // ==========================================
-  protected readonly isSidebarOpen = computed(() => this._sideBarService.open());
 
   // ==========================================
   // Public Methods

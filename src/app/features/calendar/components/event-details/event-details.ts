@@ -15,6 +15,36 @@ import { CalendarStore } from '../../state/calendar-store';
 import { CalendarForm } from '../calendar-form/calendar-form';
 import { EventApi, EventInput } from '@fullcalendar/angular';
 
+/**
+ * Plain snapshot of the event shown in the dialog. EventApi exposes its fields
+ * as prototype getters, so a spread of the live instance copies nothing —
+ * the dialog works on this snapshot instead.
+ */
+interface EventDetailsView {
+  id: string;
+  title: string;
+  allDay: boolean;
+  start: Date | null;
+  end: Date | null;
+  extendedProps: { description?: string; [key: string]: unknown };
+}
+
+const toEventView = (event: EventApi): EventDetailsView => ({
+  id: event.id,
+  title: event.title,
+  allDay: event.allDay,
+  start: event.start,
+  end: event.end,
+  extendedProps: event.extendedProps,
+});
+
+const toDate = (value: EventInput['start']): Date | null => {
+  if (value == null) return null;
+  if (value instanceof Date) return value;
+  if (typeof value === 'string' || typeof value === 'number') return new Date(value);
+  return null;
+};
+
 @Component({
   selector: 'adm-event-details',
   imports: [HlmDialogImports, HlmButtonImports, HlmBadgeImports, HlmSeparatorImports, NgIcon, TranslocoModule, DatePipe],
@@ -46,7 +76,7 @@ export class EventDetails {
   // ==========================================
   // State
   // ==========================================
-  protected readonly event = signal(this._dialogContext.event);
+  protected readonly event = signal(toEventView(this._dialogContext.event));
 
   // ==========================================
   // Public Methods
@@ -55,7 +85,7 @@ export class EventDetails {
     const dialogRef = this._hlmDialogService.open<EventInput>(CalendarForm, {
       context: {
         event: this.event(),
-        date: this.event().start,
+        date: this.event().start ?? undefined,
       },
     });
 
@@ -63,13 +93,11 @@ export class EventDetails {
       if (!result) return;
 
       this._calendarStore.updateEvent(result);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.event.update((current: any) => ({
+      this.event.update((current) => ({
         ...current,
-        id: current.id,
-        title: result.title,
-        start: result.start instanceof String ? new Date(result.start as string) : result.start,
-        end: result.end instanceof String ? new Date(result.end as string) : result.end,
+        title: result.title ?? current.title,
+        start: toDate(result.start) ?? current.start,
+        end: toDate(result.end) ?? current.end,
         extendedProps: {
           ...current.extendedProps,
           ...result.extendedProps,

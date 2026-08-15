@@ -1,6 +1,6 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { isPlatformBrowser } from '@angular/common';
-import { Component, PLATFORM_ID, inject, input, output, signal } from '@angular/core';
+import { Component, DestroyRef, PLATFORM_ID, inject, input, output, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideCopy, lucidePencil, lucideUser } from '@ng-icons/lucide';
 import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
@@ -53,9 +53,12 @@ import { TranslocoDirective } from '@jsverse/transloco';
               <hlm-bubble-content>{{ message().content }}.</hlm-bubble-content>
             </hlm-bubble>
             <hlm-message-footer
+              *transloco="let t; prefix: 'aiAssistant.ariaLabels'"
               class="md:opacity-0 md:transition-opacity md:duration-200 md:ease-in-out md:group-focus-within:opacity-100 md:group-hover:opacity-100"
             >
+              <span class="sr-only" role="status">{{ copied() ? t('copied') : '' }}</span>
               <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
+                <span class="sr-only">{{ t('copyMessage') }}</span>
                 @if (copied()) {
                   <ng-icon name="lucideCheck" />
                 } @else {
@@ -64,6 +67,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
               </button>
 
               <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="startEdit()">
+                <span class="sr-only">{{ t('editMessage') }}</span>
                 <ng-icon name="lucidePencil" />
               </button>
             </hlm-message-footer>
@@ -117,10 +121,16 @@ export class UserMessageCard {
 
     if (success) {
       this.copied.set(true);
-      setTimeout(() => {
+      this._copiedResetTimer = setTimeout(() => {
         this.copied.set(false);
       }, 2000);
     }
+  }
+
+  private _copiedResetTimer?: ReturnType<typeof setTimeout>;
+
+  constructor() {
+    inject(DestroyRef).onDestroy(() => clearTimeout(this._copiedResetTimer));
   }
 
   /** Start editing mode */

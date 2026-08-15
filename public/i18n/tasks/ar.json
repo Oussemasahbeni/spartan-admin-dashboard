@@ -1,60 +1,65 @@
 {
-  "header": {
-    "title": "المهام",
-    "subtitle": "اسحب المهام وأفلتها بين الأعمدة لتحديث حالتها",
-    "home": "الرئيسية",
-    "kanban": "المهام"
-  },
-  "addTask": "إضافة مهمة جديدة",
-  "filter": "تصفية",
-  "allTasks": "جميع المهام",
-  "emptyColumn": "أفلت المهام هنا",
-  "columns": {
-    "todo": "للتنفيذ",
-    "inprogress": "قيد التنفيذ",
-    "completed": "مكتملة"
-  },
-  "form": {
-    "title": "إضافة مهمة جديدة",
-    "description": "أدخل التفاصيل أدناه لإنشاء مهمة جديدة على اللوحة.",
-    "label": {
-      "title": "العنوان",
-      "description": "الوصف",
-      "status": "الحالة",
-      "dueDate": "تاريخ الاستحقاق",
-      "tag": "الوسم",
-      "tagName": "اسم الوسم",
-      "tagColor": "اللون"
+    "header": {
+        "title": "المهام",
+        "subtitle": "اسحب المهام وأفلتها بين الأعمدة لتحديث حالتها",
+        "home": "الرئيسية",
+        "kanban": "المهام"
     },
-    "placeholder": {
-      "title": "مثال: إصلاح خطأ تسجيل الدخول",
-      "description": "اختياري — أضف مزيدًا من السياق حول هذه المهمة",
-      "status": "اختر الحالة",
-      "dueDate": "اختر تاريخًا",
-      "tagName": "مثال: الواجهة الأمامية",
-      "selectTag": "اختر وسمًا",
-      "noTags": "لا توجد وسوم حالية.",
-      "createTag": "إنشاء وسم جديد",
-      "backToTags": "العودة إلى الوسوم"
+    "addTask": "إضافة مهمة جديدة",
+    "filter": "تصفية",
+    "allTasks": "جميع المهام",
+    "emptyColumn": "أفلت المهام هنا",
+    "columns": {
+        "todo": "للتنفيذ",
+        "inprogress": "قيد التنفيذ",
+        "completed": "مكتملة"
     },
-    "tagPreview": "معاينة",
-    "cancel": "إلغاء",
-    "save": "إضافة مهمة"
-  },
-  "details": {
-    "description": "الوصف",
-    "activity": "النشاط",
-    "members": "الأعضاء",
-    "labels": "البطاقات",
-    "assignee": "المُكلَّف",
-    "dueDate": "تاريخ الاستحقاق",
-    "comments": "التعليقات",
-    "commentsCount": "تعليق",
-    "noComments": "لا تعليقات حتى الآن.",
-    "attachments": "المرفقات",
-    "files": "ملف",
-    "tags": "الوسوم",
-    "noDescription": "لم يتم تقديم وصف.",
-    "close": "إغلاق"
-  }
+    "form": {
+        "title": "إضافة مهمة جديدة",
+        "description": "أدخل التفاصيل أدناه لإنشاء مهمة جديدة على اللوحة.",
+        "label": {
+            "title": "العنوان",
+            "description": "الوصف",
+            "status": "الحالة",
+            "dueDate": "تاريخ الاستحقاق",
+            "tag": "الوسم",
+            "tagName": "اسم الوسم",
+            "tagColor": "اللون"
+        },
+        "placeholder": {
+            "title": "مثال: إصلاح خطأ تسجيل الدخول",
+            "description": "اختياري — أضف مزيدًا من السياق حول هذه المهمة",
+            "status": "اختر الحالة",
+            "dueDate": "اختر تاريخًا",
+            "tagName": "مثال: الواجهة الأمامية",
+            "selectTag": "اختر وسمًا",
+            "noTags": "لا توجد وسوم حالية.",
+            "createTag": "إنشاء وسم جديد",
+            "backToTags": "العودة إلى الوسوم"
+        },
+        "tagPreview": "معاينة",
+        "cancel": "إلغاء",
+        "save": "إضافة مهمة",
+        "selectColor": "اختيار اللون"
+    },
+    "details": {
+        "description": "الوصف",
+        "activity": "النشاط",
+        "members": "الأعضاء",
+        "labels": "البطاقات",
+        "assignee": "المُكلَّف",
+        "dueDate": "تاريخ الاستحقاق",
+        "comments": "التعليقات",
+        "commentsCount": "تعليق",
+        "noComments": "لا تعليقات حتى الآن.",
+        "attachments": "المرفقات",
+        "files": "ملف",
+        "tags": "الوسوم",
+        "noDescription": "لم يتم تقديم وصف.",
+        "close": "إغلاق"
+    },
+    "card": {
+        "toggleComplete": "تبديل إكمال المهمة",
+        "openMenu": "فتح قائمة إجراءات المهمة"
+    }
 }

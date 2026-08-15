@@ -52,5 +52,11 @@
         "eventCreated": "Événement créé avec succès !",
         "eventUpdated": "{{eventTitle}} a été mis à jour.",
         "eventDeleted": "{{eventTitle}} a été supprimé."
+    },
+    "ariaLabels": {
+        "previousPeriod": "Période précédente",
+        "nextPeriod": "Période suivante",
+        "filterEvents": "Filtrer les événements par type",
+        "settings": "Paramètres du calendrier"
     }
 }

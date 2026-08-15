@@ -21,7 +21,8 @@
         "refunded": {
             "label": "Remboursements",
             "changeDescription": "par rapport au mois dernier"
-        }
+        },
+        "menu": "Ouvrir le menu de la carte"
     },
     "recentActivity": {
         "title": "Activité récente",
@@ -40,29 +41,6 @@
             "processing": "En cours",
             "failed": "Échoué"
         }
-    },
-    "filter": {
-        "title": "Options de filtrage",
-        "description": "Personnalisez votre vue du tableau de bord",
-        "dateRange": "Plage de dates",
-        "status": "Statut",
-        "minAmount": "Montant minimum",
-        "maxAmount": "Montant maximum",
-        "dateOptions": {
-            "all": "Tout le temps",
-            "today": "Aujourd'hui",
-            "week": "Cette semaine",
-            "month": "Ce mois-ci",
-            "year": "Cette année"
-        },
-        "statusOptions": {
-            "all": "Tous les statuts",
-            "new": "Nouveau",
-            "suspended": "Suspendu",
-            "delete": "Supprimer"
-        },
-        "reset": "Réinitialiser",
-        "apply": "Appliquer les filtres"
     },
     "revenueChart": {
         "title": "Revenus",

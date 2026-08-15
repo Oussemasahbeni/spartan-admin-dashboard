@@ -1,7 +1,7 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 
 import { isPlatformBrowser } from '@angular/common';
-import { Component, PLATFORM_ID, booleanAttribute, inject, input, output, signal } from '@angular/core';
+import { Component, DestroyRef, PLATFORM_ID, booleanAttribute, inject, input, output, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
@@ -11,18 +11,18 @@ import {
   lucideThumbsDown,
   lucideThumbsUp,
 } from '@ng-icons/lucide';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 import { AiMarkdownRenderer } from './ai-markdown-renderer';
 
 @Component({
   selector: 'adm-ai-response',
-  imports: [NgIcon, HlmButtonImports, AiMarkdownRenderer],
+  imports: [NgIcon, HlmButtonImports, AiMarkdownRenderer, TranslocoDirective],
   viewProviders: [
     provideIcons({ lucideSparkle, lucideRefreshCcw, lucideCheck, lucideCopy, lucideThumbsDown, lucideThumbsUp }),
   ],
   host: {
-    '[aria-live]': '"polite"',
     '[aria-busy]': 'isStreaming()',
   },
   template: `
@@ -38,9 +38,14 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
 
       <!-- Action Bar -->
       @if (!isStreaming()) {
-        <div class="mt-2 flex items-center justify-between gap-2">
+        <div
+          *transloco="let t; prefix: 'aiAssistant.ariaLabels'"
+          class="mt-2 flex items-center justify-between gap-2"
+        >
+          <span class="sr-only" role="status">{{ copied() ? t('copied') : '' }}</span>
           <div class="flex items-center gap-2">
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">
+              <span class="sr-only">{{ t('copyResponse') }}</span>
               @if (copied()) {
                 <ng-icon name="lucideCheck" />
               } @else {
@@ -49,15 +54,18 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
             </button>
 
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleRegenerate()">
+              <span class="sr-only">{{ t('regenerate') }}</span>
               <ng-icon name="lucideRefreshCcw" />
             </button>
           </div>
 
           <div class="flex items-center gap-2">
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleThumbsDown()">
+              <span class="sr-only">{{ t('badResponse') }}</span>
               <ng-icon name="lucideThumbsDown" />
             </button>
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleThumbsUp()">
+              <span class="sr-only">{{ t('goodResponse') }}</span>
               <ng-icon name="lucideThumbsUp" />
             </button>
           </div>
@@ -120,10 +128,16 @@ export class AiResponseCard {
 
     if (success) {
       this.copied.set(true);
-      setTimeout(() => {
+      this._copiedResetTimer = setTimeout(() => {
         this.copied.set(false);
       }, 2000);
     }
+  }
+
+  private _copiedResetTimer?: ReturnType<typeof setTimeout>;
+
+  constructor() {
+    inject(DestroyRef).onDestroy(() => clearTimeout(this._copiedResetTimer));
   }
 
   handleCodeBlockCopy(code: string): void {

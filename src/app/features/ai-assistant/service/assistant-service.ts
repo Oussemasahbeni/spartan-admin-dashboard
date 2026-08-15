@@ -1,4 +1,5 @@
-import { Service, computed, signal } from '@angular/core';
+import { Service, computed, inject, signal } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
 import { ChatMessage, MessageStatus } from '../model/assistant';
 import { AI_RESPONSES } from './data';
 
@@ -15,6 +16,7 @@ export interface Conversation {
 
 @Service()
 export class AssistantService {
+  private readonly _transloco = inject(TranslocoService);
   private readonly conversationSignal = signal<Conversation | null>(null);
   private readonly isLoadingSignal = signal(false);
   private streamAbortController: AbortController | null = null;
@@ -55,7 +57,7 @@ export class AssistantService {
 
     const newConversation: Conversation = {
       id,
-      title: 'New conversation',
+      title: this._transloco.translate('aiAssistant.newConversation'),
       messages: [],
       createdAt: now,
       updatedAt: now,
@@ -120,9 +122,12 @@ export class AssistantService {
     const chunkSize = 3; // Characters per chunk
     const delayMs = 15; // Delay between chunks
 
-    // Create abort controller for this stream
-    this.streamAbortController = new AbortController();
-    const signal = this.streamAbortController.signal;
+    // Abort any stream still in flight so two streams never write concurrently,
+    // then create this stream's own controller.
+    this.streamAbortController?.abort();
+    const controller = new AbortController();
+    this.streamAbortController = controller;
+    const signal = controller.signal;
 
     try {
       for (let i = 0; i < fullContent.length; i += chunkSize) {
@@ -140,7 +145,10 @@ export class AssistantService {
       // Mark streaming complete
       this.updateMessageContent(messageId, fullContent, undefined);
     } finally {
-      this.streamAbortController = null;
+      // Only clear the shared controller if a newer stream hasn't replaced it.
+      if (this.streamAbortController === controller) {
+        this.streamAbortController = null;
+      }
     }
   }
 

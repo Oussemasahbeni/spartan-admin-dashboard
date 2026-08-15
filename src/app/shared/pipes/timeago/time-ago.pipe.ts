@@ -13,7 +13,6 @@ const TIME_UNITS: { unit: Intl.RelativeTimeFormatUnit; seconds: number }[] = [
 
 @Pipe({
   name: 'timeAgo',
-  pure: false,
 })
 export class TimeAgoPipe implements PipeTransform {
   private readonly transloco = inject(TranslocoService);

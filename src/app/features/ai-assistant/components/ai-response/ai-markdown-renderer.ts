@@ -1,4 +1,4 @@
-import { Component, effect, inject, injectAsync, input, onIdle, output, signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, injectAsync, input, onIdle, output, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -19,6 +19,8 @@ export class AiMarkdownRenderer {
   // ==========================================
 
   private sanitizer = inject(DomSanitizer);
+
+  private readonly _copyResetTimers = new Set<ReturnType<typeof setTimeout>>();
 
   private rendererService = injectAsync(() => import('./markdown-renderer'), { prefetch: onIdle });
 
@@ -49,6 +51,8 @@ export class AiMarkdownRenderer {
   public readonly codeBlockCopy = output<string>();
 
   constructor() {
+    inject(DestroyRef).onDestroy(() => this._copyResetTimers.forEach((timer) => clearTimeout(timer)));
+
     // Re-render whenever the content changes, resolving the lazy service on demand.
     effect((onCleanup) => {
       const markdown = this.content();
@@ -94,11 +98,13 @@ export class AiMarkdownRenderer {
       checkIcon?.classList.remove('hidden');
       btn.classList.add('bg-zinc-700/50');
 
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         copyIcon?.classList.remove('hidden');
         checkIcon?.classList.add('hidden');
         btn.classList.remove('bg-zinc-700/50');
+        this._copyResetTimers.delete(timer);
       }, 2000);
+      this._copyResetTimers.add(timer);
     });
   }
 }

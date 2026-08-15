@@ -147,6 +147,9 @@
             "read": "Read",
             "write": "Write",
             "admin": "Admin"
-        }
-    }
+        },
+        "removeMember": "Remove team member"
+    },
+    "openNavigation": "Open settings navigation",
+    "navigationLabel": "Settings navigation"
 }

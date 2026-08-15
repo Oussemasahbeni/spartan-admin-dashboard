@@ -18,11 +18,18 @@
               <ng-icon name="lucideKey" />
             </hlm-input-group-addon>
             <hlm-input-group-addon align="inline-end">
-              <ng-icon
-                class="cursor-pointer"
-                [name]="showCurrentPassword() ? 'lucideEye' : 'lucideEyeOff'"
+              <button
+                type="button"
+                hlmBtn
+                variant="ghost"
+                size="icon-sm"
+                [attr.aria-pressed]="showCurrentPassword()"
                 (click)="showCurrentPassword.set(!showCurrentPassword())"
-            /></hlm-input-group-addon>
+              >
+                <span *transloco="let t" class="sr-only">{{ t('common.showPassword') }}</span>
+                <ng-icon [name]="showCurrentPassword() ? 'lucideEye' : 'lucideEyeOff'" />
+              </button>
+            </hlm-input-group-addon>
           </hlm-input-group>
           @for (error of securityForm.currentPassword().errors(); track error.kind) {
             <hlm-field-error *transloco="let t">{{ t('validation.' + error.kind) }}</hlm-field-error>
@@ -45,11 +52,18 @@
               <ng-icon name="lucideLock" />
             </hlm-input-group-addon>
             <hlm-input-group-addon align="inline-end">
-              <ng-icon
-                class="cursor-pointer"
-                [name]="showNewPassword() ? 'lucideEye' : 'lucideEyeOff'"
+              <button
+                type="button"
+                hlmBtn
+                variant="ghost"
+                size="icon-sm"
+                [attr.aria-pressed]="showNewPassword()"
                 (click)="showNewPassword.set(!showNewPassword())"
-            /></hlm-input-group-addon>
+              >
+                <span *transloco="let t" class="sr-only">{{ t('common.showPassword') }}</span>
+                <ng-icon [name]="showNewPassword() ? 'lucideEye' : 'lucideEyeOff'" />
+              </button>
+            </hlm-input-group-addon>
           </hlm-input-group>
           <hlm-field-description>{{ t('passwordRequirements') }}</hlm-field-description>
           @for (error of securityForm.newPassword().errors(); track error.kind) {
@@ -74,7 +88,7 @@
         <div class="flex flex-1 flex-col gap-1">
           <div class="flex items-center gap-2">
             <ng-icon name="lucideShieldCheck" />
-            <span class="leading-none font-medium">{{ t('twoStepAuth.title') }}</span>
+            <label for="toggleTwoStepAuth" class="leading-none font-medium">{{ t('twoStepAuth.title') }}</label>
           </div>
           <p class="text-muted-foreground text-sm">{{ t('twoStepAuth.description') }}</p>
         </div>
@@ -86,7 +100,7 @@
         <div class="flex flex-1 flex-col gap-1">
           <div class="flex items-center gap-2">
             <ng-icon name="lucideBell" />
-            <span class="leading-none font-medium">{{ t('passwordChangeReminder.title') }}</span>
+            <label for="togglePasswordChangeReminder" class="leading-none font-medium">{{ t('passwordChangeReminder.title') }}</label>
           </div>
           <p class="text-muted-foreground text-sm">{{ t('passwordChangeReminder.description') }}</p>
         </div>

@@ -1,7 +1,7 @@
 import { Component, output, signal } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideListFilter, lucideSearch } from '@ng-icons/lucide';
+import { lucideCircleCheck, lucideCircleX, lucideListFilter, lucideLoader, lucideSearch } from '@ng-icons/lucide';
 import { USER_STATUSES, UserStatus } from '@shared/models/user';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
@@ -26,7 +26,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
     HlmCheckboxImports,
     TranslocoModule,
   ],
-  providers: [provideIcons({ lucideSearch, lucideListFilter })],
+  providers: [provideIcons({ lucideSearch, lucideListFilter, lucideCircleCheck, lucideCircleX, lucideLoader })],
   template: `
     <hlm-popover
       *transloco="let t"
@@ -74,7 +74,6 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
                   @case ('pending') {
                     <ng-icon class="text-yellow-600" name="lucideLoader" />
                   }
-                  @default never;
                 }
                 <span *transloco="let t; prefix: 'users.status'"> {{ t(status) }} </span>
               </button>

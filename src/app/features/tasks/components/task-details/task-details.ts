@@ -6,8 +6,10 @@ import {
   lucideCalendar,
   lucideCheckCircle2,
   lucideLayout,
+  lucideLoader,
   lucideMessageSquare,
   lucidePaperclip,
+  lucideSquare,
   lucideTag,
   lucideUser,
 } from '@ng-icons/lucide';
@@ -20,7 +22,6 @@ import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { TAG_COLOR_CLASSES } from '../../model/tag';
 import { Task } from '../../model/task';
-import { provideTaskStatusIcons, TaskStatusUIPipe } from '../../pipes/task-status-ui.pipe';
 
 export interface TaskDetailsContext {
   task: Task;
@@ -30,7 +31,6 @@ export interface TaskDetailsContext {
   selector: 'adm-task-details',
   imports: [
     TranslocoModule,
-    TaskStatusUIPipe,
     HlmDialogImports,
     NgIcon,
     HlmBadgeImports,
@@ -48,8 +48,9 @@ export interface TaskDetailsContext {
       lucideTag,
       lucideUser,
       lucideCheckCircle2,
+      lucideLoader,
+      lucideSquare,
     }),
-    provideTaskStatusIcons(),
   ],
   host: {
     class: 'block w-full',
@@ -74,9 +75,21 @@ export interface TaskDetailsContext {
       <div class="min-w-0 flex-1">
         <h2 class="text-foreground text-xl leading-snug font-semibold">{{ task.title }}</h2>
         <div class="mt-1.5 flex flex-wrap items-center gap-1.5">
-          @let ui = task.status | taskStatusUI;
           <span hlmBadge variant="outline" class="text-muted-foreground h-auto gap-1 rounded-full px-2 py-0.5 text-[11px]">
-            <ng-icon [name]="ui.icon" [class]="ui.class" />
+            @switch (task.status) {
+              @case ('todo') {
+                <ng-icon class="text-slate-500 dark:text-slate-400" name="lucideSquare" />
+              }
+              @case ('inprogress') {
+                <ng-icon class="text-blue-500 dark:text-blue-400" name="lucideLoader" />
+              }
+              @case ('completed') {
+                <ng-icon class="text-emerald-500 dark:text-emerald-400" name="lucideCheckCircle2" />
+              }
+              @default {
+                <ng-icon class="text-muted-foreground" name="lucideSquare" />
+              }
+            }
             {{ t('columns.' + task.status) }}
           </span>
           @for (tag of task.tags; track tag.name) {
@@ -123,7 +136,7 @@ export interface TaskDetailsContext {
           </h3>
           <div class="flex items-center gap-3">
             <hlm-avatar size="sm" class="ring-background shrink-0 ring-2">
-              <img hlmAvatarImage [src]="task.assigneeAvatar" [alt]="task.title" />
+              <img hlmAvatarImage loading="lazy" alt="" [src]="task.assigneeAvatar" />
               <span hlmAvatarFallback class="text-xs">{{ avatarInitials }}</span>
             </hlm-avatar>
             <div class="bg-muted/40 flex-1 rounded-lg px-3 py-2.5">
@@ -146,7 +159,7 @@ export interface TaskDetailsContext {
           <h3 class="text-muted-foreground mb-2 text-[10px] font-semibold tracking-widest uppercase">{{ t('members') }}</h3>
           <div class="flex flex-wrap gap-1.5">
             <hlm-avatar size="lg" class="ring-background ring-2">
-              <img hlmAvatarImage [src]="task.assigneeAvatar" [alt]="task.title" />
+              <img hlmAvatarImage loading="lazy" alt="" [src]="task.assigneeAvatar" />
               <span hlmAvatarFallback class="text-xs">{{ avatarInitials }}</span>
             </hlm-avatar>
           </div>

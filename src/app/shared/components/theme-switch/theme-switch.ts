@@ -6,11 +6,9 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMoon, lucideSun } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
-import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
-
 @Component({
   selector: 'adm-theme-switch',
-  imports: [NgIcon, HlmButtonImports, HlmTooltipImports, TranslocoModule],
+  imports: [NgIcon, HlmButtonImports, TranslocoModule],
   providers: [
     provideIcons({
       lucideMoon,
@@ -21,14 +19,8 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
     '(window:keydown)': 'onKeydown($event)',
   },
   template: `
-    <button
-      type="button"
-      variant="outline"
-      hlmBtn
-      size="icon"
-      [aria-label]="'header.toggleTheme' | transloco"
-      (click)="toggleTheme()"
-    >
+    <button type="button" variant="outline" hlmBtn size="icon" (click)="toggleTheme()">
+      <span *transloco="let t" class="sr-only">{{ t('common.toggleTheme') }}</span>
       <ng-icon name="lucideSun" class="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
       <ng-icon name="lucideMoon" class="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
     </button>

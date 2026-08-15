@@ -10,13 +10,7 @@
         "rememberMe": "تذكرني",
         "noAccount": "ليس لديك حساب؟",
         "signUp": "إنشاء حساب",
-        "loginBtn": "تسجيل الدخول",
-        "errors": {
-            "emailRequired": "البريد الإلكتروني مطلوب",
-            "emailInvalid": "البريد الإلكتروني غير صالح",
-            "passwordRequired": "كلمة المرور مطلوبة",
-            "passwordMinLength": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
-        }
+        "loginBtn": "تسجيل الدخول"
     },
     "signup": {
         "title": "إنشاء حساب جديد",
@@ -36,16 +30,7 @@
         "termsText": "بالاستمرار، فإنك توافق على",
         "termsOfService": "شروط الاستخدام",
         "and": "و",
-        "privacyPolicy": "سياسة الخصوصية",
-        "errors": {
-            "nameRequired": "الاسم مطلوب",
-            "emailRequired": "البريد الإلكتروني مطلوب",
-            "emailInvalid": "البريد الإلكتروني غير صالح",
-            "passwordRequired": "كلمة المرور مطلوبة",
-            "passwordMinLength": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
-            "passwordMismatch": "كلمتا المرور غير متطابقتين",
-            "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب"
-        }
+        "privacyPolicy": "سياسة الخصوصية"
     },
     "resetPassword": {
         "title": "نسيت كلمة المرور؟",

@@ -1,4 +1,3 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
 import { Component, computed, DestroyRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -82,12 +81,11 @@ export default class Calendar {
   private readonly _calendarStore = inject(CalendarStore);
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _translocoService = inject(TranslocoService);
-  private readonly _breakpointObserver = inject(BreakpointObserver);
 
   // ==========================================
   // ViewChild
   // ==========================================
-  protected readonly calendar = viewChild.required<FullCalendarComponent>('calendar');
+  protected readonly calendar = viewChild<FullCalendarComponent>('calendar');
   // ==========================================
   // State
   // ==========================================
@@ -102,7 +100,7 @@ export default class Calendar {
   protected readonly selectedTypes = this._calendarStore.selectedTypes;
 
   protected readonly showDatePicker = computed(() => this.currentView() === 'timeGridDay');
-  protected readonly calendarApi = computed(() => this.calendar().getApi());
+  protected readonly calendarApi = computed(() => this.calendar()?.getApi());
 
   protected readonly selectedDate = signal<Date>(new Date());
 
@@ -161,36 +159,23 @@ export default class Calendar {
     },
   }));
 
-  constructor() {
-    this._breakpointObserver
-      .observe([Breakpoints.Handset])
-      .pipe(takeUntilDestroyed())
-      .subscribe((result) => {
-        if (result.matches) {
-          this.changeView('listWeek');
-        } else {
-          this.changeView(this.availableViews()[0].value);
-        }
-      });
-  }
-
   // ==========================================
   // Methods
   // ==========================================
   protected nextMonth(): void {
-    this.calendarApi().next();
+    this.calendarApi()?.next();
   }
 
   protected previousMonth(): void {
-    this.calendarApi().prev();
+    this.calendarApi()?.prev();
   }
 
   protected goToToday(): void {
-    this.calendarApi().today();
+    this.calendarApi()?.today();
   }
   protected changeView(view: ToggleValue<string>): void {
     if (typeof view !== 'string') return;
-    this.calendarApi().changeView(view);
+    this.calendarApi()?.changeView(view);
     this.currentView.set(view);
   }
 

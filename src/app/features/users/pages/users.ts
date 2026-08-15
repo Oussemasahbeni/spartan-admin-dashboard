@@ -119,6 +119,8 @@ export default class Users {
   protected readonly selectedRoles = signal<UserRole[]>([]);
   protected readonly selectedStatuses = signal<UserStatus[]>([]);
   protected readonly defaultColumnPinning: ColumnPinningState = { start: ['select'], end: ['actions'] };
+
+  protected readonly userRowId = (user: User) => user.id;
   protected readonly usersResource = rxResource({
     params: () => {
       const sort = this.sorting()[0];
@@ -213,7 +215,7 @@ export default class Users {
   // Private Methods
   // ==========================================
 
-  refreshTable(): void {
+  protected refreshTable(): void {
     this.usersResource.reload();
   }
 }

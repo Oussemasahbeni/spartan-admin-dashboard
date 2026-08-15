@@ -43,6 +43,16 @@
     },
     "ariaLabels": {
         "suggestedPrompts": "Suggested prompts",
-        "useSuggestion": "Use suggestion:"
-    }
+        "useSuggestion": "Use suggestion:",
+        "copyResponse": "Copy response",
+        "regenerate": "Regenerate response",
+        "goodResponse": "Good response",
+        "badResponse": "Bad response",
+        "copyMessage": "Copy message",
+        "editMessage": "Edit message",
+        "moreOptions": "More input options",
+        "chatMessages": "Chat messages",
+        "copied": "Copied"
+    },
+    "newConversation": "New conversation"
 }

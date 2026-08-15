@@ -3,6 +3,15 @@ import DOMPurify from 'dompurify';
 import hljs from 'highlight.js';
 import { Marked, Renderer } from 'marked';
 
+// Rendered links open in a new tab; force noopener/noreferrer so AI-generated
+// content can never reach back to the app window or leak the referrer.
+DOMPurify.addHook('afterSanitizeAttributes', (node) => {
+  if (node.tagName === 'A') {
+    node.setAttribute('target', '_blank');
+    node.setAttribute('rel', 'noopener noreferrer');
+  }
+});
+
 /**
  * Wraps the heavy markdown stack (`marked`, `highlight.js`, `dompurify`) behind a
  * single service so it can be lazy-loaded with `injectAsync`. None of these
@@ -77,6 +86,8 @@ export default class MarkdownRendererService {
   private sanitize(html: string): string {
     return DOMPurify.sanitize(html, {
       USE_PROFILES: { html: true, svg: true },
+      // Inline styles allow CSS injection / UI redress in AI-generated content.
+      FORBID_ATTR: ['style'],
       ADD_ATTR: [
         'class',
         'data-code',
@@ -96,7 +107,6 @@ export default class MarkdownRendererService {
         'ry',
         'd',
       ],
-      ADD_TAGS: ['hlm-icon', 'ng-icon'],
     });
   }
 }
