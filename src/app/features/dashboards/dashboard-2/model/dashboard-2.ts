@@ -37,7 +37,7 @@ export interface Transaction {
     email: string;
     avatar: string;
   };
-  status: 'Suspended' | 'New' | 'Delete';
+  status: 'success' | 'processing' | 'failed';
   date: string;
   amount: string;
 }

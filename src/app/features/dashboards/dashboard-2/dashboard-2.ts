@@ -25,7 +25,6 @@ import { FilterDialogComponent, FilterOptions } from './components/filter-dialog
 import { StatCardComponent, StatCardData } from './components/stat-card/stat-card';
 import { TransactionsTableComponent } from './components/transactions-table/transactions-table';
 import { Transaction } from './model/dashboard-2';
-import { provideTransactionStatusIcons } from './pipes/status-ui.pipe';
 
 @Component({
   selector: 'adm-dashboard-2',
@@ -54,7 +53,6 @@ import { provideTransactionStatusIcons } from './pipes/status-ui.pipe';
       lucideUsers,
       lucideCreditCard,
     }),
-    provideTransactionStatusIcons(),
   ],
   templateUrl: './dashboard-2.html',
 })

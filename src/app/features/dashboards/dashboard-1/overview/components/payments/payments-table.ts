@@ -20,11 +20,10 @@ import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-
 import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmTableImports } from '@spartan-ng/helm/table';
-import { CellContext, createColumnHelper, flexRenderComponent } from '@tanstack/angular-table';
+import { CellContext, createColumnHelper } from '@tanstack/angular-table';
 import { Payment, PaymentStatus } from '../../model/payment';
 import { PaymentsActionDropdown } from './action-dropdown';
 
@@ -70,7 +69,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
           <hlm-input-group>
             <input
               *transloco="let t"
-              class="h-8 w-full md:w-80"
+              class="w-full md:w-80"
               hlmInputGroupInput
               [placeholder]="t('common.searchPlaceholder')"
               [value]="searchValue()"
@@ -81,7 +80,10 @@ import { PaymentsActionDropdown } from './action-dropdown';
             </div>
             <hlm-input-group-addon align="inline-end">
               @if (searchValue()) {
-                <ng-icon name="lucideX" (click)="_clearSearch()" />
+                <button type="button" hlmBtn variant="ghost" size="icon-sm" (click)="_clearSearch()">
+                  <span class="sr-only">{{ t('common.clearSearch') }}</span>
+                  <ng-icon name="lucideX" />
+                </button>
               }
             </hlm-input-group-addon>
           </hlm-input-group>
@@ -91,7 +93,7 @@ import { PaymentsActionDropdown } from './action-dropdown';
         <adm-data-table
           [columns]="columns"
           [data]="payments()"
-          [paginationState]="{ pageIndex: 0, pageSize: 5 }"
+          [pagination]="{ pageIndex: 0, pageSize: 5 }"
           [pageSizeOptions]="[5, 10, 25, 50, 100]"
         >
           <!-- Status Cell -->
@@ -152,17 +154,18 @@ export class PaymentsTable {
   protected readonly columns = this.columnHelper.columns([
     this.columnHelper.accessor('email', {
       header: translateSignal('paymentsTable.columns.email'),
+      enableSorting: true,
       meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.email' }),
     }),
     this.columnHelper.accessor('status', {
       header: translateSignal('paymentsTable.columns.status'),
-      enableSorting: false,
+      enableSorting: true,
       meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.status' }),
       cell: () => this.statusCell(),
     }),
     this.columnHelper.accessor('amount', {
       header: translateSignal('paymentsTable.columns.amount'),
-      enableSorting: false,
+      enableSorting: true,
       meta: () => ({ translationKey: 'dashboard1.paymentsTable.columns.amount' }),
       cell: (info) => {
         const amount = info.getValue();
@@ -173,7 +176,7 @@ export class PaymentsTable {
       id: 'actions',
       enableHiding: false,
       size: 40,
-      cell: () => flexRenderComponent(PaymentsActionDropdown),
+      cell: () => PaymentsActionDropdown,
     }),
   ]);
 
@@ -184,9 +187,7 @@ export class PaymentsTable {
   protected _filterChanged(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchValue.set(value);
-    this.table()
-      .getColumn('email')
-      ?.setFilterValue((event.target as HTMLInputElement).value);
+    this.table().getColumn('email')?.setFilterValue(value);
   }
   protected _clearSearch() {
     this.searchValue.set('');

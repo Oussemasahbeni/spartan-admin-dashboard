@@ -5,8 +5,8 @@ import {
   input,
   isDevMode,
   linkedSignal,
+  model,
   numberAttribute,
-  output,
   signal,
   untracked,
 } from '@angular/core';
@@ -20,10 +20,6 @@ import {
   ColumnFiltersState,
   ColumnPinningState,
   ColumnVisibilityState,
-  createFilteredRowModel,
-  createPaginatedRowModel,
-  createSortedRowModel,
-  flexRenderComponent,
   FlexRenderDirective,
   injectTable,
   PaginationState,
@@ -61,28 +57,14 @@ import { dataTableFeatures, DataTableFeatures } from './table-features';
  *   [columns]="columns"
  *   [data]="pageData()"
  *   [totalElements]="totalCount()"
- *   [paginationState]="pagination()"
- *   [sortingState]="sorting()"
- *   (stateChange)="onStateChange($event)"
+ *   [(pagination)]="pagination()"
+ *   [(sorting)]="sorting()"
  * />
  * ```
  *
  * @template T - The type of data rows in the table
  */
 
-export type DataTableStateChangeReason = 'pagination' | 'sorting' | 'filtering';
-
-export interface DataTableStateChangeEvent {
-  pagination: PaginationState;
-  sorting: SortingState;
-  filters: ColumnFiltersState;
-  reason: DataTableStateChangeReason;
-}
-
-export interface DataTableRowSelectionChangeEvent<T> {
-  rowSelection: RowSelectionState;
-  selectedRows: T[];
-}
 @Component({
   selector: 'adm-data-table',
   imports: [
@@ -105,6 +87,14 @@ export class DataTable<T extends RowData> {
   // ==========================================
 
   /**
+   * The operation mode of the table.
+   * - client: All data is in memory; table handles pagination/sorting/filtering.
+   * - server: External API handles operations; table emits state changes.
+   * @default 'client'
+   */
+  public readonly mode = input<'client' | 'server'>('client');
+
+  /**
    * Column definitions for the table.
    * Uses TanStack Table's ColumnDef format.
    */
@@ -125,10 +115,17 @@ export class DataTable<T extends RowData> {
 
   /**
    * Total number of elements across all pages.
-   * **Only required in server mode** for proper pagination display.
+   * Only required in server mode for proper pagination display.
    * In client mode, this is calculated automatically.
    */
   public readonly totalElements = input(0, { transform: numberAttribute });
+
+  /**
+   * Returns a stable, backend-provided id for a row (e.g. `user => user.id`).
+   * Required for row selection to survive page changes in server mode —
+   * without it, rows are identified by page-relative index.
+   */
+  public readonly getRowId = input<(row: T, index: number) => string>();
 
   /**
    * Whether to show the pagination controls.
@@ -142,27 +139,13 @@ export class DataTable<T extends RowData> {
 
   /**
    * Enables checkbox selection for rows.
-=   */
+   */
   public readonly enableRowSelection = input(false, { transform: booleanAttribute });
+
+  /**
+   * Enables column pinning (sticky columns) for start/end positions.
+   */
   public readonly enableColumnPinning = input(false, { transform: booleanAttribute });
-
-  /**
-   * External pagination state for server-side mode.
-   * Ignored in client mode.
-   */
-  public readonly paginationState = input<PaginationState>({ pageIndex: 0, pageSize: 10 });
-
-  /**
-   * External sorting state for server-side mode.
-   * Ignored in client mode.
-   */
-  public readonly sortingState = input<SortingState>([]);
-
-  /**
-   * External column filters state for server-side mode.
-   * Ignored in client mode.
-   */
-  public readonly columnFiltersState = input<ColumnFiltersState>([]);
 
   /**
    * External column pinning state for server-side mode.
@@ -170,33 +153,18 @@ export class DataTable<T extends RowData> {
   public readonly defaultColumnPinning = input<ColumnPinningState>({ start: [], end: [] });
 
   /**
-   * The operation mode of the table.
-   * - `'client'`: All data is in memory; table handles pagination/sorting/filtering.
-   * - `'server'`: External API handles operations; table emits state changes.
-   * @default 'client'
-   */
-  public readonly mode = input<'client' | 'server'>('client');
-
-  /**
    * Available options for the page size dropdown.
    */
   public readonly pageSizeOptions = input([10, 25, 50, 100]);
 
   // ==========================================
-  // Outputs
+  // Two-way bound state
   // ==========================================
 
-  /**
-   * Emitted when pagination or sorting state changes.
-   * **Only used in server mode** to trigger API calls.
-   */
-  public readonly stateChange = output<DataTableStateChangeEvent>();
-
-  /**
-   * Emitted when row selection changes.
-   * Contains both the TanStack selection state and resolved selected row items.
-   */
-  public readonly rowSelectionChange = output<DataTableRowSelectionChangeEvent<T>>();
+  public readonly pagination = model<PaginationState>({ pageIndex: 0, pageSize: 10 });
+  public readonly sorting = model<SortingState>([]);
+  public readonly columnFilters = model<ColumnFiltersState>([]);
+  public readonly rowSelection = model<RowSelectionState>({});
 
   // ==========================================
   // State
@@ -214,8 +182,8 @@ export class DataTable<T extends RowData> {
     if (this.enableRowSelection() && !baseColumns.some((column) => column.id === 'select')) {
       const selectionColumn: ColumnDef<DataTableFeatures, T> = {
         id: 'select',
-        header: () => flexRenderComponent(TableHeadSelection),
-        cell: () => flexRenderComponent(TableRowSelection),
+        header: () => TableHeadSelection,
+        cell: () => TableRowSelection,
         enableSorting: false,
         enableHiding: false,
         enableResizing: false,
@@ -228,30 +196,11 @@ export class DataTable<T extends RowData> {
   });
 
   private readonly columnOrder = signal<string[]>([]);
-  private readonly rowSelection = signal<RowSelectionState>({});
   private readonly columnVisibility = signal<ColumnVisibilityState>({});
 
   private readonly columnPinning = linkedSignal<ColumnPinningState>(() =>
     this.cloneColumnPinningState(this.defaultColumnPinning())
   );
-
-  private readonly internalColumnFilters = signal<ColumnFiltersState>([]);
-
-  private readonly internalPagination = linkedSignal<PaginationState>(() => this.paginationState());
-
-  private readonly activePagination = computed(() =>
-    this.isServerMode() ? this.paginationState() : this.internalPagination()
-  );
-
-  private readonly activeColumnFilters = computed(() =>
-    this.isServerMode() ? this.columnFiltersState() : this.internalColumnFilters()
-  );
-
-  /** Internal sorting state for client mode. */
-  private readonly internalSorting = signal<SortingState>([]);
-
-  /** Selects the appropriate sorting state based on mode. */
-  private readonly activeSorting = computed(() => (this.isServerMode() ? this.sortingState() : this.internalSorting()));
 
   /** Column resizing interaction state (v8's `columnSizingInfo`). */
   protected readonly _columnResizing = computed(() => this.table.atoms.columnResizing.get());
@@ -307,29 +256,11 @@ export class DataTable<T extends RowData> {
   // ==========================================
 
   /**
-   * Stable row-model factory instances.
-   * Created once (not inside the `injectTable` initializer) so the table's
-   * memoization survives initializer re-evaluation on every data change.
-   */
-  private readonly _paginatedRowModel = createPaginatedRowModel<DataTableFeatures, T>();
-  private readonly _filteredRowModel = createFilteredRowModel<DataTableFeatures, T>();
-  private readonly _sortedRowModel = createSortedRowModel<DataTableFeatures, T>();
-
-  /**
    * The TanStack Table instance.
    * Exposes all table methods for advanced use cases.
    */
   public readonly table = injectTable(() => ({
-    features: {
-      ...dataTableFeatures,
-      ...(this.enablePagination() ? { paginatedRowModel: this._paginatedRowModel } : {}),
-      ...(this.isServerMode()
-        ? {}
-        : {
-            filteredRowModel: this._filteredRowModel,
-            sortedRowModel: this._sortedRowModel,
-          }),
-    },
+    features: dataTableFeatures,
     debugTable: isDevMode(),
     data: this.data(),
     columns: this._columns(),
@@ -337,75 +268,42 @@ export class DataTable<T extends RowData> {
     manualSorting: this.isServerMode(),
     manualFiltering: this.isServerMode(),
     rowCount: this.isServerMode() ? this.totalElements() : undefined,
+    getRowId: this.getRowId(),
     enableRowSelection: this.enableRowSelection(),
     enableColumnPinning: this.enableColumnPinning(),
     state: {
-      pagination: this.activePagination(),
-      sorting: this.activeSorting(),
+      pagination: this.pagination(),
+      sorting: this.sorting(),
       columnOrder: this.columnOrder(),
-      columnFilters: this.activeColumnFilters(),
+      columnFilters: this.columnFilters(),
       columnVisibility: this.columnVisibility(),
       columnPinning: this.columnPinning(),
       rowSelection: this.rowSelection(),
     },
-
     columnResizeMode: 'onChange',
     onSortingChange: (updater) => {
-      const current = this.table.atoms.sorting.get();
-      const next = typeof updater === 'function' ? updater(current) : updater;
-
-      if (this.isServerMode()) {
-        this.emitServerState('sorting', {
-          sorting: next,
-          pagination: { ...this.table.atoms.pagination.get(), pageIndex: 0 },
-        });
-        return;
-      }
-
-      this.internalSorting.set(next);
+      typeof updater === 'function' ? this.sorting.update(updater) : this.sorting.set(updater);
+      this.pagination.update((p) => ({ ...p, pageIndex: 0 }));
     },
 
     onColumnFiltersChange: (updater) => {
-      const current = this.table.atoms.columnFilters.get();
-      const next = typeof updater === 'function' ? updater(current) : updater;
-
-      if (this.isServerMode()) {
-        this.emitServerState('filtering', {
-          filters: next,
-          pagination: { ...this.table.atoms.pagination.get(), pageIndex: 0 },
-        });
-        return;
-      }
-
-      this.internalColumnFilters.set(next);
+      typeof updater === 'function' ? this.columnFilters.update(updater) : this.columnFilters.set(updater);
+      this.pagination.update((p) => ({ ...p, pageIndex: 0 }));
     },
-    onPaginationChange: (updaterOrValue) => {
-      const current = this.table.atoms.pagination.get();
-      const next = typeof updaterOrValue === 'function' ? updaterOrValue(current) : updaterOrValue;
-
-      if (this.isServerMode()) {
-        this.emitServerState('pagination', { pagination: next });
-        return;
-      }
-
-      this.internalPagination.set(next);
+    onPaginationChange: (updater) => {
+      typeof updater === 'function' ? this.pagination.update(updater) : this.pagination.set(updater);
     },
-
     onColumnVisibilityChange: (updater) => {
-      updater instanceof Function ? this.columnVisibility.update(updater) : this.columnVisibility.set(updater);
+      typeof updater === 'function' ? this.columnVisibility.update(updater) : this.columnVisibility.set(updater);
     },
     onRowSelectionChange: (updater) => {
-      const current = this.rowSelection();
-      const next = typeof updater === 'function' ? updater(current) : updater;
-
-      this.rowSelection.set(next);
-      this.emitRowSelectionChange(next);
+      typeof updater === 'function' ? this.rowSelection.update(updater) : this.rowSelection.set(updater);
     },
     onColumnOrderChange: (updater) => {
-      updater instanceof Function ? this.columnOrder.update(updater) : this.columnOrder.set(updater);
+      typeof updater === 'function' ? this.columnOrder.update(updater) : this.columnOrder.set(updater);
     },
     onColumnPinningChange: (updater) => {
-      updater instanceof Function ? this.columnPinning.update(updater) : this.columnPinning.set(updater);
+      typeof updater === 'function' ? this.columnPinning.update(updater) : this.columnPinning.set(updater);
     },
   }));
 
@@ -423,25 +321,6 @@ export class DataTable<T extends RowData> {
 
   protected onClearSorting(column: Column<DataTableFeatures, T>) {
     column.clearSorting();
-  }
-
-  private emitRowSelectionChange(rowSelection: RowSelectionState) {
-    this.rowSelectionChange.emit({
-      rowSelection,
-      selectedRows: this.table.getSelectedRowModel().rows.map((row) => row.original),
-    });
-  }
-
-  private emitServerState(
-    reason: DataTableStateChangeReason,
-    overrides: Partial<Omit<DataTableStateChangeEvent, 'reason'>> = {}
-  ) {
-    this.stateChange.emit({
-      reason,
-      pagination: overrides.pagination ?? this.table.atoms.pagination.get(),
-      sorting: overrides.sorting ?? this.table.atoms.sorting.get(),
-      filters: overrides.filters ?? this.table.atoms.columnFilters.get(),
-    });
   }
 
   private cloneColumnPinningState(state: ColumnPinningState): ColumnPinningState {

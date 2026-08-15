@@ -56,10 +56,9 @@
             "year": "هذه السنة"
         },
         "statusOptions": {
-            "all": "جميع الحالات",
-            "new": "جديد",
-            "suspended": "معلق",
-            "delete": "حذف"
+            "success": "ناجح",
+            "processing": "قيد المعالجة",
+            "failed": "فشل"
         },
         "reset": "إعادة تعيين",
         "apply": "تطبيق التصفية"

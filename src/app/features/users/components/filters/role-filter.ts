@@ -27,7 +27,6 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
     TranslocoModule,
   ],
   providers: [provideIcons({ lucideSearch, lucideListFilter, lucideUser, lucideBriefcase, lucideShieldCheck })],
-
   template: `
     <hlm-popover
       *transloco="let t"

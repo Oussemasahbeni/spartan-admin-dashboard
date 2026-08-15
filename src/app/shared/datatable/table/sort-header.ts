@@ -75,8 +75,7 @@ import { DataTableFeatures } from './table-features';
   `,
 })
 export class TableSortHeader<T extends RowData> {
-  public readonly header = input.required<Header<DataTableFeatures, T, unknown>>();
-
+  public readonly header = input.required<Header<DataTableFeatures, T>>();
   public readonly headerCell = input.required<string>();
 
   /**

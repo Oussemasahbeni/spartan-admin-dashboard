@@ -36,9 +36,9 @@
         "footer": "Une liste de vos activités récentes.",
         "description": "Voir l'historique de vos transactions",
         "status": {
-            "New": "Nouveau",
-            "Suspended": "Suspendu",
-            "Delete": "Supprimer"
+            "success": "Succès",
+            "processing": "En cours",
+            "failed": "Échoué"
         }
     },
     "filter": {

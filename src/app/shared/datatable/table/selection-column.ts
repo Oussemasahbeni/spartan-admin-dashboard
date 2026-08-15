@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
-import { type CellContext, type HeaderContext, injectFlexRenderContext, type RowData } from '@tanstack/angular-table';
+import { Row, type RowData, Table } from '@tanstack/angular-table';
 import { DataTableFeatures } from './table-features';
 
 @Component({
@@ -10,18 +10,14 @@ import { DataTableFeatures } from './table-features';
   },
   template: `
     <hlm-checkbox
-      [checked]="_context.table.getIsAllRowsSelected()"
-      [indeterminate]="_context.table.getIsSomeRowsSelected()"
-      (checkedChange)="_context.table.toggleAllRowsSelected()"
+      [checked]="table().getIsAllRowsSelected()"
+      [indeterminate]="table().getIsSomeRowsSelected()"
+      (checkedChange)="table().toggleAllRowsSelected()"
     />
   `,
 })
 export class TableHeadSelection<T extends RowData> {
-  // ==========================================
-  // State
-  // ==========================================
-
-  protected readonly _context = injectFlexRenderContext<HeaderContext<DataTableFeatures, T, unknown>>();
+  public readonly table = input.required<Table<DataTableFeatures, T>>();
 }
 
 @Component({
@@ -31,16 +27,9 @@ export class TableHeadSelection<T extends RowData> {
   },
 
   template: `
-    <hlm-checkbox
-      [checked]="_context.row.getIsSelected()"
-      (checkedChange)="_context.row.getToggleSelectedHandler()($event)"
-    />
+    <hlm-checkbox [checked]="row().getIsSelected()" (checkedChange)="row().toggleSelected($event)" />
   `,
 })
 export class TableRowSelection<T extends RowData> {
-  // ==========================================
-  // State
-  // ==========================================
-
-  protected readonly _context = injectFlexRenderContext<CellContext<DataTableFeatures, T, unknown>>();
+  public readonly row = input.required<Row<DataTableFeatures, T>>();
 }

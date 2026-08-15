@@ -5,7 +5,7 @@
       <div class="flex flex-col items-start gap-2 sm:flex-row">
         <hlm-input-group>
           <input
-            class="h-8 w-full md:w-80"
+            class="w-full md:w-80"
             hlmInputGroupInput
             [placeholder]="t('common.searchPlaceholder')"
             [formField]="searchForm.search"
@@ -15,7 +15,10 @@
           </div>
           <hlm-input-group-addon align="inline-end">
             @if (this.searchForm.search().value()) {
-              <ng-icon name="lucideX" (click)="searchForm.search().value.set('')" />
+              <button type="button" hlmBtn variant="ghost" size="icon-sm" (click)="searchForm.search().value.set('')">
+                <span class="sr-only">{{ t('common.clearSearch') }}</span>
+                <ng-icon name="lucideX" />
+              </button>
             }
           </hlm-input-group-addon>
         </hlm-input-group>
@@ -50,12 +53,11 @@
       [isLoading]="usersResource.isLoading()"
       [data]="this.usersResource.value()?.content || []"
       [totalElements]="this.usersResource.value()?.total"
-      [paginationState]="pagination()"
-      [sortingState]="sorting()"
       [enableColumnResizing]="true"
       [enableRowSelection]="true"
       [enableColumnPinning]="true"
-      (stateChange)="handleStateChange($event)"
+      [(pagination)]="pagination"
+      [(sorting)]="sorting"
     >
       <!-- Date Cell -->
       <ng-template #dateCell let-context>

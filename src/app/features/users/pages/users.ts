@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, DestroyRef, inject, signal, TemplateRef, viewChild } from '@angular/core';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { translateSignal, TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -18,7 +18,6 @@ import {
 
 import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounce, form, FormField } from '@angular/forms/signals';
-import { translateSignal } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideBriefcase,
@@ -34,7 +33,7 @@ import {
 } from '@ng-icons/lucide';
 import { CountryDisplay } from '@shared/components/country-display/country-display';
 import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
-import { DataTable, DataTableStateChangeEvent } from '@shared/datatable/table/data-table';
+import { DataTable } from '@shared/datatable/table/data-table';
 import { DataTableFeatures } from '@shared/datatable/table/table-features';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
 
@@ -120,7 +119,6 @@ export default class Users {
   protected readonly selectedRoles = signal<UserRole[]>([]);
   protected readonly selectedStatuses = signal<UserStatus[]>([]);
   protected readonly defaultColumnPinning: ColumnPinningState = { start: ['select'], end: ['actions'] };
-
   protected readonly usersResource = rxResource({
     params: () => {
       const sort = this.sorting()[0];
@@ -186,9 +184,10 @@ export default class Users {
       enableResizing: false,
       enablePinning: true,
       size: 40,
-      cell: () =>
+      cell: (context) =>
         flexRenderComponent(ActionDropdown, {
           inputs: {
+            row: context.row,
             onSuccess: () => this.refreshTable(),
           },
         }),
@@ -208,11 +207,6 @@ export default class Users {
     dialogRef.closed$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((result) => {
       if (result) this.refreshTable();
     });
-  }
-
-  protected handleStateChange(state: DataTableStateChangeEvent) {
-    this.pagination.set(state.pagination);
-    this.sorting.set(state.sorting);
   }
 
   // ==========================================

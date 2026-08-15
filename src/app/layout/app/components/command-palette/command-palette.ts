@@ -66,11 +66,13 @@ interface NavCommand {
         hlmBtn
         type="button"
         variant="secondary"
-        class="text-muted-foreground hidden min-w-60 justify-start gap-2 sm:flex"
+        class="text-muted-foreground hidden min-w-60 justify-between sm:flex"
         (click)="state.set('open')"
       >
-        <ng-icon name="lucideSearch" />
-        {{ t('commandPalette.search') }}
+        <span class="flex items-center gap-2">
+          <ng-icon name="lucideSearch" />
+          {{ t('commandPalette.search') }}
+        </span>
         <kbd hlmKbd class="ms-2">⌘ + K</kbd>
       </button>
       <hlm-command-dialog [state]="state()" (stateChange)="stateChanged($event)">

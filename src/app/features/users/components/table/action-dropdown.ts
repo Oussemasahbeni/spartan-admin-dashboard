@@ -12,7 +12,7 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { DataTableFeatures } from '@shared/datatable/table/table-features';
 import { User } from '@shared/models/user';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
-import { type CellContext, injectFlexRenderContext } from '@tanstack/angular-table';
+import { Row } from '@tanstack/angular-table';
 import { UserService } from '../../service/user-service';
 import { UserForm } from '../form/user-form';
 
@@ -82,12 +82,12 @@ export class ActionDropdown {
   private readonly _transloco = inject(TranslocoService);
   private readonly _hlmDialogService = inject(HlmDialogService);
   private readonly _destroyRef = inject(DestroyRef);
-  private readonly _context = injectFlexRenderContext<CellContext<DataTableFeatures, User, unknown>>();
 
   // ==========================================
   // Inputs
   // ==========================================
 
+  public readonly row = input.required<Row<DataTableFeatures, User>>();
   public readonly onSuccess = input<() => void>();
 
   // ==========================================
@@ -95,7 +95,7 @@ export class ActionDropdown {
   // ==========================================
 
   deleteUser() {
-    const user = this._context.row.original;
+    const user = this.row().original;
 
     this._userService
       .deleteUser(user.id)
@@ -114,7 +114,7 @@ export class ActionDropdown {
   }
 
   onEditUser() {
-    const user = this._context.row.original;
+    const user = this.row().original;
     const dialogRef = this._hlmDialogService.open(UserForm, {
       context: { user },
       autoFocus: 'dialog',
