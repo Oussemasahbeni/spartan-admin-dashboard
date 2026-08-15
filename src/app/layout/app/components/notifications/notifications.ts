@@ -67,7 +67,7 @@ import { Notification } from '../../model/notification';
                       <div class="bg-primary mt-4 size-1 rounded-full" aria-hidden="true"></div>
                     }
                     <hlm-avatar class="border-border/50 size-10 border">
-                      <img hlmAvatarImage loading="lazy" [src]="notification.avatar" [alt]="notification.user" />
+                      <img hlmAvatarImage [src]="notification.avatar" [alt]="notification.user" />
                       <span hlmAvatarFallback>
                         {{ notification.user.charAt(0) }}
                       </span>

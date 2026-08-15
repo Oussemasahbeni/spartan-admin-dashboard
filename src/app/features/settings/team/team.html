@@ -1,6 +1,6 @@
 <div *transloco="let t; prefix: 'settings.team'">
   <!-- Add team member -->
-  <form class="flex items-start justify-between gap-4" novalidate [formRoot]="addMemberForm">
+  <form class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between" [formRoot]="addMemberForm">
     <div class="flex w-full gap-3">
       <hlm-field class="max-w-120">
         <hlm-input-group>
@@ -14,7 +14,7 @@
         }
       </hlm-field>
 
-      <hlm-field class="max-w-24">
+      <hlm-field class="max-w-20">
         <hlm-select [formField]="addMemberForm.role">
           <hlm-select-trigger>
             <hlm-select-placeholder>{{ t('selectRole') }}</hlm-select-placeholder>
@@ -46,11 +46,11 @@
   <!-- Team members -->
   <div class="mt-8 flex flex-col divide-y border-t border-b">
     @for (member of members(); track member.id) {
-      <div class="flex flex-col gap-4 py-6 sm:flex-row sm:items-center">
+      <div class="flex items-center gap-4 py-6">
         <!-- Member info -->
         <div class="flex items-center gap-4">
           <hlm-avatar>
-            <img hlmAvatarImage loading="lazy" [src]="member.avatar" [alt]="member.name" />
+            <img hlmAvatarImage [src]="member.avatar" [alt]="member.name" />
             <span hlmAvatarFallback>{{ member.name.charAt(0) }}</span>
           </hlm-avatar>
           <div>
@@ -60,7 +60,7 @@
         </div>
 
         <!-- Actions -->
-        <div class="flex items-center gap-3 sm:ms-auto">
+        <div class="ms-auto flex items-center gap-3">
           <!-- Role selector -->
           <hlm-select class="inline-block" [value]="member.role">
             <hlm-select-trigger>

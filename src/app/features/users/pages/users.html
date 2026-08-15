@@ -69,7 +69,7 @@
       <ng-template #nameCell let-context>
         <div class="flex items-center gap-2">
           <hlm-avatar>
-            <img hlmAvatarImage loading="lazy" [src]="context.row.original.avatar" [alt]="context.row.original.name" />
+            <img hlmAvatarImage [src]="context.row.original.avatar" [alt]="context.row.original.name" />
             <span class="bg-destructive text-white" hlmAvatarFallback>
               {{ context.row.original.name.charAt(0) + context.row.original.name.charAt(1).toUpperCase() }}
             </span>

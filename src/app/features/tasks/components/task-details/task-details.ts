@@ -136,7 +136,7 @@ export interface TaskDetailsContext {
           </h3>
           <div class="flex items-center gap-3">
             <hlm-avatar size="sm" class="ring-background shrink-0 ring-2">
-              <img hlmAvatarImage loading="lazy" alt="" [src]="task.assigneeAvatar" />
+              <img hlmAvatarImage alt="" [src]="task.assigneeAvatar" />
               <span hlmAvatarFallback class="text-xs">{{ avatarInitials }}</span>
             </hlm-avatar>
             <div class="bg-muted/40 flex-1 rounded-lg px-3 py-2.5">
@@ -159,7 +159,7 @@ export interface TaskDetailsContext {
           <h3 class="text-muted-foreground mb-2 text-[10px] font-semibold tracking-widest uppercase">{{ t('members') }}</h3>
           <div class="flex flex-wrap gap-1.5">
             <hlm-avatar size="lg" class="ring-background ring-2">
-              <img hlmAvatarImage loading="lazy" alt="" [src]="task.assigneeAvatar" />
+              <img hlmAvatarImage alt="" [src]="task.assigneeAvatar" />
               <span hlmAvatarFallback class="text-xs">{{ avatarInitials }}</span>
             </hlm-avatar>
           </div>

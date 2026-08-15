@@ -81,7 +81,7 @@ import { Transaction } from '../../model/dashboard-2';
           <ng-template #userCell let-context>
             <div class="flex items-center gap-3">
               <hlm-avatar>
-                <img hlmAvatarImage loading="lazy" [src]="context.row.original.user.avatar" [alt]="context.row.original.user.name" />
+                <img hlmAvatarImage [src]="context.row.original.user.avatar" [alt]="context.row.original.user.name" />
                 <span class="bg-destructive text-white" hlmAvatarFallback>
                   {{ context.row.original.user.name.charAt(0) + context.row.original.user.name.charAt(1).toUpperCase() }}
                 </span>

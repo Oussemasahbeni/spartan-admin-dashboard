@@ -156,7 +156,7 @@ const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 
 
           <!-- Assignee avatar -->
           <hlm-avatar size="sm" class="ring-background shrink-0 ring-2">
-            <img hlmAvatarImage loading="lazy" alt="" [src]="task().assigneeAvatar" />
+            <img hlmAvatarImage alt="" [src]="task().assigneeAvatar" />
             <span hlmAvatarFallback class="text-xs">{{ avatarInitials() }}</span>
           </hlm-avatar>
         </div>

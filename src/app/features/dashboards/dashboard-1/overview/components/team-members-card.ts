@@ -8,7 +8,6 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 
-
 @Component({
   selector: 'adm-team-members-card',
   imports: [HlmCardImports, HlmAvatarImports, HlmButtonImports, NgIcon, HlmDropdownMenuImports, TranslocoModule],
@@ -29,7 +28,7 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
           <div class="flex min-w-0 items-center justify-between gap-4">
             <div class="flex min-w-0 flex-1 items-center gap-3">
               <hlm-avatar>
-                <img hlmAvatarImage loading="lazy" [src]="member.avatar" [alt]="member.name" />
+                <img hlmAvatarImage [src]="member.avatar" [alt]="member.name" />
                 <span hlmAvatarFallback>
                   {{ member.name.split(' ')[0].charAt(0) + member.name.split(' ')[1].charAt(0) }}
                 </span>
