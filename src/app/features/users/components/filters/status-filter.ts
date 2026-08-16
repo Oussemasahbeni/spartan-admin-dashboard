@@ -36,7 +36,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
       [state]="_statusState()"
       (stateChanged)="statusStateChanged($event)"
     >
-      <button type="button" hlmBtn hlmPopoverTrigger variant="outline" size="sm" class="border-dashed">
+      <button type="button" hlmBtn hlmPopoverTrigger variant="outline">
         <ng-icon name="lucideListFilter" />
         {{ t('users.list.columns.status') }}
         @if (_statusFilter().length) {
@@ -72,6 +72,9 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
                     <ng-icon class="text-destructive" name="lucideCircleX" />
                   }
                   @case ('pending') {
+                    <ng-icon class="text-yellow-600" name="lucideLoader" />
+                  }
+                  @default {
                     <ng-icon class="text-yellow-600" name="lucideLoader" />
                   }
                 }

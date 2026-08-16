@@ -36,7 +36,7 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
       [state]="_rolesState()"
       (stateChanged)="rolesStateChanged($event)"
     >
-      <button type="button" hlmBtn hlmPopoverTrigger variant="outline" class="border-dashed">
+      <button type="button" hlmBtn hlmPopoverTrigger variant="outline">
         <ng-icon name="lucideListFilter" />
         {{ t('users.list.columns.role') }}
         @if (_rolesFilter().length) {
@@ -72,6 +72,9 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
                   }
                   @case ('manager') {
                     <ng-icon name="lucideBriefcase" />
+                  }
+                  @default {
+                    <ng-icon name="lucideUser" />
                   }
                 }
                 <span *transloco="let t; prefix: 'users.role'"> {{ t(role) }} </span>
