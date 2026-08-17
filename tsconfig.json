@@ -58,7 +58,8 @@
       "@spartan-ng/helm/message": ["./src/app/libs/message/src/index.ts"],
       "@spartan-ng/helm/bubble": ["./src/app/libs/bubble/src/index.ts"],
       "@spartan-ng/helm/toggle-group": ["./src/app/libs/toggle-group/src/index.ts"],
-      "@spartan-ng/helm/toggle": ["./src/app/libs/toggle/src/index.ts"]
+      "@spartan-ng/helm/toggle": ["./src/app/libs/toggle/src/index.ts"],
+      "@spartan-ng/helm/button-group": ["./src/app/libs/button-group/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

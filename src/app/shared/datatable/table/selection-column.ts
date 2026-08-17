@@ -1,20 +1,19 @@
 import { Component, input } from '@angular/core';
-import { TranslocoDirective } from '@jsverse/transloco';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { Row, type RowData, Table } from '@tanstack/angular-table';
 import { DataTableFeatures } from './table-features';
 
 @Component({
-  imports: [HlmCheckboxImports, TranslocoDirective],
+  imports: [HlmCheckboxImports, TranslocoPipe],
   host: {
     class: 'flex',
   },
   template: `
     <hlm-checkbox
-      *transloco="let t"
-      [aria-label]="t('common.selectAll')"
+      [aria-label]="'common.selectAll' | transloco"
       [checked]="table().getIsAllRowsSelected()"
-      [indeterminate]="table().getIsSomeRowsSelected()"
+      [indeterminate]="table().getIsSomeRowsSelected() && !table().getIsAllPageRowsSelected()"
       (checkedChange)="table().toggleAllRowsSelected()"
     />
   `,
@@ -24,15 +23,13 @@ export class TableHeadSelection<T extends RowData> {
 }
 
 @Component({
-  imports: [HlmCheckboxImports, TranslocoDirective],
+  imports: [HlmCheckboxImports, TranslocoPipe],
   host: {
     class: 'flex',
   },
-
   template: `
     <hlm-checkbox
-      *transloco="let t"
-      [aria-label]="t('common.selectRow')"
+      [aria-label]="'common.selectRow' | transloco"
       [checked]="row().getIsSelected()"
       (checkedChange)="row().toggleSelected($event)"
     />

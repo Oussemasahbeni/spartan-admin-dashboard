@@ -42,6 +42,7 @@ import { isBefore, subDays } from 'date-fns';
 import { CalendarForm } from '../components/calendar-form/calendar-form';
 import { EventDetails } from '../components/event-details/event-details';
 import { CalendarStore, EVENT_TYPES } from '../state/calendar-store';
+import { HlmButtonGroupImports } from '@spartan-ng/helm/button-group';
 
 @Component({
   selector: 'adm-calendar',
@@ -52,6 +53,7 @@ import { CalendarStore, EVENT_TYPES } from '../state/calendar-store';
     HlmBadgeImports,
     HlmDatePickerImports,
     HlmToggleGroupImports,
+    HlmButtonGroupImports,
     NgIcon,
     FullCalendarModule,
     TranslocoModule,

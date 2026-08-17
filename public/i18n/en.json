@@ -116,6 +116,7 @@
         "pinEnd": "Pin to End",
         "pinLeft": "Pin Left",
         "pinRight": "Pin Right",
+        "hide": "Hide",
         "unpin": "Unpin"
     },
     "sort": {

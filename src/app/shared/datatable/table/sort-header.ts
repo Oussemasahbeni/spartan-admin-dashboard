@@ -1,11 +1,10 @@
 import { Component, input } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowUpDown, lucideSortAsc, lucideSortDesc, lucideX } from '@ng-icons/lucide';
+import { lucideArrowDown, lucideArrowUp, lucideArrowUpDown, lucideEyeOff, lucideX } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-
-import { Column, Header, RowData, SortDirection } from '@tanstack/angular-table';
+import { Column, RowData } from '@tanstack/angular-table';
 import { DataTableFeatures } from './table-features';
 
 @Component({
@@ -17,76 +16,59 @@ import { DataTableFeatures } from './table-features';
   providers: [
     provideIcons({
       lucideArrowUpDown,
-      lucideSortAsc,
-      lucideSortDesc,
+      lucideArrowUp,
+      lucideArrowDown,
       lucideX,
+      lucideEyeOff,
     }),
   ],
   template: `
-    <button type="button" class="flex items-center gap-2 capitalize" [hlmDropdownMenuTrigger]="menu">
+    <button type="button" hlmBtn variant="ghost" class="-m-2.5" [hlmDropdownMenuTrigger]="menu">
       {{ headerCell() }}
-      @if (header().column.getIsSorted() === 'asc') {
-        <ng-icon name="lucideSortAsc" />
-      } @else if (header().column.getIsSorted() === 'desc') {
-        <ng-icon name="lucideSortDesc" />
-      } @else {
-        <ng-icon name="lucideArrowUpDown" />
+      @switch (column().getIsSorted()) {
+        @case ('desc') {
+          <ng-icon name="lucideArrowDown" />
+        }
+        @case ('asc') {
+          <ng-icon name="lucideArrowUp" />
+        }
+        @default {
+          <ng-icon name="lucideArrowUpDown" />
+        }
       }
     </button>
 
     <ng-template #menu>
       <hlm-dropdown-menu>
         <hlm-dropdown-menu-group *transloco="let t">
-          <button
-            type="button"
-            hlmDropdownMenuCheckbox
-            [checked]="header().column.getIsSorted() === 'asc'"
-            (click)="onSort(header().column, 'asc')"
-          >
+          <button type="button" hlmDropdownMenuItem (click)="column().toggleSorting(false)">
             <div class="flex items-center gap-2">
-              <ng-icon name="lucideSortAsc" />
-              <span>{{ t('sort.asc') }}</span>
+              <ng-icon name="lucideArrowUp" />
+              {{ t('sort.asc') }}
             </div>
 
             <hlm-dropdown-menu-checkbox-indicator />
           </button>
 
-          <button
-            type="button"
-            hlmDropdownMenuCheckbox
-            [checked]="header().column.getIsSorted() === 'desc'"
-            (click)="onSort(header().column, 'desc')"
-          >
+          <button type="button" hlmDropdownMenuItem (click)="column().toggleSorting(true)">
             <div class="flex items-center gap-2">
-              <ng-icon name="lucideSortDesc" />
-              <span>{{ t('sort.desc') }}</span>
+              <ng-icon name="lucideArrowDown" />
+              {{ t('sort.desc') }}
             </div>
             <hlm-dropdown-menu-checkbox-indicator />
           </button>
-          @if (header().column.getIsSorted()) {
-            <button type="button" hlmDropdownMenuItem (click)="onClearSorting(header().column)">
-              <ng-icon name="lucideX" />
-              {{ t('buttons.clear') }}
-            </button>
-          }
+
+          <hlm-dropdown-menu-separator />
+          <button type="button" hlmDropdownMenuItem (click)="column().toggleVisibility(false)">
+            <ng-icon name="lucideEyeOff" />
+            {{ t('buttons.hide') }}
+          </button>
         </hlm-dropdown-menu-group>
       </hlm-dropdown-menu>
     </ng-template>
   `,
 })
 export class TableSortHeader<T extends RowData> {
-  public readonly header = input.required<Header<DataTableFeatures, T>>();
+  public readonly column = input.required<Column<DataTableFeatures, T>>();
   public readonly headerCell = input.required<string>();
-
-  /**
-   * Toggles sorting on a column.
-   * Cycles through: none → asc → desc → none
-   */
-  protected onSort(column: Column<DataTableFeatures, T>, direction: SortDirection) {
-    column.toggleSorting(direction === 'desc', false);
-  }
-
-  protected onClearSorting(column: Column<DataTableFeatures, T>) {
-    column.clearSorting();
-  }
 }

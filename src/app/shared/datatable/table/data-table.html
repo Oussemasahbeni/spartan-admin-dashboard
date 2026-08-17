@@ -23,7 +23,7 @@
                 @if (!header.isPlaceholder) {
                   <ng-container *flexRender="header.column.columnDef.header; props: header.getContext(); let headerCell">
                     @if (header.column.getCanSort()) {
-                      <adm-table-sort-header [headerCell]="headerCell" [header]="header" />
+                      <adm-table-sort-header [headerCell]="headerCell" [column]="header.column" />
                     } @else {
                       {{ headerCell }}
                     }
