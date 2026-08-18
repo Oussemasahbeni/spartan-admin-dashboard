@@ -11,7 +11,7 @@
     >
       <hlm-avatar class="rounded-lg">
         <img hlmAvatarImage [src]="user().avatar" [alt]="user().name" />
-        <span class="bg-primary rounded-lg text-white" hlmAvatarFallback>{{ userInitials() }}</span>
+        <span class="bg-primary rounded-lg text-white" hlmAvatarFallback>{{ user().name | initials }}</span>
       </hlm-avatar>
       <div class="grid flex-1 text-left text-sm leading-tight">
         <span class="truncate font-medium">{{ user().name }}</span>
@@ -28,7 +28,7 @@
       <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
         <hlm-avatar class="rounded-lg">
           <img hlmAvatarImage [src]="user().avatar" [alt]="user().name" />
-          <span class="bg-primary rounded-lg text-white" hlmAvatarFallback>{{ userInitials() }}</span>
+          <span class="bg-primary rounded-lg text-white" hlmAvatarFallback>{{ user().name | initials }}</span>
         </hlm-avatar>
         <div class="grid flex-1 text-left text-sm leading-tight">
           <span class="truncate font-medium">{{ user().name }}</span>

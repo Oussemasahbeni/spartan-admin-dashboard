@@ -1,79 +1,189 @@
 <div
-  *transloco="let t; prefix: 'tasks'"
-  class="bg-background flex h-full w-full flex-col p-6 transition-colors duration-300"
+  *transloco="let t; prefix: 'kanban'"
+  hlmTabs
+  class="bg-background -m-4 flex h-[calc(100dvh-3.5rem)] min-h-0 min-w-0 flex-col gap-0 overflow-hidden sm:-m-6"
+  [tab]="viewTab()"
+  (tabActivated)="viewTab.set($event)"
 >
-  <header class="mb-6 flex flex-col gap-5">
-    <div class="flex items-center justify-between">
-      <div class="flex flex-col gap-1">
-        <div class="flex items-center gap-2">
-          <h2 class="text-3xl font-bold tracking-tight">{{ t('header.title') }}</h2>
-          <span class="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums">
-            {{ taskGroups().count }}
-          </span>
-        </div>
-        <p class="text-muted-foreground text-sm">{{ t('header.subtitle') }}</p>
-      </div>
+  <!-- Toolbar -->
+  <div class="flex shrink-0 flex-col gap-3 border-b px-4 py-3 lg:flex-row lg:items-center lg:justify-between lg:px-6">
+    <hlm-tabs-list>
+      <button type="button" hlmTabsTrigger="board">
+        <ng-icon name="lucideKanban" />
+        {{ t('toolbar.board') }}
+      </button>
+      <button type="button" hlmTabsTrigger="list">
+        <ng-icon name="lucideList" />
+        {{ t('toolbar.list') }}
+      </button>
+      <button type="button" hlmTabsTrigger="table">
+        <ng-icon name="lucideTable2" />
+        {{ t('toolbar.table') }}
+      </button>
+    </hlm-tabs-list>
 
-      <div class="flex items-center gap-2">
-        <button hlmBtn variant="outline" type="button" size="sm" disabled aria-disabled="true">
-          <ng-icon name="lucideFilter" class="mr-1.5" />
-          {{ t('filter') }}
+    <div class="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center 2xl:justify-end">
+      <hlm-input-group class="min-w-0 sm:w-64 2xl:w-48">
+        <input
+          hlmInputGroupInput
+          type="search"
+          [placeholder]="t('toolbar.searchPlaceholder')"
+          [value]="searchQuery()"
+          (input)="onSearchInput($event)"
+        />
+        <hlm-input-group-addon>
+          <ng-icon name="lucideSearch" />
+        </hlm-input-group-addon>
+      </hlm-input-group>
+
+      <button hlmBtn variant="outline" type="button">
+        <ng-icon name="lucideSlidersHorizontal" />
+        {{ t('toolbar.filter') }}
+      </button>
+      <button hlmBtn variant="outline" type="button">
+        <ng-icon name="lucideArrowUpDown" />
+        {{ t('toolbar.sort') }}
+      </button>
+
+      <hlm-button-group class="w-full sm:w-fit">
+        <button hlmBtn type="button" (click)="openAddTaskDialog()">
+          <ng-icon name="lucidePlus" />
+          {{ t('toolbar.addTask') }}
         </button>
-        <button hlmBtn variant="default" type="button" size="sm" (click)="openAddTaskDialog()">
-          <ng-icon name="lucidePlus" class="mr-1.5" />
-          {{ t('addTask') }}
+        <hlm-button-group-separator />
+        <button hlmBtn type="button" [attr.aria-label]="t('toolbar.openAddTaskMenu')" [hlmDropdownMenuTrigger]="addMenu">
+          <ng-icon name="lucideChevronDown" />
         </button>
-      </div>
+        <ng-template #addMenu>
+          <hlm-dropdown-menu class="w-48">
+            <button hlmDropdownMenuItem type="button">
+              <ng-icon name="lucideUpload" />
+              {{ t('toolbar.importCsv') }}
+            </button>
+            <button hlmDropdownMenuItem type="button">
+              <ng-icon name="lucideLayoutTemplate" />
+              {{ t('toolbar.addFromTemplate') }}
+            </button>
+            <button hlmDropdownMenuItem type="button">
+              <ng-icon name="lucideBot" />
+              {{ t('toolbar.createAutomation') }}
+            </button>
+          </hlm-dropdown-menu>
+        </ng-template>
+      </hlm-button-group>
     </div>
-  </header>
+  </div>
 
-  <main class="grid grid-cols-1 gap-5 md:grid-cols-3" cdkDropListGroup>
-    @for (col of columns; track col.id) {
-      <div class="flex h-fit flex-col">
-        <div class="mb-3 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span [class]="'size-2.5 rounded-full ' + col.color"></span>
-            <h3 class="text-foreground text-md font-semibold">{{ t('columns.' + col.id) }}</h3>
-            <span
-              class="bg-muted text-muted-foreground flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-bold"
-            >
-              {{ taskGroups()[col.id].length }}
-            </span>
-          </div>
-        </div>
-
-        <div
-          cdkDropList
-          [class]="dropZoneClass(col.id)"
-          [id]="col.id"
-          [cdkDropListData]="taskGroups()[col.id]"
-          (cdkDropListDropped)="drop($event)"
-          (cdkDropListEntered)="draggingOverColumn.set(col.id)"
-          (cdkDropListExited)="draggingOverColumn.set(null)"
+  <!-- Board -->
+  <div
+    hlmTabsContent="board"
+    class="bg-muted/25 min-h-0 flex-1 scrollbar-thin overflow-x-auto overflow-y-hidden px-4 pt-4 lg:px-5 lg:pt-5"
+  >
+    <div
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      class="inline-grid h-full min-w-full grid-cols-[repeat(4,minmax(20rem,1fr))] gap-4"
+      [cdkDropListData]="columnOrder()"
+      (cdkDropListDropped)="dropColumn($event)"
+    >
+      @for (col of columnOrder(); track col) {
+        <section
+          cdkDrag
+          class="bg-muted/50 flex min-h-0 flex-col rounded-t-xl border transition-colors [&.cdk-drag-placeholder]:opacity-40"
+          [class.bg-muted/70]="draggingOverColumn() === col"
+          [cdkDragData]="col"
         >
-          <div class="flex min-h-40 flex-1 flex-col gap-3 p-3">
-            @for (task of taskGroups()[col.id]; track task.id) {
+          <div class="flex items-start justify-between gap-3 px-4 pt-4 pb-3">
+            <div class="min-w-0 space-y-1">
+              <div class="flex items-center gap-0.5">
+                <button
+                  cdkDragHandle
+                  hlmBtn
+                  variant="ghost"
+                  size="icon-xs"
+                  type="button"
+                  class="text-foreground/70 -ms-2 cursor-grab active:cursor-grabbing"
+                  [attr.aria-label]="t('column.drag', { title: t('columns.' + col) })"
+                >
+                  <ng-icon name="lucideGripVertical" />
+                </button>
+                <h2 class="truncate text-base leading-none font-medium">{{ t('columns.' + col) }}</h2>
+              </div>
+              <p class="text-muted-foreground text-sm leading-none tabular-nums">
+                {{ t('column.taskCount.' + pluralOf(filteredBoard()[col].length), { count: filteredBoard()[col].length }) }}
+              </p>
+            </div>
+            <div class="text-muted-foreground -me-2 flex items-center gap-0.5">
+              <button
+                hlmBtn
+                variant="ghost"
+                size="icon-sm"
+                type="button"
+                [attr.aria-label]="t('column.addTask', { title: t('columns.' + col) })"
+                (click)="openAddTaskDialog(col)"
+              >
+                <ng-icon name="lucidePlus" />
+              </button>
+              <button
+                hlmBtn
+                variant="ghost"
+                size="icon-sm"
+                type="button"
+                [attr.aria-label]="t('column.actions', { title: t('columns.' + col) })"
+              >
+                <ng-icon name="lucideMoreVertical" />
+              </button>
+            </div>
+          </div>
+
+          <div
+            cdkDropList
+            class="flex min-h-24 flex-1 scrollbar-thin flex-col gap-3 overflow-y-auto px-3 pb-3"
+            [id]="col"
+            [cdkDropListData]="filteredBoard()[col]"
+            [cdkDropListConnectedTo]="columnOrder()"
+            [cdkDropListDisabled]="searchActive()"
+            (cdkDropListDropped)="dropTask($event)"
+            (cdkDropListEntered)="draggingOverColumn.set(col)"
+            (cdkDropListExited)="draggingOverColumn.set(null)"
+          >
+            @for (task of filteredBoard()[col]; track task.id) {
               <adm-task-card
                 cdkDrag
+                class="[&.cdk-drag-placeholder]:opacity-40 [&.cdk-drag-preview]:rotate-1"
                 [cdkDragData]="task"
                 [task]="task"
-                (taskClick)="openTaskDetailsDialog($event)"
-                (toggleComplete)="toggleTaskComplete($event)"
+                [columnId]="col"
+                (taskClick)="openTaskDetailsDialog($event, col)"
               />
             }
           </div>
+        </section>
+      }
+    </div>
+  </div>
 
-          @if (taskGroups()[col.id].length === 0) {
-            <div
-              class="text-muted-foreground/40 pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 text-center transition-opacity duration-200"
-              [class.opacity-0]="draggingOverColumn() === col.id"
-            >
-              <ng-icon name="lucideChevronRight" class="rotate-90 opacity-40" />
-              <p class="text-xs font-medium">{{ t('emptyColumn') }}</p>
-            </div>
-          }
-        </div>
-      </div>
-    }
-  </main>
+  <!-- List / Table placeholder views -->
+  <div hlmTabsContent="list" class="bg-muted/25 overflow-y-auto">
+    <hlm-empty class="h-full">
+      <hlm-empty-header>
+        <hlm-empty-media variant="icon">
+          <ng-icon name="lucideList" />
+        </hlm-empty-media>
+        <h3 hlmEmptyTitle>{{ t('views.listTitle') }}</h3>
+        <p hlmEmptyDescription>{{ t('views.comingSoon') }}</p>
+      </hlm-empty-header>
+    </hlm-empty>
+  </div>
+  <div hlmTabsContent="table" class="bg-muted/25 flex-1 overflow-y-auto">
+    <hlm-empty class="h-full">
+      <hlm-empty-header>
+        <hlm-empty-media variant="icon">
+          <ng-icon name="lucideTable2" />
+        </hlm-empty-media>
+        <h3 hlmEmptyTitle>{{ t('views.tableTitle') }}</h3>
+        <p hlmEmptyDescription>{{ t('views.comingSoon') }}</p>
+      </hlm-empty-header>
+    </hlm-empty>
+  </div>
 </div>

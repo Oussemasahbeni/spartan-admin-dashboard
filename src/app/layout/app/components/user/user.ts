@@ -17,6 +17,7 @@ import {
   lucideSun,
 } from '@ng-icons/lucide';
 import { User } from '@shared/models/user';
+import { InitialsPipe } from '@shared/pipes/initials/initials.pipe';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
@@ -25,7 +26,15 @@ import { HlmSidebarImports, HlmSidebarService } from '@spartan-ng/helm/sidebar';
 
 @Component({
   selector: 'adm-user',
-  imports: [HlmSidebarImports, HlmAvatarImports, NgIcon, HlmDropdownMenuImports, HlmBadgeImports, TranslocoModule],
+  imports: [
+    HlmSidebarImports,
+    HlmAvatarImports,
+    NgIcon,
+    HlmDropdownMenuImports,
+    HlmBadgeImports,
+    TranslocoModule,
+    InitialsPipe,
+  ],
   templateUrl: './user.html',
   providers: [
     provideIcons({
@@ -57,15 +66,6 @@ export class NavUser {
   // ==========================================
 
   public readonly user = input.required<User>();
-
-  protected readonly userInitials = computed(() =>
-    this.user()
-      .name.split(' ')
-      .map((part) => part.charAt(0))
-      .slice(0, 2)
-      .join('')
-      .toUpperCase()
-  );
 
   // ==========================================
   // State

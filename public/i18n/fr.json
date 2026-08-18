@@ -43,7 +43,7 @@
         "aiAssistant": "Assistant IA",
         "dashboard-2": "Tableau de bord 2",
         "calendar": "Calendrier",
-        "tasks": "Tâches"
+        "kanban": "Kanban"
     },
     "navigation": {
         "application": "Application",
@@ -57,7 +57,7 @@
         "dashboard": "Tableau de bord",
         "dashboard-1": "Tableau de bord 1",
         "dashboard-2": "Tableau de bord 2",
-        "tasks": "Gestion des tâches",
+        "kanban": "Kanban",
         "calendar": "Calendrier",
         "users": "Utilisateurs",
         "notFound": "Page introuvable",

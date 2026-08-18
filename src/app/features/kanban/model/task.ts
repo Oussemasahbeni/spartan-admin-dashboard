@@ -1,28 +1,51 @@
-import { Tag } from './tag';
+export type ColumnId = 'todo' | 'inProgress' | 'inReview' | 'done';
 
-export type TaskStatus = 'todo' | 'inprogress' | 'completed';
+export type TaskPriority = 'high' | 'medium' | 'low';
+
+export type TaskTeam = 'Backend' | 'Data' | 'Design' | 'Docs' | 'Finance Ops' | 'Platform' | 'Product' | 'QA' | 'Security';
+
+export type TaskInsightLabel = 'attachments' | 'comments' | 'documents';
+
+export interface TaskInsight {
+  label: TaskInsightLabel;
+  count: number;
+}
+
+export type AvatarTone = 'zinc' | 'lime' | 'indigo' | 'fuchsia' | 'violet' | 'pink' | 'sky';
+
+export interface TaskOwner {
+  name: string;
+  tone: AvatarTone;
+}
 
 export interface Task {
   id: string;
   title: string;
-  description?: string;
+  description: string;
+  priority: TaskPriority;
   dueDate: string;
-  commentsCount: number;
-  attachmentsCount?: number;
-  tags: Tag[];
-  assigneeAvatar: string;
-  imageUrl?: string;
-  status: TaskStatus;
-  isCompleted: boolean;
+  progress: number;
+  owner: TaskOwner;
+  team: TaskTeam;
+  insights: TaskInsight[];
 }
 
+export type BoardState = Record<ColumnId, Task[]>;
+
 export interface TaskFormContext {
-  existingTags: Tag[];
+  columnId?: ColumnId;
+}
+
+export interface TaskFormResult {
+  columnId: ColumnId;
+  task: Task;
 }
 
 export interface TaskFormModel {
   title: string;
   description: string;
-  status: TaskStatus;
+  columnId: ColumnId;
+  priority: TaskPriority;
+  team: TaskTeam;
   dueDate: Date | null;
 }

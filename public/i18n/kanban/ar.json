@@ -1,65 +1,80 @@
 {
-    "header": {
-        "title": "المهام",
-        "subtitle": "اسحب المهام وأفلتها بين الأعمدة لتحديث حالتها",
-        "home": "الرئيسية",
-        "kanban": "المهام"
+    "toolbar": {
+        "board": "اللوحة",
+        "list": "قائمة",
+        "table": "جدول",
+        "searchPlaceholder": "البحث عن المهام",
+        "filter": "تصفية",
+        "sort": "ترتيب",
+        "addTask": "إضافة مهمة",
+        "openAddTaskMenu": "فتح قائمة إضافة مهمة",
+        "importCsv": "استيراد CSV",
+        "addFromTemplate": "إضافة من قالب",
+        "createAutomation": "إنشاء أتمتة"
     },
-    "addTask": "إضافة مهمة جديدة",
-    "filter": "تصفية",
-    "allTasks": "جميع المهام",
-    "emptyColumn": "أفلت المهام هنا",
     "columns": {
         "todo": "للتنفيذ",
-        "inprogress": "قيد التنفيذ",
-        "completed": "مكتملة"
+        "inProgress": "قيد التنفيذ",
+        "inReview": "قيد المراجعة",
+        "done": "منجز"
+    },
+    "column": {
+        "taskCount": {
+            "zero": "لا مهام",
+            "one": "مهمة واحدة",
+            "two": "مهمتان",
+            "few": "{{count}} مهام",
+            "many": "{{count}} مهمة",
+            "other": "{{count}} مهمة"
+        },
+        "drag": "سحب عمود {{title}}",
+        "addTask": "إضافة مهمة إلى {{title}}",
+        "actions": "إجراءات عمود {{title}}"
+    },
+    "priority": {
+        "high": "عالية",
+        "medium": "متوسطة",
+        "low": "منخفضة"
+    },
+    "card": {
+        "progress": "التقدم",
+        "owner": "المسؤول",
+        "dueDate": "تاريخ الاستحقاق",
+        "team": "الفريق",
+        "done": "منجز"
+    },
+    "views": {
+        "listTitle": "عرض القائمة",
+        "tableTitle": "عرض الجدول",
+        "comingSoon": "هذا العرض غير متوفر بعد."
     },
     "form": {
-        "title": "إضافة مهمة جديدة",
-        "description": "أدخل التفاصيل أدناه لإنشاء مهمة جديدة على اللوحة.",
+        "title": "إضافة مهمة",
+        "description": "املأ التفاصيل أدناه لإضافة مهمة إلى اللوحة.",
         "label": {
             "title": "العنوان",
             "description": "الوصف",
-            "status": "الحالة",
-            "dueDate": "تاريخ الاستحقاق",
-            "tag": "الوسم",
-            "tagName": "اسم الوسم",
-            "tagColor": "اللون"
+            "column": "العمود",
+            "priority": "الأولوية",
+            "team": "الفريق",
+            "dueDate": "تاريخ الاستحقاق"
         },
         "placeholder": {
             "title": "مثال: إصلاح خطأ تسجيل الدخول",
-            "description": "اختياري — أضف مزيدًا من السياق حول هذه المهمة",
-            "status": "اختر الحالة",
-            "dueDate": "اختر تاريخًا",
-            "tagName": "مثال: الواجهة الأمامية",
-            "selectTag": "اختر وسمًا",
-            "noTags": "لا توجد وسوم حالية.",
-            "createTag": "إنشاء وسم جديد",
-            "backToTags": "العودة إلى الوسوم"
-        },
-        "tagPreview": "معاينة",
-        "cancel": "إلغاء",
-        "save": "إضافة مهمة",
-        "selectColor": "اختيار اللون"
+            "description": "اختياري — أضف المزيد من السياق حول هذه المهمة",
+            "column": "اختر العمود",
+            "priority": "اختر الأولوية",
+            "team": "اختر الفريق",
+            "dueDate": "اختر تاريخ الاستحقاق"
+        }
     },
     "details": {
         "description": "الوصف",
-        "activity": "النشاط",
-        "members": "الأعضاء",
-        "labels": "البطاقات",
-        "assignee": "المُكلَّف",
-        "dueDate": "تاريخ الاستحقاق",
-        "comments": "التعليقات",
-        "commentsCount": "تعليق",
-        "noComments": "لا تعليقات حتى الآن.",
-        "attachments": "المرفقات",
-        "files": "ملف",
-        "tags": "الوسوم",
         "noDescription": "لم يتم تقديم وصف.",
+        "progress": "التقدم",
+        "owner": "المسؤول",
+        "dueDate": "تاريخ الاستحقاق",
+        "insights": "النشاط",
         "close": "إغلاق"
-    },
-    "card": {
-        "toggleComplete": "تبديل إكمال المهمة",
-        "openMenu": "فتح قائمة إجراءات المهمة"
     }
 }

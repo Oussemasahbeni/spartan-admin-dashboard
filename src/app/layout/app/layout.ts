@@ -13,9 +13,9 @@ import { Navigation } from './components/navigation/navigation';
       <adm-back-to-top />
     }
     <adm-navigation>
-      <main hlmSidebarInset>
+      <main hlmSidebarInset class="min-w-0">
         <adm-site-header />
-        <div class="flex-1 p-4 sm:p-6">
+        <div class="min-w-0 flex-1 p-4 sm:p-6">
           <router-outlet />
         </div>
       </main>

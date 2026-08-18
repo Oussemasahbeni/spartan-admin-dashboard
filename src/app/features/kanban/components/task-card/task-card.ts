@@ -2,290 +2,182 @@ import { Component, computed, input, output } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
-  lucideCalendar,
-  lucideCheckCircle2,
-  lucideCircle,
-  lucideClock,
-  lucideLoader,
+  lucideArrowUpRight,
+  lucideBadgeCheck,
+  lucideCalendarDays,
+  lucideFileText,
+  lucideFlame,
   lucideMessageSquare,
-  lucideMoreVertical,
+  lucideMinus,
   lucidePaperclip,
-  lucideSquare,
 } from '@ng-icons/lucide';
+import { InitialsPipe } from '@shared/pipes/initials/initials.pipe';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
-import { HlmBadgeImports } from '@spartan-ng/helm/badge';
-import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmCardImports } from '@spartan-ng/helm/card';
-
+import { BadgeVariants, HlmBadgeImports } from '@spartan-ng/helm/badge';
+import { HlmProgressImports } from '@spartan-ng/helm/progress';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
-import { cva } from 'class-variance-authority';
-import { parseISO, startOfDay } from 'date-fns';
-import { TAG_COLOR_CLASSES } from '../../model/tag';
-import { Task } from '../../model/task';
+import { ColumnId, Task, TaskInsightLabel, TaskPriority } from '../../model/task';
+import { avatarToneVariants, priorityBadgeVariants, teamBadgeVariants } from '../../model/task-variants';
 
-const dueDateVariants = cva('flex items-center gap-1 rounded-full border px-1.5 py-0.5 transition-colors', {
-  variants: {
-    state: {
-      overdue: 'border-red-400 bg-red-50 text-red-500 dark:bg-red-950',
-      completed: 'border-emerald-400 bg-emerald-50 text-emerald-600 dark:bg-emerald-950',
-      default: 'text-muted-foreground border-transparent',
-    },
-  },
-  defaultVariants: { state: 'default' },
-});
+const PRIORITY_CONFIG: Record<TaskPriority, { icon: string; variant: BadgeVariants['variant'] }> = {
+  high: { icon: 'lucideFlame', variant: 'destructive' },
+  medium: { icon: 'lucideArrowUpRight', variant: 'secondary' },
+  low: { icon: 'lucideMinus', variant: 'secondary' },
+};
+
+const INSIGHT_ICONS: Record<TaskInsightLabel, string> = {
+  attachments: 'lucidePaperclip',
+  comments: 'lucideMessageSquare',
+  documents: 'lucideFileText',
+};
 
 @Component({
   selector: 'adm-task-card',
   imports: [
     TranslocoModule,
     NgIcon,
-    HlmBadgeImports,
-    HlmCardImports,
-    HlmButtonImports,
     HlmAvatarImports,
+    HlmBadgeImports,
+    HlmProgressImports,
     HlmSeparatorImports,
+    InitialsPipe,
   ],
   providers: [
     provideIcons({
-      lucideCalendar,
-      lucideCheckCircle2,
-      lucideCircle,
-      lucideClock,
-      lucideLoader,
+      lucideArrowUpRight,
+      lucideBadgeCheck,
+      lucideCalendarDays,
+      lucideFileText,
+      lucideFlame,
       lucideMessageSquare,
-      lucideMoreVertical,
+      lucideMinus,
       lucidePaperclip,
-      lucideSquare,
     }),
   ],
   host: {
-    class: 'block group',
+    class: 'block',
   },
   template: `
     <article
-      hlmCard
-      role="button"
-      tabindex="0"
-      class="focus-visible:ring-ring cursor-pointer gap-0 py-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-      (focusin)="groupFocused = true"
-      (focusout)="onFocusOut($event)"
-      (click)="taskClick.emit(task())"
-      (keydown.enter)="taskClick.emit(task())"
-      (keydown.space)="$event.preventDefault(); taskClick.emit(task())"
+      *transloco="let t; prefix: 'kanban.card'"
+      class="bg-card text-card-foreground relative flex flex-col gap-3 rounded-xl border p-4 shadow-xs"
     >
-      <!-- Optional cover image -->
-      @if (task().imageUrl) {
-        <div class="overflow-hidden rounded-t-xl">
-          <img
-            class="h-36 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            alt="Task preview"
-            [src]="task().imageUrl!"
-          />
+      <div class="min-w-0 space-y-1.5">
+        <div class="flex items-center justify-between gap-3">
+          <h3 class="min-w-0 truncate text-sm leading-none font-medium">
+            <!-- The title button's ::after overlay stretches its click target over the whole card. -->
+            <button
+              type="button"
+              class="focus-visible:after:ring-ring text-start after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:after:ring-2"
+              (click)="taskClick.emit(task())"
+            >
+              {{ task().title }}
+            </button>
+          </h3>
+          <hlm-badge
+            *transloco="let t; prefix: 'kanban.priority'"
+            [variant]="priorityConfig().variant"
+            [class]="priorityBadgeClass()"
+          >
+            <ng-icon [name]="priorityConfig().icon" />
+            {{ t(task().priority) }}
+          </hlm-badge>
+        </div>
+        <p class="text-muted-foreground line-clamp-2 text-sm leading-5">{{ task().description }}</p>
+      </div>
+
+      @if (!showProgressDetails()) {
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <hlm-avatar class="size-5">
+              <span hlmAvatarFallback [class]="ownerToneClass()">
+                {{ task().owner.name | initials }}
+              </span>
+            </hlm-avatar>
+            <span class="text-muted-foreground text-sm">{{ task().owner.name }}</span>
+          </div>
+
+          <div class="text-muted-foreground flex min-w-0 items-center gap-1.5">
+            <span class="truncate text-sm">{{ task().dueDate }}</span>
+            <ng-icon name="lucideCalendarDays" />
+          </div>
+        </div>
+      } @else {
+        <div class="flex flex-col gap-3">
+          <div class="space-y-1.5">
+            <div class="text-muted-foreground flex items-center justify-between text-xs">
+              <span class="leading-none">{{ t('progress') }}</span>
+              <span class="leading-none tabular-nums">{{ task().progress }}%</span>
+            </div>
+            <hlm-progress [value]="task().progress">
+              <hlm-progress-indicator />
+            </hlm-progress>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-muted-foreground text-sm">{{ t('owner') }}</span>
+              <div class="flex items-center gap-1.5">
+                <span class="text-muted-foreground truncate text-sm">{{ task().owner.name }}</span>
+                <hlm-avatar class="size-5">
+                  <span hlmAvatarFallback [class]="ownerToneClass()">
+                    {{ task().owner.name | initials }}
+                  </span>
+                </hlm-avatar>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-muted-foreground text-sm">{{ t('dueDate') }}</span>
+              <span class="text-muted-foreground flex items-center gap-1.5">
+                <span class="truncate text-sm">{{ task().dueDate }}</span>
+                <ng-icon name="lucideCalendarDays" />
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-muted-foreground text-sm">{{ t('team') }}</span>
+              <hlm-badge variant="secondary" [class]="teamBadgeClass()">
+                {{ task().team }}
+              </hlm-badge>
+            </div>
+          </div>
         </div>
       }
 
-      <!-- Card Header -->
-      <div hlmCardHeader class="px-4 pt-4 pb-0 [.border-b]:pb-0">
-        <div class="flex items-start justify-between gap-3">
-          <div class="flex items-start">
-            <!-- Complete toggle -->
-            <div
-              [class]="
-                (task().isCompleted ? 'w-9 pr-2' : 'w-0 group-hover:w-9 group-hover:pr-2') +
-                ' group-focus-within:w-9 group-focus-within:pr-2 focus-visible:w-9 focus-visible:pr-2' +
-                ' overflow-hidden transition-all duration-200 ease-in-out'
-              "
-            >
-              <button
-                hlmBtn
-                type="button"
-                variant="ghost"
-                size="icon"
-                [attr.aria-label]="'tasks.card.toggleComplete' | transloco"
-                [attr.aria-pressed]="task().isCompleted"
-                [class]="task().isCompleted ? 'text-emerald-500' : 'text-muted-foreground'"
-                (click)="toggleComplete.emit(task()); $event.stopPropagation()"
-              >
-                @if (task().isCompleted) {
-                  <ng-icon name="lucideCheckCircle2" />
-                } @else {
-                  <ng-icon name="lucideCircle" />
-                }
-              </button>
-            </div>
+      <hlm-separator />
 
-            <div class="flex min-w-0 flex-1 flex-col gap-1.5">
-              <!-- Status badge -->
-              <span
-                *transloco="let t; prefix: 'tasks.columns'"
-                hlmBadge
-                variant="outline"
-                class="text-muted-foreground w-fit"
-              >
-                @switch (task().status) {
-                  @case ('todo') {
-                    <ng-icon class="text-slate-500 dark:text-slate-400" name="lucideSquare" />
-                  }
-                  @case ('inprogress') {
-                    <ng-icon class="text-blue-500 dark:text-blue-400" name="lucideLoader" />
-                  }
-                  @case ('completed') {
-                    <ng-icon class="text-emerald-500 dark:text-emerald-400" name="lucideCheckCircle2" />
-                  }
-                  @default {
-                    <ng-icon class="text-muted-foreground" name="lucideSquare" />
-                  }
-                }
-                {{ t(task().status) }}
-              </span>
-              <h4
-                class="text-card-foreground group-hover:text-primary line-clamp-2 text-base leading-snug font-semibold transition-colors"
-                [class.line-through]="task().isCompleted"
-                [class.text-muted-foreground]="task().isCompleted"
-              >
-                <button
-                  type="button"
-                  class="focus-visible:ring-ring cursor-pointer rounded-xs text-start focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-                  (click)="taskClick.emit(task()); $event.stopPropagation()"
-                >
-                  {{ task().title }}
-                </button>
-              </h4>
-            </div>
+      <div>
+        @if (isDone()) {
+          <div class="flex items-center gap-1 text-sm font-medium text-green-700 dark:text-green-600">
+            <ng-icon name="lucideBadgeCheck" />
+            {{ t('done') }}
           </div>
-
-          <!-- Assignee avatar -->
-          <hlm-avatar size="sm" class="ring-background shrink-0 ring-2">
-            <img hlmAvatarImage alt="" [src]="task().assigneeAvatar" />
-            <span hlmAvatarFallback class="text-xs">{{ avatarInitials() }}</span>
-          </hlm-avatar>
-        </div>
-      </div>
-
-      <!-- Card Content -->
-      <div hlmCardContent class="flex flex-col px-4 py-3">
-        @if (task().description) {
-          <p class="text-muted-foreground mb-3 line-clamp-2 text-sm leading-relaxed">
-            {{ task().description }}
-          </p>
-        }
-
-        <!-- Tags -->
-        @if (task().tags.length > 0) {
-          <div class="flex flex-wrap gap-1">
-            @for (tag of task().tags; track tag.name) {
-              <span
-                hlmBadge
-                variant="outline"
-                [class]="
-                  'h-auto cursor-default rounded-full px-2 py-0 text-xs font-normal lowercase ' + tagColorClasses[tag.color]
-                "
-              >
-                {{ tag.name }}
+        } @else {
+          <div class="text-muted-foreground flex items-center gap-3 text-sm">
+            @for (insight of task().insights; track insight.label) {
+              <span class="flex items-center gap-1.5 text-sm">
+                <ng-icon [name]="insightIcons[insight.label]" />
+                {{ insight.count }}
               </span>
             }
           </div>
         }
       </div>
-
-      <!-- Separator -->
-      <div hlmSeparator class="mx-4"></div>
-
-      <!-- Card Footer -->
-      <div hlmCardFooter class="flex items-center justify-between px-4 py-2.5">
-        <div class="text-muted-foreground flex items-center gap-3 text-sm">
-          <!-- Due date -->
-          <div [class]="dueDateClass()">
-            <ng-icon [name]="isOverdue() ? 'lucideClock' : 'lucideCalendar'" />
-            <span>{{ task().dueDate }}</span>
-          </div>
-
-          <!-- Comments -->
-          @if (task().commentsCount > 0) {
-            <div class="flex items-center gap-1">
-              <ng-icon name="lucideMessageSquare" />
-              <span>{{ task().commentsCount }}</span>
-            </div>
-          }
-
-          <!-- Attachments -->
-          @if (task().attachmentsCount && task().attachmentsCount! > 0) {
-            <div class="flex items-center gap-1">
-              <ng-icon name="lucidePaperclip" />
-              <span>{{ task().attachmentsCount }}</span>
-            </div>
-          }
-        </div>
-
-        <!-- Options menu trigger -->
-        <button
-          hlmBtn
-          type="button"
-          variant="ghost"
-          size="icon-xs"
-          [attr.aria-label]="'tasks.card.openMenu' | transloco"
-          (click)="optionsClick.emit($event); $event.stopPropagation()"
-        >
-          <ng-icon name="lucideMoreVertical" />
-        </button>
-      </div>
     </article>
   `,
 })
 export class TaskCard {
-  // ==========================================
-  // Inputs
-  // ==========================================
-
   public readonly task = input.required<Task>();
+  public readonly columnId = input.required<ColumnId>();
 
-  protected groupFocused = false;
+  public readonly taskClick = output<Task>();
 
-  // ==========================================
-  // Outputs
-  // ==========================================
+  protected readonly insightIcons = INSIGHT_ICONS;
 
-  protected readonly optionsClick = output<MouseEvent>();
-  protected readonly taskClick = output<Task>();
-  protected readonly toggleComplete = output<Task>();
-
-  // ==========================================
-  // Derived state
-  // ==========================================
-
-  protected readonly dueDateClass = computed(() =>
-    dueDateVariants({
-      state: this.isOverdue() ? 'overdue' : this.task().isCompleted ? 'completed' : 'default',
-    })
-  );
-  protected readonly tagColorClasses = TAG_COLOR_CLASSES;
-
-  protected readonly isOverdue = computed(() => {
-    if (this.task().isCompleted || !this.task().dueDate) return false;
-
-    const dueDate = startOfDay(parseISO(this.task().dueDate));
-    const today = startOfDay(new Date());
-
-    return dueDate < today;
-  });
-
-  protected readonly avatarInitials = computed(() =>
-    this.task()
-      .title.split(' ')
-      .slice(0, 2)
-      .map((w) => w[0])
-      .join('')
-      .toUpperCase()
-  );
-
-  protected onFocusOut(event: FocusEvent): void {
-    const currentTarget = event.currentTarget;
-    const relatedTarget = event.relatedTarget;
-
-    if (currentTarget instanceof HTMLElement && relatedTarget instanceof Node && currentTarget.contains(relatedTarget)) {
-      return;
-    }
-
-    this.groupFocused = false;
-  }
+  protected readonly isDone = computed(() => this.columnId() === 'done');
+  protected readonly showProgressDetails = computed(() => this.columnId() === 'inProgress');
+  protected readonly priorityConfig = computed(() => PRIORITY_CONFIG[this.task().priority]);
+  protected readonly priorityBadgeClass = computed(() => priorityBadgeVariants({ priority: this.task().priority }));
+  protected readonly ownerToneClass = computed(() => avatarToneVariants({ tone: this.task().owner.tone }));
+  protected readonly teamBadgeClass = computed(() => teamBadgeVariants({ team: this.task().team }));
 }

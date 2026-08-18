@@ -4,7 +4,7 @@ import { provideTranslocoScope } from '@jsverse/transloco';
 export default [
   {
     path: '',
-    providers: [provideTranslocoScope('tasks')],
-    loadComponent: () => import('./pages/tasks'),
+    providers: [provideTranslocoScope('kanban')],
+    loadComponent: () => import('./pages/kanban'),
   },
 ] as Routes;

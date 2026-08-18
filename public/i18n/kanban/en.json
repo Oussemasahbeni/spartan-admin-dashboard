@@ -1,65 +1,76 @@
 {
-    "header": {
-        "title": "Tasks",
-        "subtitle": "Drag and drop tasks across columns to update their status",
-        "home": "Home",
-        "kanban": "Tasks"
+    "toolbar": {
+        "board": "Board",
+        "list": "List",
+        "table": "Table",
+        "searchPlaceholder": "Search tasks",
+        "filter": "Filter",
+        "sort": "Sort",
+        "addTask": "Add task",
+        "openAddTaskMenu": "Open add task menu",
+        "importCsv": "Import CSV",
+        "addFromTemplate": "Add from template",
+        "createAutomation": "Create automation"
     },
-    "addTask": "Add New Task",
-    "filter": "Filter",
-    "allTasks": "All Tasks",
-    "emptyColumn": "Drop tasks here",
     "columns": {
         "todo": "To Do",
-        "inprogress": "In Progress",
-        "completed": "Completed"
+        "inProgress": "In Progress",
+        "inReview": "In Review",
+        "done": "Done"
+    },
+    "column": {
+        "taskCount": {
+            "one": "{{count}} task",
+            "other": "{{count}} tasks"
+        },
+        "drag": "Drag {{title}} column",
+        "addTask": "Add task to {{title}}",
+        "actions": "{{title}} column actions"
+    },
+    "priority": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+    },
+    "card": {
+        "progress": "Progress",
+        "owner": "Owner",
+        "dueDate": "Due date",
+        "team": "Team",
+        "done": "Done"
+    },
+    "views": {
+        "listTitle": "List view",
+        "tableTitle": "Table view",
+        "comingSoon": "This view is not available yet."
     },
     "form": {
-        "title": "Add New Task",
-        "description": "Fill in the details below to create a new task on the board.",
+        "title": "Add task",
+        "description": "Fill in the details below to add a task to the board.",
         "label": {
             "title": "Title",
             "description": "Description",
-            "status": "Status",
-            "dueDate": "Due Date",
-            "tag": "Tag",
-            "tagName": "Tag name",
-            "tagColor": "Color"
+            "column": "Column",
+            "priority": "Priority",
+            "team": "Team",
+            "dueDate": "Due date"
         },
         "placeholder": {
             "title": "e.g. Fix login bug",
             "description": "Optional — add more context about this task",
-            "status": "Select status",
-            "dueDate": "Select due date",
-            "tagName": "e.g. Frontend",
-            "selectTag": "Select a tag",
-            "noTags": "No existing tags.",
-            "createTag": "Create new tag",
-            "backToTags": "Back to tags"
-        },
-        "tagPreview": "Preview",
-        "cancel": "Cancel",
-        "save": "Add Task",
-        "selectColor": "Select color"
+            "column": "Select column",
+            "priority": "Select priority",
+            "team": "Select team",
+            "dueDate": "Select due date"
+        }
     },
     "details": {
         "description": "Description",
-        "activity": "Activity",
-        "members": "Members",
-        "labels": "Labels",
-        "assignee": "Assignee",
-        "dueDate": "Due Date",
-        "comments": "Comments",
-        "commentsCount": "comments",
-        "noComments": "No comments yet.",
-        "attachments": "Attachments",
-        "files": "files",
-        "tags": "Tags",
         "noDescription": "No description provided.",
+        "progress": "Progress",
+        "owner": "Owner",
+        "dueDate": "Due date",
+        "insights": "Activity",
         "close": "Close"
-    },
-    "card": {
-        "toggleComplete": "Toggle task completion",
-        "openMenu": "Open task actions menu"
     }
 }

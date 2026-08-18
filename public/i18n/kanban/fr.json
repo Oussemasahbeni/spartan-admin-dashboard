@@ -1,65 +1,76 @@
 {
-    "header": {
-        "title": "Tâches",
-        "subtitle": "Glissez-déposez les tâches pour mettre à jour leur statut",
-        "home": "Accueil",
-        "kanban": "Tâches"
+    "toolbar": {
+        "board": "Tableau",
+        "list": "Liste",
+        "table": "Table",
+        "searchPlaceholder": "Rechercher des tâches",
+        "filter": "Filtrer",
+        "sort": "Trier",
+        "addTask": "Ajouter une tâche",
+        "openAddTaskMenu": "Ouvrir le menu d'ajout de tâche",
+        "importCsv": "Importer un CSV",
+        "addFromTemplate": "Ajouter depuis un modèle",
+        "createAutomation": "Créer une automatisation"
     },
-    "addTask": "Ajouter une tâche",
-    "filter": "Filtrer",
-    "allTasks": "Toutes les tâches",
-    "emptyColumn": "Déposez des tâches ici",
     "columns": {
         "todo": "À faire",
-        "inprogress": "En cours",
-        "completed": "Terminées"
+        "inProgress": "En cours",
+        "inReview": "En revue",
+        "done": "Terminé"
+    },
+    "column": {
+        "taskCount": {
+            "one": "{{count}} tâche",
+            "other": "{{count}} tâches"
+        },
+        "drag": "Déplacer la colonne {{title}}",
+        "addTask": "Ajouter une tâche à {{title}}",
+        "actions": "Actions de la colonne {{title}}"
+    },
+    "priority": {
+        "high": "Haute",
+        "medium": "Moyenne",
+        "low": "Basse"
+    },
+    "card": {
+        "progress": "Progression",
+        "owner": "Responsable",
+        "dueDate": "Échéance",
+        "team": "Équipe",
+        "done": "Terminé"
+    },
+    "views": {
+        "listTitle": "Vue liste",
+        "tableTitle": "Vue table",
+        "comingSoon": "Cette vue n'est pas encore disponible."
     },
     "form": {
-        "title": "Nouvelle tâche",
-        "description": "Remplissez les détails ci-dessous pour créer une nouvelle tâche.",
+        "title": "Ajouter une tâche",
+        "description": "Renseignez les informations ci-dessous pour ajouter une tâche au tableau.",
         "label": {
             "title": "Titre",
             "description": "Description",
-            "status": "Statut",
-            "dueDate": "Échéance",
-            "tag": "Étiquette",
-            "tagName": "Nom de l'étiquette",
-            "tagColor": "Couleur"
+            "column": "Colonne",
+            "priority": "Priorité",
+            "team": "Équipe",
+            "dueDate": "Échéance"
         },
         "placeholder": {
             "title": "ex. Corriger le bug de connexion",
-            "description": "Facultatif — ajoutez plus de contexte sur cette tâche",
-            "status": "Choisir un statut",
-            "dueDate": "Choisir une date",
-            "tagName": "ex. Frontend",
-            "selectTag": "Sélectionner une étiquette",
-            "noTags": "Aucune étiquette existante.",
-            "createTag": "Créer une nouvelle étiquette",
-            "backToTags": "Retour aux étiquettes"
-        },
-        "tagPreview": "Aperçu",
-        "cancel": "Annuler",
-        "save": "Ajouter",
-        "selectColor": "Choisir la couleur"
+            "description": "Optionnel — ajoutez du contexte sur cette tâche",
+            "column": "Sélectionner une colonne",
+            "priority": "Sélectionner une priorité",
+            "team": "Sélectionner une équipe",
+            "dueDate": "Sélectionner une échéance"
+        }
     },
     "details": {
         "description": "Description",
-        "activity": "Activité",
-        "members": "Membres",
-        "labels": "Étiquettes",
-        "assignee": "Assigné à",
-        "dueDate": "Échéance",
-        "comments": "Commentaires",
-        "commentsCount": "commentaire(s)",
-        "noComments": "Aucun commentaire pour l'instant.",
-        "attachments": "Pièces jointes",
-        "files": "fichier(s)",
-        "tags": "Étiquettes",
         "noDescription": "Aucune description fournie.",
+        "progress": "Progression",
+        "owner": "Responsable",
+        "dueDate": "Échéance",
+        "insights": "Activité",
         "close": "Fermer"
-    },
-    "card": {
-        "toggleComplete": "Basculer l'achèvement de la tâche",
-        "openMenu": "Ouvrir le menu des actions de la tâche"
     }
 }

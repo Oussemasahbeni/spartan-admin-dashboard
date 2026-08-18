@@ -59,10 +59,10 @@ export const routes: Routes = [
         loadChildren: () => import('./features/calendar/routes'),
       },
       {
-        path: 'tasks',
-        title: 'tasks',
-        data: { breadcrumb: 'navigation.tasks' },
-        loadChildren: () => import('./features/tasks/routes'),
+        path: 'kanban',
+        title: 'kanban',
+        data: { breadcrumb: 'navigation.kanban' },
+        loadChildren: () => import('./features/kanban/routes'),
       },
       {
         path: 'settings',
