@@ -1,4 +1,4 @@
-import { Component, DOCUMENT, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth-service';
 import { Language, LanguageService } from '@core/config/language-service';
@@ -9,8 +9,9 @@ import {
   lucideBot,
   lucideCalendarDays,
   lucideCheck,
-  lucideKanbanSquare,
+  lucideFolderOpen,
   lucideGauge,
+  lucideKanbanSquare,
   lucideLanguages,
   lucideLayoutDashboard,
   lucideLogOut,
@@ -46,6 +47,7 @@ interface NavCommand {
       lucideBot,
       lucideCalendarDays,
       lucideCheck,
+      lucideFolderOpen,
       lucideKanbanSquare,
       lucideGauge,
       lucideLanguages,
@@ -178,6 +180,7 @@ export class CommandPalette {
     { key: 'users', icon: 'lucideUsers', url: '/users' },
     { key: 'calendar', icon: 'lucideCalendarDays', url: '/calendar' },
     { key: 'kanban', icon: 'lucideKanbanSquare', url: '/kanban' },
+    { key: 'fileManager', icon: 'lucideFolderOpen', url: '/file-manager' },
     { key: 'settings', icon: 'lucideSettings', url: '/settings' },
     { key: 'aiAssistant', icon: 'lucideBot', url: '/assistant' },
   ];

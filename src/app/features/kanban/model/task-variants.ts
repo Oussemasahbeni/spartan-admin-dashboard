@@ -1,8 +1,6 @@
 import { cva } from 'class-variance-authority';
 import { AvatarTone, TaskPriority, TaskTeam } from './task';
 
-// TODO: arja3 l hedhi
-
 /** Badge classes for a task's priority; `high` relies on the hlmBadge `destructive` variant. */
 export const priorityBadgeVariants = cva('shrink-0 rounded-md border-transparent px-2 font-medium', {
   variants: {

@@ -65,6 +65,12 @@ export const routes: Routes = [
         loadChildren: () => import('./features/kanban/routes'),
       },
       {
+        path: 'file-manager',
+        title: 'fileManager',
+        data: { breadcrumb: 'navigation.fileManager' },
+        loadChildren: () => import('./features/file-manager/routes'),
+      },
+      {
         path: 'settings',
         title: 'settings',
         data: { breadcrumb: 'navigation.settings', preload: true },

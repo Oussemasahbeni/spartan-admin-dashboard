@@ -56,10 +56,10 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
             </div>
           </div>
           <div hlmCardAction>
-            <span hlmBadge variant="outline">
+            <hlm-badge variant="outline">
               <ng-icon class="text-success" name="lucideTrendingUp" />
               +10%
-            </span>
+            </hlm-badge>
           </div>
         </div>
       </div>
@@ -78,10 +78,10 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
           </div>
 
           <div hlmCardAction>
-            <span hlmBadge variant="outline">
+            <hlm-badge variant="outline">
               <ng-icon class="text-destructive" name="lucideTrendingDown" />
               -12.5%
-            </span>
+            </hlm-badge>
           </div>
         </div>
       </div>
@@ -96,10 +96,10 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
             </div>
           </div>
           <div hlmCardAction>
-            <span hlmBadge variant="outline">
+            <hlm-badge variant="outline">
               <ng-icon class="text-success" name="lucideTrendingUp" />
               +12.5%
-            </span>
+            </hlm-badge>
           </div>
         </div>
       </div>

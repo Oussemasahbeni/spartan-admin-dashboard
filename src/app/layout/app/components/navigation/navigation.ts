@@ -12,6 +12,7 @@ import {
   lucideCalendarDays,
   lucideChevronRight,
   lucideFileText,
+  lucideFolderOpen,
   lucideGauge,
   lucideKanbanSquare,
   lucideLayoutDashboard,
@@ -50,6 +51,7 @@ import { NavUser } from '../user/user';
       lucideGauge,
       lucideBarChart3,
       lucideFileText,
+      lucideFolderOpen,
       lucideUsers,
       lucideCalendarDays,
       lucideKanbanSquare,
@@ -94,6 +96,7 @@ export class Navigation {
         { title: 'Users', key: 'users', url: '/users', icon: 'lucideUsers' },
         { title: 'Calendar', key: 'calendar', url: '/calendar', icon: 'lucideCalendarDays' },
         { title: 'Kanban', key: 'kanban', url: '/kanban', icon: 'lucideKanbanSquare' },
+        { title: 'File Manager', key: 'fileManager', url: '/file-manager', icon: 'lucideFolderOpen' },
       ],
     },
     {

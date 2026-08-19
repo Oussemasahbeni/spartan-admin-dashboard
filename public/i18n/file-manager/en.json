@@ -1,0 +1,68 @@
+{
+    "header": {
+        "title": "My files",
+        "subtitle": "Organize, share, and find workspace files.",
+        "newFolder": "New folder",
+        "upload": "Upload"
+    },
+    "toolbar": {
+        "searchPlaceholder": "Search files and folders...",
+        "filterSort": "Filter & sort",
+        "show": "Show",
+        "showOption": {
+            "all": "All files",
+            "starred": "Starred",
+            "shared": "Shared"
+        },
+        "fileType": "File type",
+        "allTypes": "All types",
+        "sortBy": "Sort by",
+        "sortOption": {
+            "modified": "Last modified",
+            "name": "Name",
+            "size": "File size"
+        }
+    },
+    "folders": {
+        "title": "Folders",
+        "count": "{{count}} folders",
+        "files": "{{count}} files",
+        "updated": "Updated {{date}}",
+        "actionsFor": "Actions for {{name}}",
+        "open": "Open folder",
+        "copyLink": "Copy share link",
+        "rename": "Rename",
+        "emptyTitle": "No folders yet",
+        "emptyDescription": "Create a folder to organize your files."
+    },
+    "files": {
+        "title": "All files",
+        "viewLabel": "File view",
+        "gridView": "Grid View",
+        "listView": "List View",
+        "modifiedBy": "Modified {{date}} by {{owner}}",
+        "name": "Name",
+        "owner": "Owner",
+        "modified": "Modified",
+        "size": "Size",
+        "actions": "Actions",
+        "shared": "Shared",
+        "star": "Star {{name}}",
+        "unstar": "Unstar {{name}}"
+    },
+    "kind": {
+        "archive": "Archive",
+        "design": "Design",
+        "document": "Document",
+        "pdf": "PDF",
+        "spreadsheet": "Spreadsheet"
+    },
+    "actions": {
+        "actionsFor": "Actions for {{name}}",
+        "addStar": "Add to starred",
+        "removeStar": "Remove from starred",
+        "download": "Download",
+        "copyLink": "Copy share link",
+        "trash": "Move to trash"
+    }
+}

@@ -1,6 +1,6 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { STATIC_NOTIFICATIONS } from '@core/mock/notifications.data';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBell, lucideX } from '@ng-icons/lucide';
 import { TimeAgoPipe } from '@shared/pipes/timeago/time-ago.pipe';
@@ -82,7 +82,7 @@ import { Notification } from '../../model/notification';
                           <span class="sr-only">({{ t('unread') }})</span>
                         }
                       </div>
-                      <div class="text-muted-foreground text-xs">{{ notification.date | timeAgo }}</div>
+                      <div class="text-muted-foreground text-xs">{{ notification.date | timeAgo: lang() }}</div>
                     </div>
                   </button>
                   <div class="flex flex-col items-center gap-3 self-center">
@@ -127,6 +127,8 @@ export class Notifications {
   // ==========================================
   // State
   // ==========================================
+
+  protected readonly lang = inject(TranslocoService).activeLang;
 
   protected readonly notifications = signal<Notification[]>(structuredClone(STATIC_NOTIFICATIONS));
 

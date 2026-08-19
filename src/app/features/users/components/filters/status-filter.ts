@@ -44,9 +44,9 @@ import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 
           <div class="flex gap-1">
             @for (status of _statusFilter(); track status) {
-              <span *transloco="let t" hlmBadge>
+              <hlm-badge *transloco="let t">
                 {{ t('users.status.' + status) }}
-              </span>
+              </hlm-badge>
             }
           </div>
         }

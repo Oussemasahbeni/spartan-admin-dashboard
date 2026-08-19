@@ -1,0 +1,68 @@
+{
+    "header": {
+        "title": "ملفاتي",
+        "subtitle": "نظّم وشارك واعثر على ملفات مساحة العمل.",
+        "newFolder": "مجلد جديد",
+        "upload": "رفع"
+    },
+    "toolbar": {
+        "searchPlaceholder": "البحث في الملفات والمجلدات...",
+        "filterSort": "تصفية وترتيب",
+        "show": "عرض",
+        "showOption": {
+            "all": "جميع الملفات",
+            "starred": "المميزة بنجمة",
+            "shared": "المشتركة"
+        },
+        "fileType": "نوع الملف",
+        "allTypes": "جميع الأنواع",
+        "sortBy": "ترتيب حسب",
+        "sortOption": {
+            "modified": "آخر تعديل",
+            "name": "الاسم",
+            "size": "حجم الملف"
+        }
+    },
+    "folders": {
+        "title": "المجلدات",
+        "count": "{{count}} مجلدات",
+        "files": "{{count}} ملفات",
+        "updated": "آخر تحديث {{date}}",
+        "actionsFor": "إجراءات {{name}}",
+        "open": "فتح المجلد",
+        "copyLink": "نسخ رابط المشاركة",
+        "rename": "إعادة تسمية",
+        "emptyTitle": "لا توجد مجلدات بعد",
+        "emptyDescription": "أنشئ مجلدًا لتنظيم ملفاتك."
+    },
+    "files": {
+        "title": "جميع الملفات",
+        "viewLabel": "طريقة العرض",
+        "gridView": "عرض شبكي",
+        "listView": "عرض قائمة",
+        "modifiedBy": "عُدّل {{date}} بواسطة {{owner}}",
+        "name": "الاسم",
+        "owner": "المالك",
+        "modified": "آخر تعديل",
+        "size": "الحجم",
+        "actions": "الإجراءات",
+        "shared": "مشترك",
+        "star": "تمييز {{name}} بنجمة",
+        "unstar": "إزالة النجمة عن {{name}}"
+    },
+    "kind": {
+        "archive": "أرشيف",
+        "design": "تصميم",
+        "document": "مستند",
+        "pdf": "PDF",
+        "spreadsheet": "جدول بيانات"
+    },
+    "actions": {
+        "actionsFor": "إجراءات {{name}}",
+        "addStar": "إضافة إلى المميزة بنجمة",
+        "removeStar": "إزالة من المميزة بنجمة",
+        "download": "تنزيل",
+        "copyLink": "نسخ رابط المشاركة",
+        "trash": "نقل إلى المهملات"
+    }
+}

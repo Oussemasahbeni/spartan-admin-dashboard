@@ -86,7 +86,7 @@
 
       <!-- Status Cell -->
       <ng-template #statusCell let-context>
-        <span hlmBadge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
+        <hlm-badge variant="outline" class="text-muted-foreground" [id]="context.row.original.id + '-status'">
           @let status = context.getValue();
           @switch (status) {
             @case ('active') {
@@ -104,7 +104,7 @@
           }
 
           <span *transloco="let t; prefix: 'users.status'">{{ t(status) }}</span>
-        </span>
+        </hlm-badge>
       </ng-template>
 
       <!-- Role Cell -->

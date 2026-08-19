@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { TranslocoModule } from '@jsverse/transloco';
+import { DatePipe } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideAlignLeft,
@@ -43,6 +44,7 @@ const INSIGHT_ICONS: Record<TaskInsightLabel, string> = {
 @Component({
   selector: 'adm-task-details',
   imports: [
+    DatePipe,
     TranslocoModule,
     HlmDialogImports,
     NgIcon,
@@ -140,7 +142,7 @@ const INSIGHT_ICONS: Record<TaskInsightLabel, string> = {
         <div class="flex items-center justify-between gap-3">
           <span class="text-muted-foreground text-sm">{{ t('dueDate') }}</span>
           <span class="text-foreground flex items-center gap-1.5 text-sm font-medium">
-            {{ task.dueDate }}
+            {{ task.dueDate | date: 'MMM d' : '' : activeLanguage() }}
             <ng-icon name="lucideCalendarDays" />
           </span>
         </div>
@@ -171,6 +173,9 @@ const INSIGHT_ICONS: Record<TaskInsightLabel, string> = {
 })
 export class TaskDetails {
   private readonly _dialogContext = injectBrnDialogContext<TaskDetailsContext>();
+  private readonly _translocoService = inject(TranslocoService);
+
+  protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
 
   protected readonly _task = this._dialogContext.task;
   protected readonly _columnId = this._dialogContext.columnId;

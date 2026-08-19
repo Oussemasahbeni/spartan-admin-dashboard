@@ -1,5 +1,6 @@
-import { Component, computed, input, output } from '@angular/core';
-import { TranslocoModule } from '@jsverse/transloco';
+import { DatePipe } from '@angular/common';
+import { Component, computed, inject, input, output } from '@angular/core';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUpRight,
@@ -34,6 +35,7 @@ const INSIGHT_ICONS: Record<TaskInsightLabel, string> = {
 @Component({
   selector: 'adm-task-card',
   imports: [
+    DatePipe,
     TranslocoModule,
     NgIcon,
     HlmAvatarImports,
@@ -98,7 +100,7 @@ const INSIGHT_ICONS: Record<TaskInsightLabel, string> = {
           </div>
 
           <div class="text-muted-foreground flex min-w-0 items-center gap-1.5">
-            <span class="truncate text-sm">{{ task().dueDate }}</span>
+            <span class="truncate text-sm">{{ task().dueDate | date: 'MMM d' : '' : activeLanguage() }}</span>
             <ng-icon name="lucideCalendarDays" />
           </div>
         </div>
@@ -129,7 +131,7 @@ const INSIGHT_ICONS: Record<TaskInsightLabel, string> = {
             <div class="flex items-center justify-between gap-3">
               <span class="text-muted-foreground text-sm">{{ t('dueDate') }}</span>
               <span class="text-muted-foreground flex items-center gap-1.5">
-                <span class="truncate text-sm">{{ task().dueDate }}</span>
+                <span class="truncate text-sm">{{ task().dueDate | date: 'MMM d' : '' : activeLanguage() }}</span>
                 <ng-icon name="lucideCalendarDays" />
               </span>
             </div>
@@ -167,6 +169,8 @@ const INSIGHT_ICONS: Record<TaskInsightLabel, string> = {
   `,
 })
 export class TaskCard {
+  private readonly _translocoService = inject(TranslocoService);
+
   public readonly task = input.required<Task>();
   public readonly columnId = input.required<ColumnId>();
 
@@ -174,6 +178,7 @@ export class TaskCard {
 
   protected readonly insightIcons = INSIGHT_ICONS;
 
+  protected readonly activeLanguage = computed(() => this._translocoService.activeLang());
   protected readonly isDone = computed(() => this.columnId() === 'done');
   protected readonly showProgressDetails = computed(() => this.columnId() === 'inProgress');
   protected readonly priorityConfig = computed(() => PRIORITY_CONFIG[this.task().priority]);

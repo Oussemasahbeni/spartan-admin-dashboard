@@ -23,7 +23,7 @@ export interface Task {
   title: string;
   description: string;
   priority: TaskPriority;
-  dueDate: string;
+  dueDate: Date;
   progress: number;
   owner: TaskOwner;
   team: TaskTeam;

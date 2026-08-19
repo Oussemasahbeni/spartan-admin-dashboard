@@ -1,0 +1,68 @@
+{
+    "header": {
+        "title": "Mes fichiers",
+        "subtitle": "Organisez, partagez et retrouvez les fichiers de votre espace de travail.",
+        "newFolder": "Nouveau dossier",
+        "upload": "Téléverser"
+    },
+    "toolbar": {
+        "searchPlaceholder": "Rechercher des fichiers et dossiers...",
+        "filterSort": "Filtrer et trier",
+        "show": "Afficher",
+        "showOption": {
+            "all": "Tous les fichiers",
+            "starred": "Favoris",
+            "shared": "Partagés"
+        },
+        "fileType": "Type de fichier",
+        "allTypes": "Tous les types",
+        "sortBy": "Trier par",
+        "sortOption": {
+            "modified": "Dernière modification",
+            "name": "Nom",
+            "size": "Taille du fichier"
+        }
+    },
+    "folders": {
+        "title": "Dossiers",
+        "count": "{{count}} dossiers",
+        "files": "{{count}} fichiers",
+        "updated": "Mis à jour {{date}}",
+        "actionsFor": "Actions pour {{name}}",
+        "open": "Ouvrir le dossier",
+        "copyLink": "Copier le lien de partage",
+        "rename": "Renommer",
+        "emptyTitle": "Aucun dossier pour l'instant",
+        "emptyDescription": "Créez un dossier pour organiser vos fichiers."
+    },
+    "files": {
+        "title": "Tous les fichiers",
+        "viewLabel": "Vue des fichiers",
+        "gridView": "Vue grille",
+        "listView": "Vue liste",
+        "modifiedBy": "Modifié {{date}} par {{owner}}",
+        "name": "Nom",
+        "owner": "Propriétaire",
+        "modified": "Modifié",
+        "size": "Taille",
+        "actions": "Actions",
+        "shared": "Partagé",
+        "star": "Ajouter {{name}} aux favoris",
+        "unstar": "Retirer {{name}} des favoris"
+    },
+    "kind": {
+        "archive": "Archive",
+        "design": "Design",
+        "document": "Document",
+        "pdf": "PDF",
+        "spreadsheet": "Feuille de calcul"
+    },
+    "actions": {
+        "actionsFor": "Actions pour {{name}}",
+        "addStar": "Ajouter aux favoris",
+        "removeStar": "Retirer des favoris",
+        "download": "Télécharger",
+        "copyLink": "Copier le lien de partage",
+        "trash": "Déplacer vers la corbeille"
+    }
+}

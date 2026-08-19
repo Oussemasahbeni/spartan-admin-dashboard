@@ -43,7 +43,8 @@
         "aiAssistant": "مساعد الذكاء الاصطناعي",
         "dashboard-2": "لوحة التحكم 2",
         "calendar": "التقويم",
-        "kanban": "كانبان"
+        "kanban": "كانبان",
+        "fileManager": "إدارة الملفات"
     },
     "navigation": {
         "application": "النظام",
@@ -58,6 +59,7 @@
         "dashboard-1": "لوحة التحكم 1",
         "dashboard-2": "لوحة التحكم 2",
         "kanban": "لوحة كانبان",
+        "fileManager": "إدارة الملفات",
         "calendar": "الجدول الزمني",
         "users": "شؤون المستخدمين",
         "settings": "الإعدادات",

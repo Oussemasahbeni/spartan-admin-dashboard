@@ -1,0 +1,200 @@
+<div *transloco="let t; prefix: 'fileManager'" class="flex flex-col gap-4">
+  <!-- Header -->
+  <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <div class="flex flex-col gap-1">
+      <h1 class="text-3xl leading-none tracking-tight">{{ t('header.title') }}</h1>
+      <p class="text-muted-foreground text-sm">{{ t('header.subtitle') }}</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <!--  Search -->
+      <hlm-input-group class="md:max-w-lg">
+        <input
+          hlmInputGroupInput
+          type="search"
+          [placeholder]="t('toolbar.searchPlaceholder')"
+          [attr.aria-label]="t('toolbar.searchPlaceholder')"
+          [value]="searchQuery()"
+          (input)="onSearchInput($event)"
+        />
+        <hlm-input-group-addon>
+          <ng-icon name="lucideSearch" />
+        </hlm-input-group-addon>
+      </hlm-input-group>
+      <!--  Filter and Sort -->
+      <div class="flex flex-1 flex-wrap items-center gap-2 xl:justify-end">
+        <button hlmBtn variant="outline" type="button" [hlmDropdownMenuTrigger]="filterMenu">
+          <ng-icon name="lucideSlidersHorizontal" />
+          {{ t('toolbar.filterSort') }}
+        </button>
+        <ng-template #filterMenu>
+          <hlm-dropdown-menu class="w-48">
+            <hlm-dropdown-menu-group>
+              <hlm-dropdown-menu-label>{{ t('toolbar.show') }}</hlm-dropdown-menu-label>
+              @for (filter of showFilters; track filter) {
+                <button
+                  hlmDropdownMenuRadio
+                  type="button"
+                  [checked]="showFilter() === filter"
+                  (triggered)="showFilter.set(filter)"
+                >
+                  <hlm-dropdown-menu-radio-indicator />
+                  {{ t('toolbar.showOption.' + filter) }}
+                </button>
+              }
+            </hlm-dropdown-menu-group>
+            <hlm-dropdown-menu-separator />
+            <hlm-dropdown-menu-group>
+              <button hlmDropdownMenuItem side="right" align="start" type="button" [hlmDropdownMenuSubTrigger]="typeMenu">
+                <ng-icon name="lucideSlidersHorizontal" />
+                {{ t('toolbar.fileType') }}
+                <hlm-dropdown-menu-item-sub-indicator />
+              </button>
+              <ng-template #typeMenu>
+                <hlm-dropdown-menu-sub class="w-44">
+                  <hlm-dropdown-menu-group>
+                    @for (type of typeFilters; track type) {
+                      <button
+                        hlmDropdownMenuRadio
+                        type="button"
+                        [checked]="typeFilter() === type"
+                        (triggered)="typeFilter.set(type)"
+                      >
+                        <hlm-dropdown-menu-radio-indicator />
+                        {{ type === 'all' ? t('toolbar.allTypes') : t('kind.' + type) }}
+                      </button>
+                    }
+                  </hlm-dropdown-menu-group>
+                </hlm-dropdown-menu-sub>
+              </ng-template>
+              <button hlmDropdownMenuItem side="right" align="start" type="button" [hlmDropdownMenuSubTrigger]="sortMenu">
+                <ng-icon name="lucideArrowUpDown" />
+                {{ t('toolbar.sortBy') }}
+                <hlm-dropdown-menu-item-sub-indicator />
+              </button>
+              <ng-template #sortMenu>
+                <hlm-dropdown-menu-sub class="w-44">
+                  <hlm-dropdown-menu-group>
+                    @for (sort of sortOptions; track sort) {
+                      <button
+                        hlmDropdownMenuRadio
+                        type="button"
+                        [checked]="sortBy() === sort"
+                        (triggered)="sortBy.set(sort)"
+                      >
+                        <hlm-dropdown-menu-radio-indicator />
+                        {{ t('toolbar.sortOption.' + sort) }}
+                      </button>
+                    }
+                  </hlm-dropdown-menu-group>
+                </hlm-dropdown-menu-sub>
+              </ng-template>
+            </hlm-dropdown-menu-group>
+          </hlm-dropdown-menu>
+        </ng-template>
+      </div>
+      <!--  New Folder and Upload -->
+      <button hlmBtn variant="outline" type="button">
+        <ng-icon name="lucideFolderPlus" />
+        {{ t('header.newFolder') }}
+      </button>
+      <button hlmBtn type="button">
+        <ng-icon name="lucideUpload" />
+        {{ t('header.upload') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Folders -->
+  <section class="flex flex-col gap-2" aria-labelledby="folders-heading">
+    <div class="flex items-center justify-between">
+      <h2 id="folders-heading" class="text-lg font-medium">{{ t('folders.title') }}</h2>
+      <span class="text-muted-foreground text-sm">{{ t('folders.count', { count: filteredFolders().length }) }}</span>
+    </div>
+    @if (filteredFolders().length > 0) {
+      <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        @for (folder of filteredFolders(); track folder.id) {
+          <hlm-card size="sm">
+            <hlm-card-header>
+              <div class="flex min-w-0 items-center gap-2">
+                <div class="bg-muted text-muted-foreground flex size-9 shrink-0 items-center justify-center rounded-lg">
+                  <ng-icon name="lucideFolder" size="18" />
+                </div>
+                <div class="flex min-w-0 flex-col gap-1">
+                  <h3 hlmCardTitle class="truncate leading-none">{{ folder.name }}</h3>
+                  <p hlmCardDescription class="text-xs">{{ t('folders.files', { count: folder.fileCount }) }}</p>
+                </div>
+              </div>
+              <div hlmCardAction>
+                <button
+                  hlmBtn
+                  variant="ghost"
+                  size="icon-sm"
+                  type="button"
+                  [attr.aria-label]="t('folders.actionsFor', { name: folder.name })"
+                  [hlmDropdownMenuTrigger]="folderMenu"
+                >
+                  <ng-icon name="lucideMoreVertical" />
+                </button>
+                <ng-template #folderMenu>
+                  <hlm-dropdown-menu>
+                    <hlm-dropdown-menu-group>
+                      <button hlmDropdownMenuItem type="button">{{ t('folders.open') }}</button>
+                      <button hlmDropdownMenuItem type="button">{{ t('folders.copyLink') }}</button>
+                      <button hlmDropdownMenuItem type="button">{{ t('folders.rename') }}</button>
+                    </hlm-dropdown-menu-group>
+                  </hlm-dropdown-menu>
+                </ng-template>
+              </div>
+            </hlm-card-header>
+            <div hlmCardContent class="text-muted-foreground flex items-center justify-between gap-3 text-xs">
+              <div class="flex items-center gap-1.5">
+                <ng-icon name="lucideClock" />
+                <span>{{ t('folders.updated', { date: folder.updatedAt | timeAgo: lang() }) }}</span>
+              </div>
+              <span>{{ folder.size | bytes }}</span>
+            </div>
+          </hlm-card>
+        }
+      </div>
+    } @else {
+      <hlm-empty class="min-h-32">
+        <hlm-empty-header>
+          <hlm-empty-media variant="icon">
+            <ng-icon name="lucideFolder" />
+          </hlm-empty-media>
+          <h3 hlmEmptyTitle>{{ t('folders.emptyTitle') }}</h3>
+          <p hlmEmptyDescription>{{ t('folders.emptyDescription') }}</p>
+        </hlm-empty-header>
+      </hlm-empty>
+    }
+  </section>
+
+  <!-- All files -->
+  <div class="flex flex-col gap-2">
+    <div class="flex items-center justify-between gap-4">
+      <h2 class="text-lg font-medium">{{ t('files.title') }}</h2>
+      <hlm-toggle-group
+        type="single"
+        variant="outline"
+        size="sm"
+        [value]="view()"
+        [attr.aria-label]="t('files.viewLabel')"
+        (valueChange)="onViewChange($event)"
+      >
+        <button hlmToggleGroupItem value="grid" type="button">
+          <ng-icon name="lucideGrid2x2" />
+          {{ t('files.gridView') }}
+        </button>
+        <button hlmToggleGroupItem value="list" type="button">
+          <ng-icon name="lucideList" />
+          {{ t('files.listView') }}
+        </button>
+      </hlm-toggle-group>
+    </div>
+    @if (view() === 'list') {
+      <adm-file-list-view [files]="filteredFiles()" (toggleStar)="toggleStar($event)" />
+    } @else {
+      <adm-file-grid-view [files]="filteredFiles()" (toggleStar)="toggleStar($event)" />
+    }
+  </div>
+</div>

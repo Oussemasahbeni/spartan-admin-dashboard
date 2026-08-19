@@ -10,7 +10,6 @@ import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmSpinnerImports } from '@spartan-ng/helm/spinner';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
-import { format } from 'date-fns';
 import { COLUMN_IDS, TASK_OWNERS } from '../../model/board-data';
 import { ColumnId, Task, TaskFormContext, TaskFormModel, TaskFormResult, TaskPriority, TaskTeam } from '../../model/task';
 
@@ -94,7 +93,7 @@ export class TaskForm {
         title: val.title().value(),
         description: val.description().value(),
         priority: val.priority().value(),
-        dueDate: val.dueDate().value() ? format(val.dueDate().value()!, 'MMM d') : '',
+        dueDate: val.dueDate().value() ?? new Date(),
         progress: 0,
         owner,
         team: val.team().value(),

@@ -43,7 +43,8 @@
         "aiAssistant": "Assistant IA",
         "dashboard-2": "Tableau de bord 2",
         "calendar": "Calendrier",
-        "kanban": "Kanban"
+        "kanban": "Kanban",
+        "fileManager": "Gestionnaire de fichiers"
     },
     "navigation": {
         "application": "Application",
@@ -58,6 +59,7 @@
         "dashboard-1": "Tableau de bord 1",
         "dashboard-2": "Tableau de bord 2",
         "kanban": "Kanban",
+        "fileManager": "Gestionnaire de fichiers",
         "calendar": "Calendrier",
         "users": "Utilisateurs",
         "notFound": "Page introuvable",

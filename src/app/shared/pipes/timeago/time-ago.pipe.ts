@@ -1,4 +1,4 @@
-import { computed, inject, Pipe, PipeTransform, signal } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 
 const TIME_UNITS: { unit: Intl.RelativeTimeFormatUnit; seconds: number }[] = [
@@ -11,42 +11,50 @@ const TIME_UNITS: { unit: Intl.RelativeTimeFormatUnit; seconds: number }[] = [
   { unit: 'second', seconds: 1 },
 ];
 
+interface TimeAgoFormatters {
+  always: Intl.RelativeTimeFormat;
+  justNow: Intl.RelativeTimeFormat;
+}
+
 @Pipe({
   name: 'timeAgo',
 })
 export class TimeAgoPipe implements PipeTransform {
   private readonly transloco = inject(TranslocoService);
 
-  protected readonly activeLang = computed(() => this.transloco.activeLang());
+  private readonly formatters = new Map<string, TimeAgoFormatters>();
 
-  private readonly formatter = computed(
-    () => new Intl.RelativeTimeFormat(this.activeLang(), { numeric: 'always', style: 'long' })
-  );
-  private readonly justNowFormatter = computed(
-    () => new Intl.RelativeTimeFormat(this.activeLang(), { numeric: 'auto', style: 'long' })
-  );
-
-  private readonly now = signal(Date.now());
-
-  transform(value: string | Date | null | undefined): string {
+  transform(value: string | Date | null | undefined, lang?: string): string {
     const timestamp = this.toTimestamp(value);
 
     if (timestamp === null) {
       return '';
     }
-    const now = this.now();
-    const diffSeconds = Math.round((timestamp - now) / 1000);
+    const { always, justNow } = this.formattersFor(lang ?? this.transloco.activeLang());
+    const diffSeconds = Math.round((timestamp - Date.now()) / 1000);
     const absDiff = Math.abs(diffSeconds);
 
-    if (absDiff < 5) return this.justNowFormatter().format(0, 'second');
+    if (absDiff < 5) return justNow.format(0, 'second');
 
     for (const { unit, seconds } of TIME_UNITS) {
       if (absDiff >= seconds) {
-        return this.formatter().format(Math.round(diffSeconds / seconds), unit);
+        return always.format(Math.round(diffSeconds / seconds), unit);
       }
     }
 
-    return this.formatter().format(diffSeconds, 'second');
+    return always.format(diffSeconds, 'second');
+  }
+
+  private formattersFor(lang: string): TimeAgoFormatters {
+    let formatters = this.formatters.get(lang);
+    if (!formatters) {
+      formatters = {
+        always: new Intl.RelativeTimeFormat(lang, { numeric: 'always', style: 'long' }),
+        justNow: new Intl.RelativeTimeFormat(lang, { numeric: 'auto', style: 'long' }),
+      };
+      this.formatters.set(lang, formatters);
+    }
+    return formatters;
   }
 
   private toTimestamp(value: string | Date | null | undefined): number | null {

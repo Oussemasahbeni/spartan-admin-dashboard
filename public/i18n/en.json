@@ -43,7 +43,8 @@
         "aiAssistant": "AI Assistant",
         "dashboard-2": "Dashboard 2",
         "calendar": "Calendar",
-        "kanban": "Kanban"
+        "kanban": "Kanban",
+        "fileManager": "File Manager"
     },
     "navigation": {
         "application": "Application",
@@ -58,6 +59,7 @@
         "dashboard-1": "Dashboard 1",
         "dashboard-2": "Dashboard 2",
         "kanban": "Kanban",
+        "fileManager": "File Manager",
         "calendar": "Calendar",
         "users": "Users",
         "settings": "Settings",
