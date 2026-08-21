@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4 md:gap-6">
+<div class="flex flex-col gap-4 md:gap-6" [tanStackTable]="table">
   <div hlmTableContainer class="rounded-md border">
     <table hlmTable class="w-max min-w-full border-spacing-0" [style]="columnSizeVars()">
       <!-- Table Header -->
@@ -99,7 +99,7 @@
         </span>
       }
       @if (enablePagination()) {
-        <adm-pagination class="sm:ms-auto" [pageSizeOptions]="pageSizeOptions()" [table]="table" />
+        <adm-pagination class="sm:ms-auto" [pageSizeOptions]="pageSizeOptions()" />
       }
     }
   </div>

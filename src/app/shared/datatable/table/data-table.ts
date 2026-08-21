@@ -22,11 +22,13 @@ import {
   ColumnVisibilityState,
   FlexRenderDirective,
   injectTable,
+  isFunction,
   PaginationState,
   RowData,
   RowSelectionState,
   SortDirection,
   SortingState,
+  TanStackTable,
 } from '@tanstack/angular-table';
 import { TableResizableCell, TableResizableHeader } from '../directives/resizable-cell';
 import { DataTablePagination } from '../pagination/pagination';
@@ -77,6 +79,7 @@ import { dataTableFeatures, DataTableFeatures } from './table-features';
     TableResizableCell,
     TableResizableHeader,
     TableSortHeader,
+    TanStackTable,
   ],
   templateUrl: './data-table.html',
   styleUrl: './data-table.css',
@@ -282,28 +285,28 @@ export class DataTable<T extends RowData> {
     },
     columnResizeMode: 'onChange',
     onSortingChange: (updater) => {
-      typeof updater === 'function' ? this.sorting.update(updater) : this.sorting.set(updater);
+      isFunction(updater) ? this.sorting.update(updater) : this.sorting.set(updater);
       this.pagination.update((p) => ({ ...p, pageIndex: 0 }));
     },
 
     onColumnFiltersChange: (updater) => {
-      typeof updater === 'function' ? this.columnFilters.update(updater) : this.columnFilters.set(updater);
+      isFunction(updater) ? this.columnFilters.update(updater) : this.columnFilters.set(updater);
       this.pagination.update((p) => ({ ...p, pageIndex: 0 }));
     },
     onPaginationChange: (updater) => {
-      typeof updater === 'function' ? this.pagination.update(updater) : this.pagination.set(updater);
+      isFunction(updater) ? this.pagination.update(updater) : this.pagination.set(updater);
     },
     onColumnVisibilityChange: (updater) => {
-      typeof updater === 'function' ? this.columnVisibility.update(updater) : this.columnVisibility.set(updater);
+      isFunction(updater) ? this.columnVisibility.update(updater) : this.columnVisibility.set(updater);
     },
     onRowSelectionChange: (updater) => {
-      typeof updater === 'function' ? this.rowSelection.update(updater) : this.rowSelection.set(updater);
+      isFunction(updater) ? this.rowSelection.update(updater) : this.rowSelection.set(updater);
     },
     onColumnOrderChange: (updater) => {
-      typeof updater === 'function' ? this.columnOrder.update(updater) : this.columnOrder.set(updater);
+      isFunction(updater) ? this.columnOrder.update(updater) : this.columnOrder.set(updater);
     },
     onColumnPinningChange: (updater) => {
-      typeof updater === 'function' ? this.columnPinning.update(updater) : this.columnPinning.set(updater);
+      isFunction(updater) ? this.columnPinning.update(updater) : this.columnPinning.set(updater);
     },
   }));
 

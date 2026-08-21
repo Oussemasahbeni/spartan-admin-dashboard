@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
-import { Row, type RowData, Table } from '@tanstack/angular-table';
+import { injectTableContext, Row, type RowData } from '@tanstack/angular-table';
 import { DataTableFeatures } from './table-features';
 
 @Component({
@@ -18,8 +18,8 @@ import { DataTableFeatures } from './table-features';
     />
   `,
 })
-export class TableHeadSelection<T extends RowData> {
-  public readonly table = input.required<Table<DataTableFeatures, T>>();
+export class TableHeadSelection {
+  protected readonly table = injectTableContext();
 }
 
 @Component({

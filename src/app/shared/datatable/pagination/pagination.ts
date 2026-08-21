@@ -16,8 +16,7 @@ import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 
-import { RowData, Table } from '@tanstack/angular-table';
-import { DataTableFeatures } from '../table/table-features';
+import { injectTableContext } from '@tanstack/angular-table';
 
 /**
  * Pagination controls for the DataTable component.
@@ -122,7 +121,7 @@ import { DataTableFeatures } from '../table/table-features';
     </div>
   `,
 })
-export class DataTablePagination<T extends RowData> {
+export class DataTablePagination {
   // ==========================================
   // Inputs
   // ==========================================
@@ -136,7 +135,7 @@ export class DataTablePagination<T extends RowData> {
    * The TanStack Table instance to control.
    * Required for accessing pagination state and methods.
    */
-  public readonly table = input.required<Table<DataTableFeatures, T>>();
+  protected readonly table = injectTableContext();
 
   // ==========================================
   // Public Methods
