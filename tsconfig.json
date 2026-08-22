@@ -48,10 +48,8 @@
       "@spartan-ng/helm/utils": ["./src/app/libs/utils/src/index.ts"],
       "@spartan-ng/helm/alert-dialog": ["./src/app/libs/alert-dialog/src/index.ts"],
       "@spartan-ng/helm/calendar": ["./src/app/libs/calendar/src/index.ts"],
-      "@spartan-ng/helm/combobox": ["./src/app/libs/combobox/src/index.ts"],
       "@spartan-ng/helm/date-picker": ["./src/app/libs/date-picker/src/index.ts"],
       "@spartan-ng/helm/dialog": ["./src/app/libs/dialog/src/index.ts"],
-      "@spartan-ng/helm/sidebar": ["./src/app/libs/sidebar/src/index.ts"],
       "@spartan-ng/helm/tabs": ["./src/app/libs/tabs/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./src/app/libs/tooltip/src/index.ts"],
       "@spartan-ng/helm/attachment": ["./src/app/libs/attachment/src/index.ts"],
@@ -60,7 +58,9 @@
       "@spartan-ng/helm/toggle-group": ["./src/app/libs/toggle-group/src/index.ts"],
       "@spartan-ng/helm/toggle": ["./src/app/libs/toggle/src/index.ts"],
       "@spartan-ng/helm/button-group": ["./src/app/libs/button-group/src/index.ts"],
-      "@spartan-ng/helm/progress": ["./src/app/libs/progress/src/index.ts"]
+      "@spartan-ng/helm/progress": ["./src/app/libs/progress/src/index.ts"],
+      "@spartan-ng/helm/combobox": ["./src/app/libs/combobox/src/index.ts"],
+      "@spartan-ng/helm/sidebar": ["./src/app/libs/sidebar/src/index.ts"]
     }
   },
   "angularCompilerOptions": {
