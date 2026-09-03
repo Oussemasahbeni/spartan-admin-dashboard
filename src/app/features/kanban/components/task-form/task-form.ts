@@ -103,5 +103,4 @@ export class TaskForm {
       this._dialogRef.close({ columnId: val.columnId().value(), task });
     });
   }
-
 }

@@ -1,5 +1,16 @@
 import { isPlatformBrowser } from '@angular/common';
-import { booleanAttribute, Component, computed, ElementRef, inject, input, output, PLATFORM_ID, signal, viewChild } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  output,
+  PLATFORM_ID,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -57,13 +68,12 @@ import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
       lucidePencilRuler,
       lucideSquareStop,
       lucideX,
-      lucideFile
+      lucideFile,
     }),
   ],
 })
 export class AssistantInput {
-
-    private readonly platformId = inject(PLATFORM_ID);
+  private readonly platformId = inject(PLATFORM_ID);
   // ==========================================
   // View Children
   // ==========================================

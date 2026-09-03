@@ -62,37 +62,37 @@ export default class Dashboard2 {
   protected readonly transactions = signal<Transaction[]>(structuredClone(STATIC_TRANSACTIONS));
 
   protected readonly statCards = signal<StatCardData[]>([
-      {
-        icon: 'lucideShoppingBag',
-        labelKey: 'totalSales.label',
-        value: '$4,523,189',
-        changePercent: '+20.1%',
-        changeDescriptionKey: 'totalSales.changeDescription',
-        isPositive: true,
-      },
-      {
-        icon: 'lucideLayoutDashboard',
-        labelKey: 'totalOrders.label',
-        value: '12,545',
-        changePercent: '+10.2%',
-        changeDescriptionKey: 'totalOrders.changeDescription',
-        isPositive: true,
-      },
-      {
-        icon: 'lucideUsers',
-        labelKey: 'totalVisitors.label',
-        value: '8,344',
-        changePercent: '-14.2%',
-        changeDescriptionKey: 'totalVisitors.changeDescription',
-        isPositive: false,
-      },
-      {
-        icon: 'lucideCreditCard',
-        labelKey: 'refunded.label',
-        value: '3,148',
-        changePercent: '+12.6%',
-        changeDescriptionKey: 'refunded.changeDescription',
-        isPositive: true,
-      },
+    {
+      icon: 'lucideShoppingBag',
+      labelKey: 'totalSales.label',
+      value: '$4,523,189',
+      changePercent: '+20.1%',
+      changeDescriptionKey: 'totalSales.changeDescription',
+      isPositive: true,
+    },
+    {
+      icon: 'lucideLayoutDashboard',
+      labelKey: 'totalOrders.label',
+      value: '12,545',
+      changePercent: '+10.2%',
+      changeDescriptionKey: 'totalOrders.changeDescription',
+      isPositive: true,
+    },
+    {
+      icon: 'lucideUsers',
+      labelKey: 'totalVisitors.label',
+      value: '8,344',
+      changePercent: '-14.2%',
+      changeDescriptionKey: 'totalVisitors.changeDescription',
+      isPositive: false,
+    },
+    {
+      icon: 'lucideCreditCard',
+      labelKey: 'refunded.label',
+      value: '3,148',
+      changePercent: '+12.6%',
+      changeDescriptionKey: 'refunded.changeDescription',
+      isPositive: true,
+    },
   ]);
 }

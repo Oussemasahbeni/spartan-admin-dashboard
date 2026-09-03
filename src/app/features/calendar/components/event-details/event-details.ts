@@ -9,11 +9,11 @@ import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports, HlmDialogService } from '@spartan-ng/helm/dialog';
 
+import { EventApi, EventInput } from '@fullcalendar/angular';
 import { toast } from '@spartan-ng/brain/sonner';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { CalendarStore } from '../../state/calendar-store';
 import { CalendarForm } from '../calendar-form/calendar-form';
-import { EventApi, EventInput } from '@fullcalendar/angular';
 
 /**
  * Plain snapshot of the event shown in the dialog. EventApi exposes its fields

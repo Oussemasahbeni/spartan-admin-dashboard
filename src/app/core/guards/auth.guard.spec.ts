@@ -7,7 +7,6 @@ import { LOCAL_STORAGE } from '@core/config/tokens';
 import { Mocked } from 'vitest';
 import { authGuard } from './auth-guard';
 
-
 @Component({ template: '<h1>Protected Page</h1>' })
 class Protected {}
 @Component({ template: '<h1>Login Page</h1>' })

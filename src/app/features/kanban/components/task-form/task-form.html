@@ -86,7 +86,7 @@
     <!-- Due Date -->
     <hlm-field>
       <hlm-field-label for="task-due-date">{{ t('label.dueDate') }}</hlm-field-label>
-      <hlm-date-picker [min]="today" [formField]="taskForm.dueDate" [autoCloseOnSelect]="true">
+      <hlm-date-picker [minDate]="today" [formField]="taskForm.dueDate" [autoCloseOnSelect]="true">
         <hlm-date-picker-trigger class="w-full" buttonId="task-due-date">{{
           t('placeholder.dueDate')
         }}</hlm-date-picker-trigger>

@@ -112,13 +112,11 @@ export class VisitorChartCard {
                 fontSize: '14px',
                 color: 'var(--muted-foreground)',
                 formatter(w) {
-                  return (
-                    w.globals.seriesTotals
-                      .reduce((a: number, b: number) => {
-                        return a + b;
-                      }, 0)
-                      .toLocaleString()
-                  );
+                  return w.globals.seriesTotals
+                    .reduce((a: number, b: number) => {
+                      return a + b;
+                    }, 0)
+                    .toLocaleString();
                 },
               },
             },

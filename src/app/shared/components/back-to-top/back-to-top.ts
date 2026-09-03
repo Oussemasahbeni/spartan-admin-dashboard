@@ -22,7 +22,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
         size="icon"
         (click)="scrollToTop()"
       >
-      <span class="sr-only">{{ t('common.backToTop') }}</span>
+        <span class="sr-only">{{ t('common.backToTop') }}</span>
         <ng-icon name="lucideArrowUp" />
       </button>
     }

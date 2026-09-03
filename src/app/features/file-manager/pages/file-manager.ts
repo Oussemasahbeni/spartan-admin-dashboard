@@ -22,7 +22,6 @@ import { HlmEmptyImports } from '@spartan-ng/helm/empty';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmToggleGroupImports } from '@spartan-ng/helm/toggle-group';
 
-import { ToggleValue } from '@spartan-ng/brain/toggle-group';
 import { FileGridView } from '../components/file-grid-view/file-grid-view';
 import { FileListView } from '../components/file-list-view/file-list-view';
 import { FileFilter, FileManagerFile, FileManagerView, FileSort, FileTypeFilter } from '../model/file';

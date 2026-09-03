@@ -2,6 +2,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 
 import { isPlatformBrowser } from '@angular/common';
 import { Component, DestroyRef, PLATFORM_ID, booleanAttribute, inject, input, output, signal } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
@@ -11,7 +12,6 @@ import {
   lucideThumbsDown,
   lucideThumbsUp,
 } from '@ng-icons/lucide';
-import { TranslocoDirective } from '@jsverse/transloco';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 import { AiMarkdownRenderer } from './ai-markdown-renderer';
@@ -38,10 +38,7 @@ import { AiMarkdownRenderer } from './ai-markdown-renderer';
 
       <!-- Action Bar -->
       @if (!isStreaming()) {
-        <div
-          *transloco="let t; prefix: 'aiAssistant.ariaLabels'"
-          class="mt-2 flex items-center justify-between gap-2"
-        >
+        <div *transloco="let t; prefix: 'aiAssistant.ariaLabels'" class="mt-2 flex items-center justify-between gap-2">
           <span class="sr-only" role="status">{{ copied() ? t('copied') : '' }}</span>
           <div class="flex items-center gap-2">
             <button type="button" hlmBtn size="icon" variant="ghost" class="size-8" (click)="handleCopy()">

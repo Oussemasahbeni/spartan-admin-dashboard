@@ -2,7 +2,6 @@ import { computed, Service, signal } from '@angular/core';
 import { STATIC_EVENTS } from '@core/mock/events.data';
 import { EventInput } from '@fullcalendar/angular';
 
-
 export interface EventType {
   color: string;
   value: string;

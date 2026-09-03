@@ -2,14 +2,14 @@ import { Directive } from '@angular/core';
 import { classes } from '@spartan-ng/helm/utils';
 
 @Directive({
-	selector: '[hlmMessageFooter],hlm-message-footer',
-	host: { 'data-slot': 'message-footer' },
+  selector: '[hlmMessageFooter],hlm-message-footer',
+  host: { 'data-slot': 'message-footer' },
 })
 export class HlmMessageFooter {
-	constructor() {
-		classes(
-			() =>
-				'text-muted-foreground px-3 text-xs font-medium flex max-w-full min-w-0 items-center group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end',
-		);
-	}
+  constructor() {
+    classes(
+      () =>
+        'text-muted-foreground flex max-w-full min-w-0 items-center px-3 text-xs font-medium group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end'
+    );
+  }
 }

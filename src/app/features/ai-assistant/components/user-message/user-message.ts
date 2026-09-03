@@ -1,6 +1,7 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { isPlatformBrowser } from '@angular/common';
 import { Component, DestroyRef, PLATFORM_ID, inject, input, output, signal } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideCopy, lucidePencil, lucideUser } from '@ng-icons/lucide';
 import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
@@ -10,7 +11,6 @@ import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 import { UserMessage } from '../../model/assistant';
 import { EditEvent } from '../../model/user-message';
-import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'adm-user-message',
@@ -36,7 +36,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
             (keydown)="handleEditKeydown($event)"
           ></textarea>
           <div hlmInputGroupAddon align="block-end">
-            <div *transloco="let t; prefix:'buttons'" class="ms-auto flex items-center gap-4">
+            <div *transloco="let t; prefix: 'buttons'" class="ms-auto flex items-center gap-4">
               <button type="button" hlmInputGroupButton size="sm" variant="secondary" (click)="cancelEdit()">
                 <span>{{ t('cancel') }}</span>
               </button>
