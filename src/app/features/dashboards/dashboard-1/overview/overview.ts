@@ -3,10 +3,10 @@ import { STATIC_PAYMENTS } from '@core/mock/payments.data';
 import { STATIC_USERS } from '@core/mock/users.data';
 import { TranslocoModule } from '@jsverse/transloco';
 import { User } from '../../../../shared/models/user';
-import { BarChartCard } from './components/bar-chart-card';
+import { BarChartCard } from './components/subscriptions-chart';
 import { OverviewMetricCard } from './components/metric-card';
 import { PaymentsTable } from './components/payments/payments-table';
-import { AreaChartCard } from './components/subscriptions-card';
+import { AreaChartCard } from './components/sales-activity-chart';
 import { TeamMembersCard } from './components/team-members-card';
 import { Payment } from './model/payment';
 
@@ -40,7 +40,7 @@ export class OverviewDashboard {
       descriptionKey: 'overview.cards.newSubscriptions.description',
       icon: 'lucideSubscript',
       chartData: [45, 75, 55, 85, 40, 70],
-      chartColor: 'var(--color-chart-teal)',
+      chartColor: 'var( --chart-2)',
       trendValue: '15.54%',
       trendUp: true,
     },
@@ -51,7 +51,7 @@ export class OverviewDashboard {
       descriptionKey: 'overview.cards.newOrders.description',
       icon: 'lucideArrowUpDown',
       chartData: [30, 45, 75, 25, 55, 55],
-      chartColor: 'var(--color-destructive)',
+      chartColor: 'var(--chart-5)',
       trendValue: '40.2%',
       trendUp: false,
     },
@@ -62,7 +62,7 @@ export class OverviewDashboard {
       descriptionKey: 'overview.cards.avgOrderRevenue.description',
       icon: 'lucideGift',
       chartData: [35, 55, 40, 65, 50, 85],
-      chartColor: 'var(--color-chart-teal)',
+      chartColor: 'var( --chart-2)',
       trendValue: '10.8%',
       trendUp: true,
     },

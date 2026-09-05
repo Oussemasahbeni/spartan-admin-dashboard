@@ -4,10 +4,12 @@ import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideInfo, lucideTrendingDown, lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-
+import { HLM_CHART_THEME, HlmChartImports, hlmChartTooltip } from '@spartan-ng/helm/chart';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
-import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
+import { barY, ChartPoint, ChartTooltipContent, defineChart } from '@tanstack/charts';
+import { scaleBand } from '@tanstack/charts/scales/band';
+import { scaleLinear } from '@tanstack/charts/scales/linear';
 
 interface MonthsTranslation {
   jan: string;
@@ -18,9 +20,17 @@ interface MonthsTranslation {
   jun: string;
 }
 
+interface Row {
+  month: string;
+  sales: number;
+}
+
+const COLOR = 'var(--chart-1)';
+const formatK = (v: number) => `${v / 1000}k`;
+
 @Component({
   selector: 'adm-sales-card',
-  imports: [HlmCardImports, NgIcon, HlmTabsImports, HlmTooltipImports, NgApexchartsModule, TranslocoModule],
+  imports: [HlmCardImports, HlmChartImports, NgIcon, HlmTabsImports, HlmTooltipImports, TranslocoModule],
   providers: [provideIcons({ lucideInfo, lucideTrendingUp, lucideTrendingDown })],
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.salesCard'" hlmCard class="h-full w-full">
@@ -32,19 +42,13 @@ interface MonthsTranslation {
           </div>
 
           <hlm-tabs-list *transloco="let t; prefix: 'dashboard1'">
-            <button type="button" hlmTabsTrigger="month">
-              {{ t('period.month') }}
-            </button>
-            <button type="button" hlmTabsTrigger="week">
-              {{ t('period.week') }}
-            </button>
+            <button type="button" hlmTabsTrigger="month">{{ t('period.month') }}</button>
+            <button type="button" hlmTabsTrigger="week">{{ t('period.week') }}</button>
           </hlm-tabs-list>
         </header>
 
         <main hlmCardContent class="flex flex-col gap-6 lg:flex-row" [hlmTabsContent]="selectedPeriod()">
-          <!-- Metrics Panel -->
           <div class="flex flex-col justify-center gap-4 lg:w-1/3">
-            <!-- Net Sales Metric -->
             <div class="bg-muted/50 rounded-lg border p-4">
               <div class="mb-1 flex items-center justify-between">
                 <span class="text-muted-foreground text-sm font-medium">{{ t('netSales') }}</span>
@@ -57,7 +61,6 @@ interface MonthsTranslation {
               </div>
             </div>
 
-            <!-- Orders Metric -->
             <div class="bg-muted/50 rounded-lg border p-4">
               <div class="mb-1 flex items-center justify-between">
                 <span class="text-muted-foreground text-sm font-medium">{{ t('orders') }}</span>
@@ -71,19 +74,8 @@ interface MonthsTranslation {
             </div>
           </div>
 
-          <!-- Chart -->
           <div class="flex-1">
-            <apx-chart
-              [grid]="chartOptions().grid!"
-              [series]="chartOptions().series!"
-              [chart]="chartOptions().chart!"
-              [plotOptions]="chartOptions().plotOptions!"
-              [dataLabels]="chartOptions().dataLabels!"
-              [legend]="chartOptions().legend!"
-              [xaxis]="chartOptions().xaxis!"
-              [yaxis]="chartOptions().yaxis!"
-              [colors]="chartOptions().colors!"
-            />
+            <tanstack-chart hlmChart [options]="_chartOptions()" />
           </div>
         </main>
       </hlm-tabs>
@@ -91,80 +83,69 @@ interface MonthsTranslation {
   `,
 })
 export class SalesCard {
-  // ==========================================
-  // Services
-  // ==========================================
-
   private readonly _dir = inject(DirectionalityService);
-
-  // ==========================================
-  // State
-  // ==========================================
-
-  private readonly rtl = this._dir.isRtl;
 
   protected readonly selectedPeriod = signal<string>('month');
 
   private readonly _months = translateObjectSignal('months', {});
-
   protected readonly months = computed(() => this._months() as MonthsTranslation);
 
-  protected readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly _chartOptions = computed(() => {
     const m = this.months();
-    const isRtl = this.rtl();
-    const categories = [m.jan, m.feb, m.mar, m.apr, m.may, m.jun];
-    const data =
+    const labels = [m.jan, m.feb, m.mar, m.apr, m.may, m.jun];
+    const values =
       this.selectedPeriod() === 'month'
         ? [220000, 180000, 270000, 200000, 320000, 140000]
         : [80000, 90000, 70000, 60000, 110000, 50000];
 
+    let rows: Row[] = labels.map((month, i) => ({ month, sales: values[i] }));
+    if (this._dir.isRtl()) rows = [...rows].reverse();
+
     return {
-      grid: {
-        borderColor: 'var(--color-border)',
-        strokeDashArray: 4,
-      },
-      series: [
+      definition: defineChart(
         {
-          name: 'Sales',
-          data: isRtl ? [...data].reverse() : data,
+          marks: [
+            barY(rows, {
+              id: 'sales-bars',
+              x: 'month',
+              y: 'sales',
+              key: 'month',
+              radius: 4,
+              fill: COLOR,
+            }),
+          ],
+          scales: {
+            x: {
+              scale: () => scaleBand<string>().padding(0.5),
+              axis: { line: false, ticks: { size: 0, padding: 10 } },
+            },
+            y: {
+              scale: scaleLinear,
+              nice: true,
+              grid: true,
+              axis: { line: false, ticks: { size: 0, format: formatK } },
+            },
+          },
+          theme: HLM_CHART_THEME,
         },
-      ],
-      chart: {
-        type: 'bar',
-        height: 220,
-        toolbar: { show: false },
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: '50%',
-          borderRadius: 4,
+        {
+          focus: 'group-x',
+          tooltip: hlmChartTooltip({
+            content: (points: readonly ChartPoint<Row, string, number>[]) => this.tooltipContent(points),
+          }),
         },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      legend: {
-        show: false,
-      },
-      xaxis: {
-        categories: isRtl ? [...categories].reverse() : categories,
-        reversed: isRtl,
-        labels: {
-          style: { colors: 'var(--muted-foreground)', fontSize: '12px' },
-        },
-        axisBorder: { show: false },
-        axisTicks: { show: false },
-      },
-      yaxis: {
-        show: true,
-        opposite: isRtl,
-        labels: {
-          style: { colors: 'var(--muted-foreground)', fontSize: '12px' },
-          formatter: (val: number) => `${val / 1000}k`,
-        },
-      },
-      colors: ['var(--color-chart-azure)'],
+      ),
+      ariaLabel: 'Sales by month',
+      height: 220,
     };
   });
+
+  private tooltipContent(points: readonly ChartPoint<Row, string, number>[]): ChartTooltipContent {
+    const p = points[0];
+    if (!p) return { rows: [] };
+    return {
+      title: p.xValue,
+      rows: [{ label: 'Sales', value: p.yValue.toLocaleString(), color: COLOR }],
+    };
+  }
 }

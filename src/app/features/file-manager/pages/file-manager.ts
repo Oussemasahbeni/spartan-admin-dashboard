@@ -26,6 +26,7 @@ import { FileGridView } from '../components/file-grid-view/file-grid-view';
 import { FileListView } from '../components/file-list-view/file-list-view';
 import { FileFilter, FileManagerFile, FileManagerView, FileSort, FileTypeFilter } from '../model/file';
 import { FILES, FOLDERS } from '../model/file-manager-data';
+import { ToggleValue } from '@spartan-ng/brain/toggle-group';
 
 @Component({
   selector: 'adm-file-manager',

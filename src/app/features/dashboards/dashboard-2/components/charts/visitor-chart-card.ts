@@ -3,8 +3,11 @@ import { provideTranslocoScope, translateObjectSignal, Translation } from '@jsve
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-
-import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
+import { HLM_CHART_THEME, HlmChartImports, hlmChartTooltip } from '@spartan-ng/helm/chart';
+import { ChartPoint } from '@tanstack/angular-charts';
+import { ChartTooltipContent, defineChart } from '@tanstack/charts';
+import { focusGroupAngle, pie, PieDatum, polar, radialArc, radialText } from '@tanstack/charts/polar';
+import { scaleLinear } from '@tanstack/charts/scales/linear';
 
 const SCOPE = { scope: 'dashboard/dashboard2', alias: 'dashboard2' };
 
@@ -20,17 +23,30 @@ interface VisitorChartTranslation {
     other: string;
   };
 }
+interface Slice {
+  key: string;
+  label: string;
+  value: number;
+}
+
+interface CenterLabel {
+  id: string;
+  angle: number;
+  radius: number;
+  text: string;
+}
+
+type DonutDatum = PieDatum<Slice> | CenterLabel;
 
 @Component({
   selector: 'adm-visitor-chart-card',
-  imports: [NgApexchartsModule, HlmCardImports, NgIcon],
+  imports: [HlmCardImports, HlmChartImports, NgIcon],
   providers: [
     provideTranslocoScope(SCOPE),
     provideIcons({
       lucideTrendingUp,
     }),
   ],
-
   template: `
     <section hlmCard class="h-full w-full">
       <div hlmCardHeader class="text-center">
@@ -39,20 +55,11 @@ interface VisitorChartTranslation {
       </div>
 
       <div hlmCardContent class="flex min-h-75 flex-1 items-center justify-center">
-        <apx-chart
-          [series]="chartOptions().series!"
-          [chart]="chartOptions().chart!"
-          [labels]="chartOptions().labels!"
-          [colors]="chartOptions().colors!"
-          [dataLabels]="chartOptions().dataLabels!"
-          [legend]="chartOptions().legend!"
-          [plotOptions]="chartOptions().plotOptions!"
-          [stroke]="chartOptions().stroke!"
-        />
+        <tanstack-chart [options]="_chartOptions()" />
       </div>
 
       <div hlmCardFooter class="flex flex-col items-center text-center">
-        <div class="flex items-center justify-center gap-2 text-sm font-medium text-emerald-400">
+        <div class="text-success flex items-center justify-center gap-2 text-sm font-medium">
           {{ visitorChart().trendingText }}
           <ng-icon name="lucideTrendingUp" />
         </div>
@@ -70,63 +77,82 @@ export class VisitorChartCard {
 
   protected readonly visitorChart = computed(() => this._visitorChart() as Translation & VisitorChartTranslation);
 
-  protected readonly chartOptions = computed<ApexOptions>(() => {
-    const chart = this.visitorChart();
+  protected readonly _chartOptions = computed(() => {
+    const s = this.visitorChart().series;
+
+    const slices: Slice[] = [
+      { key: 'desktop', label: s.desktop, value: 1200 },
+      { key: 'mobile', label: s.mobile, value: 600 },
+      { key: 'tablet', label: s.tablet, value: 550 },
+      { key: 'other', label: s.other, value: 500 },
+    ];
+    const total = slices.reduce((sum, r) => sum + r.value, 0);
+
+    const marks = [
+      radialArc(
+        pie(slices, {
+          value: 'value',
+        }),
+        {
+          id: 'visitor-slices',
+          key: 'key',
+          innerRadius: ({ radius }) => radius * 0.75,
+          color: 'key',
+        }
+      ),
+      radialText([{ id: 'total', angle: 0, radius: 0, text: total.toLocaleString() }], {
+        id: 'visitor-total',
+        angle: 'angle',
+        radius: 'radius',
+        key: 'id',
+        text: 'text',
+        dy: -6,
+        fill: 'var(--foreground)',
+        fontSize: 36,
+        fontWeight: 700,
+      }),
+    ];
 
     return {
-      series: [500, 300, 200, 125],
-      labels: [chart.series.desktop, chart.series.mobile, chart.series.tablet, chart.series.other],
-      chart: {
-        type: 'donut',
-        height: 320,
-        background: 'transparent',
-      },
-      colors: [
-        'var(--color-chart-azure)',
-        'var(--color-chart-orange)',
-        'var(--color-chart-teal)',
-        'var(--color-chart-amber)',
-      ],
-      plotOptions: {
-        pie: {
-          donut: {
-            size: '75%',
-            labels: {
-              show: true,
-              name: {
-                show: false,
+      definition: defineChart(
+        {
+          marks: [
+            polar({
+              radiusRatio: 0.78,
+              scales: {
+                angle: { scale: scaleLinear().domain([0, Math.PI * 2]) },
+                radius: { scale: scaleLinear().domain([0, 1]) },
               },
-              value: {
-                show: true,
-                fontSize: '36px',
-                fontWeight: 'bold',
-                color: 'var(--foreground)',
-                formatter(val: string) {
-                  return val;
-                },
-              },
-              total: {
-                show: true,
-                showAlways: true,
-                label: 'Visitors',
-                fontSize: '14px',
-                color: 'var(--muted-foreground)',
-                formatter(w) {
-                  return w.globals.seriesTotals
-                    .reduce((a: number, b: number) => {
-                      return a + b;
-                    }, 0)
-                    .toLocaleString();
-                },
-              },
-            },
+              marks,
+            }),
+          ],
+          scales: { x: null, y: null },
+          color: {
+            domain: slices.map((s) => s.key),
+            range: ['var(--chart-1)', 'var(--chart-2)', 'var(--chart-3)', 'var(--chart-4)'],
           },
+          margin: 0,
+          theme: HLM_CHART_THEME,
         },
-      },
-      dataLabels: { enabled: false },
-      stroke: { show: false },
-      legend: { show: false },
-      tooltip: { theme: 'dark' },
+        {
+          focus: focusGroupAngle,
+          tooltip: hlmChartTooltip({
+            anchor: 'group-center',
+            placement: 'auto',
+            content: (points: readonly ChartPoint<DonutDatum, number, number>[]) => this.tooltipContent(points),
+          }),
+        }
+      ),
+      ariaLabel: this.visitorChart().title,
+      height: 350,
     };
   });
+
+  private tooltipContent(points: readonly ChartPoint<DonutDatum, number, number>[]): ChartTooltipContent {
+    const p = points.find((c) => 'label' in c.datum);
+    if (!p || !('label' in p.datum)) return { rows: [] };
+    return {
+      rows: [{ label: p.datum.label, value: p.datum.value.toLocaleString(), color: p.color }],
+    };
+  }
 }

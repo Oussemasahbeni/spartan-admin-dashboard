@@ -2,8 +2,11 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { DirectionalityService } from '@core/config/directionality-service';
 import { translateObjectSignal, TranslocoModule } from '@jsverse/transloco';
 import { HlmCardImports } from '@spartan-ng/helm/card';
+import { HLM_CHART_THEME, HlmChartImports, hlmChartTooltip } from '@spartan-ng/helm/chart';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
-import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
+import { barX, ChartPoint, ChartTooltipContent, defineChart } from '@tanstack/charts';
+import { scaleBand } from '@tanstack/charts/scales/band';
+import { scaleLinear } from '@tanstack/charts/scales/linear';
 
 interface TrafficSourceCardTranslation {
   google: string;
@@ -11,9 +14,16 @@ interface TrafficSourceCardTranslation {
   direct: string;
 }
 
+interface Row {
+  source: string;
+  value: number;
+}
+
+const formatK = (v: number) => `${v / 1000}k`;
+
 @Component({
   selector: 'adm-traffic-source-card',
-  imports: [HlmCardImports, HlmTabsImports, NgApexchartsModule, TranslocoModule],
+  imports: [HlmCardImports, HlmChartImports, HlmTabsImports, TranslocoModule],
   template: `
     <section *transloco="let t; prefix: 'dashboard1.analytics.trafficSourceCard'" hlmCard class="h-full w-full">
       <hlm-tabs class="w-auto" [tab]="selectedPeriod()" (tabActivated)="selectedPeriod.set($event)">
@@ -24,103 +34,82 @@ interface TrafficSourceCardTranslation {
           </div>
 
           <hlm-tabs-list *transloco="let t; prefix: 'dashboard1'">
-            <button type="button" hlmTabsTrigger="month" [aria-label]="t('period.month')">
-              {{ t('period.month') }}
-            </button>
-            <button type="button" hlmTabsTrigger="week" [aria-label]="t('period.week')">
-              {{ t('period.week') }}
-            </button>
+            <button type="button" hlmTabsTrigger="month" [aria-label]="t('period.month')">{{ t('period.month') }}</button>
+            <button type="button" hlmTabsTrigger="week" [aria-label]="t('period.week')">{{ t('period.week') }}</button>
           </hlm-tabs-list>
         </header>
 
         <main hlmCardContent class="mt-4" [hlmTabsContent]="selectedPeriod()">
-          <apx-chart
-            [grid]="chartOptions().grid!"
-            [series]="chartOptions().series!"
-            [chart]="chartOptions().chart!"
-            [plotOptions]="chartOptions().plotOptions!"
-            [legend]="chartOptions().legend!"
-            [xaxis]="chartOptions().xaxis!"
-            [yaxis]="chartOptions().yaxis!"
-            [colors]="chartOptions().colors!"
-          />
+          <tanstack-chart hlmChart [options]="_chartOptions()" />
         </main>
       </hlm-tabs>
     </section>
   `,
 })
 export class TrafficSourceCard {
-  // ==========================================
-  // Services
-  // ==========================================
-
   private readonly _dir = inject(DirectionalityService);
 
-  // ==========================================
-  // State
-  // ==========================================
-
-  protected readonly rtl = this._dir.isRtl;
   protected readonly selectedPeriod = signal<string>('month');
 
   private readonly _trafficCard = translateObjectSignal('analytics.trafficSourceCard.sources');
-
   protected readonly trafficCard = computed(() => this._trafficCard() as TrafficSourceCardTranslation);
 
-  protected readonly chartOptions = computed<ApexOptions>(() => {
+  protected readonly _chartOptions = computed(() => {
     const t = this.trafficCard();
-    const isRtl = this.rtl();
+    const isRtl = this._dir.isRtl();
+    const sources = [t.google, t.social, t.direct];
+    const values = this.selectedPeriod() === 'month' ? [186, 305, 237] : [62, 102, 79];
 
-    const categories = [t.google, t.social, t.direct];
-    const monthData = [186, 305, 237];
-    const weekData = [62, 102, 79];
-    const data = this.selectedPeriod() === 'month' ? monthData : weekData;
+    const rows: Row[] = sources.map((source, i) => ({ source, value: values[i] }));
 
     return {
-      grid: {
-        show: false,
-      },
-      series: [
+      definition: defineChart(
         {
-          name: 'Traffic',
-          data: isRtl ? [...data].reverse() : data,
+          marks: [
+            barX(rows, {
+              id: 'traffic-bars',
+              x: 'value',
+              y: 'source',
+              key: 'source',
+              color: 'source',
+              radius: 4,
+            }),
+          ],
+          scales: {
+            x: {
+              scale: () => scaleLinear().domain([0, 350]),
+              reverse: isRtl,
+              grid: false,
+              axis: { line: false, ticks: { size: 0, format: formatK } },
+            },
+            y: {
+              scale: () => scaleBand<string>().padding(0.5),
+              axis: { line: false, ticks: { size: 0, padding: 8 } },
+            },
+          },
+          color: {
+            domain: sources,
+            range: ['var(--chart-1)', 'var(--chart-2)', 'var(--chart-3)'],
+          },
+          theme: HLM_CHART_THEME,
         },
-      ],
-      chart: {
-        type: 'bar',
-        height: 180,
-        toolbar: { show: false },
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true,
-          barHeight: '50%',
-          borderRadius: 4,
-          distributed: true,
-        },
-      },
-      legend: {
-        show: false,
-      },
-      xaxis: {
-        categories: isRtl ? [...categories].reverse() : categories,
-        reversed: isRtl,
-        labels: {
-          show: true,
-          style: { colors: 'var(--muted-foreground)', fontSize: '12px' },
-          formatter: (val: string) => `${Number(val) / 1000}k`,
-        },
-        axisBorder: { show: false },
-        axisTicks: { show: false },
-        max: 350,
-      },
-      yaxis: {
-        reversed: isRtl,
-        labels: {
-          style: { colors: 'var(--muted-foreground)', fontSize: '12px' },
-        },
-      },
-      colors: ['var(--color-chart-azure)', 'var(--color-chart-teal)', 'var(--color-chart-orange)'],
+        {
+          focus: 'group-y',
+          tooltip: hlmChartTooltip({
+            content: (points: readonly ChartPoint<Row, number, string>[]) => this.tooltipContent(points),
+          }),
+        }
+      ),
+      ariaLabel: 'Traffic by source',
+      height: 180,
     };
   });
+
+  private tooltipContent(points: readonly ChartPoint<Row, number, string>[]): ChartTooltipContent {
+    const p = points[0];
+    if (!p) return { rows: [] };
+    return {
+      rows: [{ label: p.yValue, value: p.xValue.toLocaleString(), color: p.color }],
+    };
+  }
 }

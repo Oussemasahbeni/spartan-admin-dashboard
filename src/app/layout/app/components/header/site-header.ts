@@ -1,5 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { BreadcrumbsHeader } from '@shared/components/breadcrumbs-header/breadcrumbs-header';
 import { ThemeSwitch } from '@shared/components/theme-switch/theme-switch';
@@ -28,7 +27,7 @@ import { Notifications } from '../notifications/notifications';
       class="bg-background/95 sticky top-0 z-30 flex h-14 w-full shrink-0 items-center justify-between gap-2 border-b px-6 backdrop-blur"
     >
       <div class="flex items-center gap-2">
-        <button type="button" hlmSidebarTrigger (click)="onResize()">
+        <button type="button" hlmSidebarTrigger>
           <span *transloco="let t" class="sr-only">{{ t('common.toggleSidebar') }}</span>
         </button>
         <hlm-separator orientation="vertical" class="me-2" />
@@ -42,23 +41,4 @@ import { Notifications } from '../notifications/notifications';
     </header>
   `,
 })
-export class SiteHeader {
-  // ==========================================
-  // Services
-  // ==========================================
-
-  private readonly _platformId = inject(PLATFORM_ID);
-
-  // ==========================================
-  // Public Methods
-  // ==========================================
-
-  onResize() {
-    if (isPlatformBrowser(this._platformId)) {
-      // Trigger a resize event to notify charts to resize
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-      }, 250);
-    }
-  }
-}
+export class SiteHeader {}

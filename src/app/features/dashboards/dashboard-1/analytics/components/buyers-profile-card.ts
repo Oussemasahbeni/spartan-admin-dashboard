@@ -1,14 +1,20 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTrendingUp } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
+import { HLM_CHART_THEME, HlmChartImports } from '@spartan-ng/helm/chart';
+import { defineChart } from '@tanstack/charts';
+import { pie, polar, radialArc } from '@tanstack/charts/polar';
 
-import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
+interface GaugeSlice {
+  status: 'complete' | 'remaining';
+  value: number;
+}
 
 @Component({
   selector: 'adm-buyers-profile-card',
-  imports: [HlmCardImports, NgIcon, NgApexchartsModule, TranslocoModule],
+  imports: [HlmCardImports, HlmChartImports, NgIcon, TranslocoModule],
   providers: [provideIcons({ lucideTrendingUp })],
   template: `
     <section
@@ -22,18 +28,10 @@ import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
       </header>
 
       <main hlmCardContent class="flex flex-1 items-center justify-center">
-        <div class="relative">
-          <apx-chart
-            [series]="chartOptions().series!"
-            [chart]="chartOptions().chart!"
-            [plotOptions]="chartOptions().plotOptions!"
-            [stroke]="chartOptions().stroke!"
-            [colors]="chartOptions().colors!"
-            [labels]="chartOptions().labels!"
-          />
-          <!-- Center Label -->
+        <div class="relative w-50">
+          <tanstack-chart hlmChart [options]="_chartOptions()" />
           <div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-            <span class="text-4xl font-bold">200</span>
+            <span class="text-4xl font-bold">{{ buyers }}</span>
             <span class="text-muted-foreground text-sm">{{ t('buyers') }}</span>
           </div>
         </div>
@@ -47,39 +45,50 @@ import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
   `,
 })
 export class BuyersProfileCard {
-  // ==========================================
-  // State
-  // ==========================================
+  protected readonly buyers = 200;
+  private readonly percent = 75;
 
-  protected readonly chartOptions = signal<ApexOptions>({
-    series: [75], // 75% completion
-    chart: {
-      type: 'radialBar',
+  protected readonly _chartOptions = computed(() => {
+    const slices: GaugeSlice[] = [
+      { status: 'complete', value: this.percent },
+      { status: 'remaining', value: 100 - this.percent },
+    ];
+
+    const arcs = pie(slices, {
+      value: 'value',
+      startAngle: -Math.PI * 0.75,
+      endAngle: Math.PI * 0.75,
+    });
+
+    return {
+      definition: defineChart(
+        {
+          marks: [
+            polar({
+              radiusRatio: 0.95,
+              scales: { angle: null, radius: null },
+              marks: [
+                radialArc(arcs, {
+                  innerRadius: ({ radius }) => radius * 0.7,
+                  cornerRadius: 999,
+                  color: 'status',
+                  key: 'status',
+                }),
+              ],
+            }),
+          ],
+          scales: { x: null, y: null },
+          color: {
+            domain: ['complete', 'remaining'],
+            range: ['var(--chart-1)', 'var(--muted)'],
+          },
+          margin: 0,
+          theme: HLM_CHART_THEME,
+        },
+        { focus: false }
+      ),
+      ariaLabel: 'Buyers profile',
       height: 200,
-      sparkline: { enabled: true },
-    },
-    plotOptions: {
-      radialBar: {
-        startAngle: -135,
-        endAngle: 135,
-        hollow: {
-          margin: 0,
-          size: '70%',
-        },
-        track: {
-          background: 'var(--muted)',
-          strokeWidth: '100%',
-          margin: 0,
-        },
-        dataLabels: {
-          show: false,
-        },
-      },
-    },
-    stroke: {
-      lineCap: 'round',
-    },
-    colors: ['var(--color-chart-teal)'],
-    labels: ['Buyers'],
+    };
   });
 }

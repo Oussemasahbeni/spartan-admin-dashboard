@@ -29,7 +29,6 @@
       "@spartan-ng/helm/field": ["./src/app/libs/field/src/index.ts"],
       "@spartan-ng/helm/input": ["./src/app/libs/input/src/index.ts"],
       "@spartan-ng/helm/input-group": ["./src/app/libs/input-group/src/index.ts"],
-      "@spartan-ng/helm/input-otp": ["./src/app/libs/input-otp/src/index.ts"],
       "@spartan-ng/helm/kbd": ["./src/app/libs/kbd/src/index.ts"],
       "@spartan-ng/helm/label": ["./src/app/libs/label/src/index.ts"],
       "@spartan-ng/helm/pagination": ["./src/app/libs/pagination/src/index.ts"],
@@ -47,7 +46,6 @@
       "@spartan-ng/helm/textarea": ["./src/app/libs/textarea/src/index.ts"],
       "@spartan-ng/helm/utils": ["./src/app/libs/utils/src/index.ts"],
       "@spartan-ng/helm/alert-dialog": ["./src/app/libs/alert-dialog/src/index.ts"],
-      "@spartan-ng/helm/calendar": ["./src/app/libs/calendar/src/index.ts"],
       "@spartan-ng/helm/dialog": ["./src/app/libs/dialog/src/index.ts"],
       "@spartan-ng/helm/tabs": ["./src/app/libs/tabs/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./src/app/libs/tooltip/src/index.ts"],
@@ -56,11 +54,14 @@
       "@spartan-ng/helm/bubble": ["./src/app/libs/bubble/src/index.ts"],
       "@spartan-ng/helm/toggle-group": ["./src/app/libs/toggle-group/src/index.ts"],
       "@spartan-ng/helm/toggle": ["./src/app/libs/toggle/src/index.ts"],
-      "@spartan-ng/helm/button-group": ["./src/app/libs/button-group/src/index.ts"],
       "@spartan-ng/helm/progress": ["./src/app/libs/progress/src/index.ts"],
       "@spartan-ng/helm/combobox": ["./src/app/libs/combobox/src/index.ts"],
       "@spartan-ng/helm/sidebar": ["./src/app/libs/sidebar/src/index.ts"],
-      "@spartan-ng/helm/date-picker": ["./src/app/libs/date-picker/src/index.ts"]
+      "@spartan-ng/helm/date-picker": ["./src/app/libs/date-picker/src/index.ts"],
+      "@spartan-ng/helm/button-group": ["./src/app/libs/button-group/src/index.ts"],
+      "@spartan-ng/helm/input-otp": ["./src/app/libs/input-otp/src/index.ts"],
+      "@spartan-ng/helm/chart": ["./src/app/libs/chart/src/index.ts"],
+      "@spartan-ng/helm/calendar": ["./src/app/libs/calendar/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

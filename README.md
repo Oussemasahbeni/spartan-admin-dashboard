@@ -1,6 +1,5 @@
 <div align="center">
 
-
 # Spartan Admin Dashboard
 
 A production-ready, Angular admin dashboard template built with [Spartan UI](https://spartan.ng) components and [Tailwind CSS](https://tailwindcss.com). Clone it and ship.
@@ -13,10 +12,9 @@ A production-ready, Angular admin dashboard template built with [Spartan UI](htt
 
 <img src="./poster.png" alt="Spartan Admin Dashboard — the shadcn experience, now for Angular" width="640" />
 
-
 ## Features
 
-- **Two dashboards** — overview metrics, charts (ApexCharts), payments tables, and team widgets.
+- **Two dashboards** — overview metrics, charts (Tanstack charts), payments tables, and team widgets.
 - **User management** — server-style data table with sorting, filtering, pagination, and row actions (backed by a mock API).
 - **Task board** — Kanban-style cards with tags, due dates, comments, and completion state.
 - **Calendar** — full scheduling UI powered by FullCalendar, with event details and locale-aware rendering.
@@ -28,15 +26,15 @@ A production-ready, Angular admin dashboard template built with [Spartan UI](htt
 
 ## Tech stack
 
-| Area | Choice |
-|---|---|
-| Framework | Angular 22 (standalone, signals, zoneless-ready, OnPush) |
-| UI components | Spartan UI (HLM) — vendored locally under `src/app/libs` |
-| Styling | Tailwind CSS 4 + `class-variance-authority` + `tailwind-merge` |
-| Tables | TanStack Angular Table |
-| Charts | ApexCharts (`ng-apexcharts`) |
-| Calendar | FullCalendar |
-| i18n | Transloco (`en`, `fr`, `ar`) |
+| Area          | Choice                                                         |
+| ------------- | -------------------------------------------------------------- |
+| Framework     | Angular 22 (standalone, signals, zoneless-ready, OnPush)       |
+| UI components | Spartan UI (HLM) — vendored locally under `src/app/libs`       |
+| Styling       | Tailwind CSS 4 + `class-variance-authority` + `tailwind-merge` |
+| Tables        | TanStack Angular Table                                         |
+| Charts        | Tanstack Charts                                                |
+| Calendar      | FullCalendar                                                   |
+| i18n          | Transloco (`en`, `fr`, `ar`)                                   |
 
 ## Getting started
 
@@ -73,7 +71,6 @@ Each feature in `features/<name>/` is lazy-loaded via its own `routes.ts` and ow
 ## Contributing
 
 Issues and pull requests are welcome. Please run `pnpm lint` and `pnpm test` before opening a PR.
-
 
 ---
 
