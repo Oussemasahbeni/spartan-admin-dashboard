@@ -202,7 +202,6 @@ export default class Users {
 
   protected addUser() {
     const dialogRef = this._hlmDialogService.open(UserForm, {
-      autoFocus: false,
       contentClass: 'sm:min-w-lg',
     });
 

@@ -104,7 +104,6 @@ export class ActionDropdown {
     const user = this.row().original;
     const dialogRef = this._hlmDialogService.open(UserForm, {
       context: { user },
-      autoFocus: 'dialog',
       contentClass: 'sm:min-w-lg',
     });
 
