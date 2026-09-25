@@ -9,7 +9,6 @@ import {
   provideRouter,
   TitleStrategy,
   withComponentInputBinding,
-  withExperimentalAutoCleanupInjectors,
   withInMemoryScrolling,
   withPreloading,
   withViewTransitions,
@@ -25,6 +24,7 @@ import { ThemeService } from './core/config/theme-service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
 
+import { withAutoCleanupInjectors } from '@angular/router';
 import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 
@@ -51,7 +51,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(
       routes,
-      withExperimentalAutoCleanupInjectors(),
+      withAutoCleanupInjectors(),
       withViewTransitions(),
       withPreloading(FlagBasedPreloadingStrategy),
       withComponentInputBinding(),
