@@ -2,6 +2,10 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.columns-list.cdk-drop-list-dragging .column-box > * {
+  pointer-events: none;
+}
+
 .cdk-drag-preview {
   border: none;
   box-sizing: border-box;
