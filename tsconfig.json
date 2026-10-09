@@ -24,7 +24,6 @@
       "@spartan-ng/helm/checkbox": ["./src/app/libs/checkbox/src/index.ts"],
       "@spartan-ng/helm/collapsible": ["./src/app/libs/collapsible/src/index.ts"],
       "@spartan-ng/helm/command": ["./src/app/libs/command/src/index.ts"],
-      "@spartan-ng/helm/dropdown-menu": ["./src/app/libs/dropdown-menu/src/index.ts"],
       "@spartan-ng/helm/empty": ["./src/app/libs/empty/src/index.ts"],
       "@spartan-ng/helm/field": ["./src/app/libs/field/src/index.ts"],
       "@spartan-ng/helm/input": ["./src/app/libs/input/src/index.ts"],
@@ -52,7 +51,6 @@
       "@spartan-ng/helm/toggle-group": ["./src/app/libs/toggle-group/src/index.ts"],
       "@spartan-ng/helm/toggle": ["./src/app/libs/toggle/src/index.ts"],
       "@spartan-ng/helm/progress": ["./src/app/libs/progress/src/index.ts"],
-      "@spartan-ng/helm/combobox": ["./src/app/libs/combobox/src/index.ts"],
       "@spartan-ng/helm/date-picker": ["./src/app/libs/date-picker/src/index.ts"],
       "@spartan-ng/helm/button-group": ["./src/app/libs/button-group/src/index.ts"],
       "@spartan-ng/helm/input-otp": ["./src/app/libs/input-otp/src/index.ts"],
@@ -61,7 +59,9 @@
       "@spartan-ng/helm/dialog": ["./src/app/libs/dialog/src/index.ts"],
       "@spartan-ng/helm/select": ["./src/app/libs/select/src/index.ts"],
       "@spartan-ng/helm/sidebar": ["./src/app/libs/sidebar/src/index.ts"],
-      "@spartan-ng/helm/sonner": ["./src/app/libs/sonner/src/index.ts"]
+      "@spartan-ng/helm/sonner": ["./src/app/libs/sonner/src/index.ts"],
+      "@spartan-ng/helm/combobox": ["./src/app/libs/combobox/src/index.ts"],
+      "@spartan-ng/helm/dropdown-menu": ["./src/app/libs/dropdown-menu/src/index.ts"]
     }
   },
   "angularCompilerOptions": {
