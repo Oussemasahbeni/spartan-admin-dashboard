@@ -5,6 +5,7 @@ import { injectHlmDropdownMenuConfig } from './hlm-dropdown-menu-token';
 
 @Directive({
   selector: '[hlmDropdownMenuTrigger]',
+  exportAs: 'hlmDropdownMenuTrigger',
   providers: [{ provide: MENU_SIDE, useExisting: forwardRef(() => HlmDropdownMenuTrigger) }],
   hostDirectives: [
     {

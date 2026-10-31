@@ -11,7 +11,6 @@ import { scaleLinear } from '@tanstack/charts/scales/linear';
 import { scalePoint } from '@tanstack/charts/scales/point';
 import { curveMonotoneX } from 'd3-shape';
 
-
 interface MonthsTranslation {
   jan: string;
   feb: string;
@@ -81,7 +80,10 @@ export class CustomersCard {
           gradients: [
             {
               id: 'customers-area',
-              x1: 0, y1: 0, x2: 0, y2: 1,
+              x1: 0,
+              y1: 0,
+              x2: 0,
+              y2: 1,
               stops: [
                 { offset: 0, color: COLOR, opacity: 0.5 },
                 { offset: 1, color: COLOR, opacity: 0.1 },
@@ -95,7 +97,7 @@ export class CustomersCard {
           tooltip: hlmChartTooltip({
             content: (points: readonly ChartPoint<Row, string, number>[]) => this.tooltipContent(points),
           }),
-        },
+        }
       ),
       ariaLabel: 'Customers by month',
       height: 200,

@@ -6,6 +6,7 @@ import { classes } from '@spartan-ng/helm/utils';
 
 @Directive({
   selector: '[hlmPaginationLink]',
+  exportAs: 'hlmPaginationLink',
   hostDirectives: [
     {
       directive: RouterLink,
@@ -40,7 +41,7 @@ export class HlmPaginationLink {
 
   constructor() {
     classes(() => [
-      '',
+      'relative',
       buttonVariants({
         variant: this.isActive() ? 'outline' : 'ghost',
         size: this.size(),

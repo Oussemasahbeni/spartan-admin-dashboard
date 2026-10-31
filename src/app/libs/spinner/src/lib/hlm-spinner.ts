@@ -5,10 +5,12 @@ import { classes } from '@spartan-ng/helm/utils';
 
 @Component({
   selector: 'hlm-spinner',
+  exportAs: 'hlmSpinner',
   imports: [NgIcon],
   providers: [provideIcons({ lucideLoader2 })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    'data-slot': 'spinner',
     role: 'status',
     '[attr.aria-label]': 'ariaLabel()',
   },

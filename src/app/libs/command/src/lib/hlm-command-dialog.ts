@@ -7,6 +7,7 @@ import { ClassValue } from 'clsx';
 
 @Component({
   selector: 'hlm-command-dialog',
+  exportAs: 'hlmCommandDialog',
   imports: [HlmDialogImports],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

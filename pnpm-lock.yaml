@@ -152,17 +152,17 @@ importers:
         specifier: ^36.0.0
         version: 36.0.0(@ng-icons/core@36.0.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@schematics/angular@22.2.0(chokidar@5.0.0))(rxjs@7.8.2))
       '@spartan-ng/brain':
-        specifier: ^1.6.3
-        version: 1.6.3(3433234f85919d52e51d98981aa29c08)
+        specifier: ^1.9.0
+        version: 1.9.0(3433234f85919d52e51d98981aa29c08)
       '@tanstack/angular-charts':
-        specifier: 1.0.0
-        version: 1.0.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)
+        specifier: 1.1.0
+        version: 1.1.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)
       '@tanstack/angular-table':
         specifier: ^9.1.2
         version: 9.1.3(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))
       '@tanstack/charts':
-        specifier: 1.0.0
-        version: 1.0.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)
+        specifier: 1.1.0
+        version: 1.1.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -222,8 +222,8 @@ importers:
         specifier: ^8.3.0
         version: 8.3.0
       '@spartan-ng/cli':
-        specifier: ^1.6.3
-        version: 1.6.3(46d5bcd4971b2d40a695a25b37c07784)
+        specifier: ^1.9.0
+        version: 1.9.0(46d5bcd4971b2d40a695a25b37c07784)
       '@tailwindcss/postcss':
         specifier: ^4.3.0
         version: 4.3.0
@@ -2835,8 +2835,8 @@ packages:
   '@sinclair/typebox@0.34.49':
     resolution: {integrity: sha512-brySQQs7Jtn0joV8Xh9ZV/hZb9Ozb0pmazDIASBkYKCjXrXU3mpcFahmK/z4YDhGkQvP9mWJbVyahdtU5wQA+A==}
 
-  '@spartan-ng/brain@1.6.3':
-    resolution: {integrity: sha512-qerkqUXXP0Wk9Lk7PMOM5BwHY1I066OJb49UWVt4pNT0KrQ24i1Ea06SLHbiXvR5fWilPrX5t42vibTkkmXyRw==}
+  '@spartan-ng/brain@1.9.0':
+    resolution: {integrity: sha512-vPULFnCRk0B4RD3gB2ks5hA/AOfXX5J4vD5wrsxHyAElhkwmY6vvyVL/3BcJ7w3LszhUVUsag8ORPqtvRCEJ0w==}
     peerDependencies:
       '@angular/cdk': '>=21.0.0 <23.0.0'
       '@angular/common': '>=21.0.0 <23.0.0'
@@ -2851,8 +2851,8 @@ packages:
       luxon:
         optional: true
 
-  '@spartan-ng/cli@1.6.3':
-    resolution: {integrity: sha512-tz+5zjZ5T2tv8AksVn7NS2ZQxO2RSPQD6d/vT/E2vruu1v+DfiGWzUW1jpg/FeghgBY4o8+IGwvjfVXcTerYMg==}
+  '@spartan-ng/cli@1.9.0':
+    resolution: {integrity: sha512-a8t4F4l8AamfBXpiB5gqBAt8Dux6ARw+pcVBZXyyNNGTkJpNxx2RKthm6pJ7eRN05c+ZWdx1G6WCymdgu+z7Ww==}
     peerDependencies:
       tslib: ^2.3.0
 
@@ -2956,8 +2956,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || >=4.0.0 || insiders'
 
-  '@tanstack/angular-charts@1.0.0':
-    resolution: {integrity: sha512-FTaXkm78LPJbeE0BaT9F/y2x1yymQ2j7BZAYei9kUDOdZZFFozrqFz9ymygKMBrIoaaGYFZBkvdYVs/N+xEIkg==}
+  '@tanstack/angular-charts@1.1.0':
+    resolution: {integrity: sha512-EKpNjv6u5Hq1cOAPdBRfs+vzI3iBFqXkroFLmpodNE3oD6R/vid9ZGfJwAHm8FsoGSkqbdFrUMbGF7hQFiBxJg==}
     peerDependencies:
       '@angular/core': '>=19'
       '@angular/platform-browser': '>=19'
@@ -2974,8 +2974,8 @@ packages:
     peerDependencies:
       '@angular/core': '>=19'
 
-  '@tanstack/charts@1.0.0':
-    resolution: {integrity: sha512-4U+zbn5jzQF8MNDsvjMG7TE4Fv68mfIIiFlFmrWiBIHor8zCX+7W8gpyDcT1SYJYvOIZXv3uxbK/IjwGY40Sig==}
+  '@tanstack/charts@1.1.0':
+    resolution: {integrity: sha512-0mb05yZMrBUzjHBohcKtK1XcTKJH9b8LS2uT0iYjDiLU+QR2jo0hrUJramAgg/AfBLMu2DY5fOgKe5bsqd6z4Q==}
     peerDependencies:
       '@angular/core': '>=19'
       '@angular/platform-browser': '>=19'
@@ -10233,7 +10233,7 @@ snapshots:
 
   '@sinclair/typebox@0.34.49': {}
 
-  '@spartan-ng/brain@1.6.3(3433234f85919d52e51d98981aa29c08)':
+  '@spartan-ng/brain@1.9.0(3433234f85919d52e51d98981aa29c08)':
     dependencies:
       '@angular/cdk': 22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/forms@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(rxjs@7.8.2)
       '@angular/common': 22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -10247,7 +10247,7 @@ snapshots:
     optionalDependencies:
       luxon: 3.7.2
 
-  '@spartan-ng/cli@1.6.3(46d5bcd4971b2d40a695a25b37c07784)':
+  '@spartan-ng/cli@1.9.0(46d5bcd4971b2d40a695a25b37c07784)':
     dependencies:
       '@angular/core': 22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)
       '@nx/angular': 22.7.5(869dbec2516ca9345094ba75562fae29)
@@ -10393,11 +10393,11 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.3.0
 
-  '@tanstack/angular-charts@1.0.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)':
+  '@tanstack/angular-charts@1.1.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)':
     dependencies:
       '@angular/core': 22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)
       '@angular/platform-browser': 22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))
-      '@tanstack/charts': 1.0.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)
+      '@tanstack/charts': 1.1.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)
       tslib: 2.8.1
     transitivePeerDependencies:
       - alpinejs
@@ -10427,7 +10427,7 @@ snapshots:
     transitivePeerDependencies:
       - '@angular/common'
 
-  '@tanstack/charts@1.0.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)':
+  '@tanstack/charts@1.1.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(@angular/platform-browser@22.2.0(@angular/common@22.2.0(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.2.0(@angular/compiler@22.2.0)(rxjs@7.8.2)))(preact@10.29.7)':
     dependencies:
       '@types/d3-force': 3.0.10
       '@types/d3-geo': 3.1.1

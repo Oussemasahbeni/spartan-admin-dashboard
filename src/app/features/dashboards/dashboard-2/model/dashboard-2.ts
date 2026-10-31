@@ -1,6 +1,5 @@
-
-
-export interface Transaction {  id: string;
+export interface Transaction {
+  id: string;
   user: {
     name: string;
     email: string;

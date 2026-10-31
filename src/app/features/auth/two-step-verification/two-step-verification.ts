@@ -5,7 +5,6 @@ import { LOCAL_STORAGE } from '@core/config/tokens';
 import { TranslocoModule } from '@jsverse/transloco';
 import { provideIcons } from '@ng-icons/core';
 import { lucideMail } from '@ng-icons/lucide';
-import { BrnInputOtpImports } from '@spartan-ng/brain/input-otp';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
@@ -20,7 +19,6 @@ import { AuthLayout } from '../layout';
     HlmInputOtpImports,
     HlmSpinnerImports,
     HlmAlertImports,
-    BrnInputOtpImports,
     HlmCard,
     ReactiveFormsModule,
     TranslocoModule,

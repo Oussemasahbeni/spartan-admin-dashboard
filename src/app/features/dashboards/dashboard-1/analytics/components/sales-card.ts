@@ -133,7 +133,7 @@ export class SalesCard {
           tooltip: hlmChartTooltip({
             content: (points: readonly ChartPoint<Row, string, number>[]) => this.tooltipContent(points),
           }),
-        },
+        }
       ),
       ariaLabel: 'Sales by month',
       height: 220,

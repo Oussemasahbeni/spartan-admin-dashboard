@@ -14,9 +14,8 @@
 
     <form class="mt-4 flex flex-col gap-4" [formGroup]="otpForm" (ngSubmit)="onSubmit()">
       <div class="flex flex-col items-center gap-3">
-        <brn-input-otp
+        <hlm-input-otp
           id="otp-input"
-          hlmInputOtp
           formControlName="otp"
           [length]="maxLength"
           [transformPaste]="transformPaste"
@@ -33,7 +32,7 @@
             <hlm-input-otp-slot [index]="4" />
             <hlm-input-otp-slot [index]="5" />
           </hlm-input-otp-group>
-        </brn-input-otp>
+        </hlm-input-otp>
         <p class="text-muted-foreground text-center text-sm">{{ t('helperText') }}</p>
       </div>
 
