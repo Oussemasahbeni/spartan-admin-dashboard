@@ -37,6 +37,7 @@ export default defineConfig([
       '@angular-eslint/prefer-signals': 'error',
       '@angular-eslint/prefer-service-decorator': 'error',
       '@angular-eslint/inject-at-top': 'error',
+      '@angular-eslint/no-global-document': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {

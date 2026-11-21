@@ -1,17 +1,18 @@
 {
-  "version": 1,
+  "version": 2,
   "skills": {
     "angular-developer": {
       "source": "angular/skills",
       "sourceType": "github",
       "skillPath": "angular-developer/SKILL.md",
-      "computedHash": "d3335311700c3c7ca9e522b0e1e439213f196938517a072fd9e731a7cfe1a069"
+      "computedHash": ""
     },
     "spartan": {
       "source": "spartan-ng/spartan",
+      "commit": "0f84d71b1f73e991bb5988b3736a692eda611caa",
       "sourceType": "github",
       "skillPath": "skills/spartan/SKILL.md",
-      "computedHash": "1f60e02863a89dc0adb58ff1a3b244904c3d6df3f6ea48177dff9158588e29f6"
+      "computedHash": "9f2ff4478e54ddd6646a2d7900d3a1435b662584e53b5a9ff5128281d47dc932"
     }
   }
 }
