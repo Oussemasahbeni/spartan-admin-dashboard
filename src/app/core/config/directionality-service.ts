@@ -1,6 +1,5 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { isPlatformBrowser } from '@angular/common';
-
 import { computed, DOCUMENT, inject, PLATFORM_ID, Service } from '@angular/core';
 
 @Service()

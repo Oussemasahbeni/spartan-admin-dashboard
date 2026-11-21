@@ -1,5 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
+
 import { AssistantInput } from '../components/assistant-input/assistant-input';
 import { ChatList } from '../components/chat-list/chat-list';
 import { AssistantEmptyState } from '../components/empty-state/empty-state';

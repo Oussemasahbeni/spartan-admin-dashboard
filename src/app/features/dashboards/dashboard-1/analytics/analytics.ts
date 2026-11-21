@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
+
 import { BuyersProfileCard } from './components/buyers-profile-card';
 import { CustomersCard } from './components/customers-card';
 import { SalesCard } from './components/sales-card';

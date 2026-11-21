@@ -1,6 +1,7 @@
 import { Service, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE } from '@core/config/tokens';
+
 import { User } from '../../shared/models/user';
 
 @Service()

@@ -1,5 +1,6 @@
 import { booleanAttribute, Component, input, output } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
+
 import { ChatMessage, UserMessage } from '../../model/assistant';
 import { AiResponseCard } from '../ai-response/ai-response';
 import { UserMessageCard } from '../user-message/user-message';

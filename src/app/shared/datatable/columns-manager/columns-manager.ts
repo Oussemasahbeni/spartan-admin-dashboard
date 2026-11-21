@@ -13,8 +13,8 @@ import {
 } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-
 import { Column, ColumnPinningPosition, RowData, Table } from '@tanstack/angular-table';
+
 import { DataTableFeatures } from '../table/table-features';
 
 @Component({

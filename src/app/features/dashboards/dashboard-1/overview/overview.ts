@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { STATIC_PAYMENTS } from '@core/mock/payments.data';
 import { STATIC_USERS } from '@core/mock/users.data';
 import { TranslocoModule } from '@jsverse/transloco';
+
 import { User } from '../../../../shared/models/user';
 import { OverviewMetricCard } from './components/metric-card';
 import { PaymentsTable } from './components/payments/payments-table';

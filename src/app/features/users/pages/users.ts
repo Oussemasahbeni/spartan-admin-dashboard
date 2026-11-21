@@ -1,23 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, DestroyRef, inject, signal, TemplateRef, viewChild } from '@angular/core';
-import { translateSignal, TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
-import { HlmBadgeImports } from '@spartan-ng/helm/badge';
-import { HlmButtonImports } from '@spartan-ng/helm/button';
-
-import { HlmInputImports } from '@spartan-ng/helm/input';
-import { HlmLabelImports } from '@spartan-ng/helm/label';
-import {
-  CellContext,
-  ColumnPinningState,
-  createColumnHelper,
-  flexRenderComponent,
-  PaginationState,
-  SortingState,
-} from '@tanstack/angular-table';
-
 import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounce, form, FormField } from '@angular/forms/signals';
+import { translateSignal, TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideBriefcase,
@@ -35,9 +20,22 @@ import { CountryDisplay } from '@shared/components/country-display/country-displ
 import { DataTableColumnsManager } from '@shared/datatable/columns-manager/columns-manager';
 import { DataTable } from '@shared/datatable/table/data-table';
 import { DataTableFeatures } from '@shared/datatable/table/table-features';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBadgeImports } from '@spartan-ng/helm/badge';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogService } from '@spartan-ng/helm/dialog';
-
+import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
+import { HlmLabelImports } from '@spartan-ng/helm/label';
+import {
+  CellContext,
+  ColumnPinningState,
+  createColumnHelper,
+  flexRenderComponent,
+  PaginationState,
+  SortingState,
+} from '@tanstack/angular-table';
+
 import { User, UserRole, UserStatus } from '../../../shared/models/user';
 import { UsersCardSection } from '../components/cards/card-section';
 import { RoleFilter } from '../components/filters/role-filter';

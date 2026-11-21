@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { STATIC_TRANSACTIONS } from '@core/mock/transactions.data';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -14,8 +15,6 @@ import {
   lucideTrendingUp,
   lucideUsers,
 } from '@ng-icons/lucide';
-
-import { STATIC_TRANSACTIONS } from '@core/mock/transactions.data';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 

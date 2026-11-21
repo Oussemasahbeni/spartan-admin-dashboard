@@ -30,6 +30,7 @@ import {
   SortingState,
   TanStackTable,
 } from '@tanstack/angular-table';
+
 import { TableResizableCell, TableResizableHeader } from '../directives/resizable-cell';
 import { DataTablePagination } from '../pagination/pagination';
 import { toCssVarToken } from '../utils/css-var-token';

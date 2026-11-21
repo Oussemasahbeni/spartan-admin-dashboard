@@ -1,5 +1,4 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-
 import { isPlatformBrowser } from '@angular/common';
 import { Component, DestroyRef, PLATFORM_ID, booleanAttribute, inject, input, output, signal } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';

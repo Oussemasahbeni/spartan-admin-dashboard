@@ -11,11 +11,9 @@ import {
   lucideTrendingUp,
 } from '@ng-icons/lucide';
 import { HlmCardImports } from '@spartan-ng/helm/card';
-
+import { HLM_CHART_THEME, HlmChartImports } from '@spartan-ng/helm/chart';
 import { HlmLabelImports } from '@spartan-ng/helm/label';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
-
-import { HLM_CHART_THEME, HlmChartImports } from '@spartan-ng/helm/chart';
 import { defineChart, lineY } from '@tanstack/charts';
 import { scaleLinear } from '@tanstack/charts/scales/linear';
 

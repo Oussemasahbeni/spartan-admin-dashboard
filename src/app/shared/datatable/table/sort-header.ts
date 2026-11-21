@@ -5,6 +5,7 @@ import { lucideArrowDown, lucideArrowUp, lucideArrowUpDown, lucideEyeOff, lucide
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { Column, RowData } from '@tanstack/angular-table';
+
 import { DataTableFeatures } from './table-features';
 
 @Component({

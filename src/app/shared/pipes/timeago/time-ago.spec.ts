@@ -1,6 +1,7 @@
 import { signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@jsverse/transloco';
+
 import { TimeAgoPipe } from './time-ago.pipe';
 
 const SEC = 1_000;

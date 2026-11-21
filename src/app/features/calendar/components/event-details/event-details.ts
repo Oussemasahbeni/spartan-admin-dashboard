@@ -1,17 +1,17 @@
 import { DatePipe } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EventApi, EventInput } from '@fullcalendar/angular';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideAlignLeft, lucideCalendar, lucideClock, lucideMapPin, lucideTag } from '@ng-icons/lucide';
 import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
+import { toast } from '@spartan-ng/brain/sonner';
 import { HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports, HlmDialogService } from '@spartan-ng/helm/dialog';
-
-import { EventApi, EventInput } from '@fullcalendar/angular';
-import { toast } from '@spartan-ng/brain/sonner';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
+
 import { CalendarStore } from '../../state/calendar-store';
 import { CalendarForm } from '../calendar-form/calendar-form';
 

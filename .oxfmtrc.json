@@ -7,6 +7,7 @@
   "tabWidth": 2,
   "singleQuote": true,
   "bracketSpacing": true,
+  "sortImports": true,
   "arrowParens": "always",
   "sortPackageJson": false,
   "sortTailwindcss": {
@@ -18,5 +19,5 @@
       "language": "angular-html"
     }
   ],
-  "ignorePatterns": ["src/app/libs/"]
+  "ignorePatterns": ["src/app/libs/", ".claude/**", ".agents/**"]
 }

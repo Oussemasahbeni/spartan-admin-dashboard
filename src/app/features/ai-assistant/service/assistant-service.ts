@@ -1,5 +1,6 @@
 import { Service, computed, inject, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
+
 import { ChatMessage, MessageStatus } from '../model/assistant';
 import { AI_RESPONSES } from './data';
 

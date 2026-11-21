@@ -17,6 +17,7 @@ import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { BadgeVariants, HlmBadgeImports } from '@spartan-ng/helm/badge';
 import { HlmProgressImports } from '@spartan-ng/helm/progress';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
+
 import { ColumnId, Task, TaskInsightLabel, TaskPriority } from '../../model/task';
 import { avatarToneVariants, priorityBadgeVariants, teamBadgeVariants } from '../../model/task-variants';
 

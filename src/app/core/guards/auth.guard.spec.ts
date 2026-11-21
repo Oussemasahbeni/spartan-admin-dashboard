@@ -5,6 +5,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { AuthService } from '@core/auth/auth-service';
 import { LOCAL_STORAGE } from '@core/config/tokens';
 import { Mocked } from 'vitest';
+
 import { authGuard } from './auth-guard';
 
 @Component({ template: '<h1>Protected Page</h1>' })

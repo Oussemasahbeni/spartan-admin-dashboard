@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { HlmCheckboxImports } from '@spartan-ng/helm/checkbox';
 import { injectTableContext, Row, type RowData } from '@tanstack/angular-table';
+
 import { DataTableFeatures } from './table-features';
 
 @Component({

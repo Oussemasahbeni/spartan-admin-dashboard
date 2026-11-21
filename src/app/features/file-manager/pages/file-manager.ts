@@ -15,6 +15,7 @@ import {
 } from '@ng-icons/lucide';
 import { BytesPipe } from '@shared/pipes/bytes/bytes.pipe';
 import { TimeAgoPipe } from '@shared/pipes/timeago/time-ago.pipe';
+import { ToggleValue } from '@spartan-ng/brain/toggle-group';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmCardImports } from '@spartan-ng/helm/card';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
@@ -26,7 +27,6 @@ import { FileGridView } from '../components/file-grid-view/file-grid-view';
 import { FileListView } from '../components/file-list-view/file-list-view';
 import { FileFilter, FileManagerFile, FileManagerView, FileSort, FileTypeFilter } from '../model/file';
 import { FILES, FOLDERS } from '../model/file-manager-data';
-import { ToggleValue } from '@spartan-ng/brain/toggle-group';
 
 @Component({
   selector: 'adm-file-manager',

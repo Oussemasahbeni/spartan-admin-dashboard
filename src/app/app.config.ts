@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import {
   ApplicationConfig,
   inject,
@@ -13,20 +14,18 @@ import {
   withPreloading,
   withViewTransitions,
 } from '@angular/router';
-
-import { provideHttpClient } from '@angular/common/http';
+import { withAutoCleanupInjectors } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideNgIconsConfig, withExceptionLogger } from '@ng-icons/core';
+import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
+import { provideSpartanHlm } from '@spartan-ng/helm/utils';
+
 import { routes } from './app.routes';
 import { FlagBasedPreloadingStrategy } from './core/config/flag-based-preloading-strategy';
 import { Language, LANGUAGES, LanguageService } from './core/config/language-service';
 import { ThemeService } from './core/config/theme-service';
 import { TranslateTitleStrategy } from './core/config/title-i18n-strategy';
 import { TranslocoHttpLoader } from './transloco-loader';
-
-import { withAutoCleanupInjectors } from '@angular/router';
-import { provideHlmSidebarConfig } from '@spartan-ng/helm/sidebar';
-import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 
 function isLanguage(value: string): value is Language {
   return (LANGUAGES as readonly string[]).includes(value);

@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth-service';
 import { LOCAL_STORAGE } from '@core/config/tokens';
+
 import { User } from '../../shared/models/user';
 
 export const authGuard: CanActivateFn = (_route, _state) => {

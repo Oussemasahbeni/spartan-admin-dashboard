@@ -21,6 +21,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmProgressImports } from '@spartan-ng/helm/progress';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
+
 import { ColumnId, Task, TaskInsightLabel, TaskPriority } from '../../model/task';
 import { avatarToneVariants, priorityBadgeVariants, teamBadgeVariants } from '../../model/task-variants';
 

@@ -1,4 +1,5 @@
 import { cva } from 'class-variance-authority';
+
 import { AvatarTone, TaskPriority, TaskTeam } from './task';
 
 /** Badge classes for a task's priority; `high` relies on the hlmBadge `destructive` variant. */
