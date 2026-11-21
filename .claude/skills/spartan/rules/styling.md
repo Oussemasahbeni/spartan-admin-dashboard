@@ -100,13 +100,13 @@ import { Component } from '@angular/core';
 import { classes } from '@spartan-ng/helm/utils';
 
 @Component({
-	selector: 'app-badge',
-	template: '<ng-content />',
+  selector: 'app-badge',
+  template: '<ng-content />',
 })
 export class AppBadge {
-	constructor() {
-		classes(() => 'inline-flex items-center rounded-md border px-2 py-0.5');
-	}
+  constructor() {
+    classes(() => 'inline-flex items-center rounded-md border px-2 py-0.5');
+  }
 }
 ```
 
@@ -125,15 +125,15 @@ import { hlm } from '@spartan-ng/helm/utils';
 import type { ClassValue } from 'cn';
 
 @Component({
-	selector: 'app-badge',
-	template: '<ng-content />',
-	host: { '[class]': '_computedClass()' },
+  selector: 'app-badge',
+  template: '<ng-content />',
+  host: { '[class]': '_computedClass()' },
 })
 export class AppBadge {
-	public readonly userClass = input<ClassValue>('', { alias: 'class' });
-	protected readonly _computedClass = computed(() =>
-		hlm('inline-flex items-center rounded-md border px-2 py-0.5', this.userClass()),
-	);
+  public readonly userClass = input<ClassValue>('', { alias: 'class' });
+  protected readonly _computedClass = computed(() =>
+    hlm('inline-flex items-center rounded-md border px-2 py-0.5', this.userClass())
+  );
 }
 ```
 

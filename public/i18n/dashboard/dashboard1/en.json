@@ -1,124 +1,124 @@
 {
-    "layout": {
-        "title": "Dashboard",
-        "filterBy": "Filter By",
-        "export": "Export",
-        "tabs": {
-            "overview": "Overview",
-            "analytics": "Analytics",
-            "reports": "Reports"
-        }
-    },
-    "overview": {
-        "cards": {
-            "newSubscriptions": {
-                "title": "New Subscriptions",
-                "infoTooltip": "Number of new subscriptions in the last week",
-                "description": "Since last week"
-            },
-            "newOrders": {
-                "title": "New Orders",
-                "infoTooltip": "Number of new orders in the last week",
-                "description": "Since last week"
-            },
-            "avgOrderRevenue": {
-                "title": "Avg Order Revenue",
-                "infoTooltip": "Average revenue per order in the last week",
-                "description": "Since last week"
-            }
-        }
-    },
-    "metricCard": {
-        "details": "Details"
-    },
-    "barChart": {
-        "title": "Subscriptions",
-        "value": "+2350",
-        "description": "+180.1% from last month",
-        "seriesName": "Subscriptions"
-    },
-    "areaChart": {
-        "title": "Sale Activity - Monthly",
-        "description": "Showing total sales for the last 6 months",
-        "series": {
-            "mobile": "Mobile",
-            "desktop": "Desktop"
-        }
-    },
-    "paymentsTable": {
-        "title": "Payments",
-        "description": "Manage your payments.",
-        "columns": {
-            "status": "Status",
-            "email": "Email",
-            "amount": "Amount"
-        },
-        "status": {
-            "success": "Success",
-            "processing": "Processing",
-            "failed": "Failed"
-        }
-    },
-    "teamMembersCard": {
-        "title": "Team Members",
-        "description": "Invite your team members to collaborate.",
-        "roles": {
-            "user": "User",
-            "admin": "Admin",
-            "manager": "Manager"
-        },
-        "remove": "Remove"
-    },
-    "analytics": {
-        "salesCard": {
-            "title": "Sales",
-            "description": "Visualize sales performance trends",
-            "netSales": "Net Sales",
-            "orders": "Orders"
-        },
-        "visitorsCard": {
-            "title": "Visitors",
-            "description": "Key visitor information at a glance",
-            "newVisitors": "New Visitors",
-            "returning": "Returning"
-        },
-        "trafficSourceCard": {
-            "title": "Traffic Source",
-            "description": "Gain insights into where your visitors are coming from.",
-            "sources": {
-                "google": "Google",
-                "social": "Social",
-                "direct": "Direct"
-            }
-        },
-        "customersCard": {
-            "title": "Customers",
-            "description": "Customer performance and growth trends.",
-            "trendingText": "Trending up by 5.2% this month"
-        },
-        "buyersProfileCard": {
-            "title": "Buyers Profile",
-            "description": "Discover key insights into the buyer's preferences",
-            "buyers": "Buyers",
-            "trendingText": "Trending up by 5.2% this month"
-        }
-    },
-    "period": {
-        "week": "Week",
-        "month": "Month"
-    },
-    "months": {
-        "jan": "Jan",
-        "feb": "Feb",
-        "mar": "Mar",
-        "apr": "Apr",
-        "may": "May",
-        "jun": "Jun",
-        "jul": "Jul",
-        "aug": "Aug",
-        "sep": "Sep",
-        "oct": "Oct",
-        "nov": "Nov",
-        "dec": "Dec"
+  "layout": {
+    "title": "Dashboard",
+    "filterBy": "Filter By",
+    "export": "Export",
+    "tabs": {
+      "overview": "Overview",
+      "analytics": "Analytics",
+      "reports": "Reports"
     }
+  },
+  "overview": {
+    "cards": {
+      "newSubscriptions": {
+        "title": "New Subscriptions",
+        "infoTooltip": "Number of new subscriptions in the last week",
+        "description": "Since last week"
+      },
+      "newOrders": {
+        "title": "New Orders",
+        "infoTooltip": "Number of new orders in the last week",
+        "description": "Since last week"
+      },
+      "avgOrderRevenue": {
+        "title": "Avg Order Revenue",
+        "infoTooltip": "Average revenue per order in the last week",
+        "description": "Since last week"
+      }
+    }
+  },
+  "metricCard": {
+    "details": "Details"
+  },
+  "barChart": {
+    "title": "Subscriptions",
+    "value": "+2350",
+    "description": "+180.1% from last month",
+    "seriesName": "Subscriptions"
+  },
+  "areaChart": {
+    "title": "Sale Activity - Monthly",
+    "description": "Showing total sales for the last 6 months",
+    "series": {
+      "mobile": "Mobile",
+      "desktop": "Desktop"
+    }
+  },
+  "paymentsTable": {
+    "title": "Payments",
+    "description": "Manage your payments.",
+    "columns": {
+      "status": "Status",
+      "email": "Email",
+      "amount": "Amount"
+    },
+    "status": {
+      "success": "Success",
+      "processing": "Processing",
+      "failed": "Failed"
+    }
+  },
+  "teamMembersCard": {
+    "title": "Team Members",
+    "description": "Invite your team members to collaborate.",
+    "roles": {
+      "user": "User",
+      "admin": "Admin",
+      "manager": "Manager"
+    },
+    "remove": "Remove"
+  },
+  "analytics": {
+    "salesCard": {
+      "title": "Sales",
+      "description": "Visualize sales performance trends",
+      "netSales": "Net Sales",
+      "orders": "Orders"
+    },
+    "visitorsCard": {
+      "title": "Visitors",
+      "description": "Key visitor information at a glance",
+      "newVisitors": "New Visitors",
+      "returning": "Returning"
+    },
+    "trafficSourceCard": {
+      "title": "Traffic Source",
+      "description": "Gain insights into where your visitors are coming from.",
+      "sources": {
+        "google": "Google",
+        "social": "Social",
+        "direct": "Direct"
+      }
+    },
+    "customersCard": {
+      "title": "Customers",
+      "description": "Customer performance and growth trends.",
+      "trendingText": "Trending up by 5.2% this month"
+    },
+    "buyersProfileCard": {
+      "title": "Buyers Profile",
+      "description": "Discover key insights into the buyer's preferences",
+      "buyers": "Buyers",
+      "trendingText": "Trending up by 5.2% this month"
+    }
+  },
+  "period": {
+    "week": "Week",
+    "month": "Month"
+  },
+  "months": {
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "jun": "Jun",
+    "jul": "Jul",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Oct",
+    "nov": "Nov",
+    "dec": "Dec"
+  }
 }

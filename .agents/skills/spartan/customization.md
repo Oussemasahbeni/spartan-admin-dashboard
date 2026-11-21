@@ -36,20 +36,20 @@ classes (`bg-primary`, `text-muted-foreground`, `border-border`, ...). See `rule
 
 ```css
 :root {
-	color-scheme: light;
-	--radius: 0.625rem;
-	--background: oklch(1 0 0);
-	--foreground: oklch(0.145 0 0);
-	--primary: oklch(0.205 0 0);
-	--primary-foreground: oklch(0.985 0 0);
-	/* ...rest of the tokens... */
+  color-scheme: light;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  /* ...rest of the tokens... */
 }
 
 .dark {
-	color-scheme: dark;
-	--background: oklch(0.145 0 0);
-	--foreground: oklch(0.985 0 0);
-	/* ...dark overrides... */
+  color-scheme: dark;
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  /* ...dark overrides... */
 }
 ```
 
@@ -60,17 +60,17 @@ Define the variable in both `:root` and `.dark`, then expose it to Tailwind with
 
 ```css
 :root {
-	--warning: oklch(0.84 0.16 84);
-	--warning-foreground: oklch(0.28 0.07 46);
+  --warning: oklch(0.84 0.16 84);
+  --warning-foreground: oklch(0.28 0.07 46);
 }
 .dark {
-	--warning: oklch(0.41 0.11 46);
-	--warning-foreground: oklch(0.99 0.02 95);
+  --warning: oklch(0.41 0.11 46);
+  --warning-foreground: oklch(0.99 0.02 95);
 }
 
 @theme inline {
-	--color-warning: var(--warning);
-	--color-warning-foreground: var(--warning-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
 }
 ```
 

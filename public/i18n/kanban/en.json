@@ -1,76 +1,76 @@
 {
-    "toolbar": {
-        "board": "Board",
-        "list": "List",
-        "table": "Table",
-        "searchPlaceholder": "Search tasks",
-        "filter": "Filter",
-        "sort": "Sort",
-        "addTask": "Add task",
-        "openAddTaskMenu": "Open add task menu",
-        "importCsv": "Import CSV",
-        "addFromTemplate": "Add from template",
-        "createAutomation": "Create automation"
+  "toolbar": {
+    "board": "Board",
+    "list": "List",
+    "table": "Table",
+    "searchPlaceholder": "Search tasks",
+    "filter": "Filter",
+    "sort": "Sort",
+    "addTask": "Add task",
+    "openAddTaskMenu": "Open add task menu",
+    "importCsv": "Import CSV",
+    "addFromTemplate": "Add from template",
+    "createAutomation": "Create automation"
+  },
+  "columns": {
+    "todo": "To Do",
+    "inProgress": "In Progress",
+    "inReview": "In Review",
+    "done": "Done"
+  },
+  "column": {
+    "taskCount": {
+      "one": "{{count}} task",
+      "other": "{{count}} tasks"
     },
-    "columns": {
-        "todo": "To Do",
-        "inProgress": "In Progress",
-        "inReview": "In Review",
-        "done": "Done"
+    "drag": "Drag {{title}} column",
+    "addTask": "Add task to {{title}}",
+    "actions": "{{title}} column actions"
+  },
+  "priority": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "card": {
+    "progress": "Progress",
+    "owner": "Owner",
+    "dueDate": "Due date",
+    "team": "Team",
+    "done": "Done"
+  },
+  "views": {
+    "listTitle": "List view",
+    "tableTitle": "Table view",
+    "comingSoon": "This view is not available yet."
+  },
+  "form": {
+    "title": "Add task",
+    "description": "Fill in the details below to add a task to the board.",
+    "label": {
+      "title": "Title",
+      "description": "Description",
+      "column": "Column",
+      "priority": "Priority",
+      "team": "Team",
+      "dueDate": "Due date"
     },
-    "column": {
-        "taskCount": {
-            "one": "{{count}} task",
-            "other": "{{count}} tasks"
-        },
-        "drag": "Drag {{title}} column",
-        "addTask": "Add task to {{title}}",
-        "actions": "{{title}} column actions"
-    },
-    "priority": {
-        "high": "High",
-        "medium": "Medium",
-        "low": "Low"
-    },
-    "card": {
-        "progress": "Progress",
-        "owner": "Owner",
-        "dueDate": "Due date",
-        "team": "Team",
-        "done": "Done"
-    },
-    "views": {
-        "listTitle": "List view",
-        "tableTitle": "Table view",
-        "comingSoon": "This view is not available yet."
-    },
-    "form": {
-        "title": "Add task",
-        "description": "Fill in the details below to add a task to the board.",
-        "label": {
-            "title": "Title",
-            "description": "Description",
-            "column": "Column",
-            "priority": "Priority",
-            "team": "Team",
-            "dueDate": "Due date"
-        },
-        "placeholder": {
-            "title": "e.g. Fix login bug",
-            "description": "Optional — add more context about this task",
-            "column": "Select column",
-            "priority": "Select priority",
-            "team": "Select team",
-            "dueDate": "Select due date"
-        }
-    },
-    "details": {
-        "description": "Description",
-        "noDescription": "No description provided.",
-        "progress": "Progress",
-        "owner": "Owner",
-        "dueDate": "Due date",
-        "insights": "Activity",
-        "close": "Close"
+    "placeholder": {
+      "title": "e.g. Fix login bug",
+      "description": "Optional — add more context about this task",
+      "column": "Select column",
+      "priority": "Select priority",
+      "team": "Select team",
+      "dueDate": "Select due date"
     }
+  },
+  "details": {
+    "description": "Description",
+    "noDescription": "No description provided.",
+    "progress": "Progress",
+    "owner": "Owner",
+    "dueDate": "Due date",
+    "insights": "Activity",
+    "close": "Close"
+  }
 }

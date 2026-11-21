@@ -1,58 +1,58 @@
 {
-    "thinking": "...التفكير",
-    "emptyState": {
-        "title": "كيف يمكنني مساعدتك اليوم؟",
-        "description": "ابدأ محادثة أو اختر اقتراحاً أدناه",
-        "disclaimer": "هذا عرض توضيحي، لا يوجد ذكاء اصطناعي حقيقي متصل.",
-        "suggestions": {
-            "explainComponents": {
-                "title": "شرح المكونات",
-                "prompt": "هل يمكنك شرح كيفية عمل مكونات الدردشة في Angular AI Kit؟"
-            },
-            "customizeStyling": {
-                "title": "تخصيص التصميم",
-                "prompt": "كيف يمكنني تخصيص التصميم والسمات للمكونات؟"
-            },
-            "performanceTips": {
-                "title": "نصائح الأداء",
-                "prompt": "ما هي أفضل ممارسات الأداء عند استخدام هذه المكونات؟"
-            },
-            "integrationGuide": {
-                "title": "دليل التكامل",
-                "prompt": "كيف أدمج Angular AI Kit مع مشروع Angular الحالي الخاص بي؟"
-            }
-        }
-    },
-    "input": {
-        "placeholder": "كيف يمكنني مساعدتك اليوم؟",
-        "keyboardHint": "اضغط Enter للإرسال، Shift+Enter لسطر جديد، Escape للمسح",
-        "attachFile": "إرفاق ملف",
-        "addPhotosFiles": "إضافة صور وملفات",
-        "voiceInput": "إدخال صوتي",
-        "sendMessage": "إرسال الرسالة",
-        "remove": "إزالة"
-    },
-    "capabilities": {
-        "webSearch": "بحث الويب",
-        "thinking": "التفكير",
-        "deepReasoning": "الاستدلال العميق",
-        "more": "المزيد",
-        "exploreApps": "استكشاف التطبيقات",
-        "studyAndLearn": "الدراسة والتعلم",
-        "canvas": "لوحة الرسم"
-    },
-    "ariaLabels": {
-        "suggestedPrompts": "الاقتراحات المقترحة",
-        "useSuggestion": "استخدم الاقتراح:",
-        "copyResponse": "نسخ الرد",
-        "regenerate": "إعادة توليد الرد",
-        "goodResponse": "رد جيد",
-        "badResponse": "رد سيئ",
-        "copyMessage": "نسخ الرسالة",
-        "editMessage": "تعديل الرسالة",
-        "moreOptions": "المزيد من خيارات الإدخال",
-        "chatMessages": "رسائل المحادثة",
-        "copied": "تم النسخ"
-    },
-    "newConversation": "محادثة جديدة"
+  "thinking": "...التفكير",
+  "emptyState": {
+    "title": "كيف يمكنني مساعدتك اليوم؟",
+    "description": "ابدأ محادثة أو اختر اقتراحاً أدناه",
+    "disclaimer": "هذا عرض توضيحي، لا يوجد ذكاء اصطناعي حقيقي متصل.",
+    "suggestions": {
+      "explainComponents": {
+        "title": "شرح المكونات",
+        "prompt": "هل يمكنك شرح كيفية عمل مكونات الدردشة في Angular AI Kit؟"
+      },
+      "customizeStyling": {
+        "title": "تخصيص التصميم",
+        "prompt": "كيف يمكنني تخصيص التصميم والسمات للمكونات؟"
+      },
+      "performanceTips": {
+        "title": "نصائح الأداء",
+        "prompt": "ما هي أفضل ممارسات الأداء عند استخدام هذه المكونات؟"
+      },
+      "integrationGuide": {
+        "title": "دليل التكامل",
+        "prompt": "كيف أدمج Angular AI Kit مع مشروع Angular الحالي الخاص بي؟"
+      }
+    }
+  },
+  "input": {
+    "placeholder": "كيف يمكنني مساعدتك اليوم؟",
+    "keyboardHint": "اضغط Enter للإرسال، Shift+Enter لسطر جديد، Escape للمسح",
+    "attachFile": "إرفاق ملف",
+    "addPhotosFiles": "إضافة صور وملفات",
+    "voiceInput": "إدخال صوتي",
+    "sendMessage": "إرسال الرسالة",
+    "remove": "إزالة"
+  },
+  "capabilities": {
+    "webSearch": "بحث الويب",
+    "thinking": "التفكير",
+    "deepReasoning": "الاستدلال العميق",
+    "more": "المزيد",
+    "exploreApps": "استكشاف التطبيقات",
+    "studyAndLearn": "الدراسة والتعلم",
+    "canvas": "لوحة الرسم"
+  },
+  "ariaLabels": {
+    "suggestedPrompts": "الاقتراحات المقترحة",
+    "useSuggestion": "استخدم الاقتراح:",
+    "copyResponse": "نسخ الرد",
+    "regenerate": "إعادة توليد الرد",
+    "goodResponse": "رد جيد",
+    "badResponse": "رد سيئ",
+    "copyMessage": "نسخ الرسالة",
+    "editMessage": "تعديل الرسالة",
+    "moreOptions": "المزيد من خيارات الإدخال",
+    "chatMessages": "رسائل المحادثة",
+    "copied": "تم النسخ"
+  },
+  "newConversation": "محادثة جديدة"
 }

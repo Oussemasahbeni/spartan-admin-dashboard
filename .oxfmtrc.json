@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 125,
+  "semi": true,
+  "bracketSameLine": false,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "sortPackageJson": false,
+  "sortTailwindcss": {
+    "functions": ["hlm", "cva", "classes"]
+  },
+  "associations": [
+    {
+      "files": ["*.html"],
+      "language": "angular-html"
+    }
+  ],
+  "ignorePatterns": ["src/app/libs/"]
+}

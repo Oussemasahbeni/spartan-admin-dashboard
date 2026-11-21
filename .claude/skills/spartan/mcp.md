@@ -10,9 +10,9 @@ No install (recommended):
 
 ```json
 {
-	"mcpServers": {
-		"spartan-ui": { "command": "npx", "args": ["-y", "@spartan-ng/mcp"] }
-	}
+  "mcpServers": {
+    "spartan-ui": { "command": "npx", "args": ["-y", "@spartan-ng/mcp"] }
+  }
 }
 ```
 
@@ -24,7 +24,7 @@ npm install -g @spartan-ng/mcp
 
 ```json
 {
-	"mcpServers": { "spartan-ui": { "command": "spartan-mcp" } }
+  "mcpServers": { "spartan-ui": { "command": "spartan-mcp" } }
 }
 ```
 

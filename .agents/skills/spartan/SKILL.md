@@ -102,19 +102,19 @@ Read the rule file before doing the related work:
 
 <!-- Icon in a button: ng-icon -->
 <button hlmBtn size="icon" variant="ghost">
-	<ng-icon name="lucideTrash" />
+  <ng-icon name="lucideTrash" />
 </button>
 
 <!-- Loading state: compose a spinner, there is no isLoading input -->
 <button hlmBtn [disabled]="loading()">
-	@if (loading()) {
-	<hlm-spinner />
-	} Save
+  @if (loading()) {
+  <hlm-spinner />
+  } Save
 </button>
 
 <!-- Layout: gap, not space-* ; size-* when width == height -->
 <div class="flex items-center gap-2">
-	<span hlmBadge variant="secondary">beta</span>
+  <span hlmBadge variant="secondary">beta</span>
 </div>
 ```
 

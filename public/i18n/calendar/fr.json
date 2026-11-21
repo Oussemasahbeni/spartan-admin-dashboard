@@ -1,62 +1,62 @@
 {
-    "addEvent": "Ajouter un événement",
-    "labels": {
-        "month": "Mois",
-        "week": "Semaine",
-        "day": "Jour",
-        "list": "Liste"
+  "addEvent": "Ajouter un événement",
+  "labels": {
+    "month": "Mois",
+    "week": "Semaine",
+    "day": "Jour",
+    "list": "Liste"
+  },
+  "today": "Aujourd’hui",
+  "events": "Événements",
+  "form": {
+    "addTitle": "Ajouter un événement",
+    "addDescription": "Remplissez le formulaire ci-dessous pour ajouter un nouvel événement à votre calendrier.",
+    "editTitle": "Modifier l’événement",
+    "editDescription": "Modifiez les détails de l’événement puis enregistrez vos changements.",
+    "label": {
+      "title": "Titre",
+      "description": "Description",
+      "startDate": "Date de début",
+      "startTime": "Heure de début",
+      "endDate": "Date de fin",
+      "endTime": "Heure de fin"
     },
-    "today": "Aujourd’hui",
-    "events": "Événements",
-    "form": {
-        "addTitle": "Ajouter un événement",
-        "addDescription": "Remplissez le formulaire ci-dessous pour ajouter un nouvel événement à votre calendrier.",
-        "editTitle": "Modifier l’événement",
-        "editDescription": "Modifiez les détails de l’événement puis enregistrez vos changements.",
-        "label": {
-            "title": "Titre",
-            "description": "Description",
-            "startDate": "Date de début",
-            "startTime": "Heure de début",
-            "endDate": "Date de fin",
-            "endTime": "Heure de fin"
-        },
-        "placeholder": {
-            "selectDate": "Sélectionnez une date"
-        }
-    },
-    "settings": {
-        "title": "Paramètres",
-        "use24HourFormat": "Format 24 heures",
-        "cardView": "Vue carte"
-    },
-    "filter-menu": {
-        "title": "Filtrer par type",
-        "all": "Tous les types",
-        "clear": "Effacer les filtres",
-        "labels": {
-            "work": "Travail",
-            "personal": "Personnel",
-            "urgent": "Urgent",
-            "meeting": "Réunion"
-        }
-    },
-    "details": {
-        "allDay": "Toute la journée",
-        "startDate": "Date de début",
-        "endDate": "Date de fin",
-        "description": "Description",
-        "at": "à"
-    },
-    "toast": {
-        "eventCreated": "Événement créé avec succès !",
-        "eventUpdated": "{{eventTitle}} a été mis à jour.",
-        "eventDeleted": "{{eventTitle}} a été supprimé."
-    },
-    "ariaLabels": {
-        "previousPeriod": "Période précédente",
-        "nextPeriod": "Période suivante",
-        "filterEvents": "Filtrer les événements par type",
-        "settings": "Paramètres du calendrier"
+    "placeholder": {
+      "selectDate": "Sélectionnez une date"
     }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "use24HourFormat": "Format 24 heures",
+    "cardView": "Vue carte"
+  },
+  "filter-menu": {
+    "title": "Filtrer par type",
+    "all": "Tous les types",
+    "clear": "Effacer les filtres",
+    "labels": {
+      "work": "Travail",
+      "personal": "Personnel",
+      "urgent": "Urgent",
+      "meeting": "Réunion"
+    }
+  },
+  "details": {
+    "allDay": "Toute la journée",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "description": "Description",
+    "at": "à"
+  },
+  "toast": {
+    "eventCreated": "Événement créé avec succès !",
+    "eventUpdated": "{{eventTitle}} a été mis à jour.",
+    "eventDeleted": "{{eventTitle}} a été supprimé."
+  },
+  "ariaLabels": {
+    "previousPeriod": "Période précédente",
+    "nextPeriod": "Période suivante",
+    "filterEvents": "Filtrer les événements par type",
+    "settings": "Paramètres du calendrier"
+  }
 }

@@ -1,61 +1,61 @@
 {
-    "login": {
-        "title": "Login to your account",
-        "emailLabel": "Email",
-        "emailPlaceholder": "name@example.com",
-        "passwordLabel": "Password",
-        "passwordPlaceholder": "Your password",
-        "forgotPassword": "Forgot your password?",
-        "orContinueWith": "Or continue with",
-        "rememberMe": "Remember me",
-        "noAccount": "Don't have an account?",
-        "signUp": "Sign up",
-        "loginBtn": "Login"
-    },
-    "signup": {
-        "title": "Create an account",
-        "haveAccount": "Already have an account?",
-        "signIn": "Sign in",
-        "nameLabel": "Name",
-        "namePlaceholder": "Your full name",
-        "emailLabel": "Email",
-        "emailPlaceholder": "name@example.com",
-        "passwordLabel": "Password",
-        "passwordPlaceholder": "Your password",
-        "confirmPasswordLabel": "Confirm Password",
-        "confirmPasswordPlaceholder": "Confirm your password",
-        "signupButton": "Sign up",
-        "orContinueWith": "Or continue with",
-        "github": "GitHub",
-        "termsText": "By clicking continue, you agree to our",
-        "termsOfService": "Terms of Service",
-        "and": "and",
-        "privacyPolicy": "Privacy Policy"
-    },
-    "resetPassword": {
-        "title": "Forgot your password?",
-        "description": "Enter your email address and we'll send you a link to reset your password",
-        "emailLabel": "Email",
-        "emailPlaceholder": "name@example.com",
-        "submitBtn": "Send reset link",
-        "backToLogin": "Back to login",
-        "alert": {
-            "successTitle": "Success",
-            "resetLinkSent": "Password reset instructions have been sent to your email address if an account exists."
-        }
-    },
-    "twoStepVerification": {
-        "title": "Enter verification code",
-        "description": "We sent a 6-digit code to your email",
-        "helperText": "Enter the 6-digit code sent to your email.",
-        "verifyBtn": "Verify",
-        "didntReceive": "Didn't receive the code?",
-        "resend": "Resend",
-        "resendIn": "Resend in {{seconds}}s",
-        "errors": {
-            "invalidCode": "Invalid verification code",
-            "invalidCodeDescription": "The code you entered is incorrect. Please check and try again."
-        }
-    },
-    "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
+  "login": {
+    "title": "Login to your account",
+    "emailLabel": "Email",
+    "emailPlaceholder": "name@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "forgotPassword": "Forgot your password?",
+    "orContinueWith": "Or continue with",
+    "rememberMe": "Remember me",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "loginBtn": "Login"
+  },
+  "signup": {
+    "title": "Create an account",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your full name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "name@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "signupButton": "Sign up",
+    "orContinueWith": "Or continue with",
+    "github": "GitHub",
+    "termsText": "By clicking continue, you agree to our",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "resetPassword": {
+    "title": "Forgot your password?",
+    "description": "Enter your email address and we'll send you a link to reset your password",
+    "emailLabel": "Email",
+    "emailPlaceholder": "name@example.com",
+    "submitBtn": "Send reset link",
+    "backToLogin": "Back to login",
+    "alert": {
+      "successTitle": "Success",
+      "resetLinkSent": "Password reset instructions have been sent to your email address if an account exists."
+    }
+  },
+  "twoStepVerification": {
+    "title": "Enter verification code",
+    "description": "We sent a 6-digit code to your email",
+    "helperText": "Enter the 6-digit code sent to your email.",
+    "verifyBtn": "Verify",
+    "didntReceive": "Didn't receive the code?",
+    "resend": "Resend",
+    "resendIn": "Resend in {{seconds}}s",
+    "errors": {
+      "invalidCode": "Invalid verification code",
+      "invalidCodeDescription": "The code you entered is incorrect. Please check and try again."
+    }
+  },
+  "testimonial": "This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."
 }

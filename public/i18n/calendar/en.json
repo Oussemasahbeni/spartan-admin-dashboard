@@ -1,62 +1,62 @@
 {
-    "addEvent": "Add Event",
-    "labels": {
-        "month": "Month",
-        "week": "Week",
-        "day": "Day",
-        "list": "List"
+  "addEvent": "Add Event",
+  "labels": {
+    "month": "Month",
+    "week": "Week",
+    "day": "Day",
+    "list": "List"
+  },
+  "today": "Today",
+  "events": "Events",
+  "form": {
+    "addTitle": "Add Event",
+    "addDescription": "Fill out the form below to add a new event to your calendar.",
+    "editTitle": "Edit Event",
+    "editDescription": "Make changes to the event details and save your changes.",
+    "label": {
+      "title": "Title",
+      "description": "Description",
+      "startDate": "Start Date",
+      "startTime": "Start Time",
+      "endDate": "End Date",
+      "endTime": "End Time"
     },
-    "today": "Today",
-    "events": "Events",
-    "form": {
-        "addTitle": "Add Event",
-        "addDescription": "Fill out the form below to add a new event to your calendar.",
-        "editTitle": "Edit Event",
-        "editDescription": "Make changes to the event details and save your changes.",
-        "label": {
-            "title": "Title",
-            "description": "Description",
-            "startDate": "Start Date",
-            "startTime": "Start Time",
-            "endDate": "End Date",
-            "endTime": "End Time"
-        },
-        "placeholder": {
-            "selectDate": "Select a date "
-        }
-    },
-    "settings": {
-        "title": "Settings",
-        "use24HourFormat": "24-hour format",
-        "cardView": "Card view"
-    },
-    "filter-menu": {
-        "title": "Filter by Type",
-        "all": "All Types",
-        "clear": "Clear Filters",
-        "labels": {
-            "work": "Work",
-            "personal": "Personal",
-            "urgent": "Urgent",
-            "meeting": "Meeting"
-        }
-    },
-    "details": {
-        "allDay": "All Day",
-        "startDate": "Start Date",
-        "endDate": "End Date",
-        "description": "Description",
-        "at": "at"
-    },
-    "toast": {
-        "eventCreated": "Event created successfully!",
-        "eventUpdated": "{{eventTitle}} has been updated.",
-        "eventDeleted": "{{eventTitle}} has been deleted."
-    },
-    "ariaLabels": {
-        "previousPeriod": "Previous period",
-        "nextPeriod": "Next period",
-        "filterEvents": "Filter events by type",
-        "settings": "Calendar settings"
+    "placeholder": {
+      "selectDate": "Select a date "
     }
+  },
+  "settings": {
+    "title": "Settings",
+    "use24HourFormat": "24-hour format",
+    "cardView": "Card view"
+  },
+  "filter-menu": {
+    "title": "Filter by Type",
+    "all": "All Types",
+    "clear": "Clear Filters",
+    "labels": {
+      "work": "Work",
+      "personal": "Personal",
+      "urgent": "Urgent",
+      "meeting": "Meeting"
+    }
+  },
+  "details": {
+    "allDay": "All Day",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "description": "Description",
+    "at": "at"
+  },
+  "toast": {
+    "eventCreated": "Event created successfully!",
+    "eventUpdated": "{{eventTitle}} has been updated.",
+    "eventDeleted": "{{eventTitle}} has been deleted."
+  },
+  "ariaLabels": {
+    "previousPeriod": "Previous period",
+    "nextPeriod": "Next period",
+    "filterEvents": "Filter events by type",
+    "settings": "Calendar settings"
+  }
 }

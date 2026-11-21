@@ -1,155 +1,155 @@
 {
-    "title": "Settings",
-    "description": "Manage your account and application settings",
-    "panels": {
-        "account": {
-            "title": "Account",
-            "description": "Manage your public profile and private information"
-        },
-        "security": {
-            "title": "Security",
-            "description": "Manage your password and 2-step verification preferences"
-        },
-        "planBilling": {
-            "title": "Plan & Billing",
-            "description": "Manage your subscription plan, payment method and billing information"
-        },
-        "notifications": {
-            "title": "Notifications",
-            "description": "Manage when you'll be notified on which channels"
-        },
-        "team": {
-            "title": "Team",
-            "description": "Manage your existing team and change roles/permissions"
-        }
-    },
+  "title": "Settings",
+  "description": "Manage your account and application settings",
+  "panels": {
     "account": {
-        "name": "Name",
-        "username": "Username",
-        "title": "Title",
-        "company": "Company",
-        "about": "About",
-        "aboutDescription": "Brief description for your profile. Basic HTML and Emoji are allowed.",
-        "personalInfo": {
-            "title": "Personal Information",
-            "description": "Communication details in case we want to connect with you. These will be kept private."
-        },
-        "email": "Email",
-        "phone": "Phone",
-        "country": "Country",
-        "language": "Language",
-        "selectLanguage": "Select a language",
-        "languages": {
-            "english": "English",
-            "french": "French",
-            "arabic": "Arabic"
-        }
+      "title": "Account",
+      "description": "Manage your public profile and private information"
     },
     "security": {
-        "currentPassword": "Current password",
-        "newPassword": "New password",
-        "passwordRequirements": "Minimum 8 characters. Must include numbers, letters and special characters.",
-        "securityPreferences": {
-            "title": "Security preferences",
-            "description": "Keep your account more secure with following preferences."
-        },
-        "twoStepAuth": {
-            "title": "Enable 2-step authentication",
-            "description": "Protects you against password theft by requesting an authentication code via SMS on every login."
-        },
-        "passwordChangeReminder": {
-            "title": "Ask to change password every 6 months",
-            "description": "A simple but effective way to be protected against data leaks and password theft."
-        }
+      "title": "Security",
+      "description": "Manage your password and 2-step verification preferences"
     },
     "planBilling": {
-        "planAlert": "Changing the plan will take effect immediately. You will be charged for the rest of the current month.",
-        "plans": {
-            "basic": {
-                "label": "BASIC",
-                "details": "Starter plan for individuals."
-            },
-            "team": {
-                "label": "TEAM",
-                "details": "Collaborate up to 10 people."
-            },
-            "enterprise": {
-                "label": "ENTERPRISE",
-                "details": "For bigger businesses."
-            }
-        },
-        "perMonth": "/ month",
-        "paymentDetails": {
-            "title": "Payment Details",
-            "description": "Update your billing information. Make sure to set your location correctly as it could affect your tax rates."
-        },
-        "cardHolder": "Card holder",
-        "cardNumber": "Card number",
-        "expirationDate": "Expiration date",
-        "expirationPlaceholder": "MM / YY",
-        "cvc": "CVC / CVC2",
-        "country": "Country",
-        "zipCode": "ZIP / Postal code",
-        "countries": {
-            "usa": "United States",
-            "canada": "Canada",
-            "mexico": "Mexico",
-            "france": "France",
-            "germany": "Germany",
-            "italy": "Italy"
-        }
+      "title": "Plan & Billing",
+      "description": "Manage your subscription plan, payment method and billing information"
     },
     "notifications": {
-        "save": "Save",
-        "alerts": {
-            "title": "Alerts",
-            "description": "These settings allow you to manage your alerts and be notified about important events.",
-            "communication": {
-                "title": "Communication",
-                "description": "Get news, announcements, and product updates."
-            },
-            "security": {
-                "title": "Security",
-                "description": "Get important notifications about your account security."
-            },
-            "meetups": {
-                "title": "Meetups",
-                "description": "Get meetups, workshops, and other events near you."
-            }
-        },
-        "accountActivity": {
-            "title": "Account Activity",
-            "description": "These settings allow you to manage your account activity and be notified about important events.",
-            "comments": {
-                "title": "Comments",
-                "description": "Notify when someone comments on your post or profile."
-            },
-            "mention": {
-                "title": "Mention",
-                "description": "Notify when someone mentions you in a comment, post or story."
-            },
-            "follow": {
-                "title": "Follow",
-                "description": "Notify when someone follows you."
-            },
-            "inquiry": {
-                "title": "Inquiry",
-                "description": "Notify when someone sends you a message."
-            }
-        }
+      "title": "Notifications",
+      "description": "Manage when you'll be notified on which channels"
     },
     "team": {
-        "emailPlaceholder": "Email address",
-        "selectRole": "Select role",
-        "addMember": "Add Member",
-        "role": "Role",
-        "roles": {
-            "read": "Read",
-            "write": "Write",
-            "admin": "Admin"
-        },
-        "removeMember": "Remove team member"
+      "title": "Team",
+      "description": "Manage your existing team and change roles/permissions"
+    }
+  },
+  "account": {
+    "name": "Name",
+    "username": "Username",
+    "title": "Title",
+    "company": "Company",
+    "about": "About",
+    "aboutDescription": "Brief description for your profile. Basic HTML and Emoji are allowed.",
+    "personalInfo": {
+      "title": "Personal Information",
+      "description": "Communication details in case we want to connect with you. These will be kept private."
     },
-    "openNavigation": "Open settings navigation",
-    "navigationLabel": "Settings navigation"
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country",
+    "language": "Language",
+    "selectLanguage": "Select a language",
+    "languages": {
+      "english": "English",
+      "french": "French",
+      "arabic": "Arabic"
+    }
+  },
+  "security": {
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "passwordRequirements": "Minimum 8 characters. Must include numbers, letters and special characters.",
+    "securityPreferences": {
+      "title": "Security preferences",
+      "description": "Keep your account more secure with following preferences."
+    },
+    "twoStepAuth": {
+      "title": "Enable 2-step authentication",
+      "description": "Protects you against password theft by requesting an authentication code via SMS on every login."
+    },
+    "passwordChangeReminder": {
+      "title": "Ask to change password every 6 months",
+      "description": "A simple but effective way to be protected against data leaks and password theft."
+    }
+  },
+  "planBilling": {
+    "planAlert": "Changing the plan will take effect immediately. You will be charged for the rest of the current month.",
+    "plans": {
+      "basic": {
+        "label": "BASIC",
+        "details": "Starter plan for individuals."
+      },
+      "team": {
+        "label": "TEAM",
+        "details": "Collaborate up to 10 people."
+      },
+      "enterprise": {
+        "label": "ENTERPRISE",
+        "details": "For bigger businesses."
+      }
+    },
+    "perMonth": "/ month",
+    "paymentDetails": {
+      "title": "Payment Details",
+      "description": "Update your billing information. Make sure to set your location correctly as it could affect your tax rates."
+    },
+    "cardHolder": "Card holder",
+    "cardNumber": "Card number",
+    "expirationDate": "Expiration date",
+    "expirationPlaceholder": "MM / YY",
+    "cvc": "CVC / CVC2",
+    "country": "Country",
+    "zipCode": "ZIP / Postal code",
+    "countries": {
+      "usa": "United States",
+      "canada": "Canada",
+      "mexico": "Mexico",
+      "france": "France",
+      "germany": "Germany",
+      "italy": "Italy"
+    }
+  },
+  "notifications": {
+    "save": "Save",
+    "alerts": {
+      "title": "Alerts",
+      "description": "These settings allow you to manage your alerts and be notified about important events.",
+      "communication": {
+        "title": "Communication",
+        "description": "Get news, announcements, and product updates."
+      },
+      "security": {
+        "title": "Security",
+        "description": "Get important notifications about your account security."
+      },
+      "meetups": {
+        "title": "Meetups",
+        "description": "Get meetups, workshops, and other events near you."
+      }
+    },
+    "accountActivity": {
+      "title": "Account Activity",
+      "description": "These settings allow you to manage your account activity and be notified about important events.",
+      "comments": {
+        "title": "Comments",
+        "description": "Notify when someone comments on your post or profile."
+      },
+      "mention": {
+        "title": "Mention",
+        "description": "Notify when someone mentions you in a comment, post or story."
+      },
+      "follow": {
+        "title": "Follow",
+        "description": "Notify when someone follows you."
+      },
+      "inquiry": {
+        "title": "Inquiry",
+        "description": "Notify when someone sends you a message."
+      }
+    }
+  },
+  "team": {
+    "emailPlaceholder": "Email address",
+    "selectRole": "Select role",
+    "addMember": "Add Member",
+    "role": "Role",
+    "roles": {
+      "read": "Read",
+      "write": "Write",
+      "admin": "Admin"
+    },
+    "removeMember": "Remove team member"
+  },
+  "openNavigation": "Open settings navigation",
+  "navigationLabel": "Settings navigation"
 }

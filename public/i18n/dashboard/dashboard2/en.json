@@ -1,75 +1,75 @@
 {
-    "header": {
-        "title": "Dashboard",
-        "subtitle": "Here's the details of your analysis.",
-        "filterBy": "Filter By",
-        "export": "Export"
+  "header": {
+    "title": "Dashboard",
+    "subtitle": "Here's the details of your analysis.",
+    "filterBy": "Filter By",
+    "export": "Export"
+  },
+  "stats": {
+    "totalSales": {
+      "label": "Total Sales",
+      "changeDescription": "from last month"
     },
-    "stats": {
-        "totalSales": {
-            "label": "Total Sales",
-            "changeDescription": "from last month"
-        },
-        "totalOrders": {
-            "label": "Total Orders",
-            "changeDescription": "from last month"
-        },
-        "totalVisitors": {
-            "label": "Total Visitors",
-            "changeDescription": "from last month"
-        },
-        "refunded": {
-            "label": "Refunded",
-            "changeDescription": "from last month"
-        },
-        "menu": "Open card menu"
+    "totalOrders": {
+      "label": "Total Orders",
+      "changeDescription": "from last month"
     },
-    "recentActivity": {
-        "title": "Recent Activity",
-        "period": "Period",
-        "columns": {
-            "user": "User",
-            "status": "Status",
-            "id": "ID",
-            "date": "Date",
-            "amount": "Amount"
-        },
-        "footer": "A list of your recent activity.",
-        "description": "View your transaction history",
-        "status": {
-            "success": "Success",
-            "processing": "Processing",
-            "failed": "Failed"
-        }
+    "totalVisitors": {
+      "label": "Total Visitors",
+      "changeDescription": "from last month"
     },
-    "revenueChart": {
-        "title": "Revenue",
-        "value": "$14,324",
-        "change": "6.5%",
-        "period": "Year",
-        "series": {
-            "desktop": "Desktop",
-            "mobile": "Mobile"
-        }
+    "refunded": {
+      "label": "Refunded",
+      "changeDescription": "from last month"
     },
-    "visitorChart": {
-        "title": "Total Visitor - Chart",
-        "period": "January - June 2024",
-        "trendingText": "Trending up by 5.2% this month",
-        "description": "Showing total visitors for the last 6 months",
-        "series": {
-            "desktop": "Desktop",
-            "mobile": "Mobile",
-            "tablet": "Tablet",
-            "other": "Other"
-        }
+    "menu": "Open card menu"
+  },
+  "recentActivity": {
+    "title": "Recent Activity",
+    "period": "Period",
+    "columns": {
+      "user": "User",
+      "status": "Status",
+      "id": "ID",
+      "date": "Date",
+      "amount": "Amount"
     },
-    "months": {
-        "jan": "Jan",
-        "feb": "Feb",
-        "mar": "Mar",
-        "apr": "Apr",
-        "may": "May",
-        "jun": "Jun"
+    "footer": "A list of your recent activity.",
+    "description": "View your transaction history",
+    "status": {
+      "success": "Success",
+      "processing": "Processing",
+      "failed": "Failed"
     }
+  },
+  "revenueChart": {
+    "title": "Revenue",
+    "value": "$14,324",
+    "change": "6.5%",
+    "period": "Year",
+    "series": {
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    }
+  },
+  "visitorChart": {
+    "title": "Total Visitor - Chart",
+    "period": "January - June 2024",
+    "trendingText": "Trending up by 5.2% this month",
+    "description": "Showing total visitors for the last 6 months",
+    "series": {
+      "desktop": "Desktop",
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "other": "Other"
+    }
+  },
+  "months": {
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "jun": "Jun"
+  }
 }

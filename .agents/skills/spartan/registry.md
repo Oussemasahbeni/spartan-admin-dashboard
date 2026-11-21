@@ -19,10 +19,10 @@ project marker the skill triggers on and the source of paths/aliases.
 
 ```json
 {
-	"componentsPath": "libs/ui",
-	"importAlias": "@spartan-ng/helm",
-	"buildable": true,
-	"generateAs": "library"
+  "componentsPath": "libs/ui",
+  "importAlias": "@spartan-ng/helm",
+  "buildable": true,
+  "generateAs": "library"
 }
 ```
 

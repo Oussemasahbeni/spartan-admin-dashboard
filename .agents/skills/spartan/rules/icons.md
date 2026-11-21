@@ -22,12 +22,10 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight, lucideTrash } from '@ng-icons/lucide';
 
 @Component({
-	selector: 'app-example',
-	imports: [NgIcon],
-	providers: [provideIcons({ lucideChevronRight })],
-	template: `
-		<ng-icon name="lucideChevronRight" />
-	`,
+  selector: 'app-example',
+  imports: [NgIcon],
+  providers: [provideIcons({ lucideChevronRight })],
+  template: ` <ng-icon name="lucideChevronRight" /> `,
 })
 export class ExampleComponent {}
 ```

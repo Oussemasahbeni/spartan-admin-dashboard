@@ -1,76 +1,76 @@
 {
-    "toolbar": {
-        "board": "Tableau",
-        "list": "Liste",
-        "table": "Table",
-        "searchPlaceholder": "Rechercher des tâches",
-        "filter": "Filtrer",
-        "sort": "Trier",
-        "addTask": "Ajouter une tâche",
-        "openAddTaskMenu": "Ouvrir le menu d'ajout de tâche",
-        "importCsv": "Importer un CSV",
-        "addFromTemplate": "Ajouter depuis un modèle",
-        "createAutomation": "Créer une automatisation"
+  "toolbar": {
+    "board": "Tableau",
+    "list": "Liste",
+    "table": "Table",
+    "searchPlaceholder": "Rechercher des tâches",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "addTask": "Ajouter une tâche",
+    "openAddTaskMenu": "Ouvrir le menu d'ajout de tâche",
+    "importCsv": "Importer un CSV",
+    "addFromTemplate": "Ajouter depuis un modèle",
+    "createAutomation": "Créer une automatisation"
+  },
+  "columns": {
+    "todo": "À faire",
+    "inProgress": "En cours",
+    "inReview": "En revue",
+    "done": "Terminé"
+  },
+  "column": {
+    "taskCount": {
+      "one": "{{count}} tâche",
+      "other": "{{count}} tâches"
     },
-    "columns": {
-        "todo": "À faire",
-        "inProgress": "En cours",
-        "inReview": "En revue",
-        "done": "Terminé"
+    "drag": "Déplacer la colonne {{title}}",
+    "addTask": "Ajouter une tâche à {{title}}",
+    "actions": "Actions de la colonne {{title}}"
+  },
+  "priority": {
+    "high": "Haute",
+    "medium": "Moyenne",
+    "low": "Basse"
+  },
+  "card": {
+    "progress": "Progression",
+    "owner": "Responsable",
+    "dueDate": "Échéance",
+    "team": "Équipe",
+    "done": "Terminé"
+  },
+  "views": {
+    "listTitle": "Vue liste",
+    "tableTitle": "Vue table",
+    "comingSoon": "Cette vue n'est pas encore disponible."
+  },
+  "form": {
+    "title": "Ajouter une tâche",
+    "description": "Renseignez les informations ci-dessous pour ajouter une tâche au tableau.",
+    "label": {
+      "title": "Titre",
+      "description": "Description",
+      "column": "Colonne",
+      "priority": "Priorité",
+      "team": "Équipe",
+      "dueDate": "Échéance"
     },
-    "column": {
-        "taskCount": {
-            "one": "{{count}} tâche",
-            "other": "{{count}} tâches"
-        },
-        "drag": "Déplacer la colonne {{title}}",
-        "addTask": "Ajouter une tâche à {{title}}",
-        "actions": "Actions de la colonne {{title}}"
-    },
-    "priority": {
-        "high": "Haute",
-        "medium": "Moyenne",
-        "low": "Basse"
-    },
-    "card": {
-        "progress": "Progression",
-        "owner": "Responsable",
-        "dueDate": "Échéance",
-        "team": "Équipe",
-        "done": "Terminé"
-    },
-    "views": {
-        "listTitle": "Vue liste",
-        "tableTitle": "Vue table",
-        "comingSoon": "Cette vue n'est pas encore disponible."
-    },
-    "form": {
-        "title": "Ajouter une tâche",
-        "description": "Renseignez les informations ci-dessous pour ajouter une tâche au tableau.",
-        "label": {
-            "title": "Titre",
-            "description": "Description",
-            "column": "Colonne",
-            "priority": "Priorité",
-            "team": "Équipe",
-            "dueDate": "Échéance"
-        },
-        "placeholder": {
-            "title": "ex. Corriger le bug de connexion",
-            "description": "Optionnel — ajoutez du contexte sur cette tâche",
-            "column": "Sélectionner une colonne",
-            "priority": "Sélectionner une priorité",
-            "team": "Sélectionner une équipe",
-            "dueDate": "Sélectionner une échéance"
-        }
-    },
-    "details": {
-        "description": "Description",
-        "noDescription": "Aucune description fournie.",
-        "progress": "Progression",
-        "owner": "Responsable",
-        "dueDate": "Échéance",
-        "insights": "Activité",
-        "close": "Fermer"
+    "placeholder": {
+      "title": "ex. Corriger le bug de connexion",
+      "description": "Optionnel — ajoutez du contexte sur cette tâche",
+      "column": "Sélectionner une colonne",
+      "priority": "Sélectionner une priorité",
+      "team": "Sélectionner une équipe",
+      "dueDate": "Sélectionner une échéance"
     }
+  },
+  "details": {
+    "description": "Description",
+    "noDescription": "Aucune description fournie.",
+    "progress": "Progression",
+    "owner": "Responsable",
+    "dueDate": "Échéance",
+    "insights": "Activité",
+    "close": "Fermer"
+  }
 }

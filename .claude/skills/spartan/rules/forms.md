@@ -13,12 +13,12 @@ display, and tracks validation state.
 
 ```html
 <div hlmField>
-	<label hlmFieldLabel for="email">Email</label>
-	<input hlmInput id="email" [formControl]="email" />
-	<p hlmFieldDescription>We'll never share your email.</p>
-	@if (email.invalid && email.touched) {
-	<hlm-field-error>Enter a valid email address.</hlm-field-error>
-	}
+  <label hlmFieldLabel for="email">Email</label>
+  <input hlmInput id="email" [formControl]="email" />
+  <p hlmFieldDescription>We'll never share your email.</p>
+  @if (email.invalid && email.touched) {
+  <hlm-field-error>Enter a valid email address.</hlm-field-error>
+  }
 </div>
 ```
 
@@ -43,13 +43,13 @@ readonly emailForm = form(this.model, (path) => {
 
 ```html
 <form [formRoot]="emailForm">
-	<div hlmField>
-		<label hlmFieldLabel for="email">Email</label>
-		<input hlmInput id="email" [formField]="emailForm.email" />
-		@for (error of emailForm.email().errors(); track error) {
-		<hlm-field-error [validator]="error.kind">{{ error.message }}</hlm-field-error>
-		}
-	</div>
+  <div hlmField>
+    <label hlmFieldLabel for="email">Email</label>
+    <input hlmInput id="email" [formField]="emailForm.email" />
+    @for (error of emailForm.email().errors(); track error) {
+    <hlm-field-error [validator]="error.kind">{{ error.message }}</hlm-field-error>
+    }
+  </div>
 </form>
 ```
 
@@ -66,17 +66,17 @@ elements:
 
 ```html
 <fieldset hlmFieldSet>
-	<legend hlmFieldLegend>Notifications</legend>
-	<div hlmFieldGroup>
-		<div hlmField orientation="horizontal">
-			<hlm-checkbox id="email-opt" />
-			<label hlmFieldLabel for="email-opt">Email</label>
-		</div>
-		<div hlmField orientation="horizontal">
-			<hlm-checkbox id="sms-opt" />
-			<label hlmFieldLabel for="sms-opt">SMS</label>
-		</div>
-	</div>
+  <legend hlmFieldLegend>Notifications</legend>
+  <div hlmFieldGroup>
+    <div hlmField orientation="horizontal">
+      <hlm-checkbox id="email-opt" />
+      <label hlmFieldLabel for="email-opt">Email</label>
+    </div>
+    <div hlmField orientation="horizontal">
+      <hlm-checkbox id="sms-opt" />
+      <label hlmFieldLabel for="sms-opt">SMS</label>
+    </div>
+  </div>
 </fieldset>
 ```
 
@@ -87,9 +87,9 @@ over a row of buttons or a select.
 
 ```html
 <hlm-toggle-group type="single" [(value)]="size">
-	<button hlmToggleGroupItem value="sm">Small</button>
-	<button hlmToggleGroupItem value="md">Medium</button>
-	<button hlmToggleGroupItem value="lg">Large</button>
+  <button hlmToggleGroupItem value="sm">Small</button>
+  <button hlmToggleGroupItem value="md">Medium</button>
+  <button hlmToggleGroupItem value="lg">Large</button>
 </hlm-toggle-group>
 ```
 

@@ -1,80 +1,80 @@
 {
-    "toolbar": {
-        "board": "اللوحة",
-        "list": "قائمة",
-        "table": "جدول",
-        "searchPlaceholder": "البحث عن المهام",
-        "filter": "تصفية",
-        "sort": "ترتيب",
-        "addTask": "إضافة مهمة",
-        "openAddTaskMenu": "فتح قائمة إضافة مهمة",
-        "importCsv": "استيراد CSV",
-        "addFromTemplate": "إضافة من قالب",
-        "createAutomation": "إنشاء أتمتة"
+  "toolbar": {
+    "board": "اللوحة",
+    "list": "قائمة",
+    "table": "جدول",
+    "searchPlaceholder": "البحث عن المهام",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "addTask": "إضافة مهمة",
+    "openAddTaskMenu": "فتح قائمة إضافة مهمة",
+    "importCsv": "استيراد CSV",
+    "addFromTemplate": "إضافة من قالب",
+    "createAutomation": "إنشاء أتمتة"
+  },
+  "columns": {
+    "todo": "للتنفيذ",
+    "inProgress": "قيد التنفيذ",
+    "inReview": "قيد المراجعة",
+    "done": "منجز"
+  },
+  "column": {
+    "taskCount": {
+      "zero": "لا مهام",
+      "one": "مهمة واحدة",
+      "two": "مهمتان",
+      "few": "{{count}} مهام",
+      "many": "{{count}} مهمة",
+      "other": "{{count}} مهمة"
     },
-    "columns": {
-        "todo": "للتنفيذ",
-        "inProgress": "قيد التنفيذ",
-        "inReview": "قيد المراجعة",
-        "done": "منجز"
+    "drag": "سحب عمود {{title}}",
+    "addTask": "إضافة مهمة إلى {{title}}",
+    "actions": "إجراءات عمود {{title}}"
+  },
+  "priority": {
+    "high": "عالية",
+    "medium": "متوسطة",
+    "low": "منخفضة"
+  },
+  "card": {
+    "progress": "التقدم",
+    "owner": "المسؤول",
+    "dueDate": "تاريخ الاستحقاق",
+    "team": "الفريق",
+    "done": "منجز"
+  },
+  "views": {
+    "listTitle": "عرض القائمة",
+    "tableTitle": "عرض الجدول",
+    "comingSoon": "هذا العرض غير متوفر بعد."
+  },
+  "form": {
+    "title": "إضافة مهمة",
+    "description": "املأ التفاصيل أدناه لإضافة مهمة إلى اللوحة.",
+    "label": {
+      "title": "العنوان",
+      "description": "الوصف",
+      "column": "العمود",
+      "priority": "الأولوية",
+      "team": "الفريق",
+      "dueDate": "تاريخ الاستحقاق"
     },
-    "column": {
-        "taskCount": {
-            "zero": "لا مهام",
-            "one": "مهمة واحدة",
-            "two": "مهمتان",
-            "few": "{{count}} مهام",
-            "many": "{{count}} مهمة",
-            "other": "{{count}} مهمة"
-        },
-        "drag": "سحب عمود {{title}}",
-        "addTask": "إضافة مهمة إلى {{title}}",
-        "actions": "إجراءات عمود {{title}}"
-    },
-    "priority": {
-        "high": "عالية",
-        "medium": "متوسطة",
-        "low": "منخفضة"
-    },
-    "card": {
-        "progress": "التقدم",
-        "owner": "المسؤول",
-        "dueDate": "تاريخ الاستحقاق",
-        "team": "الفريق",
-        "done": "منجز"
-    },
-    "views": {
-        "listTitle": "عرض القائمة",
-        "tableTitle": "عرض الجدول",
-        "comingSoon": "هذا العرض غير متوفر بعد."
-    },
-    "form": {
-        "title": "إضافة مهمة",
-        "description": "املأ التفاصيل أدناه لإضافة مهمة إلى اللوحة.",
-        "label": {
-            "title": "العنوان",
-            "description": "الوصف",
-            "column": "العمود",
-            "priority": "الأولوية",
-            "team": "الفريق",
-            "dueDate": "تاريخ الاستحقاق"
-        },
-        "placeholder": {
-            "title": "مثال: إصلاح خطأ تسجيل الدخول",
-            "description": "اختياري — أضف المزيد من السياق حول هذه المهمة",
-            "column": "اختر العمود",
-            "priority": "اختر الأولوية",
-            "team": "اختر الفريق",
-            "dueDate": "اختر تاريخ الاستحقاق"
-        }
-    },
-    "details": {
-        "description": "الوصف",
-        "noDescription": "لم يتم تقديم وصف.",
-        "progress": "التقدم",
-        "owner": "المسؤول",
-        "dueDate": "تاريخ الاستحقاق",
-        "insights": "النشاط",
-        "close": "إغلاق"
+    "placeholder": {
+      "title": "مثال: إصلاح خطأ تسجيل الدخول",
+      "description": "اختياري — أضف المزيد من السياق حول هذه المهمة",
+      "column": "اختر العمود",
+      "priority": "اختر الأولوية",
+      "team": "اختر الفريق",
+      "dueDate": "اختر تاريخ الاستحقاق"
     }
+  },
+  "details": {
+    "description": "الوصف",
+    "noDescription": "لم يتم تقديم وصف.",
+    "progress": "التقدم",
+    "owner": "المسؤول",
+    "dueDate": "تاريخ الاستحقاق",
+    "insights": "النشاط",
+    "close": "إغلاق"
+  }
 }

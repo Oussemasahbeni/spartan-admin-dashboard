@@ -1,124 +1,124 @@
 {
-    "layout": {
-        "title": "لوحة التحكم",
-        "filterBy": "تصفية حسب",
-        "export": "تصدير",
-        "tabs": {
-            "overview": "نظرة عامة",
-            "analytics": "التحليلات",
-            "reports": "التقارير"
-        }
-    },
-    "overview": {
-        "cards": {
-            "newSubscriptions": {
-                "title": "الاشتراكات الجديدة",
-                "infoTooltip": "عدد الاشتراكات الجديدة في الأسبوع الماضي",
-                "description": "منذ الأسبوع الماضي"
-            },
-            "newOrders": {
-                "title": "الطلبات الجديدة",
-                "infoTooltip": "عدد الطلبات الجديدة في الأسبوع الماضي",
-                "description": "منذ الأسبوع الماضي"
-            },
-            "avgOrderRevenue": {
-                "title": "متوسط إيرادات الطلب",
-                "infoTooltip": "متوسط الإيرادات لكل طلب في الأسبوع الماضي",
-                "description": "منذ الأسبوع الماضي"
-            }
-        }
-    },
-    "metricCard": {
-        "details": "التفاصيل"
-    },
-    "barChart": {
-        "title": "الاشتراكات",
-        "value": "+2350",
-        "description": "+180.1% مقارنة بالشهر الماضي",
-        "seriesName": "الاشتراكات"
-    },
-    "areaChart": {
-        "title": "نشاط المبيعات - شهري",
-        "description": "عرض إجمالي المبيعات لآخر 6 أشهر",
-        "series": {
-            "mobile": "الجوال",
-            "desktop": "سطح المكتب"
-        }
-    },
-    "paymentsTable": {
-        "title": "المدفوعات",
-        "description": "إدارة مدفوعاتك.",
-        "columns": {
-            "status": "الحالة",
-            "email": "البريد الإلكتروني",
-            "amount": "المبلغ"
-        },
-        "status": {
-            "success": "ناجح",
-            "processing": "قيد المعالجة",
-            "failed": "فشل"
-        }
-    },
-    "teamMembersCard": {
-        "title": "أعضاء الفريق",
-        "description": "ادعُ أعضاء فريقك للتعاون.",
-        "roles": {
-            "user": "مستخدم",
-            "admin": "مشرف",
-            "manager": "مدير"
-        },
-        "remove": "إزالة"
-    },
-    "analytics": {
-        "salesCard": {
-            "title": "المبيعات",
-            "description": "عرض اتجاهات أداء المبيعات",
-            "netSales": "صافي المبيعات",
-            "orders": "الطلبات"
-        },
-        "visitorsCard": {
-            "title": "الزوار",
-            "description": "معلومات أساسية عن الزوار في لمحة",
-            "newVisitors": "زوار جدد",
-            "returning": "زوار عائدون"
-        },
-        "trafficSourceCard": {
-            "title": "مصادر الزيارات",
-            "description": "تعرّف على مصادر قدوم زوارك.",
-            "sources": {
-                "google": "جوجل",
-                "social": "وسائل التواصل",
-                "direct": "مباشر"
-            }
-        },
-        "customersCard": {
-            "title": "العملاء",
-            "description": "أداء العملاء واتجاهات النمو.",
-            "trendingText": "ارتفاع بنسبة 5.2٪ هذا الشهر"
-        },
-        "buyersProfileCard": {
-            "title": "ملف المشترين",
-            "description": "اكتشف أهم المعلومات حول تفضيلات المشترين",
-            "buyers": "المشترون",
-            "trendingText": "ارتفاع بنسبة 5.2٪ هذا الشهر"
-        }
-    },
-    "period": {
-        "month": "شهر",
-        "week": "أسبوع"
-    },
-    "months": {
-        "jan": "يناير",
-        "feb": "فبراير",
-        "mar": "مارس",
-        "apr": "أبريل",
-        "may": "مايو",
-        "jun": "يونيو",
-        "jul": "يوليو",
-        "aug": "أغسطس",
-        "sep": "سبتمبر",
-        "oct": "أكتوبر",
-        "nov": "نوفمبر",
-        "dec": "ديسمبر"
+  "layout": {
+    "title": "لوحة التحكم",
+    "filterBy": "تصفية حسب",
+    "export": "تصدير",
+    "tabs": {
+      "overview": "نظرة عامة",
+      "analytics": "التحليلات",
+      "reports": "التقارير"
     }
+  },
+  "overview": {
+    "cards": {
+      "newSubscriptions": {
+        "title": "الاشتراكات الجديدة",
+        "infoTooltip": "عدد الاشتراكات الجديدة في الأسبوع الماضي",
+        "description": "منذ الأسبوع الماضي"
+      },
+      "newOrders": {
+        "title": "الطلبات الجديدة",
+        "infoTooltip": "عدد الطلبات الجديدة في الأسبوع الماضي",
+        "description": "منذ الأسبوع الماضي"
+      },
+      "avgOrderRevenue": {
+        "title": "متوسط إيرادات الطلب",
+        "infoTooltip": "متوسط الإيرادات لكل طلب في الأسبوع الماضي",
+        "description": "منذ الأسبوع الماضي"
+      }
+    }
+  },
+  "metricCard": {
+    "details": "التفاصيل"
+  },
+  "barChart": {
+    "title": "الاشتراكات",
+    "value": "+2350",
+    "description": "+180.1% مقارنة بالشهر الماضي",
+    "seriesName": "الاشتراكات"
+  },
+  "areaChart": {
+    "title": "نشاط المبيعات - شهري",
+    "description": "عرض إجمالي المبيعات لآخر 6 أشهر",
+    "series": {
+      "mobile": "الجوال",
+      "desktop": "سطح المكتب"
+    }
+  },
+  "paymentsTable": {
+    "title": "المدفوعات",
+    "description": "إدارة مدفوعاتك.",
+    "columns": {
+      "status": "الحالة",
+      "email": "البريد الإلكتروني",
+      "amount": "المبلغ"
+    },
+    "status": {
+      "success": "ناجح",
+      "processing": "قيد المعالجة",
+      "failed": "فشل"
+    }
+  },
+  "teamMembersCard": {
+    "title": "أعضاء الفريق",
+    "description": "ادعُ أعضاء فريقك للتعاون.",
+    "roles": {
+      "user": "مستخدم",
+      "admin": "مشرف",
+      "manager": "مدير"
+    },
+    "remove": "إزالة"
+  },
+  "analytics": {
+    "salesCard": {
+      "title": "المبيعات",
+      "description": "عرض اتجاهات أداء المبيعات",
+      "netSales": "صافي المبيعات",
+      "orders": "الطلبات"
+    },
+    "visitorsCard": {
+      "title": "الزوار",
+      "description": "معلومات أساسية عن الزوار في لمحة",
+      "newVisitors": "زوار جدد",
+      "returning": "زوار عائدون"
+    },
+    "trafficSourceCard": {
+      "title": "مصادر الزيارات",
+      "description": "تعرّف على مصادر قدوم زوارك.",
+      "sources": {
+        "google": "جوجل",
+        "social": "وسائل التواصل",
+        "direct": "مباشر"
+      }
+    },
+    "customersCard": {
+      "title": "العملاء",
+      "description": "أداء العملاء واتجاهات النمو.",
+      "trendingText": "ارتفاع بنسبة 5.2٪ هذا الشهر"
+    },
+    "buyersProfileCard": {
+      "title": "ملف المشترين",
+      "description": "اكتشف أهم المعلومات حول تفضيلات المشترين",
+      "buyers": "المشترون",
+      "trendingText": "ارتفاع بنسبة 5.2٪ هذا الشهر"
+    }
+  },
+  "period": {
+    "month": "شهر",
+    "week": "أسبوع"
+  },
+  "months": {
+    "jan": "يناير",
+    "feb": "فبراير",
+    "mar": "مارس",
+    "apr": "أبريل",
+    "may": "مايو",
+    "jun": "يونيو",
+    "jul": "يوليو",
+    "aug": "أغسطس",
+    "sep": "سبتمبر",
+    "oct": "أكتوبر",
+    "nov": "نوفمبر",
+    "dec": "ديسمبر"
+  }
 }

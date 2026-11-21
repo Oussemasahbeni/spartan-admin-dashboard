@@ -1,62 +1,62 @@
 {
-    "addEvent": "إضافة حدث",
-    "labels": {
-        "month": "شهر",
-        "week": "أسبوع",
-        "day": "يوم",
-        "list": "قائمة"
+  "addEvent": "إضافة حدث",
+  "labels": {
+    "month": "شهر",
+    "week": "أسبوع",
+    "day": "يوم",
+    "list": "قائمة"
+  },
+  "today": "اليوم",
+  "events": "الأحداث",
+  "form": {
+    "addTitle": "إضافة حدث",
+    "addDescription": "املأ النموذج أدناه لإضافة حدث جديد إلى التقويم.",
+    "editTitle": "تعديل الحدث",
+    "editDescription": "قم بتعديل تفاصيل الحدث ثم احفظ التغييرات.",
+    "label": {
+      "title": "العنوان",
+      "description": "الوصف",
+      "startDate": "تاريخ البدء",
+      "startTime": "وقت البدء",
+      "endDate": "تاريخ الانتهاء",
+      "endTime": "وقت الانتهاء"
     },
-    "today": "اليوم",
-    "events": "الأحداث",
-    "form": {
-        "addTitle": "إضافة حدث",
-        "addDescription": "املأ النموذج أدناه لإضافة حدث جديد إلى التقويم.",
-        "editTitle": "تعديل الحدث",
-        "editDescription": "قم بتعديل تفاصيل الحدث ثم احفظ التغييرات.",
-        "label": {
-            "title": "العنوان",
-            "description": "الوصف",
-            "startDate": "تاريخ البدء",
-            "startTime": "وقت البدء",
-            "endDate": "تاريخ الانتهاء",
-            "endTime": "وقت الانتهاء"
-        },
-        "placeholder": {
-            "selectDate": "اختر تاريخًا"
-        }
-    },
-    "settings": {
-        "title": "الإعدادات",
-        "use24HourFormat": "تنسيق 24 ساعة",
-        "cardView": "عرض البطاقة"
-    },
-    "filter-menu": {
-        "title": "تصفية حسب النوع",
-        "all": "جميع الأنواع",
-        "clear": "مسح عوامل التصفية",
-        "labels": {
-            "work": "عمل",
-            "personal": "شخصي",
-            "urgent": "عاجل",
-            "meeting": "اجتماع"
-        }
-    },
-    "details": {
-        "allDay": "طوال اليوم",
-        "startDate": "تاريخ البداية",
-        "endDate": "تاريخ النهاية",
-        "description": "الوصف",
-        "at": "في"
-    },
-    "toast": {
-        "eventCreated": "تم إنشاء الحدث بنجاح!",
-        "eventUpdated": "{{eventTitle}} تم تحديثه.",
-        "eventDeleted": "{{eventTitle}} تم حذفه."
-    },
-    "ariaLabels": {
-        "previousPeriod": "الفترة السابقة",
-        "nextPeriod": "الفترة التالية",
-        "filterEvents": "تصفية الأحداث حسب النوع",
-        "settings": "إعدادات التقويم"
+    "placeholder": {
+      "selectDate": "اختر تاريخًا"
     }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "use24HourFormat": "تنسيق 24 ساعة",
+    "cardView": "عرض البطاقة"
+  },
+  "filter-menu": {
+    "title": "تصفية حسب النوع",
+    "all": "جميع الأنواع",
+    "clear": "مسح عوامل التصفية",
+    "labels": {
+      "work": "عمل",
+      "personal": "شخصي",
+      "urgent": "عاجل",
+      "meeting": "اجتماع"
+    }
+  },
+  "details": {
+    "allDay": "طوال اليوم",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ النهاية",
+    "description": "الوصف",
+    "at": "في"
+  },
+  "toast": {
+    "eventCreated": "تم إنشاء الحدث بنجاح!",
+    "eventUpdated": "{{eventTitle}} تم تحديثه.",
+    "eventDeleted": "{{eventTitle}} تم حذفه."
+  },
+  "ariaLabels": {
+    "previousPeriod": "الفترة السابقة",
+    "nextPeriod": "الفترة التالية",
+    "filterEvents": "تصفية الأحداث حسب النوع",
+    "settings": "إعدادات التقويم"
+  }
 }

@@ -58,9 +58,7 @@ Navigation is blocked if a resolver fails.
 - Use `catchError` within the resolver to return a `RedirectCommand` or fallback data.
 
 ```ts
-return userService
-  .get(id)
-  .pipe(catchError(() => of(new RedirectCommand(router.parseUrl('/error')))));
+return userService.get(id).pipe(catchError(() => of(new RedirectCommand(router.parseUrl('/error')))));
 ```
 
 ## Best Practices

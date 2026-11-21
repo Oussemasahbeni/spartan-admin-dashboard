@@ -20,19 +20,19 @@ present and apply `class="sr-only"`.
 
 ```html
 <hlm-dialog>
-	<button hlmDialogTrigger hlmBtn>Edit profile</button>
-	<hlm-dialog-content *hlmDialogPortal class="sm:max-w-[425px]">
-		<hlm-dialog-header>
-			<h3 hlmDialogTitle>Edit profile</h3>
-			<p hlmDialogDescription>Make changes to your profile here.</p>
-		</hlm-dialog-header>
-		<div class="py-4">
-			<input hlmInput placeholder="Name" />
-		</div>
-		<hlm-dialog-footer>
-			<button hlmBtn hlmDialogClose>Save changes</button>
-		</hlm-dialog-footer>
-	</hlm-dialog-content>
+  <button hlmDialogTrigger hlmBtn>Edit profile</button>
+  <hlm-dialog-content *hlmDialogPortal class="sm:max-w-[425px]">
+    <hlm-dialog-header>
+      <h3 hlmDialogTitle>Edit profile</h3>
+      <p hlmDialogDescription>Make changes to your profile here.</p>
+    </hlm-dialog-header>
+    <div class="py-4">
+      <input hlmInput placeholder="Name" />
+    </div>
+    <hlm-dialog-footer>
+      <button hlmBtn hlmDialogClose>Save changes</button>
+    </hlm-dialog-footer>
+  </hlm-dialog-content>
 </hlm-dialog>
 ```
 
@@ -46,15 +46,15 @@ Use the structural pieces rather than styling a bare `div`.
 
 ```html
 <section hlmCard>
-	<div hlmCardHeader>
-		<h3 hlmCardTitle>Create project</h3>
-		<p hlmCardDescription>Deploy in one click.</p>
-	</div>
-	<div hlmCardContent>...</div>
-	<div hlmCardFooter class="justify-between">
-		<button hlmBtn variant="ghost">Cancel</button>
-		<button hlmBtn>Create</button>
-	</div>
+  <div hlmCardHeader>
+    <h3 hlmCardTitle>Create project</h3>
+    <p hlmCardDescription>Deploy in one click.</p>
+  </div>
+  <div hlmCardContent>...</div>
+  <div hlmCardFooter class="justify-between">
+    <button hlmBtn variant="ghost">Cancel</button>
+    <button hlmBtn>Create</button>
+  </div>
 </section>
 ```
 
@@ -62,12 +62,12 @@ Use the structural pieces rather than styling a bare `div`.
 
 ```html
 <hlm-tabs tab="account">
-	<hlm-tabs-list>
-		<button hlmTabsTrigger="account">Account</button>
-		<button hlmTabsTrigger="password">Password</button>
-	</hlm-tabs-list>
-	<div hlmTabsContent="account">...</div>
-	<div hlmTabsContent="password">...</div>
+  <hlm-tabs-list>
+    <button hlmTabsTrigger="account">Account</button>
+    <button hlmTabsTrigger="password">Password</button>
+  </hlm-tabs-list>
+  <div hlmTabsContent="account">...</div>
+  <div hlmTabsContent="password">...</div>
 </hlm-tabs>
 ```
 
@@ -75,8 +75,8 @@ Use the structural pieces rather than styling a bare `div`.
 
 ```html
 <hlm-avatar>
-	<img hlmAvatarImage src="/avatar.jpg" alt="Jane Doe" />
-	<span hlmAvatarFallback>JD</span>
+  <img hlmAvatarImage src="/avatar.jpg" alt="Jane Doe" />
+  <span hlmAvatarFallback>JD</span>
 </hlm-avatar>
 ```
 
@@ -87,9 +87,9 @@ button:
 
 ```html
 <button hlmBtn [disabled]="saving()">
-	@if (saving()) {
-	<hlm-spinner />
-	} Save
+  @if (saving()) {
+  <hlm-spinner />
+  } Save
 </button>
 ```
 
